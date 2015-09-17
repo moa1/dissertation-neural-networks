@@ -1,0 +1,735 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+Notation
+\end_layout
+
+\begin_layout Description
+Random
+\begin_inset space ~
+\end_inset
+
+variable The name of a random variable is written upper-case.
+ For example: 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Value
+\begin_inset space ~
+\end_inset
+
+of
+\begin_inset space ~
+\end_inset
+
+a
+\begin_inset space ~
+\end_inset
+
+random
+\begin_inset space ~
+\end_inset
+
+variable The value of a random variable is written lower-case.
+ For example, the value of variable 
+\begin_inset Formula $X$
+\end_inset
+
+ is written 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+Vector Vectors are written in bold font.
+ For example, the variable 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ could represent the variables 
+\begin_inset Formula $X_{1},X_{2},X_{3}$
+\end_inset
+
+.
+ And the vector 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ could mean the values 
+\begin_inset Formula $x_{1},x_{2},x_{3}$
+\end_inset
+
+ of the variables 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Graphical Models
+\end_layout
+
+\begin_layout Paragraph
+Graphical Models
+\end_layout
+
+\begin_layout Standard
+Graphical Models are an encoding of a joint probability distribution with
+ the help of a graph.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: hier muss ein Beispiel mit einer Tabelle einer joint probability distribut
+ion stehen.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: Hier eine Figure mit einem DAG und einem MRF.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the following we will consider only variables with discrete values in
+ the joint probability distribution.
+\end_layout
+
+\begin_layout Paragraph
+Directed and Undirected Graphical Models
+\end_layout
+
+\begin_layout Standard
+Graphical models can be directed or undirected.
+ Graphical models are based on (directed acyclic or undirected) graphs with
+ nodes and edges, where the nodes correspond to random variables, and the
+ edges encode relations between random variables.
+ Directed acyclic graphical models are also called 
+\emph on
+Bayesian networks
+\emph default
+, and undirected graphical models are called 
+\emph on
+Markov random fields
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+(There is also a unification of Bayesian networks and Markov random fields,
+ i.e.
+ graphical models that can have both directed and undirected edges (subject
+ to some restrictions of cycles).
+ These networks are called 
+\emph on
+chain graphs
+\emph default
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO: reference.
+ Referenz zu chain graph ist http://www.cs.ubc.ca/~murphyk/Bayes/bnintro.html
+ (
+\begin_inset Quotes erd
+\end_inset
+
+It is possible to have a model with both directed and undirected arcs, which
+ is called a chain graph.
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+, or 
+\emph on
+partially directed acyclic graphs
+\emph default
+.)
+\end_layout
+
+\begin_layout Paragraph
+Bayesian Networks
+\end_layout
+
+\begin_layout Standard
+As said before, directed acyclic graphical models are also called 
+\emph on
+Bayesian Networks
+\emph default
+ or 
+\emph on
+Belief Networks
+\emph default
+.
+\end_layout
+
+\begin_layout Paragraph
+Inference in Graphical Models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Here (before the inference example below) I have to introduce cliques.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: Do 
+\begin_inset Formula $\mathbf{K},\mathbf{W},\mathbf{U}$
+\end_inset
+
+ have to fulfill some relationship for directed acyclic graphs in the inference
+ example below? (For example, does 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+ have to be a subset of the parents of 
+\series bold
+
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+
+\series default
+?)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Exact Inference in directed and in undirected graphical models
+\end_layout
+
+\begin_layout Standard
+A graphical model is another representation of a joint probability distribution.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I'm not sure I know how 
+\begin_inset Quotes eld
+\end_inset
+
+Inference
+\begin_inset Quotes erd
+\end_inset
+
+ is defined.
+ I should look it up in a book, e.g.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Probabilistic Graphical Model, by Koller and Friedman
+\begin_inset Quotes erd
+\end_inset
+
+.
+ But that book is not downloadable.
+\end_layout
+
+\begin_layout Plain Layout
+There is a paper, however: http://ai.stanford.edu/~koller/Papers/Koller+al:SRL07.pd
+f
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inference in a graphical model is the task of answering a query about the
+ joint probability distribution encoded by the graph.
+ For example, we might want to infer the probability of a configuration
+ of variables when the values of only some of the variables are known.
+ This means that we can partition the variables 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ of a graphical model into three disjoint groups:
+\end_layout
+
+\begin_layout Enumerate
+the known variables 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+the unknown variables 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+ that we want to know the probability distribution of,
+\end_layout
+
+\begin_layout Enumerate
+the unknown variables 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ that we do not care about.
+\end_layout
+
+\begin_layout Standard
+Let the known values of 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+ be written 
+\series bold
+
+\begin_inset Formula $\mathbf{k}$
+\end_inset
+
+
+\series default
+.
+ The unknown values of 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+ are named 
+\series bold
+
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+
+\series default
+, and the values of 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{u}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+When we want to find the probability of configuration 
+\begin_inset Formula $\mathbf{W}=\mathbf{w}$
+\end_inset
+
+, given 
+\begin_inset Formula $\mathbf{K}=\mathbf{k}$
+\end_inset
+
+, we can first write the query in terms of the joint probability distribution.
+ After that we marginalize out the unknown variables 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ that we do not care about, and condition on 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & = & \sum_{U}P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u}|\mathbf{K}=\mathbf{k})\nonumber \\
+ & = & \sum_{\mathbf{U}}\frac{P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\label{eq:Inference in graphical models}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: write that in the general case, this query is exponential.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the above formula there is a sum over all variables 
+\series bold
+
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+
+\series default
+.
+ Writing this out, we obtain:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k})\nonumber \\
+= & \sum_{\mathbf{U}}\frac{P(\mathbf{W}=\mathbf{w},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\nonumber \\
+= & \sum_{U_{1}}\sum_{U_{2}}\cdots\sum_{U_{n}}\frac{P(\mathbf{W}=\mathbf{w},U_{1}=u_{1},U_{2}=u_{2},\dots,U_{n}=u_{n},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\label{eq:Inference in graphical models, written out}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the general case (if the joint probability cannot be factorized), this
+ nested sum needs 
+\begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{U}|})=O(|\mathbf{u}|^{n})$
+\end_inset
+
+ operations to compute.
+ Run-time is then exponential in the number of variables, and therefore
+ intractable.
+\end_layout
+
+\begin_layout Standard
+This can be improved by factorizing the joint probability into independent
+ sub-joint-probabilities.
+ For example, if the random variables 
+\begin_inset Formula $\mathbf{U}=\{U_{1},U_{2},\dots,U_{7}\}$
+\end_inset
+
+ can be partitioned into three pairwise independent cliques 
+\begin_inset Formula $\mathbf{C_{1}}=\{U_{1},U_{2}\},$
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{C_{2}}=\{U_{3},U_{4}\}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{C_{3}}=\{U_{5},U_{6},U_{7}\}$
+\end_inset
+
+, so that 
+\begin_inset Formula $P(\mathbf{U})=P(\mathbf{C_{1}})P(\mathbf{C_{2}})P(\mathbf{C_{3}})$
+\end_inset
+
+, then above sum can be written as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & =\\
+ & = & \sum_{\mathbf{C_{1}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{1}}|\mathbf{K}=\mathbf{k})*\\
+ &  & \sum_{\mathbf{C_{2}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{2}}|\mathbf{K}=\mathbf{k})*\\
+ &  & \sum_{\mathbf{C_{3}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{3}}|\mathbf{K}=\mathbf{k})\\
+ & = & \prod_{\mathbf{C}\in\{\mathbf{C_{1}},\mathbf{C_{2}},\mathbf{C_{3}}\}}\sum_{\mathbf{C}}P(\mathbf{W}=\mathbf{w},\mathbf{C}|\mathbf{K}=\mathbf{k})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The runtime of this formula is dominated by the largest clique, and so the
+ runtime is 
+\begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{C_{l}}|})$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{C_{l}}$
+\end_inset
+
+ is the clique with the largest number of variables in it.
+ This is still an exponential run-time.
+ In practice, the joint probability is approximated, for example by Gibbs
+ sampling.
+\end_layout
+
+\begin_layout Paragraph
+Gibbs sampling
+\end_layout
+
+\begin_layout Paragraph
+Explaining away
+\end_layout
+
+\begin_layout Standard
+Directed Acyclic Graphical Models show the phenomenon of 
+\begin_inset Quotes eld
+\end_inset
+
+explaining away
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: is there also explaining away in undirected graphs?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Restricted Boltzmann Machines
+\end_layout
+
+\begin_layout Paragraph
+Boltzmann Machines
+\end_layout
+
+\begin_layout Standard
+What are Boltzmann Machines? 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Example figure of a BM.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Inference in Boltzmann Machines
+\end_layout
+
+\begin_layout Standard
+How is inference complicated in general Boltzmann Machines?
+\end_layout
+
+\begin_layout Paragraph
+Restricted Boltzmann Machines
+\end_layout
+
+\begin_layout Standard
+What are Restricted Boltzmann Machines? 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Example figure of an RBM.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Explaining away in RBMs
+\end_layout
+
+\begin_layout Standard
+There could be the problem of 
+\begin_inset Quotes eld
+\end_inset
+
+explaining away
+\begin_inset Quotes erd
+\end_inset
+
+ in multi-layer RBMs.
+\end_layout
+
+\begin_layout Standard
+TODO: https://www.quora.com/Why-does-the-phenomenon-of-explaining-away-make-infere
+nce-difficult-in-directed-belief-nets?share=1
+\end_layout
+
+\begin_layout Paragraph
+Difficulties in training multi-layer neural networks
+\end_layout
+
+\begin_layout Standard
+Training a feed-forward neural network with more than 1 hidden layer using
+ back-propagation is difficult and usually does not succeed.
+ This is probably due to the many local minima (
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO: visualise or describe in words the many bumps created by adding many
+ weighted sigmoid functions.
+\end_layout
+
+\end_inset
+
+) of the implicitly optimized energy function during back-propagation.
+\end_layout
+
+\begin_layout Paragraph
+RBMs can be interpreted as feed-forward neural networks
+\end_layout
+
+\begin_layout Standard
+A trained stacked RBM can be reinterpreted as a feed-forward neural network.
+ In particular, the weights and biases of a trained stacked RBM can be transferr
+ed to a multi-layer feed-forward neural network with the same architecture
+ as the stacked RBM, thereby making the stochastic RBM a deterministic neural
+ network.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO: See 
+\begin_inset Quotes eld
+\end_inset
+
+An Introduction to Restricted Boltzmann Machines
+\begin_inset Quotes erd
+\end_inset
+
+ by Asja Fischer and Christian Igel.
+ Paragraph starting at 
+\begin_inset Quotes eld
+\end_inset
+
+It is an important property that single as well as stacked RBMs
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ This process is also called 
+\emph on
+pre-training
+\emph default
+.
+ Furthermore, another neural network (usually only one layer, due to the
+ training difficulties of multi-layer neural networks) can be put on top
+ of the pre-trained converted RBM, where the final (output) layer has neurons
+ corresponding to variables to be predicted.
+ The resulting network can be then be fine-tuned, using standard back-propagatio
+n, into a configuration that can predict from input variables (input at
+ the bottom of the network) the output variables (read off at the top of
+ the network).
+\end_layout
+
+\begin_layout Section
+Motivation for using RBMs on genetic data
+\end_layout
+
+\begin_layout Standard
+There were successes in visual object/face recognition by RBMs.
+ There is a certain similarity of visual data and genetic data like high
+ correlation of neighboring pixels and certain genes.
+\end_layout
+
+\end_body
+\end_document
