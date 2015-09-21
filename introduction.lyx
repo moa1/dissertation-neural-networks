@@ -4,6 +4,9 @@
 \begin_header
 \textclass article
 \use_default_options true
+\begin_modules
+fix-cm
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -27,7 +30,7 @@
 \paperfontsize default
 \spacing single
 \use_hyperref false
-\papersize default
+\papersize a4paper
 \use_geometry false
 \use_package amsmath 1
 \use_package amssymb 1
@@ -146,12 +149,104 @@ Graphical Models
 \end_layout
 
 \begin_layout Paragraph
+Graphs
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+graph 
+\emph default
+is a set 
+\begin_inset Formula $\mathcal{G}=(\mathcal{N},\mathcal{E})$
+\end_inset
+
+ of nodes 
+\begin_inset Formula $\mathcal{N}$
+\end_inset
+
+ and edges 
+\begin_inset Formula $\mathcal{E}$
+\end_inset
+
+.
+ An edge 
+\begin_inset Formula $\mathcal{E}\ni e=(n_{1},n_{2})$
+\end_inset
+
+ consists of a pair of nodes 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{2}$
+\end_inset
+
+.
+ The edges can be directed or undirected (i.e.
+ the pair 
+\begin_inset Formula $(n_{1},n_{2})$
+\end_inset
+
+ can be ordered or unordered).
+ If all edges are directed, then the graph is called a 
+\emph on
+directed graph
+\emph default
+; if all edges are undirected, then the graph is called a 
+\emph on
+undirected graph
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+directed acyclic graph 
+\emph default
+(DAG) is a directed graph that does not contain (directed) cycles.
+ This means if we start at any node and only go into the direction of the
+ edges, it is impossible to reach a node visited earlier.
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+clique 
+\emph default
+in an undirected graph is a subset of nodes 
+\begin_inset Formula $\mathcal{N}_{C}\subset\mathcal{N}$
+\end_inset
+
+, such that every pair of nodes in the clique 
+\begin_inset Formula $n_{1},n_{2}\in\mathcal{N}_{C}$
+\end_inset
+
+ has an edge in the graph 
+\begin_inset Formula $(n_{1},n_{2})\in\mathcal{E}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
 Graphical Models
 \end_layout
 
 \begin_layout Standard
 Graphical Models are an encoding of a joint probability distribution with
  the help of a graph.
+\end_layout
+
+\begin_layout Standard
+In a graphical model, each node of the graph corresponds to a random variable
+ of the joint probability distribution, and the dependencies between the
+ random variables are encoded in the edges of the graph.
+\end_layout
+
+\begin_layout Standard
+This is 
 \end_layout
 
 \begin_layout Standard
@@ -235,6 +330,33 @@ partially directed acyclic graphs
 \end_layout
 
 \begin_layout Paragraph
+Generative and Discriminative Models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I'm not sure this belongs here, but I should introduce the concept
+ of a 
+\begin_inset Quotes eld
+\end_inset
+
+Generative Model
+\begin_inset Quotes erd
+\end_inset
+
+ to be able to refer to it later when introducing Deep Belief Networks from
+ RBMs.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
 Bayesian Networks
 \end_layout
 
@@ -257,10 +379,6 @@ Inference in Graphical Models
 \begin_layout Standard
 \begin_inset Note Note
 status open
-
-\begin_layout Plain Layout
-TODO: Here (before the inference example below) I have to introduce cliques.
-\end_layout
 
 \begin_layout Plain Layout
 TODO: Do 
@@ -337,8 +455,13 @@ f
 \begin_layout Standard
 Inference in a graphical model is the task of answering a query about the
  joint probability distribution encoded by the graph.
- For example, we might want to infer the probability of a configuration
- of variables when the values of only some of the variables are known.
+ However, in the general case this takes exponential time.
+ An example will illustrate this.
+\end_layout
+
+\begin_layout Standard
+For example, we might want to infer the probability of a configuration of
+ variables when the values of only some of the variables are known.
  This means that we can partition the variables 
 \begin_inset Formula $\mathbf{V}$
 \end_inset
@@ -493,7 +616,7 @@ In the general case (if the joint probability cannot be factorized), this
 
 \begin_layout Standard
 This can be improved by factorizing the joint probability into independent
- sub-joint-probabilities.
+ sub-joint-probabilities, if possible.
  For example, if the random variables 
 \begin_inset Formula $\mathbf{U}=\{U_{1},U_{2},\dots,U_{7}\}$
 \end_inset
@@ -542,7 +665,11 @@ The runtime of this formula is dominated by the largest clique, and so the
 \begin_inset Formula $\mathbf{C_{l}}$
 \end_inset
 
- is the clique with the largest number of variables in it.
+ is the clique with the largest number of variables in it (in our case 
+\begin_inset Formula $\mathbf{C_{3}}$
+\end_inset
+
+).
  This is still an exponential run-time.
  In practice, the joint probability is approximated, for example by Gibbs
  sampling.
@@ -571,12 +698,17 @@ explaining away
 status open
 
 \begin_layout Plain Layout
-TODO: is there also explaining away in undirected graphs?
+TODO: is there also explaining away in undirected graphs? nope, I don't
+ think so.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+In a directed graph Explaining away
 \end_layout
 
 \begin_layout Section
@@ -644,8 +776,17 @@ explaining away
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 TODO: https://www.quora.com/Why-does-the-phenomenon-of-explaining-away-make-infere
 nce-difficult-in-directed-belief-nets?share=1
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph

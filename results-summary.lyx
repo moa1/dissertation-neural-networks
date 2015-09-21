@@ -1,0 +1,331 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Itemize
+Das was meine Arbeit von anderen abhebt (und was meines Wissens nach neu
+ ist), ist, dass ich direkt auf Expressionsdaten neuronale Netze trainiere,
+ um eine Eigenschaft des Patienten vorherzusagen.
+ Zuvor haben andere (z.B.
+ Biganzoli 1998: 
+\begin_inset Quotes eld
+\end_inset
+
+FEED FORWARD NEURAL NETWORKS FOR THE ANALYSIS OF CENSORED SURVIVAL DATA:
+ A PARTIAL LOGISTIC REGRESSION APPROACH
+\begin_inset Quotes erd
+\end_inset
+
+) auf Patienten-Metadaten gelernt.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+zwei References, die ich als Example zitieren könnte, die Eigenschaften
+ von Cancer vorhersagen (allerdings nicht auf expressionsdaten) (die references
+ sind aus 
+\begin_inset Quotes eld
+\end_inset
+
+Sharaf Tsokos 2015 neural networks for modeling discrete survival time of
+ censored data.pdf
+\begin_inset Quotes erd
+\end_inset
+
+, die übrigens aus 4 input-variablen die survival time vorhersagen.
+ Sie haben allerdings 69000 Patienten (siehe Figure 1).)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+D.-R.
+ Chen, R.-F.
+ Chang, W.-J.
+ Kuo, M.-C.
+ Chen, and Y.-L.
+ Huang, “Diagnosis of breast tumors with sonographic texture analysis using
+ wavelet transform and neural networks,” Ultra- sound in Medicine and Biology,
+ vol.
+ 28, no.
+ 10, pp.
+ 1301–1310, 2002.
+\end_layout
+
+\begin_layout Itemize
+F.
+ Ercal, A.
+ Chawla, W.
+ V.
+ Stoecker, H.-C.
+ Lee, and R.
+ H.
+ Moss, “Neural network diagnosis of malignant melanoma from color images,”
+ IEEE Transactions on Biomedical Engineering, vol.
+ 41, no.
+ 9, pp.
+ 837–845, 1994.
+ 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+we used feed-forward neural networks (aka multi-layer perceptron?) to predict
+ cancer recurrence
+\end_layout
+
+\begin_layout Itemize
+instances of those networks perform well for image classification
+\end_layout
+
+\begin_layout Itemize
+does pre-training improve prediction accuracy?
+\end_layout
+
+\begin_layout Itemize
+pre-training using autoencoder or RBM (breast_cancer_04)
+\end_layout
+
+\begin_layout Itemize
+there does not seem to be a difference in accuracy on the testing set between
+ the two tested pre-training methods (breast_cancer_04)
+\end_layout
+
+\begin_layout Itemize
+we tried different normalization methods (breast_cancer_08): RMA and MAS5
+ normalization, COMBAT batch effect correction, ZCA whitening.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+reconstruction error plots seem to depend on the normalization used
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert the breast_cancer_11 experiment here (taking the log2 after
+ MAS5 normalization).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+do the different normalization methods influence prediction accuracy on
+ the testing set?
+\end_layout
+
+\begin_layout Itemize
+we also tried networks with two hidden layers
+\end_layout
+
+\begin_layout Itemize
+the networks with two hidden layers seem to not perform better than those
+ with one hidden layer
+\end_layout
+
+\begin_layout Itemize
+I should still try networks with a larger hidden layer 1 size (larger than
+ the number of input neurons), and with larger hidden layer 2 size
+\end_layout
+
+\begin_layout Itemize
+we used an increasing number of unlabeled data in pre-training.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+does this improve testing set accuracy
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+we used SVM and TSVM (transductive SVM, as implemented in SVMlight) to compare
+ to the neural network classifier
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+neural network classifiers without pre-training (and with pre-training)
+ seem to perform better than SVM.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+reconstruction error during pre-training converged well for our cases, sometimes
+ you have to wait a few iterations though (die 
+\begin_inset Quotes eld
+\end_inset
+
+Höcker
+\begin_inset Quotes erd
+\end_inset
+
+ im reconstruction error plot)
+\end_layout
+
+\begin_layout Itemize
+we used validation set accuracy to select the neural network which is used
+ to predict testing data recurrence status
+\end_layout
+
+\begin_layout Itemize
+I should also try to do regression using the neural network to predict expected
+ survival time at time of diagnosis
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert the findings from breast_cancer_08.lyx (see label 
+\begin_inset Quotes eld
+\end_inset
+
+sub:bb_ic-Reconstruction-error-plots
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The test set accuracies depend on the normalization procedure of the microarray
+ data
+\end_layout
+
+\begin_layout Itemize
+A low reconstruction error rate does not imply a good accuracy on the test
+ set: Although the neural nets using MAS5 normalized data have a lower reconstru
+ction error that their RMA counterparts, the former have a lower accuracy
+ than the latter.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Das was ich in ~/uni/nnet/datasets/breast_cancer_10/README.lyx geschrieben
+ habe.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The accuracy of the classifier in the GSE25055-paper is 65% on the testing
+ data.
+ I should compare that to the accuracies that my classifiers achieve.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+also calculate and tabulate sensitivity, selectivity, Diagnostic likelihood
+ ratios
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+When looking at the accuracies of the TSVM on the data sets with more and
+ more unlabeled data, accuracy does not increase with more unlabeled data.
+ (like the nnets).
+ It's just that TSVM seems to be (or is it just random noise; TODO: make
+ the paired T-Test or Wilcoxon-Rank-Test (see ~/uni/journal.txt) to check
+ if the differences between accuracies of TSVM and NNet are just by chance
+ or systematic.)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Biganzoli 1998 neural networks for censored survival data.pdf
+\begin_inset Quotes erd
+\end_inset
+
+: from that paper on page 3: 
+\begin_inset Quotes eld
+\end_inset
+
+Feed forward ANNs, are strictly equivalent to non-linear multivariate regression
+ methods.
+\begin_inset Quotes erd
+\end_inset
+
+ (Or maybe reference 15 of that paper showed it earlier.)
+\end_layout
+
+\end_body
+\end_document
