@@ -125,7 +125,7 @@ Vector Vectors are written in bold font.
 \end_inset
 
  could represent the variables 
-\begin_inset Formula $X_{1},X_{2},X_{3}$
+\begin_inset Formula $\{X_{1},X_{2},X_{3}\}$
 \end_inset
 
 .
@@ -134,7 +134,7 @@ Vector Vectors are written in bold font.
 \end_inset
 
  could mean the values 
-\begin_inset Formula $x_{1},x_{2},x_{3}$
+\begin_inset Formula $\{x_{1},x_{2},x_{3}\}$
 \end_inset
 
  of the variables 
@@ -279,8 +279,8 @@ Directed and Undirected Graphical Models
 \begin_layout Standard
 Graphical models can be directed or undirected.
  Graphical models are based on (directed acyclic or undirected) graphs with
- nodes and edges, where the nodes correspond to random variables, and the
- edges encode relations between random variables.
+ nodes and edges, where each node corresponds to a random variable, and
+ the edges encode relations between random variables.
  Directed acyclic graphical models are also called 
 \emph on
 Bayesian networks
@@ -293,9 +293,9 @@ Markov random fields
 \end_layout
 
 \begin_layout Standard
-(There is also a unification of Bayesian networks and Markov random fields,
- i.e.
- graphical models that can have both directed and undirected edges (subject
+(Besides other types of graphs, there is also a unification of Bayesian
+ networks and Markov random fields, i.e.
+ a graphical model that can have both directed and undirected edges (subject
  to some restrictions of cycles).
  These networks are called 
 \emph on
@@ -411,7 +411,7 @@ Exact Inference in directed and in undirected graphical models
 \end_layout
 
 \begin_layout Standard
-A graphical model is another representation of a joint probability distribution.
+A graphical model is a representation of a joint probability distribution.
  
 \end_layout
 
@@ -523,7 +523,7 @@ Let the known values of
 \begin_inset Formula $\mathbf{U}$
 \end_inset
 
- 
+, 
 \begin_inset Formula $\mathbf{u}$
 \end_inset
 
@@ -555,7 +555,7 @@ When we want to find the probability of configuration
 \begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray}
-P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & = & \sum_{U}P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u}|\mathbf{K}=\mathbf{k})\nonumber \\
+P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & = & \sum_{\mathbf{U}}P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u}|\mathbf{K}=\mathbf{k})\nonumber \\
  & = & \sum_{\mathbf{U}}\frac{P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\label{eq:Inference in graphical models}
 \end{eqnarray}
 
@@ -609,8 +609,26 @@ In the general case (if the joint probability cannot be factorized), this
 \begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{U}|})=O(|\mathbf{u}|^{n})$
 \end_inset
 
- operations to compute.
- Run-time is then exponential in the number of variables, and therefore
+ operations to compute (where 
+\begin_inset Formula $|\mathbf{u}|$
+\end_inset
+
+ is the number of possible values a variable 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+ can have and 
+\begin_inset Formula $|\mathbf{U}|$
+\end_inset
+
+ is the number of unknown variables 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+).
+ This is because all possible combinations of variable assignments have
+ to be considered.
+ Thus, run-time is exponential in the number of variables, and therefore
  intractable.
 \end_layout
 
@@ -666,17 +684,29 @@ The runtime of this formula is dominated by the largest clique, and so the
 \end_inset
 
  is the clique with the largest number of variables in it (in our case 
-\begin_inset Formula $\mathbf{C_{3}}$
+\begin_inset Formula $\mathbf{C_{l}}=\mathbf{C_{3}}$
+\end_inset
+
+, because 
+\begin_inset Formula $|\mathbf{C_{3}}|=3$
+\end_inset
+
+, and 
+\begin_inset Formula $|\mathbf{C_{1}}|=|\mathbf{C_{2}}|=2$
 \end_inset
 
 ).
  This is still an exponential run-time.
- In practice, the joint probability is approximated, for example by Gibbs
- sampling.
+ Therefore, in practice, the joint probability is approximated, for example
+ by Gibbs sampling.
 \end_layout
 
 \begin_layout Paragraph
 Gibbs sampling
+\end_layout
+
+\begin_layout Standard
+Gibbs sampling is a type of Markov Chain Monte Carlo (MCMC) algorithm.
 \end_layout
 
 \begin_layout Paragraph
