@@ -742,6 +742,88 @@ In a directed graph Explaining away
 \end_layout
 
 \begin_layout Section
+Artificial Neural Networks
+\end_layout
+
+\begin_layout Paragraph
+Hopfield Network
+\end_layout
+
+\begin_layout Paragraph
+Multilayer Perceptron
+\end_layout
+
+\begin_layout Standard
+A Multilayer Perceptron belongs to the class of feedforward neural networks.
+ This is in contrast to recurrent networks, which contain a directed cycle
+ of neural connections.
+\end_layout
+
+\begin_layout Paragraph
+Multilayer feedforward networks as universal function approximators
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HornikW1989"
+
+\end_inset
+
+ found that artificial feedforward neural networks with as few as one hidden
+ layer are capable of modeling virtually any function within a given error,
+ provided the following conditions are met:
+\end_layout
+
+\begin_layout Itemize
+The activation function must be a 
+\begin_inset Quotes eld
+\end_inset
+
+squashing
+\begin_inset Quotes erd
+\end_inset
+
+ function: A squashing function 
+\begin_inset Formula $s(x)$
+\end_inset
+
+ must be non-decreasing, 
+\begin_inset Formula $\lim_{x\rightarrow\infty}s(x)=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\lim_{x\rightarrow-\infty}s(x)=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Provided sufficiently many hidden nodes are available.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HornikW1989"
+
+\end_inset
+
+ also note that 
+\begin_inset Quotes eld
+\end_inset
+
+This [result] implies that any lack of success in applications must arise
+ from inadequate learning, insufficient numbers of hidden units or the lack
+ of a deterministic relationship between input and target.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Restricted Boltzmann Machines
 \end_layout
 
@@ -787,6 +869,51 @@ TODO: Example figure of an RBM.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+A Restricted Boltzmann Machine has a bipartite topology: there are visible
+ nodes and hidden nodes, and each node in the visible layer is connected
+ (via an undirected edge) to all hidden nodes, but there are no visible-to-visib
+le node connections and no hidden-to-hidden node connections.
+\end_layout
+
+\begin_layout Standard
+As originally proposed by Hinton 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+and ...
+ the guy who named it 
+\begin_inset Quotes eld
+\end_inset
+
+Harmonium
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, a Restricted Boltzmann Machine has binary visible and hidden nodes.
+ There are extensions to real-valued nodes, however.
+\end_layout
+
+\begin_layout Paragraph
+Analogy to Hopfield Networks
+\end_layout
+
+\begin_layout Standard
+A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
+ When choosing a zero temperature 
+\begin_inset Formula $T=0$
+\end_inset
+
+, the Restricted Boltzmann Machine becomes deterministic and equivalent
+ to a Hopfield network.
 \end_layout
 
 \begin_layout Paragraph
@@ -892,6 +1019,221 @@ n, into a configuration that can predict from input variables (input at
  the network).
 \end_layout
 
+\begin_layout Paragraph
+Learning Rule in Restricted Boltzmann Machines
+\end_layout
+
+\begin_layout Standard
+Usually, the learning rule includes a 
+\begin_inset Quotes eld
+\end_inset
+
+momentum
+\begin_inset Quotes erd
+\end_inset
+
+ term.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Formel hinschreiben
+\end_layout
+
+\end_inset
+
+ This term works like a low-pass filter and reduces oscillations during
+ learning by smoothing the weight and bias deltas added to the parameters
+ of the network.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe the following paragraph should go into Results, not Introduction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the momentum term includes a coefficient that describes the fraction
+ of the weights deltas in the previous time step to be added to the current
+ weight deltas, it adds another meta-parameter to training.
+ Sometimes the coefficient is even changed during training, usually gradually
+ increased during the early steps of training to its final value.
+ This is to prevent the 
+\begin_inset Quotes eld
+\end_inset
+
+explosion
+\begin_inset Quotes erd
+\end_inset
+
+ of the model during training, which happens when the training does not
+ converge, and can be caused by a too high momentum coefficient.
+\end_layout
+
+\begin_layout Subsection
+Parameters of a Restricted Boltzmann Machine
+\end_layout
+
+\begin_layout Paragraph
+Activation function
+\end_layout
+
+\begin_layout Standard
+The hidden and visible nodes are a function of the sum of their inputs.
+ The function that maps the sum of the inputs of a node to its value is
+ called the 
+\emph on
+activation function
+\emph default
+.
+ There are several activations functions:
+\end_layout
+
+\begin_layout Paragraph
+Sigmoid activation function
+\end_layout
+
+\begin_layout Standard
+This is a fairly standard activation function, often used in neural networks.
+ It has the property that it is almost linear for inputs around zero, tends
+ to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
+ infinity.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Kurve einer sigmoid-Funktion hier einfügen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As the values of a Restricted Boltzmann Machine, as orignially proposed,
+ are binary (i.e.
+ either 0 or 1), the output of the sigmoid activation function is used as
+ a probability that the output of the node assumes value 1.
+ In this way the output is sampled from 
+\begin_inset Formula $\{0,1\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Linear units with independent Gaussian noise
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonS2006"
+
+\end_inset
+
+ proposed a way to extend Restricted Boltzmann Machines with only binary
+ values to nodes with real values.
+\end_layout
+
+\begin_layout Paragraph
+Rectified linear activation function
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NairH2010"
+
+\end_inset
+
+ then modified the idea in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonS2006"
+
+\end_inset
+
+ to rectified linear units, in which the sampled output of a unit is given
+ by 
+\begin_inset Formula $max(0,x+N(0,\sigma(x))$
+\end_inset
+
+ where 
+\begin_inset Formula $x$
+\end_inset
+
+ is the sum of the inputs of the unit, 
+\begin_inset Formula $\sigma(x)$
+\end_inset
+
+ is the variance of the input
+\end_layout
+
+\begin_layout Subsection
+Regularizations of Restricted Boltzmann Machines
+\end_layout
+
+\begin_layout Paragraph
+L1 Weight Decay
+\end_layout
+
+\begin_layout Paragraph
+L2 Weight Decay
+\end_layout
+
+\begin_layout Standard
+As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FischerI2012"
+
+\end_inset
+
+ note, adding an L2 weight decay term to the corresponds to assuming a zero-mean
+ Gaussian prior on the parameters.
+\end_layout
+
+\begin_layout Paragraph
+Sparsity
+\end_layout
+
+\begin_layout Paragraph
+Dropout
+\end_layout
+
+\begin_layout Standard
+Dropout is usually combined with weight normalization.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I think weight normalization is described a bit in the dropout paper.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Weight normalization
+\end_layout
+
 \begin_layout Section
 Motivation for using RBMs on genetic data
 \end_layout
@@ -900,6 +1242,51 @@ Motivation for using RBMs on genetic data
 There were successes in visual object/face recognition by RBMs.
  There is a certain similarity of visual data and genetic data like high
  correlation of neighboring pixels and certain genes.
+\end_layout
+
+\begin_layout Section
+Bibliography
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: make the citations look like 
+\begin_inset Quotes eld
+\end_inset
+
+[FischerI2012]
+\begin_inset Quotes erd
+\end_inset
+
+, not 
+\begin_inset Quotes eld
+\end_inset
+
+[1]
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This is probably done using a Bibtex style file?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "zusammenfassung"
+options "bibtotoc,plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
