@@ -749,6 +749,253 @@ Artificial Neural Networks
 Hopfield Network
 \end_layout
 
+\begin_layout Standard
+A Hopfield Network is a deterministic recurrent network with nodes 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+As this is not a stochastic network, I don't think it makes sense to define
+ random variables 
+\begin_inset Formula $\mathbf{N}=\{N_{1},\dots,N_{m}\}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+, whose states 
+\begin_inset Formula $\mathbf{n}=\{n_{1},n_{m}\}$
+\end_inset
+
+ are binary, i.e.
+ 
+\begin_inset Formula $n_{i}\in\{0,1\}$
+\end_inset
+
+ for all nodes 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Each node has a connection with all others (but not itself).
+ The connection from node 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+ to node 
+\begin_inset Formula $N_{j}$
+\end_inset
+
+ is directed and has a real weight 
+\begin_inset Formula $w_{ij}\in\mathbb{R}$
+\end_inset
+
+.
+ (As there is no connection from node 
+\begin_inset Formula $i$
+\end_inset
+
+ to node 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $w_{ii}=0$
+\end_inset
+
+ for all nodes 
+\begin_inset Formula $i$
+\end_inset
+
+.) There is also a real-valued bias 
+\begin_inset Formula $b_{i}\in\mathbb{R}$
+\end_inset
+
+ for each node 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ (This means each node has 
+\begin_inset Formula $m-1$
+\end_inset
+
+ outgoing connections and 
+\begin_inset Formula $m-1$
+\end_inset
+
+ incoming connections.)
+\end_layout
+
+\begin_layout Standard
+The network is updated iteratively, this means the states of time step 
+\begin_inset Formula $t$
+\end_inset
+
+ depend only on the states at time step 
+\begin_inset Formula $t-1$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{j}^{(t)}=f(\sum_{i\in\{1,\dots,m\}\land i\neq j}n_{i}^{(t-1)}w_{ij}+b_{j})
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+The activation function 
+\begin_inset Formula $f$
+\end_inset
+
+ is a stepping function
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: there must be a better word instead of 
+\begin_inset Quotes eld
+\end_inset
+
+stepping function
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+, with negative values mapped to 0, and positive values mapped to 1: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: stimmt die Definition von 
+\begin_inset Formula $f$
+\end_inset
+
+ überhaupt?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\begin{cases}
+0 & x\leq0\\
+1 & x>0
+\end{cases}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+While this updating rule was described as synchronous (i.e.
+ all nodes are updated at the same time), the network can also be updated
+ asynchronously (i.e.
+ at each time step a node is picked at random and its state is updated.).
+\end_layout
+
+\begin_layout Standard
+Although a hopfield network is recurrent, Hopfield 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: citation
+\end_layout
+
+\end_inset
+
+ proved that the updating rule converges to a (local) minimum.
+\end_layout
+
+\begin_layout Standard
+This can be also viewed in terms of an energy: Each state 
+\begin_inset Formula $\mathbf{N}=\mathbf{n}$
+\end_inset
+
+ has an energy 
+\begin_inset Formula $E$
+\end_inset
+
+ associated with it: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: complete
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E=\sum\label{eq:Energy of a Hopfield network}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+As time progresses, 
+\begin_inset Formula $E$
+\end_inset
+
+ becomes smaller and smaller, i.e.
+ 
+\begin_inset Formula $E^{(t)}\leq E^{(t-1)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Training a Hopfield network is the task of finding weights 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ and biases 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+, so that desirable states (training patterns) have a low energy and undesirable
+ states have a high energy.
+ After training, a Hopfield network can be initialized with a distorted
+ pattern (i.e.
+ state), and updated iteratively until its state doesn't change anymore.
+ This stationary state should then be equal to a similar pattern used in
+ training.
+ Due to this property Hopfield networks can be used as 
+\emph on
+associative memory
+\emph default
+.
+\end_layout
+
 \begin_layout Paragraph
 Multilayer Perceptron
 \end_layout
@@ -914,6 +1161,37 @@ A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
 
 , the Restricted Boltzmann Machine becomes deterministic and equivalent
  to a Hopfield network.
+\end_layout
+
+\begin_layout Standard
+The energy of a hopfield network was defined in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Energy of a Hopfield network"
+
+\end_inset
+
+ (
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "eq:Energy of a Hopfield network"
+
+\end_inset
+
+) as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: repeat energy of equation 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
