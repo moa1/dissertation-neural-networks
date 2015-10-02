@@ -119,7 +119,7 @@ variable The value of a random variable is written lower-case.
 \end_layout
 
 \begin_layout Description
-Vector Vectors are written in bold font.
+Vector Vectors or sets are written in bold font.
  For example, the variable 
 \begin_inset Formula $\mathbf{X}$
 \end_inset
@@ -158,20 +158,20 @@ A
 graph 
 \emph default
 is a set 
-\begin_inset Formula $\mathcal{G}=(\mathcal{N},\mathcal{E})$
+\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
 \end_inset
 
  of nodes 
-\begin_inset Formula $\mathcal{N}$
+\begin_inset Formula $\mathbf{N}$
 \end_inset
 
  and edges 
-\begin_inset Formula $\mathcal{E}$
+\begin_inset Formula $\mathbf{E}$
 \end_inset
 
 .
  An edge 
-\begin_inset Formula $\mathcal{E}\ni e=(n_{1},n_{2})$
+\begin_inset Formula $\mathbf{E}\ni e=(n_{1},n_{2})$
 \end_inset
 
  consists of a pair of nodes 
@@ -216,15 +216,78 @@ A
 clique 
 \emph default
 in an undirected graph is a subset of nodes 
-\begin_inset Formula $\mathcal{N}_{C}\subset\mathcal{N}$
+\begin_inset Formula $\mathbf{N_{C}}\subset\mathbf{N}$
 \end_inset
 
 , such that every pair of nodes in the clique 
-\begin_inset Formula $n_{1},n_{2}\in\mathcal{N}_{C}$
+\begin_inset Formula $n_{1},n_{2}\in\mathbf{N_{C}}$
 \end_inset
 
  has an edge in the graph 
-\begin_inset Formula $(n_{1},n_{2})\in\mathcal{E}$
+\begin_inset Formula $(n_{1},n_{2})\in\mathbf{E}$
+\end_inset
+
+.
+ A 
+\emph on
+maximal clique
+\emph default
+ is a clique where there is no edge that can be added to it so that the
+ resulting subset is still a clique.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: add definition of 
+\begin_inset Quotes eld
+\end_inset
+
+separate
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A set of nodes 
+\begin_inset Formula $\mathbf{N_{A}}\subset\mathbf{N}$
+\end_inset
+
+ is 
+\emph on
+separated 
+\emph default
+from a set of nodes 
+\begin_inset Formula $\mathbf{N_{B}}\subset\mathbf{N}$
+\end_inset
+
+ by a set of nodes 
+\begin_inset Formula $\mathbf{N_{S}}\subset\mathbf{N}$
+\end_inset
+
+, if it is impossible to go (along the edges 
+\begin_inset Formula $\mathbf{E}$
+\end_inset
+
+) from a node 
+\begin_inset Formula $N_{1}\in\mathbf{N_{A}}$
+\end_inset
+
+ to a node 
+\begin_inset Formula $N_{2}\in\mathbf{N_{B}}$
+\end_inset
+
+ without passing through any node 
+\begin_inset Formula $N_{3}\in\mathbf{N_{S}}$
 \end_inset
 
 .
@@ -243,10 +306,10 @@ Graphical Models are an encoding of a joint probability distribution with
 In a graphical model, each node of the graph corresponds to a random variable
  of the joint probability distribution, and the dependencies between the
  random variables are encoded in the edges of the graph.
-\end_layout
-
-\begin_layout Standard
-This is 
+ In addition to the graph structure, probability functions of the elements
+ of the structure have to be defined that are equivalent to the target joint
+ probability.
+ Let's illustrate this with an example.
 \end_layout
 
 \begin_layout Standard
@@ -327,6 +390,107 @@ It is possible to have a model with both directed and undirected arcs, which
 partially directed acyclic graphs
 \emph default
 .)
+\end_layout
+
+\begin_layout Subparagraph
+Undirected Graphical Model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I should include the result of the Hammersley-Clifford theorem here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Markov random field must fulfill the 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: is there a difference between 
+\begin_inset Quotes eld
+\end_inset
+
+global Markov propery
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+Markov property
+\begin_inset Quotes erd
+\end_inset
+
+?
+\end_layout
+
+\end_inset
+
+Markov property.
+ That is, a graph 
+\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
+\end_inset
+
+ consisting of a given set of nodes 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ and edges 
+\begin_inset Formula $\mathbf{E}$
+\end_inset
+
+ is not a Markov random field if there are any three sets of nodes not fulfillin
+g the Markov property.
+ This means that for all sets of nodes 
+\begin_inset Formula $\mathbf{N_{A}}\subset\mathbf{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{N_{B}}\subset\mathbf{N}$
+\end_inset
+
+ separated by a third set of nodes 
+\begin_inset Formula $\mathbf{N_{S}}\subset\mathbf{N}$
+\end_inset
+
+ the corresponding random variables in 
+\begin_inset Formula $\mathbf{N_{A}}$
+\end_inset
+
+ must be conditionally independent from the random variables in 
+\begin_inset Formula $\mathbf{N_{B}}$
+\end_inset
+
+ given the random variables in the separator 
+\begin_inset Formula $\mathbf{N_{S}}$
+\end_inset
+
+.
+ the joint probability distribution encoded by the graph 
+\begin_inset Formula $G=(N,E)$
+\end_inset
+
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -911,15 +1075,40 @@ While this updating rule was described as synchronous (i.e.
  all nodes are updated at the same time), the network can also be updated
  asynchronously (i.e.
  at each time step a node is picked at random and its state is updated.).
-\end_layout
-
-\begin_layout Standard
-Although a hopfield network is recurrent, Hopfield 
+ Although a hopfield network is recurrent, Hopfield 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: citation
+TODO: citation.
+ TODO: stimmt das überhaupt? In 
+\begin_inset Quotes eld
+\end_inset
+
+Neural networks and physical systems with emergent collective computational
+ abilities
+\begin_inset Quotes erd
+\end_inset
+
+, Hopfield writes: 
+\begin_inset Quotes eld
+\end_inset
+
+A simple cycle also occurred occasionally
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+The third behavior seen was chaotic wandering in a small region of state
+ space.
+\begin_inset Quotes erd
+\end_inset
+
+ TODO: Ausserdem steht in den beiden Hopfield-Papers nichts über einen Beweis,
+ dass das Netzwerk konvergiert.
 \end_layout
 
 \end_inset
@@ -1002,7 +1191,7 @@ Multilayer Perceptron
 
 \begin_layout Standard
 A Multilayer Perceptron belongs to the class of feedforward neural networks.
- This is in contrast to recurrent networks, which contain a directed cycle
+ These are in contrast to recurrent networks, which contain a directed cycle
  of neural connections.
 \end_layout
 
@@ -1047,7 +1236,7 @@ squashing
 \end_layout
 
 \begin_layout Itemize
-Provided sufficiently many hidden nodes are available.
+Sufficiently many hidden nodes must be available.
 \end_layout
 
 \begin_layout Standard
