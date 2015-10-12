@@ -425,7 +425,402 @@ y is factored into potentials (written
 \end_inset
 
 ), where each factor corresponds to a clique in the undirected graph.
- For example, if there are the three cliques 
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assume that we want to encode a joint probability distribution 
+\begin_inset Formula $P$
+\end_inset
+
+ into an undirected graph 
+\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
+\end_inset
+
+.
+ We could use for every random variable a node, and connect all nodes with
+ all others.
+ This 
+\emph on
+complete graph 
+\emph default
+encodes no conditional independencies.
+ However, to minimize computation time we normally want to get a minimal
+ graph that still encodes the joint probability distribution faithfully.
+ What properties does 
+\begin_inset Formula $P$
+\end_inset
+
+ have to fulfill and what does the minimal undirected graph 
+\begin_inset Formula $G$
+\end_inset
+
+ look like?
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+Hammersley-Clifford theorem 
+\emph default
+(
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HammersleyClifford1971"
+
+\end_inset
+
+) is helpful here.
+ It states that when we have a vector of random variables 
+\begin_inset Formula $\mathbf{X}=\{X_{1},\dots,X_{n}\}$
+\end_inset
+
+, its strictly positive joint probability distribution 
+\begin_inset Formula $P(\mathbf{X})$
+\end_inset
+
+ with 
+\begin_inset Formula $P(\mathbf{x})>0$
+\end_inset
+
+ for all possible values 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ of 
+\series bold
+
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+
+\series default
+, and an undirected graph 
+\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
+\end_inset
+
+ with each node corresponding to a random variable (i.e.
+ 
+\begin_inset Formula $\mathbf{N}=\{X_{1},\dots,X_{n}\}$
+\end_inset
+
+), then the following statements are equivalent:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P(\mathbf{X})$
+\end_inset
+
+ is a 
+\emph on
+Gibbs distribution 
+\emph default
+that factorizes according to the maximal cliques 
+\begin_inset Formula $C_{1},\dots,C_{m}$
+\end_inset
+
+ in 
+\begin_inset Formula $G$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $P(\mathbf{X})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\dots\cdot\phi_{m}(C_{m})$
+\end_inset
+
+ where 
+\begin_inset Formula $Z$
+\end_inset
+
+ is the 
+\emph on
+partition function
+\emph default
+, and 
+\begin_inset Formula $\phi_{i}(C_{i})$
+\end_inset
+
+ are the 
+\emph on
+potential functions
+\emph default
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+On page 21 of the Hammersley-Clifford paper, the authors define the name
+ 
+\begin_inset Quotes eld
+\end_inset
+
+light-coloured potential function
+\begin_inset Quotes erd
+\end_inset
+
+.
+ There, they also define 
+\begin_inset Quotes eld
+\end_inset
+
+Gibbsian ensemble
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+the 
+\emph on
+local Markov property 
+\emph default
+holds for the graph 
+\begin_inset Formula $G$
+\end_inset
+
+ and the joint probability distribution 
+\begin_inset Formula $P$
+\end_inset
+
+: Given the states of the random variables 
+\begin_inset Formula $\mathbf{N_{neighbor}}$
+\end_inset
+
+ immediately connected to a node 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is conditionally independent from all other nodes 
+\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $P(X_{i}|\mathbf{N_{neighbor}})=P(X_{i}|\mathbf{N}\backslash\mathbf{N_{neighbor}})$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
+\end_inset
+
+ is the set of nodes 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ without the neighboring nodes of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+the 
+\emph on
+global Markov property 
+\emph default
+holds for the graph 
+\begin_inset Formula $G$
+\end_inset
+
+ and the joint probability distribution 
+\begin_inset Formula $P$
+\end_inset
+
+: Given any disjoint subsets 
+\begin_inset Formula $\mathbf{N_{A}},\mathbf{N_{B}},\mathbf{N_{S}}\subset\mathbf{N}$
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbf{N_{S}}$
+\end_inset
+
+ separates the nodes 
+\begin_inset Formula $\mathbf{N_{A}}$
+\end_inset
+
+ from the nodes 
+\begin_inset Formula $\mathbf{N_{B}}$
+\end_inset
+
+, and given the states of the random variables of 
+\begin_inset Formula $\mathbf{N_{S}}$
+\end_inset
+
+, the nodes 
+\begin_inset Formula $\mathbf{N_{A}}$
+\end_inset
+
+ are conditionally independent of the nodes 
+\begin_inset Formula $\mathbf{N_{B}}$
+\end_inset
+
+: 
+\begin_inset Formula $P(\mathbf{N_{A}}|\mathbf{N_{S}})=$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: look up global Markov property and insert formula here
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert graphics illustrating local and global Markov property
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I should include the result of the Hammersley-Clifford theorem here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This means that when we have a strictly positive joint probability distribution
+ 
+\begin_inset Formula $P$
+\end_inset
+
+, we can construct the minimal undirected graph 
+\begin_inset Formula $G$
+\end_inset
+
+ representing 
+\begin_inset Formula $P$
+\end_inset
+
+ by starting from the completely connected graph and deleting the edges
+ 
+\begin_inset Formula $E_{12}=(N_{1},N_{2})$
+\end_inset
+
+ whose ends are conditionally independent 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: conditionally independent on what? I think that's the crux of being
+ NP; we probably have to enumerate all possible separators...?
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Markov random field must fulfill the 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: is there a difference between 
+\begin_inset Quotes eld
+\end_inset
+
+global Markov propery
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+Markov property
+\begin_inset Quotes erd
+\end_inset
+
+? There is the local and the global Markov property.
+\end_layout
+
+\end_inset
+
+Markov property.
+ That is, a graph 
+\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
+\end_inset
+
+ consisting of a given set of nodes 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ and edges 
+\begin_inset Formula $\mathbf{E}$
+\end_inset
+
+ is not a Markov random field if there are any three sets of nodes not fulfillin
+g the Markov property.
+ This means that for all sets of nodes 
+\begin_inset Formula $\mathbf{N_{A}}\subset\mathbf{N}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{N_{B}}\subset\mathbf{N}$
+\end_inset
+
+ separated by a third set of nodes 
+\begin_inset Formula $\mathbf{N_{S}}\subset\mathbf{N}$
+\end_inset
+
+ the corresponding random variables in 
+\begin_inset Formula $\mathbf{N_{A}}$
+\end_inset
+
+ must be conditionally independent from the random variables in 
+\begin_inset Formula $\mathbf{N_{B}}$
+\end_inset
+
+ given the random variables in the separator 
+\begin_inset Formula $\mathbf{N_{S}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subparagraph
+Example of an Undirected Graph Model
+\end_layout
+
+\begin_layout Standard
+For example, if there are the three cliques 
 \begin_inset Formula $\mathbf{C_{1}}=\{X_{1},X_{2},X_{3}\}$
 \end_inset
 
@@ -441,14 +836,10 @@ y is factored into potentials (written
 \begin_inset Formula $P$
 \end_inset
 
- (also called 
-\emph on
-Gibbs distribution
-\emph default
-) can be written as:
+ (also called Gibbs distribution) can be written as:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Formula 
 \[
 P(X_{1},\dots,X_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
@@ -473,18 +864,14 @@ clique potential
 \begin_inset Formula $Z$
 \end_inset
 
- is the 
-\emph on
-partition function
-\emph default
- and must normalize the function so that 
+ is the partition function and must normalize the function so that 
 \begin_inset Formula $P$
 \end_inset
 
  is a probability:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Formula 
 \[
 Z=\sum_{X_{1},\dots,X_{n}}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
@@ -495,7 +882,7 @@ Z=\sum_{X_{1},\dots,X_{n}}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 In practice, 
 \begin_inset Formula $\phi_{1}(X_{1},X_{2},X_{3})$
 \end_inset
@@ -510,7 +897,7 @@ In practice,
  entries) could look like this:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="4">
@@ -772,361 +1159,6 @@ B
 </cell>
 </row>
 </lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Assume that we want to encode a joint probability distribution 
-\begin_inset Formula $P$
-\end_inset
-
- into an undirected graph 
-\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
-\end_inset
-
-.
- We could use for every random variable a node, and connect all nodes with
- all others.
- This 
-\emph on
-complete graph 
-\emph default
-encodes no conditional independencies.
- However, we normally want to get a minimal graph that still encodes the
- joint probability distribution faithfully.
- What properties does 
-\begin_inset Formula $P$
-\end_inset
-
- have to fulfill and how does the minimal undirected graph 
-\begin_inset Formula $G$
-\end_inset
-
- look like?
-\end_layout
-
-\begin_layout Standard
-The 
-\emph on
-Hammersley-Clifford theorem 
-\emph default
-(
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HammersleyClifford1971"
-
-\end_inset
-
-) is helpful here.
- It states that when we have a vector of random variables 
-\begin_inset Formula $\mathbf{X}=\{X_{1},\dots,X_{n}\}$
-\end_inset
-
-, its strictly positive joint probability distribution 
-\begin_inset Formula $P(\mathbf{X})$
-\end_inset
-
- with 
-\begin_inset Formula $P(\mathbf{x})>0$
-\end_inset
-
- for all possible values 
-\begin_inset Formula $\mathbf{x}$
-\end_inset
-
- of 
-\series bold
-
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
-
-\series default
-, and an undirected graph 
-\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
-\end_inset
-
- with each node corresponding to a random variable (i.e.
- 
-\begin_inset Formula $\mathbf{N}=\{X_{1},\dots,X_{n}\}$
-\end_inset
-
-), then the following statements are equivalent:
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $P(\mathbf{X})$
-\end_inset
-
- is a 
-\emph on
-Gibbs distribution 
-\emph default
-that factorizes according to the maximal cliques 
-\begin_inset Formula $C_{1},\dots,C_{m}$
-\end_inset
-
- in 
-\begin_inset Formula $G$
-\end_inset
-
-, i.e.
- 
-\begin_inset Formula $P(\mathbf{X})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\dots\cdot\phi_{m}(C_{m})$
-\end_inset
-
- where 
-\begin_inset Formula $Z$
-\end_inset
-
- is the partition function, and 
-\begin_inset Formula $\phi_{i}(C_{i})$
-\end_inset
-
- are the potential functions.
-\end_layout
-
-\begin_layout Itemize
-the 
-\emph on
-local Markov property 
-\emph default
-holds for the graph 
-\begin_inset Formula $G$
-\end_inset
-
- and the joint probability distribution 
-\begin_inset Formula $P$
-\end_inset
-
-: Given the states of the random variables 
-\begin_inset Formula $\mathbf{N_{neighbor}}$
-\end_inset
-
- immediately connected to a node 
-\begin_inset Formula $X_{i}$
-\end_inset
-
-, 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- is conditionally independent from all other nodes 
-\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
-\end_inset
-
-, i.e.
- 
-\begin_inset Formula $P(X_{i}|\mathbf{N_{neighbor}})=P(X_{i}|\mathbf{N}\backslash\mathbf{N_{neighbor}})$
-\end_inset
-
-, where 
-\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
-\end_inset
-
- is the set of nodes 
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- without the neighboring nodes of 
-\begin_inset Formula $X_{i}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-the 
-\emph on
-global Markov property 
-\emph default
-holds for the graph 
-\begin_inset Formula $G$
-\end_inset
-
- and the joint probability distribution 
-\begin_inset Formula $P$
-\end_inset
-
-: Given any disjoint subsets 
-\begin_inset Formula $\mathbf{N_{A}},\mathbf{N_{B}},\mathbf{N_{S}}\subset\mathbf{N}$
-\end_inset
-
- where 
-\begin_inset Formula $\mathbf{N_{S}}$
-\end_inset
-
- separates the nodes 
-\begin_inset Formula $\mathbf{N_{A}}$
-\end_inset
-
- from the nodes 
-\begin_inset Formula $\mathbf{N_{B}}$
-\end_inset
-
-, and given the states of the random variables of 
-\begin_inset Formula $\mathbf{N_{S}}$
-\end_inset
-
-, the nodes 
-\begin_inset Formula $\mathbf{N_{A}}$
-\end_inset
-
- are conditionally independent of the nodes 
-\begin_inset Formula $\mathbf{N_{B}}$
-\end_inset
-
-: 
-\begin_inset Formula $P(\mathbf{N_{A}}|\mathbf{N_{S}})=$
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: look up global Markov property and insert formula here
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: insert graphics illustrating local and global Markov property
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I should include the result of the Hammersley-Clifford theorem here.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This means that when we have a strictly positive joint probability distribution
- 
-\begin_inset Formula $P$
-\end_inset
-
-, we can construct the minimal undirected graph 
-\begin_inset Formula $G$
-\end_inset
-
- representing 
-\begin_inset Formula $P$
-\end_inset
-
- by starting from the completely connected graph and deleting the edges
- 
-\begin_inset Formula $E_{12}=(N_{1},N_{2})$
-\end_inset
-
- whose ends are conditionally independent aaaaaa.
-\end_layout
-
-\begin_layout Standard
-A Markov random field must fulfill the 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: is there a difference between 
-\begin_inset Quotes eld
-\end_inset
-
-global Markov propery
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-Markov property
-\begin_inset Quotes erd
-\end_inset
-
-? There is the local and the global Markov property.
-\end_layout
-
-\end_inset
-
-Markov property.
- That is, a graph 
-\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
-\end_inset
-
- consisting of a given set of nodes 
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- and edges 
-\begin_inset Formula $\mathbf{E}$
-\end_inset
-
- is not a Markov random field if there are any three sets of nodes not fulfillin
-g the Markov property.
- This means that for all sets of nodes 
-\begin_inset Formula $\mathbf{N_{A}}\subset\mathbf{N}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{N_{B}}\subset\mathbf{N}$
-\end_inset
-
- separated by a third set of nodes 
-\begin_inset Formula $\mathbf{N_{S}}\subset\mathbf{N}$
-\end_inset
-
- the corresponding random variables in 
-\begin_inset Formula $\mathbf{N_{A}}$
-\end_inset
-
- must be conditionally independent from the random variables in 
-\begin_inset Formula $\mathbf{N_{B}}$
-\end_inset
-
- given the random variables in the separator 
-\begin_inset Formula $\mathbf{N_{S}}$
-\end_inset
-
-.
- the joint probability distribution encoded by the graph 
-\begin_inset Formula $G=(N,E)$
-\end_inset
-
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO
-\end_layout
 
 \end_inset
 
@@ -1413,7 +1445,7 @@ In the general case (if the joint probability cannot be factorized), this
 \begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{U}|})=O(|\mathbf{u}|^{n})$
 \end_inset
 
- operations to compute (where 
+ operations to compute, where 
 \begin_inset Formula $|\mathbf{u}|$
 \end_inset
 
@@ -1421,7 +1453,15 @@ In the general case (if the joint probability cannot be factorized), this
 \begin_inset Formula $U_{i}$
 \end_inset
 
- can have and 
+ can have (assuming for simplicity that all random variables 
+\begin_inset Formula $U_{i}$
+\end_inset
+
+ have the same number of possible values 
+\begin_inset Formula $|\mathbf{u}|$
+\end_inset
+
+) and 
 \begin_inset Formula $|\mathbf{U}|$
 \end_inset
 
@@ -1429,7 +1469,7 @@ In the general case (if the joint probability cannot be factorized), this
 \begin_inset Formula $U_{i}$
 \end_inset
 
-).
+.
  This is because all possible combinations of variable assignments have
  to be considered.
  Thus, run-time is exponential in the number of variables, and therefore
@@ -1444,27 +1484,29 @@ This can be improved by factorizing the joint probability into independent
 \end_inset
 
  can be partitioned into three pairwise independent cliques 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I think the following example is wrong, because the cliques do not
- overlap in their random variables, i.e.
- the cliques would not be connected with each other in the undirected graph.
-\end_layout
-
-\end_inset
-
- 
 \begin_inset Formula $\mathbf{C_{1}}=\{U_{1},U_{2}\},$
 \end_inset
 
  
-\begin_inset Formula $\mathbf{C_{2}}=\{U_{3},U_{4}\}$
+\begin_inset Formula $\mathbf{C_{2}}=\{U_{2},U_{3}\}$
 \end_inset
 
 , 
-\begin_inset Formula $\mathbf{C_{3}}=\{U_{5},U_{6},U_{7}\}$
+\begin_inset Formula $\mathbf{C_{3}}=\{U_{3},U_{4},U_{5}\}$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Note that the random variables 
+\begin_inset Formula $U$
+\end_inset
+
+ overlap between clusters, so that the clusters are connected.
+\end_layout
+
 \end_inset
 
 , so that 
