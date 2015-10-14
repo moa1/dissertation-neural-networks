@@ -581,6 +581,12 @@ Gibbsian ensemble
 \end_layout
 
 \begin_layout Itemize
+\begin_inset CommandInset label
+LatexCommand label
+name "local-Markov-property"
+
+\end_inset
+
 the 
 \emph on
 local Markov property 
@@ -594,6 +600,32 @@ holds for the graph
 \end_inset
 
 : Given the states of the random variables 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: isn't using 
+\begin_inset Formula $\mathbf{N}$
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+nodes
+\begin_inset Quotes erd
+\end_inset
+
+) as a synonym for the random variables 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ confusing?
+\end_layout
+
+\end_inset
+
+
 \begin_inset Formula $\mathbf{N_{neighbor}}$
 \end_inset
 
@@ -1564,7 +1596,420 @@ Gibbs sampling
 \end_layout
 
 \begin_layout Standard
-Gibbs sampling is a type of Markov Chain Monte Carlo (MCMC) algorithm.
+Gibbs sampling 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GemanGeman1984"
+
+\end_inset
+
+ is a type of Markov Chain Monte Carlo (MCMC) algorithm.
+\end_layout
+
+\begin_layout Subparagraph
+Markov Chain
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+Markov Chain 
+\emph default
+is a time sequence of random variables 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+, where 
+\begin_inset Formula $t$
+\end_inset
+
+ denotes the discrete index of time.
+ In a Markov Chain, each random variable 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ may depend only on the state of the random variable at the immediately
+ previous time point 
+\begin_inset Formula $t-1$
+\end_inset
+
+, i.e.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P(X_{t}=x_{t}|X_{0}=x_{0},\dots,X_{t-1}=x_{t-1})=P(X_{t}=x_{t}|X_{t-1}=x_{t-1})
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+time-homogeneous Markov Chain 
+\emph default
+is a Markov Chain in which the conditional probability 
+\begin_inset Formula $P(X_{t}=x_{t}|X_{t-1}=x_{t-1})$
+\end_inset
+
+ is the same for all time points 
+\begin_inset Formula $t$
+\end_inset
+
+, i.e.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P(X_{t}=x_{t}|X_{t-1}=x_{t-1})=P(X_{t-1}=x_{t-1}|X_{t-2}=x_{t-2})
+\]
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+for all time points 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ If this is the case, then this conditional probability 
+\begin_inset Formula $P(X_{t}=i|X_{t-1}=j)=P_{ji}$
+\end_inset
+
+ can be written as the two-dimensional matrix 
+\begin_inset Formula $P$
+\end_inset
+
+, called the 
+\family default
+\series default
+\shape default
+\size default
+\emph on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+transition matrix
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: stationary distribution, write the conditions necessary for a Markov
+ Chain to converge.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Markov Chain Monte Carlo (MCMC)
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Markov Chain Monte Carlo
+\emph default
+ is a type of algorithm to sample from a distribution.
+ A Markov Chain has to be set up so that it 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: And also write down how the target distribution is specified.
+ At this point I think that this depends on the specific instance of MCMC,
+ e.g.
+ Gibbs Sampling needs conditional probabilities.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Gibbs Sampling
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Gibbs Sampling 
+\emph default
+is an instance of a Markov Chain Monte Carlo algorithm, so it is also used
+ to sample from a target distribution.
+\end_layout
+
+\begin_layout Standard
+A precondition to being able to use a Gibbs Sampler is that the following
+ conditional probabilities of the target distribution are known, so that
+ they can be evaluated.
+ Suppose that the (possibly unknown) target distribution is 
+\begin_inset Formula $P(X_{1},\dots,X_{n})$
+\end_inset
+
+.
+ Then for each random variable 
+\begin_inset Formula $X_{i}\in\{X_{1},\dots,X_{n}\}$
+\end_inset
+
+ the conditional probability of the variable given all other variables must
+ be known in closed form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P(X_{i}|\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},X_{n})
+\]
+
+\end_inset
+
+ The joint probability distribution is thus given to the algorithm implicitly.
+\end_layout
+
+\begin_layout Standard
+A Gibbs Sampler starts by specifying a start value 
+\begin_inset Formula $x_{i}^{(0)}$
+\end_inset
+
+ for each random variable 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Because the Markov Chain is 
+\end_layout
+
+\end_inset
+
+The start value does not really matter that much, but it influences the
+ numbers of iterations needed until the Gibbs Sampler returns samples from
+ the target distribution.
+ So the start value should be close to the 
+\begin_inset Quotes eld
+\end_inset
+
+mass
+\begin_inset Quotes erd
+\end_inset
+
+ of the distribution.
+\end_layout
+
+\begin_layout Standard
+Then an iterative process is started.
+ In each iteration 
+\begin_inset Formula $t$
+\end_inset
+
+, each variable 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is updated by sampling a new value 
+\begin_inset Formula $x_{i}^{(t)}$
+\end_inset
+
+ from the conditional probability distribution 
+\begin_inset Formula 
+\begin{equation}
+P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})\label{eq:Gibbs sampling: CPD}
+\end{equation}
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+After some number of throw-away iterations, the Gibbs Sampler's values 
+\begin_inset Formula $(x_{1},\dots,x_{n})$
+\end_inset
+
+ will start coming from the target joint distribution 
+\begin_inset Formula $P(X_{1},\dots,X_{n})$
+\end_inset
+
+.
+ This 
+\begin_inset Quotes eld
+\end_inset
+
+some number of throw-away iterations
+\begin_inset Quotes erd
+\end_inset
+
+ is called the 
+\emph on
+burn-in period
+\emph default
+ and can be considerable depending on the starting values and the joint
+ probability distribution underlying the conditional probability distributions.
+\end_layout
+
+\begin_layout Standard
+There are different alternative ways in which the random variables are updated,
+ for example the updating order of the random variables can be done in random
+ order, or sequentially, or a whole 
+\begin_inset Quotes eld
+\end_inset
+
+block
+\begin_inset Quotes erd
+\end_inset
+
+ of more than one random variable can be sampled from the conditional distributi
+on given all the other random variables (e.g.
+ 
+\begin_inset Formula $P(X_{i1},X_{i2},X_{i3}|\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash\{i1,i2,i3\})$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+In Gibbs Sampling, even after the Markov chain is burned in, there is still
+ a problem with the returned samples.
+ The samples of two adjacent time steps 
+\begin_inset Formula $\mathbf{x}^{(t)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{x}^{(t+1)}$
+\end_inset
+
+ are correlated because at every iteration only a single variable is changed.
+ This can be mitigated by returning only the states of every 
+\emph on
+n
+\emph default
+th iteration.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: is this true?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Gibbs Sampling in Markov Random Fields
+\end_layout
+
+\begin_layout Standard
+Gibbs Sampling in Markov Random Fields is easier than Gibbs Sampling in
+ directed graphical models.
+ This is because the conditional probability distributions needed for Gibbs
+ Sampling are simpler than those in Bayesian Networks.
+ The conditional probability distribution needed in Gibbs Sampling was given
+ in equation 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "eq:Gibbs sampling: CPD"
+
+\end_inset
+
+.
+ This conditional probability is particularly simple for Markov Random Fields,
+ because of the local Markov property (refer to 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "local-Markov-property"
+
+\end_inset
+
+): each random variable 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is independent of all other random variables given the states of the neighborin
+g random variables.
+ This means that in Markov Random Fields, equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Gibbs sampling: CPD"
+
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\mathbf{X}_{Neighborhood(X_{i})})
+\]
+
+\end_inset
+
+.
+ This is simpler to specify than the conditional probabilities necessary
+ to specify in Bayesian Networks, which are
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P(X_{i}|\mathbf{X}_{MB(X_{i})})
+\]
+
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{X}_{MB(X_{i})}$
+\end_inset
+
+ are the random variables in the Markov Blanket of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
