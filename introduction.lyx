@@ -1275,7 +1275,7 @@ TODO: Do
 \end_layout
 
 \begin_layout Paragraph
-Exact Inference in directed and in undirected graphical models
+Exact Inference in Directed and in Undirected Graphical Models
 \end_layout
 
 \begin_layout Standard
@@ -1620,7 +1620,7 @@ is a time sequence of random variables
 \end_inset
 
 , where 
-\begin_inset Formula $t$
+\begin_inset Formula $t\in\mathbb{N}_{0}$
 \end_inset
 
  denotes the discrete index of time.
@@ -2210,11 +2210,22 @@ f(x)=\begin{cases}
 \begin_inset Newline newline
 \end_inset
 
-While this updating rule was described as synchronous (i.e.
+While this updating rule was described here as synchronous (i.e.
  all nodes are updated at the same time), the network can also be updated
  asynchronously (i.e.
- at each time step a node is picked at random and its state is updated.).
- Although a hopfield network is recurrent, Hopfield 
+ at each time step a node is picked at random and its state is updated,
+ which is how Hopfield described it in 1984 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Although a Hopfield network is recurrent, Hopfield 
 \begin_inset Note Note
 status open
 
@@ -2252,7 +2263,7 @@ The third behavior seen was chaotic wandering in a small region of state
 
 \end_inset
 
- proved that the updating rule converges to a (local) minimum.
+ proved that the updating rule converges to a (possibly local) minimum.
 \end_layout
 
 \begin_layout Standard
