@@ -1989,14 +1989,14 @@ P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\math
 \end_inset
 
 .
- This is simpler to specify than the conditional probabilities necessary
- to specify in Bayesian Networks, which are
+ For comparison, in Bayesian Networks the conditional probability would
+ be
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-P(X_{i}|\mathbf{X}_{MB(X_{i})})
+P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\mathbf{X}_{MB(X_{i})})
 \]
 
 \end_inset
@@ -2010,6 +2010,8 @@ P(X_{i}|\mathbf{X}_{MB(X_{i})})
 \end_inset
 
 .
+ The Markov Blanket of a random variable is more complicated to compute
+ than its neighborhood.
 \end_layout
 
 \begin_layout Paragraph
