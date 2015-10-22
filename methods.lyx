@@ -1592,22 +1592,20 @@ The runtime of this formula is dominated by the largest clique, and so the
 \end_layout
 
 \begin_layout Paragraph
-Gibbs sampling
+Markov Chain
 \end_layout
 
 \begin_layout Standard
-Gibbs sampling 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GemanGeman1984"
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Bild von einer Markov Chain.
+\end_layout
 
 \end_inset
 
- is a type of Markov Chain Monte Carlo (MCMC) algorithm.
-\end_layout
 
-\begin_layout Subparagraph
-Markov Chain
 \end_layout
 
 \begin_layout Standard
@@ -1650,6 +1648,16 @@ P(X_{t}=x_{t}|X_{0}=x_{0},\dots,X_{t-1}=x_{t-1})=P(X_{t}=x_{t}|X_{t-1}=x_{t-1})
 \begin_layout Standard
 A 
 \emph on
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+time-homogeneous Markov Chain
+\end_layout
+
+\end_inset
+
 time-homogeneous Markov Chain 
 \emph default
 is a Markov Chain in which the conditional probability 
@@ -1689,11 +1697,15 @@ for all time points
 
 .
  If this is the case, then this conditional probability 
-\begin_inset Formula $P(X_{t}=i|X_{t-1}=j)=P_{ji}$
+\begin_inset Formula $P(X_{t}=i|X_{t-1}=j)=p_{ji}$
 \end_inset
 
- can be written as the two-dimensional matrix 
-\begin_inset Formula $P$
+ is independent of the current time 
+\begin_inset Formula $t$
+\end_inset
+
+ and can be written as the two-dimensional matrix 
+\begin_inset Formula $p$
 \end_inset
 
 , called the 
@@ -1709,6 +1721,16 @@ for all time points
 \noun default
 \color inherit
 transition matrix
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+transition matrix
+\end_layout
+
+\end_inset
+
+
 \family roman
 \series medium
 \shape up
@@ -1730,6 +1752,259 @@ status open
 \begin_layout Plain Layout
 TODO: stationary distribution, write the conditions necessary for a Markov
  Chain to converge.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It makes sense to talk about the distribution of states a Markov chain can
+ have at a certain time point 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Let it be named the 
+\emph on
+probability vector
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+probability vector
+\end_layout
+
+\end_inset
+
+ 
+\emph default
+
+\begin_inset Formula $d^{(t)}$
+\end_inset
+
+, a row vector with its horizontal length equal to the number of different
+ possible states of the random variables 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
+ The distribution at the next time point 
+\begin_inset Formula $t+1$
+\end_inset
+
+ can be computed by matrix multiplication from 
+\begin_inset Formula $d^{(t)}$
+\end_inset
+
+ and the transition matrix 
+\begin_inset Formula $p_{ji}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d^{(t+1)}=d^{(t)}p
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Given an initial distribution 
+\begin_inset Formula $d^{(0)}$
+\end_inset
+
+ and the transition matrix 
+\begin_inset Formula $p$
+\end_inset
+
+, the probabilities of all states the Markov chain can assume are defined
+ for all time points 
+\begin_inset Formula $t\geq0$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+d^{(t)}=d^{(0)}p^{t}
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+There are time-homogeneous Markov chains whose state distribution stays
+ constant once it has assumed a certain state distribution.
+ Such state distributions are called 
+\emph on
+invariant
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+invariant distribution
+\end_layout
+
+\end_inset
+
+ 
+\emph default
+or 
+\emph on
+stationary distribution
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+stationary distribution
+\end_layout
+
+\end_inset
+
+
+\emph default
+.
+ A stationary distribution 
+\begin_inset Formula $\pi$
+\end_inset
+
+ must fulfill the following equation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\pi p=\pi
+\]
+
+\end_inset
+
+If 
+\begin_inset Formula $d^{(t)}=\pi$
+\end_inset
+
+, then 
+\begin_inset Formula $d^{(t+u)}=\pi$
+\end_inset
+
+ for all 
+\begin_inset Formula $u\geq0$
+\end_inset
+
+.
+ A Markov Chain can have more than one stationary distributions.
+\end_layout
+
+\begin_layout Standard
+A Markov chain with transition matrix 
+\begin_inset Formula $p$
+\end_inset
+
+ satisfies 
+\emph on
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+detailed balance
+\end_layout
+
+\end_inset
+
+detailed balance 
+\emph default
+if there exists a probability distribution 
+\begin_inset Formula $\pi=(\pi_{1},\pi_{2},\dots\pi_{n})$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\pi_{j}p_{ji}=\pi_{i}p_{ij}
+\]
+
+\end_inset
+
+.
+ Such a Markov chain is also called a 
+\emph on
+reversible
+\emph default
+ Markov chain
+\emph on
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+reversible Markov chain
+\end_layout
+
+\end_inset
+
+
+\emph default
+.
+ A Markov chain with the detailed balance property is known to converge
+ to a stationary distribution, where the stationary distribution is equal
+ to the 
+\begin_inset Formula $\pi$
+\end_inset
+
+ from the detailed balance condition.
+ While having detailed balance implies that a Markov chain has a stationary
+ distribution, the reverse is not true: there are Markov chains having a
+ stationary distribution but not satisfying detailed balance.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(For example, a Markov chain with transition probabilities 
+\begin_inset Formula $p_{ij}=p_{jk}=p_{ki}=1$
+\end_inset
+
+ for 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+, 
+\begin_inset Formula $j\neq k$
+\end_inset
+
+, 
+\begin_inset Formula $k\neq i$
+\end_inset
+
+, and the other entries of the transition matrix equal to 0 does not satisfy
+ detailed balance, but 
+\begin_inset Formula $\pi_{i}=\pi_{j}=\pi_{k}=\frac{1}{3}$
+\end_inset
+
+ is a stationary distribution of this Markov chain.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+)
 \end_layout
 
 \end_inset
@@ -1761,6 +2036,21 @@ TODO: And also write down how the target distribution is specified.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subparagraph
+Gibbs sampling
+\end_layout
+
+\begin_layout Standard
+Gibbs sampling 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GemanGeman1984"
+
+\end_inset
+
+ is a type of Markov Chain Monte Carlo (MCMC) algorithm.
 \end_layout
 
 \begin_layout Subparagraph
@@ -2044,6 +2334,29 @@ TODO: is there also explaining away in undirected graphs? nope, I don't
 
 \begin_layout Standard
 In a directed graph Explaining away
+\end_layout
+
+\begin_layout Paragraph
+Comparison of the Representational Power of Markov Random Fields with Bayesian
+ Networks
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO Neal shows in (~/uni/publication/zusammenfassung/rbm/A11 Connectionist
+ learning of belief networks.pdf) that Boltzmann Machines and Bayesian Networks
+ both have instances of them that are not representable in the other kind
+ of graphical model.
+ This means that some probability distributions representable in Boltzmann
+ Machines do not have representations in Bayesian Networks and vice versa.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2377,11 +2690,11 @@ squashing
 \end_inset
 
  must be non-decreasing, 
-\begin_inset Formula $\lim_{x\rightarrow\infty}s(x)=1$
+\begin_inset Formula $\lim_{x\rightarrow-\infty}s(x)=0$
 \end_inset
 
  and 
-\begin_inset Formula $\lim_{x\rightarrow-\infty}s(x)=0$
+\begin_inset Formula $\lim_{x\rightarrow\infty}s(x)=1$
 \end_inset
 
 .
@@ -2439,6 +2752,55 @@ Inference in Boltzmann Machines
 
 \begin_layout Standard
 How is inference complicated in general Boltzmann Machines?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+In 
+\begin_inset Quotes eld
+\end_inset
+
+Connectionist learning for belief networks
+\begin_inset Quotes erd
+\end_inset
+
+ (~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
+ networks.pdf), Neal derives the learning rule for Boltzmann Machines: page
+ 6, equation 7.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Connections to other Graphical Models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Generalized to allow J and H to vary from spin to spin, and to allow interaction
+s between any two spins, the Ising model becomes the 
+\begin_inset Quotes eld
+\end_inset
+
+Boltzmann machine
+\begin_inset Quotes erd
+\end_inset
+
+ of Ackley, Hinton, and Sejnowski.
+\begin_inset Quotes erd
+\end_inset
+
+ [Probabilistic Inference Using Markov Chain Monte Carlo Methods, Radford
+ M.
+ Neal 1993]
 \end_layout
 
 \begin_layout Paragraph
