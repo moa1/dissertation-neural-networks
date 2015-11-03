@@ -1601,6 +1601,10 @@ status open
 
 \begin_layout Plain Layout
 TODO: Bild von einer Markov Chain.
+ Evtl.
+ von einer Markov Chain, an der ich die verschiedenen Eigenschaften wie
+ period, irreducible, etc.
+ zeigen kann.
 \end_layout
 
 \end_inset
@@ -1642,15 +1646,40 @@ P(X_{t}=x_{t}|X_{0}=x_{0},\dots,X_{t-1}=x_{t-1})=P(X_{t}=x_{t}|X_{t-1}=x_{t-1})
 
 \end_inset
 
+must hold for all 
+\begin_inset Formula $t\geq1$
+\end_inset
+
 .
+ Here we only consider Markov Chains whose possible states 
+\begin_inset Formula $x_{t}$
+\end_inset
+
+ at each time point are discrete and from the same set 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+.
+ (I.e.
+ 
+\begin_inset Formula $x_{t}\in\mathbb{S}$
+\end_inset
+
+ for all 
+\begin_inset Formula $t$
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
 A 
 \emph on
+time-homogeneous Markov Chain
+\emph default
 
 \begin_inset Index idx
-status collapsed
+status open
 
 \begin_layout Plain Layout
 time-homogeneous Markov Chain
@@ -1658,9 +1687,7 @@ time-homogeneous Markov Chain
 
 \end_inset
 
-time-homogeneous Markov Chain 
-\emph default
-is a Markov Chain in which the conditional probability 
+ is a Markov Chain in which the conditional probability 
 \begin_inset Formula $P(X_{t}=x_{t}|X_{t-1}=x_{t-1})$
 \end_inset
 
@@ -1692,12 +1719,54 @@ P(X_{t}=x_{t}|X_{t-1}=x_{t-1})=P(X_{t-1}=x_{t-1}|X_{t-2}=x_{t-2})
 \noun off
 \color none
 for all time points 
-\begin_inset Formula $t$
+\begin_inset Formula $t\geq2$
 \end_inset
 
 .
- If this is the case, then this conditional probability 
-\begin_inset Formula $P(X_{t}=i|X_{t-1}=j)=p_{ji}$
+ If this is the case, then this conditional probability
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: In the following, do I have to replace 
+\begin_inset Formula $p$
+\end_inset
+
+ with 
+\begin_inset Formula $P$
+\end_inset
+
+, because it is a matrix?
+\end_layout
+
+\end_inset
+
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $P(X_{t}=j|X_{t-1}=i)=p_{ij}$
 \end_inset
 
  is independent of the current time 
@@ -1721,8 +1790,10 @@ for all time points
 \noun default
 \color inherit
 transition matrix
+\emph default
+
 \begin_inset Index idx
-status collapsed
+status open
 
 \begin_layout Plain Layout
 transition matrix
@@ -1769,6 +1840,8 @@ It makes sense to talk about the distribution of states a Markov chain can
  Let it be named the 
 \emph on
 probability vector
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1778,19 +1851,44 @@ probability vector
 
 \end_inset
 
+
+\emph on
  
 \emph default
 
 \begin_inset Formula $d^{(t)}$
 \end_inset
 
-, a row vector with its horizontal length equal to the number of different
- possible states of the random variables 
-\begin_inset Formula $X_{i}$
+, a row vector with its length equal to 
+\begin_inset Formula $|\mathbb{S}|$
+\end_inset
+
+ (the number of different possible states of the random variables 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+) and its entry 
+\begin_inset Formula $d_{i}^{(t)}=P(X_{t}=x_{i})$
+\end_inset
+
+ equal to the probability of 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ having state 
+\begin_inset Formula $x_{i}$
 \end_inset
 
 .
- The distribution at the next time point 
+ (This means 
+\begin_inset Formula $\sum_{i}d_{i}^{(t)}=1$
+\end_inset
+
+ for all 
+\begin_inset Formula $t$
+\end_inset
+
+.) The distribution at the next time point 
 \begin_inset Formula $t+1$
 \end_inset
 
@@ -1799,7 +1897,7 @@ probability vector
 \end_inset
 
  and the transition matrix 
-\begin_inset Formula $p_{ji}$
+\begin_inset Formula $(p_{ji})$
 \end_inset
 
 :
@@ -1850,6 +1948,8 @@ There are time-homogeneous Markov chains whose state distribution stays
  Such state distributions are called 
 \emph on
 invariant
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1859,11 +1959,15 @@ invariant distribution
 
 \end_inset
 
+
+\emph on
  
 \emph default
 or 
 \emph on
 stationary distribution
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1873,8 +1977,6 @@ stationary distribution
 
 \end_inset
 
-
-\emph default
 .
  A stationary distribution 
 \begin_inset Formula $\pi$
@@ -1904,7 +2006,7 @@ If
 \end_inset
 
 .
- A Markov Chain can have more than one stationary distributions.
+ A Markov Chain can have more than one stationary distribution.
 \end_layout
 
 \begin_layout Standard
@@ -1913,8 +2015,6 @@ A Markov chain with transition matrix
 \end_inset
 
  satisfies 
-\emph on
-
 \begin_inset Index idx
 status collapsed
 
@@ -1924,6 +2024,8 @@ detailed balance
 
 \end_inset
 
+
+\emph on
 detailed balance 
 \emph default
 if there exists a probability distribution 
@@ -1942,13 +2044,44 @@ if there exists a probability distribution
 \end_inset
 
 .
- Such a Markov chain is also called a 
+ Such a Markov chain is also
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Is this true? In 
+\begin_inset Quotes eld
+\end_inset
+
+neal.pdf
+\begin_inset Quotes erd
+\end_inset
+
+, it says 
+\begin_inset Quotes eld
+\end_inset
+
+Often, we will use time reversible homogeneous Markov chains that satisfy
+ the 
+\series bold
+more restrictive 
+\series default
+condition of detailed balance
+\begin_inset Quotes erd
+\end_inset
+
+.
+ So Markov chains satisfying detailed balance seem to be a subset of the
+ Markov chains satisfying time reversibility.
+\end_layout
+
+\end_inset
+
+ called a 
 \emph on
 reversible
 \emph default
  Markov chain
-\emph on
-
 \begin_inset Index idx
 status collapsed
 
@@ -1959,24 +2092,89 @@ reversible Markov chain
 \end_inset
 
 
-\emph default
-.
- A Markov chain with the detailed balance property is known to converge
- to a stationary distribution, where the stationary distribution is equal
- to the 
-\begin_inset Formula $\pi$
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Norris1997"
+
 \end_inset
 
- from the detailed balance condition.
- While having detailed balance implies that a Markov chain has a stationary
- distribution, the reverse is not true: there are Markov chains having a
- stationary distribution but not satisfying detailed balance.
- 
+
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-(For example, a Markov chain with transition probabilities 
+Lemma 1.9.3
+\end_layout
+
+\end_inset
+
+.
+ A Markov chain with the detailed balance property is known to 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: why is detailed balance not enough for a Markov chain to have an unique
+ stationary distribution in AltRBM-proof.pdf? why do we need irreducibility
+ and aperiodicity?
+\end_layout
+
+\begin_layout Plain Layout
+irreducibility has to be shown so that we can be sure that the markov chain
+ has an unique stationary distribution.
+\end_layout
+
+\begin_layout Plain Layout
+aperiodicity: 
+\begin_inset Quotes eld
+\end_inset
+
+AltRBM-proof.pdf
+\begin_inset Quotes erd
+\end_inset
+
+ says 
+\begin_inset Quotes eld
+\end_inset
+
+One can show that an irreducible and aperiodic Markov chain on a finite
+ state space is guarantied to converge to its stationary distribution (see,
+ e.g., [6]).
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+have at least one stationary distribution, where the stationary distributions
+ fulfill the 
+\begin_inset Formula $\pi$
+\end_inset
+
+ from the detailed balance condition 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Norris1997"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Lemma 1.9.2
+\end_layout
+
+\end_inset
+
+.
+ While having detailed balance implies that a Markov chain has a stationary
+ distribution, the reverse is not true: there are Markov chains with a stationar
+y distribution but not satisfying detailed balance.
+ (For example, a Markov chain with transition probabilities 
 \begin_inset Formula $p_{ij}=p_{jk}=p_{ki}=1$
 \end_inset
 
@@ -1997,19 +2195,242 @@ status open
 \begin_inset Formula $\pi_{i}=\pi_{j}=\pi_{k}=\frac{1}{3}$
 \end_inset
 
- is a stationary distribution of this Markov chain.
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Neal1993"
+ is a stationary distribution of this Markov chain.)
+\end_layout
+
+\begin_layout Subparagraph
+Fundamental Theorem of Markov Chains
+\end_layout
+
+\begin_layout Standard
+Under what conditions does a Markov chain have an unique stationary distribution
+? This is answered by the 
+\emph on
+Fundamental Theorem of Markov Chains
+\emph default
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+which was proved by Kolmogorov?.
+ TODO
+\end_layout
 
 \end_inset
 
-)
+.
+ It states that, in the long run (i.e.
+ 
+\begin_inset Formula $\lim_{t\rightarrow\infty}d^{(0)}p^{t}$
+\end_inset
+
+), the probability of being in a specific state converges to an unique stationar
+y distribution which is indepentent of the starting state, given that 
+\begin_inset Formula $p$
+\end_inset
+
+ is irreducible, positive-recurrent and aperiodic
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Behrends2000"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Theorem 7.4 in ~/uni/publication/zusammenfassung/markov chains/markovbuch2008.pdf.
 \end_layout
 
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Irgendwo an passender Stelle einfügen: 
+\begin_inset Quotes eld
+\end_inset
+
+It is possible to efficiently calculate the stationary distribution 
+\begin_inset Formula $\pi$
+\end_inset
+
+ by computing only the transition matrix for time steps that are a power
+ of 2, i.e.
+ 
+\begin_inset Formula $p^{2^{t}}$
+\end_inset
+
+.
+ This can be done by repeated squaring and assignment: 
+\begin_inset Formula $p^{2t}:=p^{t}p^{t}$
+\end_inset
+
+.
+ (And starting with 
+\begin_inset Formula $p^{1}:=p$
+\end_inset
+
+.)
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A Markov Chain is called 
+\emph on
+irreducible
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+irreducible
+\end_layout
+
+\end_inset
+
+, if it is possible to go from any state 
+\begin_inset Formula $i$
+\end_inset
+
+ of the Markov Chain to any state 
+\begin_inset Formula $j$
+\end_inset
+
+ (possibly in more than 1 steps).
+ Formally, a Markov Chain is called irreducible, if its states are all in
+ the same (and only) closed subset.
+ A subset 
+\begin_inset Formula $C$
+\end_inset
+
+ of 
+\begin_inset Formula $\mathbb{S}$
+\end_inset
+
+ is called 
+\emph on
+closed 
+\emph default
+if 
+\begin_inset Formula $p_{ij}=0$
+\end_inset
+
+ whenever 
+\begin_inset Formula $i\in C$
+\end_inset
+
+ and 
+\begin_inset Formula $j\notin C$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A state of a Markov Chain is 
+\emph on
+positive recurrent
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+positive recurrent
+\end_layout
+
+\end_inset
+
+, if 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: (siehe Seite 46 von markovbuch2008.pdf) Vielleicht ist es einfacher
+ zu definieren, wann ein state NICHT positive recurrent ist.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The period of a state
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+period of a state
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $i$
+\end_inset
+
+ is defined as the greatest common denominator of the number of time steps
+ needed for a Markov chain so that it is possible to be in state 
+\begin_inset Formula $i$
+\end_inset
+
+ again, after it was in state 
+\begin_inset Formula $i$
+\end_inset
+
+ before:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+period(i)=gcd(\{k|k\geq0,p_{ii}^{k}>0\})
+\]
+
+\end_inset
+
+.
+ If 
+\begin_inset Formula $period(i)=1$
+\end_inset
+
+, state 
+\begin_inset Formula $i$
+\end_inset
+
+ is called 
+\emph on
+aperiodic
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+aperiodic
+\end_layout
+
+\end_inset
+
+.
+ If all states of a Markov chain are aperiodic, the Markov chain is called
+ aperiodic.
 \end_layout
 
 \begin_layout Subparagraph
