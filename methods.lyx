@@ -868,10 +868,7 @@ For example, if there are the three cliques
 \begin_inset Formula $P$
 \end_inset
 
- (also called Gibbs distribution) can be written as:
-\end_layout
-
-\begin_layout Standard
+ (also called Gibbs distribution) can be written as: 
 \begin_inset Formula 
 \[
 P(X_{1},\dots,X_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
@@ -900,10 +897,7 @@ clique potential
 \begin_inset Formula $P$
 \end_inset
 
- is a probability:
-\end_layout
-
-\begin_layout Standard
+ is a probability: 
 \begin_inset Formula 
 \[
 Z=\sum_{X_{1},\dots,X_{n}}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
@@ -1418,9 +1412,7 @@ When we want to find the probability of configuration
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
+ 
 \begin_inset Formula 
 \begin{eqnarray}
 P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & = & \sum_{\mathbf{U}}P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u}|\mathbf{K}=\mathbf{k})\nonumber \\
@@ -1455,10 +1447,7 @@ In the above formula there is a sum over all variables
 
 \series default
 .
- Writing this out, we obtain:
-\end_layout
-
-\begin_layout Standard
+ Writing this out, we obtain: 
 \begin_inset Formula 
 \begin{eqnarray}
 P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k})\nonumber \\
@@ -1545,10 +1534,7 @@ Note that the random variables
 \begin_inset Formula $P(\mathbf{U})=P(\mathbf{C_{1}})P(\mathbf{C_{2}})P(\mathbf{C_{3}})$
 \end_inset
 
-, then above sum can be written as:
-\end_layout
-
-\begin_layout Standard
+, then above sum can be written as: 
 \begin_inset Formula 
 \begin{eqnarray*}
 P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & =\\
@@ -1636,9 +1622,7 @@ is a time sequence of random variables
 \end_inset
 
 , i.e.
-\end_layout
-
-\begin_layout Standard
+ 
 \begin_inset Formula 
 \[
 P(X_{t}=x_{t}|X_{0}=x_{0},\dots,X_{t-1}=x_{t-1})=P(X_{t}=x_{t}|X_{t-1}=x_{t-1})
@@ -1651,7 +1635,7 @@ must hold for all
 \end_inset
 
 .
- Here we only consider Markov Chains whose possible states 
+ In a Markov Chain, possible states 
 \begin_inset Formula $x_{t}$
 \end_inset
 
@@ -1669,7 +1653,25 @@ must hold for all
 \begin_inset Formula $t$
 \end_inset
 
-.)
+.) When the state a Markov Chain is in is not specific to a certain time
+ point 
+\begin_inset Formula $t$
+\end_inset
+
+, we will also use single-letter variables like 
+\begin_inset Formula $i\in\mathbb{S}$
+\end_inset
+
+ and 
+\begin_inset Formula $j\in\mathbb{S}$
+\end_inset
+
+ to denote the state, e.g.
+ 
+\begin_inset Formula $X_{1}=i$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1696,9 +1698,7 @@ time-homogeneous Markov Chain
 \end_inset
 
 , i.e.
-\end_layout
-
-\begin_layout Standard
+ 
 \begin_inset Formula 
 \[
 P(X_{t}=x_{t}|X_{t-1}=x_{t-1})=P(X_{t-1}=x_{t-1}|X_{t-2}=x_{t-2})
@@ -1900,10 +1900,7 @@ probability vector
 \begin_inset Formula $(p_{ji})$
 \end_inset
 
-:
-\end_layout
-
-\begin_layout Standard
+: 
 \begin_inset Formula 
 \[
 d^{(t+1)}=d^{(t)}p
@@ -1928,10 +1925,7 @@ Given an initial distribution
 \begin_inset Formula $t\geq0$
 \end_inset
 
-:
-\end_layout
-
-\begin_layout Standard
+: 
 \begin_inset Formula 
 \[
 d^{(t)}=d^{(0)}p^{t}
@@ -1982,10 +1976,7 @@ stationary distribution
 \begin_inset Formula $\pi$
 \end_inset
 
- must fulfill the following equation:
-\end_layout
-
-\begin_layout Standard
+ must fulfill the following equation: 
 \begin_inset Formula 
 \[
 \pi p=\pi
@@ -2032,10 +2023,7 @@ if there exists a probability distribution
 \begin_inset Formula $\pi=(\pi_{1},\pi_{2},\dots\pi_{n})$
 \end_inset
 
- such that
-\end_layout
-
-\begin_layout Standard
+ such that 
 \begin_inset Formula 
 \[
 \pi_{j}p_{ji}=\pi_{i}p_{ij}
@@ -2219,7 +2207,15 @@ which was proved by Kolmogorov?.
 
 \end_inset
 
-.
+ (refer to e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Behrends2000"
+
+\end_inset
+
+).
  It states that, in the long run (i.e.
  
 \begin_inset Formula $\lim_{t\rightarrow\infty}d^{(0)}p^{t}$
@@ -2231,13 +2227,6 @@ y distribution which is indepentent of the starting state, given that
 \end_inset
 
  is irreducible, positive-recurrent and aperiodic
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Behrends2000"
-
-\end_inset
-
-
 \begin_inset Note Note
 status open
 
@@ -2286,6 +2275,8 @@ It is possible to efficiently calculate the stationary distribution
 \end_inset
 
 .
+ The definitions of irreducibility, positive recurrence, and aperiodicity
+ follow.
 \end_layout
 
 \begin_layout Standard
@@ -2342,7 +2333,11 @@ if
 \end_layout
 
 \begin_layout Standard
-A state of a Markov Chain is 
+A state 
+\begin_inset Formula $i$
+\end_inset
+
+ of a Markov Chain is 
 \emph on
 positive recurrent
 \emph default
@@ -2356,22 +2351,237 @@ positive recurrent
 
 \end_inset
 
-, if 
-\begin_inset Note Note
-status open
+, if we expect the Markov Chain to take an finite number of steps until
+ it is in state 
+\begin_inset Formula $i$
+\end_inset
 
-\begin_layout Plain Layout
-TODO: (siehe Seite 46 von markovbuch2008.pdf) Vielleicht ist es einfacher
- zu definieren, wann ein state NICHT positive recurrent ist.
-\end_layout
+ again, when it started in state 
+\begin_inset Formula $i$
+\end_inset
+
+ at time point 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ To define positive recurrence formally, we have to define auxiliary measures
+ first.
+ The probability that state 
+\begin_inset Formula $j$
+\end_inset
+
+ is visited for the first time -- at time step 
+\begin_inset Formula $k$
+\end_inset
+
+ -- after the Markov Chain had been in state 
+\begin_inset Formula $i$
+\end_inset
+
+ at time point 
+\begin_inset Formula $0$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{ij}^{(k)}:=P(X_{1}\neq j,X_{2}\neq j,\dots,X_{k-1}\neq j,X_{k}=j|X_{0}=i)
+\]
+
+\end_inset
+
+.
+ The probability that state 
+\begin_inset Formula $j$
+\end_inset
+
+ is ever reached from state 
+\begin_inset Formula $i$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+f_{ij}^{*}:=\sum_{k=1}^{\infty}f_{ij}^{(k)}
+\]
+
+\end_inset
+
+.
+ With this, we can define the expected number of steps for the Markov Chain
+ to reach state 
+\begin_inset Formula $j$
+\end_inset
+
+, when starting at state 
+\begin_inset Formula $i$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mu_{ij}:=\sum_{k=1}^{\infty}kf_{ij}^{(k)}
+\]
 
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+I won't use 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Behrends2000"
+
+\end_inset
+
+ for positive recurrence, because he defines (on page 46 of markovbuch2008.pdf)
+ 
+\begin_inset Formula $\mu_{ij}:=\sum_{k=1}^{\infty}kf_{ij}^{(k)}+(1-f_{ij}^{*})\infty$
+\end_inset
+
+, which is not defined for 
+\begin_inset Formula $f_{ij}^{*}=1$
+\end_inset
+
+.
+ I don't understand his definition.
+\end_layout
+
+\end_inset
+
+.
+ This number is also called the 
+\emph on
+mean recurrence time
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+mean recurrence time
+\end_layout
+
+\end_inset
+
+.
+ With these definitions, we can define a state to be 
+\emph on
+transient
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+transient
+\end_layout
+
+\end_inset
+
+, positive recurrent, or 
+\emph on
+null recurrent
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+null recurrent
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $f_{ii}^{*}<1$
+\end_inset
+
+, the state 
+\begin_inset Formula $i$
+\end_inset
+
+ is called transient.
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $f_{ii}^{*}=1$
+\end_inset
+
+, the state 
+\begin_inset Formula $i$
+\end_inset
+
+ is called recurrent.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+If 
+\begin_inset Formula $f_{ii}^{*}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{ii}<\infty$
+\end_inset
+
+, the state 
+\begin_inset Formula $i$
+\end_inset
+
+ is called 
+\emph on
+positive recurrent
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $f_{ii}^{*}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{ii}=\infty$
+\end_inset
+
+, the state 
+\begin_inset Formula $i$
+\end_inset
+
+ is called 
+\emph on
+null recurrent
+\emph default
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+It can be proven that when there are finitely many states, there are no
+ null recurrent states (see Proposition 7.2.
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Behrends2000"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
-The period of a state
+The definition of an aperiodic state is shorter.
+ The period of a state
 \begin_inset Index idx
 status collapsed
 
@@ -2394,10 +2604,7 @@ period of a state
 \begin_inset Formula $i$
 \end_inset
 
- before:
-\end_layout
-
-\begin_layout Standard
+ before: 
 \begin_inset Formula 
 \[
 period(i)=gcd(\{k|k\geq0,p_{ii}^{k}>0\})
@@ -2442,7 +2649,7 @@ Markov Chain Monte Carlo (MCMC)
 \emph on
 Markov Chain Monte Carlo
 \emph default
- is a type of algorithm to sample from a distribution.
+ is a type of algorithm to sample from a multivariate probability distribution.
  A Markov Chain has to be set up so that it 
 \begin_inset Note Note
 status open
@@ -2501,10 +2708,7 @@ A precondition to being able to use a Gibbs Sampler is that the following
 \end_inset
 
  the conditional probability of the variable given all other variables must
- be known in closed form:
-\end_layout
-
-\begin_layout Standard
+ be known in closed form: 
 \begin_inset Formula 
 \[
 P(X_{i}|\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},X_{n})
@@ -2688,10 +2892,7 @@ reference "eq:Gibbs sampling: CPD"
 
 \end_inset
 
- is
-\end_layout
-
-\begin_layout Standard
+ is 
 \begin_inset Formula 
 \[
 P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\mathbf{X}_{Neighborhood(X_{i})})
@@ -2701,10 +2902,7 @@ P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\math
 
 .
  For comparison, in Bayesian Networks the conditional probability would
- be
-\end_layout
-
-\begin_layout Standard
+ be 
 \begin_inset Formula 
 \[
 P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\mathbf{X}_{MB(X_{i})})
@@ -2877,10 +3075,7 @@ The network is updated iteratively, this means the states of time step
 \begin_inset Formula $t-1$
 \end_inset
 
-:
-\end_layout
-
-\begin_layout Standard
+: 
 \begin_inset Formula 
 \[
 n_{j}^{(t)}=f(\sum_{i\in\{1,\dots,m\}\land i\neq j}n_{i}^{(t-1)}w_{ij}+b_{j})
@@ -2928,10 +3123,7 @@ TODO: stimmt die Definition von
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
+ 
 \begin_inset Formula 
 \[
 f(x)=\begin{cases}
@@ -3021,10 +3213,7 @@ TODO: complete
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
+ 
 \begin_inset Formula 
 \begin{equation}
 E=\sum\label{eq:Energy of a Hopfield network}
