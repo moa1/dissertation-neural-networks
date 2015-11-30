@@ -1589,7 +1589,7 @@ The runtime of this formula is dominated by the largest clique, and so the
  by Gibbs sampling.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Markov Chain
 \end_layout
 
@@ -1608,6 +1608,14 @@ TODO: Bild von einer Markov Chain.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Definitions
+\end_layout
+
+\begin_layout Subparagraph
+Markov property: Memorylessness
 \end_layout
 
 \begin_layout Standard
@@ -1644,6 +1652,21 @@ P(X_{t}=x_{t}|X_{0}=x_{0},\dots,X_{t-1}=x_{t-1})=P(X_{t}=x_{t}|X_{t-1}=x_{t-1})
 
 must hold for all 
 \begin_inset Formula $t\geq1$
+\end_inset
+
+.
+ This memorylessness is called the 
+\emph on
+Markov property
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+Markov property
+\end_layout
+
 \end_inset
 
 .
@@ -1684,6 +1707,10 @@ must hold for all
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subparagraph
+Time-homogeneous Markov Chain and Transition Matrix
 \end_layout
 
 \begin_layout Standard
@@ -1833,6 +1860,10 @@ transition matrix
  In the following we will only be dealing with time-homogeneous Markov chains.
 \end_layout
 
+\begin_layout Subparagraph
+Computing future states from the initial distribution
+\end_layout
+
 \begin_layout Standard
 It makes sense to talk about the distribution of states a Markov chain can
  have at a certain time point 
@@ -1939,6 +1970,10 @@ d^{(t)}=d^{(0)}p^{t}
 .
 \end_layout
 
+\begin_layout Subparagraph
+Stationary distribution
+\end_layout
+
 \begin_layout Standard
 There are time-homogeneous Markov chains whose state distribution stays
  constant once it has assumed a certain state distribution.
@@ -2001,6 +2036,10 @@ If
 
 .
  A Markov Chain can have more than one stationary distribution.
+\end_layout
+
+\begin_layout Subparagraph
+Detailed balance/Reversibility
 \end_layout
 
 \begin_layout Standard
@@ -2189,7 +2228,7 @@ y distribution but not satisfying detailed balance.
  is a stationary distribution of this Markov chain.)
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Fundamental Theorem of Markov Chains
 \end_layout
 
@@ -2286,6 +2325,10 @@ It is possible to efficiently calculate the stationary distribution
  follow.
 \end_layout
 
+\begin_layout Subparagraph
+Irreducibility
+\end_layout
+
 \begin_layout Standard
 A Markov Chain is called 
 \emph on
@@ -2342,6 +2385,10 @@ if
 \end_inset
 
  is the set of possible states of the Markov Chain.)
+\end_layout
+
+\begin_layout Subparagraph
+Positive Recurrence
 \end_layout
 
 \begin_layout Standard
@@ -2591,6 +2638,10 @@ key "Behrends2000"
 ).
 \end_layout
 
+\begin_layout Subparagraph
+Aperiodicity
+\end_layout
+
 \begin_layout Standard
 The definition of an 
 \emph on
@@ -2692,7 +2743,7 @@ TODO: And also write down how the target distribution is specified.
 
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Subsubsection
 Gibbs Sampling
 \end_layout
 
@@ -2725,8 +2776,8 @@ key "GemanGeman1984"
 is an instance of a Markov Chain Monte Carlo (MCMC) algorithm.
  Its goal is to generate samples from a multivariate joint probability distribut
 ion.
- This can be used to compute an approximation of the mean of a distribution,
- for example.
+ The generated samples can then be used to compute an approximation of the
+ mean of a distribution, for example.
 \end_layout
 
 \begin_layout Standard
@@ -2735,6 +2786,10 @@ To use a Gibbs Sampler, one must construct a Markov chain with its (only)
  Because its goal is to sample from a multivariate probability distribution,
  each of the random variables are updated in turn, based on the conditional
  probabilities.
+\end_layout
+
+\begin_layout Subparagraph
+Gibbs Sampling Requires Closed-form Conditional Probabilities
 \end_layout
 
 \begin_layout Standard
@@ -2759,8 +2814,8 @@ P(X_{i}|\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}|X_{1},\dots,X_{i-1
 
 \end_inset
 
-It should also be simpler to sample from these conditional probability distribut
-ions than from the joint target probability distribution, because otherwise
+It should also be faster to sample from these conditional probability distributi
+ons than from the joint target probability distribution, because otherwise
  one should just sample from the joint distribution directly, and not use
  Gibbs sampling.
 \end_layout
@@ -2816,18 +2871,15 @@ Gibbs Sampling using a Markov Chain
 \end_layout
 
 \begin_layout Standard
-As 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Neal1993"
-
-\end_inset
-
- notes, the variable updates in Gibbs sampling can be regarded as a Markov
- chain.
+The variable updates in Gibbs sampling can be regarded as a Markov chain.
  However, we must first define how the random variables of Gibbs sampling
  are mapped to the random variable of the Markov chain.
- Above, Markov chains were defined for a single state variable 
+ One theoretic possibility is to re-map the random variables and their states
+ to a single random variable.
+\end_layout
+
+\begin_layout Standard
+Above, Markov chains were defined for a single state variable 
 \begin_inset Formula $X$
 \end_inset
 
@@ -2877,6 +2929,39 @@ e.g.
 
 \end_layout
 
+\begin_layout Subparagraph
+Constructing a Markov Chain from Base Transitions
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+ suggests
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+on page 45
+\end_layout
+
+\end_inset
+
+ constructing a time-homogeneous Markov Chain from a weighted mixture of
+ base transitions and notes that the required properties are fulfilled:
+ If each of the base transitions have the same stationary distribution,
+ then the mixture also has this stationary distribution.
+ In addition, if each of the base transitions satisfy detailed balance,
+ then the mixture also does.
+\end_layout
+
+\begin_layout Subparagraph
+Initialization of the Gibbs Sampler
+\end_layout
+
 \begin_layout Standard
 A Gibbs Sampler starts by specifying a start value 
 \begin_inset Formula $x_{i}^{(0)}$
@@ -2911,13 +2996,17 @@ mass
  of the distribution.
 \end_layout
 
+\begin_layout Subparagraph
+Iterations
+\end_layout
+
 \begin_layout Standard
 Then an iterative process is started.
  In each iteration 
 \begin_inset Formula $t$
 \end_inset
 
-, each variable 
+, each random variable 
 \begin_inset Formula $X_{i}$
 \end_inset
 
@@ -2928,17 +3017,42 @@ Then an iterative process is started.
  from the conditional probability distribution 
 \begin_inset Formula 
 \begin{equation}
-P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})\label{eq:Gibbs sampling: CPD}
+P(X_{i}|X_{1}=x_{1}^{(t-1)},\dots,X_{i-1}=x_{i-1}^{(t-1)},X_{i+1}=x_{i+1}^{(t-1)},\dots,X_{n}=x_{n}^{(t-1)})\label{eq:Gibbs sampling: CPD}
 \end{equation}
 
 \end_inset
 
 .
+ Then the other variables must be updated.
+\end_layout
+
+\begin_layout Standard
+There are different alternative ways in which the random variables are updated,
+ for example updating the random variables can be done in random order,
+ or sequentially, or a whole 
+\begin_inset Quotes eld
+\end_inset
+
+block
+\begin_inset Quotes erd
+\end_inset
+
+ of multiple random variables can be sampled from the conditional distribution
+ given all the other random variables (e.g.
+ 
+\begin_inset Formula $P(X_{i_{1}},X_{i_{2}},X_{i_{3}}|\mathbf{X_{j}=x_{j}^{(t-1)}},j\in\{1,\dots,n\}\backslash\{i_{1},i_{2},i_{3}\})$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subparagraph
+Burn-in Period
 \end_layout
 
 \begin_layout Standard
 After some number of throw-away iterations, the Gibbs Sampler's values 
-\begin_inset Formula $(x_{1},\dots,x_{n})$
+\begin_inset Formula $\mathbf{x}=(x_{1},\dots,x_{n})$
 \end_inset
 
  will start coming from the target joint distribution 
@@ -2962,26 +3076,6 @@ burn-in period
  probability distribution underlying the conditional probability distributions.
 \end_layout
 
-\begin_layout Standard
-There are different alternative ways in which the random variables are updated,
- for example the updating order of the random variables can be done in random
- order, or sequentially, or a whole 
-\begin_inset Quotes eld
-\end_inset
-
-block
-\begin_inset Quotes erd
-\end_inset
-
- of more than one random variable can be sampled from the conditional distributi
-on given all the other random variables (e.g.
- 
-\begin_inset Formula $P(X_{i_{1}},X_{i_{2}},X_{i_{3}}|\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash\{i_{1},i_{2},i_{3}\})$
-\end_inset
-
-).
-\end_layout
-
 \begin_layout Subparagraph
 Thinning
 \end_layout
@@ -2996,8 +3090,9 @@ thinning
 
 \end_inset
 
-In Gibbs Sampling, even after the Markov chain is burned in, there is still
- a problem with the returned samples.
+However, even after the Markov chain is burned in, there is still a problem
+ with the returned samples, which prevent them from being used in some applicati
+ons.
  The samples of two adjacent time steps 
 \begin_inset Formula $\mathbf{x}^{(t)}$
 \end_inset
@@ -3006,7 +3101,7 @@ In Gibbs Sampling, even after the Markov chain is burned in, there is still
 \begin_inset Formula $\mathbf{x}^{(t+1)}$
 \end_inset
 
- are correlated because at every iteration only a single variable is changed.
+ are correlated because the latter is dependent on the former (by definition).
  This can be mitigated by returning only the states of every 
 \emph on
 
