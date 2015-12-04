@@ -28,7 +28,7 @@ fix-cm
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
@@ -424,6 +424,13 @@ partially directed acyclic graphs
 
 \begin_layout Subparagraph
 Undirected Graphical Model
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Hammersley-Clifford-theorem"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -478,7 +485,21 @@ encodes no conditional independencies.
 \begin_layout Standard
 The 
 \emph on
-Hammersley-Clifford theorem 
+Hammersley-Clifford theorem
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Hammersley-Clifford theorem
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
 \emph default
 (
 \begin_inset CommandInset citation
@@ -530,7 +551,21 @@ key "HammersleyClifford1971"
 
  is a 
 \emph on
-Gibbs distribution 
+Gibbs distribution
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+Gibbs distribution
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
 \emph default
 that factorizes according to the maximal cliques 
 \begin_inset Formula $C_{1},\dots,C_{m}$
@@ -880,7 +915,17 @@ For example, if there are the three cliques
 \begin_inset Formula $P$
 \end_inset
 
- (also called Gibbs distribution) can be written as: 
+ (also called 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Gibbs distribution
+\end_layout
+
+\end_inset
+
+Gibbs distribution) can be written as: 
 \begin_inset Formula 
 \[
 P(X_{1},\dots,X_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
@@ -1282,6 +1327,13 @@ TODO: Do
 
 \begin_layout Paragraph
 Exact Inference in Directed and in Undirected Graphical Models
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2230,6 +2282,13 @@ y distribution but not satisfying detailed balance.
 
 \begin_layout Paragraph
 Fundamental Theorem of Markov Chains
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Fundamental-Theorem-of-Markov-Chains"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2951,11 +3010,129 @@ on page 45
 \end_inset
 
  constructing a time-homogeneous Markov Chain from a weighted mixture of
- base transitions and notes that the required properties are fulfilled:
- If each of the base transitions have the same stationary distribution,
- then the mixture also has this stationary distribution.
+ base transitions, each of which describe the probability of a state change
+ of one random variable.
+ The base transitions are named 
+\begin_inset Formula $B_{k}(x,x')$
+\end_inset
+
+, where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the number of the base transition, 
+\begin_inset Formula $x$
+\end_inset
+
+ is the starting state of the transition, 
+\begin_inset Formula $x'$
+\end_inset
+
+ is the target state of the transition, and the whole term 
+\begin_inset Formula $B_{k}(x,x')$
+\end_inset
+
+ is the probability of the transition.
+ A weighted mixture can then be constructed as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T(\mathbf{x},\mathbf{x}')=\sum_{k}\alpha_{k}B_{k}(x,x')
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\alpha_{k}$
+\end_inset
+
+ is the weight of base transition 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+, and the weights must fulfill 
+\begin_inset Formula $\alpha_{k}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{k}\alpha_{k}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+ also notes that the required properties are fulfilled: If each of the base
+ transitions 
+\begin_inset Formula $B_{k}$
+\end_inset
+
+ have the same stationary distribution, then the mixture 
+\begin_inset Formula $T$
+\end_inset
+
+ also has this stationary distribution.
  In addition, if each of the base transitions satisfy detailed balance,
  then the mixture also does.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Hier fehlt wie die Markov Chain genau aussehen muss.
+ Wie werden die random variables des Gibbs sampling auf die eine random
+ variable der Markov chain gemappt? Wie wird sichergestellt, dass die Markov
+ Chain konvergiert?
+\end_layout
+
+\begin_layout Plain Layout
+Hier muss stehen, dass die Markov Chain nur dann konvergiert, wenn alle
+ probabilities strictly positive sind (i.e.
+ nicht 0).
+ (Siehe 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+, Seite 48: 
+\begin_inset Quotes eld
+\end_inset
+
+...
+ provided that all the conditional probabilities used to define the B k
+ in equation (4.1) are non-zero.
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Plain Layout
+Ich glaube in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FischerIgel2012"
+
+\end_inset
+
+ steht das auch.)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subparagraph
@@ -2972,24 +3149,15 @@ A Gibbs Sampler starts by specifying a start value
 \end_inset
 
 .
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Because the Markov Chain is 
-\end_layout
-
-\end_inset
-
-The start value does not really matter that much, but it influences the
- numbers of iterations needed until the Gibbs Sampler returns samples from
- the target distribution.
+ Since the Markov chain must be constructed such that it converges to its
+ only stationary distribution the choice of start values is not critical,
+ but it influences the numbers of iterations needed until the Gibbs Sampler
+ returns samples from the target distribution.
  So the start value should be close to the 
 \begin_inset Quotes eld
 \end_inset
 
-mass
+center
 \begin_inset Quotes erd
 \end_inset
 
@@ -3023,7 +3191,7 @@ P(X_{i}|X_{1}=x_{1}^{(t-1)},\dots,X_{i-1}=x_{i-1}^{(t-1)},X_{i+1}=x_{i+1}^{(t-1)
 \end_inset
 
 .
- Then the other variables must be updated.
+ Then all the other variables must be updated.
 \end_layout
 
 \begin_layout Standard
@@ -3046,12 +3214,45 @@ block
 ).
 \end_layout
 
+\begin_layout Standard
+If the Markov chain fulfills irreducibility, positive recurrence, and aperiodici
+ty, then it is guaranteed to converge to its stationary distribution (see
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:Fundamental-Theorem-of-Markov-Chains"
+
+\end_inset
+
+).
+ However there is currently no known method to determine when the Markov
+ chain has done so, which leads to the following two practices, 
+\emph on
+burn-in
+\emph default
+ and 
+\emph on
+thinning
+\emph default
+.
+\end_layout
+
 \begin_layout Subparagraph
 Burn-in Period
 \end_layout
 
 \begin_layout Standard
-After some number of throw-away iterations, the Gibbs Sampler's values 
+The starting value of the random variable might be far from the 
+\begin_inset Quotes eld
+\end_inset
+
+center
+\begin_inset Quotes erd
+\end_inset
+
+ of the distribution.
+ But after some number of throw-away iterations, the Gibbs Sampler's values
+ 
 \begin_inset Formula $\mathbf{x}=(x_{1},\dots,x_{n})$
 \end_inset
 
@@ -3072,8 +3273,37 @@ some number of throw-away iterations
 \emph on
 burn-in period
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+burn-in period
+\end_layout
+
+\end_inset
+
  and can be considerable depending on the starting values and the joint
  probability distribution underlying the conditional probability distributions.
+\end_layout
+
+\begin_layout Standard
+There is no known analytic method to determine when a chain is burned-in.
+ One can only use methods like TODO
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO
+\end_layout
+
+\end_inset
+
+ to determine that a chain is probably 
+\emph on
+not 
+\emph default
+burned-in.
 \end_layout
 
 \begin_layout Subparagraph
@@ -3090,9 +3320,13 @@ thinning
 
 \end_inset
 
-However, even after the Markov chain is burned in, there is still a problem
- with the returned samples, which prevent them from being used in some applicati
-ons.
+Even after the Markov chain is burned in, there is still a problem with
+ the returned samples, which prevent them from being used in those applications
+ needing 
+\emph on
+independent 
+\emph default
+samples.
  The samples of two adjacent time steps 
 \begin_inset Formula $\mathbf{x}^{(t)}$
 \end_inset
@@ -3101,8 +3335,12 @@ ons.
 \begin_inset Formula $\mathbf{x}^{(t+1)}$
 \end_inset
 
- are correlated because the latter is dependent on the former (by definition).
- This can be mitigated by returning only the states of every 
+ are correlated however because the latter is dependent on the former (by
+ definition).
+\end_layout
+
+\begin_layout Standard
+This can be mitigated by returning only the states of every 
 \emph on
 
 \begin_inset Formula $n$
@@ -3132,7 +3370,7 @@ thinning
 \begin_inset Quotes erd
 \end_inset
 
- of the Markov chain.
+ of the Gibbs sampler.
  There is however currently no straightforward way to determine what a sufficien
 tly large 
 \begin_inset Formula $n$
@@ -3142,11 +3380,201 @@ tly large
 \begin_inset Formula $\mathbf{x}$
 \end_inset
 
- to be regarded independent.
+ to be regarded independent (aside from heuristics like autocorrelation).
+\end_layout
+
+\begin_layout Subsubsection
+Inference in Markov Random Fields
 \end_layout
 
 \begin_layout Paragraph
 Gibbs Sampling in Markov Random Fields
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
+
+\end_inset
+
+ we described how exact inference in Markov Random Fields can be done by
+ conditioning on the known random variables and marginalizing out the uninterest
+ing variables.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
+
+\end_inset
+
+ stated that the exponential runtime of exact inference can be circumvented
+ by approximate methods like Gibbs sampling.
+ Here we address that claim.
+\end_layout
+
+\begin_layout Standard
+The random variables of the Markov Random Field will be named like those
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
+
+\end_inset
+
+.
+ The interesting variables are named 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+, the variables whose states are known (for example because they were measured)
+ 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+, and the variables we are not interested in 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+.
+ The union of all random variables is called 
+\begin_inset Formula $\mathbf{X}:=\{\mathbf{U},\mathbf{K},\mathbf{W}\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Gibbs Sampling in Markov Random Fields uses a converging Markov chain to
+ sample from the target joint probability distribution.
+\end_layout
+
+\begin_layout Enumerate
+A prerequisite is that the conditional probability distributions are known
+ in closed form.
+\end_layout
+
+\begin_layout Enumerate
+Initialize the state 
+\begin_inset Formula $x_{i}^{(1)}$
+\end_inset
+
+ of the random variable 
+\begin_inset Formula $X_{i}\in\{\mathbf{W},\mathbf{U}\}$
+\end_inset
+
+ with an arbitrary value.
+\end_layout
+
+\begin_layout Enumerate
+Initialize the state 
+\begin_inset Formula $x_{i}^{(1)}$
+\end_inset
+
+ of the known random variables 
+\begin_inset Formula $X_{i}\in\mathbf{K}$
+\end_inset
+
+ with their known state.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:For-each-time"
+
+\end_inset
+
+For each time point 
+\begin_inset Formula $t\in\{2,\dots\}$
+\end_inset
+
+ do
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Keep the known variables fixed (i.e.
+ 
+\begin_inset Formula $x_{i}^{(t+1)}:=x_{i}^{(t)}$
+\end_inset
+
+ for all 
+\begin_inset Formula $X_{i}\in\mathbf{K}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+For each random variable 
+\begin_inset Formula $X_{i}\in\{\mathbf{W},\mathbf{U}\}$
+\end_inset
+
+ do
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Given the states of all variables 
+\begin_inset Formula $\mathbf{X}\backslash X_{i}$
+\end_inset
+
+, sample a new 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ from its conditional distribution 
+\begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}|X_{1}=x_{1}^{(t)},\dots,X_{i-1}=x_{i-1}^{(t)},X_{i+1}=x_{i+1}^{(t)},\dots,X_{n}=x_{n}^{(t)})$
+\end_inset
+
+.
+ Due to the Hammersley-Clifford theorem
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "par:Hammersley-Clifford-theorem"
+
+\end_inset
+
+ this conditional probability is equal to 
+\begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}|\mathbf{X}_{Neighborhood(X_{i})})$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Repeat (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:For-each-time"
+
+\end_inset
+
+) until the Markov chain converges.
+\end_layout
+
+\begin_layout Enumerate
+Forget the uninteresting random variables 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Return the states of the interesting random variables 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Comparison of Gibbs Sampling in Markov Random Fields and Bayesian Networks
 \end_layout
 
 \begin_layout Standard
@@ -3187,7 +3615,7 @@ reference "eq:Gibbs sampling: CPD"
  is 
 \begin_inset Formula 
 \[
-P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\mathbf{X}_{Neighborhood(X_{i})})
+P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}|\mathbf{X}_{Neighborhood(X_{i})})
 \]
 
 \end_inset
@@ -3197,13 +3625,13 @@ P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\math
  be 
 \begin_inset Formula 
 \[
-P(X_{i}|X_{1}=x_{1}^{(t-1)},X_{i-1}^{(t-1)},X_{i+1}^{(t-1)},X_{n})=P(X_{i}|\mathbf{X}_{MB(X_{i})})
+P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}|\mathbf{X}_{MarkovBlanket(X_{i})})
 \]
 
 \end_inset
 
 , where 
-\begin_inset Formula $\mathbf{X}_{MB(X_{i})}$
+\begin_inset Formula $\mathbf{X}_{MarkovBlanket(X_{i})}$
 \end_inset
 
  are the random variables in the Markov Blanket of 
