@@ -81,7 +81,7 @@ Random
 \begin_inset space ~
 \end_inset
 
-variable The name of a random variable is written upper-case.
+variable The name of a random variable is written in upper-case.
  For example: 
 \begin_inset Formula $X$
 \end_inset
@@ -106,7 +106,7 @@ random
 \begin_inset space ~
 \end_inset
 
-variable The value of a random variable is written lower-case.
+variable The value of a random variable is written in lower-case.
  For example, the value of variable 
 \begin_inset Formula $X$
 \end_inset
@@ -173,7 +173,21 @@ Graphs
 \begin_layout Standard
 A 
 \emph on
-graph 
+graph
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+graph
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
 \emph default
 is a set 
 \begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
@@ -211,10 +225,30 @@ is a set
 \emph on
 directed graph
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+directed graph
+\end_layout
+
+\end_inset
+
 ; if all edges are undirected, then the graph is called a 
 \emph on
 undirected graph
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+undirected graph
+\end_layout
+
+\end_inset
+
 .
 \end_layout
 
@@ -223,7 +257,17 @@ A
 \emph on
 directed acyclic graph 
 \emph default
-(DAG) is a directed graph that does not contain (directed) cycles.
+(DAG)
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+directed acyclic graph (DAG)
+\end_layout
+
+\end_inset
+
+ is a directed graph that does not contain (directed) cycles.
  This means if we start at any node and only go into the direction of the
  edges, it is impossible to reach a node visited earlier.
 \end_layout
@@ -231,7 +275,21 @@ directed acyclic graph
 \begin_layout Standard
 A 
 \emph on
-clique 
+clique
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+clique
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
 \emph default
 in an undirected graph is a subset of nodes 
 \begin_inset Formula $\mathbf{N_{C}}\subset\mathbf{N}$
@@ -250,6 +308,16 @@ in an undirected graph is a subset of nodes
 \emph on
 maximal clique
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+maximal clique
+\end_layout
+
+\end_inset
+
  is a clique where there is no edge that can be added to it so that the
  resulting subset is still a clique.
 \end_layout
@@ -282,7 +350,21 @@ A set of nodes
 
  is 
 \emph on
-separated 
+separated
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+separation of nodes
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
 \emph default
 from a set of nodes 
 \begin_inset Formula $\mathbf{N_{B}}\subset\mathbf{N}$
@@ -378,10 +460,30 @@ Graphical models can be directed or undirected.
 \emph on
 Bayesian networks
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Bayesian network
+\end_layout
+
+\end_inset
+
 , and undirected graphical models are called 
 \emph on
 Markov random fields
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Markov random fields
+\end_layout
+
+\end_inset
+
 .
 \end_layout
 
@@ -555,7 +657,7 @@ Gibbs distribution
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Gibbs distribution
@@ -588,6 +690,16 @@ that factorizes according to the maximal cliques
 \emph on
 partition function
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+partition function
+\end_layout
+
+\end_inset
+
 , and 
 \begin_inset Formula $\phi_{i}(C_{i})$
 \end_inset
@@ -596,6 +708,16 @@ partition function
 \emph on
 potential functions
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+potential function
+\end_layout
+
+\end_inset
+
 .
 \begin_inset Note Note
 status open
@@ -636,7 +758,17 @@ name "local-Markov-property"
 
 the 
 \emph on
-local Markov property 
+local Markov property
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+local Markov property
+\end_layout
+
+\end_inset
+
+ 
 \emph default
 holds for the graph 
 \begin_inset Formula $G$
@@ -711,7 +843,21 @@ nodes
 \begin_layout Itemize
 the 
 \emph on
-global Markov property 
+global Markov property
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+global Markov property
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
 \emph default
 holds for the graph 
 \begin_inset Formula $G$
@@ -941,6 +1087,16 @@ P(X_{1},\dots,X_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})
 \emph on
 clique potential
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+clique potential
+\end_layout
+
+\end_inset
+
 ), and is a function of the 3 random variables 
 \begin_inset Formula $X_{1},X_{2},X_{3}$
 \end_inset
@@ -2578,7 +2734,7 @@ mean recurrence time
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 mean recurrence time
@@ -2593,7 +2749,7 @@ transient
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transient
@@ -2607,7 +2763,7 @@ null recurrent
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 null recurrent
@@ -2777,10 +2933,10 @@ Markov Chain Monte Carlo
 \emph default
 
 \begin_inset Index idx
-status collapsed
+status open
 
 \begin_layout Plain Layout
-Markov Chain Monte Carlo
+Markov Chain Monte Carlo algorithm
 \end_layout
 
 \end_inset
@@ -3285,25 +3441,30 @@ burn-in period
 
  and can be considerable depending on the starting values and the joint
  probability distribution underlying the conditional probability distributions.
+ If one knows where the 
+\begin_inset Quotes eld
+\end_inset
+
+center
+\begin_inset Quotes erd
+\end_inset
+
+ of the equilibrium distribution is then one should use a value near that
+ center as the starting point, however, in many cases such things are not
+ known (and are the goal of Gibbs sampling in the first place).
 \end_layout
 
 \begin_layout Standard
 There is no known analytic method to determine when a chain is burned-in.
- One can only use methods like TODO
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO
-\end_layout
+ Several convergence diagnostics methods have been proposed, see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CowlesCarlin1996"
 
 \end_inset
 
- to determine that a chain is probably 
-\emph on
-not 
-\emph default
-burned-in.
+ for a review.
 \end_layout
 
 \begin_layout Subparagraph
@@ -3439,7 +3600,7 @@ reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
 
 .
  The union of all random variables is called 
-\begin_inset Formula $\mathbf{X}:=\{\mathbf{U},\mathbf{K},\mathbf{W}\}$
+\begin_inset Formula $\mathbf{X}:=\mathbf{U}\cup\mathbf{K}\cup\mathbf{W}$
 \end_inset
 
 .
@@ -3461,7 +3622,7 @@ Initialize the state
 \end_inset
 
  of the random variable 
-\begin_inset Formula $X_{i}\in\{\mathbf{W},\mathbf{U}\}$
+\begin_inset Formula $X_{i}\in\mathbf{W}\cup\mathbf{U}$
 \end_inset
 
  with an arbitrary value.
@@ -3487,7 +3648,7 @@ name "enu:For-each-time"
 \end_inset
 
 For each time point 
-\begin_inset Formula $t\in\{2,\dots\}$
+\begin_inset Formula $t\in\{2,3,\dots\}$
 \end_inset
 
  do
@@ -3509,7 +3670,7 @@ Keep the known variables fixed (i.e.
 
 \begin_layout Enumerate
 For each random variable 
-\begin_inset Formula $X_{i}\in\{\mathbf{W},\mathbf{U}\}$
+\begin_inset Formula $X_{i}\in\mathbf{W}\cup\mathbf{U}$
 \end_inset
 
  do
@@ -3558,7 +3719,7 @@ reference "enu:For-each-time"
 \end_layout
 
 \begin_layout Enumerate
-Forget the uninteresting random variables 
+Discard the states of the uninteresting random variables 
 \begin_inset Formula $\mathbf{U}$
 \end_inset
 
@@ -3696,6 +3857,14 @@ TODO Neal shows in (~/uni/publication/zusammenfassung/rbm/A11 Connectionist
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Machine Learning
+\end_layout
+
+\begin_layout Standard
+Definition of supervised, unsupervised, and semi-supervised learning.
 \end_layout
 
 \begin_layout Section
