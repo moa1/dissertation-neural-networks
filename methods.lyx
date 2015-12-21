@@ -926,19 +926,6 @@ TODO: insert graphics illustrating local and global Markov property
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I should include the result of the Hammersley-Clifford theorem here.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 This means that when we have a strictly positive joint probability distribution
  
 \begin_inset Formula $P$
@@ -1398,6 +1385,533 @@ B
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Directed Graphical Model
+\end_layout
+
+\begin_layout Standard
+Like undirected graphical models, directed graphical models represent an
+ implicit joint probability distribution over all random variables present
+ in the model.
+\end_layout
+
+\begin_layout Standard
+In a directed graphical model, the random variables have an ordering associated
+ with them induced by the directed dependence of the variables.
+ See the figure for an example.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: example figure
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe write a formal definition here.
+\end_layout
+
+\end_inset
+
+A directed graphical model is defined by the directed graph, prior probability
+ distributions at the nodes that do not have ancestors, and conditional
+ probability distributions at the nodes that have ancestors.
+ In the latter nodes the conditional probability distribution can be represented
+ by a table with a size exponential in the number of involved nodes.
+ For example, if a node has 
+\begin_inset Formula $a$
+\end_inset
+
+ ancestors, each of which has 
+\begin_inset Formula $s$
+\end_inset
+
+ possible states, and the node itself also has 
+\begin_inset Formula $s$
+\end_inset
+
+ possible states, then the table must contain one probability value for
+ each of the 
+\begin_inset Formula $s^{a}*(s-1)$
+\end_inset
+
+ possible states.
+\end_layout
+
+\begin_layout Standard
+TODO: explaining away
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+TODO: explain explaining away for this example: A,B are ancestors, C is
+ the child node.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+A
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+B
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+C
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+nC
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+95%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+90%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+n
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+5%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+95%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+y
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+70%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -1869,7 +2383,7 @@ Markov property
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Markov property
@@ -1928,7 +2442,7 @@ time-homogeneous Markov Chain
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 time-homogeneous Markov Chain
@@ -2044,7 +2558,7 @@ transition matrix
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transition matrix
@@ -3837,6 +4351,116 @@ In a directed graph Explaining away
 \end_layout
 
 \begin_layout Paragraph
+Sigmoid Belief Network
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+According to 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/rbm/reweighted weight-sleep.pdf
+\begin_inset Quotes erd
+\end_inset
+
+, a Sigmoidal Belief Network (SBN) is a directed graphical model with independen
+t variables 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ given the parents 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+P^{SBN}(x_{i}=1|\mathbf{y})=\sigma(W^{i,:}\mathbf{y}+b_{i})
+\]
+
+\end_inset
+
+And they say that although a SBN is a very simple generative model given
+ 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+, inference for 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ given x is in general intractable.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Wake-Sleep Algorithm
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/rbm/wake-sleep.pdf
+\begin_inset Quotes erd
+\end_inset
+
+ describes the wake-sleep algorithm.
+ It says something about a factorial distribution produced by the recognition
+ weights (the recognition weights are part of the recognition network; there
+ is also the generation network), which has only 
+\begin_inset Formula $n$
+\end_inset
+
+ parameters instead of 
+\begin_inset Formula $2^{n}-1$
+\end_inset
+
+.
+ It also says that this simplification makes it impossible to 
+\begin_inset Quotes eld
+\end_inset
+
+capture explaining-away effects
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+It also says 
+\begin_inset Quotes eld
+\end_inset
+
+Both [PCA and clustering] can be viewed as special cases of the minimum
+ description length approach, in which there is only one hidden layer and
+ it is unnecessary to distinguish between the recognition and generative
+ weights because they are always the same.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
 Comparison of the Representational Power of Markov Random Fields with Bayesian
  Networks
 \end_layout
@@ -4583,10 +5207,18 @@ Sigmoid activation function
 \end_layout
 
 \begin_layout Standard
-This is a fairly standard activation function, often used in neural networks.
+This is a standard activation function, often used in neural networks.
  It has the property that it is almost linear for inputs around zero, tends
  to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
  infinity.
+\begin_inset Formula 
+\[
+\sigma(x)=\frac{1}{1+e^{-x}}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4602,11 +5234,18 @@ TODO: Kurve einer sigmoid-Funktion hier einfügen.
 
 \end_layout
 
+\begin_layout Subparagraph
+Binarizing the output of a node
+\end_layout
+
 \begin_layout Standard
-As the values of a Restricted Boltzmann Machine, as orignially proposed,
- are binary (i.e.
- either 0 or 1), the output of the sigmoid activation function is used as
- a probability that the output of the node assumes value 1.
+The output of a node in a Restricted Boltzmann Machine, as orignially proposed,
+ is binary (i.e.
+ either 0 or 1).
+ However the sigmoid activation function outputs continuous values between
+ 0 and 1.
+ Therefore the output of the sigmoid activation function is interpreted
+ as the probability that the node outputs value 1, and 0 otherwise.
  In this way the output is sampled from 
 \begin_inset Formula $\{0,1\}$
 \end_inset
@@ -4649,7 +5288,7 @@ key "HintonSalakhutdinov2006"
 
  to rectified linear units, in which the sampled output of a unit is given
  by 
-\begin_inset Formula $max(0,x+N(0,\sigma(x))$
+\begin_inset Formula $\max(0,x+N(0,\sigma(x))$
 \end_inset
 
  where 
@@ -4660,7 +5299,19 @@ key "HintonSalakhutdinov2006"
 \begin_inset Formula $\sigma(x)$
 \end_inset
 
- is the variance of the input
+ is the sigmoid function, and 
+\begin_inset Formula $N(0,\sigma(x))$
+\end_inset
+
+ is normally distributed noise with mean 
+\begin_inset Formula $0$
+\end_inset
+
+ and variance 
+\begin_inset Formula $\sigma(x)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -4683,8 +5334,8 @@ key "FischerIgel2012"
 
 \end_inset
 
- note, adding an L2 weight decay term to the corresponds to assuming a zero-mean
- Gaussian prior on the parameters.
+ note, adding an L2 weight decay term to the updating term corresponds to
+ assuming a zero-mean Gaussian prior on the parameters.
 \end_layout
 
 \begin_layout Paragraph
@@ -4714,6 +5365,190 @@ TODO: I think weight normalization is described a bit in the dropout paper.
 Weight normalization
 \end_layout
 
+\begin_layout Subsection
+Fine-tuning
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe rename this to 
+\begin_inset Quotes eld
+\end_inset
+
+Back-propagation
+\begin_inset Quotes erd
+\end_inset
+
+ and add a small paragraph 
+\begin_inset Quotes eld
+\end_inset
+
+Fine-tuning
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general, 
+\emph on
+fine-tuning
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fine-tuning
+\end_layout
+
+\end_inset
+
+ is the use of back-propagation to fine-tune the parameters of a neural
+ network.
+\end_layout
+
+\begin_layout Standard
+It is the adaptation of weights and biases of the network to make its set
+ of actual outputs better fit a set of desired outputs for a given set of
+ inputs.
+ Technically it is just running the network for a given input, observing
+ the outputs in the output layer, computing the errors to the desired outputs
+ and back-propagating them to adapt the weights and biases between all the
+ layers.
+ This will make the network output values closer to the desired values next
+ time this particular input pattern is given to the network.
+ The use of the back-propagation algorithm implies that fine-tuning is a
+ supervised learning step and thus prone to overfitting.
+\end_layout
+
+\begin_layout Standard
+Usually in fine-tuning, the sum of the squared differences
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+sum of squared errors
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+squared-error sum
+\end_layout
+
+\end_inset
+
+ between the desired outputs and the actual outputs in the output layer
+ are minimized:
+\begin_inset Formula 
+\[
+\sum_{i}(\hat{x_{i}}-x_{i})^{2}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is the desired value for node 
+\begin_inset Formula $i$
+\end_inset
+
+ of the output layer and 
+\begin_inset Formula $\hat{x_{i}}$
+\end_inset
+
+ is the actual output value of node 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ The minimization is done by computing the derivative of the error of one
+ node (which is a function of the outputs of the nodes in the above layer
+ and the desired output value) with respect to a particular weight and then
+ increasing or decreasing the weight by the computed derivative multiplied
+ by the learning rate.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: formula for the updating in the back-propagation algorithm.
+ TODO: cite some paper.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One can also minimize the cross-entropy error
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+cross-entropy error
+\end_layout
+
+\end_inset
+
+:
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: cite something.
+ Defined like this in the last line of the leftmost column of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonSalakhutdinov2006"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\sum_{i}p_{i}\log\hat{p_{i}}-\sum(1-p_{i})\log(1-\hat{p_{i}})
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ is the desired output value of node 
+\begin_inset Formula $i$
+\end_inset
+
+ in the output layer and 
+\begin_inset Formula $\hat{p_{i}}$
+\end_inset
+
+ is the actual output value output by node 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Motivation for using RBMs on genetic data
 \end_layout
@@ -4722,6 +5557,22 @@ Motivation for using RBMs on genetic data
 There were successes in visual object/face recognition by RBMs.
  There is a certain similarity of visual data and genetic data like high
  correlation of neighboring pixels and certain genes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Say something about the time taken to train RBMs.
+ Training is linear in the number of training cases, but quadratic in the
+ number of features if a multiple-layer neural network is trained and the
+ number of features is gradually reduced.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
