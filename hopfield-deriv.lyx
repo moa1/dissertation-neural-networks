@@ -1,0 +1,237 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray}
+E^{(t)} & = & -\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}\label{eq:Energy of a Hopfield network}\\
+ & = & -\frac{1}{2}\sum_{i}n_{i}^{(t)}(\sum_{j\neq i}w_{ij}n_{j}^{(t)}+b_{i})\nonumber \\
+ & = & -\frac{1}{2}\sum_{i}n_{i}^{(t)}(\sum_{j\neq i}w_{ij}n_{j}^{(t)}+b_{i})-n_{i}^{(t-1)}(\sum_{j\neq i}w_{ij}n_{j}^{(t-1)}+b_{i})+n_{i}^{(t-1)}(\sum_{j\neq i}w_{ij}n_{j}^{(t-1)}+b_{i})\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming that node 
+\begin_inset Formula $k$
+\end_inset
+
+ was updated at time step 
+\begin_inset Formula $t$
+\end_inset
+
+, i.e.
+ all other nodes 
+\begin_inset Formula $l\neq k$
+\end_inset
+
+ remain constant 
+\begin_inset Formula $n_{l}^{(t)}=n_{l}^{(t-1)}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+E^{(t)}-E^{(t-1)} & = & -\frac{1}{2}\sum_{i}n_{i}^{(t)}(\sum_{j\neq i}w_{ij}n_{j}^{(t)}+b_{i})+\frac{1}{2}\sum_{i}n_{i}^{(t-1)}(\sum_{j\neq i}w_{ij}n_{j}^{(t-1)}+b_{i})\\
+ & = & -\frac{1}{2}(\sum_{l\neq k}n_{l}^{(t)}(\sum_{j\neq l}w_{lj}n_{j}^{(t)}+b_{l})+n_{k}^{(t)}(\sum_{j\neq k}w_{kj}n_{j}^{(t)}+b_{k}))\\
+ & + & \frac{1}{2}(\sum_{l\neq k}n_{l}^{(t-1)}(\sum_{j\neq l}w_{lj}n_{j}^{(t-1)}+b_{l})+n_{k}^{(t-1)}(\sum_{j\neq k}w_{kj}n_{j}^{(t-1)}+b_{k}))\\
+ & = & -\frac{1}{2}n_{k}^{(t)}(\sum_{j\neq k}w_{kj}n_{j}^{(t)}+b_{k})+\frac{1}{2}n_{k}^{(t-1)}(\sum_{j\neq k}w_{kj}n_{j}^{(t-1)}+b_{k})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If 
+\begin_inset Formula $n_{k}^{(t-1)}=n_{k}^{(t)}$
+\end_inset
+
+, 
+\begin_inset Formula $E^{(t)}-E^{(t-1)}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The other cases are 
+\begin_inset Formula $n_{k}^{(t-1)}\neq n_{k}^{(t)}$
+\end_inset
+
+, i.e.
+ only the two cases 
+\begin_inset Formula $n_{k}^{(t-1)}=0$
+\end_inset
+
+, 
+\begin_inset Formula $n_{k}^{(t)}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{k}^{(t-1)}=1$
+\end_inset
+
+, 
+\begin_inset Formula $n_{k}^{(t)}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the case that 
+\begin_inset Formula $n_{k}^{(t-1)}=0$
+\end_inset
+
+, then 
+\begin_inset Formula $n_{k}^{(t)}=1$
+\end_inset
+
+ only if 
+\begin_inset Formula $f(\sum_{j\neq k}n_{j}^{(t-1)}w_{jk}+b_{k})>0$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\sum_{j\neq k}n_{j}^{(t-1)}w_{jk}+b_{k}>0$
+\end_inset
+
+.
+ This means (using that 
+\begin_inset Formula $w_{kj}=w_{jk}$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{eqnarray*}
+E^{(t)}-E^{(t-1)} & = & -\frac{1}{2}n_{k}^{(t)}(\sum_{j\neq k}w_{kj}n_{j}^{(t)}+b_{k})+\frac{1}{2}n_{k}^{(t-1)}(\sum_{j\neq k}w_{kj}n_{j}^{(t-1)}+b_{k})\\
+ & = & -\frac{1}{2}n_{k}^{(t)}(\sum_{j\neq k}w_{kj}n_{j}^{(t)}+b_{k})\\
+ & = & -\frac{1}{2}n_{k}^{(t)}(\sum_{j\neq k}w_{jk}n_{j}^{(t)}+b_{k})\\
+ & \leq & 0
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the case that 
+\begin_inset Formula $n_{k}^{(t-1)}=1$
+\end_inset
+
+, then 
+\begin_inset Formula $n_{k}^{(t)}=0$
+\end_inset
+
+ only if 
+\begin_inset Formula $f(\sum_{j\neq k}n_{j}^{(t-1)}w_{jk}+b_{k})\leq0$
+\end_inset
+
+, i.e.
+ 
+\begin_inset Formula $\sum_{j\neq k}n_{j}^{(t-1)}w_{jk}+b_{k}\leq0$
+\end_inset
+
+.
+ This means (using that 
+\begin_inset Formula $w_{kj}=w_{jk}$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{eqnarray*}
+E^{(t)}-E^{(t-1)} & = & -\frac{1}{2}n_{k}^{(t)}(\sum_{j\neq k}w_{kj}n_{j}^{(t)}+b_{k})+\frac{1}{2}n_{k}^{(t-1)}(\sum_{j\neq k}w_{kj}n_{j}^{(t-1)}+b_{k})\\
+ & = & -\frac{1}{2}0(\sum_{j\neq k}w_{kj}n_{j}^{(t)}+b_{k})+\frac{1}{2}1(\sum_{j\neq k}w_{kj}n_{j}^{(t-1)}+b_{k})\\
+ & = & \frac{1}{2}1(\sum_{j\neq k}w_{kj}n_{j}^{(t-1)}+b_{k})\\
+ & = & \frac{1}{2}1(\sum_{j\neq k}w_{jk}n_{j}^{(t-1)}+b_{k})\\
+ & \leq & 0
+\end{eqnarray*}
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This shows that 
+\begin_inset Formula $E^{(t)}-E^{(t-1)}\leq0$
+\end_inset
+
+ in all cases.
+\end_layout
+
+\end_body
+\end_document

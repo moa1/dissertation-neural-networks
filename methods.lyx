@@ -4500,14 +4500,18 @@ Hopfield Network
 \end_layout
 
 \begin_layout Standard
-A Hopfield Network is a deterministic recurrent network with nodes 
+A Hopfield Network is a deterministic recurrent network with 
+\begin_inset Formula $m$
+\end_inset
+
+ nodes 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
 As this is not a stochastic network, I don't think it makes sense to define
  random variables 
-\begin_inset Formula $\mathbf{N}=\{N_{1},\dots,N_{m}\}$
+\begin_inset Formula $\mathbf{N}=(N_{1},\dots,N_{m})$
 \end_inset
 
 .
@@ -4515,12 +4519,7 @@ As this is not a stochastic network, I don't think it makes sense to define
 
 \end_inset
 
-, whose states 
-\begin_inset Formula $\mathbf{n}=\{n_{1},n_{m}\}$
-\end_inset
-
- are binary, i.e.
- 
+, each having a binary state 
 \begin_inset Formula $n_{i}\in\{0,1\}$
 \end_inset
 
@@ -4580,23 +4579,148 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_layout
 
 \begin_layout Standard
-The network is updated iteratively, this means the states of time step 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Hier fehlt ein Bild von einem Hopfield-Netzwerk: Die connections sollten
+ directed sein, d.h.
+ Pfeile am Ende haben.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The network is updated asynchronously: At each time point 
 \begin_inset Formula $t$
 \end_inset
 
- depend only on the states at time step 
+, a node 
+\begin_inset Formula $i$
+\end_inset
+
+ is chosen at random out of the 
+\begin_inset Formula $m$
+\end_inset
+
+ possible nodes and it is updated, while all other nodes remain constant.
+ The state 
+\begin_inset Formula $n_{i}$
+\end_inset
+
+ of node 
+\begin_inset Formula $i$
+\end_inset
+
+ at time point 
+\begin_inset Formula $t$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $n_{i}^{(t)}$
+\end_inset
+
+ and depends on the state of all other nodes at time step 
 \begin_inset Formula $t-1$
 \end_inset
 
 : 
 \begin_inset Formula 
 \[
-n_{j}^{(t)}=f(\sum_{i\in\{1,\dots,m\}\land i\neq j}n_{i}^{(t-1)}w_{ij}+b_{j})
+n_{i}^{(t)}=f(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i})
 \]
 
 \end_inset
 
 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Note that I have added 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ here (to be consistent with the rest of this text), while in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+ the bias is on the right-hand side in eq.
+ 2: 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $<U_{i}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ To make up for this sign change, I also swap signs in the energy (eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Energy of a Hopfield network-1"
+
+\end_inset
+
+) below.
+\end_layout
+
+\end_inset
+
+(In Hopfield's formulation in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+ there is also an external input 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Der Input, der in jedem Zeitschritt auf den Input addiert wird, heißt in
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+ 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+to each node, constant over all times 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Because the bias also does not depend on 
+\begin_inset Formula $t$
+\end_inset
+
+, both are combined into 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ here.)
 \begin_inset Newline newline
 \end_inset
 
@@ -4640,105 +4764,160 @@ TODO: stimmt die Definition von
 \begin_inset Formula 
 \[
 f(x)=\begin{cases}
-0 & x\leq0\\
-1 & x>0
+0 & \mbox{for }x\leq0\\
+1 & \mbox{for }x>0
 \end{cases}
 \]
 
 \end_inset
 
-
-\begin_inset Newline newline
-\end_inset
-
-While this updating rule was described here as synchronous (i.e.
- all nodes are updated at the same time), the network can also be updated
- asynchronously (i.e.
+While this updating rule was described here as asynchronous (i.e.
  at each time step a node is picked at random and its state is updated,
- which is how Hopfield described it in 1984 
+ which is how Hopfield described it in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hopfield1984"
 
 \end_inset
 
-).
-\end_layout
 
-\begin_layout Standard
-Although a Hopfield network is recurrent, Hopfield 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-TODO: citation.
- TODO: stimmt das überhaupt? In 
+page 1: 
 \begin_inset Quotes eld
 \end_inset
 
-Neural networks and physical systems with emergent collective computational
- abilities
+Each neuron samples its input at random times.
 \begin_inset Quotes erd
 \end_inset
 
-, Hopfield writes: 
-\begin_inset Quotes eld
-\end_inset
 
-A simple cycle also occurred occasionally
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-The third behavior seen was chaotic wandering in a small region of state
- space.
-\begin_inset Quotes erd
-\end_inset
-
- TODO: Ausserdem steht in den beiden Hopfield-Papers nichts über einen Beweis,
- dass das Netzwerk konvergiert.
 \end_layout
 
 \end_inset
 
- proved that the updating rule converges to a (possibly local) minimum.
+), updating the network synchronously (i.e.
+ all nodes are updated at the same time) is also possible as this is a special
+ case of asynchronous updating.
 \end_layout
 
 \begin_layout Standard
-This can be also viewed in terms of an energy: Each state 
-\begin_inset Formula $\mathbf{N}=\mathbf{n}$
+Although a Hopfield network is recurrent, Hopfield proved that the updating
+ rule converges to a (possibly local) minimum given that the weights are
+ symmetric (i.e.
+ 
+\begin_inset Formula $w_{ij}=w_{ji}$
 \end_inset
 
- has an energy 
+) and there are no single-node loops (i.e.
+ 
+\begin_inset Formula $w_{ii}=0$
+\end_inset
+
+).
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Aus 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+There is a simple mathematical condition which guarantees that the state
+ space flow algorithm converges on stable states.
+ Any symmetric T with zero diagonal elements (i.e., 
+\begin_inset Formula $T_{ij}$
+\end_inset
+
+ = 
+\begin_inset Formula $T_{ji}$
+\end_inset
+
+, 
+\begin_inset Formula $T_{ii}$
+\end_inset
+
+ = 0) will produce such a flow.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can be proven by showing that a single number, associated with the
+ state of the network, can only decrease when updating a node.
+ It is the so-called 
+\emph on
+energy 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+energy
+\end_layout
+
+\end_inset
+
+
+\emph default
+ 
 \begin_inset Formula $E$
 \end_inset
 
- associated with it: 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: complete
+:
 \end_layout
 
-\end_inset
-
- 
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-E=\sum\label{eq:Energy of a Hopfield network}
+E^{(t)}=-\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}\label{eq:Energy of a Hopfield network}
 \end{equation}
 
 \end_inset
 
 
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Standard
+Each update of a single node either doesn't change the energy 
+\begin_inset Formula $E$
 \end_inset
 
-As time progresses, 
+ or decreases it.
+ (Shown in the appendix 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert link to file 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/hopfield-deriv.lyx
+\begin_inset Quotes erd
+\end_inset
+
+ when the document is finished.
+\end_layout
+
+\end_inset
+
+.) As time progresses, 
 \begin_inset Formula $E$
 \end_inset
 
@@ -4761,16 +4940,16 @@ Training a Hopfield network is the task of finding weights
 
 , so that desirable states (training patterns) have a low energy and undesirable
  states have a high energy.
- After training, a Hopfield network can be initialized with a distorted
- pattern (i.e.
- state), and updated iteratively until its state doesn't change anymore.
- This stationary state should then be equal to a similar pattern used in
- training.
  Due to this property Hopfield networks can be used as 
 \emph on
 associative memory
 \emph default
 .
+ After training, a Hopfield network can be initialized with a distorted
+ pattern, in which the state of some nodes is swapped, and updated iteratively
+ until its state doesn't change anymore.
+ This stationary state should then be equal to a similar pattern used in
+ training.
 \end_layout
 
 \begin_layout Paragraph
@@ -4993,14 +5172,14 @@ A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
 The energy of a hopfield network was defined in equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:Energy of a Hopfield network"
+reference "eq:Energy of a Hopfield network-1"
 
 \end_inset
 
  (
 \begin_inset CommandInset ref
 LatexCommand vpageref
-reference "eq:Energy of a Hopfield network"
+reference "eq:Energy of a Hopfield network-1"
 
 \end_inset
 
