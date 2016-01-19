@@ -1510,7 +1510,7 @@ A
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1547,7 +1547,7 @@ B
 \uwave off
 \noun off
 \color none
-C
+C=y
 \end_layout
 
 \end_inset
@@ -1568,7 +1568,7 @@ C
 \uwave off
 \noun off
 \color none
-nC
+C=n
 \end_layout
 
 \end_inset
@@ -1596,7 +1596,7 @@ n
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1682,7 +1682,7 @@ y
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1768,7 +1768,7 @@ n
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1854,7 +1854,7 @@ y
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -1908,6 +1908,46 @@ y
 </row>
 </lyxtabular>
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Let's say we know from observation that A=y.
+ Then the probability for B decreases due to explaining away 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/graphical model/explaining_away/pami93.pdf
+\begin_inset Quotes erd
+\end_inset
+
+ says that explaining away can not only decrease but also INCREASE belief:
+ (in the abstract) 
+\begin_inset Quotes eld
+\end_inset
+
+The opposite of explaining away also can occur, where the confirmation of
+ one cause increases belief in another.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $P(B)=P(B|C)*P(C)$
 \end_inset
 
 
@@ -4351,7 +4391,381 @@ In a directed graph Explaining away
 \end_layout
 
 \begin_layout Paragraph
+Boltzmann Machines
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: probably move this to its own (sub)section
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: in the following, replace the word 
+\begin_inset Quotes eld
+\end_inset
+
+unit
+\begin_inset Quotes erd
+\end_inset
+
+ with 
+\begin_inset Quotes eld
+\end_inset
+
+node
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Gibbs Sampling in Boltzmann Machines
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: probably move this somewhere else
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: rewrite the following using consistent variable names and fonts.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: the following is only for binary nodes, i.e.
+ they can only have either state 0 or state 1.
+ Do I find a generalization to (discrete multiple states) / (continuous)
+ nodes somewhere?
+\end_layout
+
+\begin_layout Plain Layout
+Neal
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+ writes (on page 75) how to approximate the probability distribution of
+ a specific variable 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+, given the states of all other variables 
+\begin_inset Formula $S_{j}$
+\end_inset
+
+, 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+ in a Boltzmann machine:
+\begin_inset Formula 
+\[
+P(S_{i}=x|S_{j})=\sigma((2x-1)\sum_{j\neq i}s_{j}w_{ij})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(this formula is only valid for 0/1-valued nodes.)
+\end_layout
+
+\end_inset
+
+ This conditional probability is needed for Gibbs sampling.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: define 
+\begin_inset Formula $\sigma(x)=\frac{1}{1+\exp(-x)}$
+\end_inset
+
+ somewhere
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Training Boltzmann Machines
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: probably move this somewhere else
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: rewrite the following using consistent variable names and fonts.
+\end_layout
+
+\begin_layout Plain Layout
+Neal writes (on page 75) about training of Boltzmann machines, i.e.
+ adjusting the weights so that a set of training samples 
+\begin_inset Formula $T$
+\end_inset
+
+ (i.e.
+ measured states of the visible units) become as probable as possible.
+ The log-likelihood is 
+\begin_inset Formula $L=\log\prod_{v\in T}P(V=v)$
+\end_inset
+
+.
+ The derivative of the log-likelihood with respect to a weight is: 
+\begin_inset Formula $\frac{\partial L}{\partial w_{ij}}=\beta\sum_{\mathbf{v}\in\mathbf{T}}(\sum_{s}P(\mathbf{S=s}|\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j})$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: derive 
+\begin_inset Formula $\frac{\partial L}{\partial w_{ij}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ (
+\begin_inset Formula $\beta$
+\end_inset
+
+ is defined on page 74 to be 1 for 0/1-valued nodes, and 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+ for -1/1-valued nodes.)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This derivative can be approximated by two parallel Gibbs sampling steps:
+ the 
+\begin_inset Quotes eld
+\end_inset
+
+positive
+\begin_inset Quotes erd
+\end_inset
+
+ phase, where 
+\begin_inset Formula $P(\mathbf{S=s}|\mathbf{V=v})$
+\end_inset
+
+ is approximated, and the 
+\begin_inset Quotes eld
+\end_inset
+
+negative
+\begin_inset Quotes erd
+\end_inset
+
+ phase, where 
+\begin_inset Formula $P(\mathbf{S=s})$
+\end_inset
+
+ is approximated.
+\end_layout
+
+\begin_layout Subparagraph
+Positive Phase
+\end_layout
+
+\begin_layout Standard
+In more detail, in the positive phase
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+positive phase
+\end_layout
+
+\end_inset
+
+, the visible nodes 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ are clamped (i.e.
+ their state is held fixed) to their states as they are in the training
+ sample 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+, and then the states of the remaining (i.e.
+ hidden) nodes are sampled via Gibbs sampling.
+ This means starting in any (for example random, or close to equilibrium)
+ configuration of the remaining nodes, repeatedly sampling each remaining
+ variable 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ from its conditional probability distribution given the states of all other
+ variables (i.e.
+ 
+\begin_inset Formula $P(S_{i}|S_{j:j\neq i}=s_{j})$
+\end_inset
+
+) until the Gibbs sampler reaches equilibrium, and recording the state 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ that each remaining variable 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ had assumed in equilibrium.
+ By repeatedly sampling the 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ a few times when the Markov chain is in equilibrium, we determine their
+ probability distributions.
+ This means the conditional probability distribution of the remaining variables
+ 
+\begin_inset Formula $P(\mathbf{S=s}|\mathbf{V=v})$
+\end_inset
+
+ is determined, and therefore the term 
+\begin_inset Formula $\sum_{s}P(\mathbf{S=s}|\mathbf{V=v})s_{i}s_{j}$
+\end_inset
+
+ can be determined, which completes the positive phase.
+\end_layout
+
+\begin_layout Subparagraph
+Negative Phase
+\end_layout
+
+\begin_layout Standard
+In the negative phase
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+negative phase
+\end_layout
+
+\end_inset
+
+ no nodes are clamped, and the states of all variables in equilibrium are
+ recorded.
+ Again, we start in any configuration of the network.
+ Then we repeatedly sample from the conditional probability distributions
+ 
+\begin_inset Formula $P(S_{i}|S_{j:j\neq i}=s_{j})$
+\end_inset
+
+ for all variables 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ until equilibrium, and record the state 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ each variable 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ had in equilibrium.
+ Sampling a few more steps in equilibrium, we can determine their distributions
+ 
+\begin_inset Formula $P(\mathbf{S=s})$
+\end_inset
+
+ and therefore the term 
+\begin_inset Formula $\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
 Sigmoid Belief Network
+\end_layout
+
+\begin_layout Standard
+Belief Networks can be seen as the stochastic counterpart of the equivalent
+ deterministic feed-forward network.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I should make a small section on feed-forward networks, like the one
+ on Hopfield networks (but maybe shorter).
+ A definition of feed-forward networks is also needed later for mentioning
+ that a learned Deep Belief Networks can be interpreted as a feed-forward
+ network.
+\end_layout
+
+\end_inset
+
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+sigmoid
+\begin_inset Quotes erd
+\end_inset
+
+ in Sigmoid Belief Network refers to the activation function of the nodes.
 \end_layout
 
 \begin_layout Standard
@@ -4399,6 +4813,204 @@ And they say that although a SBN is a very simple generative model given
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Neal writes about the training of weights to maximize the likelihood given
+ the observed training cases in Sigmoid Belief Networks in 
+\begin_inset Quotes eld
+\end_inset
+
+Connectionist learning of belief networks
+\begin_inset Quotes erd
+\end_inset
+
+ (
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
+ networks.pdf
+\begin_inset Quotes erd
+\end_inset
+
+) on (the paper's printed page numbers) pages 82/83:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+Next, we must find values for the network weights that maximize the likelihood
+ given the training cases, though to avoid overfitting or to reduce computation
+ we might decide to fix certain weights at zero based on a priori knowledge.
+ Other weights will be set to zero (or to small random values if we wish
+ to break symmetry faster) and then adjusted by gradient-ascent so as to
+ maximize the log-likelihood: [...] These partial derivatives can be evaluated
+ by running a separate Gibbs sampling simulation of the network for each
+ training case, clamping the visi- ble units to the values they take in
+ that training case and observing the state vectors that arise as a result.
+ [...] Incrementing each weight, Wij, by a small amount proportional to the
+ average value of [...] over the combined samples for all training cases will
+ then move the weights along the gradient toward a local maximum of the
+ likelihood.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Man kann also trainieren, indem man 
+\begin_inset Formula $P(\tilde{S}=\tilde{s}|\tilde{V}=\tilde{v})$
+\end_inset
+
+ mittels Gibbs-Sampling bestimmt, dann mit 
+\begin_inset Formula $s_{i}s_{j}\sigma(-s_{i}\sum_{k<i}s_{k}w_{ik})$
+\end_inset
+
+ multipliziert, und das Ergebnis (mal einer learning rate) dann auf die
+ Weight 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ addiert.
+\end_layout
+
+\begin_layout Plain Layout
+Wie man die 
+\begin_inset Formula $P(\tilde{S}=\tilde{s}|\tilde{V}=\tilde{v})$
+\end_inset
+
+ mittels Gibbs-Sampling bestimmt, beschreibt Neal auf Seite 80: 
+\begin_inset Quotes eld
+\end_inset
+
+To exhibit these marginal and conditional distributions via Gibbs sam- pling,
+ we must repeatedly select a new value for each unit from its distri- bution
+ conditional on the rest of the network.
+ This distribution is given by the proportionality 
+\begin_inset Formula 
+\begin{eqnarray*}
+P(S_{i}=x|S_{j}=s_{j}:j\neq i) & = & P(S_{i}=x|S_{j}=s_{j}:j<i)\\
+ &  & *\prod_{j>i}P(S_{j}=s_{j}|S_{i}=x,S_{k}=s_{k}:k<j,k\neq i)\\
+ & = & \sigma(x^{*}\sum_{j<i}s_{j}w_{ij})\\
+ &  & *\prod_{j>i}\sigma(s_{j}^{*}(xw_{ji}+\sum_{k<j,k\neq i}s_{k}w_{jk}))
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Die Equation hier ist ein Mix aus Eq.
+ (9) und (17)
+\end_layout
+
+\end_inset
+
+.
+ To select a new value from the above distribution, unit i must have available
+ both its own total input: 
+\begin_inset Formula $\sum_{j<i}s_{j}w_{ij}$
+\end_inset
+
+ and the input to each unit, j, that it feeds into, exclusive of its own
+ contribution: 
+\begin_inset Formula $\sum_{k<j,k\neq i}s_{k}w_{jk}$
+\end_inset
+
+.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+(Der 
+\begin_inset Formula $*$
+\end_inset
+
+ auf manchen 
+\begin_inset Formula $s$
+\end_inset
+
+ oder 
+\begin_inset Formula $x$
+\end_inset
+
+, z.B.
+ 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ oder 
+\begin_inset Formula $s_{j}^{*}$
+\end_inset
+
+ bezieht sich auf Knoten, in denen -1/1 Zustände verwendet anstatt 0/1:
+ Seite 80: 
+\begin_inset Quotes eld
+\end_inset
+
+for -1/+1-valued units, 
+\begin_inset Formula $s_{i}^{*}=s_{i}$
+\end_inset
+
+, while for 0/1-valued units, 
+\begin_inset Formula $s_{i}^{*}=2s_{i}-1$
+\end_inset
+
+.
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+Neal schreibt auf Seite 86 (bzw.
+ proof auf Seite 109, dass für bis zu 2 Knoten alle möglichen joint probability
+ distributions mit Boltzmann machine als auch mit sigmoid belief network
+ modellierbar sind.
+ Bei 3 Knoten sind nicht mehr alle joint probability distributions modellierbar,
+ aber die, die von einer Bolzmann machine modellierbar sind, sind auch von
+ einem sigmoiden Belief Network modellierbar und umgekehrt.
+ Ab 4 oder mehr Knoten sind die joint probability distributions, die von
+ einer Boltzmann machine und von einem sigmoid belief network modellierbar
+ sind, unterschiedlich.
+\end_layout
+
+\begin_layout Plain Layout
+Allerdings schreibt Neal auf Seite 72: 
+\begin_inset Quotes eld
+\end_inset
+
+With the help of "hidden" units, all these networks [Boltzmann machine und
+ sigmoid belief network] can represent arbitrary distributions over a set
+ of "visible" units.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both Boltzmann machines and sigmoid belief networks can represent arbitrary
+ probability distributions over a set of an arbitrary number of visible
+ units, provided that a sufficient number of hidden units is available.
 \end_layout
 
 \begin_layout Paragraph
@@ -4864,6 +5476,8 @@ This can be proven by showing that a single number, associated with the
  It is the so-called 
 \emph on
 energy 
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -4873,8 +5487,6 @@ energy
 
 \end_inset
 
-
-\emph default
  
 \begin_inset Formula $E$
 \end_inset
@@ -4944,6 +5556,16 @@ Training a Hopfield network is the task of finding weights
 \emph on
 associative memory
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+associative memory
+\end_layout
+
+\end_inset
+
 .
  After training, a Hopfield network can be initialized with a distorted
  pattern, in which the state of some nodes is swapped, and updated iteratively
@@ -4957,7 +5579,8 @@ Multilayer Perceptron
 \end_layout
 
 \begin_layout Standard
-A Multilayer Perceptron belongs to the class of feedforward neural networks.
+A Multilayer Perceptron belongs to the class of deterministic feedforward
+ neural networks.
  These are in contrast to recurrent networks, which contain a directed cycle
  of neural connections.
 \end_layout
@@ -5027,6 +5650,47 @@ This [result] implies that any lack of success in applications must arise
 \end_layout
 
 \begin_layout Section
+Distinction between a deterministic and stochastic network
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe move the definition of a deterministic network and a stochastic
+ network somewhere else.
+\end_layout
+
+\end_inset
+
+The difference between a stochastic and a deterministic network is that
+ in a deterministic network a node represents a single value, while in a
+ stochastic network a single node represents a probability distribution.
+ In particular, if there is a set of 
+\begin_inset Quotes eld
+\end_inset
+
+output
+\begin_inset Quotes erd
+\end_inset
+
+ nodes, then in a deterministic setting the output can be interpreted as
+ a single point in a high-dimensional space, while in a stochastic network
+ the output is the joint probability distribution over all the random variables
+ associated with the output nodes.
+\end_layout
+
+\begin_layout Standard
+A stochastic network is more general than its deterministic counterpart,
+ since a stochastic network can be converted to a deterministic network,
+ but not vice-versa.
+ This greater generality comes at a higher cost, however, since inference
+ and learning in stochastic networks takes longer than the computation of
+ the output and the learning in deterministic networks.
+\end_layout
+
+\begin_layout Section
 Restricted Boltzmann Machines
 \end_layout
 
@@ -5046,6 +5710,11 @@ TODO: Example figure of a BM.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+A Boltzmann Machine is the stochastic equivalent to a Hopfield network.
+ 
 \end_layout
 
 \begin_layout Paragraph
