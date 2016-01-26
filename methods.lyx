@@ -2132,7 +2132,7 @@ Belief Networks
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Inference in Graphical Models
 \end_layout
 
@@ -2166,7 +2166,7 @@ TODO: Do
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Exact Inference in Directed and in Undirected Graphical Models
 \begin_inset CommandInset label
 LatexCommand label
@@ -2330,19 +2330,6 @@ P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & = & \sum_{\mathbf{U}}P(\mathbf{
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: write that in the general case, this query is exponential.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 In the above formula there is a sum over all variables 
 \series bold
 
@@ -2399,12 +2386,313 @@ In the general case (if the joint probability cannot be factorized), this
  This is because all possible combinations of variable assignments have
  to be considered.
  Thus, run-time is exponential in the number of variables, and therefore
- intractable.
+ intractable in general.
+\end_layout
+
+\begin_layout Subsubsection
+Example of Exact Inference in a Directed Graphical Model
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-This can be improved by factorizing the joint probability into independent
- sub-joint-probabilities, if possible.
+Here we show an example of how inference in a specific directed graphical
+ model is done.
+ The directed graphical model shall be composed of several densely connected
+ layers, where the nodes within a layer are not connected, and they have
+ outgoing directed connections only to nodes in the adjacent layer below.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert graphics here that looks like a the directed graph 
+\begin_inset Formula $\mathbf{G}\rightarrow\mathbf{H}\rightarrow\mathbf{V}$
+\end_inset
+
+, but with individual nodes in 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+, and that I can use to explain why inference in a densely connected directed
+ graphical model is hard.
+\end_layout
+
+\end_inset
+
+When the probability distribution of the parent nodes are known, inferring
+ the probability distributions of nodes 
+\begin_inset Quotes eld
+\end_inset
+
+down-stream
+\begin_inset Quotes erd
+\end_inset
+
+ is easy.
+ Therefore, given the probability distributions of the nodes in the bottom
+ layer, we want to infer the probability distributions for all the other
+ nodes.
+ We want to determine the exact probability distributions, hence the name
+ 
+\begin_inset Quotes eld
+\end_inset
+
+exact inference
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For example let a directed acyclic graph be defined by the following directed
+ connections between its nodes: 
+\begin_inset Formula $G_{1}\rightarrow H_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $G_{1}\rightarrow H_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $G_{2}\rightarrow H_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $G_{2}\rightarrow H_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $H_{1}\rightarrow V_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $H_{1}\rightarrow V_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $H_{2}\rightarrow V_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $H_{2}\rightarrow V_{2}$
+\end_inset
+
+.
+ Furthermore the following conditional probability distributions are given:
+ 
+\begin_inset Formula $P(H_{1}|G_{1},G_{2})$
+\end_inset
+
+, 
+\begin_inset Formula $P(H_{2}|G_{1},G_{2})$
+\end_inset
+
+, 
+\begin_inset Formula $P(V_{1}|H_{1},H_{2})$
+\end_inset
+
+, 
+\begin_inset Formula $P(V_{2}|H_{1},H_{2})$
+\end_inset
+
+.
+ This defines a directed graphical model.
+\end_layout
+
+\begin_layout Standard
+Now assume that 
+\begin_inset Formula $P(V_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $P(V_{2})$
+\end_inset
+
+ are given and we want to infer 
+\begin_inset Formula $P(G_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $P(G_{2})$
+\end_inset
+
+, 
+\begin_inset Formula $P(H_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $P(H_{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\\
+ & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{Z}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Z=\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_{2}=h_{2})P(H_{1}=h_{1},H_{2}=h_{2})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can make this transformation because 
+\begin_inset Formula $\ensuremath{V_{1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\ensuremath{V_{2}}$
+\end_inset
+
+ are independent given 
+\begin_inset Formula $\ensuremath{H_{1}},\ensuremath{H_{2}}$
+\end_inset
+
+.
+ To determine 
+\begin_inset Formula $P(H_{1}|V_{1},V_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(H_{2}|V_{1},V_{2})$
+\end_inset
+
+, we have to marginalize the other variable in 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ out:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+P(H_{1}|V_{1},V_{2}) & = & \sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})\\
+P(H_{2}|V_{1},V_{2}) & = & \sum_{h_{1}}P(H_{1}=h_{1},H_{2}|V_{1},V_{2})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that if there are 
+\begin_inset Formula $n$
+\end_inset
+
+ binary variables in 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+, then the computation of 
+\begin_inset Formula $P(\mathbf{H}|\mathbf{V})$
+\end_inset
+
+ takes 
+\begin_inset Formula $O(2^{n-1}n)$
+\end_inset
+
+ due to having to marginalize out all variables in 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ except one, and this for all variables.
+ Once we have 
+\begin_inset Formula $P(H_{1}|\mathbf{V})$
+\end_inset
+
+, we can determine 
+\begin_inset Formula $P(H_{1})$
+\end_inset
+
+: (using 
+\begin_inset Formula $P(H_{1})=\sum_{v_{1}}\sum_{v_{2}}P(H_{1},V_{1}=v_{1},V_{2}=v_{2})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(H_{1}|V_{1},V_{2})=P(H_{1},V_{1},V_{2})/P(V_{1},V_{2})$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using similar computations we can determine 
+\begin_inset Formula $P(H_{2})$
+\end_inset
+
+.
+ Now that we know 
+\begin_inset Formula $P(H_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(H_{2})$
+\end_inset
+
+, we can then repeat the steps to determine 
+\begin_inset Formula $P(G_{1})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(G_{2})$
+\end_inset
+
+.
+ This concludes how to do exact inference in a directed graphical model.
+ However, due to all the involved marginalizations, this procedure becomes
+ infeasible in a belief network with more than a few nodes per layer.
+\end_layout
+
+\begin_layout Subsubsection
+Factorization in Undirected Graphical Models
+\end_layout
+
+\begin_layout Standard
+In the case of an undirected graphical model, this can be improved by factorizin
+g the joint probability into independent sub-joint-probabilities, if possible.
  For example, if the random variables 
 \begin_inset Formula $\mathbf{U}=\{U_{1},U_{2},\dots,U_{7}\}$
 \end_inset
@@ -5227,383 +5515,47 @@ Both Boltzmann machines and sigmoid belief networks can represent arbitrary
 \end_layout
 
 \begin_layout Subparagraph
-Example that inference is hard in a deep belief network
+Deep Belief Network
 \end_layout
 
 \begin_layout Standard
-Assume that we have a belief network composed of several densely connected
- layers, where the nodes within a layer are not connected, and they form
- directed connections only to the adjacent layer below.
-\begin_inset Note Note
-status open
+A deep belief network 
+\begin_inset Index idx
+status collapsed
 
 \begin_layout Plain Layout
-TODO: insert graphics here that looks like a deep belief network (
-\begin_inset Formula $\mathbf{G}\rightarrow\mathbf{H}\rightarrow\mathbf{V}$
-\end_inset
-
-, but with individual nodes in 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{V}$
-\end_inset
-
-) and that I can use to explain why inference in a densely connected deep
- belief network is hard: 
+deep belief network
 \end_layout
 
 \end_inset
 
-
+ is a directed graphical model, composed of multiple layers consisting of
+ one or several nodes.
+ Imagine the layers arranged and numbered from top to bottom.
+ The nodes in the first two layers are connected using undirected connections.
+ The nodes in the second layer and the layers below have outgoing connections
+ only to nodes in the adjacent layer below.
 \end_layout
 
 \begin_layout Standard
-Let's assume there are 3 layers, where the topmost layer is the one with
- hidden layer 2, the middle layer is hidden layer 1, and the bottom-most
- is the visible layer.
- As defined, the connections between the layers would all go down, i.e.
- all nodes in hidden layer 2 have out-going connections to all hidden layer
- 1 nodes, and all hidden layer 1 nodes have directed connections to all
- visible nodes.
+A deep belief network is a model that can be used to generate samples distribute
+d like a training data set.
+ In that case, the nodes in the layer at the bottom correspond to the random
+ variables in the training set and learning a deep belief network is the
+ task of finding weights for the (directed and undirected) connections such
+ that the energy of the training samples becomes maximal.
 \end_layout
 
 \begin_layout Standard
-Inference is then defined as determining the probability distributions of
- the hidden nodes, given the probability distributions of the visible nodes.
- We can determine these probability distributions using equation 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO insert cross-reference here
-\end_layout
+Because a deep belief network contains a directed graphical model of the
+ form as show in the example 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
 
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{eqnarray*}
-P(S_{i}=x|S_{j}=s_{j}:j\neq i) & = & P(S_{i}=x|S_{j}=s_{j}:j<i)\\
- &  & *\prod_{j>i}P(S_{j}=s_{j}|S_{i}=x,S_{k}=s_{k}:k<j,k\neq i)
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Let's name nodes in the visible layer, 
-\begin_inset Formula $\mathbf{V}$
-\end_inset
-
-, nodes in the hidden layer 1, 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
-, and nodes in hidden layer 2, 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
-.
- Inferring the probability distribution of node 
-\begin_inset Formula $H_{i}$
-\end_inset
-
- in hidden layer 1 first, we get
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: FIXME: Is the following wrong or not?
-\end_layout
-
-\begin_layout Plain Layout
-The following is wrong because (according to the formula above) I have to
- condition not only on 
-\begin_inset Formula $H_{i}=h_{i}$
-\end_inset
-
- (one node) but also on the (or at least some) other nodes in 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-But then again it is not wrong because 
-\begin_inset Formula $P(V_{j}=v_{j}|H_{1}=h_{1},H_{2}=h_{2},\mathbf{G})=P(V_{j}=v_{j}|H_{1}=h_{1},\mathbf{G})$
-\end_inset
-
- because 
-\begin_inset Formula $H_{1}$
-\end_inset
-
- independent of 
-\begin_inset Formula $H_{2}$
-\end_inset
-
- given 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{eqnarray*}
-P(H_{i}=h_{i}|\mathbf{H_{\neq i},V,G}) & = & P(H_{i}=h_{i}|G_{1}=g_{1},\dots,G_{n}=g_{n})\\
- &  & *\prod_{j>i}P(V_{j}=v_{j}|H_{i}=h_{i},G_{1}=g_{1},\dots,G_{n}=g_{n})\\
-\mbox{(\ensuremath{\mathbf{V}}independent of \ensuremath{\mathbf{G}} given \ensuremath{\mathbf{H}})} & = & P(H_{i}=h_{i}|\mathbf{G=g})\\
- &  & *\prod_{j>i}P(V_{j}=v_{j}|H_{i}=h_{i})
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The probability distribution of node 
-\begin_inset Formula $G_{k}$
-\end_inset
-
- in hidden layer 2 is 
-\end_layout
-
-\begin_layout Subparagraph
-Example that inference is hard in a deep belief network
-\end_layout
-
-\begin_layout Standard
-Assume the following directed acyclic graph: 
-\begin_inset Formula $G_{1}\rightarrow H_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $G_{1}\rightarrow H_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $G_{2}\rightarrow H_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $G_{2}\rightarrow H_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $H_{1}\rightarrow V_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $H_{1}\rightarrow V_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $H_{2}\rightarrow V_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $H_{2}\rightarrow V_{2}$
-\end_inset
-
-.
- Furthermore the following conditional probability distributions are given:
- 
-\begin_inset Formula $P(H_{1}|G_{1},G_{2})$
-\end_inset
-
-, 
-\begin_inset Formula $P(H_{2}|G_{1},G_{2})$
-\end_inset
-
-, 
-\begin_inset Formula $P(V_{1}|H_{1},H_{2})$
-\end_inset
-
-, 
-\begin_inset Formula $P(V_{2}|H_{1},H_{2})$
-\end_inset
-
-.
- This defines a directed graphical model.
- (A deep belief network is a directed graphical model.)
-\end_layout
-
-\begin_layout Standard
-Assume that 
-\begin_inset Formula $V_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $V_{2}$
-\end_inset
-
- are given and we want to infer 
-\begin_inset Formula $P(G_{1})$
-\end_inset
-
-, 
-\begin_inset Formula $P(G_{2})$
-\end_inset
-
-, 
-\begin_inset Formula $P(H_{1})$
-\end_inset
-
-, 
-\begin_inset Formula $P(H_{2})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{eqnarray*}
-P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\\
- & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_{2}=h_{2})P(H_{1}=h_{1},H_{2}=h_{2})}
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We can make this transformation because 
-\begin_inset Formula $\ensuremath{V_{1}}$
-\end_inset
-
- and 
-\begin_inset Formula $\ensuremath{V_{2}}$
-\end_inset
-
- are independent given 
-\begin_inset Formula $\ensuremath{H_{1}},\ensuremath{H_{2}}$
-\end_inset
-
-.
- To determine 
-\begin_inset Formula $P(H_{1}|V_{1},V_{2})$
-\end_inset
-
- and 
-\begin_inset Formula $P(H_{2}|V_{1},V_{2})$
-\end_inset
-
-, we have to marginalize the other variable in 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
- out:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{eqnarray*}
-P(H_{1}|V_{1},V_{2}) & = & \sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})\\
-P(H_{2}|V_{1},V_{2}) & = & \sum_{h_{1}}P(H_{1}=h_{1},H_{2}|V_{1},V_{2})
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Note that if there are 
-\begin_inset Formula $n$
-\end_inset
-
- binary variables in 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
-, then the computation of 
-\begin_inset Formula $P(\mathbf{H}|\mathbf{V})$
-\end_inset
-
- takes 
-\begin_inset Formula $O(2^{n-1}n)$
-\end_inset
-
- due to having to marginalize out all variables in 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
- except one, and this for all variables.
- Once we have 
-\begin_inset Formula $P(H_{1}|\mathbf{V})$
-\end_inset
-
-, we can determine 
-\begin_inset Formula $P(H_{1})$
-\end_inset
-
-: (using 
-\begin_inset Formula $P(H_{1})=\sum_{v_{1}}\sum_{v_{2}}P(H_{1},V_{1}=v_{1},V_{2}=v_{2})$
-\end_inset
-
- and 
-\begin_inset Formula $P(H_{1}|V_{1},V_{2})=P(H_{1},V_{1},V_{2})/P(V_{1},V_{2})$
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{eqnarray*}
-P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Using similar computations we can determine 
-\begin_inset Formula $P(H_{2})$
-\end_inset
-
-.
- Now that we know 
-\begin_inset Formula $P(H_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $P(H_{2})$
-\end_inset
-
-, we can then repeat the steps to determine 
-\begin_inset Formula $P(G_{1})$
-\end_inset
-
- and 
-\begin_inset Formula $P(G_{2})$
-\end_inset
-
-.
- This concludes how to do exact inference in a directed graphical model.
+, exact inference is infeasible.
 \end_layout
 
 \begin_layout Paragraph
