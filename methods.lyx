@@ -72,6 +72,67 @@ fix-cm
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: replace the 
+\begin_inset Quotes eld
+\end_inset
+
+|
+\begin_inset Quotes erd
+\end_inset
+
+ in all conditional probabilities 
+\begin_inset Formula $P(A|B)$
+\end_inset
+
+ with the 
+\backslash
+mid sign, i.e.
+ 
+\begin_inset Formula $P(A\mid B)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: in all formulas, replace brackets near a sum sign (as in 
+\begin_inset Formula $\sum_{i}(\frac{a}{b})$
+\end_inset
+
+) with large brackets (key 
+\begin_inset Quotes eld
+\end_inset
+
+Alt+m (
+\begin_inset Quotes erd
+\end_inset
+
+): 
+\begin_inset Formula $\sum_{i}\left(\frac{a}{b}\right)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Notation
 \end_layout
@@ -81,7 +142,7 @@ Random
 \begin_inset space ~
 \end_inset
 
-variable The name of a random variable is written in upper-case.
+variable The name of a random variable is written upper-case.
  For example: 
 \begin_inset Formula $X$
 \end_inset
@@ -106,7 +167,7 @@ random
 \begin_inset space ~
 \end_inset
 
-variable The value of a random variable is written in lower-case.
+variable The value of a random variable is written lower-case.
  For example, the value of variable 
 \begin_inset Formula $X$
 \end_inset
@@ -809,6 +870,15 @@ nodes
 \end_inset
 
  is overused.
+ TODO: replace 
+\begin_inset Formula $X$
+\end_inset
+
+ by 
+\begin_inset Formula $N$
+\end_inset
+
+ in the following.
 \end_layout
 
 \end_inset
@@ -1440,6 +1510,43 @@ A directed graphical model is defined by the directed graph, prior probability
  probability distributions at the nodes that have ancestors.
  In the latter nodes the conditional probability distribution may only condition
  on its immediate parents.
+ The directed graph encodes the set of conditional independencies between
+ the random variables: A random variable 
+\begin_inset Formula $X$
+\end_inset
+
+ is conditionally independent of all random variables that are not descendants
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+ given the values of the immediate parent variables of 
+\begin_inset Formula $X$
+\end_inset
+
+ (this is called the 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+local Markov property
+\end_layout
+
+\end_inset
+
+
+\emph on
+local Markov property
+\emph default
+):
+\begin_inset Formula 
+\[
+X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(X)}})\mid\mathbf{N_{parent(X)}}
+\]
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1447,7 +1554,7 @@ In a directed graphical model, the random variables
 \begin_inset Formula $\mathbf{N}$
 \end_inset
 
- are totally ordered such that 
+ can be totally ordered such that 
 \begin_inset Formula $N_{i}$
 \end_inset
 
@@ -1463,7 +1570,16 @@ In a directed graphical model, the random variables
 \begin_inset Formula $N_{j}$
 \end_inset
 
- in the graph.
+ in the graph, and the order is unspecified if there is no directed path
+ between 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{j}$
+\end_inset
+
+.
  (This means there are graphs which have more than one compatible ordering,
  for example in the graph 
 \begin_inset Formula $A\rightarrow C\leftarrow B$
@@ -1515,7 +1631,7 @@ The probability that the random variable
 
  
 \series default
-are equal to (the vector) 
+are equal to 
 \begin_inset Formula $\mathbf{n_{j}}$
 \end_inset
 
@@ -1587,12 +1703,27 @@ For example, if the
 \end_layout
 
 \begin_layout Standard
-TODO: explaining away
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
+
+\begin_layout Plain Layout
+NOTE: I think I explained 
+\begin_inset Quotes eld
+\end_inset
+
+explaining
+\begin_inset Quotes erd
+\end_inset
+
+ away in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
+
+\end_inset
+
+, so this TODO can probably be removed.
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -2116,6 +2247,13 @@ Generative Model
 
 \end_layout
 
+\begin_layout Standard
+An advantage of a generative over a discriminative model is that its parameters
+ are constrained by the number of bits required to encode the training samples,
+ while the parameters of a discriminative model are only constrained by
+ the number of bits required to encode the label.
+\end_layout
+
 \begin_layout Paragraph
 Bayesian Networks
 \end_layout
@@ -2446,7 +2584,7 @@ down-stream
  Therefore, given the probability distributions of the nodes in the bottom
  layer, we want to infer the probability distributions for all the other
  nodes.
- We want to determine the exact probability distributions, hence the name
+ We want to determine the exact probability distributions, hence the term
  
 \begin_inset Quotes eld
 \end_inset
@@ -2578,7 +2716,7 @@ We can make this transformation because
 \begin_inset Formula $\ensuremath{H_{1}},\ensuremath{H_{2}}$
 \end_inset
 
-.
+ (local Markov property).
  To determine 
 \begin_inset Formula $P(H_{1}|V_{1},V_{2})$
 \end_inset
@@ -2607,7 +2745,7 @@ P(H_{2}|V_{1},V_{2}) & = & \sum_{h_{1}}P(H_{1}=h_{1},H_{2}|V_{1},V_{2})
 \end_layout
 
 \begin_layout Standard
-Note that if there are 
+This does not look too complicated, but note that if there are 
 \begin_inset Formula $n$
 \end_inset
 
@@ -2628,7 +2766,25 @@ Note that if there are
 \end_inset
 
  except one, and this for all variables.
- Once we have 
+ The phenomenon that leads to this computational problem is called 
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+explaining away
+\end_layout
+
+\end_inset
+
+
+\emph on
+explaining away
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Once we have 
 \begin_inset Formula $P(H_{1}|\mathbf{V})$
 \end_inset
 
@@ -4783,7 +4939,7 @@ Explaining away
 \end_layout
 
 \begin_layout Standard
-Directed Acyclic Graphical Models show the phenomenon of 
+Directed graphical models show the phenomenon of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -4791,7 +4947,7 @@ explaining away
 \begin_inset Quotes erd
 \end_inset
 
-.
+, which complicates inference.
  
 \begin_inset Note Note
 status open
@@ -4804,10 +4960,6 @@ TODO: is there also explaining away in undirected graphs? nope, I don't
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-In a directed graph Explaining away
 \end_layout
 
 \begin_layout Paragraph
@@ -5519,7 +5671,108 @@ Deep Belief Network
 \end_layout
 
 \begin_layout Standard
-A deep belief network 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: irgendwo vor Deep Belief Networks muss ich einen Abschnitt machen,
+ wo ich erkläre dass viele der Netzwerk-Lernmethoden gradient descent machen.
+ Deep Belief Networks machen das auch, aber keine maximum likelihood estimation,
+ sondern eine contrastive divergence.
+ Siehe section 3 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Irgendwo vor Deep Belief Networks muss ich contrastive divergence
+ erklären.
+ Das Folgende kommt aus 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+, Seite 1534.
+\end_layout
+
+\begin_layout Plain Layout
+Maximum likelihood learning minimizes the Kullback-Leibler divergence 
+\begin_inset Formula $KL(P^{0}||P_{\theta}^{\infty})$
+\end_inset
+
+ where 
+\begin_inset Formula $P^{0}$
+\end_inset
+
+ is the distribution of the data, and 
+\begin_inset Formula $P_{\theta}^{\infty}$
+\end_inset
+
+ is the equilibrium distribution of the model, when running the Gibbs chain
+ until equilibrium.
+\end_layout
+
+\begin_layout Plain Layout
+Contrastive divergence learning (
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+cite: Hinton, G.
+ E.
+ (2002).
+ Training products of experts by minimizing contrastive diver- gence, Neural
+ Computation, 14(8), 1711–1800.
+\end_layout
+
+\end_inset
+
+) runs the Gibbs chain for only 
+\begin_inset Formula $n$
+\end_inset
+
+ steps.
+ Contrastive divergence learning minimizes the difference of two Kullback-Leible
+r divergences 
+\begin_inset Formula $KL(P^{0}||P_{\theta}^{\infty})-KL(P_{\theta}^{n}||P_{\theta}^{\infty})$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ introduced the 
+\emph on
+deep belief network 
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -5529,33 +5782,274 @@ deep belief network
 
 \end_inset
 
- is a directed graphical model, composed of multiple layers consisting of
- one or several nodes.
+.
+ It is a directed graphical model, composed of multiple layers consisting
+ of one or several nodes.
  Imagine the layers arranged and numbered from top to bottom.
  The nodes in the first two layers are connected using undirected connections.
- The nodes in the second layer and the layers below have outgoing connections
- only to nodes in the adjacent layer below.
+ The nodes in the second layer and the layers below have directed (outgoing)
+ connections only to nodes in the adjacent layer below.
 \end_layout
 
 \begin_layout Standard
-A deep belief network is a model that can be used to generate samples distribute
-d like a training data set.
- In that case, the nodes in the layer at the bottom correspond to the random
- variables in the training set and learning a deep belief network is the
- task of finding weights for the (directed and undirected) connections such
- that the energy of the training samples becomes maximal.
-\end_layout
+The training algorithm deep belief network is a possible solution of how
+ to learn a logistic belief network.
+ This is a network in which nodes in the bottom layer correspond to the
+ (observed) random variables in the training set and the nodes in the layer
+ above are the (hidden) causes of the visible nodes, which can in turn have
+ other hidden causes.
+ As originally defined, each random variable is binary.
+ The probability that a node 
+\begin_inset Formula $i$
+\end_inset
 
-\begin_layout Standard
-Because a deep belief network contains a directed graphical model of the
- form as show in the example 
+ in the network is activated (i.e.
+ that its state 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ equals 1) is a sigmoid function of the states 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ of its parents 
+\begin_inset Formula $j$
+\end_inset
+
+, the weights 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ of the directed connections from parent 
+\begin_inset Formula $j$
+\end_inset
+
+ to 
+\begin_inset Formula $i$
+\end_inset
+
+, and the bias 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ of node 
+\begin_inset Formula $i$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+P(X_{i}=s_{i}=1)=\frac{1}{1+\exp(-b_{i}-\sum_{j}s_{j}w_{ij})}
+\]
+
+\end_inset
+
+Learning such a logistic belief network is the task of finding weights for
+ the connections and biases for the nodes such that the probability of the
+ training samples becomes maximal, and the probabilities for other visible
+ layer configurations low.
+ A logistic belief network is a directed graphical model of the form as
+ show in the example 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
 
 \end_inset
 
-, exact inference is infeasible.
+, and therefore exact inference is time-consuming, because the probabilities
+ of nodes in a hidden layer given the states of nodes in the layer below
+ are inter-dependent due to explaining away.
+ This makes learning a belief network with multiple hidden layers very hard,
+ since the derivative of the probability of the visible layer with respect
+ to a specific weight of the network is intractable
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I think it might be because the derivative with respect to a specific
+ weight of an outgoing connection depends on the weights on the outgoing
+ connections of adjacent nodes in the same layer.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ addressed this problem by introducing so-called 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+complementary priors
+\end_layout
+
+\end_inset
+
+
+\emph on
+complementary priors
+\emph default
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: explain what these are.
+\end_layout
+
+\end_inset
+
+ Using Bayes theorem, the posterior probabilities of the nodes 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ in the hidden layer above the visible layer with nodes 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ are:
+\begin_inset Formula 
+\[
+P(\mathbf{H}\mid\mathbf{V})=\frac{P(\mathbf{V}\mid\mathbf{H})P(\mathbf{H)}}{P(\mathbf{V})}
+\]
+
+\end_inset
+
+The key idea of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ was to find priors 
+\begin_inset Formula $P(\mathbf{H})$
+\end_inset
+
+ of a form so that when multiplied with the likelihood 
+\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})$
+\end_inset
+
+, the posterior 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
+\end_inset
+
+ becomes factorial, i.e.
+ 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})=\prod_{j}P(H_{j}\mid\mathbf{V})$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I should insert here why the posterior is usually not factorial.
+ Maybe refer to 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
+
+\end_inset
+
+.
+ The formula to look at is 
+\begin_inset Formula 
+\begin{eqnarray*}
+P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\\
+ & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{Z}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+This is not of the form 
+\begin_inset Formula $\prod_{j}P(H_{j}\mid\mathbf{V})$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+They showed that if the probability distributions are strictly positive,
+ i.e.
+ 
+\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})>0$
+\end_inset
+
+ and 
+\begin_inset Formula $P(\mathbf{H})>0$
+\end_inset
+
+ for every value of 
+\series bold
+
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+
+\series default
+ and 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+, then only likelihoods of the following form lead to a complementary prior:
+\begin_inset Formula 
+\[
+P(\mathbf{V}\mid\mathbf{H})=\frac{1}{\Omega(\mathbf{H})}\exp\left(\sum_{j}\Phi_{j}(\mathbf{V},H_{j})+\beta(\mathbf{V})\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Omega(\mathbf{H})$
+\end_inset
+
+ is the normalization term.
+ The complementary prior then is of the form
+\begin_inset Formula 
+\[
+P(\mathbf{H})=\frac{1}{C}\Omega(\mathbf{H})\exp\mbox{\left(\sum_{j}\alpha_{j}(H_{j})\right)}
+\]
+
+\end_inset
+
+where the constant 
+\begin_inset Formula $C$
+\end_inset
+
+ normalizes 
+\begin_inset Formula $P(\mathbf{H})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+joint distributions 
+\begin_inset Formula $P(\mathbf{V},\mathbf{H})$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+A deep belief network is a model that can be used to generate samples distribute
+d like a training data set.
 \end_layout
 
 \begin_layout Paragraph
@@ -6414,54 +6908,21 @@ TODO: repeat energy of equation
 \end_layout
 
 \begin_layout Paragraph
-Explaining away in RBMs
-\end_layout
-
-\begin_layout Standard
-There could be the problem of 
-\begin_inset Quotes eld
-\end_inset
-
-explaining away
-\begin_inset Quotes erd
-\end_inset
-
- in multi-layer RBMs.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: https://www.quora.com/Why-does-the-phenomenon-of-explaining-away-make-infere
-nce-difficult-in-directed-belief-nets?share=1
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
 Difficulties in training multi-layer neural networks
 \end_layout
 
 \begin_layout Standard
 Training a feed-forward neural network with more than 1 hidden layer using
  back-propagation is difficult and usually does not succeed.
- This is probably due to the many local minima (
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-TODO: visualise or describe in words the many bumps created by adding many
- weighted sigmoid functions.
-\end_layout
-
-\end_inset
-
-) of the implicitly optimized energy function during back-propagation.
+ When attempting to train such a network, each node in the output layer
+ often just outputs the mean value over the training cases, independently
+ of the input.
+ One problem is that there are many local minima (generated by repeatedly
+ adding weighted sigmoid functions) of the implicitly optimized energy function
+ during back-propagation.
+ Another problem is that in discriminative learning, each training case
+ only contributes as many bits to the specification of the parameters of
+ the network as needed to specify the label.
 \end_layout
 
 \begin_layout Paragraph
@@ -6764,7 +7225,7 @@ Fine-tuning
 status open
 
 \begin_layout Plain Layout
-TODO: maybe rename this to 
+TODO: rename this to 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6781,6 +7242,22 @@ Fine-tuning
 \end_inset
 
 .
+ The term 
+\begin_inset Quotes eld
+\end_inset
+
+fine-tuning
+\begin_inset Quotes erd
+\end_inset
+
+ is actually used by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ not for back-propagation, but for the up-down algorithm.
 \end_layout
 
 \end_inset
@@ -6918,7 +7395,7 @@ key "HintonSalakhutdinov2006"
 
 \begin_inset Formula 
 \[
--\sum_{i}p_{i}\log\hat{p_{i}}-\sum(1-p_{i})\log(1-\hat{p_{i}})
+-\sum_{i}p_{i}\log\hat{p_{i}}-\sum_{i}(1-p_{i})\log(1-\hat{p_{i}})
 \]
 
 \end_inset
