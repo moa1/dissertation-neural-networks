@@ -133,6 +133,24 @@ Alt+m (
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
+ graphical, RBM, DBN) immer gleich strukturieren: 1.
+ structure (i.e.
+ die nodes und weights erklären) 2.
+ How to generate data from the model 3.
+ How to train a model so that it fits data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Notation
 \end_layout
@@ -142,33 +160,34 @@ Random
 \begin_inset space ~
 \end_inset
 
-variable The name of a random variable is written upper-case.
+variable,
+\begin_inset space ~
+\end_inset
+
+Node Random variables and nodes are written upper-case.
  For example: 
 \begin_inset Formula $X$
+\end_inset
+
+ or 
+\begin_inset Formula $N_{4}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Description
-Value
+Value,
 \begin_inset space ~
 \end_inset
 
-of
+Normal
 \begin_inset space ~
 \end_inset
 
-a
-\begin_inset space ~
-\end_inset
-
-random
-\begin_inset space ~
-\end_inset
-
-variable The value of a random variable is written lower-case.
- For example, the value of variable 
+variable The value of a random variable and a normal variable are written
+ lower-case.
+ For example, the value of random variable 
 \begin_inset Formula $X$
 \end_inset
 
@@ -176,16 +195,24 @@ variable The value of a random variable is written lower-case.
 \begin_inset Formula $x$
 \end_inset
 
-.
+, and 
+\begin_inset Formula $i$
+\end_inset
+
+ is a normal variable.
 \end_layout
 
 \begin_layout Description
-Vector Vectors or sets are written in bold font.
- For example, the variable 
+Vector,
+\begin_inset space ~
+\end_inset
+
+Set Vectors or sets are written in bold font.
+ For example, the vector 
 \begin_inset Formula $\mathbf{X}$
 \end_inset
 
- could represent the variables 
+ could represent the random variables 
 \begin_inset Formula $\{X_{1},X_{2},X_{3}\}$
 \end_inset
 
@@ -227,8 +254,38 @@ terms introduced, together with the page number they were introduced on.
 Graphical Models
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Graphs
+\end_layout
+
+\begin_layout Standard
+In the following we will define some terms having to do with graphs.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I think I should write nodes in upper-case in the whole document.
+ This is logical since I interchangeably refer to both nodes and random
+ variables as the same entity, and random variables are upper-case.
+ So write 
+\begin_inset Formula $\mathbf{E}\ni e=(N_{1},N_{2})$
+\end_inset
+
+ below.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: I also should write edges upper-case since they are sets with two
+ elements, and sets are written upper-case.
+ Do this in the whole document.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -250,7 +307,7 @@ graph
 \emph on
  
 \emph default
-is a set 
+is a tuple 
 \begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
 \end_inset
 
@@ -263,26 +320,120 @@ is a set
 \end_inset
 
 .
- An edge 
-\begin_inset Formula $\mathbf{E}\ni e=(n_{1},n_{2})$
+ An 
+\emph on
+edge
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+edge
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{E}\ni E=(N_{1},N_{2})$
 \end_inset
 
  consists of a pair of nodes 
-\begin_inset Formula $n_{1}$
+\begin_inset Formula $N_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $n_{2}$
+\begin_inset Formula $N_{2}$
 \end_inset
 
 .
- The edges can be directed or undirected (i.e.
- the pair 
-\begin_inset Formula $(n_{1},n_{2})$
+ Two nodes 
+\begin_inset Formula $N_{1}$
 \end_inset
 
- can be ordered or unordered).
- If all edges are directed, then the graph is called a 
+ and 
+\begin_inset Formula $N_{2}$
+\end_inset
+
+ connected by an edge are called 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+neighbor
+\end_layout
+
+\end_inset
+
+
+\emph on
+neighbors
+\emph default
+.
+ A 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+complete graph
+\end_layout
+
+\end_inset
+
+
+\emph on
+complete graph 
+\emph default
+is a graph where there exists an edge 
+\begin_inset Formula $E=(N_{1},N_{2})$
+\end_inset
+
+ for every distinct pair of nodes 
+\begin_inset Formula $\mathbf{N}\ni N_{1}\neq N_{2}\in\mathbf{N}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+An edge can be 
+\emph on
+directed
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+directed edge
+\end_layout
+
+\end_inset
+
+ or 
+\emph on
+undirected
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+undirected edge
+\end_layout
+
+\end_inset
+
+, which means that the edge 
+\begin_inset Formula $(N_{1},N_{2})$
+\end_inset
+
+ is either distinct from the edge 
+\begin_inset Formula $(N_{2},N_{1})$
+\end_inset
+
+ or they are the same.
+ If all edges of a graph are directed, then the graph is called a 
 \emph on
 directed graph
 \emph default
@@ -311,26 +462,189 @@ undirected graph
 \end_inset
 
 .
+ In a directed edge 
+\begin_inset Formula $E=(P,C)$
+\end_inset
+
+, also written as 
+\begin_inset Formula $P\rightarrow C$
+\end_inset
+
+, 
+\begin_inset Formula $P$
+\end_inset
+
+ is called the 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+parent
+\end_layout
+
+\end_inset
+
+
+\emph on
+parent
+\emph default
+ and 
+\begin_inset Formula $C$
+\end_inset
+
+ the 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+child
+\end_layout
+
+\end_inset
+
+
+\emph on
+child
+\emph default
+.
 \end_layout
 
 \begin_layout Standard
 A 
 \emph on
-directed acyclic graph 
+path
 \emph default
-(DAG)
+
 \begin_inset Index idx
-status collapsed
+status open
 
 \begin_layout Plain Layout
-directed acyclic graph (DAG)
+path
 \end_layout
 
 \end_inset
 
- is a directed graph that does not contain (directed) cycles.
- This means if we start at any node and only go into the direction of the
- edges, it is impossible to reach a node visited earlier.
+ is an ordered list of edges 
+\begin_inset Formula $\mathbf{P}=[E_{1},E_{2},\dots,E_{n}]$
+\end_inset
+
+, so that the child of the previous edge is the parent of the next edge:
+ If 
+\begin_inset Formula $E_{i}=(P_{i},C_{i})$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{i+1}=(P_{i+1},C_{i+1})$
+\end_inset
+
+, then 
+\begin_inset Formula $C_{i}=P_{i+1}$
+\end_inset
+
+.
+ In the path 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+, 
+\begin_inset Formula $P_{1}$
+\end_inset
+
+ is called the 
+\emph on
+ancestor
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ancestor
+\end_layout
+
+\end_inset
+
+ of 
+\begin_inset Formula $C_{i}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ If the child 
+\begin_inset Formula $C_{j}$
+\end_inset
+
+ of any edge 
+\begin_inset Formula $E_{j}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbf{P}$
+\end_inset
+
+ is equal to the parent 
+\begin_inset Formula $P_{i}$
+\end_inset
+
+ of the same or a previous edge (i.e.
+ 
+\begin_inset Formula $i\leq j$
+\end_inset
+
+), then the sub-path 
+\begin_inset Formula $\mathbf{C}=[(P_{i},C_{i}),(P_{i+1},C_{i+1}),\dots,(P_{j},C_{j})]$
+\end_inset
+
+ is called a 
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+cycle
+\end_layout
+
+\end_inset
+
+
+\emph on
+cycle
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+directed acyclic graph
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+directed acyclic graph
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+(DAG
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+DAG
+\end_layout
+
+\end_inset
+
+) is a directed graph that does not contain directed cycles.
 \end_layout
 
 \begin_layout Standard
@@ -357,11 +671,11 @@ in an undirected graph is a subset of nodes
 \end_inset
 
 , such that every pair of nodes in the clique 
-\begin_inset Formula $n_{1},n_{2}\in\mathbf{N_{C}}$
+\begin_inset Formula $N_{1},N_{2}\in\mathbf{N_{C}}$
 \end_inset
 
- has an edge in the graph 
-\begin_inset Formula $(n_{1},n_{2})\in\mathbf{E}$
+ is an edge in the graph: 
+\begin_inset Formula $(N_{1},N_{2})\in\mathbf{E}$
 \end_inset
 
 .
@@ -379,8 +693,8 @@ maximal clique
 
 \end_inset
 
- is a clique where there is no edge that can be added to it so that the
- resulting subset is still a clique.
+ is a clique where there are no edges that can be added to it so that the
+ resulting subset of nodes is still a clique.
 \end_layout
 
 \begin_layout Standard
@@ -454,28 +768,38 @@ from a set of nodes
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Graphical Models
 \end_layout
 
 \begin_layout Standard
-Graphical Models are an encoding of a joint probability distribution with
- the help of a graph.
-\end_layout
-
-\begin_layout Standard
-In a graphical model, each node of the graph corresponds to a random variable
- of the joint probability distribution, and the dependencies between the
- random variables are encoded in the edges of the graph.
- In addition to the graph structure, probability functions of the elements
- of the structure have to be defined that are equivalent to the target joint
- probability.
- Let's illustrate this with an example.
+Graphical models are an encoding of a factorizable joint probability distributio
+n with the help of a graph.
+ There are different types of graphical models, but there are defining elements
+ of all graphical models.
+ Each node of the graph corresponds to a random variable of the joint probabilit
+y distribution.
+ The edges of the graph encode the factors of the joint probability distribution.
+ The graph, together with probability functions over the structural elements
+ of the graph are equivalent to the joint probability distribution.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Note Note
 status open
+
+\begin_layout Plain Layout
+Vielleicht sollten die beiden Examples (eins für directed und eins für undirecte
+d graphical model) jeweils am Anfang der Unterabschnitte 
+\begin_inset Quotes eld
+\end_inset
+
+(un)directed graphical model
+\begin_inset Quotes erd
+\end_inset
+
+ stehen.
+\end_layout
 
 \begin_layout Plain Layout
 TODO: hier muss ein Beispiel mit einer Tabelle einer joint probability distribut
@@ -484,6 +808,19 @@ ion stehen.
 
 \begin_layout Plain Layout
 TODO: Hier eine Figure mit einem DAG und einem MRF.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: der folgende Satz muss woanders hin.
 \end_layout
 
 \end_inset
@@ -504,7 +841,9 @@ status open
 \begin_layout Plain Layout
 TODO: I should write somewhere that the edges in a directed graph encode
  the dependence and independence relationships between the random variables.
- TODO: What do the edges encode in an undirected graph?
+ TODO: What do the edges encode in an undirected graph? (Answer: the factorizati
+on of the joint.
+ (Or, rather cliques than edges encode the factorization).)
 \end_layout
 
 \end_inset
@@ -513,11 +852,9 @@ TODO: I should write somewhere that the edges in a directed graph encode
 \end_layout
 
 \begin_layout Standard
-Graphical models can be directed or undirected.
- Graphical models are based on (directed acyclic or undirected) graphs with
- nodes and edges, where each node corresponds to a random variable, and
- the edges encode relations between random variables.
- Directed acyclic graphical models are also called 
+In the following, we will discuss directed graphical models and undirected
+ graphical models.
+ Directed graphical models are also called 
 \emph on
 Bayesian networks
 \emph default
@@ -531,7 +868,7 @@ Bayesian network
 
 \end_inset
 
-, and undirected graphical models are called 
+, and undirected graphical models are also called 
 \emph on
 Markov random fields
 \emph default
@@ -540,19 +877,19 @@ Markov random fields
 status collapsed
 
 \begin_layout Plain Layout
-Markov random fields
+Markov random field
 \end_layout
 
 \end_inset
 
-.
-\end_layout
 
-\begin_layout Standard
-(Besides other types of graphs, there is also a unification of Bayesian
- networks and Markov random fields, i.e.
- a graphical model that can have both directed and undirected edges (subject
- to some restrictions of cycles).
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+There is also an unification of Bayesian networks and Markov random fields,
+ i.e.
+ a graphical model that can have both directed and undirected edges.
  These networks are called 
 \emph on
 chain graphs
@@ -582,11 +919,16 @@ It is possible to have a model with both directed and undirected arcs, which
 \emph on
 partially directed acyclic graphs
 \emph default
-.)
+ and are not discussed here.
 \end_layout
 
-\begin_layout Subparagraph
-Undirected Graphical Model
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Undirected Graphical Models
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Hammersley-Clifford-theorem"
@@ -599,6 +941,22 @@ name "par:Hammersley-Clifford-theorem"
 \begin_layout Standard
 \begin_inset Note Note
 status open
+
+\begin_layout Plain Layout
+TODO: Hier muß eine formale Definition von 
+\begin_inset Quotes eld
+\end_inset
+
+undirected graphical model
+\begin_inset Quotes erd
+\end_inset
+
+ stehen: d.h.
+ Erkläre wie man aus dem graph zusammen mit den potentials (die üder die
+ Cliquen des Graphs definiert sind) die joint probability distribution berechnen
+ kann.
+ (das produkt der potentials ist die joint).
+\end_layout
 
 \begin_layout Plain Layout
 I should at some point write that in undirected graphical models, the probabilit
@@ -616,7 +974,7 @@ y is factored into potentials (written
 \end_layout
 
 \begin_layout Standard
-Assume that we want to encode a joint probability distribution 
+We want to encode a joint probability distribution 
 \begin_inset Formula $P$
 \end_inset
 
@@ -625,15 +983,15 @@ Assume that we want to encode a joint probability distribution
 \end_inset
 
 .
- We could use for every random variable a node, and connect all nodes with
- all others.
- This 
+ We know that every random variable corresponds to a node.
+ But how to define the edges? They have to do with conditional independencies.
+ 
 \emph on
-complete graph 
+A complete graph 
 \emph default
-encodes no conditional independencies.
+would encode no conditional independencies.
  However, to minimize computation time we normally want to get a minimal
- graph that still encodes the same joint probability distribution.
+ graph that still encodes the joint probability distribution faithfully.
  What properties does 
 \begin_inset Formula $P$
 \end_inset
@@ -671,7 +1029,7 @@ key "HammersleyClifford1971"
 
 \end_inset
 
-) is helpful here.
+) is helpful for a formal definition.
  It states that when we have a vector of random variables 
 \begin_inset Formula $\mathbf{X}=\{X_{1},\dots,X_{n}\}$
 \end_inset
@@ -731,7 +1089,7 @@ Gibbs distribution
  
 \emph default
 that factorizes according to the maximal cliques 
-\begin_inset Formula $C_{1},\dots,C_{m}$
+\begin_inset Formula $\mathbf{C_{1}},\dots,\mathbf{C_{m}}$
 \end_inset
 
  in 
@@ -740,7 +1098,7 @@ that factorizes according to the maximal cliques
 
 , i.e.
  
-\begin_inset Formula $P(\mathbf{X})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\dots\cdot\phi_{m}(C_{m})$
+\begin_inset Formula $P(\mathbf{X})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\dots\cdot\phi_{m}(\mathbf{C_{m}})$
 \end_inset
 
  where 
@@ -761,8 +1119,12 @@ partition function
 
 \end_inset
 
+ such that 
+\begin_inset Formula $\sum_{\mathbf{x}}P(\mathbf{X}=\mathbf{x})=1$
+\end_inset
+
 , and 
-\begin_inset Formula $\phi_{i}(C_{i})$
+\begin_inset Formula $\phi_{i}(\mathbf{C_{i}})$
 \end_inset
 
  are the 
@@ -779,7 +1141,12 @@ potential function
 
 \end_inset
 
-.
+, which depend only on the states of the random variables in the clique
+ 
+\begin_inset Formula $\mathbf{C_{i}}=(X_{i_{1}},\dots,X_{i_{n}})$
+\end_inset
+
+ and must be positive for all possible states.
 \begin_inset Note Note
 status open
 
@@ -839,7 +1206,15 @@ holds for the graph
 \begin_inset Formula $P$
 \end_inset
 
-: Given the states of the random variables 
+: A node 
+\begin_inset Formula $N$
+\end_inset
+
+ is conditionally independent from all non-neighbor nodes 
+\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
+\end_inset
+
+, given the states of the random variables 
 \begin_inset Note Note
 status open
 
@@ -887,33 +1262,12 @@ nodes
 \begin_inset Formula $\mathbf{N_{neighbor}}$
 \end_inset
 
- immediately connected to a node 
-\begin_inset Formula $X_{i}$
+ immediately connected to 
+\begin_inset Formula $N$
 \end_inset
 
-, 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- is conditionally independent from all other nodes 
-\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
-\end_inset
-
-, i.e.
- 
-\begin_inset Formula $P(X_{i}|\mathbf{N_{neighbor}})=P(X_{i}|\mathbf{N}\backslash\mathbf{N_{neighbor}})$
-\end_inset
-
-, where 
-\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
-\end_inset
-
- is the set of nodes 
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- without the neighboring nodes of 
-\begin_inset Formula $X_{i}$
+: 
+\begin_inset Formula $P(X_{i}\mid\mathbf{N_{neighbor}})=P(X_{i}|\mathbf{N})$
 \end_inset
 
 .
@@ -975,20 +1329,10 @@ holds for the graph
 \end_inset
 
 : 
-\begin_inset Formula $P(\mathbf{N_{A}}|\mathbf{N_{S}})=$
+\begin_inset Formula $P(\mathbf{N_{A}}\mid\mathbf{N_{S}})=P(\mathbf{N_{A}\mid}\mathbf{N_{S}},\mathbf{N_{B}})$
 \end_inset
 
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: look up global Markov property and insert formula here
-\end_layout
-
-\end_inset
-
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -996,7 +1340,36 @@ TODO: look up global Markov property and insert formula here
 status open
 
 \begin_layout Plain Layout
-TODO: insert graphics illustrating local and global Markov property
+TODO: insert example graphics with an undirected graph with node names.
+ The figure text should denote the maximal cliques text and illustrate the
+ local Markov property for a node 
+\begin_inset Formula $N$
+\end_inset
+
+ and the global Markov property for two nodes 
+\begin_inset Formula $N_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{2}$
+\end_inset
+
+ separated by a set of nodes 
+\begin_inset Formula $\mathbf{N_{S}}$
+\end_inset
+
+.
+ Maybe also print definitions of the potential functions for the maximal
+ cliques (but these are probably too large).
+ The graphics could be similar to Figure 2.3 in 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/graphical model/Koller+al_SRL07.pdf
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1010,7 +1383,8 @@ This means that when we have a strictly positive joint probability distribution
 \begin_inset Formula $P$
 \end_inset
 
-, we can construct the minimal undirected graph 
+, determine the conditional independencies by considering the local or global
+ Markov property, and construct the minimal undirected graph 
 \begin_inset Formula $G$
 \end_inset
 
@@ -1470,8 +1844,8 @@ B
 
 \end_layout
 
-\begin_layout Subparagraph
-Directed Graphical Model
+\begin_layout Subsubsection
+Directed Graphical Models
 \end_layout
 
 \begin_layout Standard
@@ -1500,7 +1874,7 @@ TODO: example figure
 status open
 
 \begin_layout Plain Layout
-TODO: maybe write a formal definition here.
+TODO: write a formal definition here.
 \end_layout
 
 \end_inset
@@ -1515,12 +1889,17 @@ A directed graphical model is defined by the directed graph, prior probability
 \begin_inset Formula $X$
 \end_inset
 
- is conditionally independent of all random variables that are not descendants
- of 
+ of the graph is conditionally independent of all random variables that
+ are not descendants of 
 \begin_inset Formula $X$
 \end_inset
 
- given the values of the immediate parent variables of 
+ (i.e.
+ 
+\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{descendant(X)}}$
+\end_inset
+
+) given the values of the parent variables of 
 \begin_inset Formula $X$
 \end_inset
 
@@ -2539,8 +2918,8 @@ name "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
 \end_layout
 
 \begin_layout Standard
-Here we show an example of how inference in a specific directed graphical
- model is done.
+Here we show an example how inference in a specific directed graphical model
+ is done.
  The directed graphical model shall be composed of several densely connected
  layers, where the nodes within a layer are not connected, and they have
  outgoing directed connections only to nodes in the adjacent layer below.
@@ -2684,8 +3063,22 @@ Now assume that
 \begin_inset Formula 
 \begin{eqnarray*}
 P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\\
- & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{Z}
+ & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{P(V_{1},V_{2})}\\
+ & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}
 \end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: correct below text since I corrected the formula for the posterior.
+\end_layout
 
 \end_inset
 
@@ -2704,7 +3097,7 @@ Z=\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_
 \end_layout
 
 \begin_layout Standard
-We can make this transformation because 
+We can make the last transformation because 
 \begin_inset Formula $\ensuremath{V_{1}}$
 \end_inset
 
@@ -2768,7 +3161,7 @@ This does not look too complicated, but note that if there are
  except one, and this for all variables.
  The phenomenon that leads to this computational problem is called 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 explaining away
@@ -2788,11 +3181,7 @@ Once we have
 \begin_inset Formula $P(H_{1}|\mathbf{V})$
 \end_inset
 
-, we can determine 
-\begin_inset Formula $P(H_{1})$
-\end_inset
-
-: (using 
+, using 
 \begin_inset Formula $P(H_{1})=\sum_{v_{1}}\sum_{v_{2}}P(H_{1},V_{1}=v_{1},V_{2}=v_{2})$
 \end_inset
 
@@ -2800,7 +3189,11 @@ Once we have
 \begin_inset Formula $P(H_{1}|V_{1},V_{2})=P(H_{1},V_{1},V_{2})/P(V_{1},V_{2})$
 \end_inset
 
-)
+, we can determine 
+\begin_inset Formula $P(H_{1})$
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
@@ -2815,11 +3208,10 @@ P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v
 \end_layout
 
 \begin_layout Standard
-Using similar computations we can determine 
 \begin_inset Formula $P(H_{2})$
 \end_inset
 
-.
+ can be computed similarly.
  Now that we know 
 \begin_inset Formula $P(H_{1})$
 \end_inset
@@ -2838,7 +3230,25 @@ Using similar computations we can determine
 
 .
  This concludes how to do exact inference in a directed graphical model.
- However, due to all the involved marginalizations, this procedure becomes
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: rewrite the following sentence in order to remove 
+\begin_inset Quotes eld
+\end_inset
+
+belief network
+\begin_inset Quotes erd
+\end_inset
+
+ that was not introduced yet.
+\end_layout
+
+\end_inset
+
+However, due to all the involved marginalizations, this procedure becomes
  infeasible in a belief network with more than a few nodes per layer.
 \end_layout
 
@@ -5786,18 +6196,16 @@ deep belief network
  It is a directed graphical model, composed of multiple layers consisting
  of one or several nodes.
  Imagine the layers arranged and numbered from top to bottom.
- The nodes in the first two layers are connected using undirected connections.
+ The nodes in the top two layers are connected using undirected connections.
  The nodes in the second layer and the layers below have directed (outgoing)
  connections only to nodes in the adjacent layer below.
 \end_layout
 
 \begin_layout Standard
-The training algorithm deep belief network is a possible solution of how
- to learn a logistic belief network.
- This is a network in which nodes in the bottom layer correspond to the
- (observed) random variables in the training set and the nodes in the layer
- above are the (hidden) causes of the visible nodes, which can in turn have
- other hidden causes.
+This is a network in which nodes in the bottom layer correspond to the (observed
+) random variables in the training set and the nodes in the layer above
+ are the (hidden) causes of the visible nodes, which can in turn have other
+ hidden causes.
  As originally defined, each random variable is binary.
  The probability that a node 
 \begin_inset Formula $i$
@@ -5844,10 +6252,16 @@ P(X_{i}=s_{i}=1)=\frac{1}{1+\exp(-b_{i}-\sum_{j}s_{j}w_{ij})}
 
 \end_inset
 
-Learning such a logistic belief network is the task of finding weights for
- the connections and biases for the nodes such that the probability of the
- training samples becomes maximal, and the probabilities for other visible
- layer configurations low.
+
+\end_layout
+
+\begin_layout Standard
+The training algorithm for deep belief networks is a possible solution of
+ how to learn a logistic belief network with many hidden layers.
+ Learning such a logistic belief network is the task of finding weights
+ for the connections and biases for the nodes such that the probability
+ of the training samples becomes maximal, and the probabilities for other
+ visible layer configurations low.
  A logistic belief network is a directed graphical model of the form as
  show in the example 
 \begin_inset CommandInset ref
@@ -5856,7 +6270,7 @@ reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
 
 \end_inset
 
-, and therefore exact inference is time-consuming, because the probabilities
+, and therefore exact inference is intractable, because the probabilities
  of nodes in a hidden layer given the states of nodes in the layer below
  are inter-dependent due to explaining away.
  This makes learning a belief network with multiple hidden layers very hard,
@@ -5867,7 +6281,7 @@ status open
 
 \begin_layout Plain Layout
 TODO: I think it might be because the derivative with respect to a specific
- weight of an outgoing connection depends on the weights on the outgoing
+ weight of an outgoing connection depends on the weights of the outgoing
  connections of adjacent nodes in the same layer.
 \end_layout
 
@@ -5944,8 +6358,12 @@ key "HintonTeh2006"
 \end_inset
 
  becomes factorial, i.e.
- 
-\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})=\prod_{j}P(H_{j}\mid\mathbf{V})$
+ can be written as a product over the conditional probabilities 
+\begin_inset Formula 
+\[
+P(\mathbf{H}\mid\mathbf{V})=\prod_{j}P(H_{j}\mid\mathbf{V})
+\]
+
 \end_inset
 
 .
@@ -6037,6 +6455,40 @@ where the constant
 \end_inset
 
 .
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Insert the posterior here, to show that it is factorial, which was
+ the goal.
+\end_layout
+
+\end_inset
+
+ The posterior is as follows and factorial:
+\begin_inset Formula 
+\begin{eqnarray*}
+P(\mathbf{H}\mid\mathbf{V}) & =\\
+ & =
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: W
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6045,6 +6497,93 @@ joint distributions
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
+TODO: insert that an RBM with visible nodes 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ and hidden nodes 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ can be viewed as an infinite DAG with tied weights between alternating
+ representations of the visible and hidden layer.
+ TODO: insert graphics like Figure 3 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+.
+ This provides a starting point for a training algorithm for deep belief
+ networks: Start with a single RBM containing visible nodes 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ and hidden nodes 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ and learn the hidden layer representation of the training data.
+ Then copy the visible layer together with the weights, turn the copy upside-dow
+n (i.e.
+ transpose the weights), and connect this new layer called 
+\begin_inset Formula $\mathbf{V_{1}}$
+\end_inset
+
+ to the top of the hidden layer.
+ This new 3-layer network is then further modified: The undirected weights
+ between 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ are untied and replaced by weights going from 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ , and weights going from 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+.
+ The 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: 
+\begin_inset Quotes eld
+\end_inset
+
+incorrect
+\begin_inset Quotes erd
+\end_inset
+
+ hab ich irgendwo gelesen, aber ich weiss nicht mehr wo.
+\end_layout
+
+\end_inset
+
+ upward weights serve the purpose of inferring the 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ representation of the data, and the downward weights are part of the model.
 \end_layout
 
 \begin_layout Standard
