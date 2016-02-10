@@ -547,10 +547,10 @@ path
 \end_inset
 
 , 
-\begin_inset Formula $P_{1}$
+\begin_inset Formula $P_{p}$
 \end_inset
 
- is called the 
+ is called 
 \emph on
 ancestor
 \emph default
@@ -565,11 +565,37 @@ ancestor
 \end_inset
 
  of 
-\begin_inset Formula $C_{i}$
+\begin_inset Formula $C_{c}$
 \end_inset
 
- for all 
-\begin_inset Formula $i$
+ if 
+\begin_inset Formula $p\leq c$
+\end_inset
+
+, and 
+\begin_inset Formula $C_{c}$
+\end_inset
+
+ is called  
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+descendant
+\end_layout
+
+\end_inset
+
+
+\emph on
+descendant 
+\emph default
+of 
+\begin_inset Formula $P_{p}$
+\end_inset
+
+ if 
+\begin_inset Formula $p\leq c$
 \end_inset
 
 .
@@ -1917,7 +1943,7 @@ local Markov property
 \emph on
 local Markov property
 \emph default
-):
+ of directed graphs):
 \begin_inset Formula 
 \[
 X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(X)}})\mid\mathbf{N_{parent(X)}}
@@ -2683,6 +2709,60 @@ TODO: Do
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Maybe I should explain the algorithm 
+\begin_inset Quotes eld
+\end_inset
+
+ELIMINATE
+\begin_inset Quotes erd
+\end_inset
+
+ from 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/graphical model/inference/jordan.pdf
+\begin_inset Quotes erd
+\end_inset
+
+ and exercise it for an instance of a directed and undirected graph.
+ This would be more systematic than it is now.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: In the introduction of this section (
+\begin_inset Quotes eld
+\end_inset
+
+Inference in Graphical Models
+\begin_inset Quotes erd
+\end_inset
+
+) I should cite the paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChandrasekaranHarsha2012"
+
+\end_inset
+
+ when stating that inference in graphical models is NP-hard in the general
+ case.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Algorithm for Exact Inference on General Graph
+\end_layout
+
 \begin_layout Subsubsection
 Exact Inference in Directed and in Undirected Graphical Models
 \begin_inset CommandInset label
@@ -2902,8 +2982,203 @@ In the general case (if the joint probability cannot be factorized), this
 .
  This is because all possible combinations of variable assignments have
  to be considered.
- Thus, run-time is exponential in the number of variables, and therefore
- intractable in general.
+ Thus, for this naive marginalization run-time is exponential in the number
+ of variables, and therefore intractable.
+ However, in this example we have not considered the structure of the graph
+ at all.
+ We can improve run-time in some cases of graphs and for some sets of variables
+ 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+, but in general, exact inference can 
+\end_layout
+
+\begin_layout Paragraph
+The Junction-tree Algorithm
+\end_layout
+
+\begin_layout Standard
+The run-time can be shortened by marginalizing variables out as early as
+ possible.
+ This must be done according to the factorization imposed by the graph structure.
+\end_layout
+
+\begin_layout Paragraph
+Intractability of Inference
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChandrasekaranHarsha2012"
+
+\end_inset
+
+ showed that under some assumptions, 
+\emph on
+treewidth
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+treewidth
+\end_layout
+
+\end_inset
+
+ is the only structural property that ensures polynomial run-time of exact
+ inference on arbitrary graphs 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: the paper says on page 1: 
+\begin_inset Quotes eld
+\end_inset
+
+Among these problems is inference in graphi- cal models, which, as mentioned
+ earlier, can be solved in polynomial-time if the treewidth of the underly-
+ ing graphs is bounded.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, given that arbitrary potential functions should be allowed.
+\end_layout
+
+\begin_layout Standard
+For a triangulated graph, the treewidth is the number of nodes contained
+ in the largest clique minus one.
+ For a graph of any form, the treewidth is the treewidth of the triangulation
+ that minimizes the treewidth.
+ For directed acyclic graphs, the number of parents is the critical number
+ (also shown by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KwisthoutVanderGaag2010"
+
+\end_inset
+
+), since it determines the treewidth of the moralized
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+You obtain a moralized graph from a directed acyclic graph by introducing
+ edges between all parents of a node, and then replacing directed edges
+ by undirected edges.
+\end_layout
+
+\end_inset
+
+ graph.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: stimmt das Folgende? Ich dachte, man könnte das aufgrund der Struktur
+ von Formel (1) im Paper sagen, aber glaube gerade, dass das nicht reicht:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+For directed graphs, factorization according to the edges of the graph serves
+ the purpose of cliques in the proof.
+ Thus, the cliques are defined on the moral graph of the directed graph.
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The assumptions of the proof are that 
+\begin_inset Formula $\mathbf{NP}\nsubseteq\mathbf{P/poly}$
+\end_inset
+
+, which is a version of the 
+\begin_inset Formula $\mathbf{NP}\neq\mathbf{P}$
+\end_inset
+
+ assumption, and that the grid-minor hypothesis is true.
+ (For an explanation of the grid-minor hypothesis, see Section 2.4 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChandrasekaranHarsha2012"
+
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Standard
+If these assumptions are correct then the only way to reduce the computational
+ cost of inference on a general graph is to reduce
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Page 2, section 
+\begin_inset Quotes eld
+\end_inset
+
+Main Result
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ the treewidth or choose particularly simple potential functions
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Page 2, section 
+\begin_inset Quotes eld
+\end_inset
+
+Main Result
+\begin_inset Quotes erd
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+there exists a choice of potential functions ...
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
