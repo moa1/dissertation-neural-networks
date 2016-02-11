@@ -189,7 +189,8 @@ the networks with two hidden layers seem to not perform better than those
 
 \begin_layout Itemize
 I should still try networks with a larger hidden layer 1 size (larger than
- the number of input neurons), and with larger hidden layer 2 size
+ the number of input neurons), and with larger hidden layer 2 size.
+ (This is actually probably a not-so-good idea, since 
 \end_layout
 
 \begin_layout Itemize
@@ -261,7 +262,7 @@ The test set accuracies depend on the normalization procedure of the microarray
 \begin_layout Itemize
 A low reconstruction error rate does not imply a good accuracy on the test
  set: Although the neural nets using MAS5 normalized data have a lower reconstru
-ction error that their RMA counterparts, the former have a lower accuracy
+ction error than their RMA counterparts, the former have a lower accuracy
  than the latter.
 \end_layout
 
@@ -313,5 +314,212 @@ Feed forward ANNs, are strictly equivalent to non-linear multivariate regression
  (Or maybe reference 15 of that paper showed it earlier.)
 \end_layout
 
+\begin_layout Itemize
+\begin_inset CommandInset label
+LatexCommand label
+name "inputs-to-weights-ratio"
+
+\end_inset
+
+Comparing my data sets and neuronal network configurations to the ones in
+ handwritten digit classification:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+[A Fast Learning Algorithm for Deep Belief Nets; by Hinton, Osindero, Teh]
+ write that they use a 3-hidden-layer network with about 
+\begin_inset Formula $1.7*10^{6}$
+\end_inset
+
+ weights.
+ (
+\begin_inset Quotes eld
+\end_inset
+
+Section 6 shows the pattern recognition performance of a network with three
+ hidden layers and about 1.7 million weights on the MNIST set of handwritten
+ digits.
+\begin_inset Quotes erd
+\end_inset
+
+) I believe they used 44000 training samples (
+\begin_inset Quotes eld
+\end_inset
+
+The network shown in Figure 1 was trained on 44,000 of the training images
+\begin_inset Quotes erd
+\end_inset
+
+) with 28*28 pixels each (their Figure 1: 
+\begin_inset Quotes eld
+\end_inset
+
+28 x 28 pixel image
+\begin_inset Quotes erd
+\end_inset
+
+).
+ So altogether they have about 34.5 million 
+\begin_inset Quotes eld
+\end_inset
+
+training numbers
+\begin_inset Quotes erd
+\end_inset
+
+, and 1.7 million weights that have to be determined.
+\end_layout
+
+\begin_layout Itemize
+In contrast to that I have (in data set breast_cancer_12, data set 6) 238
+ training samples, each of which has 500 expression levels, i.e.
+ 238*500=119000 
+\begin_inset Quotes eld
+\end_inset
+
+training numbers
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The networks whose performances I compared for the statcomp poster are
+ breast_cancer_12_aa - dv.
+ They all (see 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/nnet/configs/make-config-breast_cancer_12-01
+\begin_inset Quotes erd
+\end_inset
+
+) have an architecture of 500 input nodes, 1000 hidden layer 1 nodes, 1000
+ hidden layer 2 nodes, 2000 hidden layer 3 nodes, and 1 output layer node.
+ This means there are 
+\begin_inset Formula $500*1000+1000*1000+1000*2000+2000*1\approx3.5*10^{6}$
+\end_inset
+
+ weights to be learnt.
+ How could this work? I'm surprised that I didn't notice that before.
+\end_layout
+
+\begin_layout Itemize
+I could reduce the number of input (and subsequently hidden) nodes:
+\begin_inset Newline newline
+\end_inset
+
+Let 
+\begin_inset Formula $i$
+\end_inset
+
+ be the number of input nodes and 
+\begin_inset Formula $h$
+\end_inset
+
+ be the number of hidden nodes.
+ Assume that 
+\begin_inset Formula $h=i/2$
+\end_inset
+
+, and 
+\begin_inset Formula $o=1$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{i*238+i*h+h*h+h*o}{i*238} & = & =\frac{i*238+i*i/2+i/2*i/2+i/2*1}{i*238}\\
+ & = & \frac{i*(238+i/2+i/4+1/2)}{i*238}\\
+ & = & \frac{238+i/2+i/4+1/2}{238}
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+This is linear in 
+\begin_inset Formula $i$
+\end_inset
+
+, so it doesn't help.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+But I could have all 22283 genes as inputs, and only a very small 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ If I take 
+\begin_inset Formula $i=22283$
+\end_inset
+
+, and there are 238 training samples (in fact I have only 20 labeled+100
+ unlabeled training samples in data set breast_cancer_12), then I have 
+\begin_inset Formula $22283*238=5303354$
+\end_inset
+
+ measured numbers.
+ In 
+\begin_inset Quotes eld
+\end_inset
+
+A Fast Learning Algorithm for Deep Belief Nets
+\begin_inset Quotes erd
+\end_inset
+
+, they have 
+\begin_inset Formula $\frac{44000*28*28}{28*28*500+500*500+500*2000+2000*10}=20.8$
+\end_inset
+
+ measured numbers per weight.
+ Let's say I also wanted such a ratio.
+ Then
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $r(h)=\frac{22283*238}{22283*h+h*h+h*h+h*o}$
+\end_inset
+
+; 
+\begin_inset Formula $r(12)\approx19.8$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+So I could use 
+\begin_inset Formula $h=12$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+See 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/nnet/datasets/breast_cancer_15/README.lyx
+\begin_inset Quotes erd
+\end_inset
+
+ for the 
+\begin_inset Formula $h$
+\end_inset
+
+ that I chose.
+\end_layout
+
+\end_deeper
 \end_body
 \end_document
