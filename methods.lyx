@@ -1507,7 +1507,7 @@ g the Markov property.
 \end_layout
 
 \begin_layout Subparagraph
-Example of an Undirected Graph Model
+Example of an Undirected Graphical Model
 \end_layout
 
 \begin_layout Standard
@@ -2653,6 +2653,42 @@ Generative Model
 \end_layout
 
 \begin_layout Standard
+An often-cited quote by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vapnik1998"
+
+\end_inset
+
+ is: 
+\begin_inset Quotes eld
+\end_inset
+
+If you possess a restricted amount of information for solving some problem,
+ try to solve the problem directly and never solve a more general problem
+ as an intermediate step.
+ It is possible that the available information is sufficient for a direct
+ solution but is insufficient for solving a more general intermediate problem.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A generative model is such a more general problem: its aim is to model the
+ input data set such that hypothetical samples can be generated from the
+ model which might as well be found in the original input data set.
+\end_layout
+
+\begin_layout Standard
+A discriminative model on the other hand receives the input samples and
+ models the desired output values from these input samples.
+ Usually the desired output values have much lower dimension than the input
+ samples.
+\end_layout
+
+\begin_layout Standard
 An advantage of a generative over a discriminative model is that its parameters
  are constrained by the number of bits required to encode the training samples,
  while the parameters of a discriminative model are only constrained by
@@ -3029,7 +3065,7 @@ treewidth
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 treewidth
@@ -3134,7 +3170,7 @@ key "ChandrasekaranHarsha2012"
 
 \begin_layout Standard
 If these assumptions are correct then the only way to reduce the computational
- cost of inference on a general graph is to reduce
+ cost of exact inference on a general graph is to reduce
 \begin_inset Note Note
 status open
 
@@ -3226,15 +3262,8 @@ TODO: insert graphics here that looks like a the directed graph
 \end_inset
 
 When the probability distribution of the parent nodes are known, inferring
- the probability distributions of nodes 
-\begin_inset Quotes eld
-\end_inset
-
-down-stream
-\begin_inset Quotes erd
-\end_inset
-
- is easy.
+ the probability distributions of child nodes is easy: just multiply the
+ probability of the parents with the conditional probability of the child.
  Therefore, given the probability distributions of the nodes in the bottom
  layer, we want to infer the probability distributions for all the other
  nodes.
@@ -3332,6 +3361,11 @@ Now assume that
 \end_inset
 
 .
+ Using Bayes' Theorem (
+\begin_inset Formula $\mbox{posterior}=\mbox{likelihood}*\mbox{prior}$
+\end_inset
+
+) we get:
 \end_layout
 
 \begin_layout Standard
@@ -3341,19 +3375,6 @@ P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}
  & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{P(V_{1},V_{2})}\\
  & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}
 \end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: correct below text since I corrected the formula for the posterior.
-\end_layout
 
 \end_inset
 
@@ -3452,7 +3473,7 @@ explaining away
 \end_layout
 
 \begin_layout Standard
-Once we have 
+Since we now have 
 \begin_inset Formula $P(H_{1}|\mathbf{V})$
 \end_inset
 
@@ -3495,7 +3516,7 @@ P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v
 \begin_inset Formula $P(H_{2})$
 \end_inset
 
-, we can then repeat the steps to determine 
+, we can repeat the steps to determine 
 \begin_inset Formula $P(G_{1})$
 \end_inset
 
@@ -3518,13 +3539,24 @@ belief network
 \begin_inset Quotes erd
 \end_inset
 
- that was not introduced yet.
+ that was not introduced yet:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+However, due to all the involved marginalizations, this procedure becomes
+ infeasible in a belief network with more than a few parents per node.
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
-However, due to all the involved marginalizations, this procedure becomes
- infeasible in a belief network with more than a few nodes per layer.
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -3610,6 +3642,23 @@ The runtime of this formula is dominated by the largest clique, and so the
  This is still an exponential run-time.
  Therefore, in practice, the joint probability is approximated, for example
  by Gibbs sampling.
+\end_layout
+
+\begin_layout Subsubsection
+General Algorithm
+\end_layout
+
+\begin_layout Standard
+In the following paragraph we summarize the ELIMINATE algorithm from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JordanWeiss2002"
+
+\end_inset
+
+.
+ This algorithm works for both directed and undirected graphical models
+ and computes the marginal probabilities of all nodes.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4778,6 +4827,17 @@ Gibbs Sampling
 \end_layout
 
 \begin_layout Standard
+Here, we will introduce Gibbs Sampling to show how 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+ used it to approximate inference in directed and undirected graphical models.
+\end_layout
+
+\begin_layout Standard
 
 \emph on
 Gibbs Sampling
@@ -4805,7 +4865,7 @@ key "GemanGeman1984"
 \emph default
 is an instance of a Markov Chain Monte Carlo (MCMC) algorithm.
  Its goal is to generate samples from a multivariate joint probability distribut
-ion.
+ion, without having to know its closed form.
  The generated samples can then be used to compute an approximation of the
  mean of a distribution, for example.
 \end_layout
@@ -4844,10 +4904,34 @@ P(X_{i}|\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}|X_{1},\dots,X_{i-1
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: das hier evtl.
+ weglassen: es reicht nicht nur dass man faster samplen kann aus der conditional
+, sondern man muss ja auch iterieren.
+ 
+\begin_inset Quotes eld
+\end_inset
+
 It should also be faster to sample from these conditional probability distributi
-ons than from the joint target probability distribution, because otherwise
- one should just sample from the joint distribution directly, and not use
- Gibbs sampling.
+ons than from the joint target probability distribution (should it be known),
+ because otherwise one should just sample from the joint distribution directly,
+ and not use Gibbs sampling.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5003,7 +5087,16 @@ on page 45
 \begin_inset Formula $B_{k}(x,x')$
 \end_inset
 
- is the probability of the transition.
+ is the probability of the transition, which must be strictly greater than
+ zero for all values of 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $x'$
+\end_inset
+
+, to make the Markov chain irreducible.
  A weighted mixture can then be constructed as
 \end_layout
 
@@ -5041,8 +5134,8 @@ key "Neal1993"
 
 \end_inset
 
- also notes that the required properties are fulfilled: If each of the base
- transitions 
+ also notes that the required properties for a Markov chain to converge
+ are fulfilled: If each of the base transitions 
 \begin_inset Formula $B_{k}$
 \end_inset
 
@@ -5347,8 +5440,11 @@ thinning
 \end_inset
 
  of the Gibbs sampler.
- There is however currently no straightforward way to determine what a sufficien
-tly large 
+\end_layout
+
+\begin_layout Standard
+Again, also here there is currently no straightforward analytic way to determine
+ what a sufficiently large 
 \begin_inset Formula $n$
 \end_inset
 
@@ -5356,15 +5452,30 @@ tly large
 \begin_inset Formula $\mathbf{x}$
 \end_inset
 
- to be regarded independent (aside from heuristics like autocorrelation).
+ to be regarded independent.
+ In practice on resorts to heuristics like autocorrelation.
 \end_layout
 
 \begin_layout Subsubsection
 Inference in Markov Random Fields
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Inference-in-Markov-Random-Fields"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
 Gibbs Sampling in Markov Random Fields
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Gibbs-Sampling-in-Markov-Random-Fields"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5550,6 +5661,91 @@ Return the states of the interesting random variables
 \end_layout
 
 \begin_layout Paragraph
+Gibbs Sampling in Bayesian Networks
+\end_layout
+
+\begin_layout Standard
+The conditional probability of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ given all other nodes is equal to its conditional probability given the
+ values of the nodes in 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+'s Markov Blanket 
+\begin_inset Formula $X_{MarkovBlanket(X_{i})}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P(X_{i}=x_{i}\mid\mathbf{X_{j}}=\mathbf{x_{j}}:j\neq i)=P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}=\mathbf{x}_{MarkovBlanket(X_{i})})
+\]
+
+\end_inset
+
+.
+ This conditional probability is needed for Gibbs Sampling from a Bayesian
+ Network: We use the same algorithmic structure as for Markov Random Fields
+ above (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
+
+\end_inset
+
+), but sample from 
+\begin_inset Formula $P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}=\mathbf{x}_{MarkovBlanket(X_{i})})$
+\end_inset
+
+ when updating the state of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ in step 4(b).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $P(X_{i}=x_{i}\mid X_{MarkovBlanket(X_{i})})$
+\end_inset
+
+ is equal to:
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: rewrite the algorithm from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+We start the Gibbs sampling procedure by fixing the observed variables to
+ their known values, and setting the unobserved variables arbitrarily.
+ We then repeatedly visit each unobserved variable in turn, each time randomly
+ selecting a new value for the variable from its conditional distribution
+ given the current values of the other variables.
+ From the joint distribution of equation (2.15), we see that the conditional
+ distribution for X k is as follows:
+\begin_inset Quotes erd
+\end_inset
+
+ Diese Formel hier einfügen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
 Comparison of Gibbs Sampling in Markov Random Fields and Bayesian Networks
 \end_layout
 
@@ -5617,6 +5813,16 @@ P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}|\mathbf{X}_{MarkovBlank
 .
  The Markov Blanket of a random variable is more complicated to compute
  than its neighborhood.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: define Markov Blanket.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -5687,6 +5893,24 @@ node
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Elaborate the definition
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Boltzmann Machine is an undirected graphical model that has a specific
+ form of the conditional probability distribution defined at each node.
+\end_layout
+
 \begin_layout Subparagraph
 Gibbs Sampling in Boltzmann Machines
 \begin_inset Note Note
@@ -5699,6 +5923,26 @@ TODO: probably move this somewhere else
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Since a Boltzmann Machine is an undirected graphical model, the inference
+ algorithm from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+ applies.
+ See 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Inference-in-Markov-Random-Fields"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -7421,10 +7665,10 @@ associative memory
 
 .
  After training, a Hopfield network can be initialized with a distorted
- pattern, in which the state of some nodes is swapped, and updated iteratively
- until its state doesn't change anymore.
- This stationary state should then be equal to a similar pattern used in
- training.
+ pattern, in which the state of some nodes is swapped.
+ After iteratively updating until its state doesn't change anymore, the
+ stationary state will be equal to a similar pattern used in training if
+ training was successful.
 \end_layout
 
 \begin_layout Paragraph
@@ -7434,8 +7678,8 @@ Multilayer Perceptron
 \begin_layout Standard
 A Multilayer Perceptron belongs to the class of deterministic feedforward
  neural networks.
- These are in contrast to recurrent networks, which contain a directed cycle
- of neural connections.
+ Feedforward networks are in contrast to recurrent networks, which contain
+ a directed cycle of neural connections.
 \end_layout
 
 \begin_layout Paragraph
