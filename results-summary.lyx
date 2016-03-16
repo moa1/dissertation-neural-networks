@@ -521,5 +521,28 @@ See
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+"~/uni/publication/zusammenfassung/applications/Bioinformatics-2016-Chen-bioinfo
+rmatics_btw074.pdf" lernen auf der hidden layer representations of the training
+ data a linear model to predict the expression value of the genes.
+ (Siehe ihre Seite 7 links unten 
+\begin_inset Quotes eld
+\end_inset
+
+To dissect the nonlinear contribution, we took a relatively simple approach
+ by focusing on the representation (activations) from the last hidden layer.
+ Each of the hidden unit in that layer can be viewed as a feature generated
+ through some nonlinear transformation of the landmark genes.
+ We then studied whether a linear regression based on these nonlinear features
+ can achieve better performance than a linear regression based solely on
+ the landmark genes.
+\begin_inset Quotes erd
+\end_inset
+
+).
+ Das ist so ähnlich wie mein Versuch, auf der hidden layer representation
+ eine SVM zu lernen.
+\end_layout
+
 \end_body
 \end_document
