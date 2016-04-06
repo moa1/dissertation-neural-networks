@@ -1,0 +1,357 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This is supposed to be a high-level description of neuronal networks, to
+ be used in the thesis before the mathematical description of neuronal networks
+ (currently 
+\begin_inset Quotes eld
+\end_inset
+
+methods.lyx
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Artificial neuronal networks
+\end_layout
+
+\end_inset
+
+Artificial neuronal networks are mathematical constructs, designed to imitate
+ the signal processing capabilities of real neurons, found in nearly all
+ animals.
+ Like their biological counterparts, artificial neuronal networks consist
+ of simpler building blocks, the neurons.
+ The real neurons are defined (according to the neuron doctrine
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BullockDouglas2005"
+
+\end_inset
+
+) as the smallest units whose state change may be called signal processing,
+ so they are the basic signal processing units.
+ They have multiple inputs (dendrites) and multiple outputs (axons)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ByrneDafny1997"
+
+\end_inset
+
+.
+ In most real neurons, the signal transmission and processing is facilitated
+ by alternating small electric (action) potentials (along the axons) and
+ chemical transmissions (at synapses between axon and dendrite).
+ The electrical voltage is transmitted by the dendrites of a neuron, and
+ flows to the axon of the neuron, which can lead to the release of neurotransmit
+ters in the axon terminals.
+ The neurotransmitters cause ion channels in the adjacent dendrites of other
+ neurons to open, which changes their membrane potential.
+\end_layout
+
+\begin_layout Standard
+The action potentials are realized by cells in the form of different ion
+ concentrations inside and outside the cell.
+ These ion gradients are maintained by ion pumps.
+ Neurotransmitters binding to receptors present on the outside of the neuron's
+ membrane can cause ion channels to open, and the ions flow inside or outside
+ the cell to achieve equilibrium of ion concentration.
+ The type of ion channel being opened upon binding of a neurotransmitter
+ can cause either depolarization or hyperpolarization of the dendrite, depending
+ on the charge of the ion, and whether the concentration of the ion is higher
+ or lower intracellular compared to extracellular.
+ The propagation of the action potentials along dendrites is realized by
+ ion channels.
+ Once depolarization of a section of a neuron reaches a critical value,
+ ion channels can open, causing depolarization in adjacent regions of the
+ neuron.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+artificial neuron signal processing
+\end_layout
+
+\end_inset
+
+This basic signal processing of a real neuron is modelled in an artificial
+ neuron as a mathematical function that has multiple input variables, computes
+ a value according to the function formula and its parameters and outputs
+ its computed value to multiple neurons, which use it as an input variable.
+ Herein, the processes of neurotransmitter release, de- and hyperpolarization,
+ and propagation of the action potential are abstracted away into discrete
+ time steps.
+ Each artificial neuron's function is evaluated once per time step.
+ Often, the 
+\emph on
+sigmoid
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+sigmoid function
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+function is used to describe the output of an artificial neuron, the so-called
+ 
+\emph on
+activation
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+activation of an artificial neuron
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(v_{i})}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ is the accumulated and modulated input to the neuron 
+\begin_inset Formula $i$
+\end_inset
+
+, and 
+\begin_inset Formula $o_{i}=\sigma(v_{i})$
+\end_inset
+
+ is the activation of the neuron.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Hier einen Plot von 
+\begin_inset Formula $\sigma(x)$
+\end_inset
+
+ einfuegen.
+\end_layout
+
+\end_inset
+
+The interaction between two neurons, that is, the different types of receptors
+ that can be present on the outside of a real dendrite, and the effected
+ de- or hyperpolarization of the dendrite are abstracted away by using real-numb
+ered weights.
+ These weights describe the accumulation and modulation of the vector of
+ outputs of artificial neurons to form the single input value 
+\begin_inset Formula $v$
+\end_inset
+
+ of an artificial neuron connected to them.
+ Usually the following formula is used to describe the computation of the
+ input 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ from the outputs of its connected neurons 
+\begin_inset Formula $\mathbf{c_{i}}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+v_{i}=-b_{i}-\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ is the so-called 
+\emph on
+bias
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+bias of an artificial neuron
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{c_{i}}$
+\end_inset
+
+ is the vector of its in-going connected neurons, 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+ is the activation of the connected neuron 
+\begin_inset Formula $j$
+\end_inset
+
+, and 
+\begin_inset Formula $w_{ij}\in\mathbb{R}$
+\end_inset
+
+ is the weight of the connection going out of neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ and into neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Nervous systems do not only process signals, but they also learn, which
+ means that they adapt their signal processing over time in response to
+ input from the environment.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: continue with maybe citing www.smc.edu/cpr/TheBiologyofLearning.pdf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "zusammenfassung"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
