@@ -92,6 +92,20 @@ methods.lyx
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Insert sections and paragraphs into the following text and title them
+ appropriately.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Index idx
 status collapsed
 
@@ -106,7 +120,14 @@ Artificial neuronal networks are mathematical constructs, designed to imitate
  animals.
  Like their biological counterparts, artificial neuronal networks consist
  of simpler building blocks, the neurons.
- The real neurons are defined (according to the neuron doctrine
+\end_layout
+
+\begin_layout Paragraph
+Neurons as basic signal processing units
+\end_layout
+
+\begin_layout Standard
+The real, biological neurons are defined (according to the neuron doctrine
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BullockDouglas2005"
@@ -125,30 +146,141 @@ key "ByrneDafny1997"
 .
  In most real neurons, the signal transmission and processing is facilitated
  by alternating small electric (action) potentials (along the axons) and
- chemical transmissions (at synapses between axon and dendrite).
- The electrical voltage is transmitted by the dendrites of a neuron, and
- flows to the axon of the neuron, which can lead to the release of neurotransmit
-ters in the axon terminals.
+ chemical transmissions (at chemical synapses between axon and dendrite).
+ The electric potential is transmitted along the dendrites of a neuron,
+ and flows to the axon of the neuron, which can lead to the release of neurotran
+smitters in the axon terminals.
  The neurotransmitters cause ion channels in the adjacent dendrites of other
  neurons to open, which changes their membrane potential.
+\end_layout
+
+\begin_layout Paragraph
+Action potentials, their propagation, and chemical synapses 
 \end_layout
 
 \begin_layout Standard
 The action potentials are realized by cells in the form of different ion
  concentrations inside and outside the cell.
- These ion gradients are maintained by ion pumps.
- Neurotransmitters binding to receptors present on the outside of the neuron's
- membrane can cause ion channels to open, and the ions flow inside or outside
- the cell to achieve equilibrium of ion concentration.
+ These ion gradients are maintained in the resting state by the 
+\begin_inset Formula $Na^{+}/K^{+}$
+\end_inset
+
+-ATPase, that pumps 3 
+\begin_inset Formula $Na^{+}$
+\end_inset
+
+ ions out of and 2 
+\begin_inset Formula $K^{+}$
+\end_inset
+
+ ions into the cell for every ATP molecule
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LodishZipursky2000"
+
+\end_inset
+
+.
+ Because ions are charged, there is an electric potential between the outside
+ and inside of the cell.
+ (The resting potential is between -80mV and -40mV, depending on the type
+ of cell.) The electric potential becoming more positive is called depolarization
+, and the opposite hyperpolarization.
+\end_layout
+
+\begin_layout Standard
+The propagation of the action potentials along dendrites is realized by
+ the opening and closing of ion channels.
+ Once depolarization of an adjacent region of a neuron causes the electric
+ potential between the inside and outside of a 
+\begin_inset Formula $Na^{+}$
+\end_inset
+
+ ion channel to reach a critical value, the ion channel opens, causing further
+ depolarization in adjacent regions of the neuron.
+ This positive feedback loop continues until all 
+\begin_inset Formula $Na^{+}$
+\end_inset
+
+ channels are open.
+ At the peak of depolarization, 
+\begin_inset Formula $K^{+}$
+\end_inset
+
+ ion channels open, causing hyperpolarization, and the potential returns
+ to the resting  potential.
+ This causes the action potential to travel along the neuron.
+ Once it has reached an axon terminal, it causes neurotransmitter release.
+\end_layout
+
+\begin_layout Standard
+Neurotransmitters binding to receptors present on the outside of the neuron's
+ membrane can cause ion channels to open, and the ions flow into or out
+ of the cell to achieve equilibrium of ion concentration.
  The type of ion channel being opened upon binding of a neurotransmitter
  can cause either depolarization or hyperpolarization of the dendrite, depending
- on the charge of the ion, and whether the concentration of the ion is higher
- or lower intracellular compared to extracellular.
- The propagation of the action potentials along dendrites is realized by
- ion channels.
- Once depolarization of a section of a neuron reaches a critical value,
- ion channels can open, causing depolarization in adjacent regions of the
- neuron.
+ on the charge of the ion, and whether the resting concentration of the
+ ion is higher intracellular or extracellular.
+ If a critical threshold of depolarization is reached, the 
+\begin_inset Formula $Na^{+}$
+\end_inset
+
+ ion channels will open, and an action potential 
+\begin_inset Quotes eld
+\end_inset
+
+spike
+\begin_inset Quotes erd
+\end_inset
+
+ is generated as described above.
+\end_layout
+
+\begin_layout Paragraph
+Encoding of information in action potentials
+\end_layout
+
+\begin_layout Standard
+The presence of a critical threshold suggests that it is not the 
+\begin_inset Quotes eld
+\end_inset
+
+analogue
+\begin_inset Quotes erd
+\end_inset
+
+ electric potential, but the 
+\begin_inset Quotes eld
+\end_inset
+
+digital
+\begin_inset Quotes erd
+\end_inset
+
+ spike that carries the information from one neuron to the next.
+ For example, the strength muscles are innervated with is encoded in the
+ number of action potentials per time delivered by muscle neurons to muscle
+ fibers.
+ However, some neurons directly transmit information in the fluctuations
+ of neurotransmitter released.
+ This analogue mode of transmission allows more information to be transmitted
+ per time.
+ Sub-threshold emission of neurotransmitter also seems to modulate subsequent
+ action potentials, allowing for a mixture of analogue and digital information
+ transmission 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DebanneRama2013"
+
+\end_inset
+
+.
+ The machinery facilitating propagation and transmission of information
+ in and between biological neurons is highly simplified in artificial neurons.
+\end_layout
+
+\begin_layout Paragraph
+Artificial neurons as simple models of biological neurons
 \end_layout
 
 \begin_layout Standard
@@ -161,14 +293,17 @@ artificial neuron signal processing
 
 \end_inset
 
-This basic signal processing of a real neuron is modelled in an artificial
- neuron as a mathematical function that has multiple input variables, computes
- a value according to the function formula and its parameters and outputs
- its computed value to multiple neurons, which use it as an input variable.
+Signal processing of a real neuron is modelled in an artificial neuron as
+ a mathematical function that has multiple input variables, computes a value
+ according to the function formula and its parameters and outputs its computed
+ value to multiple neurons, which use it as an input variable.
  Herein, the processes of neurotransmitter release, de- and hyperpolarization,
  and propagation of the action potential are abstracted away into discrete
  time steps.
- Each artificial neuron's function is evaluated once per time step.
+\end_layout
+
+\begin_layout Standard
+Each artificial neuron's function is evaluated once per time step.
  Often, the 
 \emph on
 sigmoid
@@ -214,28 +349,32 @@ o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(v_{i})}
 \end_inset
 
 where 
-\begin_inset Formula $v_{i}$
+\begin_inset Formula $v_{i}\in\mathbb{R}$
 \end_inset
 
- is the accumulated and modulated input to the neuron 
+ is the accumulated and modulated input to neuron 
 \begin_inset Formula $i$
 \end_inset
 
 , and 
-\begin_inset Formula $o_{i}=\sigma(v_{i})$
+\begin_inset Formula $o_{i}=\sigma(v_{i})\in[0;1]$
 \end_inset
 
- is the activation of the neuron.
+ is the activation of neuron 
+\begin_inset Formula $i$
+\end_inset
+
+.
  
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: Hier einen Plot von 
+TODO: Hier eine Figure mit dem Plot von 
 \begin_inset Formula $\sigma(x)$
 \end_inset
 
- einfuegen.
+ einfügen.
 \end_layout
 
 \end_inset
@@ -244,8 +383,9 @@ The interaction between two neurons, that is, the different types of receptors
  that can be present on the outside of a real dendrite, and the effected
  de- or hyperpolarization of the dendrite are abstracted away by using real-numb
 ered weights.
- These weights describe the accumulation and modulation of the vector of
- outputs of artificial neurons to form the single input value 
+ These are parameters to the mathematical function describing the accumulation
+ and modulation of the vector of outputs of artificial neurons to form the
+ single input value 
 \begin_inset Formula $v$
 \end_inset
 
@@ -272,7 +412,7 @@ v_{i}=-b_{i}-\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij}
 \end_inset
 
 where 
-\begin_inset Formula $b_{i}$
+\begin_inset Formula $b_{i}\in\mbox{\mathbb{R}}$
 \end_inset
 
  is the so-called 
@@ -301,8 +441,8 @@ of neuron
 \begin_inset Formula $\mathbf{c_{i}}$
 \end_inset
 
- is the vector of its in-going connected neurons, 
-\begin_inset Formula $o_{j}$
+ is the vector of indices of its in-going connected neurons, 
+\begin_inset Formula $o_{j}\in\mathbb{R}$
 \end_inset
 
  is the activation of the connected neuron 
@@ -324,21 +464,20 @@ of neuron
 .
 \end_layout
 
+\begin_layout Paragraph
+Learning in biological neurons
+\end_layout
+
 \begin_layout Standard
 Nervous systems do not only process signals, but they also learn, which
  means that they adapt their signal processing over time in response to
  input from the environment.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: continue with maybe citing www.smc.edu/cpr/TheBiologyofLearning.pdf
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+In biological neuronal systems, this is possible by altering or exchanging
+ the receptors on the surface of dendrites, or by connecting the axon terminals
+ of a neuron to different neurons.
 \end_layout
 
 \begin_layout Standard
