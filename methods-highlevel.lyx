@@ -161,11 +161,11 @@ Action potentials, their propagation, and chemical synapses
 \begin_layout Standard
 The action potentials are realized by cells in the form of different ion
  concentrations inside and outside the cell.
- These ion gradients are maintained in the resting state by the 
+ These ion gradients are maintained in the resting state by 
 \begin_inset Formula $Na^{+}/K^{+}$
 \end_inset
 
--ATPase, that pumps 3 
+-ATPases that pump 3 
 \begin_inset Formula $Na^{+}$
 \end_inset
 
@@ -184,8 +184,8 @@ key "LodishZipursky2000"
  Because ions are charged, there is an electric potential between the outside
  and inside of the cell.
  (The resting potential is between -80mV and -40mV, depending on the type
- of cell.) The electric potential becoming more positive is called depolarization
-, and the opposite hyperpolarization.
+ of neuron.) The electric potential becoming more positive is called depolarizati
+on, and the opposite hyperpolarization.
 \end_layout
 
 \begin_layout Standard
@@ -209,14 +209,24 @@ The propagation of the action potentials along dendrites is realized by
 
  ion channels open, causing hyperpolarization, and the potential returns
  to the resting  potential.
- This causes the action potential to travel along the neuron.
+ This makes the action potential travel along the neuron.
  Once it has reached an axon terminal, it causes neurotransmitter release.
 \end_layout
 
 \begin_layout Standard
-Neurotransmitters binding to receptors present on the outside of the neuron's
- membrane can cause ion channels to open, and the ions flow into or out
- of the cell to achieve equilibrium of ion concentration.
+Neurotransmitters binding to receptors
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+for example, AMPA and NMDA receptors
+\end_layout
+
+\end_inset
+
+ present on the outside of the neuron's membrane cause ion channels to open,
+ and the ions flow into or out of the cell to achieve equilibrium of ion
+ concentration.
  The type of ion channel being opened upon binding of a neurotransmitter
  can cause either depolarization or hyperpolarization of the dendrite, depending
  on the charge of the ion, and whether the resting concentration of the
@@ -259,10 +269,10 @@ digital
 
  spike that carries the information from one neuron to the next.
  For example, the strength muscles are innervated with is encoded in the
- number of action potentials per time delivered by muscle neurons to muscle
- fibers.
- However, some neurons directly transmit information in the fluctuations
- of neurotransmitter released.
+ number of action potentials per time delivered by the muscle neuron to
+ the muscle fiber.
+ However, some neurons involved in perception directly transmit information
+ in the fluctuations of neurotransmitter released.
  This analogue mode of transmission allows more information to be transmitted
  per time.
  Sub-threshold emission of neurotransmitter also seems to modulate subsequent
@@ -310,7 +320,7 @@ sigmoid
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 sigmoid function
@@ -352,7 +362,7 @@ where
 \begin_inset Formula $v_{i}\in\mathbb{R}$
 \end_inset
 
- is the accumulated and modulated input to neuron 
+ is the accumulated input to neuron 
 \begin_inset Formula $i$
 \end_inset
 
@@ -379,10 +389,10 @@ TODO: Hier eine Figure mit dem Plot von
 
 \end_inset
 
-The interaction between two neurons, that is, the different types of receptors
- that can be present on the outside of a real dendrite, and the effected
- de- or hyperpolarization of the dendrite are abstracted away by using real-numb
-ered weights.
+The effect of an incoming axon onto a neuron, that is, the different types
+ of receptors that can be present on the outside of a real dendrite, and
+ the effected de- or hyperpolarization of the dendrite are abstracted away
+ by using real-numbered weights.
  These are parameters to the mathematical function describing the accumulation
  and modulation of the vector of outputs of artificial neurons to form the
  single input value 
@@ -465,19 +475,63 @@ of neuron
 \end_layout
 
 \begin_layout Paragraph
-Learning in biological neurons
+Learning
 \end_layout
 
 \begin_layout Standard
-Nervous systems do not only process signals, but they also learn, which
- means that they adapt their signal processing over time in response to
- input from the environment.
+Nervous systems do not only process signals, but they also learn, that means
+ that they adapt their signal processing over time.
+ One reason for this is an organism's need for a change in behavior, as
+ response to a changing environment.
 \end_layout
 
 \begin_layout Standard
 In biological neuronal systems, this is possible by altering or exchanging
  the receptors on the surface of dendrites, or by connecting the axon terminals
  of a neuron to different neurons.
+ Strengthening of the synaptic link (that occurs within minutes and remains
+ after hours and days in mammals) is called long-term potentiation (LTP),
+ while its weakening is called long-term depression (LTD).
+ LTP is induced by associativity of connected neurons, that is, the 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Hier weitermachen mit Erklären und Zitieren der 
+\begin_inset Quotes eld
+\end_inset
+
+Hebbian learning rule
+\begin_inset Quotes erd
+\end_inset
+
+: die synapse zwischen zwei benachbarten neuronen wird gestärkt, wenn beide
+ neuronen gleichzeitig aktiv sind.? Ein Einblick in molekulare Abläufe wäre
+ wünschenswert.
+\end_layout
+
+\end_inset
+
+.The cellular mechanisms controlling these processes, and their interplay
+ in larger neuron ensembles are a field of active research
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BermudezFederico2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In artificial neuronal networks, and machine learning in general, there
+ are two major types of learning: supervised and unsupervised learning.
+ In supervised learning, for every input pattern in the data set there is
+ defined an output pattern that the learner should compute from the input
+ pattern.
+ This means the algorithm should infer a function that maps from the space
+ of input patterns to the space of output patterns.
+ In unsupervised learning, there 
 \end_layout
 
 \begin_layout Standard
