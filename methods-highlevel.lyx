@@ -289,6 +289,20 @@ key "DebanneRama2013"
  in and between biological neurons is highly simplified in artificial neurons.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Hier ein Bild einfügen, das links ein biologisches neuronales Netz zeigt,
+ und rechts ein artifizielles.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 Artificial neurons as simple models of biological neurons
 \end_layout
@@ -486,13 +500,57 @@ Nervous systems do not only process signals, but they also learn, that means
 \end_layout
 
 \begin_layout Standard
-In biological neuronal systems, this is possible by altering or exchanging
- the receptors on the surface of dendrites, or by connecting the axon terminals
- of a neuron to different neurons.
+In biological neuronal systems, this is possible by altering existing synapses
+ (for example by exchanging the receptors on the surface of dendrites),
+ or by connecting the axon terminals of a neuron to different neurons.
+ There are several known cellular mechanisms for that, among them LTP, LTD,
+ PTP
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+post-tetanic potentiation
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BermudezFederico2007"
+
+\end_inset
+
+.
  Strengthening of the synaptic link (that occurs within minutes and remains
- after hours and days in mammals) is called long-term potentiation (LTP),
- while its weakening is called long-term depression (LTD).
- LTP is induced by associativity of connected neurons, that is, the 
+ after hours and up to weeks in the hippocampus of mammals) is called long-term
+ potentiation (LTP), while its weakening is called long-term depression
+ (LTD).
+ LTP is induced by associativity of connected neurons, that means, when
+ a neuron contributes to the depolarization in a directly connected neuron,
+ the efficiency of that connection will be strengthened
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+maybe (after reading) cite 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GalanGalizia2006"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ The molecular mechanisms responsible for this phenomenon are not yet completely
+ understood.
+ It is known that they differ between brain regions, and also types of synapses
+ in the same brain region.
+ This 
 \begin_inset Note Note
 status open
 
@@ -521,6 +579,25 @@ key "BermudezFederico2007"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Of note in the Hebbian learning rule is that it is local
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+locality of Hebbian learning rule
+\end_layout
+
+\end_inset
+
+, which means that changes at a synapse only depend on the directly connected
+ neurons, but not on other distantly-connected neurons.
+\end_layout
+
+\begin_layout Paragraph
+Machine Learning
 \end_layout
 
 \begin_layout Standard
