@@ -268,7 +268,7 @@ digital
 \end_inset
 
  spike that carries the information from one neuron to the next.
- For example, the strength muscles are innervated with is encoded in the
+ For example, the strength muscles are innervated with, is encoded in the
  number of action potentials per time delivered by the muscle neuron to
  the muscle fiber.
  However, some neurons involved in perception directly transmit information
@@ -285,8 +285,99 @@ key "DebanneRama2013"
 \end_inset
 
 .
- The machinery facilitating propagation and transmission of information
- in and between biological neurons is highly simplified in artificial neurons.
+ 
+\end_layout
+
+\begin_layout Standard
+Examples for neuronal networks that have been partly decoded are the eye
+ (visual system) and the nose (olfactory system).
+\end_layout
+
+\begin_layout Paragraph
+The eye as an example of a biological neuronal network
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: how does light on rhodopsin lead to glutamate release inhibition?
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: cite Kolb 2003 here.
+\end_layout
+
+\end_inset
+
+In the eye, specialized cells, the rods and cones detect light
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kolb2003"
+
+\end_inset
+
+.
+ In these cells, light elicits a transformation of cis-rhodopsin to trans-rhodop
+sin, which receives a G protein binding site.
+ Transducin binds to the activated rhodopsin, and GDP acquires a phosphate
+ group to form GTP.
+ 
+\end_layout
+
+\begin_layout Standard
+Rods are more sensitive to dim light, while cones only react to bright light
+ but can see colors.
+ Both release the neurotransmitter glutamate continuously into the synaptic
+ cleft, but when hit by light, suspend this emission for the duration of
+ the light.
+ The area that must be lit for a cell to emit neurotransmitter is called
+ the 
+\emph on
+receptive field
+\emph default
+, and is just as large as the top of the photoreceptor for rods and cones.
+ The glutamate binds to receptors on the cell outside of bipolar cells,
+ and, depending on the type of bipolar cell, cause either an action potential
+ to be generated when the photoreceptor is lit and the surrounding area
+ is dark (
+\emph on
+ON 
+\emph default
+bipolar cell), or when the photoreceptor is dark against a bright background
+ (
+\emph on
+OFF 
+\emph default
+bipolar cell).
+ Horizontal cells integrate signals from surrounding cone cells, and feed
+ their signal back to the cones, or directly to bipolar cells.
+ This enhances contrast.
+ The signal from several bipolar cells is fed into a ganglion cell, which
+ therefore has a larger receptive field than its connected bipolar cells.
+ ON bipolar cells only excite ON ganglion cells, and OFF bipolar cells excite
+ only OFF ganglion cells.
+ Finally, there are more than a million nerve fibers from ganglion cells
+ to the visual cortex of the brain.
+ Altogether, the basic cell types are, depending on the species, 1 to 4
+ horizontal types of cell, 11 types of bipolar cells, 22 to 30 types of
+ amacrine cells, and 20 types of ganglion cells.
+ Among their known functions are brightness-dependent size regulation of
+ the receptive field of amacrine cells, integration of a large number of
+ rods to provide sight in little light, and an additional photoreceptor
+ distinct from rods and cones.
+\end_layout
+
+\begin_layout Standard
+The machinery facilitating propagation and transmission of information in
+ and between biological neurons is highly simplified in artificial neurons.
 \end_layout
 
 \begin_layout Standard
@@ -301,6 +392,33 @@ Hier ein Bild einfügen, das links ein biologisches neuronales Netz zeigt,
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Odor sensing in the olfactory system
+\end_layout
+
+\begin_layout Standard
+The olfactory system of mammals and insects contains neurons that detect
+ odor molecules called glomeruli.
+ In humans, there are about 500 different types of glomeruli [1], but it
+ is hypothesized that a human can perceive around 10,000 different odors.
+ A single odorant consisting of a mixture of different odor molecules can
+ excite one or more glomeruli.
+ Each glomerulus is connected to one or more neurons in the olfactory cortex
+ in the mammalian brain, or to one or more Kenyon Cells in insects.
+ For example, in 
+\emph on
+Drosophila
+\emph default
+, about 9% of the glomeruli are excited by an odorant, and the connectivity
+ between glomeruli and Kenyon Cells is between 6.5% and 12.5%.
+ However, these numbers vary greatly between species.
+ It is hypothesized that species with sparse connectivity have better odor
+ perception of complex odor mixtures.
+ On the other hand, species with dense connectivity should have better performan
+ce in detecting low concentrations of simple odor mixtures.
+ (TODO: confirm the last sentence.)
 \end_layout
 
 \begin_layout Paragraph
@@ -597,18 +715,102 @@ locality of Hebbian learning rule
 \end_layout
 
 \begin_layout Paragraph
-Machine Learning
+Supervised and Unsupervised Machine Learning
 \end_layout
 
 \begin_layout Standard
 In artificial neuronal networks, and machine learning in general, there
- are two major types of learning: supervised and unsupervised learning.
+ are two major types of learning: supervised
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+supervised machine learning
+\end_layout
+
+\end_inset
+
+ and unsupervised learning
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+unsupervised machine learning
+\end_layout
+
+\end_inset
+
+.
  In supervised learning, for every input pattern in the data set there is
  defined an output pattern that the learner should compute from the input
  pattern.
  This means the algorithm should infer a function that maps from the space
  of input patterns to the space of output patterns.
- In unsupervised learning, there 
+ The output patterns are also called 
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+labels
+\end_layout
+
+\end_inset
+
+
+\emph on
+labels
+\emph default
+, and you say 
+\begin_inset Quotes eld
+\end_inset
+
+the input data is labeled
+\begin_inset Quotes erd
+\end_inset
+
+.
+ In unsupervised learning, there are only input data and the goal is to
+ find underlying patterns in them.
+ Examples of supervised learning algorithms are (linear or logistic) regression,
+ support vector machines (SVMs), backpropagation neuronal networks.
+ Examples for unsupervised learning algorithms are clustering, self-organising
+ maps (SOMs), principal component analysis (PCA).
+\end_layout
+
+\begin_layout Paragraph
+Semi-supervised Machine Learning
+\end_layout
+
+\begin_layout Standard
+In addition to these two modes of machine learning, there is semi-supervised
+ learning.
+ In contrast to supervised machine learning, which has for every input pattern
+ a corresponding target output pattern, semi-supervised learning does not
+ need a target output pattern for every input pattern.
+ It tries to utilize the unlabeled input data by finding patterns in
+\end_layout
+
+\begin_layout Paragraph
+Properties of semi-supervised learning
+\end_layout
+
+\begin_layout Standard
+An advantage of semi-supervised learning over supervised learning is that
+ it does not need labels for all input patterns, because labels are often
+ time-consuming or costly to acquire.
+ For example, the Gene Expression Omnibus data base (GEO) 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: citation
+\end_layout
+
+\end_inset
+
+ contains 41,379 expression data sets that were uploaded between Jan 1st,
+ 2000, and August 31st, 2013.
+ Many of these are potentially usable as unlabeled data sets.
 \end_layout
 
 \begin_layout Standard
