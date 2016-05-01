@@ -578,5 +578,19 @@ Having such a transformation for expression data would be very useful, not
  This would require knowledge about gene modules in advance .
 \end_layout
 
+\begin_layout Itemize
+Eine probability zu erhalten wie im Paper von Inka (
+\begin_inset Quotes eld
+\end_inset
+
+Estimating classification probabilities in high-dimensional diagnostic studies,
+ Bioinformatics, 27(18):2563-2570.
+\begin_inset Quotes erd
+\end_inset
+
+), ist in neuronal networks sehr einfach, da der Classifier selbst die Konfidenz
+ seiner Vorhersage als Zahl zwischen 0 und 1 ausgibt.
+\end_layout
+
 \end_body
 \end_document
