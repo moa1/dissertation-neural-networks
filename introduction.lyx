@@ -128,8 +128,8 @@ Deep Belief Networks find correlated nodes
 Deep Belief Networks can group correlated input nodes by increasing their
  weights to a single hidden node, and decreasing the weights to all other
  hidden nodes.
- This is a form of abstraction, since in this way, the many correlated input
- nodes are grouped into one hidden node.
+ This is a form of abstraction (and dimensionality reduction), since in
+ this way, the many correlated input nodes are grouped into one hidden node.
  The hidden node will only be active if many of its highly-weighted input
  nodes are active.
  Repeated application of this principle of abstraction allows the Deep Belief
@@ -141,6 +141,33 @@ In face recognition for example, an abstract representation might have a
  single value for the size of the lips.
  In transcriptomic data, a single node in an abstract representation might
  encode the activity of a gene module.
+ Very recently, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(TODO: insert citation here)
+\end_layout
+
+\end_inset
+
+ AUTHORS_YEAR published work on compressing expression data into fewer dimension
+s on a large scale using deep learning.
+ Input data were all genome-wide expression data from the GEO database of
+ Affymetrix microarrays.
+ For each sample, the same subset of approximately 1000 genes was chosen
+ and all the other genes were predicted from these ~1000 genes.
+ Their results imply that the prediction accuracy is 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(TODO: insert some evaluation numbers here)
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \end_body
