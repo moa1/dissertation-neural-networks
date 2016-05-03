@@ -741,11 +741,25 @@ unsupervised machine learning
 \end_inset
 
 .
- In supervised learning, for every input pattern in the data set there is
+ Both methods process data sets that are in matrix form: for example, in
+ expression data, the rows usually denote different genes or transcripts,
+ and each column represents an independently measured sample.
+ (Note that in the general machine learning literature, usually the data
+ matrix is transposed: the columns denote the features, and the rows the
+ samples.) Samples usually are tissue, blood samples, or cell line, and differ
+ in their biological background (e.g.
+ cell type, gene knock-out or knock-in, cell cycle phase) or treatment (e.g.
+ drugs applied).
+\end_layout
+
+\begin_layout Standard
+In supervised learning, for every input pattern in the data set there is
  defined an output pattern that the learner should compute from the input
  pattern.
- This means the algorithm should infer a function that maps from the space
- of input patterns to the space of output patterns.
+ Herein, both input and output pattern can be one- or multi-dimensional
+ vectors.
+ The goal of supervised learning is to infer a function that maps from the
+ space of input patterns to the space of output patterns.
  The output patterns are also called 
 \begin_inset Index idx
 status open
@@ -760,7 +774,7 @@ labels
 \emph on
 labels
 \emph default
-, and you say 
+, and one says that  
 \begin_inset Quotes eld
 \end_inset
 
@@ -769,12 +783,21 @@ the input data is labeled
 \end_inset
 
 .
- In unsupervised learning, there are only input data and the goal is to
- find underlying patterns in them.
+\end_layout
+
+\begin_layout Standard
+In unsupervised learning, there are only input data and the goal is to find
+ interesting underlying patterns in them.
+ Unsupervised learning algorithms usually compute a mapping from input space
+ to output space, where both spaces can differ in their dimensionality.
+ This can be used for example for dimensionality reduction, or data re-represent
+ation and abstraction.
  Examples of supervised learning algorithms are (linear or logistic) regression,
- support vector machines (SVMs), backpropagation neuronal networks.
+ k-Nearest-Neighbor (k-NN), support vector machines (SVMs), backpropagation
+ neuronal networks, Deep Belief Networks (DBNs).
  Examples for unsupervised learning algorithms are clustering, self-organising
- maps (SOMs), principal component analysis (PCA).
+ maps (SOMs), principal component analysis (PCA), Restricted Boltzmann Machine
+ (RBM).
 \end_layout
 
 \begin_layout Paragraph
@@ -782,12 +805,25 @@ Semi-supervised Machine Learning
 \end_layout
 
 \begin_layout Standard
-In addition to these two modes of machine learning, there is semi-supervised
+An intermediate form of these two machine learning modes is semi-supervised
  learning.
  In contrast to supervised machine learning, which has for every input pattern
  a corresponding target output pattern, semi-supervised learning does not
  need a target output pattern for every input pattern.
- It tries to utilize the unlabeled input data by finding patterns in
+ However, in contrast to fully unsupervised machine learning, it does need
+ some labeled input data sets.
+ Supervised machine learning algorithms often try to find underlying structure
+ in all input data sets and then use the known labels to assign probable
+ labels to the found structure (or just the unlabeled input samples).
+ There are two types of semi-supervised learning: transductive and inductive
+ semi-supervised learning.
+ The goal of transductive semi-supervised learning is to predict the class
+ label of a pre-specified list of unlabeled input patterns, while the goal
+ of inductive semi-supervised learning is to find a universal rule mapping
+ from the space of input patterns to class labels, which could be applied
+ to classify unknown, future input patterns.
+ In case unknown, future input patterns are to be classified using transductive
+ semi-supervised machine learning, the whole model may have to be re-evaluated.
 \end_layout
 
 \begin_layout Paragraph
@@ -811,6 +847,249 @@ TODO: citation
  contains 41,379 expression data sets that were uploaded between Jan 1st,
  2000, and August 31st, 2013.
  Many of these are potentially usable as unlabeled data sets.
+ However, machine learning algorithms usually require samples to be independetly
+ and identically distributed (iid) (TODO: insert index entry).
+ In an ideal world, GEO samples could be assumed to be identically distributed
+ within a data set.
+ However, even within the same GEO data set there often is systematic variation
+ between samples, called the 
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+batch-effect
+\end_layout
+
+\end_inset
+
+
+\emph on
+batch-effect
+\emph default
+.
+ This means if one wants to use samples from different GEO data sets simultaneou
+sly, one either has to correct for a possible batch-effect manually, or
+ use an algorithm that has some built-in mechanism to make such a correction.
+\end_layout
+
+\begin_layout Standard
+One machine learning algorithm with such a built-in mechanism could be 
+\emph on
+deep learning
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+deep learning
+\end_layout
+
+\end_inset
+
+, as employed in 
+\emph on
+Deep Belief Networks (DBNs)
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+Deep Belief Network (DBN)
+\end_layout
+
+\end_inset
+
+.
+ This supervised machine-learning algorithm (which can also be used semi-supervi
+sedly) was shown to be able to learn from images of objects or faces, where
+ the objects or faces are in different lighting conditions or are viewed
+ from different angles.
+ (TODO: insert some citations here) Such results seem to imply that DBNs
+ are able to abstract the images, which are given as vectors of pixels,
+ into encodings of relevant features and compute a classifier on these abstract
+ features.
+\end_layout
+
+\begin_layout Standard
+Before we motivate using DBNs on expression data, we first introduce deep
+ learning.
+ Deep learning is a term used in conjunction with artificial neuronal networks.
+ Those 
+\begin_inset Quotes eld
+\end_inset
+
+deep artificial
+\begin_inset space ~
+\end_inset
+
+neuronal networks
+\begin_inset Quotes erd
+\end_inset
+
+ usually have several hidden layers.
+\end_layout
+
+\begin_layout Paragraph
+Back-propagation
+\end_layout
+
+\begin_layout Standard
+Before deep learning, artificial neuronal networks were usually trained
+ using back-propagation.
+ This supervised training procedure sets input activations in the input
+ layer according to the input pattern to be learned, computes the activations
+ of the hidden layers and the output layer, and then computes the error
+ at each node in the output layer by subtracting the computed activation
+ from the target activation as given by the desired output pattern for the
+ particular input pattern that was fed into the network.
+ The error for each node is then back-propagated in reverse input direction
+ to the hidden layers and finally to the input layer.
+ The purpose of this is to be able to adjust the weights of the artificial
+ neuronal network such that when the current input pattern pair is presented
+ to the network, its computed output pattern gets closer and closer to the
+ desired output pattern.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(TODO: hier vielleicht eine figure mit dem Daten-strom von input layer über
+ hidden layers in output layers, und dann backprop-daten-strom in reverse
+ direction)
+\end_layout
+
+\end_inset
+
+However, back-propagation was not able to compute networks with more than
+ very few hidden layers.
+\end_layout
+
+\begin_layout Standard
+Deep learning overcame this limitation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: vor _introduction.lyx_ (also der Motivation, DBNs auf expression data
+ anzuwenden) muss ich hier grob DBNs, und _deep_learning_ erklären.TODO:
+ new paragraph: Motivation for using Deep Belief Networks on expression
+ data.
+\end_layout
+
+\begin_layout Plain Layout
+NOTE: the following is the content of file _introduction.lyx_.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Motivations for using Deep Belief Networks on transcriptomic data
+\end_layout
+
+\begin_layout Standard
+The motivations for using Deep Belief Networks on transcriptomic data come
+ from those networks' successes when used on image data.
+\end_layout
+
+\begin_layout Paragraph
+Highly correlated inputs
+\end_layout
+
+\begin_layout Standard
+Both underlying distributions often have many correlated dimensions.
+ For images, adjacent pixels often display the same object and have therefore
+ correlated values.
+ In face recognition for example, the faces are usually scaled and translated
+ so that the centers of both eyes and mouth are aligned in different faces.
+ There will be highly correlated pixels for areas of the image where the
+ cheeks and lips usually are.
+ If you use the pixels of the whole image as input to the neural network,
+ the corresponding input nodes will be highly correlated as well.
+\end_layout
+
+\begin_layout Standard
+For transcriptomic data, the correlations can be due to many genes being
+ regulated by the same transcription factor.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: add some statistics of correlations, e.g.
+ in the breast_cancer data set.
+ for example, find a group of genes that are all correlated in all samples
+ with a correlation coefficient larger than 
+\begin_inset Formula $x$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: add some citations for reasons of high correlation in expression data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Deep Belief Networks find correlated nodes
+\end_layout
+
+\begin_layout Standard
+Deep Belief Networks can group correlated input nodes by increasing their
+ weights to a single hidden node, and decreasing the weights to all other
+ hidden nodes.
+ This is a form of abstraction (and dimensionality reduction), since in
+ this way, the many correlated input nodes are grouped into one hidden node.
+ The hidden node will only be active if many of its highly-weighted input
+ nodes are active.
+ Repeated application of this principle of abstraction allows the Deep Belief
+ Network to form more and more abstract representations of its input.
+\end_layout
+
+\begin_layout Standard
+In face recognition for example, an abstract representation might have a
+ single value for the size of the lips.
+ In transcriptomic data, a single node in an abstract representation might
+ encode the activity of a gene module.
+ Very recently, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(TODO: insert citation here)
+\end_layout
+
+\end_inset
+
+ AUTHORS_YEAR published work on compressing expression data into fewer dimension
+s on a large scale using deep learning.
+ Input data were all genome-wide expression data from the GEO database of
+ Affymetrix microarrays.
+ For each sample, the same subset of approximately 1000 genes was chosen
+ and all the other genes were predicted from these ~1000 genes.
+ Their results imply that the prediction accuracy is 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(TODO: insert some evaluation numbers here)
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
