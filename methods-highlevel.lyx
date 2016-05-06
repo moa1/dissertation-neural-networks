@@ -966,8 +966,63 @@ However, back-propagation was not able to compute networks with more than
  very few hidden layers.
 \end_layout
 
+\begin_layout Paragraph
+Autoassociator
+\end_layout
+
 \begin_layout Standard
-Deep learning overcame this limitation.
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: vielleicht sollte die Beschreibung eines autoassociators hier kürzer sein, und diese lange Beschreibung stattdessen in den Methods-Teil, da sonst die Beschreibung von Deep learning danach sehr kurz wirkt.
+\end_layout
+
+\end_inset
+
+An algorithm to train an artificial neuronal networks with more than one hidden layer was the autoassociator (TODO: add index entry). The algorithm is unsupervised and iteratively constructs deeper and deeper networks. Its essential idea is the construction of an encoder network and its anti-symmetric counterpart, the decoder network. The encoder starts in the first iteration as a network that consists of the input layer and one hidden layer on top. The decoder network consists of the very same hidden layer and the output layer on top, which must have the same dimensions as the input layer.
+When training this first iteration, standard back-propagation is used to adapt the weights between input layer and hidden layer and between hidden layer and output layer so that the network reconstructs its input patterns as the output patterns (i.e. the values of the nodes in the output layer). The input patterns are taken from the training data set. Usually the number of nodes in the hidden layer is chosen to be smaller than the number of nodes in the input (and output) layer. In this way the autoassociator learns to reconstruct its input from a compressed representation. (TODO: hier ein Bild eines autoassociator networks). Once back-propagation does not improve the reconstruction error on the test set anymore, the second iteration starts.
+In the second iteration, the encoder network is enlarged by an additional hidden layer put on top of its existing 1st hidden layer. The weights between the 1st and 2nd (new) hidden layer are initialized randomly. The biases of the nodes in the 2nd (new) hidden layer are also initialized (randomly or constantly zero). The decoder network is constructed on top of the new hidden 2nd layer by inserting weights initialized randomly, copying the 1st hidden layer to form the 3rd hidden layer, copying the weights between hidden layer 1 (from the first iteration) to the output layer, and copying the output layer (from the first iteration). Then back-propagation is used to train the autoassociator consisting of the new encoder network with the new decoder network on top. This establishes values for the values of the initialized weights and biases.
+Because the network size increases iteratively from only 3 layers, to 5 layers, to 7 layers, and so on, and only 2 weight layers are initialized randomly in each iteration, back-propagation is often able to find parameters for the network that is not stuck in a poor local optimum.
+\end_layout
+
+\begin_layout Paragraph
+Autoassociator with classifier on top
+\end_layout
+
+\begin_layout Standard
+The autoassociator can be used in a supervised fashion by first training its encoder and decoder networks up to sufficient depth, and then removing the decoder network and replacing it by a single output layer that has the dimension of the training output patterns. The weights between the last hidden layer of the encoder and the new output layer as well as the biases of the new output layer are initialized randomly (or to constantly zero), and trained using back-propagation.
+\end_layout
+
+\begin_layout Standard
+
+Deep learning, as demonstrated by (TODO: insert Hinton citation) also overcame the limitation of only a few hidden layers. It is separated into a pre-training phase and a fine-tuning phase. The pre-training phase is unsupervised. In this phase, hidden layers are iteratively added on top of the input layer of the network, and the weights between layers are initialized and pre-trained. Without this step, fine-tuning a multiple-hidden-layer network usually gets stuck in a local error minimum. The pre-training algorithm is called
+\emph on
+contrastive divergence
+\emph default
+and was developed on
+\emph on
+Restricted Boltzmann Machines 
+\emph default
+.
+(As 
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: cite Bengio and Delalleau, 2007, Justifying and Generalizing Contrastive Divergence.
+Wahrscheinlich sollte der ganze Satz hier in die Methods, nicht die Introduction.
+\end_layout
+
+\end_inset
+
+showed, training using contrastive divergence (CD-1) and training using reconstruction error as error metric in an autoassociator are linked. They showed that the weight learning gradient used with the reconstruction error is a more biased approximator of the log-likelihood than the gradient computed by CD-1.)
+
+While the pre-training phase is unsupervised, the fine-tuning phase is supervised. (TODO: stimmt das überhaupt? Siehe eines der Hinton-Papers.) In unsupervised pre-training, unlabeled training samples can be used in learning the weights between layers.
+
+A deep belief network (DBN) is an artificial neuronal network that has multiple hidden layers.
 \end_layout
 
 \begin_layout Standard
@@ -976,7 +1031,7 @@ status open
 
 \begin_layout Plain Layout
 TODO: vor _introduction.lyx_ (also der Motivation, DBNs auf expression data
- anzuwenden) muss ich hier grob DBNs, und _deep_learning_ erklären.TODO:
+ anzuwenden) muss ich hier grob Autoassociators, DBNs, und _deep_learning_ erklären. TODO:
  new paragraph: Motivation for using Deep Belief Networks on expression
  data.
 \end_layout
@@ -1053,7 +1108,7 @@ Deep Belief Networks can group correlated input nodes by increasing their
  This is a form of abstraction (and dimensionality reduction), since in
  this way, the many correlated input nodes are grouped into one hidden node.
  The hidden node will only be active if many of its highly-weighted input
- nodes are active.
+ nodes are active and only few of its negatively-weighted input nodes are active.
  Repeated application of this principle of abstraction allows the Deep Belief
  Network to form more and more abstract representations of its input.
 \end_layout
@@ -1068,7 +1123,7 @@ In face recognition for example, an abstract representation might have a
 status open
 
 \begin_layout Plain Layout
-(TODO: insert citation here)
+(TODO: insert citation of Yifei Chen, Xiaohui Xie, (Gene expression inference with deep learning) here)
 \end_layout
 
 \end_inset
@@ -1084,7 +1139,7 @@ s on a large scale using deep learning.
 status open
 
 \begin_layout Plain Layout
-(TODO: insert some evaluation numbers here)
+(TODO: insert some evaluation numbers here, see Table 1: 0.3204+-0.0879 is the oerall error, but I have to look up what the total numeric expression value input range of the genes was.)
 \end_layout
 
 \end_inset
