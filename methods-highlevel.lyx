@@ -981,7 +981,7 @@ Back-propagation
 
 \begin_layout Standard
 Before deep learning, artificial neuronal networks were usually trained
- using back-propagation.
+ using back-propagation. (TODO: cite Rumelhart, D. E., Hinton, G. E., and Williams, R. J. (1988). Learning representations by back-propagating errors. Cognitive modeling, 5.)
  This supervised training procedure sets input activations in the input
  layer according to the input pattern to be learned, computes the activations
  of the hidden layers and the output layer, and then computes the error
@@ -1311,7 +1311,14 @@ In face recognition for example, an abstract representation might have a
  single value for the size of the lips.
  In transcriptomic data, a single node in an abstract representation might
  encode the activity of a gene module.
- Very recently, 
+\end_layout
+
+\begin_layout Paragraph
+Previous Work: Gene Expression inference with deep learning
+\end_layout
+
+\begin_layout Standard
+Very recently, 
 \begin_inset Note Note
 status open
 
@@ -1325,22 +1332,31 @@ status open
  AUTHORS_YEAR published work on compressing expression data into fewer dimension
 s on a large scale using deep learning.
  Input data were all genome-wide expression data from the GEO database of
- Affymetrix microarrays.
- For each sample, the same subset of approximately 1000 genes was chosen
- and all the other genes were predicted from these ~1000 genes.
- Their results imply that the prediction accuracy is 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(TODO: insert some evaluation numbers here, see Table 1: 0.3204+-0.0879 is
- the oerall error, but I have to look up what the total numeric expression
- value input range of the genes was.)
+ Affymetrix microarrays, which were partitioned into training, validation, and testing data sets.
+ For each sample, the same subset of 943 "landmark" genes was chosen
+ and all the other genes were predicted from the landmark genes.
 \end_layout
 
-\end_inset
+\begin_layout Standard
+Their artificial neuronal network architecture had between 1 and 3 hidden layers with either 3,000, 6,000, or 9,000 nodes. It had 943 input expression values (one for each landmark gene), and a total of 9,520 output expression values (one for each gene to be predicted).
+\end_layout
 
-.
+\begin_layout Standard
+In addition to the (non-linear) neuronal network, they tried linear regression with no regularization, l1-, and l2-regularization (to keep the weights between input layer and output layer small).
+\end_layout
+
+\begin_layout Standard
+They also tried k-Nearest Neighbor (TODO: add index entry), where, during training, they determined the $k$ landmark genes with expression value closest to each target gene $i$ (let's call this set of genes $knn_i$) in the training data set, and during testing, they predicted the expression value of the target gene $i$ as the average of the gene's $knn_i$ expression values in the testing data set. The optimal $k$ (number of genes to average over) was chosen based on a validation data set.
+\end_layout
+
+\begin_layout Standard
+The input values were quantile normalized expression values between 4 and 15. The models were ranked according to the average prediction errors over all 9,520 target genes. 
+k-Nearest Neighbor performed worst, with an average prediction error of 0.5866. The three linear regression models performed about equally well, with average prediction errors of either 0.3784 or 0.3782, which means that regularization did not improve linear regression. The neuronal network-based average prediction errors were between 0.3421 and 0.3204, with the network having 3 hidden layers of size 9000, and 10% dropout rate performing best. (TODO: have to explain dropout rate, or better all regularization methods before this in the introduction, maybe at the end of the paragraph "Artificial neurons as simple models of biological neurons") Because the input expression values were between 4 and 15, an average prediction error of 0.3204 implies an average error of about 3% on the GEO dataset.
+\end_layout
+
+\begin_layout Standard
+In another dataset, AUTHORS_YEAR used the GEO dataset for training, the 1000 Genomes data for validation (TODO: cite Lappalainen, T., Sammeth, M., FriedlÂ¨ander, M. R., ACt Hoen, P., Monlong, J., Rivas, M. A., Gonz`alez-Porta, M., Kurbatova, N., Griebel, T., Ferreira, P. G., et al. (2013). Transcriptome and genome sequencing uncovers functional variation in humans. Nature, 501(7468), 506-511), and GTEx data for testing (TODO: cite Ardlie, K. G., Deluca, D. S., Segr`e, A. V., Sullivan, T. J., Young, T. R., Gelfand, E. T., Trowbridge, C. A., Maller, J. B., Tukiainen, T., Lek, M., et al. (2015). The genotype-tissue expression (gtex) pilot analysis: Multitissue gene regulation in humans. Science, 348(6235), 648-660).
+Learning in this dataset, where multiple input sources were combined, is therefore prone to the Batch effect. Nevertheless, the performance ranking of the methods is the same. KNN scored worst, with an average prediction error of 0.6520. Linear regression with L1-regularization had an average prediction error of 0.5667. Linear regression without regularization and L2-regularization had an average prediction error of 0.4702. The artificial neuronal networks all scored consistently better than KNN and linear regression, with the artificial neuronal network with 2 hidden layers of size 9000, and 25% dropout rate having the lowest prediction error of 0.4393 (which is equivalent to a relative error of 4%).
 \end_layout
 
 \begin_layout Standard
