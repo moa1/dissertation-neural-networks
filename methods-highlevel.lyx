@@ -720,8 +720,8 @@ Supervised and Unsupervised Machine Learning
 \end_layout
 
 \begin_layout Standard
-In artificial neuronal networks, and machine learning in general, there
- are two major types of learning: supervised
+In artificial neuronal networks, the goals of learning are defined by humans.
+In machine learning in general, there are two major types of learning: supervised
 \begin_inset Index idx
 status collapsed
 
@@ -929,8 +929,7 @@ key "HintonTeh2006"
 \end_inset
 
 .
- This machine-learning algorithm (which can be used supervisedly, unsupervisedly
-, as well as semi-supervisedly) was shown to be able to learn from images
+ This machine-learning algorithm (which can be used unsupervisedly, supervisedly, as well as semi-supervisedly) was shown to be able to learn from images
  of objects or faces, where the objects or faces are in different lighting
  conditions or are viewed from different angles (
 \begin_inset CommandInset citation
@@ -981,7 +980,8 @@ Back-propagation
 
 \begin_layout Standard
 Before deep learning, artificial neuronal networks were usually trained
- using back-propagation.
+ using only back-propagation without regularizations.
+ Back-propagation learns from labeled samples the weights and biases of an artificial neuronal network.
  (TODO: cite Rumelhart, D.
  E., Hinton, G.
  E., and Williams, R.
@@ -1222,25 +1222,87 @@ DBN
 DBN).
 \end_layout
 
+\begin_layout Paragraph
+Regularizations for Training Artificial Neuronal Networks
+\end_layout
+
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: vor _introduction.lyx_ (also der Motivation, DBNs auf expression data
- anzuwenden) muss ich hier grob Autoassociators, DBNs, und _deep_learning_
- erklären.
- TODO: new paragraph: Motivation for using Deep Belief Networks on expression
- data.
-\end_layout
-
-\begin_layout Plain Layout
-NOTE: the following is the content of file _introduction.lyx_.
-\end_layout
-
+Several regularization methods have been developed over the years. They have in common that they artificially constrain the search space of weights and biases in order to let the model find better error minima or to prevent overfitting, that means that the neuronal network does less 
+\begin_inset Quotes eld
 \end_inset
+learning by heart
+\begin_inset Quotes erd
+\end_inset
+ and make its predictions more general.
+\end_layout
 
+\begin_layout Paragraph
+L1 and L2 Weight Decay Regularization
+\end_layout
 
+\begin_layout Standard
+L1 weight decay decreases the absolute value of each weight in each training iteration, in order to prevent large weights. This can be necessary because for some training samples, some weights tend to escape, i.e. become larger and larger in value. L1 weight decay multiplies all weights $w_ij$ with $c$, where $c$ is a constant meta-parameter between 0 and 1. (TODO: check this)
+\end_layout
+
+\begin_layout Paragraph
+L2 weight decay is similar to L1 weight decay but penalizes large weights even more. It assigns the weights $w_ij := w_ij - c * \sqrt(w_ij*w_ij)$, where $c$ is a constant meta-parameter between 0 and 1. (TODO: check this)
+\end_layout
+
+\begin_layout Paragraph
+Dropout Regularization
+\end_layout
+
+\begin_layout Paragraph
+Dropout is a regularization method to make the nodes in the hidden layers, which can be seen as feature detectors, more independent from each other (TODO: cite Dropout: A Simple Way to Prevent Neural Networks from Overfitting). This is enforced by omitting (or 
+\begin_inset Quotes eld
+\end_inset
+dropping
+\begin_inset Quotes erd
+\end_inset
+) in a layer a random subset of nodes from computing the layers after that layer. Its meta-parameter is a single value
+\begin_inset Formula $d$
+\end_inset
+ between 0 and 1 for each layer, the fraction of nodes whose input and output weights should temporarily be set to 0 during one learning iteration. This makes the incoming activations in the layer after the current layer smaller by the factor
+\begin_inset Formula $d$
+\end_inset
+ on average. During prediction (or testing) time, no node is dropped out, and the value
+ \begin_inset Formula $d$
+\end_inset
+ is set to 1, so that all nodes are used in calculating the output. To compensate for the larger average activation input in the next layer, all incoming weights are multiplied by the factor
+ \begin_inset Formula $d$
+\end_inset
+.
+The theory behind dropout is that for a network with
+\begin_inset Formula $d$
+\end_inset
+ nodes, there are 
+\begin_inset Formula $2^{n}$
+\end_inset
+ possible ways to drop out nodes and a network trained with dropout implicitly averages its output over all these 
+\begin_inset Formula $2^{n}$
+\end_inset
+ networks with shared weights. Dropping out a random fraction of nodes prevents single nodes from co-adapting to the specific working of a large number of other nodes.
+\end_layout
+
+\begin_layout Paragraph
+Regularization: Sparsity
+\end_layout
+
+\begin_layout Standard
+Sparsity regularization is a method to make only a small fraction of nodes output an activation different from zero. This helps to generalize the output, and also makes neuronal networks more interpretable. It has at least one meta-parameter, $s$, the fraction of nodes that should be active within a neuronal network layer.
+TODO: HIER WEITERMACHEN, INDEM ICH NACH PAPERS SUCHE UND ZITIERE, DIE SPARSITY BESCHREIBEN.
+\end_layout
+
+\begin_layout Paragraph
+Early stopping
+\end_layout
+
+\begin_layout Standard
+Early stopping is not really a regularization method, but nevertheless a method to prevent overfitting in supervised training of an artificial neuronal network. It is used by splitting the training data set into a real training data set and a validation data set, and using only the real training data set for adapting the weights and biases during learning. After each learning iteration, the validation data set is used to compute the output error of the current network. After a defined number of training iterations, the neuronal network that had the lowest output error on the validation data set is used as the final network to be used in making predictions.
+\end_layout
+
+\begin_layout Standard
+This prevents the training procedure from overfitting to sampling error present in the training data set.
 \end_layout
 
 \begin_layout Paragraph
