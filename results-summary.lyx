@@ -550,7 +550,7 @@ To dissect the nonlinear contribution, we took a relatively simple approach
  In most applications of deep learning there is some algorithm involved
  to multiply the number of available training data sets.
  For example, in image classification the training images are usually translated
- by pixel or subpixel shifts, or by small non-linear deformations using
+ by pixel or subpixel shifts, or small non-linear deformations are applied using
  a warped mesh.
  This has the effect that a local feature of an input training image (for
  example, a red pixel on green background) is present in different input
@@ -567,7 +567,7 @@ Having such a transformation for expression data would be very useful, not
  learning algorithms.
  However, it is not at all clear what a pre-processing equivalent to the
  local image deformations could look like for mRNA abundance.
- Straightforward application of the principle would provide the neuronal
+ Straightforward application of the image deformation scheme would provide the neuronal
  network with input for a gene in the dimension of a maybe completely unrelated
  gene.
  (Note that adding some sort of noise onto the expression levels would be
@@ -575,7 +575,7 @@ Having such a transformation for expression data would be very useful, not
  the image.) A possible approach could be to look for gene modules that consist
  of redundant genes, and permute their expression values among the redundacy
  group.
- This would require knowledge about gene modules in advance .
+ This would require knowledge about gene modules in advance.
 \end_layout
 
 \begin_layout Itemize
