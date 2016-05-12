@@ -576,6 +576,7 @@ Having such a transformation for expression data would be very useful, not
  of redundant genes, and permute their expression values among the redundacy
  group.
  This would require knowledge about gene modules in advance.
+ Maybe I could increase the number of input samples by creating additional samples by composing them of random subsets of other input samples. E.g. take gene 1-1000 from sample 1, gene 1001-2001 from samples 2, and so on. Or maybe even better use gene modules as learned by an RBM (see the _hub_features_ in Figure S3 of "~/zusammenfassung/applications/Bioinformatics-2016-Chen-bioinformatics_btw074-supplementary.pdf"). The algorithm would work like this: Determine for each _measured_ input sample the gene hub activation (by training an RBM or unsupervised DBN on all input samples). This results in a vector of numbers, one vector for each input sample; each number stands for one gene hub activation. Permute the gene hub activations between the learned representations, but only use representations from samples that have the same class label. Due to the number of permutations this creates a large number of labeled training samples (each training sample is labeled like the measured samples used in the training sample generation). Use these generated training samples as input for a supervised DBN.
 \end_layout
 
 \begin_layout Itemize
