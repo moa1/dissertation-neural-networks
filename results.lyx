@@ -1,0 +1,176 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Paragraph
+Reasons for choosing GSE25055, and GSE25065 as the data set
+\end_layout
+
+\begin_layout Standard
+Originally I wanted to find a data set that had something to do with drug sensitivity and resistance. Therefore a GEO (TODO: cite GEO) database search was conducted. All data sets uploaded to GEO between January 1st 2000, and August 31st 2013 were considered and searched for "sensitiv" and "resist". The ones having a match in title or abstract were sorted by the number of samples in the data set. GSE25055 and GSE25065 were among those that really had something to do with drug sensitivity and had a relatively high sample count.
+\end_layout
+
+\begin_layout Standard
+GSE25055 and GSE25065 are data sets produced for the same paper, namely (TODO: cite the GEO25055 paper, I think it is by Hatzis et al.). In this paper, GSE25055 was used to generate a classifier for the prognosis of breast cancer patients that received reductive surgery followed by taxane-anthracycline chemotherapy. The tissue extracted in reductive surgery was measured on HG-U133A microarrays. After 2 years, the patients were labeled as either
+\begin_inset Quotes eld
+\end_inset
+pCR
+\begin_inset Quotes erd
+\end_inset
+ meaning 
+\begin_inset Quotes eld
+\end_inset
+pathologic complete response (there was no sign of a remaining breast cancer)
+\begin_inset Quotes erd
+\end_inset
+ or
+\begin_inset Quotes eld
+\end_inset
+RD
+\begin_inset Quotes erd
+\end_inset
+ meaning there was still
+\begin_inset Quotes eld
+\end_inset
+residual disease
+\begin_inset Quotes erd
+\end_inset
+. The classifier was then tested on an independently measured data set, GSE25065. The classifier's performance was tested based on (TODO: review something about the results of the GSE25055 paper by Hatzis & Symmans).
+\end_layout
+
+\begin_layout Paragraph
+Goal of this work
+\end_layout
+
+\begin_layout Standard
+The goal of this work was to find out whether incorporating unlabeled expression data in the training of deep artificial neuronal networks enhances a classifier's performance. This was tested for two types of neuronal networks that lend themselves for semi-supervised training: auto-encoders and deep belief networks. Parallel to these, the performance of a semi-supervised version of Support Vector Machines, namely the Transductive SVM was evaluated.
+Four normalization methods were tried: two microarray normalization methods were tried: Robust Multi-Chip Average (RMA) (TODO: cite), MAS5 (TODO: cite). These were tried without or with subsequent ComBat (TODO: cite) batch-effect correction.
+Two prediction goals were tried: (TODO: look up the exact labels that were used for prediction. One label was on a data set whose prediction reached an accuracy (of about 75%) that is equal to the accuracy reached by betting on the larger group (see ~/uni-publication/progress_report_201411/progress_report_20141118.pdf), and one label didn't work, that is, it did not enhance the classifiers' accuracies. (see ~/uni-publication/progress_report_201507/presentation-20150707.pdf)).
+As we will see, none of the attempts with artificial neuronal networks showed that adding unlabeled data in training leads to better classifiers. However, also TSVM did not show improvement when adding unlabeled data to training. I therefore think that it is probably the fault of the data set. Contrary to the data sets (hand-written digit classification and graphical object recognition) on which the discussed artificial neuronal networks were developed, expression data sets have sizes, which are some magnitudes smaller. This is probably due to the price of microarrays (and RNASeq), which are magnitudes larger than the prices to take pictures of hand-written digits or objects.
+\end_layout
+
+\begin_layout Paragraph
+Issues in running /deepnet/
+\end_layout
+
+\begin_layout Standard
+/deepnet/ (TODO: cite) is a neuronal network implementation written by Nitish Srivastava and uses a matrix library written by Krishevski (TODO: oder so). It can run on NVIDIA graphics cards supporting CUDA. Due to graphics cards having a highly parallel architecture, this means faster training times. However, because graphics cards have to process large data, their RAM is more expensive than normal RAM for PCs. In the Regensburg Athene NVIDIA computers, there are 4 GB of RAM installed. Because /deepnet/ loads all data sets at the beginning of computation onto the graphics card, this means that the data sets may not be larger than 4 GB.
+However, as mentioned, the matrix library can also run on the normal floating-point unit of normal PC. There was a bug in /deepnet/ when run on 64-bit processors, which I fixed. (TODO: include the bugfix here). Most of the data sets were trained on rhskl11, which has 128GB of RAM (TODO: or 256GB?), which was more than enough for the data sets tested.
+\end_layout
+
+\begin_layout Paragraph
+How unlabeled data was used in training Auto-Encoders
+\end_layout
+
+\begin_layout Paragraph
+Because Auto-Encoders (TOOD: add index entry) are composed of an encoder and a decoder and the encoder tries to compress the input data and the decoder tries to reconstruct the input from its compressed form, training them is unsupervised. The unlabeled data are therefore handled like the labeled data, because the label is unused in training the autoencoder.
+\end_layout
+
+\begin_layout Paragraph
+The decoder network of the trained autoencoder was then thrown away, so that only the encoder remained. Classification was done on the compressed respresentation of the input. The classifier network was built on top of the encoder, and the compressed output layer of the encoder was connected to the input layer of the classifier.
+(TODO: Bild wie unten auf Slide 7 von ~/uni-publication/progress_report_201411/progress_report_20141118.pdf einfügen.)
+The weights of the classifier were initialized randomly, and standard back-propagtion was used to train the whole network to classify samples. This means that the encoder can be modified by back-propagation training, but pre-training with the auto-encoder initializes it to a configuration that 
+\begin_inset Quotes eld
+\end_inset
+knows
+\begin_inset Quotes erd
+\end_inset
+ about the unlabeled samples. The learning rate of the second training run should be small enough not to diverge from the unlabeled training configuration in too large steps (per iteration).
+\end_layout
+
+\begin_layout Paragraph
+How unlabeled data was used in training Deep Belief Networks
+\end_layout
+
+\begin_layout Paragraph
+Settings for /deepnet/ that work with the breast cancer data set
+\end_layout
+
+\begin_layout Paragraph
+Learn rate: /base_epsilon/
+\end_layout
+
+\begin_layout Standard
+One of the crucial settings when training artificial neuronal networks is the learning rate. It is named /base_epsilon/ in /deepnet/. It controls by what factor the gradient of each weight is multiplied with to influence the parameters of the neuronal network in the next iteration.
+The following settings for /base_epsilon/ were tried: 1.0, 0.1, 0.01, 0.001, 0.0001.
+TODO: insert the table in section "1 breast_cancer_02 a-e" from "notes/breast_cancer_02" with subtitle here.
+TODO: insert the graph in section "1.1 training step vs. training error T_E" from "notes/breast_cancer_02" with subtitle here.
+\end_layout
+
+\begin_layout Paragraph
+(TODO: describe here all tested features of deepnet and illustrate with results from .../nnet/notes/.)
+\end_layout
+
+\begin_layout Standard
+\end_layout
+
+
+\end_body
+\end_document
