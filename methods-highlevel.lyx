@@ -706,8 +706,8 @@ Supervised and Unsupervised Machine Learning
 \end_layout
 
 \begin_layout Standard
-In artificial neuronal networks, the goals of learning are defined by humans.
-In machine learning in general, there are two major types of learning: supervised
+In artificial neuronal networks, the goals of learning are defined by humans.In
+ machine learning in general, there are two major types of learning: supervised
 \begin_inset Index idx
 status collapsed
 
@@ -802,15 +802,17 @@ semi-supervised learning
 \end_layout
 
 \end_inset
+
  In contrast to supervised machine learning, which has for every input pattern
  a corresponding target output pattern, semi-supervised learning does not
  need a target output pattern for every input pattern.
  However, in contrast to fully unsupervised machine learning, it does need
  some labeled input data sets.
- Semi-supervised machine learning algorithms often try to find underlying structure
- in all input data sets and then use the known labels to assign probable
- labels to the found structure (or just the unlabeled input samples).
- This assumes that samples close in the (high-dimensional) input space probably have the same label.
+ Semi-supervised machine learning algorithms often try to find underlying
+ structure in all input data sets and then use the known labels to assign
+ probable labels to the found structure (or just the unlabeled input samples).
+ This assumes that samples close in the (high-dimensional) input space probably
+ have the same label, or conversely, that samples distant from each other probably have different labels.
  There are two types of semi-supervised learning: transductive and inductive
  semi-supervised learning.
  The goal of transductive semi-supervised learning
@@ -822,9 +824,9 @@ transductive semi-supervised learning
 \end_layout
 
 \end_inset
- is to predict the class
- label of a pre-specified list of unlabeled input patterns, while the goal
- of inductive
+
+ is to predict the class label of a pre-specified list of unlabeled input
+ patterns, while the goal of inductive
 \begin_inset Index idx
 status open
 
@@ -833,9 +835,10 @@ inductive semi-supervised learning
 \end_layout
 
 \end_inset
- semi-supervised learning is to find a universal rule mapping
- from the space of input patterns to class labels, which could be applied
- to classify unknown, future input patterns.
+
+ semi-supervised learning is to find a universal rule mapping from the space
+ of input patterns to class labels, which could be applied to classify unknown,
+ future input patterns.
  In case unknown, future input patterns are to be classified using transductive
  semi-supervised machine learning, the whole model may have to be re-evaluated.
 \end_layout
@@ -942,7 +945,8 @@ key "HintonTeh2006"
 \end_inset
 
 .
- This machine-learning algorithm (which can be used unsupervisedly, supervisedly, as well as semi-supervisedly) was shown to be able to learn from images
+ This machine-learning algorithm (which can be used unsupervisedly, supervisedly
+, as well as semi-supervisedly) was shown to be able to learn from images
  of objects or faces, where the objects or faces are in different lighting
  conditions or are viewed from different angles (
 \begin_inset CommandInset citation
@@ -994,7 +998,8 @@ Back-propagation
 \begin_layout Standard
 Before deep learning, artificial neuronal networks were usually trained
  using only back-propagation without regularizations.
- Back-propagation learns from labeled samples the weights and biases of an artificial neuronal network.
+ Back-propagation learns from labeled samples the weights and biases of
+ an artificial neuronal network.
  (TODO: cite Rumelhart, D.
  E., Hinton, G.
  E., and Williams, R.
@@ -1055,6 +1060,7 @@ autoassociator
 \end_layout
 
 \end_inset
+
 .
  The algorithm is unsupervised and iteratively constructs deeper and deeper
  networks.
@@ -1249,13 +1255,19 @@ Regularizations for Training Artificial Neuronal Networks
 \end_layout
 
 \begin_layout Standard
-Several regularization methods have been developed over the years. They have in common that they artificially constrain the search space of weights and biases in order to let the model find better error minima or to prevent overfitting, that means that the neuronal network does less 
+Several regularization methods have been developed over the years.
+ They have in common that they artificially constrain the search space of
+ weights and biases in order to let the model find better error minima or
+ to prevent overfitting, that means that the neuronal network does less
+ 
 \begin_inset Quotes eld
 \end_inset
+
 learning by heart
 \begin_inset Quotes erd
 \end_inset
- and make its predictions more general.
+
+ and instead make its predictions more general.
 \end_layout
 
 \begin_layout Paragraph
@@ -1263,51 +1275,113 @@ L1 and L2 Weight Decay Regularization
 \end_layout
 
 \begin_layout Standard
-L1 weight decay decreases the absolute value of each weight in each training iteration, in order to prevent large weights. This can be necessary because for some training samples, some weights tend to escape, i.e. become larger and larger in value. L1 weight decay multiplies all weights $w_ij$ with $c$, where $c$ is a constant meta-parameter between 0 and 1. (TODO: check this)
+L1 weight decay decreases the absolute value of each weight in each training
+ iteration, in order to prevent large weights.
+ This can be necessary because for some training samples, some weights tend
+ to escape, i.e.
+ become larger and larger in value.
+ L1 weight decay multiplies all weights 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ with 
+\begin_inset Formula $c$
+\end_inset
+
+, where 
+\begin_inset Formula $c$
+\end_inset
+
+ is a constant meta-parameter between 0 and 1.
+ (TODO: check this)
 \end_layout
 
-\begin_layout Paragraph
-L2 weight decay is similar to L1 weight decay but penalizes large weights even more. It assigns the weights $w_ij := w_ij - c * \sqrt(w_ij*w_ij) * \sgn(w_ij)$, where $c$ is a constant meta-parameter between 0 and 1. (TODO: check this)
+\begin_layout Standard
+L2 weight decay is similar to L1 weight decay but penalizes large weights
+ even more.
+ It assigns the weights 
+\begin_inset Formula $w_{ij}:=w_{ij}-c\sqrt{w_{ij}w_{ij}}sgn(w_{ij})$
+\end_inset
+
+(TODO: check this), where 
+\begin_inset Formula $c$
+\end_inset
+
+ is a constant meta-parameter between 0 and 1, and 
+\begin_inset Formula $sgn(x)$
+\end_inset
+
+ is the sign function, that returns -1, 0, 1 for negative, zero, positive
+ 
+\begin_inset Formula $x$
+\end_inset
+
+, respectively.
 \end_layout
 
 \begin_layout Paragraph
 Dropout Regularization
 \end_layout
 
-\begin_layout Paragraph
-Dropout is a regularization method to make the nodes in the hidden layers, which can be seen as feature detectors, more independent from each other (TODO: cite Dropout: A Simple Way to Prevent Neural Networks from Overfitting). This is enforced by omitting (or 
+\begin_layout Standard
+Dropout is a regularization method to make the nodes in the hidden layers,
+ which can be seen as feature detectors, more independent from each other
+ (TODO: cite Dropout: A Simple Way to Prevent Neural Networks from Overfitting).
+ This is enforced by omitting (or 
 \begin_inset Quotes eld
 \end_inset
+
 dropping
 \begin_inset Quotes erd
 \end_inset
-) in a layer a random subset of nodes from computing the layers after that layer. Its meta-parameter is a single value, between 0 and 1 for each layer, the 
+
+) in a layer a random subset of nodes from computing the layers after that
+ layer.
+ Its meta-parameter is a single value, between 0 and 1 for each layer, the
+ 
 \emph on
 dropout rate
 \emph default
  
 \begin_inset Formula $d$
 \end_inset
-. It is the fraction of nodes in the layer whose input and output weights should temporarily be set to 0 during one learning iteration. This makes the incoming activations in the layer after the current layer smaller by the factor
-\begin_inset Formula $d$
-\end_inset
- on average. During prediction (or testing) time, no node is dropped out, and the value
- \begin_inset Formula $d$
-\end_inset
- is set to 1, so that all nodes are used in calculating the output. To compensate for the larger average activation input in the next layer, all incoming weights are multiplied by the factor
- \begin_inset Formula $d$
-\end_inset
+
 .
-The theory behind dropout is that for a network with
+ It is the fraction of nodes in the layer whose input and output weights
+ should temporarily be set to 0 during one learning iteration.
+ This makes the incoming activations in the layer after the current layer
+ smaller by the factor
 \begin_inset Formula $d$
 \end_inset
+
+ on average.
+ During prediction (or testing) time, no node is dropped out, and the value
+ 
+\begin_inset Formula $d$
+\end_inset
+
+ is set to 1, so that all nodes are used in calculating the output.
+ To compensate for the larger average activation input in the next layer,
+ all incoming weights are multiplied by the factor 
+\begin_inset Formula $d$
+\end_inset
+
+.The theory behind dropout is that for a network with
+\begin_inset Formula $d$
+\end_inset
+
  nodes, there are 
 \begin_inset Formula $2^{n}$
 \end_inset
- possible ways to drop out nodes and a network trained with dropout implicitly averages its output over all these 
+
+ possible ways to drop out nodes and a network trained with dropout implicitly
+ averages its output over all these 
 \begin_inset Formula $2^{n}$
 \end_inset
- networks with shared weights. Dropping out a random fraction of nodes prevents single nodes from co-adapting to the specific working of a large number of other nodes.
+
+ networks with shared weights.
+ Dropping out a random fraction of nodes prevents single nodes from co-adapting
+ to the specific working of a large number of other nodes.
 \end_layout
 
 \begin_layout Paragraph
@@ -1315,8 +1389,17 @@ Regularization: Sparsity
 \end_layout
 
 \begin_layout Standard
-Sparsity regularization is a method to make only a small fraction of nodes output an activation different from zero. This helps to generalize the output, and also makes neuronal networks more interpretable. It has at least one meta-parameter, $s$, the fraction of nodes that should be active within a neuronal network layer.
-TODO: HIER WEITERMACHEN, INDEM ICH NACH PAPERS SUCHE UND ZITIERE, DIE SPARSITY BESCHREIBEN.
+Sparsity regularization is a method to make only a small fraction of nodes
+ output an activation different from zero.
+ This helps to generalize the output, and also makes neuronal networks more
+ interpretable.
+ It has at least one meta-parameter, 
+\begin_inset Formula $s$
+\end_inset
+
+, the fraction of nodes that should be active within a neuronal network
+ layer.TODO: HIER WEITERMACHEN, INDEM ICH NACH PAPERS SUCHE UND ZITIERE,
+ DIE SPARSITY BESCHREIBEN.
 \end_layout
 
 \begin_layout Paragraph
@@ -1324,11 +1407,22 @@ Early stopping
 \end_layout
 
 \begin_layout Standard
-Early stopping is not really a regularization method, but nevertheless a method to prevent overfitting in supervised training of an artificial neuronal network. It is used by splitting the training data set into a real training data set and a validation data set, and using only the real training data set for adapting the weights and biases during learning. After each learning iteration, the validation data set is used to compute the output error of the current network. After a defined number of training iterations, the neuronal network that had the lowest output error on the validation data set is used as the final network to be used in making predictions.
+Early stopping is not really a regularization method, but nevertheless a
+ method to prevent overfitting in supervised training of an artificial neuronal
+ network.
+ It is used by splitting the training data set into a real training data
+ set and a validation data set, and using only the real training data set
+ for adapting the weights and biases during learning.
+ After each learning iteration, the validation data set is used to compute
+ the output error of the current network.
+ After a defined number of training iterations, the neuronal network that
+ had the lowest output error on the validation data set is used as the final
+ network to be used in making predictions.
 \end_layout
 
 \begin_layout Standard
-This prevents the training procedure from overfitting to sampling error present in the training data set.
+This prevents the training procedure from overfitting to sampling error
+ present in the training data set.
 \end_layout
 
 \begin_layout Paragraph
@@ -1408,7 +1502,16 @@ In face recognition for example, an abstract representation might have a
 \end_layout
 
 \begin_layout Paragraph
-Previous Work: Gene Expression inference with deep learning
+Transductive Support Vector Machine
+\end_layout
+
+\begin_layout Standard
+Another (and older) semi-supervised algorithm is the Transductive Support Vector Machine, which, despite the name, supports transductive as well as inductive learning. A standard Support Vector Machine searches for a decision boundary such that the margin between samples with differing labels is maximal. The TSVM seeks a labeling of the unlabeled samples so that the decision boundary has the maximal margin between all samples with differing classes.
+TODO: Cite TSVM here. TSVM is mentioned in the wikipedia article 'semi-supervised learning'.
+\end_layout
+
+\begin_layout Paragraph
+Previous Work: Gene Expression Inference With Deep Learning
 \end_layout
 
 \begin_layout Standard
@@ -1455,6 +1558,7 @@ k-Nearest Neighbor
 \end_layout
 
 \end_inset
+
 (kNN
 \begin_inset Index idx
 status collapsed
@@ -1464,14 +1568,38 @@ kNN
 \end_layout
 
 \end_inset
-). During
- training, they determined $k$ of the landmark genes with expression value
- closest to each target gene $i$ (let's call this set of genes $knn_i$)
- in the training data set. During testing, they predicted the expression
- value of the target gene $i$ as the average of the gene's $knn_i$ expression
- values in the testing data set.
- The optimal $k$ (number of genes to average over) was chosen based on a
- validation data set.
+
+).
+ During training, they determined a number, 
+\begin_inset Formula $k$
+\end_inset
+
+, of landmark genes with expression value closest to each target gene
+ 
+\begin_inset Formula $i$
+\end_inset
+
+ (let's call this set of genes 
+\begin_inset Formula $knn_{i}$
+\end_inset
+
+) in the training data set.
+ During testing, they predicted the expression value of the target gene
+ 
+\begin_inset Formula $i$
+\end_inset
+
+ as the average of the gene's 
+\begin_inset Formula $knn_{i}$
+\end_inset
+
+ expression values in the testing data set.
+ The optimal 
+\begin_inset Formula $k$
+\end_inset
+
+ (number of genes to average over) was chosen based on a validation data
+ set.
 \end_layout
 
 \begin_layout Standard
@@ -1490,9 +1618,8 @@ The input values were quantile normalized expression values between 4 and
  The neuronal network-based average prediction errors were between 0.3421
  and 0.3204, with the network having 3 hidden layers of size 9000, and 10%
  dropout rate performing best.
- Because the input expression
- values were between 4 and 15, an average prediction error of 0.3204 implies
- an average error of about 3% on the GEO dataset.
+ Because the input expression values were between 4 and 15, an average predictio
+n error of 0.3204 implies an average error of about 3% on the GEO dataset.
 \end_layout
 
 \begin_layout Standard
@@ -1523,12 +1650,13 @@ In another dataset, AUTHORS_YEAR used the GEO dataset for training, the
 \begin_layout Standard
 Learning in this data set, where multiple input sources were combined, is
  therefore prone to the batch-effect.
- Nevertheless, the performance ranking of the methods is the same, but worse than the data set without batch-effect.
+ Nevertheless, the performance ranking of the methods is the same, but worse
+ than the data set without batch-effect.
  KNN scored worst, with an average prediction error of 0.6520.
  Linear regression with L1-regularization had an average prediction error
  of 0.5667.
- Linear regression without regularization and with L2-regularization had an average
- prediction error of 0.4702.
+ Linear regression without regularization and with L2-regularization had
+ an average prediction error of 0.4702.
  The artificial neuronal networks all scored consistently better than KNN
  and linear regression, with the artificial neuronal network with 2 hidden
  layers of size 9000, and 25% dropout rate having the lowest prediction
@@ -1554,18 +1682,16 @@ oinformatics_btw074-supplementary.pdf, Figure S3, that there seem to be hub
 
 \end_layout
 
-\begin_layout Standard
-TODO: Describe TSVM here. TSVM is mentioned in the wikipedia article 'semi-supervised learning'.
-\end_layout
-
 \begin_layout Paragraph
 Overview of Own Work
 \end_layout
 
 \begin_layout Standard
-In the work that is described in the following part, we used auto-associators, Deep Belief Networks, and TSVMs on expression data to predict whether breast cancer patients will show pathologic complete response to chemotherapy or residual disease.
+In the work that is described in the following, we used auto-associators,
+ Deep Belief Networks, and TSVMs on expression data to predict whether breast
+ cancer patients will show pathologic complete response to chemotherapy
+ or residual disease.
 \end_layout
-
 
 \begin_layout Standard
 \begin_inset CommandInset bibtex
