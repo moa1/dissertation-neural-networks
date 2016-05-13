@@ -106,42 +106,23 @@ GSE25055 and GSE25065 are data sets produced for the same paper, namely
  (TODO: cite the GEO25055 paper, I think it is by Hatzis et al.).
  In this paper, GSE25055 was used to generate a classifier for the prognosis
  of breast cancer patients that received reductive surgery followed by taxane-an
-thracycline chemotherapy.
+thracycline chemotherapy. All patients had ERBB2 (HER2 or HER2/neu)-negative breast cancer.
  The tissue extracted in reductive surgery was measured on Affymetrix HG-U133A microarrays.
- After approximately 3 years, the patients were labeled as either
- (TODO: CONTINUE HERE)
+ After a mean of 3 years, the patients were labeled as either showing pathologic complete response (
 \begin_inset Quotes eld
 \end_inset
 
 pCR
 \begin_inset Quotes erd
 \end_inset
-
- meaning 
-\begin_inset Quotes eld
-\end_inset
-
-pathologic complete response (there was no sign of a remaining breast cancer)
-\begin_inset Quotes erd
-\end_inset
-
- or
+; class 1; there was no sign of a remaining breast cancer) to chemotherapy or residual disease (
 \begin_inset Quotes eld
 \end_inset
 
 RD
 \begin_inset Quotes erd
 \end_inset
-
- meaning there was still
-\begin_inset Quotes eld
-\end_inset
-
-residual disease
-\begin_inset Quotes erd
-\end_inset
-
-.
+; class 0; there was still cancerous tissue).
  The classifier was then tested on an independently measured data set, GSE25065.
  The classifier's performance was tested based on (TODO: review something
  about the results of the GSE25055 paper by Hatzis & Symmans).
@@ -152,11 +133,12 @@ Goal of this work
 \end_layout
 
 \begin_layout Standard
-The goal of this work was to find out whether incorporating unlabeled expression
+The goals of this work were: 1. to find out whether incorporating unlabeled expression
  data in the training of deep artificial neuronal networks enhances a classifier
 's performance.
- This was tested for two types of neuronal networks that lend themselves
- for semi-supervised training: auto-encoders and deep belief networks.
+2. to assess performance of the classifier on an independently measured data set.
+ Two types of neuronal networks that lend themselves
+ for semi-supervised training were used: auto-encoders and deep belief networks.
  Parallel to these, the performance of a semi-supervised version of Support
  Vector Machines, namely the Transductive SVM was evaluated.Four normalization
  methods were tried: two microarray normalization methods were tried: Robust
@@ -270,7 +252,57 @@ knows
 \end_layout
 
 \begin_layout Paragraph
+Training Iterations and Evaluations
+\end_layout
+
+\begin_layout Standard
+We trained for a pre-determined number of iterations (/deepnet/ setting /stopcondition.steps/ in train.pbtxt), often 1,000,000 iterations, and usually evaluated the neuronal network after every 500 iterations (/deepnet/ setting /eval_after/ in train.pbtxt). Evaluation means computing the training set, validation set, and testing set reconstruction error (in unsupervised training) or accuracy (in supervised training). The neuronal network itself was usually saved every 10,000 iterations (/deepnet/ setting /checkpoint_after/ in train.pbtxt).
+\end_layout
+
+\begin_layout Paragraph
+Model selection
+\end_layout
+
+\begin_layout Standard
+Because training an artificial neuronal network is an iterative process, there are as many models as there are iterations. The question is which one to choose. We did not use "early stopping", but selected the neuronal network that was best among all evaluated iterations.
+\end_layout
+
+\begin_layout Standard
+We normally did not use any model selection for the unsupervised training, since the reconstruction error plots of pre-training using auto-encoder or RBM did not show overfitting on the validation data set. Instead we selected the neuronal network from the last iteration that was computed.
+
+\begin_inset Note Note
+status open
+\begin_layout Plain Layout
+a validation data set for unsupervised training was defined for breast_cancer_12, see ~/nnet/notes/breast_cancer_12/reconstruction-error-*.
+\end_layout
+\end_inset
+\end_layout
+
+\begin_layout Standard
+We used model selection in training the (supervised) classifiers, because training a neuronal network for too many iterations using back-propagation has the tendency to overfit the training data and generalize poorly on the validation and test data. This means we defined three data sets: a training data set, which was used to iteratively train the neuronal network; a validation data set, which was used to pick the model (see below); a test data set, which was used to evaluate the accuracy of the neuronal network picked using the validation data set.
+\end_layout
+
+\begin_layout Standard
+Usually model selection works by picking the neuronal network defined in the iteration with the highest validation data set accuracy. However, we sometimes had only few labeled samples in the validation data set. This led to a very coarse resolution in accuracy plots, and also to noisy validation data set accuracy plots, which often jittered (TODO: i want to say "wackelt") between two accuracies from one iteration to the next. We therefore smoothed each of the validation set accuracies, and test set accuracies using the standard R "loess" smoother with a span of 0.125. Then we selected the iteration where the smoothed validation set accuracy was highest, and reported the smoothed test set accuracy at that iteration.
+(TODO: insert example plot (with figure text) of loess smoothed accuracies, like in .../nnet/notes/breast_cancer_12/smoothed_accuracy-aa.png)
+\end_layout
+
+\begin_layout Standard
+Note that this procedure allows reporting test set accuracies which seem impossible. For example in a test set with 10 members, only an accuracy in {0, 0.1, 0.2, ..., 1} would seem possible, but smoothing allows all rational numbers between 0 and 1.
+\end_layout
+
+\begin_layout Paragraph
+How unlabeled data was used when pre-training a Restricted Boltzmann Machine and fine-tuning using back-propagation
+\end_layout
+
+\begin_layout Standard
+\end_layout
+
+\begin_layout Paragraph
 How unlabeled data was used in training Deep Belief Networks
+\end_layout
+
+\begin_layout Standard
 \end_layout
 
 \begin_layout Paragraph
@@ -308,8 +340,9 @@ deepnet
 \emph default
 .
  It controls by what factor the gradient of each weight is multiplied with
- to influence the parameters of the neuronal network in the next iteration.The
- following settings for 
+ to influence the parameters of the neuronal network in the next iteration.
+ If it is too large, the neuronal network will oscillate and make too large steps between iterations, so that it will not be able to ascend an energy optimum. If it is too small, learning will take too long. 
+ The following settings for 
 \emph on
 
 \begin_inset Formula $base\textrm{\_}epsilon$
@@ -320,12 +353,43 @@ deepnet
  were tried: 1.0, 0.1, 0.01, 0.001, 0.0001.(TODO: insert the table in section
  "1 breast_cancer_02 a-e" from "notes/breast_cancer_02" with subtitle here.)
  (TODO: insert the graph in section "1.1 training step vs.
- training error T_E" from "notes/breast_cancer_02" with subtitle here.)
+ training error T_E" from "notes/breast_cancer_02" with figure caption here.)
 \end_layout
 
 \begin_layout Paragraph
 (TODO: describe here all tested features of deepnet and illustrate with
  results from .../nnet/notes/.)
+\end_layout
+
+\begin_layout Paragraph
+breast_cancer_06: Increasing number of labeled samples
+\end_layout
+
+\begin_layout Standard
+TODO: Hier die Ergebnisse aus breast_cancer_06.lyx einfügen.
+\end_layout
+
+\begin_layout Paragraph
+breast_cancer_07: Increasing number of labeled samples, with equal number of class labels
+\end_layout
+
+\begin_layout Standard
+To check whether the artificial neuronal networks work at all, we created a training data set that is composed of multiple labeled data sets of an increasing number of labeled samples.
+(TODO: hier die tabelle mit absteigender anzahl an samples in ~/nnet/notes/breast_cancer_07/breast_cancer_07.lyx ganz oben einfügen.
+TODO: die tabelle aus dem testing data set einfügen.)
+\end_layout
+
+\begin_layout Standard
+Only the 500 most variable genes were used.
+ The training and validation data sets are generated from subsets of GSE25055. Each training data set has an equal number of samples from class 0 and class 1. The validation data sets contain a larger number of class 0 samples.
+ The test data set is composed of all GSE25065 samples.
+ If we were to bet on the larger test set class we would achieve an accuracy of $140/182=0.769$.
+\end_layout
+
+\begin_layout Standard
+The following machine learning algorithms were tested on this data set: SVM, TSVM, supervised classification with unsupervised pre-trained RBM, supervised classification with unsupervised pre-trained autoencoder, supervised classification without pre-training.
+(TODO: hier die plots aus .../nnet/notes/breast_cancer_07/breast_cancer_07.lyx einfügen, ein plot pro algorithmus.)
+(TODO: hier die ganze section 7 mitsamt confusion table und histogram aus .../nnet/notes/breast_cancer_07/breast_cancer_07.lyx einfügen.)
 \end_layout
 
 \end_body
