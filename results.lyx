@@ -1832,6 +1832,9 @@ reference "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
 \end_inset
 
 .
+ Unsupervised training was done on data set breast_cancer_02, which consists
+ of (TODO: look up whether I'm correct in guessing that breast_cancer_02
+ consists of all GSE25055 samples).
 \end_layout
 
 \begin_layout Standard
@@ -2820,6 +2823,61 @@ Settings for pre-training RBMs breast_cancer_04_bg - bj.
 
 \end_layout
 
+\begin_layout Standard
+The corresponding reconstruction errors at the input layer are shown in
+ figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/toniz/uni/publication/zusammenfassung/images/plot-bg_bj.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
+
+\end_inset
+
+Reconstruction errors of training (T_E), validation (V_E) and testing (E_E)
+ data sets for unsupervised training of an RBM with configurations breast_cancer
+_04_bg, bh, bi, bj.
+ The y-axis is the reconstruction error, and the x-axis the training step
+ of neuronal network training.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 breast_cancer_06_aa - ad: supervised classification with unsupervisedly
  pre-trained RBM
@@ -2834,6 +2892,17 @@ reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 \end_inset
 
 .
+ Note that the only differences are the number of nodes in hidden layer
+ 1 (setting 
+\begin_inset Formula $dimensions$
+\end_inset
+
+) and the pre-trained weights and biases between the input layer and hidden
+ layer 1 (setting 
+\begin_inset Formula $pretrained\textrm{\_}model$
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -3954,12 +4023,21 @@ name "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 
 \end_inset
 
-Settings for the classifier using an unsupervisedly pre-trained RBM trained
- on data set breast_cancer_06.
+Settings for the classifiers breast_cancer_04_aa - ad.
+ Each classifier is initialized using an unsupervisedly pre-trained RBM,
+ and trained supervisedly on data set breast_cancer_06.
+ The only difference between the four configurations is the hidden layer
+ 1 size (
+\begin_inset Formula $dimensions$
+\end_inset
+
+) and initialization (
+\begin_inset Formula $pretrained\textrm{\_}model$
+\end_inset
+
+).
  No entry in a cell means that it has the same value as the cell to the
  left.
- (TODO: finish based on ~/uni/nnet/configs/breast_cancer_06_aa/templates/model_s
-upervised.pbtxt)
 \end_layout
 
 \end_inset
@@ -3973,99 +4051,150 @@ upervised.pbtxt)
 \end_layout
 
 \begin_layout Standard
+For each of the 
+\begin_inset Formula $5$
+\end_inset
+
+ differently sized training data sets, for each of the 
+\begin_inset Formula $5$
+\end_inset
+
+ repetitions, and for each of the 
+\begin_inset Formula $4$
+\end_inset
+
+ differently pre-trained RBMs, the a supervisedly trained classifier was
+ trained.
+ So altogether 
+\begin_inset Formula $5*5*4=100$
+\end_inset
+
+ classifiers were trained.
+ Performance was then assessed through the accuracy, as shown in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../../nnet/notes/breast_cancer_06/loess-aa_ad.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
+
+\end_inset
+
+Bar plots showing the accuracies of the models breast_cancer_06_aa - ad.
+ Each panel shows one of the four configurations breast_cancer_06_aa - ad.
+ In each panel, the x-axis shows the increasing numbers of labeled samples
+ in the 5 different data sets.
+ The y-axis shows the (smoothed) accuracy of the model on the testing set
+ GSE25065 at the network iteration where the smoothed validation data set
+ accuracy was maximal.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Surprisingly, the neuronal network accuracies do not improve with increasing
+ number of labeled samples.
+ Instead it seems that the classifiers using the least and most (18 and
+ 302) samples perform best, and all others (especially those using 76 samples)
+ perform worst.
+\end_layout
+
+\begin_layout Standard
+However, when examining the predictions of model breast_cancer_06_aa, it
+ becomes evident that the training is sub-optimal, because label 0 is predicted
+ almost exclusively.
+ 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: rephrase: Using the same supervised learning parameters as were used
- for breast_cancer_04_ak - _an, I'll train a classifier to predict pathologic
- response using a pre-trained 1-layer RBM.
-\end_layout
-
-\begin_layout Plain Layout
-As template configurations I'll use breast_cancer_04_da - _dd.
-\end_layout
-
-\begin_layout Plain Layout
-For each of the different pre-trained RBMs and for each of the 
-\begin_inset Formula $5*5=25$
+TODO: rephrase: I am looking at the representation of the output layer of
+ the classifier breast_cancer_06_aa when trained on labeled data _n302_cv1.
+ I'm counting the number of cases predicted to have label 
+\begin_inset Quotes eld
 \end_inset
 
- cross-validations the performance of a supervisedly trained classifier
- is assessed.
- So we train 
-\begin_inset Formula $25*4=100$
+RD
+\begin_inset Quotes erd
 \end_inset
 
- classifiers.
+(0) or 
+\begin_inset Quotes eld
+\end_inset
+
+pCR
+\begin_inset Quotes erd
+\end_inset
+
+(1) in the training, validation, and testing data set.
+ This means I look at the output layer when feeding the neural network (the
+ _LAST trained one; note that I should improve this by determining the network
+ training step which is closest to the one which produces the best result
+ on the validation data; I did this for 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/nnet/outputs/breast_cancer_06_aa/_n302_cv1
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The step at which the model performs best on the validation data is 95500.
+ The representation there (output file 
+\begin_inset Quotes eld
+\end_inset
+
+breast_cancer_03_classifier_1417182351
+\begin_inset Quotes erd
+\end_inset
+
+) is all zeroes) the samples at the input layer.
+ There are two output neurons at the classifier output layer.
+ Here is a table of the predicted classes:
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="6">
+<lyxtabular version="3" rows="4" columns="3">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-config
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-outputs
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -4080,34 +4209,7 @@ outputs
 \begin_inset Text
 
 \begin_layout Plain Layout
-hidden layer 1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-step
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-s_E_Acc
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-SE_s_E_Acc
+label 0
 \end_layout
 
 \end_inset
@@ -4116,7 +4218,7 @@ SE_s_E_Acc
 \begin_inset Text
 
 \begin_layout Plain Layout
-misc
+label 1
 \end_layout
 
 \end_inset
@@ -4127,7 +4229,7 @@ misc
 \begin_inset Text
 
 \begin_layout Plain Layout
-breast_cancer_06_aa
+training
 \end_layout
 
 \end_inset
@@ -4136,34 +4238,7 @@ breast_cancer_06_aa
 \begin_inset Text
 
 \begin_layout Plain Layout
-breast_cancer_04_bg
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+240
 \end_layout
 
 \end_inset
@@ -4172,7 +4247,7 @@ breast_cancer_04_bg
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2
 \end_layout
 
 \end_inset
@@ -4183,7 +4258,7 @@ breast_cancer_04_bg
 \begin_inset Text
 
 \begin_layout Plain Layout
-breast_cancer_06_ab
+validation
 \end_layout
 
 \end_inset
@@ -4192,34 +4267,7 @@ breast_cancer_06_ab
 \begin_inset Text
 
 \begin_layout Plain Layout
-breast_cancer_04_bh
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+58
 \end_layout
 
 \end_inset
@@ -4228,63 +4276,7 @@ breast_cancer_04_bh
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-breast_cancer_06_ac
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-breast_cancer_04_bi
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+2
 \end_layout
 
 \end_inset
@@ -4295,7 +4287,7 @@ breast_cancer_04_bi
 \begin_inset Text
 
 \begin_layout Plain Layout
-breast_cancer_06_ad
+testing
 \end_layout
 
 \end_inset
@@ -4304,34 +4296,7 @@ breast_cancer_06_ad
 \begin_inset Text
 
 \begin_layout Plain Layout
-breast_cancer_04_bj
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+182
 \end_layout
 
 \end_inset
@@ -4340,7 +4305,7 @@ breast_cancer_04_bj
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0
 \end_layout
 
 \end_inset
@@ -4351,6 +4316,10 @@ breast_cancer_04_bj
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+I think the heavy bias for label 0 is due to the breast_cancer_06 data
 \end_layout
 
 \end_inset
