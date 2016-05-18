@@ -1805,10 +1805,6 @@ Testing set for data set breast_cancer_06.
 \end_layout
 
 \begin_layout Standard
-TODO: Hier die Ergebnisse aus breast_cancer_06.lyx einfügen.
-\end_layout
-
-\begin_layout Standard
 Models of data set breast_cancer_06 were trained using SVM, TSVM, back-propagati
 on using a pre-trained RBM, back-propagation using a pre-trained autoencoder,
  and back-propagation without pre-training.
@@ -4134,61 +4130,46 @@ Surprisingly, the neuronal network accuracies do not improve with increasing
  perform worst.
 \end_layout
 
+\begin_layout Paragraph
+breast_cancer_06_ae - ah: supervised classification with unsupervised pre-traine
+d autoencoder
+\end_layout
+
 \begin_layout Standard
-However, when examining the predictions of model breast_cancer_06_aa, it
- becomes evident that the training is sub-optimal, because label 0 is predicted
- almost exclusively.
+When training a neuronal network using back-propagation that was pre-trained
+ using auto-encoder, the resulting accuracy plots look similar to the ones
+ when pre-training with an RBM (plots not shown).
+\end_layout
+
+\begin_layout Paragraph
+Examining the output of breast_cancer_06_aa/_n302_cv1
+\end_layout
+
+\begin_layout Standard
+However, when examining the predictions of model breast_cancer_06_aa/_n302_cv1
+ (the first network pre-trained on 302 samples), it becomes evident that
+ the training is sub-optimal, because label 0 is predicted almost exclusively.
+\end_layout
+
+\begin_layout Standard
+The step at which the network performs best on the validation data set is
+ 95,500.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:predictions-of-breast_cancer_06_aa/_n302_cv1"
+
+\end_inset
+
+ shows the predicted classes.
  
-\begin_inset Note Note
+\begin_inset Float table
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-TODO: rephrase: I am looking at the representation of the output layer of
- the classifier breast_cancer_06_aa when trained on labeled data _n302_cv1.
- I'm counting the number of cases predicted to have label 
-\begin_inset Quotes eld
-\end_inset
-
-RD
-\begin_inset Quotes erd
-\end_inset
-
-(0) or 
-\begin_inset Quotes eld
-\end_inset
-
-pCR
-\begin_inset Quotes erd
-\end_inset
-
-(1) in the training, validation, and testing data set.
- This means I look at the output layer when feeding the neural network (the
- _LAST trained one; note that I should improve this by determining the network
- training step which is closest to the one which produces the best result
- on the validation data; I did this for 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/nnet/outputs/breast_cancer_06_aa/_n302_cv1
-\begin_inset Quotes erd
-\end_inset
-
-.
- The step at which the model performs best on the validation data is 95500.
- The representation there (output file 
-\begin_inset Quotes eld
-\end_inset
-
-breast_cancer_03_classifier_1417182351
-\begin_inset Quotes erd
-\end_inset
-
-) is all zeroes) the samples at the input layer.
- There are two output neurons at the classifier output layer.
- Here is a table of the predicted classes:
-\end_layout
-
-\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="3">
 <features rotate="0" tabularvalignment="middle">
@@ -4319,12 +4300,33 @@ testing
 \end_layout
 
 \begin_layout Plain Layout
-I think the heavy bias for label 0 is due to the breast_cancer_06 data
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:predictions-of-breast_cancer_06_aa/_n302_cv1"
+
+\end_inset
+
+Predictions of the network breast_cancer_06_aa/_n302_cv1.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is a heavy bias in favor of label 0.
+ Our hypothesis was that this is due to the uneven class label distribution
+ in data set breast_cancer_06.
+ Therefore, the next data set was balanced in this regard.
 \end_layout
 
 \begin_layout Paragraph
@@ -4334,8 +4336,21 @@ breast_cancer_07: Increasing number of labeled samples, with equal number
 
 \begin_layout Standard
 To check whether the artificial neuronal networks work at all, we created
- a training data set that is composed of multiple labeled data sets of a
- decreasing number of labeled samples.
+ a training data set that is composed of multiple labeled data sets with
+ a decreasing number of labeled samples.
+ In contrast to data set breast_cancer_06, each data set contains as many
+ label 0 samples as label 1 samples.
+\end_layout
+
+\begin_layout Standard
+The testing data set is still all GSE25065 samples, see table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Testing-set-for-breast_cancer_06"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4918,9 +4933,7 @@ rep
 
 \end_inset
 
-(TODO: hier die tabelle mit absteigender anzahl an samples in ~/nnet/notes/breas
-t_cancer_07/breast_cancer_07.lyx ganz oben einfügen.TODO: die tabelle aus
- dem testing data set einfügen.)
+
 \end_layout
 
 \begin_layout Standard
@@ -4928,22 +4941,26 @@ Only the 500 most variable genes were used.
  The training and validation data sets are generated from subsets of GSE25055.
  Each training data set has an equal number of samples from class 0 and
  class 1.
- The validation data sets contain a larger number of class 0 samples.
+ Due to there being only 57 label 1 samples in GSE25055, the validation
+ data sets contain a larger number of class 0 samples, however.
  The test data set is composed of all GSE25065 samples.
  Each data set was drawn 5 times from the legal samples for the respective
  data set.
- This is to repeat the experiment 5 times and be able to obtain error bars
- for the accuracies.
+ This is to repeat the experiment 5 times and to be able to obtain error
+ bars for the accuracies.
 \end_layout
 
 \begin_layout Standard
 If we were to bet on the larger test set class we would achieve an accuracy
- of $140/182=0.769$, because the test set contains 140 label 0 samples, but
- only 42 label 1 samples.
+ of 
+\begin_inset Formula $140/182=0.769$
+\end_inset
+
+, because the test set contains 140 label 0 samples, but only 42 label 1
+ samples.
  However, because the training data set contains an equal number of label
  0 and label 1 samples, the test set accuracy should not be as biased as
  data set breast_cancer_06, whose training data set is imbalanced.
- (TODO: write something about breast_cancer_06.)
 \end_layout
 
 \begin_layout Standard
@@ -4954,6 +4971,1442 @@ The following machine learning algorithms were tested on this data set:
 _cancer_07/breast_cancer_07.lyx einfügen, ein plot pro algorithmus.)(TODO:
  hier die ganze section 7 mitsamt confusion table und histogram aus .../nnet/notes/
 breast_cancer_07/breast_cancer_07.lyx einfügen.)
+\end_layout
+
+\begin_layout Paragraph
+SVM accuracy on breast_cancer-07
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../../nnet/notes/breast_cancer_07/svm-performance/accuracies-svm-testing.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Accuracy-bar-plots-of-SVM-on-breast_cancer_07"
+
+\end_inset
+
+Accuracy bar plots of SVM predicting the testing data set of breast_cancer_07.
+ On the x-axis are the sizes of the data sets containing an increasing number
+ of labeled samples.
+ On the y-axis are the accuracies obtained on the testing data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-bar-plots-of-SVM-on-breast_cancer_07"
+
+\end_inset
+
+ shows there is the tendency that adding more samples to supervised learning
+ yields better accuracy, using both the validation (plot not shown) and
+ the testing set to predict on.
+\end_layout
+
+\begin_layout Paragraph
+TSVM performance
+\end_layout
+
+\begin_layout Standard
+TSVM can utilize incomplete and unlabelled data to improve supervised classifica
+tion (
+\begin_inset Quotes eld
+\end_inset
+
+transductive SVM
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+See ~/uni/nnet/notes/breast_cancer_07/svmlight-performance.
+\end_layout
+
+\begin_layout Standard
+TODO: create accuracy plots like for SVM.
+\end_layout
+
+\begin_layout Paragraph
+breast_cancer_07_aa - ad: supervised classification with unsupervised pre-traine
+d RBM
+\end_layout
+
+\begin_layout Standard
+The settings for the training run breast_cancer_07_aa - ad were the same
+ as those for breast_cancer_06_aa - ad (see table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The accuracy plots in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-bar-plots-of-breast_cancer_07_aa-ad"
+
+\end_inset
+
+show that all 4 neuronal networks perform better, the more labeled samples
+ there are in training.
+ In addition the variance of the accuracies decreases, the more labeled
+ samples there are in training.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../../nnet/notes/breast_cancer_07/accuracies-aa_ad.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Accuracy-bar-plots-of-breast_cancer_07_aa-ad"
+
+\end_inset
+
+Accuracy bar plots of a feed-forward neuronal network pre-trained with an
+ RBM, predicting the testing data set of breast_cancer_07.
+ On the x-axis are the sizes of the data sets containing an increasing number
+ of labeled samples.
+ On the y-axis are the accuracies obtained on the testing data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+breast_cancer_07_ae - ah: supervised classification with unsupervised pre-traine
+d autoencoder
+\end_layout
+
+\begin_layout Standard
+(TODO: settings erklären?)
+\end_layout
+
+\begin_layout Standard
+Pre-training with an autoencoder yields similar accuracy plots to pre-training
+ with an RBM, as is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ae-ah"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../../nnet/notes/breast_cancer_07/accuracies-ae_ah.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Accuracy-bar-plots-of-breast_cancer_07_ae-ah"
+
+\end_inset
+
+Accuracy bar plots of a feed-forward neuronal network pre-trained with an
+ autoencoder, predicting the testing data set of breast_cancer_07.
+ On the x-axis are the sizes of the data sets containing an increasing number
+ of labeled samples.
+ On the y-axis are the accuracies obtained on the testing data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+breast_cancer_07_ai - aj: Supervised classification without pre-training
+\end_layout
+
+\begin_layout Standard
+Finally, in breast_cancer_07 we trained the neuronal networks with no pre-traini
+ng at all.
+ The 
+\emph on
+deepnet
+\emph default
+ settings are shown in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:deepnet-settings-for-breast_cancer_07_ai-aj"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="22" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+network instance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+_07_ai
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+_07_aj
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+network setting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $base\textrm{\_}epsilon$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $activation$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LOGISTIC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $initial\textrm{\_}momentum$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $final\_momentum$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $momentum\textrm{\_}change\textrm{\_}steps$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dropout$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+true
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+false
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dropout\textrm{\_}prob$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $apply\textrm{\_}l2\textrm{\_}decay$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+true
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $l2\textrm{\_}decay$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+input layer setting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dimensions$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dropout\textrm{\_}prob$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+hidden layer 1 setting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dimensions$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $initialization$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CONSTANT
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+output layer setting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dimensions$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $loss\textrm{\_}function$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CROSS_ENTROPY
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $activation$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SOFTMAX
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dropout$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+false
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:deepnet-settings-for-breast_cancer_07_ai-aj"
+
+\end_inset
+
+Settings for the classifiers breast_cancer_07_ai - aj.
+ Each classifier is trained supervisedly on data set breast_cancer_07.
+ The only difference between the two configurations is the use of 
+\begin_inset Formula $dropout$
+\end_inset
+
+ in breast_cancer_07_ai.
+ No entry in a cell means that it has the same value as the cell to the
+ left.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../../nnet/notes/breast_cancer_07/accuracies-ai_aj.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Accuracy-bar-plots-of-breast_cancer_07_ai-aj"
+
+\end_inset
+
+Accuracy bar plots of feed-forward neuronal networks not pre-trained, predicting
+ the testing data set of breast_cancer_07.
+ On the x-axis are the sizes of the data sets containing an increasing number
+ of labeled samples.
+ On the y-axis are the accuracies obtained on the testing data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The accuracy plots are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ai-aj"
+
+\end_inset
+
+.
+ As can be seen, using 
+\begin_inset Formula $dropout$
+\end_inset
+
+ in breast_cancer_07_ai yields better accuracies than not using it in in
+ breast_cancer_07_aj.
+ In addition, comparing (e.g.
+ breast_cancer_07_ai) with the neuronal networks pre-trained using RBM or
+ auto-encoder (e.g.
+ breast_cancer_07_ag) seems to indicate a slight advantage of not using
+ pre-training (but using dropout) in the data sets with little labeled samples.
+\end_layout
+
+\begin_layout Standard
+As seen in the above sections, the accuracies of the classifiers on breast_cance
+r_07 are lower than those on breast_cancer_06, indicating the higher difficulty
+ of the classification task when the labels are balanced.
+\end_layout
+
+\begin_layout Paragraph
+Examining the output of breast_cancer_07_aa/_n090_cv1
+\end_layout
+
+\begin_layout Standard
+Like for breast_cancer_06, we looked at the output of one of the neuronal
+ networks trained on data set breast_cancer_07.
+ As can be seen in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:predictions-of-breast_cancer_07_aa"
+
+\end_inset
+
+ and in contrast to the predictions on data set breast_cancer_06, the predicted
+ classes are now more balanced.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+label 0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+label 1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+training
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+44
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+46
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+validation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+38
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+22
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+testing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+117
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+65
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:predictions-of-breast_cancer_07_aa"
+
+\end_inset
+
+Labels predicted by breast_cancer_07_aa/_n090_cv1 on training, validation,
+ and testing data set.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Confusion table on the test set samples
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+true
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+label 0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+label 1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+predicted label 0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+101
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+predicted label 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+39
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+26
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Confusion table of the predictions made by breast_cancer_07_aa/_n090_cv1
+ (which was trained on 90 labeled samples) on the testing data set of data
+ set breast_cancer_07.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A confusion table was made on the predictions on the testing data set.
+ It shows that most predicted label 1 samples are actually label 0 samples
+ (
+\begin_inset Formula $\frac{39}{39+26}$
+\end_inset
+
+).
+ Of the true label 0 samples, 
+\begin_inset Formula $\frac{101}{101+39}\approx0.72$
+\end_inset
+
+ are classified correctly, and 
+\begin_inset Formula $\frac{26}{26+16}\approx0.62$
+\end_inset
+
+ of the true label 1 samples.
+\end_layout
+
+\begin_layout Standard
+The predicted probabilities of the true class of the mis-classified samples
+ (i.e.
+ those not on the main diagonal) can be displayed in a histogram: (TODO:
+ insert histogram here)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/moa07570/uni/nnet/representations/breast_cancer_07_aa/true-label-probabilities-of-misclassified-samples.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The histogram shows that the probabilities for the true class of mis-classified
+ samples are not mostly near 0.5, but in the middle of the possible range.
+ (0.5 is the maximum probability, otherwise the sample would not be mis-classifie
+d.)
 \end_layout
 
 \end_body
