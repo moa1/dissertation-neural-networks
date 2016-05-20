@@ -74,7 +74,7 @@ Reasons for choosing GSE25055 and GSE25065 as the data set
 \end_layout
 
 \begin_layout Standard
-Originally I wanted to find a data set that had something to do with drug
+Originally we wanted to find a data set that had something to do with drug
  sensitivity and resistance.
  Therefore a GEO (TODO: cite GEO) database search was conducted.
  All data sets uploaded to GEO between January 1st 2000, and August 31st
@@ -575,7 +575,7 @@ As we will see, none of the attempts with artificial neuronal networks showed
  that adding unlabeled data in training leads to better classifiers.
  However, also TSVM did not show improvement when adding unlabeled data
  to training.
- I therefore think that it is probably the fault of the data set.
+ We therefore think that it is probably the fault of the data set.
  Contrary to the data sets (hand-written digit classification and graphical
  object recognition) on which the discussed artificial neuronal networks
  were developed, and on which they are among the best-performing predictors,
@@ -3085,7 +3085,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/plot-bg_bj.png
+	filename images/breast_cancer_04-plot-bg_bj.png
 
 \end_inset
 
@@ -4331,7 +4331,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/loess-aa_ad.png
+	filename images/breast_cancer_06-loess-aa_ad.png
 
 \end_inset
 
@@ -5238,7 +5238,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/accuracies-svm-testing.png
+	filename images/breast_cancer_07-accuracies-svm-testing.png
 
 \end_inset
 
@@ -5349,7 +5349,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/accuracies-aa_ad.png
+	filename images/breast_cancer_07-accuracies-aa_ad.png
 
 \end_inset
 
@@ -5413,7 +5413,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/accuracies-ae_ah.png
+	filename images/breast_cancer_07-accuracies-ae_ah.png
 
 \end_inset
 
@@ -6218,7 +6218,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/accuracies-ai_aj.png
+	filename images/breast_cancer_07-accuracies-ai_aj.png
 
 \end_inset
 
@@ -6464,7 +6464,7 @@ Confusion table on the test set samples
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
+\begin_inset Float table
 wide false
 sideways false
 status open
@@ -6661,7 +6661,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/true-label-probabilities-of-misclassified-samples.png
+	filename images/breast_cancer_07-true-label-probabilities-of-misclassified-samples.png
 
 \end_inset
 
@@ -6770,7 +6770,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+data source
 \end_layout
 
 \end_inset
@@ -6817,7 +6817,7 @@ data set 4
 \begin_inset Text
 
 \begin_layout Plain Layout
-# labeled training
+labeled training
 \end_layout
 
 \end_inset
@@ -6873,7 +6873,7 @@ GSE25055
 \begin_inset Text
 
 \begin_layout Plain Layout
-# unlabeled training
+unlabeled training
 \end_layout
 
 \end_inset
@@ -6985,7 +6985,7 @@ GSE25065
 \begin_inset Text
 
 \begin_layout Plain Layout
-# labeled validation
+labeled validation
 \end_layout
 
 \end_inset
@@ -7097,7 +7097,7 @@ GSE25065
 \begin_inset Text
 
 \begin_layout Plain Layout
-# labeled testing
+labeled testing
 \end_layout
 
 \end_inset
@@ -7171,7 +7171,7 @@ repeats
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+5
 \end_layout
 
 \end_inset
@@ -7314,7 +7314,8 @@ proportions 0:1
 \begin_inset Quotes erd
 \end_inset
 
- describes the proportions of label 0 and label 1 samples in the 
+ describes the relative proportions of label 0 and label 1 samples in the
+ 
 \begin_inset Quotes eld
 \end_inset
 
@@ -7521,11 +7522,10 @@ reference "tab:design-of-breast_cancer_08"
 \end_inset
 
 .
- The 4 different normalization pre-processing combinations are: RMA/MAS5,
- batch effect correction using combat: yes/no.
- These steps are done in this order: first RMA/MAS5 normalization and summarizat
-ion (to default HG_U133A probe sets), then combat (if enabled), then splitting
- of the data matrices into the sub-data-sets according to table 
+ The normalization steps are done in this order: first RMA/MAS5 normalization
+ and summarization (to default HG_U133A probe sets), then combat (if enabled),
+ then splitting of the data matrices into the sub-data-sets according to
+ table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:design-of-breast_cancer_08"
@@ -7535,8 +7535,622 @@ reference "tab:design-of-breast_cancer_08"
 .
 \end_layout
 
+\begin_layout Standard
+(TODO: maybe before showing the accuracies, show the reconstruction error
+ table from ~/uni/nnet/notes/breast_cancer_08/breast_cancer_08.lyx Section
+ 
+\begin_inset Quotes eld
+\end_inset
+
+sub:bb_ic-Reconstruction-error-plots
+\begin_inset Quotes erd
+\end_inset
+
+.)
+\end_layout
+
 \begin_layout Paragraph
-breast_cancer_08: 
+breast_cancer_08: supervised classification with unsupervised pre-trained
+ autoencoder
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rma-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mas5-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/breast_cancer_08-accuracies-testing-bb_bx.png
+	lyxscale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/breast_cancer_08-accuracies-testing-by_cu.png
+	lyxscale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rma_combat-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mas5_combat-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/breast_cancer_08-accuracies-testing-ep_fl.png
+	lyxscale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/breast_cancer_08-accuracies-testing-fm_gi.png
+	lyxscale 20
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: remove from plot the columns for data sets 5,6,7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:accuracy-plots-for-breast_cancer_08"
+
+\end_inset
+
+Box-plot for neuronal network prediction pre-trained with an autoencoder
+ on the 4 differently normalized data sets rma-data.pbtxt, mas5-data.pbtxt,
+ rma_combat-data.pbtxt, and mas5_combat-data.pbtxt.
+ The box-plot shows on the x-axis the 4 data sets, and on the y-axis the
+ achieved accuracies on the testing data set for each of the 5 repetitions.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Different normalizations
+\end_layout
+
+\begin_layout Standard
+When comparing the accuracies yielded by the different normalizations to
+ each other, a table of the mean accuracies for each normalization and data
+ sets 1-4 is helpful.
+ See table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Mean-accuracies-for-each-normalization"
+
+\end_inset
+
+ for such a table.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="5">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+normalization
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+data set
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rma-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.65
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.67
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.69
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.67
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mas5-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.58
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.58
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.63
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.61
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rma_combat-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.61
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.61
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.62
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.61
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+mas5_combat-data.pbtxt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.63
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.64
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Mean-accuracies-for-each-normalization"
+
+\end_inset
+
+Mean accuracies for each normalization and data set in breast_cancer_08.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It shows the following:
+\end_layout
+
+\begin_layout Itemize
+rma-data.pbtxt (i.e.
+ without Combat pre-processing) out-performs all other tested combinations
+ of normalization method and pre-processing in all data sets tested.
+\end_layout
+
+\begin_layout Itemize
+RMA seems to perform consistently better than MAS5 (an exception is data
+ set 3 with Combat pre-processing).
+\end_layout
+
+\begin_layout Itemize
+Using Combat as pre-processing leads to worse accuracies on the RMA-normalized
+ data, but improves accuracies when using MAS5 (except in data set 3).
+\end_layout
+
+\begin_layout Paragraph
+ZCA normalization
+\end_layout
+
+\begin_layout Standard
+We also tried applying ZCA normalization to all 4 normalizations tried above.
+ This step helped in face recognition, for example (TODO: cite the (a bit
+ older, maybe from 1999?) paper from Toronto).
+ However, for our data set it resulted in random classifiers, i.e.
+ their accuracies were around 0.5.
+\end_layout
+
+\begin_layout Standard
+(TODO: write what ZCA does in images (contrast enhacement?) and hypothesize
+ why this does not help in expression data.)
+\end_layout
+
+\begin_layout Paragraph
+Does adding unlabeled samples help in semi-supervised neuronal network training?
+\end_layout
+
+\begin_layout Standard
+Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:accuracy-plots-for-breast_cancer_08"
+
+\end_inset
+
+ shows the accuracies box plots for the different normalizations tried.
+ None of the plots show a clear increasing accuracy from data set 1 to data
+ set 4.
+ However, the silhouette of the box-plots of 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:accuracy-plot-for-breast_cancer_08-mas5_combat-data.pbtxt"
+
+\end_inset
+
+ shows an increasing accuracy.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+silhouette
+\begin_inset Quotes erd
+\end_inset
+
+ means, for each data set, the interval from the accuracy of the repetition
+ with lowest to the accuracy of the repetition with highest accuracy; or
+ differently, the maximal outliers.
+ In addition, the median of the accuracies of data set 1 is greater than
+ the median of the accuracies of both data set 3 and 4, for every normalization.
+ The fact that the median of the accuracies of data set 2 is not always
+ greater than the median of the accuracies of data set 1 could be due to
+ randomness in data subsampling when creating the 5 repetitions.
+ Another reason could be that only 28 additional unlabeled samples (
+\begin_inset Formula $29-15=14$
+\end_inset
+
+ label 0 samples, and 14 label 1 samples) are not enough to lead to a better
+ pre-trained classifier.
+\end_layout
+
+\begin_layout Standard
+A flaw in the design of the data sets of breast_cancer_08 is that the numbers
+ of label 0 and label 1 samples are not balanced.
+ This is due to the imbalance of the classes in GSE25055 and GSE25065.
+ The next data set, breast_cancer_12, thus has balanced classes in the unlabeled
+ training samples.
 \end_layout
 
 \begin_layout Paragraph
