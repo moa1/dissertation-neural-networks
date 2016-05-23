@@ -131,10 +131,11 @@ key "ByrneDafny1997"
 \end_inset
 
 .
- (TODO: insert the two hand-drawn images here, that I drew: of neurons, and of a synapse)
- In most real neurons, the signal transmission and processing is facilitated
- by alternating small electric (action) potentials (along the axons) and
- chemical transmissions (at chemical synapses between axon and dendrite).
+ (TODO: insert the two hand-drawn images here, that I drew: of neurons,
+ and of a synapse) In most real neurons, the signal transmission and processing
+ is facilitated by alternating small electric (action) potentials (along
+ the axons) and chemical transmissions (at chemical synapses between axon
+ and dendrite).
  The electric potential is transmitted along the dendrites of a neuron,
  and flows to the axon of the neuron, which can lead to the release of neurotran
 smitters in the axon terminals.
@@ -813,7 +814,8 @@ semi-supervised learning
  structure in all input data sets and then use the known labels to assign
  probable labels to the found structure (or just the unlabeled input samples).
  This assumes that samples close in the (high-dimensional) input space probably
- have the same label, or conversely, that samples distant from each other probably have different labels.
+ have the same label, or conversely, that samples distant from each other
+ probably have different labels.
  There are two types of semi-supervised learning: transductive and inductive
  semi-supervised learning.
  The goal of transductive semi-supervised learning
@@ -1507,8 +1509,15 @@ Transductive Support Vector Machine
 \end_layout
 
 \begin_layout Standard
-Another (and older) semi-supervised algorithm is the Transductive Support Vector Machine, which, despite the name, supports transductive as well as inductive learning. A standard Support Vector Machine searches for a decision boundary such that the margin between samples with differing labels is maximal. The TSVM seeks a labeling of the unlabeled samples so that the decision boundary has the maximal margin between all samples with differing classes.
-TODO: Cite TSVM here. TSVM is mentioned in the wikipedia article 'semi-supervised learning'.
+Another (and older) semi-supervised algorithm is the Transductive Support
+ Vector Machine, which, despite the name, supports transductive as well
+ as inductive learning.
+ A standard Support Vector Machine searches for a decision boundary such
+ that the margin between samples with differing labels is maximal.
+ The TSVM seeks a labeling of the unlabeled samples so that the decision
+ boundary has the maximal margin between all samples with differing classes.TODO:
+ Cite TSVM here.
+ TSVM is mentioned in the wikipedia article 'semi-supervised learning'.
 \end_layout
 
 \begin_layout Paragraph
@@ -1575,8 +1584,7 @@ kNN
 \begin_inset Formula $k$
 \end_inset
 
-, of landmark genes with expression value closest to each target gene
- 
+, of landmark genes with expression value closest to each target gene 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1611,7 +1619,7 @@ The input values were quantile normalized expression values between 4 and
 \end_layout
 
 \begin_layout Standard
- k-Nearest Neighbor performed worst, with an average prediction error of
+k-Nearest Neighbor performed worst, with an average prediction error of
  0.5866.
  The three linear regression models performed about equally well, with average
  prediction errors of either 0.3784 or 0.3782, which means that regularization
@@ -1681,6 +1689,39 @@ oinformatics_btw074-supplementary.pdf, Figure S3, that there seem to be hub
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Personalized Medicine
+\end_layout
+
+\begin_layout Standard
+A medium-term goal of medicine is 
+\begin_inset Quotes eld
+\end_inset
+
+personalized medicine
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+personalized medicine
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+, whose goal is to provide (TODO: was heisst zugeschnitten? oder maßgeschneidert
+?) health care for everyone on an individual basis.
+ For example, a standard treatment for breast cancer is chemotherapy, but
+ not all patients profit from this treatment.
+ If there were a predictor that could tell the physicist how likely a patient
+ is to benefit from chemotherapy, and if the chance for complete response
+ to it is small, it could be replaced by another therapy.
+ The goal of this work is to contribute to such a predictor.
 \end_layout
 
 \begin_layout Paragraph
