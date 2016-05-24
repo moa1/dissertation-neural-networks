@@ -11659,6 +11659,14 @@ ncer_12.
 \end_layout
 
 \begin_layout Standard
+The architecture of the DBNs is 500-1000-1000-2000-1, that means the input
+ layer has 500 nodes for the 500 most significant genes, then there are
+ three hidden layers with sizes 1000, 1000, and 2000, and the output layer
+ has 1 node, that outputs the probability that the input sample has label
+ 1.
+\end_layout
+
+\begin_layout Standard
 We reduced the unsupervised learning rate from 
 \begin_inset Quotes eld
 \end_inset
@@ -11724,6 +11732,31 @@ To predict using TSVM, for every repetition and every data set, we joined
  This is because deepnet also has access to these labeled and unlabeled
  samples.
  The testing data set is equivalent to that for deepnet.
+\end_layout
+
+\begin_layout Standard
+The default settings for TSVM were used.
+ In particular, the command lines were similar to the following:
+\end_layout
+
+\begin_layout Verbatim
+
+echo "learning model"
+\end_layout
+
+\begin_layout Verbatim
+
+svm_learn ./input.txt model.model
+\end_layout
+
+\begin_layout Verbatim
+
+echo "classifying testing data"
+\end_layout
+
+\begin_layout Verbatim
+
+svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
 \begin_layout Paragraph
@@ -11899,11 +11932,161 @@ reference "fig:Accuracy-comparison-of-breast_cancer_12"
 
 \begin_layout Standard
 This can be quantified using a paired and two-sided Wilcoxon test.
- It is paired because the labeled training and validation sets are constant
- across data sets 1-6 within a repetition and the only difference is the
- amount of unlabeled data used during training.
+ It is paired over the repetitions because the labeled training and validation
+ sets are constant across data sets 1-6 within a repetition and the only
+ difference is the amount of unlabeled data used during training.
  It is two-sided because we do not know before the experiment which data
  set will perform better than another.
+\end_layout
+
+\begin_layout Standard
+By experiment we mean the predictions that are stored in the accuracies
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-comparison-of-breast_cancer_12"
+
+\end_inset
+
+ when keeping constant the prediction method and sub-data-set of breast_cancer_1
+2, but varying the repetition.
+ This means there are 1 FFN, 5 DBN, 1 SVM, and 6 TSVM experiments.
+\end_layout
+
+\begin_layout Standard
+We could now compare all experiments against all other experiments using
+ a Wilcoxon test.
+ However, this would be 
+\begin_inset Quotes eld
+\end_inset
+
+fishing for significance
+\begin_inset Quotes erd
+\end_inset
+
+, and we would have to correct the significances for multiple testing.
+ If comparing all against all, there are 
+\begin_inset Formula $(1+5+1+6)^{2}=169$
+\end_inset
+
+ comparisons, and we would lose a lot of power due to comparisons that are
+ not interesting.
+ That is why we only compare the experiments in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-comparison-of-breast_cancer_12"
+
+\end_inset
+
+ row-wise and column-wise, because these comparisons allow an interpretation.
+ That way there are only 
+\begin_inset Formula $(1*5)+(1*6)+(1*1)+(5*6)=42$
+\end_inset
+
+ comparisons.
+ We adjust the p-values within each comparison only.
+\end_layout
+
+\begin_layout Paragraph
+Comparison FFN versus DBN
+\end_layout
+
+\begin_layout Standard
+This compares a supervised Feed-Forward Network against a semi-supervised
+ Deep Belief Network.
+\end_layout
+
+\begin_layout Standard
+(TODO: hier the wilcoxon test table from ~/notes/breast_cancer_12/statistics-*)
+\end_layout
+
+\begin_layout Standard
+The lowest adjusted p-value is 0.637, which means there is no significant
+ difference between FFN and DBN.
+\end_layout
+
+\begin_layout Paragraph
+Comparison SVM versus TSVM
+\end_layout
+
+\begin_layout Standard
+This compares a supervised Support Vector Machine against a semi-supervised
+ Transductive Support Vector Machine.
+\end_layout
+
+\begin_layout Standard
+(TODO: hier the wilcoxon test table from ~/notes/breast_cancer_12/statistics-*)
+\end_layout
+
+\begin_layout Standard
+The lowest adjusted p-value is 0.158 between SVM and TSVM on data set 1.
+ Some people consider this significant.
+\end_layout
+
+\begin_layout Paragraph
+Comparison FFN versus SVM
+\end_layout
+
+\begin_layout Standard
+This compares a non-linear Feed-Forward Network against a Support Vector
+ Machine with linear kernel.
+ Both algorithms are supervised.
+\end_layout
+
+\begin_layout Standard
+(TODO: hier the wilcoxon test table from ~/notes/breast_cancer_12/statistics-*)
+\end_layout
+
+\begin_layout Standard
+The p-value is 0.926 and not significant.
+\end_layout
+
+\begin_layout Paragraph
+Comparison DBN versus TSVM
+\end_layout
+
+\begin_layout Standard
+This compares a non-linear Deep Belief Network against a Transductive Support
+ Vector Machine with linear kernel.
+ Both algorithms are semi-supervised.
+\end_layout
+
+\begin_layout Standard
+(TODO: hier the wilcoxon test table from ~/notes/breast_cancer_12/statistics-*)
+\end_layout
+
+\begin_layout Standard
+Due to their p-values being 0.011, the TSVM on data set 1 is significantly
+ better than the DBN on all data sets.
+ In addition, the SVM on data set 2 is significantly better than the DBN
+ on data set 3.
+\end_layout
+
+\begin_layout Standard
+The result that the TSVM is better than the DBN on data set 1, and not on
+ data set 5 or 6, which consist of more unlabeled data, is contrary to the
+ expected hypothesis that a semi-supervised TSVM on more unlabeled samples
+ is better than one on less unlabeled samples.
+\end_layout
+
+\begin_layout Paragraph
+Comparison TSVM versus TSVM
+\end_layout
+
+\begin_layout Standard
+The largest differences in prediction accuracy are within TSVM.
+ Due to it being semi-supervised we are interested whether there are significant
+ accuracy differences within the sub-data-sets of breast_cancer_12.
+\end_layout
+
+\begin_layout Standard
+(TODO: hier the wilcoxon test table from ~/notes/breast_cancer_12/statistics-*)
+\end_layout
+
+\begin_layout Standard
+The lowest adjusted p-value is 0.098 between data set 1 and data set 6.
+ Again, this is contrary to the expected hypothesis that adding unlabeled
+ data to the semi-supervised TSVM is beneficial to the prediction accuracy.
 \end_layout
 
 \begin_layout Paragraph
