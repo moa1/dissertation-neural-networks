@@ -251,6 +251,84 @@ terms introduced, together with the page number they were introduced on.
 \end_layout
 
 \begin_layout Section
+Machine Learning
+\end_layout
+
+\begin_layout Standard
+(TODO: Definition of supervised, unsupervised, and semi-supervised learning.)
+\end_layout
+
+\begin_layout Paragraph
+Generative and Discriminative Models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I'm not sure this belongs here, but I should introduce the concept
+ of a 
+\begin_inset Quotes eld
+\end_inset
+
+Generative Model
+\begin_inset Quotes erd
+\end_inset
+
+ to be able to refer to it later when introducing Deep Belief Networks from
+ RBMs.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An often-cited quote by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vapnik1998"
+
+\end_inset
+
+ is: 
+\begin_inset Quotes eld
+\end_inset
+
+If you possess a restricted amount of information for solving some problem,
+ try to solve the problem directly and never solve a more general problem
+ as an intermediate step.
+ It is possible that the available information is sufficient for a direct
+ solution but is insufficient for solving a more general intermediate problem.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A generative model is such a more general problem: its aim is to model the
+ input data set such that hypothetical samples can be generated from the
+ model which might as well be found in the original input data set.
+\end_layout
+
+\begin_layout Standard
+A discriminative model on the other hand receives the input samples and
+ models the desired output values from these input samples.
+ Usually the desired output values have much lower dimension than the input
+ samples.
+\end_layout
+
+\begin_layout Standard
+An advantage of a generative over a discriminative model is that its parameters
+ are constrained by the number of bits required to encode the training samples,
+ while the parameters of a discriminative model are only constrained by
+ the number of bits required to encode the label.
+\end_layout
+
+\begin_layout Section
 Graphical Models
 \end_layout
 
@@ -326,7 +404,7 @@ edge
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 edge
@@ -842,24 +920,6 @@ TODO: Hier eine Figure mit einem DAG und einem MRF.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: der folgende Satz muss woanders hin.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the following we will consider only variables with discrete values in
- the joint probability distribution.
-\end_layout
-
-\begin_layout Paragraph
 Directed and Undirected Graphical Models
 \begin_inset Note Note
 status open
@@ -951,6 +1011,8 @@ partially directed acyclic graphs
 \end_inset
 
 .
+ We will consider only variables with discrete values in the joint probability
+ distribution.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1004,13 +1066,13 @@ We want to encode a joint probability distribution
 \begin_inset Formula $P$
 \end_inset
 
- into an undirected graph 
+ in an undirected graph 
 \begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
 \end_inset
 
 .
- We know that every random variable corresponds to a node.
- But how to define the edges? They have to do with conditional independencies.
+ Every random variable corresponds to a node.
+ The missing edges encode conditional independencies.
  
 \emph on
 A complete graph 
@@ -1018,7 +1080,7 @@ A complete graph
 would encode no conditional independencies.
  However, to minimize computation time we normally want to get a minimal
  graph that still encodes the joint probability distribution faithfully.
- What properties does 
+ What properties does thee joint probability distribution 
 \begin_inset Formula $P$
 \end_inset
 
@@ -1027,6 +1089,10 @@ would encode no conditional independencies.
 \end_inset
 
  look like?
+\end_layout
+
+\begin_layout Paragraph
+The Hammersley-Clifford theorem
 \end_layout
 
 \begin_layout Standard
@@ -1055,7 +1121,7 @@ key "HammersleyClifford1971"
 
 \end_inset
 
-) is helpful for a formal definition.
+) provides a formal definition.
  It states that when we have a vector of random variables 
 \begin_inset Formula $\mathbf{X}=\{X_{1},\dots,X_{n}\}$
 \end_inset
@@ -1409,8 +1475,8 @@ This means that when we have a strictly positive joint probability distribution
 \begin_inset Formula $P$
 \end_inset
 
-, determine the conditional independencies by considering the local or global
- Markov property, and construct the minimal undirected graph 
+, we can determine the conditional independencies by considering the local
+ or global Markov property, and construct the minimal undirected graph 
 \begin_inset Formula $G$
 \end_inset
 
@@ -1438,34 +1504,7 @@ TODO: conditionally independent on what? I think that's the crux of being
 \end_layout
 
 \begin_layout Standard
-A Markov random field must fulfill the 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: is there a difference between 
-\begin_inset Quotes eld
-\end_inset
-
-global Markov propery
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-Markov property
-\begin_inset Quotes erd
-\end_inset
-
-? There is the local and the global Markov property.
-\end_layout
-
-\end_inset
-
-Markov property.
- That is, a graph 
+On the other hand, if we have a graph 
 \begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
 \end_inset
 
@@ -1477,36 +1516,20 @@ Markov property.
 \begin_inset Formula $\mathbf{E}$
 \end_inset
 
- is not a Markov random field if there are any three sets of nodes not fulfillin
-g the Markov property.
- This means that for all sets of nodes 
-\begin_inset Formula $\mathbf{N_{A}}\subset\mathbf{N}$
+, and local conditional probabilities 
+\begin_inset Formula $P(N\mid\mathbf{N}_{\mathbf{Parents}})$
 \end_inset
 
- and 
-\begin_inset Formula $\mathbf{N_{B}}\subset\mathbf{N}$
-\end_inset
-
- separated by a third set of nodes 
-\begin_inset Formula $\mathbf{N_{S}}\subset\mathbf{N}$
-\end_inset
-
- the corresponding random variables in 
-\begin_inset Formula $\mathbf{N_{A}}$
-\end_inset
-
- must be conditionally independent from the random variables in 
-\begin_inset Formula $\mathbf{N_{B}}$
-\end_inset
-
- given the random variables in the separator 
-\begin_inset Formula $\mathbf{N_{S}}$
+ at each node fulfilling the Markov property, then we can derive from that
+ the joint probability distribution over all random variables, or equivalently
+ over all nodes 
+\begin_inset Formula $\mathbf{N}$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Example of an Undirected Graphical Model
 \end_layout
 
@@ -1875,6 +1898,38 @@ Directed Graphical Models
 \end_layout
 
 \begin_layout Standard
+Directed graphical models are also called 
+\emph on
+Bayesian Networks
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Bayesian Networks
+\end_layout
+
+\end_inset
+
+ or 
+\emph on
+Belief Networks
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Belief Networks
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Like undirected graphical models, directed graphical models represent an
  implicit joint probability distribution over all random variables present
  in the model.
@@ -1896,20 +1951,29 @@ TODO: example figure
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: write a formal definition here.
-\end_layout
-
+A directed graphical model is defined by the directed graph 
+\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
 \end_inset
 
-A directed graphical model is defined by the directed graph, prior probability
- distributions at the nodes that do not have ancestors, and conditional
- probability distributions at the nodes that have ancestors.
+, a prior probability distribution 
+\begin_inset Formula $P(N_{noparents})$
+\end_inset
+
+ at the nodes that do not have parents 
+\begin_inset Formula $\mathbf{N_{noparents}}$
+\end_inset
+
+, and conditional probability distributions 
+\begin_inset Formula $P(N_{hasparents}\mid\mathbf{N_{parents}})$
+\end_inset
+
+ at the nodes that have parents 
+\begin_inset Formula $\mathbf{N_{hasparents}}$
+\end_inset
+
+.
  In the latter nodes the conditional probability distribution may only condition
- on its immediate parents.
+ on its immediate parents, not on distant ancestors.
  The directed graph encodes the set of conditional independencies between
  the random variables: A random variable 
 \begin_inset Formula $X$
@@ -1922,7 +1986,7 @@ A directed graphical model is defined by the directed graph, prior probability
 
  (i.e.
  
-\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{descendant(X)}}$
+\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{descendant(\mathbf{\mathrm{X}})}}$
 \end_inset
 
 ) given the values of the parent variables of 
@@ -1946,7 +2010,7 @@ local Markov property
  of directed graphs):
 \begin_inset Formula 
 \[
-X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(X)}})\mid\mathbf{N_{parent(X)}}
+X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(\mathrm{X})}})\mid\mathbf{N_{parent(\mathrm{X})}}
 \]
 
 \end_inset
@@ -2067,6 +2131,10 @@ P(\mathbf{N})=P(N_{1}=n_{1},N_{2}=n_{2},\dots,N_{n}=n_{n})=\prod_{i=1}^{n}P(N_{i
 .
 \end_layout
 
+\begin_layout Paragraph
+Example how to represent the conditional probability distribution
+\end_layout
+
 \begin_layout Standard
 For example, if the 
 \begin_inset Formula $N_{i}$
@@ -2105,610 +2173,6 @@ For example, if the
 \end_inset
 
  for the values the node itself can assume.)
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-NOTE: I think I explained 
-\begin_inset Quotes eld
-\end_inset
-
-explaining
-\begin_inset Quotes erd
-\end_inset
-
- away in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
-
-\end_inset
-
-, so this TODO can probably be removed.
-\end_layout
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-TODO: explain explaining away for this example: A,B are ancestors, C is
- the child node.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="4">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-A
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-B
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-C=y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-C=n
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-n
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-n
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-5%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-95%
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-n
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-10%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-90%
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-n
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-5%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-95%
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-y
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-70%
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-30%
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Let's say we know from observation that A=y.
- Then the probability for B decreases due to explaining away 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/graphical model/explaining_away/pami93.pdf
-\begin_inset Quotes erd
-\end_inset
-
- says that explaining away can not only decrease but also INCREASE belief:
- (in the abstract) 
-\begin_inset Quotes eld
-\end_inset
-
-The opposite of explaining away also can occur, where the confirmation of
- one cause increases belief in another.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula $P(B)=P(B|C)*P(C)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Generative and Discriminative Models
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I'm not sure this belongs here, but I should introduce the concept
- of a 
-\begin_inset Quotes eld
-\end_inset
-
-Generative Model
-\begin_inset Quotes erd
-\end_inset
-
- to be able to refer to it later when introducing Deep Belief Networks from
- RBMs.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-An often-cited quote by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vapnik1998"
-
-\end_inset
-
- is: 
-\begin_inset Quotes eld
-\end_inset
-
-If you possess a restricted amount of information for solving some problem,
- try to solve the problem directly and never solve a more general problem
- as an intermediate step.
- It is possible that the available information is sufficient for a direct
- solution but is insufficient for solving a more general intermediate problem.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A generative model is such a more general problem: its aim is to model the
- input data set such that hypothetical samples can be generated from the
- model which might as well be found in the original input data set.
-\end_layout
-
-\begin_layout Standard
-A discriminative model on the other hand receives the input samples and
- models the desired output values from these input samples.
- Usually the desired output values have much lower dimension than the input
- samples.
-\end_layout
-
-\begin_layout Standard
-An advantage of a generative over a discriminative model is that its parameters
- are constrained by the number of bits required to encode the training samples,
- while the parameters of a discriminative model are only constrained by
- the number of bits required to encode the label.
-\end_layout
-
-\begin_layout Paragraph
-Bayesian Networks
-\end_layout
-
-\begin_layout Standard
-As said before, directed acyclic graphical models are also called 
-\emph on
-Bayesian Networks
-\emph default
- or 
-\emph on
-Belief Networks
-\emph default
-.
 \end_layout
 
 \begin_layout Subsection
@@ -3470,6 +2934,35 @@ explaining away
 explaining away
 \emph default
 .
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/graphical model/explaining_away/pami93.pdf
+\begin_inset Quotes erd
+\end_inset
+
+ says that explaining away can not only decrease but also INCREASE belief:
+ (in the abstract) 
+\begin_inset Quotes eld
+\end_inset
+
+The opposite of explaining away also can occur, where the confirmation of
+ one cause increases belief in another.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7190,14 +6683,6 @@ TODO Neal shows in (~/uni/publication/zusammenfassung/rbm/A11 Connectionist
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-Machine Learning
-\end_layout
-
-\begin_layout Standard
-Definition of supervised, unsupervised, and semi-supervised learning.
 \end_layout
 
 \begin_layout Section
