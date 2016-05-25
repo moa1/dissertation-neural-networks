@@ -11823,22 +11823,18 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
-
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_learn ./input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
-
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
@@ -23052,15 +23048,6 @@ r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o}
 
  is the number of output samples and is equal to 1, because the labeled
  cases have a binary label.
- Since 
-\begin_inset Formula $r(12)\approx19.8$
-\end_inset
-
-, we choose 
-\begin_inset Formula $h=12$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Paragraph
@@ -23120,7 +23107,437 @@ We choose a reasonably large unlabeled validation data set of 28 samples
 \end_layout
 
 \begin_layout Standard
-The complete data set is shown in table TODO.
+Altogether, there are in the labeled and unlabeled training data 
+\begin_inset Formula $10|10+128|32*4=138|138$
+\end_inset
+
+ samples = 276 samples, when counting the quadrupled label 1 samples as
+ individual samples.
+ When counting the quadrupled samples as only 1 real sample, there are 
+\begin_inset Formula $10|10+128|32=10*2+128+32=180$
+\end_inset
+
+ samples.
+ So 
+\begin_inset Formula $t_{quad}=276$
+\end_inset
+
+, 
+\begin_inset Formula $t_{indiv}=180$
+\end_inset
+
+, 
+\begin_inset Formula $o=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The ratio is then 
+\begin_inset Formula 
+\begin{eqnarray*}
+r(h,t) & = & \frac{22283*t}{22283*h+h*h+h*h+h*o}
+\end{eqnarray*}
+
+\end_inset
+
+.
+ For the 6 different data sets, and 
+\begin_inset Formula $h=10$
+\end_inset
+
+, 
+\begin_inset Formula $r(h,t)$
+\end_inset
+
+ is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="7">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+data set
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{quad}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2*10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2*(10+24)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2*(10+52)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2*(10+76)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2*(10+104)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2*(10+128)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r(10,t_{quad})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.79
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.39
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+22.78
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.57
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $t_{indiv}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2*10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20+24+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20+52+13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20+76+19
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20+104+26
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20+128+32
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r(10,t_{indiv})$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.00
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.49
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.49
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.99
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.98
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As the 
+\begin_inset Formula $r$
+\end_inset
+
+s in the table above are around 20 (for data set 6), both for 
+\begin_inset Formula $t_{quad}$
+\end_inset
+
+ and 
+\begin_inset Formula $t_{indiv}$
+\end_inset
+
+, we choose a hidden layer node size 
+\begin_inset Formula $h=10$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The complete data set is shown in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:design-of-breast_cancer_15"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -24718,6 +25135,12 @@ repeats
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:design-of-breast_cancer_15"
+
+\end_inset
+
 breast_cancer_15 contains 37|37 labeled testing, 10|10 labeled training,
  10|10 labeled validation, 
 \begin_inset Formula $128|32*4$
@@ -24727,7 +25150,23 @@ breast_cancer_15 contains 37|37 labeled testing, 10|10 labeled training,
 \begin_inset Formula $100|25*4$
 \end_inset
 
- unlabeled validation samples.
+ unlabeled validation samples (where 
+\begin_inset Formula $x|y*f$
+\end_inset
+
+ means 
+\begin_inset Formula $x$
+\end_inset
+
+ label 0 samples, and 
+\begin_inset Formula $y$
+\end_inset
+
+ label 1 samples duplicated 
+\begin_inset Formula $f$
+\end_inset
+
+ times).
  6 sub-data-sets are created, with the first one having no unlabeled data
  at all, the last one having 
 \begin_inset Formula $128|32*4$
@@ -24746,31 +25185,6 @@ breast_cancer_15 contains 37|37 labeled testing, 10|10 labeled training,
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: See 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/nnet/datasets/breast_cancer_15/README.lyx
-\begin_inset Quotes erd
-\end_inset
-
- for the 
-\begin_inset Formula $h$
-\end_inset
-
- that above data set definition gives.
 \end_layout
 
 \end_inset
