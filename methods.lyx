@@ -73,6 +73,17 @@ fix-cm
 \begin_body
 
 \begin_layout Standard
+CONTINUE at 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "TODO:continue-here"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -873,7 +884,7 @@ from a set of nodes
 \end_layout
 
 \begin_layout Subsection
-Graphical Models
+Definition of Graphical Models
 \end_layout
 
 \begin_layout Standard
@@ -954,6 +965,20 @@ Bayesian network
 
 \end_inset
 
+ or 
+\emph on
+Belief Networks
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Belief Networks
+\end_layout
+
+\end_inset
+
 , and undirected graphical models are also called 
 \emph on
 Markov random fields
@@ -964,6 +989,20 @@ status collapsed
 
 \begin_layout Plain Layout
 Markov random field
+\end_layout
+
+\end_inset
+
+ or 
+\emph on
+Markov Networks
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Markov Networks
 \end_layout
 
 \end_inset
@@ -1093,6 +1132,13 @@ would encode no conditional independencies.
 
 \begin_layout Paragraph
 The Hammersley-Clifford theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2018,6 +2064,17 @@ X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(\mathrm{X})}})\mid\mathbf{N_{pa
 .
 \end_layout
 
+\begin_layout Paragraph
+The Joint Probability Distribution Encoded by the Graphical Model
+\begin_inset CommandInset label
+LatexCommand label
+name "par:The-Joint-Encoded-by-Directed-Graphical-Model"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 In a directed graphical model, the random variables 
 \begin_inset Formula $\mathbf{N}$
@@ -2176,7 +2233,7 @@ For example, if the
 \end_layout
 
 \begin_layout Subsection
-Inference in Graphical Models
+Exact Inference in Graphical Models
 \end_layout
 
 \begin_layout Standard
@@ -2259,12 +2316,21 @@ key "ChandrasekaranHarsha2012"
 
 \end_layout
 
-\begin_layout Subsubsection
-Algorithm for Exact Inference on General Graph
+\begin_layout Standard
+Inference in a graphical model is the task of answering a query about the
+ joint probability distribution encoded by the graph, or of a part of the
+ joint probability distribution.
+ For example, one might be interested in the overall probability of the
+ configuration of a sub-set of variables.
+ However, in the general case this takes exponential time.
+\end_layout
+
+\begin_layout Standard
+We will now discuss a naive approach to inference.
 \end_layout
 
 \begin_layout Subsubsection
-Exact Inference in Directed and in Undirected Graphical Models
+Naive Approach: Marginalizing the Joint 
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
@@ -2275,8 +2341,29 @@ name "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
 \end_layout
 
 \begin_layout Standard
-A graphical model is a representation of a joint probability distribution.
+Since a graphical model is a representation of a joint probability distribution,
+ it can answer queries about probabilities of the joint probability distribution
+ encoded by the graphical model by first explicitly calculating the joint,
+ then marginalizing out non-interesting variables.
+\end_layout
+
+\begin_layout Standard
+How to calculate the joint encoded by the graphical model was defined in
  
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
+
+\end_inset
+
+ for undirected graphical models and 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:The-Joint-Encoded-by-Directed-Graphical-Model"
+
+\end_inset
+
+ for directed graphical models.
 \end_layout
 
 \begin_layout Standard
@@ -2314,13 +2401,6 @@ f
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Inference in a graphical model is the task of answering a query about the
- joint probability distribution encoded by the graph.
- However, in the general case this takes exponential time.
- An example will illustrate this.
 \end_layout
 
 \begin_layout Standard
@@ -2484,8 +2564,10 @@ In the general case (if the joint probability cannot be factorized), this
  to be considered.
  Thus, for this naive marginalization run-time is exponential in the number
  of variables, and therefore intractable.
- However, in this example we have not considered the structure of the graph
- at all.
+\end_layout
+
+\begin_layout Standard
+However, in this example we have not considered the structure of the graph.
  We can improve run-time in some cases of graphs and for some sets of variables
  
 \begin_inset Formula $\mathbf{K}$
@@ -2499,186 +2581,90 @@ In the general case (if the joint probability cannot be factorized), this
 \begin_inset Formula $\mathbf{U}$
 \end_inset
 
-, but in general, exact inference can 
-\end_layout
-
-\begin_layout Paragraph
-The Junction-tree Algorithm
-\end_layout
-
-\begin_layout Standard
-The run-time can be shortened by marginalizing variables out as early as
- possible.
- This must be done according to the factorization imposed by the graph structure.
-\end_layout
-
-\begin_layout Paragraph
-Intractability of Inference
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ChandrasekaranHarsha2012"
-
-\end_inset
-
- showed that under some assumptions, 
-\emph on
-treewidth
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-treewidth
-\end_layout
-
-\end_inset
-
- is the only structural property that ensures polynomial run-time of exact
- inference on arbitrary graphs 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: the paper says on page 1: 
-\begin_inset Quotes eld
-\end_inset
-
-Among these problems is inference in graphi- cal models, which, as mentioned
- earlier, can be solved in polynomial-time if the treewidth of the underly-
- ing graphs is bounded.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-, given that arbitrary potential functions should be allowed.
-\end_layout
-
-\begin_layout Standard
-For a triangulated graph, the treewidth is the number of nodes contained
- in the largest clique minus one.
- For a graph of any form, the treewidth is the treewidth of the triangulation
- that minimizes the treewidth.
- For directed acyclic graphs, the number of parents is the critical number
- (also shown by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "KwisthoutVanderGaag2010"
-
-\end_inset
-
-), since it determines the treewidth of the moralized
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-You obtain a moralized graph from a directed acyclic graph by introducing
- edges between all parents of a node, and then replacing directed edges
- by undirected edges.
-\end_layout
-
-\end_inset
-
- graph.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: stimmt das Folgende? Ich dachte, man könnte das aufgrund der Struktur
- von Formel (1) im Paper sagen, aber glaube gerade, dass das nicht reicht:
- 
-\begin_inset Quotes eld
-\end_inset
-
-For directed graphs, factorization according to the edges of the graph serves
- the purpose of cliques in the proof.
- Thus, the cliques are defined on the moral graph of the directed graph.
-\begin_inset Quotes erd
-\end_inset
-
 .
 \end_layout
 
+\begin_layout Paragraph
+Factorization in Undirected Graphical Models
+\end_layout
+
+\begin_layout Standard
+In the case of an undirected graphical model, this can be improved by factorizin
+g the joint probability into independent sub-joint-probabilities, if possible.
+ For example, if the random variables 
+\begin_inset Formula $\mathbf{U}=\{U_{1},U_{2},\dots,U_{7}\}$
+\end_inset
+
+ can be partitioned into three pairwise independent cliques 
+\begin_inset Formula $\mathbf{C_{1}}=\{U_{1},U_{2}\},$
+\end_inset
+
+ 
+\begin_inset Formula $\mathbf{C_{2}}=\{U_{2},U_{3}\}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{C_{3}}=\{U_{3},U_{4},U_{5}\}$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Note that the random variables 
+\begin_inset Formula $U$
+\end_inset
+
+ overlap between clusters, so that the clusters are connected.
+\end_layout
+
+\end_inset
+
+, so that 
+\begin_inset Formula $P(\mathbf{U})=P(\mathbf{C_{1}})P(\mathbf{C_{2}})P(\mathbf{C_{3}})$
+\end_inset
+
+, then above sum can be written as: 
+\begin_inset Formula 
+\begin{eqnarray*}
+P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & =\\
+ & = & \sum_{\mathbf{C_{1}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{1}}|\mathbf{K}=\mathbf{k})*\\
+ &  & \sum_{\mathbf{C_{2}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{2}}|\mathbf{K}=\mathbf{k})*\\
+ &  & \sum_{\mathbf{C_{3}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{3}}|\mathbf{K}=\mathbf{k})\\
+ & = & \prod_{\mathbf{C}\in\{\mathbf{C_{1}},\mathbf{C_{2}},\mathbf{C_{3}}\}}\sum_{\mathbf{C}}P(\mathbf{W}=\mathbf{w},\mathbf{C}|\mathbf{K}=\mathbf{k})
+\end{eqnarray*}
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-The assumptions of the proof are that 
-\begin_inset Formula $\mathbf{NP}\nsubseteq\mathbf{P/poly}$
+The runtime of this formula is dominated by the largest clique, and so the
+ runtime is 
+\begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{C_{l}}|})$
 \end_inset
 
-, which is a version of the 
-\begin_inset Formula $\mathbf{NP}\neq\mathbf{P}$
+, where 
+\begin_inset Formula $\mathbf{C_{l}}$
 \end_inset
 
- assumption, and that the grid-minor hypothesis is true.
- (For an explanation of the grid-minor hypothesis, see Section 2.4 in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ChandrasekaranHarsha2012"
-
+ is the clique with the largest number of variables in it (in our example
+ 
+\begin_inset Formula $\mathbf{C_{l}}=\mathbf{C_{3}}$
 \end_inset
 
-.)
-\end_layout
-
-\begin_layout Standard
-If these assumptions are correct then the only way to reduce the computational
- cost of exact inference on a general graph is to reduce
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Page 2, section 
-\begin_inset Quotes eld
+, because 
+\begin_inset Formula $|\mathbf{C_{3}}|=3$
 \end_inset
 
-Main Result
-\begin_inset Quotes erd
+, and 
+\begin_inset Formula $|\mathbf{C_{1}}|=|\mathbf{C_{2}}|=2$
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
- the treewidth or choose particularly simple potential functions
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Page 2, section 
-\begin_inset Quotes eld
-\end_inset
-
-Main Result
-\begin_inset Quotes erd
-\end_inset
-
-: 
-\begin_inset Quotes eld
-\end_inset
-
-there exists a choice of potential functions ...
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
+).
+ This is still an exponential run-time.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2743,6 +2729,10 @@ exact inference
 .
 \end_layout
 
+\begin_layout Paragraph
+Deep Belief Networks
+\end_layout
+
 \begin_layout Standard
 For example let a directed acyclic graph be defined by the following directed
  connections between its nodes: 
@@ -2796,7 +2786,26 @@ For example let a directed acyclic graph be defined by the following directed
 \end_inset
 
 .
- This defines a directed graphical model.
+ This layered architecture, where each node in a layer is connected to all
+ nodes in adjacent layers, defines a directed graphical model called 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Deep Belief Network
+\end_layout
+
+\end_inset
+
+
+\emph on
+Deep Belief Network
+\emph default
+.
+\end_layout
+
+\begin_layout Paragraph
+Posterior = Likelihood * Prior
 \end_layout
 
 \begin_layout Standard
@@ -2853,10 +2862,6 @@ Z=\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 We can make the last transformation because 
 \begin_inset Formula $\ensuremath{V_{1}}$
 \end_inset
@@ -3018,130 +3023,117 @@ P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v
 \end_inset
 
 .
- This concludes how to do exact inference in a directed graphical model.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: rewrite the following sentence in order to remove 
-\begin_inset Quotes eld
-\end_inset
-
-belief network
-\begin_inset Quotes erd
-\end_inset
-
- that was not introduced yet:
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Quotes eld
-\end_inset
-
-However, due to all the involved marginalizations, this procedure becomes
- infeasible in a belief network with more than a few parents per node.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Factorization in Undirected Graphical Models
+\begin_layout Paragraph
+Exact Inference in Deep Belief Networks is Complicated
 \end_layout
 
 \begin_layout Standard
-In the case of an undirected graphical model, this can be improved by factorizin
-g the joint probability into independent sub-joint-probabilities, if possible.
- For example, if the random variables 
-\begin_inset Formula $\mathbf{U}=\{U_{1},U_{2},\dots,U_{7}\}$
-\end_inset
-
- can be partitioned into three pairwise independent cliques 
-\begin_inset Formula $\mathbf{C_{1}}=\{U_{1},U_{2}\},$
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{C_{2}}=\{U_{2},U_{3}\}$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{C_{3}}=\{U_{3},U_{4},U_{5}\}$
-\end_inset
-
-
+This shows that exact inference in a directed graphical model with densely
+ connected layers is complicated since written out, the posterior is
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Note that the random variables 
-\begin_inset Formula $U$
+TODO: is this really the posterior? Wikipedia 
+\begin_inset Quotes eld
 \end_inset
 
- overlap between clusters, so that the clusters are connected.
+posterior
+\begin_inset Quotes erd
+\end_inset
+
+?
 \end_layout
 
 \end_inset
 
-, so that 
-\begin_inset Formula $P(\mathbf{U})=P(\mathbf{C_{1}})P(\mathbf{C_{2}})P(\mathbf{C_{3}})$
-\end_inset
-
-, then above sum can be written as: 
+: 
 \begin_inset Formula 
 \begin{eqnarray*}
-P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & =\\
- & = & \sum_{\mathbf{C_{1}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{1}}|\mathbf{K}=\mathbf{k})*\\
- &  & \sum_{\mathbf{C_{2}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{2}}|\mathbf{K}=\mathbf{k})*\\
- &  & \sum_{\mathbf{C_{3}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{3}}|\mathbf{K}=\mathbf{k})\\
- & = & \prod_{\mathbf{C}\in\{\mathbf{C_{1}},\mathbf{C_{2}},\mathbf{C_{3}}\}}\sum_{\mathbf{C}}P(\mathbf{W}=\mathbf{w},\mathbf{C}|\mathbf{K}=\mathbf{k})
+P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})\\
+ & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})P(V_{1}=v_{1},V_{2}=v_{2})\\
+ & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}P(V_{1}=v_{1},V_{2}=v_{2})
 \end{eqnarray*}
 
 \end_inset
 
+The posterior of 
+\begin_inset Formula $H_{1}$
+\end_inset
 
+ depends on all conditioal probabilities of the model, in this example,
+ 
+\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{G})$
+\end_inset
+
+.
+ For Deep Belief Networks, which are a kind of Directed Graphical Model
+ with densely connected layers, the conditional probabilities 
+\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{G})$
+\end_inset
+
+ have parameters called 
+\begin_inset Quotes eld
+\end_inset
+
+weights
+\begin_inset Quotes erd
+\end_inset
+
+ associated with them, and inference of the layer immediately above 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+, namely 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+, requires knowing all weights in the graph, not just those of 
+\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The runtime of this formula is dominated by the largest clique, and so the
- runtime is 
-\begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{C_{l}}|})$
+In addition, explaining away requires us to marginalize out all variables
+ in 
+\begin_inset Formula $\mathbf{H}$
 \end_inset
 
-, where 
-\begin_inset Formula $\mathbf{C_{l}}$
+ except one, and this for all variables in 
+\begin_inset Formula $\mathbf{H}$
 \end_inset
 
- is the clique with the largest number of variables in it (in our example
+.
+\end_layout
+
+\begin_layout Standard
+These procedures becomes infeasible in a Belief Network with more than a
+ few parents per node.
  
-\begin_inset Formula $\mathbf{C_{l}}=\mathbf{C_{3}}$
-\end_inset
+\begin_inset Note Note
+status open
 
-, because 
-\begin_inset Formula $|\mathbf{C_{3}}|=3$
-\end_inset
-
-, and 
-\begin_inset Formula $|\mathbf{C_{1}}|=|\mathbf{C_{2}}|=2$
-\end_inset
-
-).
- This is still an exponential run-time.
- Therefore, in practice, the joint probability is approximated, for example
- by Gibbs sampling.
+\begin_layout Plain Layout
+probably not TODO since we don't need them for later: 
 \end_layout
 
 \begin_layout Subsubsection
 General Algorithm
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 In the following paragraph we summarize the ELIMINATE algorithm from 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -3152,6 +3144,232 @@ key "JordanWeiss2002"
 .
  This algorithm works for both directed and undirected graphical models
  and computes the marginal probabilities of all nodes.
+\end_layout
+
+\begin_layout Paragraph
+The Junction-tree Algorithm
+\end_layout
+
+\begin_layout Plain Layout
+The run-time can be shortened by marginalizing variables out as early as
+ possible.
+ This must be done according to the factorization imposed by the graph structure.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Intractability of Inference
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChandrasekaranHarsha2012"
+
+\end_inset
+
+ showed that under some assumptions, 
+\emph on
+treewidth
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+treewidth
+\end_layout
+
+\end_inset
+
+ is the only structural property that ensures polynomial run-time of exact
+ inference on arbitrary graphs 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: the paper says on page 1: 
+\begin_inset Quotes eld
+\end_inset
+
+Among these problems is inference in graphi- cal models, which, as mentioned
+ earlier, can be solved in polynomial-time if the treewidth of the underly-
+ ing graphs is bounded.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, given that arbitrary potential functions should be allowed.
+\end_layout
+
+\begin_layout Standard
+For a triangulated graph, the treewidth is the number of nodes contained
+ in the largest clique minus one.
+ For a graph of any form, the treewidth is the treewidth of the triangulation
+ that minimizes the treewidth.
+ For directed acyclic graphs, the number of parents is the critical number,
+ since it determines the treewidth of the moralized
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+You obtain a moralized graph from a directed acyclic graph by introducing
+ edges between all parents of a node, and then replacing directed edges
+ by undirected edges.
+\end_layout
+
+\end_inset
+
+ graph.
+ (This was also shown by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KwisthoutVanderGaag2010"
+
+\end_inset
+
+).
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: stimmt das Folgende? Ich dachte, man könnte das aufgrund der Struktur
+ von Formel (1) im Paper sagen, aber glaube gerade, dass das nicht reicht:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+For directed graphs, factorization according to the edges of the graph serves
+ the purpose of cliques in the proof.
+ Thus, the cliques are defined on the moral graph of the directed graph.
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The assumptions of the proof are that 
+\begin_inset Formula $\mathbf{NP}\nsubseteq\mathbf{P/poly}$
+\end_inset
+
+, which is a version of the 
+\begin_inset Formula $\mathbf{NP}\neq\mathbf{P}$
+\end_inset
+
+ assumption, and that the grid-minor hypothesis is true.
+ (For an explanation of the grid-minor hypothesis, see Section 2.4 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChandrasekaranHarsha2012"
+
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Standard
+If these assumptions are correct then the only way to reduce the computational
+ cost of exact inference on a general graph is to reduce
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Page 2, section 
+\begin_inset Quotes eld
+\end_inset
+
+Main Result
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ the treewidth or choose particularly simple potential functions
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Page 2, section 
+\begin_inset Quotes eld
+\end_inset
+
+Main Result
+\begin_inset Quotes erd
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+there exists a choice of potential functions ...
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Den Satz irgendwo als Überleitung zu Gibbs Sampling oder Approximate
+ Inference verwenden
+\end_layout
+
+\end_inset
+
+Therefore, in practice, the joint probability is approximated, for example
+ by Gibbs sampling.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "TODO:continue-here"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Approximate Inference
+\end_layout
+
+\begin_layout Standard
+Approximate Inference in general graphical models was described by 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: cite Hinton and Sejnowski oder so.
+\end_layout
+
+\end_inset
+
+ works by Gibbs Sampling.
+ To describe Gibbs Sampling, we first have to introduce Markov Chains.
 \end_layout
 
 \begin_layout Subsubsection
