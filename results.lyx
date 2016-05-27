@@ -23527,6 +23527,8 @@ s in the table above are around 20 (for data set 6), both for
 \end_inset
 
 .
+ The architecture for artificial neuronal networks of breast_cancer_15 is
+ 22283-10-10-10-2.
 \end_layout
 
 \begin_layout Standard
@@ -25180,6 +25182,7 @@ breast_cancer_15 contains 37|37 labeled testing, 10|10 labeled training,
  The labeled data are equal across all data sets (but different between
  different repetitions).
  There are 20 sub-sampling repeats per sub-data-set.
+ All samples are from GSE25055, to avoid a possible batch-effect.
 \end_layout
 
 \end_inset
