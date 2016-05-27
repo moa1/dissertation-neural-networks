@@ -162,6 +162,36 @@ TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: make the citations look like 
+\begin_inset Quotes eld
+\end_inset
+
+[FischerIgel2012]
+\begin_inset Quotes erd
+\end_inset
+
+, not 
+\begin_inset Quotes eld
+\end_inset
+
+[1]
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This is probably done using a Bibtex style file?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section*
 Notation
 \end_layout
@@ -3054,7 +3084,8 @@ posterior
 \begin{eqnarray}
 P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
  & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
- & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}P(V_{1}=v_{1},V_{2}=v_{2})\label{eq:deep-belief-net-posterior-is-complicated}
+ & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}\label{eq:deep-belief-net-posterior-is-complicated}\\
+ &  & *P(V_{1}=v_{1},V_{2}=v_{2})
 \end{eqnarray}
 
 \end_inset
@@ -3103,10 +3134,7 @@ weights
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-In addition, explaining away requires us to marginalize out all variables
+ In addition, explaining away requires us to marginalize out all variables
  in 
 \begin_inset Formula $\mathbf{H}$
 \end_inset
@@ -3116,10 +3144,7 @@ In addition, explaining away requires us to marginalize out all variables
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-A further problem is that, were there an additional layer above 
+ A further problem is that, were there an additional layer above 
 \begin_inset Formula $\mathbf{G}$
 \end_inset
 
@@ -3218,7 +3243,7 @@ treewidth
 \end_inset
 
  is the only structural property that ensures polynomial run-time of exact
- inference on arbitrary graphs 
+ inference on arbitrary graphs
 \begin_inset Note Note
 status open
 
@@ -3333,7 +3358,7 @@ Main Result
 
 \end_inset
 
- the treewidth or choose particularly simple potential functions
+ the treewidth or to choose particularly simple potential functions
 \begin_inset Note Note
 status open
 
@@ -4498,7 +4523,8 @@ Markov Chain Monte Carlo algorithm
 
  is a type of algorithm to sample from a multivariate probability distribution.
  It sets up a Markov Chain that has the desired stationary distribution
- and iterates it until the stationary distribution is approximated sufficiently.
+ and iterates it through time until the stationary distribution is approximated
+ sufficiently.
 \end_layout
 
 \begin_layout Standard
@@ -4507,23 +4533,30 @@ A trick can be useful.
 \begin_inset Formula $\pi$
 \end_inset
 
-, computing only the transition matrix for time steps that are a power of
+, compute only the transition matrix for time steps that are a power of
  2, i.e.
  
 \begin_inset Formula $p^{2^{t}}$
 \end_inset
 
 .
- This can be done by repeated squaring and assignment: 
-\begin_inset Formula $p^{2t}:=p^{t}p^{t}$
-\end_inset
-
-.
- (And starting with 
+ This can be done by starting with 
 \begin_inset Formula $p^{1}:=p$
 \end_inset
 
-.)
+, repeated squaring: 
+\begin_inset Formula $p^{2t}:=p^{t}p^{t}$
+\end_inset
+
+, and assigning the stationary distribution 
+\begin_inset Formula $\pi=d^{(0)}p^{2^{t}}$
+\end_inset
+
+ for a large enough 
+\begin_inset Formula $t$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4600,7 +4633,7 @@ To use a Gibbs Sampler, one must construct a Markov chain with its (only)
  probabilities.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Gibbs Sampling Requires Closed-form Conditional Probabilities
 \end_layout
 
@@ -4702,8 +4735,8 @@ For example, each
 
 \end_layout
 
-\begin_layout Subparagraph
-Gibbs Sampling using a Markov Chain
+\begin_layout Paragraph
+A Markov Chain in Multiple Dimensions
 \end_layout
 
 \begin_layout Standard
@@ -4742,30 +4775,23 @@ Above, Markov chains were defined for a single state variable
 \end_inset
 
 .
-\begin_inset Note Note
-status open
+\end_layout
 
-\begin_layout Plain Layout
-e.g.
- let's say there are 3 variables, each of which can assume 2 states.
- and i want to encode these 
+\begin_layout Standard
+For example, say there are 3 variables, each of which can assume 2 states,
+ and we want to encode these 
 \begin_inset Formula $2^{3}$
 \end_inset
 
  different possible states in 1 variable.
- then I have 1 variable with 
+ Then we have 1 variable with 
 \begin_inset Formula $2*2*2$
 \end_inset
 
  different possible states.
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Constructing a Markov Chain from Base Transitions
 \end_layout
 
@@ -4786,15 +4812,15 @@ on page 45
 
 \end_inset
 
- constructing a time-homogeneous Markov Chain from a weighted mixture of
- base transitions, each of which describe the probability of a state change
- of one random variable.
+ constructing a non-homogeneous Markov Chain by applying base transitions
+ in turn, each of which describe the probability of a state change of one
+ random variable.
  The base transitions are named 
 \begin_inset Formula $B_{k}(x,x')$
 \end_inset
 
 , where 
-\begin_inset Formula $k$
+\begin_inset Formula $k\in1,2,\ldots,s$
 \end_inset
 
  is the number of the base transition, 
@@ -4819,34 +4845,26 @@ on page 45
 \end_inset
 
 , to make the Markov chain irreducible.
- A weighted mixture can then be constructed as
+ At each time-point 
+\begin_inset Formula $as+k-1$
+\end_inset
+
+, the next single base transition 
+\begin_inset Formula $B_{k}(x,x')$
+\end_inset
+
+ is then applied:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-T(\mathbf{x},\mathbf{x}')=\sum_{k}\alpha_{k}B_{k}(x,x')
+T_{as+k-1}(x,x')=B_{k}(x,x')
 \]
 
 \end_inset
 
- where 
-\begin_inset Formula $\alpha_{k}$
-\end_inset
 
- is the weight of base transition 
-\begin_inset Formula $B_{k}$
-\end_inset
-
-, and the weights must fulfill 
-\begin_inset Formula $\alpha_{k}>0$
-\end_inset
-
- and 
-\begin_inset Formula $\sum_{k}\alpha_{k}=1$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -4861,59 +4879,25 @@ key "Neal1993"
 \begin_inset Formula $B_{k}$
 \end_inset
 
- have the same stationary distribution, then the mixture 
+ have a stationary distribution, then the non-homogeneous 
 \begin_inset Formula $T$
 \end_inset
 
- also has this stationary distribution.
- In addition, if each of the base transitions satisfy detailed balance,
- then the mixture also does.
-\end_layout
-
-\begin_layout Standard
+ also has a stationary distribution.
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: Hier fehlt wie die Markov Chain genau aussehen muss.
- Wie werden die random variables des Gibbs sampling auf die eine random
- variable der Markov chain gemappt? Wie wird sichergestellt, dass die Markov
- Chain konvergiert?
-\end_layout
-
-\begin_layout Plain Layout
-Hier muss stehen, dass die Markov Chain nur dann konvergiert, wenn alle
- probabilities strictly positive sind (i.e.
- nicht 0).
- (Siehe 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Neal1993"
-
-\end_inset
-
-, Seite 48: 
+vielleicht TODO: Hinzufügen, dass Neal auf Seite 45 schreibt: 
 \begin_inset Quotes eld
 \end_inset
 
-...
- provided that all the conditional probabilities used to define the B k
- in equation (4.1) are non-zero.
+Unlike the case with mixtures, though, even when all the B k satisfy detailed
+ balance, T generally does not.
 \begin_inset Quotes erd
 \end_inset
 
-).
-\end_layout
 
-\begin_layout Plain Layout
-Ich glaube in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "FischerIgel2012"
-
-\end_inset
-
- steht das auch.)
 \end_layout
 
 \end_inset
@@ -4921,7 +4905,7 @@ key "FischerIgel2012"
 
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Initialization of the Gibbs Sampler
 \end_layout
 
@@ -4943,15 +4927,15 @@ A Gibbs Sampler starts by specifying a start value
 \begin_inset Quotes eld
 \end_inset
 
-center
+center of mass
 \begin_inset Quotes erd
 \end_inset
 
  of the distribution.
 \end_layout
 
-\begin_layout Subparagraph
-Iterations
+\begin_layout Paragraph
+Iterating
 \end_layout
 
 \begin_layout Standard
@@ -5005,7 +4989,7 @@ If the Markov chain fulfills irreducibility, positive recurrence, and aperiodici
 ty, then it is guaranteed to converge to its stationary distribution (see
  
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "par:Fundamental-Theorem-of-Markov-Chains"
 
 \end_inset
@@ -5023,7 +5007,7 @@ thinning
 .
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Burn-in Period
 \end_layout
 
@@ -5097,7 +5081,7 @@ key "CowlesCarlin1996"
  for a review.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Thinning
 \end_layout
 
@@ -5175,7 +5159,7 @@ Again, also here there is currently no straightforward analytic way to determine
 \end_inset
 
  to be regarded independent.
- In practice on resorts to heuristics like autocorrelation.
+ In practice one resorts to heuristics like autocorrelation.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5535,11 +5519,17 @@ P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}|\mathbf{X}_{MarkovBlank
 .
  The Markov Blanket of a random variable is more complicated to compute
  than its neighborhood.
+ The Markov Blanket of a random variable 
+\begin_inset Formula $X$
+\end_inset
+
+ is the set of its parents and children, and its children's parents.
+ 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: define Markov Blanket.
+TODO: the above definition is from wikipedia, but I have to cite some paper.
 \end_layout
 
 \end_inset
@@ -5547,46 +5537,557 @@ TODO: define Markov Blanket.
 
 \end_layout
 
-\begin_layout Paragraph
-Explaining away
+\begin_layout Section
+Artificial Neural Networks
+\end_layout
+
+\begin_layout Subsection
+Hopfield Network
 \end_layout
 
 \begin_layout Standard
-Directed graphical models show the phenomenon of 
+A Hopfield Network is a deterministic recurrent network with 
+\begin_inset Formula $m$
+\end_inset
+
+ nodes 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+As this is not a stochastic network, I don't think it makes sense to define
+ random variables 
+\begin_inset Formula $\mathbf{N}=(N_{1},\dots,N_{m})$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+, each having a binary state 
+\begin_inset Formula $n_{i}\in\{0,1\}$
+\end_inset
+
+ for all nodes 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Each node has a connection with all others (but not itself).
+ The connection from node 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+ to node 
+\begin_inset Formula $N_{j}$
+\end_inset
+
+ is directed and has a real weight 
+\begin_inset Formula $w_{ij}\in\mathbb{R}$
+\end_inset
+
+.
+ (As there is no connection from node 
+\begin_inset Formula $i$
+\end_inset
+
+ to node 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $w_{ii}=0$
+\end_inset
+
+ for all nodes 
+\begin_inset Formula $i$
+\end_inset
+
+.) There is also a real-valued bias 
+\begin_inset Formula $b_{i}\in\mathbb{R}$
+\end_inset
+
+ for each node 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ (This means each node has 
+\begin_inset Formula $m-1$
+\end_inset
+
+ outgoing connections and 
+\begin_inset Formula $m-1$
+\end_inset
+
+ incoming connections.)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Hier fehlt ein Bild von einem Hopfield-Netzwerk: Die connections sollten
+ directed sein, d.h.
+ Pfeile am Ende haben.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The network is updated asynchronously: At each time point 
+\begin_inset Formula $t$
+\end_inset
+
+, a node 
+\begin_inset Formula $i$
+\end_inset
+
+ is chosen at random out of the 
+\begin_inset Formula $m$
+\end_inset
+
+ possible nodes and it is updated, while all other nodes remain constant.
+ The state 
+\begin_inset Formula $n_{i}$
+\end_inset
+
+ of node 
+\begin_inset Formula $i$
+\end_inset
+
+ at time point 
+\begin_inset Formula $t$
+\end_inset
+
+ is denoted 
+\begin_inset Formula $n_{i}^{(t)}$
+\end_inset
+
+ and depends on the state of all other nodes at time step 
+\begin_inset Formula $t-1$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+n_{i}^{(t)}=f(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i})
+\]
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Note that I have added 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ here (to be consistent with the rest of this text), while in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+ the bias is on the right-hand side in eq.
+ 2: 
 \begin_inset Quotes eld
 \end_inset
 
-explaining away
+
+\begin_inset Formula $<U_{i}$
+\end_inset
+
+
 \begin_inset Quotes erd
 \end_inset
 
-, which complicates inference.
+.
+ To make up for this sign change, I also swap signs in the energy (eq.
  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Energy of a Hopfield network-1"
+
+\end_inset
+
+) below.
+\end_layout
+
+\end_inset
+
+(In Hopfield's formulation in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+ there is also an external input 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Der Input, der in jedem Zeitschritt auf den Input addiert wird, heißt in
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+ 
+\begin_inset Formula $I_{i}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+to each node, constant over all times 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Because the bias also does not depend on 
+\begin_inset Formula $t$
+\end_inset
+
+, both are combined into 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ here.)
+\begin_inset Newline newline
+\end_inset
+
+The activation function 
+\begin_inset Formula $f$
+\end_inset
+
+ is a stepping function
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: is there also explaining away in undirected graphs? nope, I don't
- think so.
+TODO: there must be a better word instead of 
+\begin_inset Quotes eld
+\end_inset
+
+stepping function
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+, with negative values mapped to 0, and positive values mapped to 1: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: stimmt die Definition von 
+\begin_inset Formula $f$
+\end_inset
+
+ überhaupt?
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+f(x)=\begin{cases}
+0 & \mbox{for }x\leq0\\
+1 & \mbox{for }x>0
+\end{cases}
+\]
+
+\end_inset
+
+While this updating rule was described here as asynchronous (i.e.
+ at each time step a node is picked at random and its state is updated,
+ which is how Hopfield described it in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+page 1: 
+\begin_inset Quotes eld
+\end_inset
+
+Each neuron samples its input at random times.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+), updating the network synchronously (i.e.
+ all nodes are updated at the same time) is also possible as this is a special
+ case of asynchronous updating.
+\end_layout
+
+\begin_layout Standard
+Although a Hopfield network is recurrent, Hopfield proved that the updating
+ rule converges to a (possibly local) minimum given that the weights are
+ symmetric (i.e.
+ 
+\begin_inset Formula $w_{ij}=w_{ji}$
+\end_inset
+
+) and there are no single-node loops (i.e.
+ 
+\begin_inset Formula $w_{ii}=0$
+\end_inset
+
+).
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Aus 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+: 
+\begin_inset Quotes eld
+\end_inset
+
+There is a simple mathematical condition which guarantees that the state
+ space flow algorithm converges on stable states.
+ Any symmetric T with zero diagonal elements (i.e., 
+\begin_inset Formula $T_{ij}$
+\end_inset
+
+ = 
+\begin_inset Formula $T_{ji}$
+\end_inset
+
+, 
+\begin_inset Formula $T_{ii}$
+\end_inset
+
+ = 0) will produce such a flow.
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This can be proven by showing that a single number, associated with the
+ state of the network, can only decrease when updating a node.
+ It is the so-called 
+\emph on
+energy 
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+energy
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $E$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E^{(t)}=-\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}\label{eq:Energy of a Hopfield network}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each update of a single node either doesn't change the energy 
+\begin_inset Formula $E$
+\end_inset
+
+ or decreases it.
+ (Shown in the appendix 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert link to file 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/hopfield-deriv.lyx
+\begin_inset Quotes erd
+\end_inset
+
+ when the document is finished.
+\end_layout
+
+\end_inset
+
+.) As time progresses, 
+\begin_inset Formula $E$
+\end_inset
+
+ becomes smaller and smaller, i.e.
+ 
+\begin_inset Formula $E^{(t)}\leq E^{(t-1)}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Training a Hopfield network is the task of finding weights 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ and biases 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+, so that desirable states (training patterns) have a low energy and undesirable
+ states have a high energy.
+ Due to this property Hopfield networks can be used as 
+\emph on
+associative memory
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+associative memory
+\end_layout
+
+\end_inset
+
+.
+ After training, a Hopfield network can be initialized with a distorted
+ pattern, in which the state of some nodes is swapped.
+ After iteratively updating until its state doesn't change anymore, the
+ stationary state will be equal to a similar pattern used in training if
+ training was successful.
+\end_layout
+
+\begin_layout Subsection
+Multilayer Perceptron
+\end_layout
+
+\begin_layout Standard
+A Multilayer Perceptron belongs to the class of deterministic feedforward
+ neural networks.
+ Feedforward networks are in contrast to recurrent networks, which contain
+ a directed cycle of neural connections.
 \end_layout
 
 \begin_layout Paragraph
-Boltzmann Machines
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: probably move this to its own (sub)section
+Multilayer feedforward networks as universal function approximators
 \end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HornikWhite1989"
 
 \end_inset
 
- 
+ found that artificial feedforward neural networks with as few as one hidden
+ layer are capable of modeling virtually any function within a given error,
+ provided the following conditions are met:
+\end_layout
+
+\begin_layout Itemize
+The activation function must be a 
+\begin_inset Quotes eld
+\end_inset
+
+squashing
+\begin_inset Quotes erd
+\end_inset
+
+ function: A squashing function 
+\begin_inset Formula $s(x)$
+\end_inset
+
+ must be non-decreasing, 
+\begin_inset Formula $\lim_{x\rightarrow-\infty}s(x)=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\lim_{x\rightarrow\infty}s(x)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Sufficiently many hidden nodes must be available.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HornikWhite1989"
+
+\end_inset
+
+ also note that 
+\begin_inset Quotes eld
+\end_inset
+
+This [result] implies that any lack of success in applications must arise
+ from inadequate learning, insufficient numbers of hidden units or the lack
+ of a deterministic relationship between input and target.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Boltzmann Machines
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -5613,9 +6114,6 @@ node
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -5633,7 +6131,7 @@ A Boltzmann Machine is an undirected graphical model that has a specific
  form of the conditional probability distribution defined at each node.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Gibbs Sampling in Boltzmann Machines
 \begin_inset Note Note
 status open
@@ -5747,7 +6245,7 @@ TODO: define
 
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Subsubsection
 Training Boltzmann Machines
 \begin_inset Note Note
 status open
@@ -5846,7 +6344,7 @@ negative
  is approximated.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Positive Phase
 \end_layout
 
@@ -5912,7 +6410,7 @@ positive phase
  can be determined, which completes the positive phase.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Negative Phase
 \end_layout
 
@@ -5960,7 +6458,7 @@ negative phase
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Belief Network
 \end_layout
 
@@ -6317,7 +6815,7 @@ Both Boltzmann machines and sigmoid belief networks can represent arbitrary
  units, provided that a sufficient number of hidden units is available.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Subsubsection
 Deep Belief Network
 \end_layout
 
@@ -6785,7 +7283,7 @@ n (i.e.
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
- are untied and replaced by weights going from 
+ are untied and replaced by directed weights going from 
 \begin_inset Formula $\mathbf{V_{0}}$
 \end_inset
 
@@ -6909,552 +7407,6 @@ TODO Neal shows in (~/uni/publication/zusammenfassung/rbm/A11 Connectionist
  Machines do not have representations in Bayesian Networks and vice versa.
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Artificial Neural Networks
-\end_layout
-
-\begin_layout Paragraph
-Hopfield Network
-\end_layout
-
-\begin_layout Standard
-A Hopfield Network is a deterministic recurrent network with 
-\begin_inset Formula $m$
-\end_inset
-
- nodes 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-As this is not a stochastic network, I don't think it makes sense to define
- random variables 
-\begin_inset Formula $\mathbf{N}=(N_{1},\dots,N_{m})$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-, each having a binary state 
-\begin_inset Formula $n_{i}\in\{0,1\}$
-\end_inset
-
- for all nodes 
-\begin_inset Formula $i$
-\end_inset
-
-.
- Each node has a connection with all others (but not itself).
- The connection from node 
-\begin_inset Formula $N_{i}$
-\end_inset
-
- to node 
-\begin_inset Formula $N_{j}$
-\end_inset
-
- is directed and has a real weight 
-\begin_inset Formula $w_{ij}\in\mathbb{R}$
-\end_inset
-
-.
- (As there is no connection from node 
-\begin_inset Formula $i$
-\end_inset
-
- to node 
-\begin_inset Formula $i$
-\end_inset
-
-, 
-\begin_inset Formula $w_{ii}=0$
-\end_inset
-
- for all nodes 
-\begin_inset Formula $i$
-\end_inset
-
-.) There is also a real-valued bias 
-\begin_inset Formula $b_{i}\in\mathbb{R}$
-\end_inset
-
- for each node 
-\begin_inset Formula $i$
-\end_inset
-
-.
- (This means each node has 
-\begin_inset Formula $m-1$
-\end_inset
-
- outgoing connections and 
-\begin_inset Formula $m-1$
-\end_inset
-
- incoming connections.)
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Hier fehlt ein Bild von einem Hopfield-Netzwerk: Die connections sollten
- directed sein, d.h.
- Pfeile am Ende haben.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The network is updated asynchronously: At each time point 
-\begin_inset Formula $t$
-\end_inset
-
-, a node 
-\begin_inset Formula $i$
-\end_inset
-
- is chosen at random out of the 
-\begin_inset Formula $m$
-\end_inset
-
- possible nodes and it is updated, while all other nodes remain constant.
- The state 
-\begin_inset Formula $n_{i}$
-\end_inset
-
- of node 
-\begin_inset Formula $i$
-\end_inset
-
- at time point 
-\begin_inset Formula $t$
-\end_inset
-
- is denoted 
-\begin_inset Formula $n_{i}^{(t)}$
-\end_inset
-
- and depends on the state of all other nodes at time step 
-\begin_inset Formula $t-1$
-\end_inset
-
-: 
-\begin_inset Formula 
-\[
-n_{i}^{(t)}=f(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i})
-\]
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Note that I have added 
-\begin_inset Formula $b_{j}$
-\end_inset
-
- here (to be consistent with the rest of this text), while in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hopfield1984"
-
-\end_inset
-
- the bias is on the right-hand side in eq.
- 2: 
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset Formula $<U_{i}$
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
-.
- To make up for this sign change, I also swap signs in the energy (eq.
- 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Energy of a Hopfield network-1"
-
-\end_inset
-
-) below.
-\end_layout
-
-\end_inset
-
-(In Hopfield's formulation in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hopfield1984"
-
-\end_inset
-
- there is also an external input 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Der Input, der in jedem Zeitschritt auf den Input addiert wird, heißt in
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hopfield1984"
-
-\end_inset
-
- 
-\begin_inset Formula $I_{i}$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-to each node, constant over all times 
-\begin_inset Formula $t$
-\end_inset
-
-.
- Because the bias also does not depend on 
-\begin_inset Formula $t$
-\end_inset
-
-, both are combined into 
-\begin_inset Formula $b_{i}$
-\end_inset
-
- here.)
-\begin_inset Newline newline
-\end_inset
-
-The activation function 
-\begin_inset Formula $f$
-\end_inset
-
- is a stepping function
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: there must be a better word instead of 
-\begin_inset Quotes eld
-\end_inset
-
-stepping function
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-, with negative values mapped to 0, and positive values mapped to 1: 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: stimmt die Definition von 
-\begin_inset Formula $f$
-\end_inset
-
- überhaupt?
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-f(x)=\begin{cases}
-0 & \mbox{for }x\leq0\\
-1 & \mbox{for }x>0
-\end{cases}
-\]
-
-\end_inset
-
-While this updating rule was described here as asynchronous (i.e.
- at each time step a node is picked at random and its state is updated,
- which is how Hopfield described it in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hopfield1984"
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-page 1: 
-\begin_inset Quotes eld
-\end_inset
-
-Each neuron samples its input at random times.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-), updating the network synchronously (i.e.
- all nodes are updated at the same time) is also possible as this is a special
- case of asynchronous updating.
-\end_layout
-
-\begin_layout Standard
-Although a Hopfield network is recurrent, Hopfield proved that the updating
- rule converges to a (possibly local) minimum given that the weights are
- symmetric (i.e.
- 
-\begin_inset Formula $w_{ij}=w_{ji}$
-\end_inset
-
-) and there are no single-node loops (i.e.
- 
-\begin_inset Formula $w_{ii}=0$
-\end_inset
-
-).
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Aus 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hopfield1984"
-
-\end_inset
-
-: 
-\begin_inset Quotes eld
-\end_inset
-
-There is a simple mathematical condition which guarantees that the state
- space flow algorithm converges on stable states.
- Any symmetric T with zero diagonal elements (i.e., 
-\begin_inset Formula $T_{ij}$
-\end_inset
-
- = 
-\begin_inset Formula $T_{ji}$
-\end_inset
-
-, 
-\begin_inset Formula $T_{ii}$
-\end_inset
-
- = 0) will produce such a flow.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This can be proven by showing that a single number, associated with the
- state of the network, can only decrease when updating a node.
- It is the so-called 
-\emph on
-energy 
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-energy
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula $E$
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-E^{(t)}=-\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}\label{eq:Energy of a Hopfield network}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Each update of a single node either doesn't change the energy 
-\begin_inset Formula $E$
-\end_inset
-
- or decreases it.
- (Shown in the appendix 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: insert link to file 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/hopfield-deriv.lyx
-\begin_inset Quotes erd
-\end_inset
-
- when the document is finished.
-\end_layout
-
-\end_inset
-
-.) As time progresses, 
-\begin_inset Formula $E$
-\end_inset
-
- becomes smaller and smaller, i.e.
- 
-\begin_inset Formula $E^{(t)}\leq E^{(t-1)}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Training a Hopfield network is the task of finding weights 
-\begin_inset Formula $w_{ij}$
-\end_inset
-
- and biases 
-\begin_inset Formula $b_{i}$
-\end_inset
-
-, so that desirable states (training patterns) have a low energy and undesirable
- states have a high energy.
- Due to this property Hopfield networks can be used as 
-\emph on
-associative memory
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-associative memory
-\end_layout
-
-\end_inset
-
-.
- After training, a Hopfield network can be initialized with a distorted
- pattern, in which the state of some nodes is swapped.
- After iteratively updating until its state doesn't change anymore, the
- stationary state will be equal to a similar pattern used in training if
- training was successful.
-\end_layout
-
-\begin_layout Paragraph
-Multilayer Perceptron
-\end_layout
-
-\begin_layout Standard
-A Multilayer Perceptron belongs to the class of deterministic feedforward
- neural networks.
- Feedforward networks are in contrast to recurrent networks, which contain
- a directed cycle of neural connections.
-\end_layout
-
-\begin_layout Paragraph
-Multilayer feedforward networks as universal function approximators
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HornikWhite1989"
-
-\end_inset
-
- found that artificial feedforward neural networks with as few as one hidden
- layer are capable of modeling virtually any function within a given error,
- provided the following conditions are met:
-\end_layout
-
-\begin_layout Itemize
-The activation function must be a 
-\begin_inset Quotes eld
-\end_inset
-
-squashing
-\begin_inset Quotes erd
-\end_inset
-
- function: A squashing function 
-\begin_inset Formula $s(x)$
-\end_inset
-
- must be non-decreasing, 
-\begin_inset Formula $\lim_{x\rightarrow-\infty}s(x)=0$
-\end_inset
-
- and 
-\begin_inset Formula $\lim_{x\rightarrow\infty}s(x)=1$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Sufficiently many hidden nodes must be available.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HornikWhite1989"
-
-\end_inset
-
- also note that 
-\begin_inset Quotes eld
-\end_inset
-
-This [result] implies that any lack of success in applications must arise
- from inadequate learning, insufficient numbers of hidden units or the lack
- of a deterministic relationship between input and target.
-\begin_inset Quotes erd
 \end_inset
 
 
@@ -7689,7 +7641,7 @@ Training a feed-forward neural network with more than 1 hidden layer using
  When attempting to train such a network, each node in the output layer
  often just outputs the mean value over the training cases, independently
  of the input.
- One problem is that there are many local minima (generated by repeatedly
+ One problem is that there are many local maxima (generated by repeatedly
  adding weighted sigmoid functions) of the implicitly optimized energy function
  during back-propagation.
  Another problem is that in discriminative learning, each training case
@@ -7825,7 +7777,7 @@ The hidden and visible nodes are a function of the sum of their inputs.
 activation function
 \emph default
 .
- There are several activations functions:
+ There are several activation functions:
 \end_layout
 
 \begin_layout Paragraph
@@ -7860,8 +7812,8 @@ TODO: Kurve einer sigmoid-Funktion hier einfügen.
 
 \end_layout
 
-\begin_layout Subparagraph
-Binarizing the output of a node
+\begin_layout Paragraph
+Interpreting the Output of a Node as a Continuous Value
 \end_layout
 
 \begin_layout Standard
@@ -7992,72 +7944,24 @@ Weight normalization
 \end_layout
 
 \begin_layout Subsection
-Fine-tuning
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: rename this to 
-\begin_inset Quotes eld
-\end_inset
-
 Back-propagation
-\begin_inset Quotes erd
-\end_inset
-
- and add a small paragraph 
-\begin_inset Quotes eld
-\end_inset
-
-Fine-tuning
-\begin_inset Quotes erd
-\end_inset
-
-.
- The term 
-\begin_inset Quotes eld
-\end_inset
-
-fine-tuning
-\begin_inset Quotes erd
-\end_inset
-
- is actually used by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
- not for back-propagation, but for the up-down algorithm.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
-In general, 
-\emph on
-fine-tuning
-\emph default
-
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-fine-tuning
+Back-propagation
 \end_layout
 
 \end_inset
 
- is the use of back-propagation to fine-tune the parameters of a neural
- network.
-\end_layout
 
-\begin_layout Standard
-It is the adaptation of weights and biases of the network to make its set
+\emph on
+Back-propagation
+\emph default
+ is the adaptation of weights and biases of the network to make its set
  of actual outputs better fit a set of desired outputs for a given set of
  inputs.
  Technically it is just running the network for a given input, observing
@@ -8066,8 +7970,12 @@ It is the adaptation of weights and biases of the network to make its set
  layers.
  This will make the network output values closer to the desired values next
  time this particular input pattern is given to the network.
- The use of the back-propagation algorithm implies that fine-tuning is a
- supervised learning step and thus prone to overfitting.
+ The back-propagation algorithm is a supervised learning step and thus prone
+ to overfitting.
+\end_layout
+
+\begin_layout Paragraph
+Optimizing the Sum of Squared Differences
 \end_layout
 
 \begin_layout Standard
@@ -8122,17 +8030,10 @@ squared-error sum
  and the desired output value) with respect to a particular weight and then
  increasing or decreasing the weight by the computed derivative multiplied
  by the learning rate.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: formula for the updating in the back-propagation algorithm.
- TODO: cite some paper.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Paragraph
+Optimizing the Cross-entropy Error
 \end_layout
 
 \begin_layout Standard
@@ -8189,16 +8090,22 @@ key "HintonSalakhutdinov2006"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Section
-Motivation for using RBMs on genetic data
+ This makes sense if only the node having the maximal value in a layer is
+ interesting, and not its exact value.
 \end_layout
 
 \begin_layout Standard
-There were successes in visual object/face recognition by RBMs.
- There is a certain similarity of visual data and genetic data like high
- correlation of neighboring pixels and certain genes.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: formula for the updating in the back-propagation algorithm.
+ TODO: cite some paper.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8207,43 +8114,10 @@ status open
 
 \begin_layout Plain Layout
 TODO: Say something about the time taken to train RBMs.
- Training is linear in the number of training cases, but quadratic in the
- number of features if a multiple-layer neural network is trained and the
- number of features is gradually reduced.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Bibliography
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: make the citations look like 
-\begin_inset Quotes eld
-\end_inset
-
-[FischerIgel2012]
-\begin_inset Quotes erd
-\end_inset
-
-, not 
-\begin_inset Quotes eld
-\end_inset
-
-[1]
-\begin_inset Quotes erd
-\end_inset
-
-.
- This is probably done using a Bibtex style file?
+ Training time is not deterministic, since the energy landscape is affected
+ by the training samples.
+ Training is quadratic in the number of features if a multiple-layer neural
+ network is trained and the number of features is gradually reduced.
 \end_layout
 
 \end_inset
