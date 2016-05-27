@@ -3051,11 +3051,11 @@ posterior
 
 : 
 \begin_inset Formula 
-\begin{eqnarray*}
-P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})\\
- & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})P(V_{1}=v_{1},V_{2}=v_{2})\\
- & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}P(V_{1}=v_{1},V_{2}=v_{2})
-\end{eqnarray*}
+\begin{eqnarray}
+P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
+ & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
+ & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}P(V_{1}=v_{1},V_{2}=v_{2})\label{eq:deep-belief-net-posterior-is-complicated}
+\end{eqnarray}
 
 \end_inset
 
@@ -3113,6 +3113,37 @@ In addition, explaining away requires us to marginalize out all variables
 
  except one, and this for all variables in 
 \begin_inset Formula $\mathbf{H}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A further problem is that, were there an additional layer above 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+, we would have to integrate over all possibile configurations of 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+ to be able to calculate 
+\begin_inset Formula $P(G_{1})$
+\end_inset
+
+, 
+\begin_inset Formula $\ldots$
+\end_inset
+
+, 
+\begin_inset Formula $P(G_{n})$
+\end_inset
+
+ in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deep-belief-net-posterior-is-complicated"
+
 \end_inset
 
 .
@@ -3329,17 +3360,7 @@ there exists a choice of potential functions ...
 \end_inset
 
 .
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Den Satz irgendwo als Überleitung zu Gibbs Sampling oder Approximate
- Inference verwenden
-\end_layout
-
-\end_inset
-
-Therefore, in practice, the joint probability is approximated, for example
+ Therefore, in practice, the joint probability is approximated, for example
  by Gibbs sampling.
 \end_layout
 
@@ -3358,22 +3379,20 @@ Approximate Inference
 \end_layout
 
 \begin_layout Standard
-Approximate Inference in general graphical models was described by 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: cite Hinton and Sejnowski oder so.
-\end_layout
+Approximate Inference in general graphical models by means of Gibbs Sampling
+ was first described by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
 
 \end_inset
 
- works by Gibbs Sampling.
- To describe Gibbs Sampling, we first have to introduce Markov Chains.
+.
+ To describe this, we first have to introduce Markov Chains.
 \end_layout
 
 \begin_layout Subsubsection
-Markov Chain
+Markov Chains
 \end_layout
 
 \begin_layout Standard
@@ -4033,8 +4052,7 @@ Fundamental Theorem of Markov Chains
 status open
 
 \begin_layout Plain Layout
-which was proved by Kolmogorov?.
- TODO
+TODO: which was proved by Kolmogorov?
 \end_layout
 
 \end_inset
@@ -4064,48 +4082,10 @@ key "Behrends2000"
 
  is irreducible, positive-recurrent and aperiodic
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Theorem 7.4 in ~/uni/publication/zusammenfassung/markov chains/markovbuch2008.pdf.
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Irgendwo an passender Stelle einfügen: 
-\begin_inset Quotes eld
-\end_inset
-
-It is possible to efficiently calculate the stationary distribution 
-\begin_inset Formula $\pi$
-\end_inset
-
- by computing only the transition matrix for time steps that are a power
- of 2, i.e.
- 
-\begin_inset Formula $p^{2^{t}}$
-\end_inset
-
-.
- This can be done by repeated squaring and assignment: 
-\begin_inset Formula $p^{2t}:=p^{t}p^{t}$
-\end_inset
-
-.
- (And starting with 
-\begin_inset Formula $p^{1}:=p$
-\end_inset
-
-.)
-\begin_inset Quotes erd
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -4517,7 +4497,38 @@ Markov Chain Monte Carlo algorithm
 \end_inset
 
  is a type of algorithm to sample from a multivariate probability distribution.
- A Markov Chain has to be set up so that it 
+ It sets up a Markov Chain that has the desired stationary distribution
+ and iterates it until the stationary distribution is approximated sufficiently.
+\end_layout
+
+\begin_layout Standard
+A trick can be useful.
+ To efficiently calculate the stationary distribution 
+\begin_inset Formula $\pi$
+\end_inset
+
+, computing only the transition matrix for time steps that are a power of
+ 2, i.e.
+ 
+\begin_inset Formula $p^{2^{t}}$
+\end_inset
+
+.
+ This can be done by repeated squaring and assignment: 
+\begin_inset Formula $p^{2t}:=p^{t}p^{t}$
+\end_inset
+
+.
+ (And starting with 
+\begin_inset Formula $p^{1}:=p$
+\end_inset
+
+.)
+\end_layout
+
+\begin_layout Standard
+MCMC will be described in the next section.
+ 
 \begin_inset Note Note
 status open
 
