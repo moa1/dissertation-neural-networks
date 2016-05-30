@@ -6401,22 +6401,120 @@ TODO: Example figure of a BM.
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+The conditional probability distribution for a hidden node 
+\begin_inset Formula $H_{i}$
+\end_inset
+
+ depends on the states of all visible nodes 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ and is defined by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
  
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-In 
+(where? I cannot find it 
 \begin_inset Quotes eld
 \end_inset
 
-Connectionist learning for belief networks
+on page 75
 \begin_inset Quotes erd
 \end_inset
 
- (~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
- networks.pdf), Neal derives the learning rule for Boltzmann Machines: page
- 6, equation 7.
+ anymore)
+\end_layout
+
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P(H_{i}=h_{i}|\mathbf{V}=\mathbf{v})=\sigma((2h_{i}-1)\sum_{j}v_{j}w_{ij})
+\]
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(this formula is only valid for 0/1-valued nodes.)
+\end_layout
+
+\end_inset
+
+where 
+\begin_inset Formula $w_{ij}\in\mathbb{R}$
+\end_inset
+
+ is the weight between hidden node 
+\begin_inset Formula $H_{i}$
+\end_inset
+
+ and visible node 
+\begin_inset Formula $V_{j}$
+\end_inset
+
+.
+ Similarly,
+\begin_inset Formula 
+\[
+P(V_{j}=v_{j}\mid\mathbf{H}=\mathbf{h})=\sigma((2v_{j}-1)\sum_{i}h_{i}w_{ji})
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: rewrite the following using consistent variable names and fonts.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: the following is only for binary nodes, i.e.
+ they can only have either state 0 or state 1.
+ Do I find a generalization to (discrete multiple states) / (continuous)
+ nodes somewhere?
+\end_layout
+
+\begin_layout Plain Layout
+This conditional probability is needed for Gibbs sampling.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: define 
+\begin_inset Formula $\sigma(x)=\frac{1}{1+\exp(-x)}$
+\end_inset
+
+ somewhere
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -6485,97 +6583,20 @@ reference "sub:Inference-in-Markov-Random-Fields"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: rewrite the following using consistent variable names and fonts.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: the following is only for binary nodes, i.e.
- they can only have either state 0 or state 1.
- Do I find a generalization to (discrete multiple states) / (continuous)
- nodes somewhere?
-\end_layout
-
-\begin_layout Plain Layout
-Neal
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Neal1993"
-
+However, there is also a more direct learning procedure called 
+\begin_inset Quotes eld
 \end_inset
 
- writes (on page 75) how to approximate the probability distribution of
- a specific variable 
-\begin_inset Formula $S_{i}$
+contrastive divergence
+\begin_inset Quotes erd
 \end_inset
 
-, given the states of all other variables 
-\begin_inset Formula $S_{j}$
-\end_inset
-
-, 
-\begin_inset Formula $i\neq j$
-\end_inset
-
- in a Boltzmann machine:
-\begin_inset Formula 
-\[
-P(S_{i}=x|S_{j})=\sigma((2x-1)\sum_{j\neq i}s_{j}w_{ij})
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(this formula is only valid for 0/1-valued nodes.)
-\end_layout
-
-\end_inset
-
- This conditional probability is needed for Gibbs sampling.
+.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: define 
-\begin_inset Formula $\sigma(x)=\frac{1}{1+\exp(-x)}$
-\end_inset
-
- somewhere
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
 Training Boltzmann Machines
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: probably move this somewhere else
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -6627,6 +6648,29 @@ TODO: derive
 \end_inset
 
  for -1/1-valued nodes.)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+In 
+\begin_inset Quotes eld
+\end_inset
+
+Connectionist learning for belief networks
+\begin_inset Quotes erd
+\end_inset
+
+ (~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
+ networks.pdf), Neal derives the learning rule for Boltzmann Machines: page
+ 6, equation 7.
 \end_layout
 
 \end_inset
