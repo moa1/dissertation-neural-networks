@@ -73,17 +73,6 @@ fix-cm
 \begin_body
 
 \begin_layout Standard
-CONTINUE at 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "TODO:continue-here"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -3389,16 +3378,6 @@ there exists a choice of potential functions ...
  by Gibbs sampling.
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "TODO:continue-here"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Approximate Inference
 \end_layout
@@ -5541,12 +5520,67 @@ TODO: the above definition is from wikipedia, but I have to cite some paper.
 Artificial Neural Networks
 \end_layout
 
+\begin_layout Subsubsection
+Distinction between a deterministic and stochastic network
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe move the definition of a deterministic network and a stochastic
+ network somewhere else.
+\end_layout
+
+\end_inset
+
+The difference between a stochastic and a deterministic network is that
+ in a deterministic network a node represents a single value, while in a
+ stochastic network a single node represents a probability distribution.
+ In particular, if there is a set of 
+\begin_inset Quotes eld
+\end_inset
+
+output
+\begin_inset Quotes erd
+\end_inset
+
+ nodes, then in a deterministic setting the output can be interpreted as
+ a single point in a high-dimensional space, while in a stochastic network
+ the output is the joint probability distribution over all the random variables
+ associated with the output nodes.
+\end_layout
+
+\begin_layout Standard
+A stochastic network is more general than its deterministic counterpart,
+ since a stochastic network can be converted to a deterministic network,
+ but not vice-versa.
+ This greater generality comes at a higher cost, however, since inference
+ and learning in stochastic networks take longer than the computation of
+ the output and the learning in deterministic networks.
+\end_layout
+
 \begin_layout Subsection
 Hopfield Network
 \end_layout
 
+\begin_layout Paragraph
+Structure of a Hopfield Network
+\end_layout
+
 \begin_layout Standard
-A Hopfield Network is a deterministic recurrent network with 
+A Hopfield Network
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Hopfield Network
+\end_layout
+
+\end_inset
+
+ is a deterministic recurrent network with 
 \begin_inset Formula $m$
 \end_inset
 
@@ -5639,6 +5673,10 @@ TODO: Hier fehlt ein Bild von einem Hopfield-Netzwerk: Die connections sollten
 
 \end_layout
 
+\begin_layout Paragraph
+Updating Rule
+\end_layout
+
 \begin_layout Standard
 The network is updated asynchronously: At each time point 
 \begin_inset Formula $t$
@@ -5715,7 +5753,7 @@ key "Hopfield1984"
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:Energy of a Hopfield network-1"
+reference "eq:Energy of a Hopfield network"
 
 \end_inset
 
@@ -5904,6 +5942,10 @@ There is a simple mathematical condition which guarantees that the state
 
 \end_layout
 
+\begin_layout Paragraph
+Energy of a Hopfield Network
+\end_layout
+
 \begin_layout Standard
 This can be proven by showing that a single number, associated with the
  state of the network, can only decrease when updating a node.
@@ -5975,6 +6017,10 @@ TODO: insert link to file
 .
 \end_layout
 
+\begin_layout Paragraph
+Training a Hopfield Network
+\end_layout
+
 \begin_layout Standard
 Training a Hopfield network is the task of finding weights 
 \begin_inset Formula $w_{ij}$
@@ -6001,6 +6047,14 @@ associative memory
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Paragraph
+Recalling a Known State by the Updating Rule
+\end_layout
+
+\begin_layout Standard
+Recalling a partially known state works by updating.
  After training, a Hopfield network can be initialized with a distorted
  pattern, in which the state of some nodes is swapped.
  After iteratively updating until its state doesn't change anymore, the
@@ -6014,12 +6068,31 @@ Multilayer Perceptron
 
 \begin_layout Standard
 A Multilayer Perceptron belongs to the class of deterministic feedforward
- neural networks.
- Feedforward networks are in contrast to recurrent networks, which contain
- a directed cycle of neural connections.
+ neuronal networks
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+feedforward neuronal network
 \end_layout
 
-\begin_layout Paragraph
+\end_inset
+
+.
+ Feedforward networks are in contrast to recurrent networks
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+recurrent neuronal network
+\end_layout
+
+\end_inset
+
+, which contain a directed cycle of neuronal connections.
+\end_layout
+
+\begin_layout Subsubsection
 Multilayer feedforward networks as universal function approximators
 \end_layout
 
@@ -6057,6 +6130,11 @@ squashing
 \end_inset
 
 .
+ An example is the sigmoid function 
+\begin_inset Formula $\frac{1}{1+exp(-x)}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -6081,6 +6159,190 @@ This [result] implies that any lack of success in applications must arise
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Back-propagation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Back-propagation
+\end_layout
+
+\end_inset
+
+
+\emph on
+Back-propagation
+\emph default
+ is the adaptation of weights and biases of the network to make its set
+ of actual outputs better fit a set of desired outputs for a given set of
+ inputs.
+ Technically it is just running the network for a given input, observing
+ the outputs in the output layer, computing the errors to the desired outputs
+ and back-propagating them to adapt the weights and biases between all the
+ layers.
+ This will make the network output values closer to the desired values next
+ time this particular input pattern is given to the network.
+ The back-propagation algorithm is a supervised learning step and thus prone
+ to overfitting.
+\end_layout
+
+\begin_layout Paragraph
+Optimizing the Sum of Squared Differences
+\end_layout
+
+\begin_layout Standard
+Usually in fine-tuning, the sum of the squared differences
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+sum of squared errors
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+squared-error sum
+\end_layout
+
+\end_inset
+
+ between the desired outputs and the actual outputs in the output layer
+ are minimized:
+\begin_inset Formula 
+\[
+\sum_{i}(\hat{x_{i}}-x_{i})^{2}
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is the desired value for node 
+\begin_inset Formula $i$
+\end_inset
+
+ of the output layer and 
+\begin_inset Formula $\hat{x_{i}}$
+\end_inset
+
+ is the actual output value of node 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ The minimization is done by computing the derivative of the error of one
+ node (which is a function of the outputs of the nodes in the above layer
+ and the desired output value) with respect to a particular weight and then
+ increasing or decreasing the weight by the computed derivative multiplied
+ by the learning rate.
+\end_layout
+
+\begin_layout Paragraph
+Optimizing the Cross-entropy Error
+\end_layout
+
+\begin_layout Standard
+One can also minimize the cross-entropy error
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+cross-entropy error
+\end_layout
+
+\end_inset
+
+:
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: cite something.
+ Defined like this in the last line of the leftmost column of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonSalakhutdinov2006"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+-\sum_{i}p_{i}\log\hat{p_{i}}-\sum_{i}(1-p_{i})\log(1-\hat{p_{i}})
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ is the desired output value of node 
+\begin_inset Formula $i$
+\end_inset
+
+ in the output layer and 
+\begin_inset Formula $\hat{p_{i}}$
+\end_inset
+
+ is the actual output value output by node 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ This makes sense if only the node having the maximal value in a layer is
+ interesting, and not its exact value.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: formula for the updating in the back-propagation algorithm.
+ TODO: cite some paper.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Difficulties in training multi-layer neural networks
+\end_layout
+
+\begin_layout Standard
+Training a randomly initialized feed-forward neural network with more than
+ 1 hidden layer using back-propagation is difficult and usually does not
+ succeed.
+ When attempting to train such a network, each node in the output layer
+ often just outputs the mean value over the training cases, independently
+ of the input.
+ One problem is that there are many local maxima (generated by repeatedly
+ adding weighted sigmoid functions) of the implicitly optimized energy function
+ during back-propagation.
+ Another problem is that in discriminative learning, each training case
+ only contributes as many bits to the specification of the parameters of
+ the network as needed to specify the label.
 \end_layout
 
 \begin_layout Subsection
@@ -6129,6 +6391,64 @@ TODO: Elaborate the definition
 \begin_layout Standard
 A Boltzmann Machine is an undirected graphical model that has a specific
  form of the conditional probability distribution defined at each node.
+ A Boltzmann Machine is the stochastic equivalent to a Hopfield network.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Example figure of a BM.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+In 
+\begin_inset Quotes eld
+\end_inset
+
+Connectionist learning for belief networks
+\begin_inset Quotes erd
+\end_inset
+
+ (~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
+ networks.pdf), Neal derives the learning rule for Boltzmann Machines: page
+ 6, equation 7.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Connections to other Graphical Models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Generalized to allow J and H to vary from spin to spin, and to allow interaction
+s between any two spins, the Ising model becomes the 
+\begin_inset Quotes eld
+\end_inset
+
+Boltzmann machine
+\begin_inset Quotes erd
+\end_inset
+
+ of Ackley, Hinton, and Sejnowski.
+\begin_inset Quotes erd
+\end_inset
+
+ [TODO: cite Probabilistic Inference Using Markov Chain Monte Carlo Methods,
+ Radford M.
+ Neal 1993]
 \end_layout
 
 \begin_layout Paragraph
@@ -6351,7 +6671,7 @@ Positive Phase
 \begin_layout Standard
 In more detail, in the positive phase
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 positive phase
@@ -6417,7 +6737,7 @@ Negative Phase
 \begin_layout Standard
 In the negative phase
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 negative phase
@@ -7399,142 +7719,29 @@ Comparison of the Representational Power of Markov Random Fields with Bayesian
 status open
 
 \begin_layout Plain Layout
-TODO Neal shows in (~/uni/publication/zusammenfassung/rbm/A11 Connectionist
- learning of belief networks.pdf) that Boltzmann Machines and Bayesian Networks
- both have instances of them that are not representable in the other kind
- of graphical model.
- This means that some probability distributions representable in Boltzmann
+TODO 
+\end_layout
+
+\end_inset
+
+Neal shows in (TODO: cite 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
+ networks.pdf
+\begin_inset Quotes erd
+\end_inset
+
+) that there are instances of Boltzmann Machines that are not representable
+ in Bayesian Networks, and there are Bayesian Networks that cannot be modeled
+ by Boltzmann Machines.
+ This means that some joint probability distributions representable in Boltzmann
  Machines do not have representations in Bayesian Networks and vice versa.
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Distinction between a deterministic and stochastic network
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: maybe move the definition of a deterministic network and a stochastic
- network somewhere else.
-\end_layout
-
-\end_inset
-
-The difference between a stochastic and a deterministic network is that
- in a deterministic network a node represents a single value, while in a
- stochastic network a single node represents a probability distribution.
- In particular, if there is a set of 
-\begin_inset Quotes eld
-\end_inset
-
-output
-\begin_inset Quotes erd
-\end_inset
-
- nodes, then in a deterministic setting the output can be interpreted as
- a single point in a high-dimensional space, while in a stochastic network
- the output is the joint probability distribution over all the random variables
- associated with the output nodes.
-\end_layout
-
-\begin_layout Standard
-A stochastic network is more general than its deterministic counterpart,
- since a stochastic network can be converted to a deterministic network,
- but not vice-versa.
- This greater generality comes at a higher cost, however, since inference
- and learning in stochastic networks takes longer than the computation of
- the output and the learning in deterministic networks.
-\end_layout
-
 \begin_layout Section
 Restricted Boltzmann Machines
-\end_layout
-
-\begin_layout Paragraph
-Boltzmann Machines
-\end_layout
-
-\begin_layout Standard
-What are Boltzmann Machines? 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Example figure of a BM.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A Boltzmann Machine is the stochastic equivalent to a Hopfield network.
- 
-\end_layout
-
-\begin_layout Paragraph
-Inference in Boltzmann Machines
-\end_layout
-
-\begin_layout Standard
-How is inference complicated in general Boltzmann Machines?
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-In 
-\begin_inset Quotes eld
-\end_inset
-
-Connectionist learning for belief networks
-\begin_inset Quotes erd
-\end_inset
-
- (~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
- networks.pdf), Neal derives the learning rule for Boltzmann Machines: page
- 6, equation 7.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Connections to other Graphical Models
-\end_layout
-
-\begin_layout Standard
-\begin_inset Quotes eld
-\end_inset
-
-Generalized to allow J and H to vary from spin to spin, and to allow interaction
-s between any two spins, the Ising model becomes the 
-\begin_inset Quotes eld
-\end_inset
-
-Boltzmann machine
-\begin_inset Quotes erd
-\end_inset
-
- of Ackley, Hinton, and Sejnowski.
-\begin_inset Quotes erd
-\end_inset
-
- [Probabilistic Inference Using Markov Chain Monte Carlo Methods, Radford
- M.
- Neal 1993]
 \end_layout
 
 \begin_layout Paragraph
@@ -7542,7 +7749,6 @@ Restricted Boltzmann Machines
 \end_layout
 
 \begin_layout Standard
-What are Restricted Boltzmann Machines? 
 \begin_inset Note Note
 status open
 
@@ -7552,10 +7758,6 @@ TODO: Example figure of an RBM.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 A Restricted Boltzmann Machine has a bipartite topology: there are visible
  nodes and hidden nodes, and each node in the visible layer is connected
  (via an undirected edge) to all hidden nodes, but there are no visible-to-visib
@@ -7563,21 +7765,21 @@ le node connections and no hidden-to-hidden node connections.
 \end_layout
 
 \begin_layout Standard
-As originally proposed by Hinton 
+As originally proposed by 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-and ...
- the guy who named it 
-\begin_inset Quotes eld
-\end_inset
-
-Harmonium
-\begin_inset Quotes erd
-\end_inset
-
-
+TODO cite: P.
+ Smolensky.
+ Information processing in dynamical systems: Foundations of harmony theory.
+ In D.
+ E.
+ Rumelhart and J.
+ L.
+ McClelland, editors, Parallel Distributed Processing: Volume 1: Foundations,
+ pages 194â281.
+ MIT Press, Cambridge, 1986.
 \end_layout
 
 \end_inset
@@ -7604,14 +7806,14 @@ A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
 The energy of a hopfield network was defined in equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:Energy of a Hopfield network-1"
+reference "eq:Energy of a Hopfield network"
 
 \end_inset
 
  (
 \begin_inset CommandInset ref
 LatexCommand vpageref
-reference "eq:Energy of a Hopfield network-1"
+reference "eq:Energy of a Hopfield network"
 
 \end_inset
 
@@ -7632,28 +7834,19 @@ TODO: repeat energy of equation
 \end_layout
 
 \begin_layout Paragraph
-Difficulties in training multi-layer neural networks
-\end_layout
-
-\begin_layout Standard
-Training a feed-forward neural network with more than 1 hidden layer using
- back-propagation is difficult and usually does not succeed.
- When attempting to train such a network, each node in the output layer
- often just outputs the mean value over the training cases, independently
- of the input.
- One problem is that there are many local maxima (generated by repeatedly
- adding weighted sigmoid functions) of the implicitly optimized energy function
- during back-propagation.
- Another problem is that in discriminative learning, each training case
- only contributes as many bits to the specification of the parameters of
- the network as needed to specify the label.
-\end_layout
-
-\begin_layout Paragraph
 RBMs can be interpreted as feed-forward neural networks
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: ist der folgende Paragraph überflüssig und verwirrend?
+\end_layout
+
+\end_inset
+
 A trained stacked RBM can be reinterpreted as a feed-forward neural network.
  In particular, the weights and biases of a trained stacked RBM can be transferr
 ed to a multi-layer feed-forward neural network with the same architecture
@@ -7699,66 +7892,6 @@ pre-training
 n, into a configuration that can predict from input variables (input at
  the bottom of the network) the output variables (read off at the top of
  the network).
-\end_layout
-
-\begin_layout Paragraph
-Learning Rule in Restricted Boltzmann Machines
-\end_layout
-
-\begin_layout Standard
-Usually, the learning rule includes a 
-\begin_inset Quotes eld
-\end_inset
-
-momentum
-\begin_inset Quotes erd
-\end_inset
-
- term.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Formel hinschreiben
-\end_layout
-
-\end_inset
-
- This term works like a low-pass filter and reduces oscillations during
- learning by smoothing the weight and bias deltas added to the parameters
- of the network.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: maybe the following paragraph should go into Results, not Introduction.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Because the momentum term includes a coefficient that describes the fraction
- of the weights deltas in the previous time step to be added to the current
- weight deltas, it adds another meta-parameter to training.
- Sometimes the coefficient is even changed during training, usually gradually
- increased during the early steps of training to its final value.
- This is to prevent the 
-\begin_inset Quotes eld
-\end_inset
-
-explosion
-\begin_inset Quotes erd
-\end_inset
-
- of the model during training, which happens when the training does not
- converge, and can be caused by a too high momentum coefficient.
 \end_layout
 
 \begin_layout Subsection
@@ -7892,6 +8025,65 @@ key "HintonSalakhutdinov2006"
 .
 \end_layout
 
+\begin_layout Paragraph
+Momentum of the Learning Rule
+\end_layout
+
+\begin_layout Standard
+Usually, the learning rule includes a 
+\begin_inset Quotes eld
+\end_inset
+
+momentum
+\begin_inset Quotes erd
+\end_inset
+
+ term.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Formel hinschreiben
+\end_layout
+
+\end_inset
+
+ This term works like a low-pass filter and reduces oscillations during
+ learning by smoothing the weight and bias deltas added to the parameters
+ of the network.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe the following paragraph should go into Results, not Introduction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the momentum term includes a coefficient that describes the fraction
+ of the weights deltas in the previous time step to be added to the current
+ weight deltas, it adds another meta-parameter to training.
+ Too high momentum coefficient can cause 
+\begin_inset Quotes eld
+\end_inset
+
+explosion
+\begin_inset Quotes erd
+\end_inset
+
+, or non-convergence of the model, of the model during training.
+ To prevent this, the coefficient is changed during training, and usually
+ gradually increased during the early steps of training to its final value.
+\end_layout
+
 \begin_layout Subsection
 Regularizations of Restricted Boltzmann Machines
 \end_layout
@@ -7927,180 +8119,18 @@ Dropout
 \begin_layout Standard
 Dropout is usually combined with weight normalization.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I think weight normalization is described a bit in the dropout paper.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Paragraph
 Weight normalization
 \end_layout
 
-\begin_layout Subsection
-Back-propagation
-\end_layout
-
-\begin_layout Standard
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-Back-propagation
-\end_layout
-
-\end_inset
-
-
-\emph on
-Back-propagation
-\emph default
- is the adaptation of weights and biases of the network to make its set
- of actual outputs better fit a set of desired outputs for a given set of
- inputs.
- Technically it is just running the network for a given input, observing
- the outputs in the output layer, computing the errors to the desired outputs
- and back-propagating them to adapt the weights and biases between all the
- layers.
- This will make the network output values closer to the desired values next
- time this particular input pattern is given to the network.
- The back-propagation algorithm is a supervised learning step and thus prone
- to overfitting.
-\end_layout
-
-\begin_layout Paragraph
-Optimizing the Sum of Squared Differences
-\end_layout
-
-\begin_layout Standard
-Usually in fine-tuning, the sum of the squared differences
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-sum of squared errors
-\end_layout
-
-\end_inset
-
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-squared-error sum
-\end_layout
-
-\end_inset
-
- between the desired outputs and the actual outputs in the output layer
- are minimized:
-\begin_inset Formula 
-\[
-\sum_{i}(\hat{x_{i}}-x_{i})^{2}
-\]
-
-\end_inset
-
- where 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- is the desired value for node 
-\begin_inset Formula $i$
-\end_inset
-
- of the output layer and 
-\begin_inset Formula $\hat{x_{i}}$
-\end_inset
-
- is the actual output value of node 
-\begin_inset Formula $i$
-\end_inset
-
-.
- The minimization is done by computing the derivative of the error of one
- node (which is a function of the outputs of the nodes in the above layer
- and the desired output value) with respect to a particular weight and then
- increasing or decreasing the weight by the computed derivative multiplied
- by the learning rate.
-\end_layout
-
-\begin_layout Paragraph
-Optimizing the Cross-entropy Error
-\end_layout
-
-\begin_layout Standard
-One can also minimize the cross-entropy error
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-cross-entropy error
-\end_layout
-
-\end_inset
-
-:
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: cite something.
- Defined like this in the last line of the leftmost column of 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonSalakhutdinov2006"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
--\sum_{i}p_{i}\log\hat{p_{i}}-\sum_{i}(1-p_{i})\log(1-\hat{p_{i}})
-\]
-
-\end_inset
-
- where 
-\begin_inset Formula $p_{i}$
-\end_inset
-
- is the desired output value of node 
-\begin_inset Formula $i$
-\end_inset
-
- in the output layer and 
-\begin_inset Formula $\hat{p_{i}}$
-\end_inset
-
- is the actual output value output by node 
-\begin_inset Formula $i$
-\end_inset
-
-.
- This makes sense if only the node having the maximal value in a layer is
- interesting, and not its exact value.
-\end_layout
-
 \begin_layout Standard
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: formula for the updating in the back-propagation algorithm.
- TODO: cite some paper.
+TODO: I think weight normalization is described a bit in the dropout paper.
 \end_layout
 
 \end_inset
