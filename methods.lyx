@@ -6391,7 +6391,6 @@ TODO: Elaborate the definition
 \begin_layout Standard
 A Boltzmann Machine is an undirected graphical model that has a specific
  form of the conditional probability distribution defined at each node.
- A Boltzmann Machine is the stochastic equivalent to a Hopfield network.
  
 \begin_inset Note Note
 status open
@@ -6776,6 +6775,422 @@ negative phase
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsection
+Restricted Boltzmann Machines
+\end_layout
+
+\begin_layout Paragraph
+Structure
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Example figure of an RBM.
+\end_layout
+
+\end_inset
+
+A Restricted Boltzmann Machine has a bipartite topology: there are visible
+ nodes and hidden nodes, and each node in the visible layer is connected
+ to all hidden nodes by undirected edges, but in contrast to general Boltzmann
+ Machines there are no visible-to-visible node connections and no hidden-to-hidd
+en node connections.
+\end_layout
+
+\begin_layout Standard
+As originally proposed by 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO cite: P.
+ Smolensky.
+ Information processing in dynamical systems: Foundations of harmony theory.
+ In D.
+ E.
+ Rumelhart and J.
+ L.
+ McClelland, editors, Parallel Distributed Processing: Volume 1: Foundations,
+ pages 194â281.
+ MIT Press, Cambridge, 1986.
+\end_layout
+
+\end_inset
+
+, a Restricted Boltzmann Machine has binary visible and hidden nodes.
+ There are extensions to real-valued nodes, however.
+\end_layout
+
+\begin_layout Paragraph
+Analogy to Hopfield Networks
+\end_layout
+
+\begin_layout Standard
+A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
+ When choosing a zero temperature 
+\begin_inset Formula $T=0$
+\end_inset
+
+, the Restricted Boltzmann Machine becomes deterministic and equivalent
+ to a Hopfield network.
+\end_layout
+
+\begin_layout Standard
+The energy of a hopfield network was defined in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Energy of a Hopfield network"
+
+\end_inset
+
+ (
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "eq:Energy of a Hopfield network"
+
+\end_inset
+
+) as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: repeat energy of equation 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+RBMs can be interpreted as feed-forward neural networks
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: ist der folgende Paragraph überflüssig und verwirrend?
+\end_layout
+
+\end_inset
+
+A trained stacked RBM can be reinterpreted as a feed-forward neural network.
+ In particular, the weights and biases of a trained stacked RBM can be transferr
+ed to a multi-layer feed-forward neural network with the same architecture
+ as the stacked RBM, thereby making the stochastic RBM a deterministic neural
+ network.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO: See 
+\begin_inset Quotes eld
+\end_inset
+
+An Introduction to Restricted Boltzmann Machines
+\begin_inset Quotes erd
+\end_inset
+
+ by Asja Fischer and Christian Igel.
+ Paragraph starting at 
+\begin_inset Quotes eld
+\end_inset
+
+It is an important property that single as well as stacked RBMs
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ This process is also called 
+\emph on
+pre-training
+\emph default
+.
+ Furthermore, another neural network (usually only one layer, due to the
+ training difficulties of multi-layer neural networks) can be put on top
+ of the pre-trained converted RBM, where the final (output) layer has neurons
+ corresponding to variables to be predicted.
+ The resulting network can be then be fine-tuned, using standard back-propagatio
+n, into a configuration that can predict from input variables (input at
+ the bottom of the network) the output variables (read off at the top of
+ the network).
+\end_layout
+
+\begin_layout Subsubsection
+Parameters of a Restricted Boltzmann Machine
+\end_layout
+
+\begin_layout Paragraph
+Activation function
+\end_layout
+
+\begin_layout Standard
+The hidden and visible nodes are a function of the sum of their inputs.
+ The function that maps the sum of the inputs of a node to its value is
+ called the 
+\emph on
+activation function
+\emph default
+.
+ There are several activation functions:
+\end_layout
+
+\begin_layout Paragraph
+Sigmoid activation function
+\end_layout
+
+\begin_layout Standard
+This is a standard activation function, often used in neural networks.
+ It has the property that it is almost linear for inputs around zero, tends
+ to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
+ infinity.
+\begin_inset Formula 
+\[
+\sigma(x)=\frac{1}{1+e^{-x}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Kurve einer sigmoid-Funktion hier einfügen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Interpreting the Output of a Node as a Continuous Value
+\end_layout
+
+\begin_layout Standard
+The output of a node in a Restricted Boltzmann Machine, as orignially proposed,
+ is binary (i.e.
+ either 0 or 1).
+ However the sigmoid activation function outputs continuous values between
+ 0 and 1.
+ Therefore the output of the sigmoid activation function is interpreted
+ as the probability that the node outputs value 1, and 0 otherwise.
+ In this way the output is sampled from 
+\begin_inset Formula $\{0,1\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Linear units with independent Gaussian noise
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonSalakhutdinov2006"
+
+\end_inset
+
+ proposed a way to extend Restricted Boltzmann Machines with only binary
+ values to nodes with real values.
+\end_layout
+
+\begin_layout Paragraph
+Rectified linear activation function
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NairHinton2010"
+
+\end_inset
+
+ then modified the idea in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonSalakhutdinov2006"
+
+\end_inset
+
+ to rectified linear units, in which the sampled output of a unit is given
+ by 
+\begin_inset Formula $\max(0,x+N(0,\sigma(x))$
+\end_inset
+
+ where 
+\begin_inset Formula $x$
+\end_inset
+
+ is the sum of the inputs of the unit, 
+\begin_inset Formula $\sigma(x)$
+\end_inset
+
+ is the sigmoid function, and 
+\begin_inset Formula $N(0,\sigma(x))$
+\end_inset
+
+ is normally distributed noise with mean 
+\begin_inset Formula $0$
+\end_inset
+
+ and variance 
+\begin_inset Formula $\sigma(x)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Momentum of the Learning Rule
+\end_layout
+
+\begin_layout Standard
+Usually, the learning rule includes a 
+\begin_inset Quotes eld
+\end_inset
+
+momentum
+\begin_inset Quotes erd
+\end_inset
+
+ term.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Formel hinschreiben
+\end_layout
+
+\end_inset
+
+ This term works like a low-pass filter and reduces oscillations during
+ learning by smoothing the weight and bias deltas added to the parameters
+ of the network.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe the following paragraph should go into Results, not Introduction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the momentum term includes a coefficient that describes the fraction
+ of the weights deltas in the previous time step to be added to the current
+ weight deltas, it adds another meta-parameter to training.
+ Too high momentum coefficient can cause 
+\begin_inset Quotes eld
+\end_inset
+
+explosion
+\begin_inset Quotes erd
+\end_inset
+
+, or non-convergence of the model, of the model during training.
+ To prevent this, the coefficient is changed during training, and usually
+ gradually increased during the early steps of training to its final value.
+\end_layout
+
+\begin_layout Subsubsection
+Regularizations of Restricted Boltzmann Machines
+\end_layout
+
+\begin_layout Paragraph
+L1 Weight Decay
+\end_layout
+
+\begin_layout Paragraph
+L2 Weight Decay
+\end_layout
+
+\begin_layout Standard
+As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FischerIgel2012"
+
+\end_inset
+
+ note, adding an L2 weight decay term to the updating term corresponds to
+ assuming a zero-mean Gaussian prior on the parameters.
+\end_layout
+
+\begin_layout Paragraph
+Sparsity
+\end_layout
+
+\begin_layout Paragraph
+Dropout
+\end_layout
+
+\begin_layout Standard
+Dropout is usually combined with weight normalization.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Weight normalization
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: I think weight normalization is described a bit in the dropout paper.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Say something about the time taken to train RBMs.
+ Training time is not deterministic, since the energy landscape is affected
+ by the training samples.
+ Training is quadratic in the number of features if a multiple-layer neural
+ network is trained and the number of features is gradually reduced.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -7738,421 +8153,6 @@ Neal shows in (TODO: cite
  by Boltzmann Machines.
  This means that some joint probability distributions representable in Boltzmann
  Machines do not have representations in Bayesian Networks and vice versa.
-\end_layout
-
-\begin_layout Section
-Restricted Boltzmann Machines
-\end_layout
-
-\begin_layout Paragraph
-Restricted Boltzmann Machines
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Example figure of an RBM.
-\end_layout
-
-\end_inset
-
-A Restricted Boltzmann Machine has a bipartite topology: there are visible
- nodes and hidden nodes, and each node in the visible layer is connected
- (via an undirected edge) to all hidden nodes, but there are no visible-to-visib
-le node connections and no hidden-to-hidden node connections.
-\end_layout
-
-\begin_layout Standard
-As originally proposed by 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO cite: P.
- Smolensky.
- Information processing in dynamical systems: Foundations of harmony theory.
- In D.
- E.
- Rumelhart and J.
- L.
- McClelland, editors, Parallel Distributed Processing: Volume 1: Foundations,
- pages 194â281.
- MIT Press, Cambridge, 1986.
-\end_layout
-
-\end_inset
-
-, a Restricted Boltzmann Machine has binary visible and hidden nodes.
- There are extensions to real-valued nodes, however.
-\end_layout
-
-\begin_layout Paragraph
-Analogy to Hopfield Networks
-\end_layout
-
-\begin_layout Standard
-A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
- When choosing a zero temperature 
-\begin_inset Formula $T=0$
-\end_inset
-
-, the Restricted Boltzmann Machine becomes deterministic and equivalent
- to a Hopfield network.
-\end_layout
-
-\begin_layout Standard
-The energy of a hopfield network was defined in equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Energy of a Hopfield network"
-
-\end_inset
-
- (
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "eq:Energy of a Hopfield network"
-
-\end_inset
-
-) as:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: repeat energy of equation 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-RBMs can be interpreted as feed-forward neural networks
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: ist der folgende Paragraph überflüssig und verwirrend?
-\end_layout
-
-\end_inset
-
-A trained stacked RBM can be reinterpreted as a feed-forward neural network.
- In particular, the weights and biases of a trained stacked RBM can be transferr
-ed to a multi-layer feed-forward neural network with the same architecture
- as the stacked RBM, thereby making the stochastic RBM a deterministic neural
- network.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-TODO: See 
-\begin_inset Quotes eld
-\end_inset
-
-An Introduction to Restricted Boltzmann Machines
-\begin_inset Quotes erd
-\end_inset
-
- by Asja Fischer and Christian Igel.
- Paragraph starting at 
-\begin_inset Quotes eld
-\end_inset
-
-It is an important property that single as well as stacked RBMs
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- This process is also called 
-\emph on
-pre-training
-\emph default
-.
- Furthermore, another neural network (usually only one layer, due to the
- training difficulties of multi-layer neural networks) can be put on top
- of the pre-trained converted RBM, where the final (output) layer has neurons
- corresponding to variables to be predicted.
- The resulting network can be then be fine-tuned, using standard back-propagatio
-n, into a configuration that can predict from input variables (input at
- the bottom of the network) the output variables (read off at the top of
- the network).
-\end_layout
-
-\begin_layout Subsection
-Parameters of a Restricted Boltzmann Machine
-\end_layout
-
-\begin_layout Paragraph
-Activation function
-\end_layout
-
-\begin_layout Standard
-The hidden and visible nodes are a function of the sum of their inputs.
- The function that maps the sum of the inputs of a node to its value is
- called the 
-\emph on
-activation function
-\emph default
-.
- There are several activation functions:
-\end_layout
-
-\begin_layout Paragraph
-Sigmoid activation function
-\end_layout
-
-\begin_layout Standard
-This is a standard activation function, often used in neural networks.
- It has the property that it is almost linear for inputs around zero, tends
- to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
- infinity.
-\begin_inset Formula 
-\[
-\sigma(x)=\frac{1}{1+e^{-x}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Kurve einer sigmoid-Funktion hier einfügen.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Interpreting the Output of a Node as a Continuous Value
-\end_layout
-
-\begin_layout Standard
-The output of a node in a Restricted Boltzmann Machine, as orignially proposed,
- is binary (i.e.
- either 0 or 1).
- However the sigmoid activation function outputs continuous values between
- 0 and 1.
- Therefore the output of the sigmoid activation function is interpreted
- as the probability that the node outputs value 1, and 0 otherwise.
- In this way the output is sampled from 
-\begin_inset Formula $\{0,1\}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Paragraph
-Linear units with independent Gaussian noise
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonSalakhutdinov2006"
-
-\end_inset
-
- proposed a way to extend Restricted Boltzmann Machines with only binary
- values to nodes with real values.
-\end_layout
-
-\begin_layout Paragraph
-Rectified linear activation function
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "NairHinton2010"
-
-\end_inset
-
- then modified the idea in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonSalakhutdinov2006"
-
-\end_inset
-
- to rectified linear units, in which the sampled output of a unit is given
- by 
-\begin_inset Formula $\max(0,x+N(0,\sigma(x))$
-\end_inset
-
- where 
-\begin_inset Formula $x$
-\end_inset
-
- is the sum of the inputs of the unit, 
-\begin_inset Formula $\sigma(x)$
-\end_inset
-
- is the sigmoid function, and 
-\begin_inset Formula $N(0,\sigma(x))$
-\end_inset
-
- is normally distributed noise with mean 
-\begin_inset Formula $0$
-\end_inset
-
- and variance 
-\begin_inset Formula $\sigma(x)$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Paragraph
-Momentum of the Learning Rule
-\end_layout
-
-\begin_layout Standard
-Usually, the learning rule includes a 
-\begin_inset Quotes eld
-\end_inset
-
-momentum
-\begin_inset Quotes erd
-\end_inset
-
- term.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Formel hinschreiben
-\end_layout
-
-\end_inset
-
- This term works like a low-pass filter and reduces oscillations during
- learning by smoothing the weight and bias deltas added to the parameters
- of the network.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: maybe the following paragraph should go into Results, not Introduction.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Because the momentum term includes a coefficient that describes the fraction
- of the weights deltas in the previous time step to be added to the current
- weight deltas, it adds another meta-parameter to training.
- Too high momentum coefficient can cause 
-\begin_inset Quotes eld
-\end_inset
-
-explosion
-\begin_inset Quotes erd
-\end_inset
-
-, or non-convergence of the model, of the model during training.
- To prevent this, the coefficient is changed during training, and usually
- gradually increased during the early steps of training to its final value.
-\end_layout
-
-\begin_layout Subsection
-Regularizations of Restricted Boltzmann Machines
-\end_layout
-
-\begin_layout Paragraph
-L1 Weight Decay
-\end_layout
-
-\begin_layout Paragraph
-L2 Weight Decay
-\end_layout
-
-\begin_layout Standard
-As 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "FischerIgel2012"
-
-\end_inset
-
- note, adding an L2 weight decay term to the updating term corresponds to
- assuming a zero-mean Gaussian prior on the parameters.
-\end_layout
-
-\begin_layout Paragraph
-Sparsity
-\end_layout
-
-\begin_layout Paragraph
-Dropout
-\end_layout
-
-\begin_layout Standard
-Dropout is usually combined with weight normalization.
- 
-\end_layout
-
-\begin_layout Paragraph
-Weight normalization
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I think weight normalization is described a bit in the dropout paper.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Say something about the time taken to train RBMs.
- Training time is not deterministic, since the energy landscape is affected
- by the training samples.
- Training is quadratic in the number of features if a multiple-layer neural
- network is trained and the number of features is gradually reduced.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
