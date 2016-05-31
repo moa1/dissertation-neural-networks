@@ -6197,7 +6197,7 @@ Optimizing the Sum of Squared Differences
 \end_layout
 
 \begin_layout Standard
-Usually in fine-tuning, the sum of the squared differences
+Usually in back-propagation, the sum of the squared differences
 \begin_inset Index idx
 status collapsed
 
@@ -6319,6 +6319,446 @@ status open
 \begin_layout Plain Layout
 TODO: formula for the updating in the back-propagation algorithm.
  TODO: cite some paper.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Parameters in Training a Multilayer Perceptron
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Parameters-of-Training-a-Multilayer-Perceptron"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Although described here for multilayer perceptrons, the parameters described
+ here apply to most artificial neuronal networks, not just multilayer perceptron
+s.
+\end_layout
+
+\begin_layout Paragraph
+Sigmoid activation function
+\end_layout
+
+\begin_layout Standard
+The hidden and visible nodes are a function of the sum of their inputs.
+ The function that maps the sum of the inputs of a node to its value is
+ called the 
+\emph on
+activation function
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+activation function
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The sigmoid activation function is a standard activation function, often
+ used in neural networks.
+ It has the property that it is almost linear for inputs around zero, tends
+ to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
+ infinity.
+\begin_inset Formula 
+\[
+\sigma(x)=\frac{1}{1+e^{-x}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Kurve einer sigmoid-Funktion hier einfügen.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Momentum of the Learning Rule
+\end_layout
+
+\begin_layout Standard
+Usually, the learning rule includes a 
+\begin_inset Quotes eld
+\end_inset
+
+momentum
+\begin_inset Quotes erd
+\end_inset
+
+ term.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Formel hinschreiben
+\end_layout
+
+\end_inset
+
+ This term works like a low-pass filter and reduces oscillations during
+ learning by smoothing the weight and bias deltas added to the parameters
+ of the network.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: maybe the following paragraph should go into Results, not Introduction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the momentum term includes a coefficient that describes the fraction
+ of the weights deltas in the previous time step to be added to the current
+ weight deltas, it adds another meta-parameter to training.
+ Too high momentum coefficient can cause 
+\begin_inset Quotes eld
+\end_inset
+
+explosion
+\begin_inset Quotes erd
+\end_inset
+
+, or non-convergence of the model, of the model during training.
+ To prevent this, the coefficient is changed during training, and usually
+ gradually increased during the early steps of training to its final value.
+\end_layout
+
+\begin_layout Subsubsection
+Regularizations of Neuronal Networks
+\end_layout
+
+\begin_layout Standard
+The regularizations described here apply to most artificial neuronal networks,
+ not just multilayer perceptrons.
+\end_layout
+
+\begin_layout Paragraph
+L1 and L2 Weight Decay
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: check in the literature if L1 and L2 weight decay in artificial neuronal
+ networks really work the way I describe them here.
+\end_layout
+
+\end_inset
+
+L1 and L2 weight decay
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+L1 weight decay
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+L2 weight decay
+\end_layout
+
+\end_inset
+
+ penalize large weights by moving them towards zero.
+ L1 weight decay uses in the updating of the weights, instead of the default
+ weight delta 
+\begin_inset Formula $\Delta w_{ij}$
+\end_inset
+
+, the penalized 
+\begin_inset Formula $\Delta w_{ij}-abs(w_{ij})*w_{1}$
+\end_inset
+
+, where 
+\begin_inset Formula $w_{1}\in\mathbb{R}^{+}$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+weight-cost
+\begin_inset Quotes erd
+\end_inset
+
+ of L1 weight decay and a small number.
+ L2 weight decay replaces 
+\begin_inset Formula $\Delta w_{ij}$
+\end_inset
+
+ with 
+\begin_inset Formula $\Delta w_{ij}-w_{ij}^{2}*w_{2}$
+\end_inset
+
+, where 
+\begin_inset Formula $w_{2}\in\mathbb{R}^{+}$
+\end_inset
+
+ is the 
+\begin_inset Quotes eld
+\end_inset
+
+weight-cost
+\begin_inset Quotes erd
+\end_inset
+
+ of L2 weight decay and a small number.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Cite 
+\begin_inset Quotes eld
+\end_inset
+
+Hinton, 2010, A Practical Guide to Training Restricted Boltzmann Machines
+ Version 1
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ notes that there are four different reasons for using weight decay: better
+ generalization of the resulting network, making the weights more interpretable
+ by shrinking large weights, penalize network nodes that are always firmly
+ on or off due to large inputs caused by large weights, and improve the
+ mixing rate of contrastive divergence, where small weights increase the
+ mixing rate of the Gibbs chain.
+\end_layout
+
+\begin_layout Standard
+As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FischerIgel2012"
+
+\end_inset
+
+ note, adding an L2 weight decay term to the updating term corresponds to
+ assuming a zero-mean Gaussian prior on the parameters.
+\end_layout
+
+\begin_layout Paragraph
+Sparsity Target
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: read how sparsity works, maybe in 
+\begin_inset Quotes eld
+\end_inset
+
+Nair, V.
+ and Hinton, G.
+ E.
+ (2009).
+ 3-d object recognition with deep belief nets.
+ In Advances in Neural Information Processing Systems, volume 22, pages
+ 1339–1347.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+An RBM that has few hidden neurons turned on is usually easier to interpret
+ than one in which half are turned on.
+ In addition, sparse activity constrains the space of possible parameters
+ of the model, to avoid overfitting.
+ A sparsity
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+sparsity
+\end_layout
+
+\end_inset
+
+ target for a neuron allows specifying at what fraction of time a neuron
+ should be on, on average
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Cite 
+\begin_inset Quotes eld
+\end_inset
+
+Hinton, 2010, A Practical Guide to Training Restricted Boltzmann Machines
+ Version 1
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Setting a sparsity target works by scaling the total input to a node by
+ a value controlled by three meta-parameters: the sparsity target, the decay
+ rate, and the sparsity cost.
+ The idea is to scale the total input to a node so that its activity distributio
+n approaches that of a target distribution.
+ The actual probability of being active is registered by using an exponentially
+ decaying average of the mean probability:
+\begin_inset Formula 
+\[
+q_{new}=\lambda q_{old}+(1-\lambda)q_{current}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the decay rate.
+ The total input is then penalized by the derivative of the cross entropy
+ between the desired and actual activity distribution:
+\begin_inset Formula 
+\[
+\mbox{sparsity penalty}\propto-p\log q-(1-p)\log(1-q)
+\]
+
+\end_inset
+
+which has a simple derivative of 
+\begin_inset Formula $q-p$
+\end_inset
+
+ with respect to the total input to a node, for units with sigmoid activation
+ function.
+ The derivative of the penalty should be 0 when the desired is equal to
+ the actual activity distribution.
+ Both the bias and the incoming weights must then be adjusted by this derivative
+, scaled by the sparsity cost.
+\end_layout
+
+\begin_layout Paragraph
+Dropout
+\end_layout
+
+\begin_layout Standard
+Dropout can be used in any neuronal network whose input to a node is computed
+ from several input nodes.
+ Dropout prevents complex co-adaptations of nodes in a layer, by randomly
+ 
+\begin_inset Quotes eld
+\end_inset
+
+dropping out
+\begin_inset Quotes erd
+\end_inset
+
+ input nodes from the input layer.
+\end_layout
+
+\begin_layout Standard
+Dropout specifies a probability 
+\begin_inset Formula $w$
+\end_inset
+
+ for nodes in a layer to be active.
+ During training, at each iteration only the fraction of 
+\begin_inset Formula $w$
+\end_inset
+
+ nodes are computed and the other nodes are set to contribute nothing (zero)
+ to the input of the next layer.
+ This greatly constrains complex co-adaptations between nodes, in which
+ nodes are only useful in the context of a large number of other nodes.
+ It thereby prevents overfitting.
+ To use all trained nodes during testing, all nodes contribute to the computatio
+n of input to a layer, but their total input must then be multiplied by
+ 
+\begin_inset Formula $w$
+\end_inset
+
+, to simulate that only a fraction of 
+\begin_inset Formula $w$
+\end_inset
+
+ nodes are active.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: probably not describe weight normalization, because I didn't use it
+ in my 
+\emph on
+deepnet 
+\emph default
+trials.
+\end_layout
+
+\begin_layout Plain Layout
+Dropout is usually combined with weight normalization.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Weight normalization
+\end_layout
+
+\begin_layout Plain Layout
+TODO: I think weight normalization is described a bit in the dropout paper.
 \end_layout
 
 \end_inset
@@ -6975,7 +7415,7 @@ contrastive divergence
 \begin_inset Quotes erd
 \end_inset
 
-.
+, where there the positive phase is simpler.
  It is obtained by approximating the derivative of the log-likelihood with
  respect to a weight 
 \begin_inset Formula $w_{ij}$
@@ -7065,9 +7505,32 @@ The negative phase is not as straightforward to compute.
 \begin_inset Formula $k$
 \end_inset
 
- and the gradient computed by contrastive convergence (i.e.
+ and the gradient computed by contrastive divergence
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+contrastive divergence
+\end_layout
+
+\end_inset
+
+ (i.e.
  the difference of positive phase and negative phase) is called 
 \begin_inset Formula $CD_{k}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{h}$
+\end_inset
+
+ are sampled from the stationary distribution and allow computing 
+\begin_inset Formula $\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})v_{j}$
 \end_inset
 
 .
@@ -7124,65 +7587,40 @@ It is an important property that single as well as stacked RBMs
 pre-training
 \emph default
 .
- Furthermore, another neural network (usually only one layer, due to the
- training difficulties of multi-layer neural networks) can be put on top
- of the pre-trained converted RBM, where the final (output) layer has neurons
- corresponding to variables to be predicted.
- The resulting network can be then be fine-tuned, using standard back-propagatio
-n, into a configuration that can predict from input variables (input at
- the bottom of the network) the output variables (read off at the top of
- the network).
+ Furthermore, another neural network can be put on top of the pre-trained
+ converted RBM, where the final (output) layer has neurons corresponding
+ to variables to be predicted.
+ Usually the network consists of only one layer, due to difficulties in
+ training freshly initialized multi-layer neural networks.
+ The resulting network can be then be fine-tuned
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fine-tuning (using backpropagation)
+\end_layout
+
+\end_inset
+
+, using standard back-propagation, into a configuration that can predict
+ from input variables (input at the bottom of the network) the output variables
+ (read off at the top of the network).
 \end_layout
 
 \begin_layout Subsubsection
-Parameters of a Restricted Boltzmann Machine
-\end_layout
-
-\begin_layout Paragraph
-Activation function
+Parameters of Training a Restricted Boltzmann Machine
 \end_layout
 
 \begin_layout Standard
-The hidden and visible nodes are a function of the sum of their inputs.
- The function that maps the sum of the inputs of a node to its value is
- called the 
-\emph on
-activation function
-\emph default
-.
- There are several activation functions:
-\end_layout
-
-\begin_layout Paragraph
-Sigmoid activation function
-\end_layout
-
-\begin_layout Standard
-This is a standard activation function, often used in neural networks.
- It has the property that it is almost linear for inputs around zero, tends
- to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
- infinity.
-\begin_inset Formula 
-\[
-\sigma(x)=\frac{1}{1+e^{-x}}
-\]
+In addition to the parameters for training a Multilayer Perceptron (see
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Parameters-of-Training-a-Multilayer-Perceptron"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Kurve einer sigmoid-Funktion hier einfügen.
-\end_layout
-
-\end_inset
-
-
+), there are the following:
 \end_layout
 
 \begin_layout Paragraph
@@ -7195,9 +7633,10 @@ The output of a node in a Restricted Boltzmann Machine, as orignially proposed,
  either 0 or 1).
  However the sigmoid activation function outputs continuous values between
  0 and 1.
- Therefore the output of the sigmoid activation function is interpreted
- as the probability that the node outputs value 1, and 0 otherwise.
- In this way the output is sampled from 
+ This output of the sigmoid activation function is interpreted as the probabilit
+y that the node outputs value 1, and 0 otherwise.
+ Using this output value directly, without using it to sample from a binomial
+ distribution, allows the output to be from the interval 
 \begin_inset Formula $\{0,1\}$
 \end_inset
 
@@ -7217,6 +7656,7 @@ key "HintonSalakhutdinov2006"
 
  proposed a way to extend Restricted Boltzmann Machines with only binary
  values to nodes with real values.
+ However, this was largely replaced by rectified linear units.
 \end_layout
 
 \begin_layout Paragraph
@@ -7263,119 +7703,8 @@ key "HintonSalakhutdinov2006"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Paragraph
-Momentum of the Learning Rule
-\end_layout
-
-\begin_layout Standard
-Usually, the learning rule includes a 
-\begin_inset Quotes eld
-\end_inset
-
-momentum
-\begin_inset Quotes erd
-\end_inset
-
- term.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Formel hinschreiben
-\end_layout
-
-\end_inset
-
- This term works like a low-pass filter and reduces oscillations during
- learning by smoothing the weight and bias deltas added to the parameters
- of the network.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: maybe the following paragraph should go into Results, not Introduction.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Because the momentum term includes a coefficient that describes the fraction
- of the weights deltas in the previous time step to be added to the current
- weight deltas, it adds another meta-parameter to training.
- Too high momentum coefficient can cause 
-\begin_inset Quotes eld
-\end_inset
-
-explosion
-\begin_inset Quotes erd
-\end_inset
-
-, or non-convergence of the model, of the model during training.
- To prevent this, the coefficient is changed during training, and usually
- gradually increased during the early steps of training to its final value.
-\end_layout
-
-\begin_layout Subsubsection
-Regularizations of Restricted Boltzmann Machines
-\end_layout
-
-\begin_layout Paragraph
-L1 Weight Decay
-\end_layout
-
-\begin_layout Paragraph
-L2 Weight Decay
-\end_layout
-
-\begin_layout Standard
-As 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "FischerIgel2012"
-
-\end_inset
-
- note, adding an L2 weight decay term to the updating term corresponds to
- assuming a zero-mean Gaussian prior on the parameters.
-\end_layout
-
-\begin_layout Paragraph
-Sparsity
-\end_layout
-
-\begin_layout Paragraph
-Dropout
-\end_layout
-
-\begin_layout Standard
-Dropout is usually combined with weight normalization.
- 
-\end_layout
-
-\begin_layout Paragraph
-Weight normalization
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I think weight normalization is described a bit in the dropout paper.
-\end_layout
-
-\end_inset
-
-
+ This allows using any positive real value for the random variables of a
+ RBM.
 \end_layout
 
 \begin_layout Standard
