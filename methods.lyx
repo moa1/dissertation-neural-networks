@@ -6414,9 +6414,20 @@ The conditional probability distribution for a hidden node
 \end_inset
 
  and is defined by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Neal1993"
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: cite 
+\begin_inset Quotes eld
+\end_inset
+
+Learning and Relearning in Boltzmann Machines
+\begin_inset Quotes erd
+\end_inset
+
+ by Hinton and Sejnowski
+\end_layout
 
 \end_inset
 
@@ -6425,15 +6436,7 @@ key "Neal1993"
 status open
 
 \begin_layout Plain Layout
-(where? I cannot find it 
-\begin_inset Quotes eld
-\end_inset
-
-on page 75
-\begin_inset Quotes erd
-\end_inset
-
- anymore)
+in Eq 2, page 6, and Eq 3, page 8
 \end_layout
 
 \end_inset
@@ -6443,9 +6446,9 @@ on page 75
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-P(H_{i}=h_{i}|\mathbf{V}=\mathbf{v})=\sigma((2h_{i}-1)\sum_{j}v_{j}w_{ij})
-\]
+\begin{equation}
+P(H_{i}=1\mid\mathbf{V}=\mathbf{v})=\sigma\left(-\sum_{j}v_{j}w_{ij}+b_{i}\right)\label{eq:RBM p(h=1|v)}
+\end{equation}
 
 \end_inset
 
@@ -6460,6 +6463,10 @@ status open
 \end_inset
 
 where 
+\begin_inset Formula $\sigma(x)=\frac{1}{1+\exp(-x)}$
+\end_inset
+
+, 
 \begin_inset Formula $w_{ij}\in\mathbb{R}$
 \end_inset
 
@@ -6471,13 +6478,41 @@ where
 \begin_inset Formula $V_{j}$
 \end_inset
 
+, and 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ is the bias of hidden unit 
+\begin_inset Formula $H_{i}$
+\end_inset
+
 .
  Similarly,
 \begin_inset Formula 
 \[
-P(V_{j}=v_{j}\mid\mathbf{H}=\mathbf{h})=\sigma((2v_{j}-1)\sum_{i}h_{i}w_{ji})
+P(V_{j}=1\mid\mathbf{H}=\mathbf{h})=\sigma\left(-\sum_{i}h_{i}w_{ij}+c_{j}\right)
 \]
 
+\end_inset
+
+where 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ is the weight between hidden node 
+\begin_inset Formula $H_{i}$
+\end_inset
+
+ and visible node 
+\begin_inset Formula $V_{j}$
+\end_inset
+
+, and 
+\begin_inset Formula $c_{j}$
+\end_inset
+
+ is the bias of visible unit 
+\begin_inset Formula $V_{j}$
 \end_inset
 
 .
@@ -6491,61 +6526,9 @@ status open
 TODO: rewrite the following using consistent variable names and fonts.
 \end_layout
 
-\begin_layout Plain Layout
-TODO: the following is only for binary nodes, i.e.
- they can only have either state 0 or state 1.
- Do I find a generalization to (discrete multiple states) / (continuous)
- nodes somewhere?
-\end_layout
-
-\begin_layout Plain Layout
-This conditional probability is needed for Gibbs sampling.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: define 
-\begin_inset Formula $\sigma(x)=\frac{1}{1+\exp(-x)}$
-\end_inset
-
- somewhere
-\end_layout
-
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Connections to other Graphical Models
-\end_layout
-
-\begin_layout Standard
-\begin_inset Quotes eld
-\end_inset
-
-Generalized to allow J and H to vary from spin to spin, and to allow interaction
-s between any two spins, the Ising model becomes the 
-\begin_inset Quotes eld
-\end_inset
-
-Boltzmann machine
-\begin_inset Quotes erd
-\end_inset
-
- of Ackley, Hinton, and Sejnowski.
-\begin_inset Quotes erd
-\end_inset
-
- [TODO: cite Probabilistic Inference Using Markov Chain Monte Carlo Methods,
- Radford M.
- Neal 1993]
 \end_layout
 
 \begin_layout Paragraph
@@ -6582,33 +6565,22 @@ reference "sub:Inference-in-Markov-Random-Fields"
 .
 \end_layout
 
-\begin_layout Standard
-However, there is also a more direct learning procedure called 
-\begin_inset Quotes eld
-\end_inset
-
-contrastive divergence
-\begin_inset Quotes erd
-\end_inset
-
-.
- 
-\end_layout
-
 \begin_layout Subsubsection
 Training Boltzmann Machines
 \end_layout
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-TODO: rewrite the following using consistent variable names and fonts.
+probably not TODO (since the next paragraphs look finished): rewrite the
+ following using consistent variable names and fonts.
 \end_layout
 
 \begin_layout Plain Layout
-Neal writes (on page 75) about training of Boltzmann machines, i.e.
+Neal writes (on page 75, I don't know for which pdf file, however) about
+ training of Boltzmann machines, i.e.
  adjusting the weights so that a set of training samples 
 \begin_inset Formula $T$
 \end_inset
@@ -6621,7 +6593,7 @@ Neal writes (on page 75) about training of Boltzmann machines, i.e.
 
 .
  The derivative of the log-likelihood with respect to a weight is: 
-\begin_inset Formula $\frac{\partial L}{\partial w_{ij}}=\beta\sum_{\mathbf{v}\in\mathbf{T}}(\sum_{s}P(\mathbf{S=s}|\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j})$
+\begin_inset Formula $\frac{\partial L}{\partial w_{ij}}=\beta\sum_{\mathbf{v}\in\mathbf{T}}(\sum_{s}P(\mathbf{S=s}\mid\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j})$
 \end_inset
 
 .
@@ -6653,9 +6625,6 @@ TODO: derive
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -6679,8 +6648,33 @@ Connectionist learning for belief networks
 \end_layout
 
 \begin_layout Standard
-This derivative can be approximated by two parallel Gibbs sampling steps:
- the 
+The log-likelihood is 
+\begin_inset Formula 
+\begin{eqnarray*}
+L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
+\end{eqnarray*}
+
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is the set of training data (to be applied to the visible nodes) and its
+ derivative with respect to a weight 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}(\sum_{\mathbf{s}}P(\mathbf{S=s}\mid\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j})
+\]
+
+\end_inset
+
+.
+ It can be approximated by two parallel Gibbs sampling steps: the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6689,7 +6683,7 @@ positive
 \end_inset
 
  phase, where 
-\begin_inset Formula $P(\mathbf{S=s}|\mathbf{V=v})$
+\begin_inset Formula $P(\mathbf{S=s}\mid\mathbf{V=v})s_{i}s_{j}$
 \end_inset
 
  is approximated, and the 
@@ -6701,10 +6695,17 @@ negative
 \end_inset
 
  phase, where 
-\begin_inset Formula $P(\mathbf{S=s})$
+\begin_inset Formula $P(\mathbf{S=s})s_{i}s_{j}$
 \end_inset
 
- is approximated.
+ is approximated
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1992"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
@@ -6712,7 +6713,7 @@ Positive Phase
 \end_layout
 
 \begin_layout Standard
-In more detail, in the positive phase
+In the positive phase
 \begin_inset Index idx
 status collapsed
 
@@ -6722,7 +6723,7 @@ positive phase
 
 \end_inset
 
-, the visible nodes 
+ of training a Boltzmann Machine, the visible nodes 
 \begin_inset Formula $\mathbf{V}$
 \end_inset
 
@@ -6734,16 +6735,15 @@ positive phase
 
 , and then the states of the remaining (i.e.
  hidden) nodes are sampled via Gibbs sampling.
- This means starting in any (for example random, or close to equilibrium)
- configuration of the remaining nodes, repeatedly sampling each remaining
- variable 
-\begin_inset Formula $S_{i}$
+ This means starting in any (for example random) configuration of the hidden
+ nodes, repeatedly sampling each remaining variable 
+\begin_inset Formula $S$
 \end_inset
 
  from its conditional probability distribution given the states of all other
  variables (i.e.
  
-\begin_inset Formula $P(S_{i}|S_{j:j\neq i}=s_{j})$
+\begin_inset Formula $P(S_{i}=s_{i}\mid\mathbf{S_{j:j\neq i}}=\mathbf{s_{j}})$
 \end_inset
 
 ) until the Gibbs sampler reaches equilibrium, and recording the state 
@@ -6767,7 +6767,7 @@ positive phase
 \end_inset
 
  is determined, and therefore the term 
-\begin_inset Formula $\sum_{s}P(\mathbf{S=s}|\mathbf{V=v})s_{i}s_{j}$
+\begin_inset Formula $\sum_{\mathbf{s}}P(\mathbf{S=s}|\mathbf{V=v})s_{i}s_{j}$
 \end_inset
 
  can be determined, which completes the positive phase.
@@ -6793,7 +6793,7 @@ negative phase
  Again, we start in any configuration of the network.
  Then we repeatedly sample from the conditional probability distributions
  
-\begin_inset Formula $P(S_{i}|S_{j:j\neq i}=s_{j})$
+\begin_inset Formula $P(S_{i}=s_{i}\mid S_{j:j\neq i}=s_{j})$
 \end_inset
 
  for all variables 
@@ -6819,6 +6819,50 @@ negative phase
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Paragraph
+Training Iterations
+\end_layout
+
+\begin_layout Standard
+The derivatives obtained by the positive and negative phases are multiplied
+ by the learning rate (a small positive real constant) and added to the
+ current weights.
+ Then another training iteration is started.
+ This is repeated until the derivatives all converge to zero.
+\end_layout
+
+\begin_layout Paragraph
+Connections to other Graphical Models
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+ notes that the Boltzmann Machine is a generalization of the Ising model
+ of ferromagnetism: 
+\begin_inset Quotes eld
+\end_inset
+
+Generalized to allow J and H to vary from spin to spin, and to allow interaction
+s between any two spins, the Ising model becomes the 
+\begin_inset Quotes eld
+\end_inset
+
+Boltzmann machine
+\begin_inset Quotes erd
+\end_inset
+
+ of Ackley, Hinton, and Sejnowski.
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -6913,6 +6957,120 @@ TODO: repeat energy of equation
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Training Restricted Boltzmann Machines
+\end_layout
+
+\begin_layout Standard
+Since a Restricted Boltzmann Machine is a restricted form of the more general
+ Boltzmann Machine, it can be trained using the training procedure for Boltzmann
+ Machines.
+ However, there is also a more direct learning procedure called 
+\begin_inset Quotes eld
+\end_inset
+
+contrastive divergence
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It is obtained by approximating the derivative of the log-likelihood with
+ respect to a weight 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Like for Boltzmann Machines, the log-likelihood is 
+\begin_inset Formula 
+\begin{eqnarray*}
+L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
+\end{eqnarray*}
+
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbf{T}$
+\end_inset
+
+ is the set of training data (to be applied to the visible nodes) and its
+ derivative with respect to a weight 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}(P(H_{i}=1\mid\mathbf{V=v})v_{j}-\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})v_{j})
+\]
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Positive Phase
+\end_layout
+
+\begin_layout Standard
+The positive phase, i.e.
+ 
+\begin_inset Formula $P(H_{i}=1\mid\mathbf{V=v})v_{j}$
+\end_inset
+
+ can be computed directly by setting the visible nodes to the training sample,
+ and then computing 
+\begin_inset Formula $P(H_{i}=1\mid\mathbf{V=v})=\sigma\left(-\sum_{j}v_{j}w_{ij}+b_{i}\right)$
+\end_inset
+
+.
+ Multiplying by 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ completes the positive phase of computing the delta for 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Negative Phase
+\end_layout
+
+\begin_layout Standard
+The negative phase is not as straightforward to compute.
+ 
+\begin_inset Formula $\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})$
+\end_inset
+
+ can be computed by running a Gibbs chain until convergence.
+ This means initializing the network with any state, and then alternatingly
+ computing 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
+\end_inset
+
+ and 
+\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})$
+\end_inset
+
+ until the stationary distribution is reached.
+ The number of iterations is usually called 
+\begin_inset Formula $k$
+\end_inset
+
+ and the gradient computed by contrastive convergence (i.e.
+ the difference of positive phase and negative phase) is called 
+\begin_inset Formula $CD_{k}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
