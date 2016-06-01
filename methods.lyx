@@ -77,6 +77,35 @@ fix-cm
 status open
 
 \begin_layout Plain Layout
+TODO: search for the word 
+\begin_inset Quotes eld
+\end_inset
+
+unit
+\begin_inset Quotes erd
+\end_inset
+
+ in this text and replace it with 
+\begin_inset Quotes eld
+\end_inset
+
+node
+\begin_inset Quotes erd
+\end_inset
+
+ wherever appropriate.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 TODO: replace the 
 \begin_inset Quotes eld
 \end_inset
@@ -949,8 +978,11 @@ TODO: Hier eine Figure mit einem DAG und einem MRF.
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Paragraph
 Directed and Undirected Graphical Models
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -964,12 +996,8 @@ on of the joint.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-In the following, we will discuss directed graphical models and undirected
- graphical models.
+In the following, we will introduce and discuss directed graphical models
+ and undirected graphical models.
  Directed graphical models are also called 
 \emph on
 Bayesian networks
@@ -2375,7 +2403,7 @@ reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
 
 \end_inset
 
- for undirected graphical models and 
+ for undirected graphical models and in 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "par:The-Joint-Encoded-by-Directed-Graphical-Model"
@@ -2733,9 +2761,9 @@ TODO: insert graphics here that looks like a the directed graph
 When the probability distribution of the parent nodes are known, inferring
  the probability distributions of child nodes is easy: just multiply the
  probability of the parents with the conditional probability of the child.
- Therefore, given the probability distributions of the nodes in the bottom
- layer, we want to infer the probability distributions for all the other
- nodes.
+ To keep the example interesting, given the probability distributions of
+ the nodes in the bottom layer, we want to infer the probability distributions
+ for all the other nodes.
  We want to determine the exact probability distributions, hence the term
  
 \begin_inset Quotes eld
@@ -2821,6 +2849,14 @@ Deep Belief Network
 Deep Belief Network
 \emph default
 .
+ (We will discuss them in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Deep-Belief-Network"
+
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Paragraph
@@ -2865,7 +2901,8 @@ Now assume that
 \begin{eqnarray*}
 P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\\
  & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{P(V_{1},V_{2})}\\
- & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}
+ & = & \frac{1}{Z}*P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})\\
+ &  & *P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})
 \end{eqnarray*}
 
 \end_inset
@@ -5566,7 +5603,7 @@ Hopfield Network
 \end_layout
 
 \begin_layout Paragraph
-Structure of a Hopfield Network
+Structure
 \end_layout
 
 \begin_layout Standard
@@ -6066,6 +6103,10 @@ Recalling a partially known state works by updating.
 Multilayer Perceptron
 \end_layout
 
+\begin_layout Paragraph
+Structure
+\end_layout
+
 \begin_layout Standard
 A Multilayer Perceptron belongs to the class of deterministic feedforward
  neuronal networks
@@ -6079,6 +6120,8 @@ feedforward neuronal network
 \end_inset
 
 .
+ In it, the neurons are arranged in layers, with the value of nodes in a
+ layer only depending on the values of nodes in the layer above.
  Feedforward networks are in contrast to recurrent networks
 \begin_inset Index idx
 status collapsed
@@ -6345,6 +6388,13 @@ s.
 
 \begin_layout Paragraph
 Sigmoid activation function
+\begin_inset CommandInset label
+LatexCommand label
+name "The-sigmoid-activation-function"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6826,6 +6876,10 @@ TODO: Elaborate the definition
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Structure
 \end_layout
 
 \begin_layout Standard
@@ -7725,21 +7779,180 @@ TODO: Say something about the time taken to train RBMs.
 \end_layout
 
 \begin_layout Subsection
-Belief Network
+Deep Belief Network
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Deep-Belief-Network"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Structure
 \end_layout
 
 \begin_layout Standard
-Belief networks can be seen as the stochastic counterpart of deterministic
+Belief Network is another name for directed graphical model.
+ Deep Belief Networks are Belief Networks in which the nodes are organized
+ in layers, where the value of a node in a layer only depends on the value
+ of nodes in the layer above.
+ The word 
+\begin_inset Quotes eld
+\end_inset
+
+Deep
+\begin_inset Quotes erd
+\end_inset
+
+ refers to the number of hidden layers of a Deep Belief Network.
+ Deep Belief networks can be seen as the stochastic counterpart of deterministic
  feed-forward networks.
+\end_layout
+
+\begin_layout Standard
+Because they are a directed graphical model, the computation of the value
+ of children nodes do not affect the parent nodes.
+ In contrast to undirected graphical models, this allows generating from
+ the model in a single pass.
+\end_layout
+
+\begin_layout Paragraph
+Sigmoid Belief Networks
+\end_layout
+
+\begin_layout Standard
+Sigmoid Belief Networks were defined by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1992"
+
+\end_inset
+
+ as a directed graphical model with a sigmoid (see 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "The-sigmoid-activation-function"
+
+\end_inset
+
+) conditional probability function.
+ A sigmoid belief network is a belief network in which the conditional probabili
+ty associated with node 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+ depends on previous nodes 
+\begin_inset Formula $\mathbf{N_{j}}$
+\end_inset
+
+ and can be expressed as 
+\begin_inset Formula 
+\begin{eqnarray*}
+P(N_{i} & = & n_{i}|\mathbf{N_{j}=n_{j}}:\mathbf{j}<i)=\sigma((2n_{i}-1)\sum_{j<i}n_{j}w_{ij})
+\end{eqnarray*}
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Arbitrary Modelling Capability
+\end_layout
+
+\begin_layout Standard
+Both Boltzmann machines and sigmoid belief networks can represent arbitrary
+ probability distributions over a set of an arbitrary number of visible
+ units, provided that a sufficient number of hidden units is available
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1992"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+It turns out that each of these three networks can represent probability
+ distributions over the full set of units that the other two networks cannot.
+ With the help of "hidden" units, all these networks can represent arbitrary
+ distributions over a set of "visible" units.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Training a Deep Sigmoid Belief Network
+\end_layout
+
+\begin_layout Standard
+Training a Sigmoid Belief Network is the process of finding weights between
+ hidden and visible units such that the likelihood given the training samples
+ becomes maximal.
+ This means we have to find the derivative of the likelihood with respect
+ to a weight.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1992"
+
+\end_inset
+
+ shows
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+in equation 27
+\end_layout
+
+\end_inset
+
+, it is
+\begin_inset Formula 
+\[
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\sum_{\mathbf{s}}P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})(2s_{i}-1)s_{j}\sigma((-2s_{i}+1)\sum_{k<i}s_{k}w_{ik})
+\]
+
+\end_inset
+
+.
+ This means we have to evaluate the term 
+\begin_inset Formula $P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Since exact inference of the hidden nodes given the visible nodes is intractable
+, we must resort to the approximate Gibbs Sampling.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: I should make a small section on feed-forward networks, like the one
- on Hopfield networks (but maybe shorter).
- A definition of feed-forward networks is also needed later for mentioning
- that a learned Deep Belief Networks can be interpreted as a feed-forward
- network.
+TODO: HIER WEITERMACHEN.
+ Erklären, wie wake-sleep funktioniert, oder wie ein DBN mittels stacking
+ RBMs gelernt werden kann.
+ Wie geht das mit den uncoupled upward weights? Warum optimiert das inference
+ Network die falsche Kullback-Leibler divergence?
 \end_layout
 
 \end_inset
@@ -7750,45 +7963,6 @@ TODO: I should make a small section on feed-forward networks, like the one
 \begin_layout Standard
 A belief network is a directed graphical model.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-A sigmoid belief network is a belief network in which the conditional probabilit
-y associated with node 
-\begin_inset Formula $N_{i}$
-\end_inset
-
- can be expressed as 
-\begin_inset Formula $P(N_{i}=n_{i}|\mathbf{N_{j}=n_{j}}:\mathbf{j}<i)=\sigma((2n_{i}-1)\sum_{j<i}n_{j}w_{ij})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: Do I need _sigmoid_ belief networks at all? In the 
-\begin_inset Quotes eld
-\end_inset
-
-A Fast Learning Algorithm for Deep Belief Nets
-\begin_inset Quotes erd
-\end_inset
-
- paper by Hinton, Osindero, and Teh the word 
-\begin_inset Quotes eld
-\end_inset
-
-sigmoid
-\begin_inset Quotes erd
-\end_inset
-
- does not appear at all.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -8073,12 +8247,6 @@ With the help of "hidden" units, all these networks [Boltzmann machine und
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Both Boltzmann machines and sigmoid belief networks can represent arbitrary
- probability distributions over a set of an arbitrary number of visible
- units, provided that a sufficient number of hidden units is available.
 \end_layout
 
 \begin_layout Subsubsection
