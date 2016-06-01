@@ -5599,7 +5599,7 @@ A stochastic network is more general than its deterministic counterpart,
 \end_layout
 
 \begin_layout Subsection
-Hopfield Network
+Hopfield Networks
 \end_layout
 
 \begin_layout Paragraph
@@ -6100,7 +6100,7 @@ Recalling a partially known state works by updating.
 \end_layout
 
 \begin_layout Subsection
-Multilayer Perceptron
+Multilayer Perceptrons
 \end_layout
 
 \begin_layout Paragraph
@@ -7779,7 +7779,7 @@ TODO: Say something about the time taken to train RBMs.
 \end_layout
 
 \begin_layout Subsection
-Deep Belief Network
+Deep Belief Networks
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Deep-Belief-Network"
