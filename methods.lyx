@@ -77,35 +77,6 @@ fix-cm
 status open
 
 \begin_layout Plain Layout
-TODO: search for the word 
-\begin_inset Quotes eld
-\end_inset
-
-unit
-\begin_inset Quotes erd
-\end_inset
-
- in this text and replace it with 
-\begin_inset Quotes eld
-\end_inset
-
-node
-\begin_inset Quotes erd
-\end_inset
-
- wherever appropriate.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 TODO: replace the 
 \begin_inset Quotes eld
 \end_inset
@@ -6196,8 +6167,8 @@ key "HornikWhite1989"
 \end_inset
 
 This [result] implies that any lack of success in applications must arise
- from inadequate learning, insufficient numbers of hidden units or the lack
- of a deterministic relationship between input and target.
+ from inadequate learning, insufficient numbers of hidden units[nodes] or
+ the lack of a deterministic relationship between input and target.
 \begin_inset Quotes erd
 \end_inset
 
@@ -6730,7 +6701,7 @@ which has a simple derivative of
 \begin_inset Formula $q-p$
 \end_inset
 
- with respect to the total input to a node, for units with sigmoid activation
+ with respect to the total input to a node, for nodes with sigmoid activation
  function.
  The derivative of the penalty should be 0 when the desired is equal to
  the actual activity distribution.
@@ -6844,32 +6815,6 @@ Boltzmann Machines
 status open
 
 \begin_layout Plain Layout
-TODO: in the following, replace the word 
-\begin_inset Quotes eld
-\end_inset
-
-unit
-\begin_inset Quotes erd
-\end_inset
-
- with 
-\begin_inset Quotes eld
-\end_inset
-
-node
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 TODO: Elaborate the definition
 \end_layout
 
@@ -6976,7 +6921,7 @@ where
 \begin_inset Formula $b_{i}$
 \end_inset
 
- is the bias of hidden unit 
+ is the bias of hidden node 
 \begin_inset Formula $H_{i}$
 \end_inset
 
@@ -7005,7 +6950,7 @@ where
 \begin_inset Formula $c_{j}$
 \end_inset
 
- is the bias of visible unit 
+ is the bias of visible node 
 \begin_inset Formula $V_{j}$
 \end_inset
 
@@ -7080,7 +7025,7 @@ Neal writes (on page 75, I don't know for which pdf file, however) about
 \end_inset
 
  (i.e.
- measured states of the visible units) become as probable as possible.
+ measured states of the visible nodes) become as probable as possible.
  The log-likelihood is 
 \begin_inset Formula $L=\log\prod_{v\in T}P(V=v)$
 \end_inset
@@ -7698,7 +7643,7 @@ y that the node outputs value 1, and 0 otherwise.
 \end_layout
 
 \begin_layout Paragraph
-Linear units with independent Gaussian noise
+Linear nodes with independent Gaussian noise
 \end_layout
 
 \begin_layout Standard
@@ -7710,7 +7655,7 @@ key "HintonSalakhutdinov2006"
 
  proposed a way to extend Restricted Boltzmann Machines with only binary
  values to nodes with real values.
- However, this was largely replaced by rectified linear units.
+ However, this was largely replaced by rectified linear nodes.
 \end_layout
 
 \begin_layout Paragraph
@@ -7731,7 +7676,7 @@ key "HintonSalakhutdinov2006"
 
 \end_inset
 
- to rectified linear units, in which the sampled output of a unit is given
+ to rectified linear nodes, in which the sampled output of a node is given
  by 
 \begin_inset Formula $\max(0,x+N(0,\sigma(x))$
 \end_inset
@@ -7740,7 +7685,7 @@ key "HintonSalakhutdinov2006"
 \begin_inset Formula $x$
 \end_inset
 
- is the sum of the inputs of the unit, 
+ is the sum of the inputs of the node, 
 \begin_inset Formula $\sigma(x)$
 \end_inset
 
@@ -7865,7 +7810,7 @@ Arbitrary Modelling Capability
 \begin_layout Standard
 Both Boltzmann machines and sigmoid belief networks can represent arbitrary
  probability distributions over a set of an arbitrary number of visible
- units, provided that a sufficient number of hidden units is available
+ nodes, provided that a sufficient number of hidden nodes is available
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neal1992"
@@ -7901,7 +7846,7 @@ Training a Deep Sigmoid Belief Network
 
 \begin_layout Standard
 Training a Sigmoid Belief Network is the process of finding weights between
- hidden and visible units such that the likelihood given the training samples
+ hidden and visible nodes such that the likelihood given the training samples
  becomes maximal.
  This means we have to find the derivative of the likelihood with respect
  to a weight.
@@ -7931,7 +7876,7 @@ in equation 27
 \end_inset
 
 .
- This means we have to evaluate the term 
+ This means we have to evaluate the conditional probability 
 \begin_inset Formula $P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})$
 \end_inset
 
@@ -8127,11 +8072,11 @@ To select a new value from the above distribution, unit i must have available
 \begin_inset Quotes eld
 \end_inset
 
-for -1/+1-valued units, 
+for -1/+1-valued nodes, 
 \begin_inset Formula $s_{i}^{*}=s_{i}$
 \end_inset
 
-, while for 0/1-valued units, 
+, while for 0/1-valued nodes, 
 \begin_inset Formula $s_{i}^{*}=2s_{i}-1$
 \end_inset
 
