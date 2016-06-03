@@ -653,16 +653,30 @@ key "GalanGalizia2006"
 \end_inset
 
 .
+ The rule for this strengthening is also called the 
+\emph on
+Hebbian learning rule
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Hebbian learning rule
+\end_layout
+
+\end_inset
+
+.
  The molecular mechanisms responsible for this phenomenon are not yet completely
  understood.
  It is known that they differ between brain regions, and also types of synapses
  in the same brain region.
- This 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Hier weitermachen mit Erklären und Zitieren der 
+TODO: Hier weitermachen mit Erklären und Zitieren der 
 \begin_inset Quotes eld
 \end_inset
 
@@ -677,7 +691,7 @@ Hebbian learning rule
 
 \end_inset
 
-.The cellular mechanisms controlling these processes, and their interplay
+ The cellular mechanisms controlling these processes, and their interplay
  in larger neuron ensembles are a field of active research
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -708,8 +722,13 @@ Supervised and Unsupervised Machine Learning
 \end_layout
 
 \begin_layout Standard
-In artificial neuronal networks, the goals of learning are defined by humans.In
- machine learning in general, there are two major types of learning: supervised
+In artificial neuronal networks, the goals of learning are defined by humans.
+ In machine learning in general, there are two major types of learning:
+ 
+\emph on
+supervised
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -719,7 +738,11 @@ supervised machine learning
 
 \end_inset
 
- and unsupervised learning
+ and 
+\emph on
+unsupervised learning
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -750,8 +773,12 @@ In supervised learning, for every input pattern in the data set there is
  The goal of supervised learning is to infer a function that maps from the
  space of input patterns to the space of output patterns.
  The output patterns are also called 
+\emph on
+labels
+\emph default
+
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 labels
@@ -759,10 +786,6 @@ labels
 
 \end_inset
 
-
-\emph on
-labels
-\emph default
 , and one says that  
 \begin_inset Quotes eld
 \end_inset
@@ -795,9 +818,9 @@ Semi-supervised Machine Learning
 
 \begin_layout Standard
 An intermediate form of these two machine learning modes is semi-supervised
- learning.
+ learning
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 semi-supervised learning
@@ -805,6 +828,7 @@ semi-supervised learning
 
 \end_inset
 
+.
  In contrast to supervised machine learning, which has for every input pattern
  a corresponding target output pattern, semi-supervised learning does not
  need a target output pattern for every input pattern.
@@ -820,7 +844,7 @@ semi-supervised learning
  semi-supervised learning.
  The goal of transductive semi-supervised learning
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 transductive semi-supervised learning
@@ -831,7 +855,7 @@ transductive semi-supervised learning
  is to predict the class label of a pre-specified list of unlabeled input
  patterns, while the goal of inductive
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 inductive semi-supervised learning
@@ -867,7 +891,8 @@ TODO: citation
  contains 41,379 expression data sets that were uploaded between Jan 1st,
  2000, and August 31st, 2013.
  Many of these are potentially usable as unlabeled data sets.
- However, machine learning algorithms usually require samples to be 
+ However, machine learning algorithms usually require samples to be independetly
+ and identically distributed
 \begin_inset Index idx
 status collapsed
 
@@ -877,7 +902,7 @@ independetly and identically distributed
 
 \end_inset
 
-independetly and identically distributed (iid
+ (iid
 \begin_inset Index idx
 status collapsed
 
@@ -892,6 +917,10 @@ iid
  within a data set.
  However, even within the same GEO data set there often is systematic variation
  between samples, called the 
+\emph on
+batch-effect
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -901,10 +930,6 @@ batch-effect
 
 \end_inset
 
-
-\emph on
-batch-effect
-\emph default
 .
  This means if one wants to use samples from different GEO data sets simultaneou
 sly, one either has to correct for a possible batch-effect manually, or
@@ -918,7 +943,7 @@ One machine learning algorithm with such a built-in mechanism is
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 deep learning
@@ -928,18 +953,36 @@ deep learning
 
 , as employed in 
 \emph on
-Deep Belief Networks (DBNs)
+Deep Belief Networks
 \emph default
 
 \begin_inset Index idx
 status open
 
 \begin_layout Plain Layout
-Deep Belief Network (DBN)
+Deep Belief Network
 \end_layout
 
 \end_inset
 
+
+\emph on
+ (DBNs
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+DBN
+\end_layout
+
+\end_inset
+
+
+\emph on
+)
+\emph default
  that have been described by 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1157,6 +1200,8 @@ key "HintonTeh2006"
  layer of the network, and the weights between layers are initialized and
  pre-trained like 
 \emph on
+Restricted Boltzmann Machines
+\emph default
 
 \begin_inset Index idx
 status collapsed
@@ -1167,19 +1212,17 @@ Restricted Boltzmann Machine
 
 \end_inset
 
-Restricted Boltzmann Machines
-\emph default
- (
+ (RBMs
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-RBMs
+RBM
 \end_layout
 
 \end_inset
 
-RBMs).
+).
  Without this step, fine-tuning a multiple-hidden-layer network usually
  gets stuck in a local error minimum.
  The pre-training algorithm is called
@@ -1188,7 +1231,7 @@ RBMs).
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 contrastive divergence
@@ -1227,6 +1270,10 @@ In unsupervised pre-training, unlabeled training samples can be used in
  be unsupervised as well as supervised.
  After training, the multiple-hidden-layer-network forms a generative artificial
  neuronal network called a 
+\emph on
+Deep Belief Network
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1238,9 +1285,9 @@ Deep Belief Network
 
 
 \emph on
-Deep Belief Network 
+ 
 \emph default
-(
+(DBN
 \begin_inset Index idx
 status collapsed
 
@@ -1250,7 +1297,7 @@ DBN
 
 \end_inset
 
-DBN).
+).
 \end_layout
 
 \begin_layout Paragraph
@@ -1703,7 +1750,7 @@ A medium-term goal of medicine is
 
 personalized medicine
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 personalized medicine
