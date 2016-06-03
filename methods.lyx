@@ -5533,7 +5533,15 @@ TODO: the above definition is from wikipedia, but I have to cite some paper.
 \end_layout
 
 \begin_layout Section
-Artificial Neural Networks
+Artificial Neuronal Networks
+\end_layout
+
+\begin_layout Standard
+Here we will introduce Artificial Neuronal Networks that have been developed
+ by various people since about the middle of the last century.
+ The introduced artificial neuronal networks all have something to do with
+ Deep Belief Networks and are Hopfield networks, Multilayer Perceptrons,
+ (Restricted) Boltzmann Machines.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8388,16 +8396,6 @@ In such a composite structure, the (unsupervisedly trained) DBN weights
 y to label the sample, i.e.
  indicate whether the abstracted representation of the sample is of a certain
  form or not.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset label
-LatexCommand label
-name "HIER-WEITERMACHEN"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
