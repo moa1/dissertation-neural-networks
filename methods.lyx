@@ -6050,25 +6050,7 @@ Each update of a single node either doesn't change the energy
 \end_inset
 
  or decreases it.
- (Shown in the appendix 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: insert link to file 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/hopfield-deriv.lyx
-\begin_inset Quotes erd
-\end_inset
-
- when the document is finished.
-\end_layout
-
-\end_inset
-
-.) As time progresses, 
+ As time progresses, 
 \begin_inset Formula $E$
 \end_inset
 
