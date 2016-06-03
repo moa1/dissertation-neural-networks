@@ -1454,8 +1454,9 @@ Both underlying distributions often have many correlated dimensions.
 \end_layout
 
 \begin_layout Standard
-For transcriptomic data, the correlations can be due to many genes being
- regulated by the same transcription factor.
+For transcriptomic data, one almost always observes many correlated genes.
+ The correlations can be due to many genes being regulated by the same transcrip
+tion factor.
  
 \begin_inset Note Note
 status open

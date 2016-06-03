@@ -39,8 +39,8 @@
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type authoryear
+\cite_engine basic
+\cite_engine_type default
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -8169,7 +8169,7 @@ breast_cancer_08_by - cu
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 mas5-data.pbtxt
 \end_layout
 
@@ -8180,7 +8180,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.045
 \end_layout
 
@@ -8191,7 +8191,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.0022
 \end_layout
 
@@ -8202,7 +8202,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.053
 \end_layout
 
@@ -8213,7 +8213,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.00041
 \end_layout
 
@@ -8224,7 +8224,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.058
 \end_layout
 
@@ -8235,7 +8235,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.002
 \end_layout
 
@@ -8246,7 +8246,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.068
 \end_layout
 
@@ -8257,7 +8257,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.0029
 \end_layout
 
@@ -8467,7 +8467,7 @@ breast_cancer_08_fm - gi
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 mas5_combat-data.pbtxt
 \end_layout
 
@@ -8478,7 +8478,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.057
 \end_layout
 
@@ -8489,7 +8489,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.0035
 \end_layout
 
@@ -8500,7 +8500,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.07
 \end_layout
 
@@ -8511,7 +8511,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.0011
 \end_layout
 
@@ -8522,7 +8522,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.079
 \end_layout
 
@@ -8533,7 +8533,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.0033
 \end_layout
 
@@ -8544,7 +8544,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.088
 \end_layout
 
@@ -8555,7 +8555,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 
-\color blue
+\emph on
 0.0034
 \end_layout
 
@@ -8585,8 +8585,8 @@ Reconstruction error for differently normalized data.
  Each cell in the table contains mean or standard deviation of the reconstructio
 n error.
  The numbers are rounded to two significant digits.
- MAS5 normalization is indicated by blue color, and COMBAT batch effect
- correction is in the lower half of the table.
+ MAS5 normalization is indicated by italic font style, and COMBAT batch
+ effect correction is in the lower half of the table.
  (TODO: transpose this table, otherwise it doesn't fit on paper.)
 \end_layout
 
