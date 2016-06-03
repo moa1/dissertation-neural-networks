@@ -624,7 +624,7 @@ path
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 path
@@ -686,7 +686,7 @@ ancestor
 
  is called  
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 descendant
@@ -734,7 +734,7 @@ of
 
  is called a 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 cycle
@@ -4508,7 +4508,7 @@ Markov Chain Monte Carlo
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Markov Chain Monte Carlo algorithm
@@ -5551,9 +5551,28 @@ TODO: maybe move the definition of a deterministic network and a stochastic
 
 \end_inset
 
-The difference between a stochastic and a deterministic network is that
- in a deterministic network a node represents a single value, while in a
- stochastic network a single node represents a probability distribution.
+The difference between a stochastic
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+stochastic network
+\end_layout
+
+\end_inset
+
+ and a deterministic network
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+deterministic network
+\end_layout
+
+\end_inset
+
+ is that in a deterministic network a node represents a single value, while
+ in a stochastic network a single node represents a probability distribution.
  In particular, if there is a set of 
 \begin_inset Quotes eld
 \end_inset
@@ -6431,14 +6450,24 @@ Momentum of the Learning Rule
 
 \begin_layout Standard
 Usually, the learning rule includes a 
-\begin_inset Quotes eld
-\end_inset
-
+\emph on
 momentum
-\begin_inset Quotes erd
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+momentum
+\end_layout
+
 \end_inset
 
- term.
+
+\emph on
+ 
+\emph default
+term.
  
 \begin_inset Note Note
 status open
@@ -6489,8 +6518,18 @@ Regularizations of Neuronal Networks
 \end_layout
 
 \begin_layout Standard
-The regularizations described here apply to most artificial neuronal networks,
- not just multilayer perceptrons.
+The regularizations
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+regularization
+\end_layout
+
+\end_inset
+
+ described here apply to most artificial neuronal networks, not just multilayer
+ perceptrons.
 \end_layout
 
 \begin_layout Paragraph
@@ -6722,8 +6761,18 @@ Dropout
 \end_layout
 
 \begin_layout Standard
-Dropout can be used in any neuronal network whose input to a node is computed
- from several input nodes.
+Dropout
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Dropout
+\end_layout
+
+\end_inset
+
+ can be used in any neuronal network whose input to a node is computed from
+ several input nodes.
  Dropout prevents complex co-adaptations of nodes in a layer, by randomly
  
 \begin_inset Quotes eld
@@ -6812,6 +6861,28 @@ Training a randomly initialized feed-forward neural network with more than
  Another problem is that in discriminative learning, each training case
  only contributes as many bits to the specification of the parameters of
  the network as needed to specify the label.
+ This makes generative models
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+generative model
+\end_layout
+
+\end_inset
+
+ with a discriminative part put on top, as will be shown later, more attractive
+ than pure discriminative models
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+discriminative model
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -6836,8 +6907,18 @@ Structure
 \end_layout
 
 \begin_layout Standard
-A Boltzmann Machine is an undirected graphical model that has a specific
- form of the conditional probability distribution defined at each node.
+A Boltzmann Machine
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Boltzmann Machine
+\end_layout
+
+\end_inset
+
+ is an undirected graphical model that has a specific form of the conditional
+ probability distribution defined at each node.
  
 \begin_inset Note Note
 status open
@@ -7330,11 +7411,30 @@ TODO: Example figure of an RBM.
 
 \end_inset
 
-A Restricted Boltzmann Machine has a bipartite topology: there are visible
- nodes and hidden nodes, and each node in the visible layer is connected
- to all hidden nodes by undirected edges, but in contrast to general Boltzmann
- Machines there are no visible-to-visible node connections and no hidden-to-hidd
-en node connections.
+A Restricted Boltzmann Machine
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Restricted Boltzmann Machine
+\end_layout
+
+\end_inset
+
+(RBM
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+RBM
+\end_layout
+
+\end_inset
+
+) has a bipartite topology: there are visible nodes and hidden nodes, and
+ each node in the visible layer is connected to all hidden nodes by undirected
+ edges, but in contrast to general Boltzmann Machines there are no visible-to-vi
+sible node connections and no hidden-to-hidden node connections.
 \end_layout
 
 \begin_layout Standard
@@ -7676,10 +7776,39 @@ Structure
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Belief Network
+\end_layout
+
+\end_inset
+
 Belief Network is another name for directed graphical model.
- Deep Belief Networks are Belief Networks in which the nodes are organized
- in layers, where the value of a node in a layer only depends on the value
- of nodes in the layer above.
+ Deep Belief Networks
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Deep Belief Network
+\end_layout
+
+\end_inset
+
+(DBN
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+DBN
+\end_layout
+
+\end_inset
+
+) are Belief Networks in which the nodes are organized in layers, where
+ the value of a node in a layer only depends on the value of nodes in the
+ layer above.
  The word 
 \begin_inset Quotes eld
 \end_inset
@@ -7848,8 +7977,8 @@ key "HintonTeh2006"
 
 \end_inset
 
- showed that there is a fast learning algorithm for Deep Belief Networks,
- even with millions of parameters.
+ showed that there is a fast greedy learning algorithm for Deep Belief Networks,
+ even with many hidden layers and millions of parameters.
 \end_layout
 
 \begin_layout Standard
@@ -7904,7 +8033,7 @@ P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\
 ).
  By the Hammersley-Clifford theorem (see 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
 
 \end_inset
@@ -7980,7 +8109,7 @@ reference "eq:DBN-y-given-x"
  However, we can also view this induction as taking place in a Deep Belief
  Network that is infinitely deep, has alternating visible and hidden layers
  and has shared weights at all layers.
- The weights matrix between the layers are 
+ The weights matrix between the DBN layers are 
 \begin_inset Formula $W$
 \end_inset
 
