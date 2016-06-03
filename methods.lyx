@@ -7543,77 +7543,6 @@ contrastive divergence
 .
 \end_layout
 
-\begin_layout Paragraph
-RBMs can be interpreted as feed-forward neural networks
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: ist der folgende Paragraph überflüssig und verwirrend?
-\end_layout
-
-\end_inset
-
-A trained stacked RBM can be reinterpreted as a feed-forward neural network.
- In particular, the weights and biases of a trained stacked RBM can be transferr
-ed to a multi-layer feed-forward neural network with the same architecture
- as the stacked RBM, thereby making the stochastic RBM a deterministic neural
- network.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-TODO: See 
-\begin_inset Quotes eld
-\end_inset
-
-An Introduction to Restricted Boltzmann Machines
-\begin_inset Quotes erd
-\end_inset
-
- by Asja Fischer and Christian Igel.
- Paragraph starting at 
-\begin_inset Quotes eld
-\end_inset
-
-It is an important property that single as well as stacked RBMs
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- This process is also called 
-\emph on
-pre-training
-\emph default
-.
- Furthermore, another neural network can be put on top of the pre-trained
- converted RBM, where the final (output) layer has neurons corresponding
- to variables to be predicted.
- Usually the network consists of only one layer, due to difficulties in
- training freshly initialized multi-layer neural networks.
- The resulting network can be then be fine-tuned
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-fine-tuning (using backpropagation)
-\end_layout
-
-\end_inset
-
-, using standard back-propagation, into a configuration that can predict
- from input variables (input at the bottom of the network) the output variables
- (read off at the top of the network).
-\end_layout
-
 \begin_layout Subsubsection
 Parameters of Training a Restricted Boltzmann Machine
 \end_layout
@@ -8244,6 +8173,92 @@ Another way to view the unrolling is to regard the infinitely Deep Belief
  The Markov Chain implemented by the RBM in the unrolling of the DBN can
  then be regarded as simulating the same Markov Chain run in reverse, and
  the more layers we add to the DBN, the farther back we go in time.
+\end_layout
+
+\begin_layout Subsubsection
+Deep Belief Networks interpreted as feed-forward neural networks
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: ist der folgende Paragraph überflüssig und verwirrend?
+\end_layout
+
+\end_inset
+
+A trained DBN can be reinterpreted as a feed-forward neural network.
+ In particular, the weights and biases of a trained DBN can be transferred
+ to a multi-layer feed-forward neural network with the same architecture
+ as the DBN, thereby making the stochastic DBN a deterministic neural network.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+TODO: See 
+\begin_inset Quotes eld
+\end_inset
+
+An Introduction to Restricted Boltzmann Machines
+\begin_inset Quotes erd
+\end_inset
+
+ by Asja Fischer and Christian Igel.
+ Paragraph starting at 
+\begin_inset Quotes eld
+\end_inset
+
+It is an important property that single as well as stacked RBMs
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ This process is also called 
+\emph on
+pre-training
+\emph default
+.
+ Furthermore, another neural network can be put on top of the pre-trained
+ converted DBN, where the final (output) layer has neurons corresponding
+ to variables to be predicted.
+ Usually the network consists of only one layer, due to difficulties in
+ training freshly initialized multi-layer neural networks.
+ The resulting network can be then be 
+\emph on
+fine-tuned
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fine-tuning (using backpropagation)
+\end_layout
+
+\end_inset
+
+, using standard back-propagation, into a configuration that can predict
+ from input variables (input at the bottom of the network) the output variables
+ (read off at the top of the network).
+\end_layout
+
+\begin_layout Standard
+In such a composite structure, the (unsupervisedly trained) DBN weights
+ take on the responsibility of re-representing the data so that it is in
+ an abstracted form that has for example correlating variables replaced
+ by a single variable indicating whether a feature is present in the sample
+ or not.
+ The (supervisedly trained) weights on top of the network have the responsibilit
+y to label the sample, i.e.
+ indicate whether the abstracted representation of the sample is of a certain
+ form or not.
 \end_layout
 
 \begin_layout Standard
