@@ -339,14 +339,34 @@ If you possess a restricted amount of information for solving some problem,
 \end_layout
 
 \begin_layout Standard
-A generative model is such a more general problem: its aim is to model the
- input data set such that hypothetical samples can be generated from the
- model which might as well be found in the original input data set.
+A generative model
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+generative model
+\end_layout
+
+\end_inset
+
+ is such a more general problem: its aim is to model the input data set
+ such that hypothetical samples can be generated from the model which might
+ as well be found in the original input data set.
 \end_layout
 
 \begin_layout Standard
-A discriminative model on the other hand receives the input samples and
- models the desired output values from these input samples.
+A discriminative model
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+discriminative model
+\end_layout
+
+\end_inset
+
+ on the other hand receives the input samples and models the desired output
+ values from these input samples.
  Usually the desired output values have much lower dimension than the input
  samples.
 \end_layout
