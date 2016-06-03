@@ -3054,11 +3054,19 @@ P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v
 
 \begin_layout Paragraph
 Exact Inference in Deep Belief Networks is Complicated
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 This shows that exact inference in a directed graphical model with densely
- connected layers is complicated since written out, the posterior is
+ connected layers is complicated since written out (using the previous equations
+), the posterior is
 \begin_inset Note Note
 status open
 
@@ -3081,8 +3089,8 @@ posterior
 \begin{eqnarray}
 P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
  & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
- & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{Z}\label{eq:deep-belief-net-posterior-is-complicated}\\
- &  & *P(V_{1}=v_{1},V_{2}=v_{2})
+ & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{1}{Z}P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})\label{eq:deep-belief-net-posterior-is-complicated}\\
+ &  & *P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})*P(V_{1}=v_{1},V_{2}=v_{2})
 \end{eqnarray}
 
 \end_inset
@@ -7399,7 +7407,7 @@ TODO: repeat energy of equation
 \end_layout
 
 \begin_layout Subsubsection
-Training Restricted Boltzmann Machines
+Training Restricted Boltzmann Machines using Contrastive Divergence
 \end_layout
 
 \begin_layout Standard
@@ -7414,7 +7422,7 @@ contrastive divergence
 \begin_inset Quotes erd
 \end_inset
 
-, where there the positive phase is simpler.
+, where the positive phase is simpler.
  It is obtained by approximating the derivative of the log-likelihood with
  respect to a weight 
 \begin_inset Formula $w_{ij}$
@@ -7761,6 +7769,8 @@ Because they are a directed graphical model, the computation of the value
  of children nodes do not affect the parent nodes.
  In contrast to undirected graphical models, this allows generating from
  the model in a single pass.
+ Thus, a Deep Belief Network is, by itself, an unsupervised algorithm that
+ can be used to generate samples distributed like a training data set.
 \end_layout
 
 \begin_layout Paragraph
@@ -7783,16 +7793,16 @@ reference "The-sigmoid-activation-function"
 \end_inset
 
 ) conditional probability function.
- A sigmoid belief network is a belief network in which the conditional probabili
+ A Sigmoid Belief Network is a belief network in which the conditional probabili
 ty associated with node 
 \begin_inset Formula $N_{i}$
 \end_inset
 
- depends on previous nodes 
+ depends only on previous nodes 
 \begin_inset Formula $\mathbf{N_{j}}$
 \end_inset
 
- and can be expressed as 
+ and can be expressed as a sigmoid function 
 \begin_inset Formula 
 \begin{eqnarray*}
 P(N_{i} & = & n_{i}|\mathbf{N_{j}=n_{j}}:\mathbf{j}<i)=\sigma((2n_{i}-1)\sum_{j<i}n_{j}w_{ij})
@@ -7808,7 +7818,7 @@ Arbitrary Modelling Capability
 \end_layout
 
 \begin_layout Standard
-Both Boltzmann machines and sigmoid belief networks can represent arbitrary
+Both Boltzmann machines and Sigmoid Belief Networks can represent arbitrary
  probability distributions over a set of an arbitrary number of visible
  nodes, provided that a sufficient number of hidden nodes is available
 \begin_inset CommandInset citation
@@ -7886,6 +7896,364 @@ in equation 27
 \begin_layout Standard
 Since exact inference of the hidden nodes given the visible nodes is intractable
 , we must resort to the approximate Gibbs Sampling.
+ This works as shown in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
+
+\end_inset
+
+.
+ However, in Gibbs Sampling, all hidden variables (of all layers simultaneously)
+ have to be inferred together, and this scales poorly as models become larger.
+\end_layout
+
+\begin_layout Subsubsection
+A Fast Learning Algorithm for Deep Belief Networks
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ showed that there is a fast learning algorithm for Deep Belief Networks,
+ even with millions of parameters.
+\end_layout
+
+\begin_layout Standard
+As mentioned in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
+
+\end_inset
+
+, there are computational problems with inferring the hidden variables from
+ visible ones.
+ The problems would go away if the posterior of the hidden given the visible
+ nodes were independent between individual hidden nodes, but this is not
+ the case due to explaining away.
+ However, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ came up with a trick: The posterior is equal to the product of prior times
+ likelihood.
+ If the prior were so that it would cancel the correlations of the likelihood,
+ then the product would factor according to the hidden nodes: 
+\begin_inset Formula 
+\[
+P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})
+\]
+
+\end_inset
+
+.
+ They showed that such priors exist and have the form
+\begin_inset Formula 
+\[
+P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\right)
+\]
+
+\end_inset
+
+.
+ The desired factorial form of the posterior means that all 
+\begin_inset Formula $y_{j}$
+\end_inset
+
+ must be conditionally independent (given 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+).
+ By the Hammersley-Clifford theorem (see 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
+
+\end_inset
+
+) these conditions are fulfilled in an undirected graphical model that has
+ edges between every hidden and visible variables and edges between all
+ visible nodes with a joint probability of the form
+\begin_inset Formula 
+\begin{equation}
+P(\mathbf{x},\mathbf{y})=\frac{1}{C}\exp\left(\sum_{j}\Phi_{j}(\mathbf{x},y_{j})+\beta(\mathbf{x})+\sum_{j}\alpha_{j}(y_{j})\right)\label{eq:DBN-joint-probability-with-dependencies-between-visible}
+\end{equation}
+
+\end_inset
+
+.
+ For reasons that will become clear later, we also want to get rid of the
+ dependencies between the visible nodes.
+ The conditional probabilities are then of the form
+\begin_inset Formula 
+\begin{equation}
+P(\mathbf{x}\mid\mathbf{y})=\prod_{i}P(x_{i}\mid\mathbf{y})\label{eq:DBN-x-given-y}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})\label{eq:DBN-y-given-x}
+\end{equation}
+
+\end_inset
+
+.
+ Also by the Hammersley-Clifford theorem, the joint probability then specializes
+ from 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DBN-joint-probability-with-dependencies-between-visible"
+
+\end_inset
+
+ to
+\begin_inset Formula 
+\[
+P(\mathbf{x},\mathbf{y})=\frac{1}{C}\exp\left(\sum_{j}\Phi_{j}(\mathbf{x},y_{j})+\sum_{i}\gamma_{i}(x_{i})+\sum_{j}\alpha_{j}(y_{j})\right)
+\]
+
+\end_inset
+
+.
+ The reason we wanted to have both independencies as encoded by equations
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DBN-x-given-y"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:DBN-y-given-x"
+
+\end_inset
+
+ is that these are the (in)dependecies described by a Restricted Boltzmann
+ Machine.
+ Inference in an RBM works by repeatedly and alternatingly evaluating these
+ two conditional probabilities.
+ The correctly inferred distribution is obtained once the Markov chain reaches
+ equilibrium.
+ However, we can also view this induction as taking place in a Deep Belief
+ Network that is infinitely deep, has alternating visible and hidden layers
+ and has shared weights at all layers.
+ The weights matrix between the layers are 
+\begin_inset Formula $W$
+\end_inset
+
+ from hidden to visible and 
+\begin_inset Formula $W^{T}$
+\end_inset
+
+ from visible to hidden layers.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert graphics like Figure 3 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+The Greedy Training Procedure
+\end_layout
+
+\begin_layout Standard
+This equivalence makes the following greedy training procedure for a Deep
+ Belief Network possible.
+ Start with a single RBM containing visible nodes 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ and hidden nodes 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ and train it using contrastive divergence to learn the weights 
+\begin_inset Formula $W$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then copy the visible layer together with the weights, turn the copy upside-down
+ (i.e.
+ transpose the weights), and connect this new layer called 
+\begin_inset Formula $\mathbf{V_{1}}$
+\end_inset
+
+ to the top of the hidden layer.
+ This new 3-layer network is then further modified: The undirected weights
+ between 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ are 
+\begin_inset Quotes eld
+\end_inset
+
+untied
+\begin_inset Quotes erd
+\end_inset
+
+ and replaced by directed weights 
+\begin_inset Formula $W$
+\end_inset
+
+ going from 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+, and weights 
+\begin_inset Formula $W^{T}$
+\end_inset
+
+ going from 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ to 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+.
+ The upward weights serve the purpose of inferring the 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+ representation of the data, and the downward weights are generative and
+ part of the model.
+ Place the original RBM (that had been between 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+) on top of the new layer 
+\begin_inset Formula $\mathbf{V_{1}}$
+\end_inset
+
+, so that it is now between 
+\begin_inset Formula $\mathbf{V_{1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{H_{1}}$
+\end_inset
+
+.
+ Up to now this model is equivalent to running an RBM for one more iteration,
+ which is implemented by the extra directed layer with shared weights below
+ the RBM.
+\end_layout
+
+\begin_layout Standard
+Infer the hidden layer representation at 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+.
+ Now train the copied RBM between layers 
+\begin_inset Formula $\mathbf{V_{1}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{H_{1}}$
+\end_inset
+
+ and adapt its weights.
+ This greedy step makes the weights different from those between 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{V_{1}}$
+\end_inset
+
+, and thus the upward (inferring) weights between 
+\begin_inset Formula $\mathbf{V_{0}}\leftarrow\mathbf{H_{0}}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{H_{0}}\leftarrow\mathbf{V_{1}}$
+\end_inset
+
+ become incorrect in theory.
+ In practice, however, this does not matter that much.
+ The gain by training the RBM on top on re-represented data outweighs the
+ incorrectness of inference.
+ Because the weights of the new RBM before training are initialized to be
+ the same as that of the old RBM, additional constrastive divergence steps
+ can only improve the model.
+\end_layout
+
+\begin_layout Standard
+Iteratively adding two new layers between the directed layers of the Deep
+ Belief Network and the RBM on top can now continue until the model is sufficien
+tly deep.
+\end_layout
+
+\begin_layout Paragraph
+The RBM seen as the DBN's Markov Chain in Reverse
+\end_layout
+
+\begin_layout Standard
+Another way to view the unrolling is to regard the infinitely Deep Belief
+ Network as the process implementing the original Markov Chain.
+ The Markov Chain implemented by the RBM in the unrolling of the DBN can
+ then be regarded as simulating the same Markov Chain run in reverse, and
+ the more layers we add to the DBN, the farther back we go in time.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset label
+LatexCommand label
+name "HIER-WEITERMACHEN"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7903,900 +8271,6 @@ TODO: HIER WEITERMACHEN.
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-A belief network is a directed graphical model.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-According to 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/rbm/reweighted weight-sleep.pdf
-\begin_inset Quotes erd
-\end_inset
-
-, a Sigmoidal Belief Network (SBN) is a directed graphical model with independen
-t variables 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- given the parents 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
-:
-\begin_inset Formula 
-\[
-P^{SBN}(x_{i}=1|\mathbf{y})=\sigma(W^{i,:}\mathbf{y}+b_{i})
-\]
-
-\end_inset
-
-And they say that although a SBN is a very simple generative model given
- 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
-, inference for 
-\begin_inset Formula $\mathbf{y}$
-\end_inset
-
- given x is in general intractable.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-More formally, the random variables 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Wie man die 
-\begin_inset Formula $P(\tilde{S}=\tilde{s}|\tilde{V}=\tilde{v})$
-\end_inset
-
- mittels Gibbs-Sampling bestimmt, beschreibt Neal auf Seite 80: 
-\begin_inset Quotes eld
-\end_inset
-
-To exhibit these marginal and conditional distributions via Gibbs sam- pling,
- we must repeatedly select a new value for each unit from its distri- bution
- conditional on the rest of the network.
- This distribution is given by the proportionality 
-\begin_inset Formula 
-\begin{eqnarray*}
-P(S_{i}=x|S_{j}=s_{j}:j\neq i) & = & P(S_{i}=x|S_{j}=s_{j}:j<i)\\
- &  & *\prod_{j>i}P(S_{j}=s_{j}|S_{i}=x,S_{k}=s_{k}:k<j,k\neq i)
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-In the case of a sigmoid activation function, this equation is:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{eqnarray*}
-P(S_{i}=x|S_{j}=s_{j}:j\neq i) & = & \sigma(x^{*}\sum_{j<i}s_{j}w_{ij})\\
- &  & *\prod_{j>i}\sigma(s_{j}^{*}(xw_{ji}+\sum_{k<j,k\neq i}s_{k}w_{jk}))
-\end{eqnarray*}
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Die Equation hier ist ein Mix aus Eq.
- (9) und (17)
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Quotes eld
-\end_inset
-
-To select a new value from the above distribution, unit i must have available
- both its own total input: 
-\begin_inset Formula $\sum_{j<i}s_{j}w_{ij}$
-\end_inset
-
- and the input to each unit, j, that it feeds into, exclusive of its own
- contribution: 
-\begin_inset Formula $\sum_{k<j,k\neq i}s_{k}w_{jk}$
-\end_inset
-
-.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-(Der 
-\begin_inset Formula $*$
-\end_inset
-
- auf manchen 
-\begin_inset Formula $s$
-\end_inset
-
- oder 
-\begin_inset Formula $x$
-\end_inset
-
-, z.B.
- 
-\begin_inset Formula $x^{*}$
-\end_inset
-
- oder 
-\begin_inset Formula $s_{j}^{*}$
-\end_inset
-
- bezieht sich auf Knoten, in denen -1/1 Zustände verwendet anstatt 0/1:
- Seite 80: 
-\begin_inset Quotes eld
-\end_inset
-
-for -1/+1-valued nodes, 
-\begin_inset Formula $s_{i}^{*}=s_{i}$
-\end_inset
-
-, while for 0/1-valued nodes, 
-\begin_inset Formula $s_{i}^{*}=2s_{i}-1$
-\end_inset
-
-.
-\begin_inset Quotes erd
-\end_inset
-
-)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Neal writes about the training of weights to maximize the likelihood given
- the observed training cases in Sigmoid Belief Networks in 
-\begin_inset Quotes eld
-\end_inset
-
-Connectionist learning of belief networks
-\begin_inset Quotes erd
-\end_inset
-
- (
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
- networks.pdf
-\begin_inset Quotes erd
-\end_inset
-
-) on (the paper's printed page numbers) pages 82/83:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Quotes eld
-\end_inset
-
-Next, we must find values for the network weights that maximize the likelihood
- given the training cases, though to avoid overfitting or to reduce computation
- we might decide to fix certain weights at zero based on a priori knowledge.
- Other weights will be set to zero (or to small random values if we wish
- to break symmetry faster) and then adjusted by gradient-ascent so as to
- maximize the log-likelihood: [...] These partial derivatives can be evaluated
- by running a separate Gibbs sampling simulation of the network for each
- training case, clamping the visi- ble units to the values they take in
- that training case and observing the state vectors that arise as a result.
- [...] Incrementing each weight, Wij, by a small amount proportional to the
- average value of [...] over the combined samples for all training cases will
- then move the weights along the gradient toward a local maximum of the
- likelihood.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Man kann also trainieren, indem man 
-\begin_inset Formula $P(\tilde{S}=\tilde{s}|\tilde{V}=\tilde{v})$
-\end_inset
-
- mittels Gibbs-Sampling bestimmt, dann mit 
-\begin_inset Formula $s_{i}s_{j}\sigma(-s_{i}\sum_{k<i}s_{k}w_{ik})$
-\end_inset
-
- multipliziert, und das Ergebnis (mal einer learning rate) dann auf die
- Weight 
-\begin_inset Formula $w_{ij}$
-\end_inset
-
- addiert.
-\end_layout
-
-\begin_layout Plain Layout
---------------------
-\end_layout
-
-\begin_layout Plain Layout
-Neal schreibt auf Seite 86 (bzw.
- proof auf Seite 109, dass für bis zu 2 Knoten alle möglichen joint probability
- distributions mit Boltzmann machine als auch mit sigmoid belief network
- modellierbar sind.
- Bei 3 Knoten sind nicht mehr alle joint probability distributions modellierbar,
- aber die, die von einer Bolzmann machine modellierbar sind, sind auch von
- einem sigmoiden Belief Network modellierbar und umgekehrt.
- Ab 4 oder mehr Knoten sind die joint probability distributions, die von
- einer Boltzmann machine und von einem sigmoid belief network modellierbar
- sind, unterschiedlich.
-\end_layout
-
-\begin_layout Plain Layout
-Allerdings schreibt Neal auf Seite 72: 
-\begin_inset Quotes eld
-\end_inset
-
-With the help of "hidden" units, all these networks [Boltzmann machine und
- sigmoid belief network] can represent arbitrary distributions over a set
- of "visible" units.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Deep Belief Network
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: irgendwo vor Deep Belief Networks muss ich einen Abschnitt machen,
- wo ich erkläre dass viele der Netzwerk-Lernmethoden gradient descent machen.
- Deep Belief Networks machen das auch, aber keine maximum likelihood estimation,
- sondern eine contrastive divergence.
- Siehe section 3 in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Irgendwo vor Deep Belief Networks muss ich contrastive divergence
- erklären.
- Das Folgende kommt aus 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
-, Seite 1534.
-\end_layout
-
-\begin_layout Plain Layout
-Maximum likelihood learning minimizes the Kullback-Leibler divergence 
-\begin_inset Formula $KL(P^{0}||P_{\theta}^{\infty})$
-\end_inset
-
- where 
-\begin_inset Formula $P^{0}$
-\end_inset
-
- is the distribution of the data, and 
-\begin_inset Formula $P_{\theta}^{\infty}$
-\end_inset
-
- is the equilibrium distribution of the model, when running the Gibbs chain
- until equilibrium.
-\end_layout
-
-\begin_layout Plain Layout
-Contrastive divergence learning (
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-cite: Hinton, G.
- E.
- (2002).
- Training products of experts by minimizing contrastive diver- gence, Neural
- Computation, 14(8), 1711–1800.
-\end_layout
-
-\end_inset
-
-) runs the Gibbs chain for only 
-\begin_inset Formula $n$
-\end_inset
-
- steps.
- Contrastive divergence learning minimizes the difference of two Kullback-Leible
-r divergences 
-\begin_inset Formula $KL(P^{0}||P_{\theta}^{\infty})-KL(P_{\theta}^{n}||P_{\theta}^{\infty})$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
- introduced the 
-\emph on
-deep belief network 
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-deep belief network
-\end_layout
-
-\end_inset
-
-.
- It is a directed graphical model, composed of multiple layers consisting
- of one or several nodes.
- Imagine the layers arranged and numbered from top to bottom.
- The nodes in the top two layers are connected using undirected connections.
- The nodes in the second layer and the layers below have directed (outgoing)
- connections only to nodes in the adjacent layer below.
-\end_layout
-
-\begin_layout Standard
-This is a network in which nodes in the bottom layer correspond to the (observed
-) random variables in the training set and the nodes in the layer above
- are the (hidden) causes of the visible nodes, which can in turn have other
- hidden causes.
- As originally defined, each random variable is binary.
- The probability that a node 
-\begin_inset Formula $i$
-\end_inset
-
- in the network is activated (i.e.
- that its state 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- equals 1) is a sigmoid function of the states 
-\begin_inset Formula $s_{j}$
-\end_inset
-
- of its parents 
-\begin_inset Formula $j$
-\end_inset
-
-, the weights 
-\begin_inset Formula $w_{ij}$
-\end_inset
-
- of the directed connections from parent 
-\begin_inset Formula $j$
-\end_inset
-
- to 
-\begin_inset Formula $i$
-\end_inset
-
-, and the bias 
-\begin_inset Formula $b_{i}$
-\end_inset
-
- of node 
-\begin_inset Formula $i$
-\end_inset
-
-:
-\begin_inset Formula 
-\[
-P(X_{i}=s_{i}=1)=\frac{1}{1+\exp(-b_{i}-\sum_{j}s_{j}w_{ij})}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The training algorithm for deep belief networks is a possible solution of
- how to learn a logistic belief network with many hidden layers.
- Learning such a logistic belief network is the task of finding weights
- for the connections and biases for the nodes such that the probability
- of the training samples becomes maximal, and the probabilities for other
- visible layer configurations low.
- A logistic belief network is a directed graphical model of the form as
- show in the example 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
-
-\end_inset
-
-, and therefore exact inference is intractable, because the probabilities
- of nodes in a hidden layer given the states of nodes in the layer below
- are inter-dependent due to explaining away.
- This makes learning a belief network with multiple hidden layers very hard,
- since the derivative of the probability of the visible layer with respect
- to a specific weight of the network is intractable
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I think it might be because the derivative with respect to a specific
- weight of an outgoing connection depends on the weights of the outgoing
- connections of adjacent nodes in the same layer.
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
- addressed this problem by introducing so-called 
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-complementary priors
-\end_layout
-
-\end_inset
-
-
-\emph on
-complementary priors
-\emph default
-.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: explain what these are.
-\end_layout
-
-\end_inset
-
- Using Bayes theorem, the posterior probabilities of the nodes 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
- in the hidden layer above the visible layer with nodes 
-\begin_inset Formula $\mathbf{V}$
-\end_inset
-
- are:
-\begin_inset Formula 
-\[
-P(\mathbf{H}\mid\mathbf{V})=\frac{P(\mathbf{V}\mid\mathbf{H})P(\mathbf{H)}}{P(\mathbf{V})}
-\]
-
-\end_inset
-
-The key idea of 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
- was to find priors 
-\begin_inset Formula $P(\mathbf{H})$
-\end_inset
-
- of a form so that when multiplied with the likelihood 
-\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})$
-\end_inset
-
-, the posterior 
-\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
-\end_inset
-
- becomes factorial, i.e.
- can be written as a product over the conditional probabilities 
-\begin_inset Formula 
-\[
-P(\mathbf{H}\mid\mathbf{V})=\prod_{j}P(H_{j}\mid\mathbf{V})
-\]
-
-\end_inset
-
-.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I should insert here why the posterior is usually not factorial.
- Maybe refer to 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
-
-\end_inset
-
-.
- The formula to look at is 
-\begin_inset Formula 
-\begin{eqnarray*}
-P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\\
- & = & \frac{P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{Z}
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-This is not of the form 
-\begin_inset Formula $\prod_{j}P(H_{j}\mid\mathbf{V})$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-They showed that if the probability distributions are strictly positive,
- i.e.
- 
-\begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})>0$
-\end_inset
-
- and 
-\begin_inset Formula $P(\mathbf{H})>0$
-\end_inset
-
- for every value of 
-\series bold
-
-\begin_inset Formula $\mathbf{V}$
-\end_inset
-
-
-\series default
- and 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
-, then only likelihoods of the following form lead to a complementary prior:
-\begin_inset Formula 
-\[
-P(\mathbf{V}\mid\mathbf{H})=\frac{1}{\Omega(\mathbf{H})}\exp\left(\sum_{j}\Phi_{j}(\mathbf{V},H_{j})+\beta(\mathbf{V})\right)
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\Omega(\mathbf{H})$
-\end_inset
-
- is the normalization term.
- The complementary prior then is of the form
-\begin_inset Formula 
-\[
-P(\mathbf{H})=\frac{1}{C}\Omega(\mathbf{H})\exp\mbox{\left(\sum_{j}\alpha_{j}(H_{j})\right)}
-\]
-
-\end_inset
-
-where the constant 
-\begin_inset Formula $C$
-\end_inset
-
- normalizes 
-\begin_inset Formula $P(\mathbf{H})$
-\end_inset
-
-.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Insert the posterior here, to show that it is factorial, which was
- the goal.
-\end_layout
-
-\end_inset
-
- The posterior is as follows and factorial:
-\begin_inset Formula 
-\begin{eqnarray*}
-P(\mathbf{H}\mid\mathbf{V}) & =\\
- & =
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: W
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-joint distributions 
-\begin_inset Formula $P(\mathbf{V},\mathbf{H})$
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-TODO: insert that an RBM with visible nodes 
-\begin_inset Formula $\mathbf{V}$
-\end_inset
-
- and hidden nodes 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
- can be viewed as an infinite DAG with tied weights between alternating
- representations of the visible and hidden layer.
- TODO: insert graphics like Figure 3 in 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
-.
- This provides a starting point for a training algorithm for deep belief
- networks: Start with a single RBM containing visible nodes 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
-
- and hidden nodes 
-\begin_inset Formula $\mathbf{H_{0}}$
-\end_inset
-
- and learn the hidden layer representation of the training data.
- Then copy the visible layer together with the weights, turn the copy upside-dow
-n (i.e.
- transpose the weights), and connect this new layer called 
-\begin_inset Formula $\mathbf{V_{1}}$
-\end_inset
-
- to the top of the hidden layer.
- This new 3-layer network is then further modified: The undirected weights
- between 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
-
- and 
-\begin_inset Formula $\mathbf{H_{0}}$
-\end_inset
-
- are untied and replaced by directed weights going from 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
-
- to 
-\begin_inset Formula $\mathbf{H_{0}}$
-\end_inset
-
- , and weights going from 
-\begin_inset Formula $\mathbf{H_{0}}$
-\end_inset
-
- to 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
-
-.
- The 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: 
-\begin_inset Quotes eld
-\end_inset
-
-incorrect
-\begin_inset Quotes erd
-\end_inset
-
- hab ich irgendwo gelesen, aber ich weiss nicht mehr wo.
-\end_layout
-
-\end_inset
-
- upward weights serve the purpose of inferring the 
-\begin_inset Formula $\mathbf{H_{0}}$
-\end_inset
-
- representation of the data, and the downward weights are part of the model.
-\end_layout
-
-\begin_layout Standard
-A deep belief network is a model that can be used to generate samples distribute
-d like a training data set.
-\end_layout
-
-\begin_layout Paragraph
-Wake-Sleep Algorithm
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/rbm/wake-sleep.pdf
-\begin_inset Quotes erd
-\end_inset
-
- describes the wake-sleep algorithm.
- It says something about a factorial distribution produced by the recognition
- weights (the recognition weights are part of the recognition network; there
- is also the generation network), which has only 
-\begin_inset Formula $n$
-\end_inset
-
- parameters instead of 
-\begin_inset Formula $2^{n}-1$
-\end_inset
-
-.
- It also says that this simplification makes it impossible to 
-\begin_inset Quotes eld
-\end_inset
-
-capture explaining-away effects
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-It also says 
-\begin_inset Quotes eld
-\end_inset
-
-Both [PCA and clustering] can be viewed as special cases of the minimum
- description length approach, in which there is only one hidden layer and
- it is unnecessary to distinguish between the recognition and generative
- weights because they are always the same.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Comparison of the Representational Power of Markov Random Fields with Bayesian
- Networks
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO 
-\end_layout
-
-\end_inset
-
-Neal shows in (TODO: cite 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/rbm/A11 Connectionist learning of belief
- networks.pdf
-\begin_inset Quotes erd
-\end_inset
-
-) that there are instances of Boltzmann Machines that are not representable
- in Bayesian Networks, and there are Bayesian Networks that cannot be modeled
- by Boltzmann Machines.
- This means that some joint probability distributions representable in Boltzmann
- Machines do not have representations in Bayesian Networks and vice versa.
 \end_layout
 
 \begin_layout Standard
