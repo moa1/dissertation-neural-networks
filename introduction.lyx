@@ -123,7 +123,8 @@ key "BullockDouglas2005"
 
 ) as the smallest units whose state change may be called signal processing,
  so they are the basic signal processing units.
- They have multiple inputs (dendrites) and multiple outputs (axons)
+ They have multiple inputs -- dendrites -- and multiple outputs -- axons
+ -- 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ByrneDafny1997"
@@ -172,9 +173,10 @@ key "LodishZipursky2000"
 .
  Because ions are charged, there is an electric potential between the outside
  and inside of the cell.
- (The resting potential is between -80mV and -40mV, depending on the type
- of neuron.) The electric potential becoming more positive is called depolarizati
-on, and the opposite hyperpolarization.
+ The resting potential is between -80mV and -40mV, depending on the type
+ of neuron.
+ The electric potential becoming more positive is called depolarization,
+ and the opposite hyperpolarization.
 \end_layout
 
 \begin_layout Standard
@@ -264,7 +266,8 @@ digital
  in the fluctuations of neurotransmitter released.
  This analogue mode of transmission allows more information to be transmitted
  per time.
- Sub-threshold emission of neurotransmitter also seems to modulate subsequent
+ Sub\SpecialChar \-
+threshold emission of neurotransmitter also seems to modulate subsequent
  action potentials, allowing for a mixture of analogue and digital information
  transmission 
 \begin_inset CommandInset citation
@@ -323,7 +326,7 @@ sin, which receives a G protein binding site.
 
 \begin_layout Standard
 Rods are more sensitive to dim light, while cones only react to bright light
- but can see colors.
+ only but can see colors.
  Both release the neurotransmitter glutamate continuously into the synaptic
  cleft, but when hit by light, suspend this emission for the duration of
  the light.
@@ -361,7 +364,14 @@ bipolar cell).
  Among their known functions are brightness-dependent size regulation of
  the receptive field of amacrine cells, integration of a large number of
  rods to provide sight in little light, and an additional photoreceptor
- distinct from rods and cones.
+ distinct from rods and cones
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kolb2003"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -609,7 +619,8 @@ Nervous systems do not only process signals, but they also learn, that means
 \begin_layout Standard
 In biological neuronal systems, this is possible by altering existing synapses
  (for example by exchanging the receptors on the surface of dendrites),
- or by connecting the axon terminals of a neuron to different neurons.
+ or by creating and abandoning existing synapses (i.e.
+ connecting the axon terminals of a neuron to different neurons).
  There are several known cellular mechanisms for that, among them LTP, LTD,
  PTP
 \begin_inset Note Note
@@ -840,7 +851,10 @@ semi-supervised learning
  This assumes that samples close in the (high-dimensional) input space probably
  have the same label, or conversely, that samples distant from each other
  probably have different labels.
- There are two types of semi-supervised learning: transductive and inductive
+\end_layout
+
+\begin_layout Standard
+There are two types of semi-supervised learning: transductive and inductive
  semi-supervised learning.
  The goal of transductive semi-supervised learning
 \begin_inset Index idx
@@ -1021,7 +1035,17 @@ TODO: cite one of the YouTube video learning papers by Salakhutdinov and
 \begin_layout Standard
 Before we motivate using DBNs on expression data, we first introduce deep
  learning.
- Deep learning is a term used in conjunction with artificial neuronal networks.
+ Deep learning
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Deep learning
+\end_layout
+
+\end_inset
+
+ is a term used in conjunction with artificial neuronal networks.
  Those 
 \begin_inset Quotes eld
 \end_inset
@@ -1076,7 +1100,7 @@ status open
 
 \end_inset
 
- However, back-propagation was not able to compute networks with more than
+ However, back-propagation was not able to train networks with more than
  very few hidden layers.
 \end_layout
 
