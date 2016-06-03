@@ -1076,7 +1076,7 @@ status open
 
 \end_inset
 
-However, back-propagation was not able to compute networks with more than
+ However, back-propagation was not able to compute networks with more than
  very few hidden layers.
 \end_layout
 
@@ -1129,9 +1129,9 @@ When training this first iteration of the network, standard back-propagation
  than the number of nodes in the input (and output) layer.
  In this way the autoassociator learns to reconstruct its input from a compresse
 d representation.
- (TODO: hier ein Bild eines autoassociator networks).
- Once back-propagation does not improve the reconstruction error on the
- test set anymore, the second iteration starts.
+ (TODO: hier ein Bild eines autoassociator networks.) Once back-propagation
+ does not improve the reconstruction error on the test set anymore, the
+ second iteration starts.
 \end_layout
 
 \begin_layout Standard
@@ -1256,7 +1256,7 @@ n.
 
 \end_inset
 
-showed, training using contrastive divergence (CD-1) and training using
+ showed, training using contrastive divergence (CD-1) and training using
  reconstruction error as error metric in an autoassociator are linked.
  They showed that the weight learning gradient used with the reconstruction
  error is a more biased approximator of the log-likelihood than the gradient
@@ -1361,7 +1361,7 @@ L2 weight decay is similar to L1 weight decay but penalizes large weights
 \begin_inset Formula $sgn(x)$
 \end_inset
 
- is the sign function, that returns -1, 0, 1 for negative, zero, positive
+ is the sign function that returns -1, 0, 1 for negative, zero, positive
  
 \begin_inset Formula $x$
 \end_inset
@@ -1416,7 +1416,8 @@ dropout rate
 \begin_inset Formula $d$
 \end_inset
 
-.The theory behind dropout is that for a network with
+.
+ The theory behind dropout is that for a network with
 \begin_inset Formula $d$
 \end_inset
 
@@ -1448,8 +1449,9 @@ Sparsity regularization is a method to make only a small fraction of nodes
 \end_inset
 
 , the fraction of nodes that should be active within a neuronal network
- layer.TODO: HIER WEITERMACHEN, INDEM ICH NACH PAPERS SUCHE UND ZITIERE,
- DIE SPARSITY BESCHREIBEN.
+ layer.
+ TODO: HIER WEITERMACHEN, INDEM ICH NACH PAPERS SUCHE UND ZITIERE, DIE SPARSITY
+ BESCHREIBEN.
 \end_layout
 
 \begin_layout Paragraph
@@ -1563,8 +1565,8 @@ Another (and older) semi-supervised algorithm is the Transductive Support
  A standard Support Vector Machine searches for a decision boundary such
  that the margin between samples with differing labels is maximal.
  The TSVM seeks a labeling of the unlabeled samples so that the decision
- boundary has the maximal margin between all samples with differing classes.TODO:
- Cite TSVM here.
+ boundary has the maximal margin between all samples with differing classes.
+ TODO: Cite TSVM here.
  TSVM is mentioned in the wikipedia article 'semi-supervised learning'.
 \end_layout
 
