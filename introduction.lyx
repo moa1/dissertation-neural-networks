@@ -1388,9 +1388,9 @@ Dropout Regularization
 
 \begin_layout Standard
 Dropout is a regularization method to make the nodes in the hidden layers,
- which can be seen as feature detectors, more independent from each other
- (TODO: cite Dropout: A Simple Way to Prevent Neural Networks from Overfitting).
- This is enforced by omitting (or 
+ which can be seen as feature detectors, less dependent on each other (TODO:
+ cite Dropout: A Simple Way to Prevent Neural Networks from Overfitting).
+ This is enforced by 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1398,9 +1398,13 @@ dropping
 \begin_inset Quotes erd
 \end_inset
 
-) in a layer a random subset of nodes from computing the layers after that
- layer.
- Its meta-parameter is a single value, between 0 and 1 for each layer, the
+ each training iteration a random subset of nodes in a layer.
+ This prevents subsequent layers from adapting to specific combinations
+ of node activations in the previous layer.
+\end_layout
+
+\begin_layout Standard
+Its meta-parameter is a single value, between 0 and 1 for each layer, the
  
 \emph on
 dropout rate
@@ -1413,7 +1417,7 @@ dropout rate
  It is the fraction of nodes in the layer whose input and output weights
  should temporarily be set to 0 during one learning iteration.
  This makes the incoming activations in the layer after the current layer
- smaller by the factor
+ smaller by the factor 
 \begin_inset Formula $d$
 \end_inset
 
@@ -1423,14 +1427,14 @@ dropout rate
 \begin_inset Formula $d$
 \end_inset
 
- is set to 1, so that all nodes are used in calculating the output.
+ is set to 0, so that all nodes are used in calculating the output.
  To compensate for the larger average activation input in the next layer,
  all incoming weights are multiplied by the factor 
 \begin_inset Formula $d$
 \end_inset
 
 .
- The theory behind dropout is that for a network with
+ The theory behind dropout is that for a network with 
 \begin_inset Formula $d$
 \end_inset
 
@@ -1438,8 +1442,12 @@ dropout rate
 \begin_inset Formula $2^{n}$
 \end_inset
 
- possible ways to drop out nodes and a network trained with dropout implicitly
- averages its output over all these 
+ possible ways to drop out 
+\begin_inset Formula $n$
+\end_inset
+
+ nodes and a network trained with dropout, in testing, implicitly averages
+ its output over all these 
 \begin_inset Formula $2^{n}$
 \end_inset
 
@@ -1457,14 +1465,11 @@ Sparsity regularization is a method to make only a small fraction of nodes
  output an activation different from zero.
  This helps to generalize the output, and also makes neuronal networks more
  interpretable.
- It has at least one meta-parameter, 
-\begin_inset Formula $s$
-\end_inset
-
-, the fraction of nodes that should be active within a neuronal network
- layer.
- TODO: HIER WEITERMACHEN, INDEM ICH NACH PAPERS SUCHE UND ZITIERE, DIE SPARSITY
- BESCHREIBEN.
+ It has three meta-parameters.
+ One of them is the fraction of nodes that should be active within a neuronal
+ network layer at any given time.
+ (TODO: cite .../zusammenfassung/rbm/restricted_boltzmann_machine/guideTR.pdf
+ by Hinton.)
 \end_layout
 
 \begin_layout Paragraph
