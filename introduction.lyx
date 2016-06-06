@@ -1357,43 +1357,29 @@ L1 weight decay decreases the absolute value of each weight in each training
  This can be necessary because for some training samples, some weights tend
  to escape, i.e.
  become larger and larger in value.
- L1 weight decay multiplies all weights 
+ L1 weight decay decreases the absolute value of all weights 
 \begin_inset Formula $w_{ij}$
 \end_inset
 
- with 
+ by a small positive constant 
 \begin_inset Formula $c$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+L2 weight decay is similar to L1 weight decay but penalizes large weights
+ even more.
+ It decreases the weights by 
+\begin_inset Formula $c*w_{ij}$
 \end_inset
 
 , where 
 \begin_inset Formula $c$
 \end_inset
 
- is a constant meta-parameter between 0 and 1.
- (TODO: check this)
-\end_layout
-
-\begin_layout Standard
-L2 weight decay is similar to L1 weight decay but penalizes large weights
- even more.
- It assigns the weights 
-\begin_inset Formula $w_{ij}:=w_{ij}-c\sqrt{w_{ij}w_{ij}}sgn(w_{ij})$
-\end_inset
-
-(TODO: check this), where 
-\begin_inset Formula $c$
-\end_inset
-
- is a constant meta-parameter between 0 and 1, and 
-\begin_inset Formula $sgn(x)$
-\end_inset
-
- is the sign function that returns -1, 0, 1 for negative, zero, positive
- 
-\begin_inset Formula $x$
-\end_inset
-
-, respectively.
+ is a constant small positive meta-parameter between 0 and 0.1.
 \end_layout
 
 \begin_layout Paragraph

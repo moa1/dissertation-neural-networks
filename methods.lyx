@@ -6551,8 +6551,11 @@ L1 and L2 Weight Decay
 status open
 
 \begin_layout Plain Layout
-TODO: check in the literature if L1 and L2 weight decay in artificial neuronal
- networks really work the way I describe them here.
+L1 and L2 weight decay are described here as implemented in 
+\emph on
+deepnet
+\emph default
+.
 \end_layout
 
 \end_inset
@@ -6584,14 +6587,14 @@ L2 weight decay
 \end_inset
 
 , the penalized 
-\begin_inset Formula $\Delta w_{ij}-abs(w_{ij})*w_{1}$
+\begin_inset Formula $\Delta w_{ij}-w_{1}*sgn(w_{ij})$
 \end_inset
 
 , where 
 \begin_inset Formula $w_{1}\in\mathbb{R}^{+}$
 \end_inset
 
- is the 
+ is a small positive number, the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6599,20 +6602,33 @@ weight-cost
 \begin_inset Quotes erd
 \end_inset
 
- of L1 weight decay and a small number.
+ of L1 weight decay, and 
+\begin_inset Formula $sgn(x)$
+\end_inset
+
+ is the sign of 
+\begin_inset Formula $x$
+\end_inset
+
+, i.e.
+ 0, 1, -1, for 
+\begin_inset Formula $x$
+\end_inset
+
+ being zero, positive, negative, respectively.
  L2 weight decay replaces 
 \begin_inset Formula $\Delta w_{ij}$
 \end_inset
 
  with 
-\begin_inset Formula $\Delta w_{ij}-w_{ij}^{2}*w_{2}$
+\begin_inset Formula $\Delta w_{ij}-w_{ij}*w_{2}$
 \end_inset
 
 , where 
 \begin_inset Formula $w_{2}\in\mathbb{R}^{+}$
 \end_inset
 
- is the 
+ is the small positive 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6620,7 +6636,7 @@ weight-cost
 \begin_inset Quotes erd
 \end_inset
 
- of L2 weight decay and a small number.
+ of L2 weight decay.
  
 \begin_inset Note Note
 status open
