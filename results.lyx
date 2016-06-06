@@ -758,28 +758,32 @@ Model selection
 Because training an artificial neuronal network is an iterative process,
  there are as many models as there are iterations.
  The question is which one to choose.
- We did not use "early stopping", but selected the neuronal network that
- was best among all evaluated iterations.
+ We did not use 
+\begin_inset Quotes eld
+\end_inset
+
+early stopping
+\begin_inset Quotes erd
+\end_inset
+
+, but selected the neuronal network that was best (on the validation data)
+ among all evaluated iterations.
 \end_layout
 
 \begin_layout Standard
 We normally did not use any model selection for the unsupervised training,
  since the reconstruction error plots of pre-training using auto-encoder
  or RBM did not show overfitting on the validation data set.
- Instead we selected the neuronal network from the last iteration that was
- computed.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Insert here a reconstruction error plot from unsupervised learning.
- a validation data set for unsupervised training was defined for breast_cancer_1
-2, see ~/nnet/notes/breast_cancer_12/reconstruction-error-*.
-\end_layout
+ See 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
 
 \end_inset
 
-
+ for an example of the plot.
+ Instead we selected the neuronal network from the last iteration that was
+ computed.
 \end_layout
 
 \begin_layout Standard
@@ -802,12 +806,75 @@ Usually model selection works by picking the neuronal network defined in
  This led to a very coarse resolution in accuracy plots, and also to noisy
  validation data set accuracy plots, which often jittered (TODO: i want
  to say "wackelt") between two accuracies from one iteration to the next.
+ See figure 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Example-of-supervised-model-selection"
+
+\end_inset
+
+ for an example.
  We therefore smoothed each of the validation set accuracies, and test set
- accuracies using the standard R "loess" smoother with a span of 0.125.
+ accuracies using the standard R 
+\emph on
+loess
+\emph default
+ smoother with a span of 0.125.
  Then we selected the iteration where the smoothed validation set accuracy
  was highest, and reported the smoothed test set accuracy at that iteration.
- (TODO: insert example plot (with figure text) of loess smoothed accuracies,
- like in .../nnet/notes/breast_cancer_12/smoothed_accuracy-aa.png)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/breast_cancer_12-smoothed_accuracy-aa.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-supervised-model-selection"
+
+\end_inset
+
+Example of supervised model selection.
+ The x-axis is the training iteration, the y-axis the accuracy.
+ The turqoise, green, and black circle clouds are the raw accuracies on
+ the training, validation, and test set, respectively.
+ The thin lines overlayed on the point clouds are the 
+\emph on
+loess 
+\emph default
+smoothed curves used for model selection.
+ The dashed vertical line is the iteration where the accuracy on the validation
+ data set is maximal, and the model at that iteration was selected.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -878,10 +945,344 @@ The following settings for
 
 
 \emph default
- were tried: 1.0, 0.1, 0.01, 0.001, 0.0001.(TODO: insert the table in section
- "1 breast_cancer_02 a-e" from "notes/breast_cancer_02" with subtitle here.)
- (TODO: insert the graph in section "1.1 training step vs.
+ were tried: 1.0, 0.1, 0.01, 0.001, 0.0001.
+ An example of the reconstruction error reached for various learning rates
+ is shown in the following table.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+configs
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+outputs
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+base_epsilon
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+min.
+ T_E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+note
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+breast_cancer_02_a
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.01
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.70362
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+T_E was still falling
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+breast_cancer_02_b
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+?
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+in a chaotic state
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+breast_cancer_02_c
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.2056
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+last 3 T_E repeat
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+breast_cancer_02_d
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.70599
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+T_E was still falling
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+breast_cancer_02_e
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.74625
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+T_E was still falling
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of the effect of the learning rate on reconstruction error.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+T_E
+\begin_inset Quotes erd
+\end_inset
+
+ is the reconstruction error.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+min T_E
+\begin_inset Quotes erd
+\end_inset
+
+ means the minimal reconstruction error after 5,100,000 iterations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(maybe TODO: insert the graph in section "1.1 training step vs.
  training error T_E" from "notes/breast_cancer_02" with figure caption here.)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -890,10 +1291,7 @@ The following settings for
 \end_layout
 
 \begin_layout Paragraph
-breast_cancer_0: (TODO: describe the RBM training experiment in LISP whose
- results are reported in ~/uni/publication/summer_school_2014/summer_school_2014.
-pdf on slide 17.
- Include the 2 plots.)
+breast_cancer_0
 \end_layout
 
 \begin_layout Standard
@@ -1114,7 +1512,7 @@ Split of GEO data sets GSE25055 and GSE25065 into training and test set.
 \end_layout
 
 \begin_layout Standard
-Then the 10,000 most variable genes were determined.
+Then the 10,000 most variable genes on GSE25055 were determined.
  They were used as input genes, to halve computation time (from 22,283 genes).
  An RBM was trained, with 10,000 input nodes, and 50 hidden nodes.
  (Both layer's node types were gaussian.) The RBM was trained for about 70,000
@@ -1134,6 +1532,12 @@ Although the 10,000 numbers were compressed into only 50 numbers, the mean
  to a relative error of 2%.
  This demonstrated that RBMs are able to reduce dimensionality of a high-dimensi
 onal data set while preserving most information.
+\end_layout
+
+\begin_layout Standard
+(TODO: insert the 2 plots of the RBM training experiment in LISP whose results
+ are reported in ~/uni/publication/summer_school_2014/summer_school_2014.pdf
+ on slide 17.)
 \end_layout
 
 \begin_layout Paragraph
