@@ -866,6 +866,65 @@ semi-supervised learning
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+A
+\begin_inset Graphics
+	filename images/summer_school_2014-intuitive2-semi_supervised_learning.eps
+	lyxscale 30
+	width 25page%
+
+\end_inset
+
+B
+\begin_inset Graphics
+	filename images/summer_school_2014-intuitive4-semi_supervised_learning.eps
+	lyxscale 30
+	width 25page%
+
+\end_inset
+
+C
+\begin_inset Graphics
+	filename images/summer_school_2014-intuitive5-semi_supervised_learning.eps
+	lyxscale 30
+	width 25page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Illustration of semi-supervised learning in two dimensions (on the two axes
+ are the two dimensions).
+ A: Supervised SVM learning.
+ B: Supervised learning ignores and probably mis-classifies some unlabeled
+ samples.
+ C: Semi-supervised learning regards densities of unlabeled samples and
+ may give better results than supervised learning on the labeled samples
+ alone.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 There are two types of semi-supervised learning: transductive and inductive
  semi-supervised learning.
  The goal of transductive semi-supervised learning
