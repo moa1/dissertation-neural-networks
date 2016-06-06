@@ -92,6 +92,10 @@ methods.lyx
 
 \end_layout
 
+\begin_layout Section
+Biological and Artificial Neuronal Networks
+\end_layout
+
 \begin_layout Standard
 \begin_inset Index idx
 status collapsed
@@ -109,7 +113,7 @@ Artificial neuronal networks are mathematical constructs, designed to imitate
  of simpler building blocks, the neurons.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Neurons as basic signal processing units
 \end_layout
 
@@ -144,7 +148,7 @@ smitters in the axon terminals.
  neurons to open, which changes their membrane potential.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Action potentials, their propagation, and chemical synapses 
 \end_layout
 
@@ -237,7 +241,7 @@ spike
  is generated as described above.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Encoding of information in action potentials
 \end_layout
 
@@ -285,8 +289,12 @@ Examples for neuronal networks that have been partly decoded are the eye
  (visual system) and the nose (olfactory system).
 \end_layout
 
-\begin_layout Paragraph
-The eye as an example of a biological neuronal network
+\begin_layout Subsection
+Examples of biological neuronal networks
+\end_layout
+
+\begin_layout Subsubsection
+The eye, a visual system
 \end_layout
 
 \begin_layout Standard
@@ -393,7 +401,7 @@ Hier ein Bild einfügen, das links ein biologisches neuronales Netz zeigt,
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Odor sensing in the olfactory system
 \end_layout
 
@@ -420,7 +428,7 @@ ce in detecting low concentrations of simple odor mixtures.
  (TODO: confirm the last sentence.)
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Artificial neurons as simple models of biological neurons
 \end_layout
 
@@ -605,7 +613,7 @@ of neuron
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Learning
 \end_layout
 
@@ -728,7 +736,11 @@ locality of Hebbian learning rule
  neurons, but not on other distantly-connected neurons.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Section
+Introduction to Machine Learning
+\end_layout
+
+\begin_layout Subsection
 Supervised and Unsupervised Machine Learning
 \end_layout
 
@@ -823,7 +835,7 @@ ation and abstraction.
  (RBM).
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Semi-supervised Machine Learning
 \end_layout
 
@@ -884,7 +896,7 @@ inductive semi-supervised learning
  semi-supervised machine learning, the whole model may have to be re-evaluated.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Properties of semi-supervised learning
 \end_layout
 
@@ -1061,7 +1073,7 @@ neuronal networks
  usually have several hidden layers.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Back-propagation
 \end_layout
 
@@ -1104,7 +1116,11 @@ status open
  very few hidden layers.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
+Networks with multiple hidden layers
+\end_layout
+
+\begin_layout Subsubsection
 Autoassociator
 \end_layout
 
@@ -1199,7 +1215,7 @@ The autoassociator can be used in a supervised fashion by first training
  (or to constantly zero), and trained using back-propagation.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Deep learning
 \end_layout
 
@@ -1327,8 +1343,8 @@ DBN
 ).
 \end_layout
 
-\begin_layout Paragraph
-Regularizations for Training Artificial Neuronal Networks
+\begin_layout Subsection
+Regularizations in Training Artificial Neuronal Networks
 \end_layout
 
 \begin_layout Standard
@@ -1347,7 +1363,7 @@ learning by heart
  and instead make its predictions more general.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 L1 and L2 Weight Decay Regularization
 \end_layout
 
@@ -1382,7 +1398,7 @@ L2 weight decay is similar to L1 weight decay but penalizes large weights
  is a constant small positive meta-parameter between 0 and 0.1.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Dropout Regularization
 \end_layout
 
@@ -1456,8 +1472,8 @@ dropout rate
  to the specific working of a large number of other nodes.
 \end_layout
 
-\begin_layout Paragraph
-Regularization: Sparsity
+\begin_layout Subsubsection
+Sparsity Regularization
 \end_layout
 
 \begin_layout Standard
@@ -1472,7 +1488,7 @@ Sparsity regularization is a method to make only a small fraction of nodes
  by Hinton.)
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Early stopping
 \end_layout
 
@@ -1495,7 +1511,23 @@ This prevents the training procedure from overfitting to sampling error
  present in the training data set.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Section
+Overview of Own Work
+\end_layout
+
+\begin_layout Standard
+In the work that is described later, we used auto-associators, Deep Belief
+ Networks, and TSVMs on expression data to predict whether breast cancer
+ patients will show pathologic complete response to chemotherapy or residual
+ disease.
+\end_layout
+
+\begin_layout Standard
+Here we give an overview of the motivation, other applicable methods, and
+ other related work.
+\end_layout
+
+\begin_layout Subsection
 Motivations for using Deep Belief Networks on transcriptomic data
 \end_layout
 
@@ -1504,7 +1536,7 @@ The motivations for using Deep Belief Networks on transcriptomic data come
  from those networks' successes when used on image data.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Highly correlated inputs
 \end_layout
 
@@ -1548,7 +1580,7 @@ TODO: add some citations for reasons of high correlation in expression data.
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Deep Belief Networks find correlated nodes
 \end_layout
 
@@ -1572,8 +1604,13 @@ In face recognition for example, an abstract representation might have a
  encode the activity of a gene module.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Transductive Support Vector Machine
+\end_layout
+
+\begin_layout Standard
+We compare our artificial neuronal network approach with an established
+ semi-supervised method, the TSVM.
 \end_layout
 
 \begin_layout Standard
@@ -1588,7 +1625,7 @@ Another (and older) semi-supervised algorithm is the Transductive Support
  TSVM is mentioned in the wikipedia article 'semi-supervised learning'.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Previous Work: Gene Expression Inference With Deep Learning
 \end_layout
 
@@ -1759,7 +1796,7 @@ oinformatics_btw074-supplementary.pdf, Figure S3, that there seem to be hub
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Personalized Medicine
 \end_layout
 
@@ -1790,17 +1827,6 @@ personalized medicine
  is to benefit from chemotherapy, and if the chance for complete response
  to it is small, it could be replaced by another therapy.
  The goal of this work is to contribute to such a predictor.
-\end_layout
-
-\begin_layout Paragraph
-Overview of Own Work
-\end_layout
-
-\begin_layout Standard
-In the work that is described in the following, we used auto-associators,
- Deep Belief Networks, and TSVMs on expression data to predict whether breast
- cancer patients will show pathologic complete response to chemotherapy
- or residual disease.
 \end_layout
 
 \begin_layout Standard
