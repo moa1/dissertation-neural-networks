@@ -99,7 +99,7 @@ Sharaf Tsokos 2015 neural networks for modeling discrete survival time of
 \end_inset
 
 , die übrigens aus 4 input-variablen die survival time vorhersagen.
- Sie haben allerdings 69000 Patienten (siehe Figure 1).)
+ Sie haben allerdings 69,000 Patienten (siehe Figure 1).)
 \end_layout
 
 \begin_deeper
@@ -550,8 +550,8 @@ To dissect the nonlinear contribution, we took a relatively simple approach
  In most applications of deep learning there is some algorithm involved
  to multiply the number of available training data sets.
  For example, in image classification the training images are usually translated
- by pixel or subpixel shifts, or small non-linear deformations are applied using
- a warped mesh.
+ by pixel or subpixel shifts, or small non-linear deformations are applied
+ using a warped mesh.
  This has the effect that a local feature of an input training image (for
  example, a red pixel on green background) is present in different input
  pixels in the transformed training images.
@@ -567,16 +567,33 @@ Having such a transformation for expression data would be very useful, not
  learning algorithms.
  However, it is not at all clear what a pre-processing equivalent to the
  local image deformations could look like for mRNA abundance.
- Straightforward application of the image deformation scheme would provide the neuronal
- network with input for a gene in the dimension of a maybe completely unrelated
- gene.
+ Straightforward application of the image deformation scheme would provide
+ the neuronal network with input for a gene in the dimension of a maybe
+ completely unrelated gene.
  (Note that adding some sort of noise onto the expression levels would be
  equivalent to adding noise to the image, which is not equivalent to shifting
  the image.) A possible approach could be to look for gene modules that consist
  of redundant genes, and permute their expression values among the redundacy
  group.
  This would require knowledge about gene modules in advance.
- Maybe I could increase the number of input samples by creating additional samples by composing them of random subsets of other input samples. E.g. take gene 1-1000 from sample 1, gene 1001-2001 from samples 2, and so on. Or maybe even better use gene modules as learned by an RBM (see the _hub_features_ in Figure S3 of "~/zusammenfassung/applications/Bioinformatics-2016-Chen-bioinformatics_btw074-supplementary.pdf"). The algorithm would work like this: Determine for each _measured_ input sample the gene hub activation (by training an RBM or unsupervised DBN on all input samples). This results in a vector of numbers, one vector for each input sample; each number stands for one gene hub activation. Permute the gene hub activations between the learned representations, but only use representations from samples that have the same class label. Due to the number of permutations this creates a large number of labeled training samples (each training sample is labeled like the measured samples used in the training sample generation). Use these generated training samples as input for a supervised DBN.
+ Maybe I could increase the number of input samples by creating additional
+ samples by composing them of random subsets of other input samples.
+ E.g.
+ take gene 1-1000 from sample 1, gene 1001-2001 from samples 2, and so on.
+ Or maybe even better use gene modules as learned by an RBM (see the _hub_featur
+es_ in Figure S3 of "~/zusammenfassung/applications/Bioinformatics-2016-Chen-bio
+informatics_btw074-supplementary.pdf").
+ The algorithm would work like this: Determine for each _measured_ input
+ sample the gene hub activation (by training an RBM or unsupervised DBN
+ on all input samples).
+ This results in a vector of numbers, one vector for each input sample;
+ each number stands for one gene hub activation.
+ Permute the gene hub activations between the learned representations, but
+ only use representations from samples that have the same class label.
+ Due to the number of permutations this creates a large number of labeled
+ training samples (each training sample is labeled like the measured samples
+ used in the training sample generation).
+ Use these generated training samples as input for a supervised DBN.
 \end_layout
 
 \begin_layout Itemize
@@ -593,5 +610,20 @@ Estimating classification probabilities in high-dimensional diagnostic studies,
  seiner Vorhersage als Zahl zwischen 0 und 1 ausgibt.
 \end_layout
 
+\begin_layout Itemize
+in the Discussion, review the observation of ./Bioinformatics-2016-Chen-bioinform
+atics_btw074-supplementary.pdf, Figure S3, that there seem to be hub genes,
+ that have outgoing connections to many output layer genes, with many of
+ the hub genes having either positive or negative outgoing weights, but
+ not both.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Our work differs from the Chen paper in that they use purely unsupervised
+ learning, and we try semi-supervised learning.
+\end_layout
+
+\end_deeper
 \end_body
 \end_document

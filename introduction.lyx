@@ -1811,23 +1811,6 @@ Learning in this data set is harder since the input is from multiple sources,
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(TODO: in the Discussion, review the observation of ./Bioinformatics-2016-Chen-bi
-oinformatics_btw074-supplementary.pdf, Figure S3, that there seem to be hub
- genes, that have outgoing connections to many output layer genes, with
- many of the hub genes having either positive or negative outgoing weights,
- but not both.)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintAll"
