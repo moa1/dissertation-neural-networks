@@ -983,7 +983,7 @@ Deep Belief Networks
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Deep Belief Network
@@ -1512,7 +1512,7 @@ This prevents the training procedure from overfitting to sampling error
 \end_layout
 
 \begin_layout Section
-Overview of Own Work
+Overview of Own and Related Work
 \end_layout
 
 \begin_layout Standard
@@ -1525,6 +1525,39 @@ In the work that is described later, we used auto-associators, Deep Belief
 \begin_layout Standard
 Here we give an overview of the motivation, other applicable methods, and
  other related work.
+\end_layout
+
+\begin_layout Subsection
+Personalized Medicine
+\end_layout
+
+\begin_layout Standard
+A medium-term goal of medicine is 
+\begin_inset Quotes eld
+\end_inset
+
+personalized medicine
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+personalized medicine
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+, whose goal is to provide custom-tailored health care for everyone on an
+ individual basis.
+ For example, a standard treatment for breast cancer is chemotherapy, but
+ not all patients profit from this treatment.
+ If there were a predictor that could tell the physicist how likely a patient
+ is to benefit from chemotherapy, and if the chance for complete response
+ to it were small, it could be replaced by another therapy.
+ The goal of this work is to contribute to such a predictor.
 \end_layout
 
 \begin_layout Subsection
@@ -1544,7 +1577,7 @@ Highly correlated inputs
 Both underlying distributions often have many correlated dimensions.
  For images, adjacent pixels often display the same object and have therefore
  correlated values.
- In face recognition for example, the faces are usually scaled and translated
+ In some face recognition tasks for example, the faces are scaled and translated
  so that the centers of both eyes and mouth are aligned in different faces.
  There will be highly correlated pixels for areas of the image where the
  cheeks and lips usually are.
@@ -1609,20 +1642,16 @@ Transductive Support Vector Machine
 \end_layout
 
 \begin_layout Standard
-We compare our artificial neuronal network approach with an established
- semi-supervised method, the TSVM.
-\end_layout
-
-\begin_layout Standard
-Another (and older) semi-supervised algorithm is the Transductive Support
- Vector Machine, which, despite the name, supports transductive as well
- as inductive learning.
+(TODO: Cite TSVM here.
+ TSVM is mentioned in the wikipedia article 'semi-supervised learning'.)
+ We compare our artificial neuronal network approach with another, older,
+ and established semi-supervised method, the Transductive Support Vector
+ Machine (TSVM).
+ Despite the name, it supports transductive as well as inductive learning.
  A standard Support Vector Machine searches for a decision boundary such
  that the margin between samples with differing labels is maximal.
  The TSVM seeks a labeling of the unlabeled samples so that the decision
  boundary has the maximal margin between all samples with differing classes.
- TODO: Cite TSVM here.
- TSVM is mentioned in the wikipedia article 'semi-supervised learning'.
 \end_layout
 
 \begin_layout Subsection
@@ -1643,11 +1672,11 @@ status open
 
  AUTHORS_YEAR published work on compressing expression data into fewer dimension
 s on a large scale using deep learning.
- Input data were all genome-wide expression data from the GEO database of
- Affymetrix microarrays, which were partitioned into training, validation,
- and testing data sets.
+ Input data were all ~111,000 genome-wide expression profiles from the GEO
+ database of Affymetrix microarrays, which were partitioned into training,
+ validation, and testing data sets.
  For each sample, the same subset of 943 "landmark" genes was chosen and
- all the other genes were predicted from the landmark genes.
+ 9,520 other genes were predicted from the landmark genes.
 \end_layout
 
 \begin_layout Standard
@@ -1659,7 +1688,7 @@ Their artificial neuronal network architecture had between 1 and 3 hidden
 
 \begin_layout Standard
 In addition to the (non-linear) neuronal network, they tried linear regression
- with no regularization, l1-, and l2-regularization (to keep the weights
+ with no regularization, L1-, and L2-regularization (to keep the weights
  between input layer and output layer small).
 \end_layout
 
@@ -1685,7 +1714,7 @@ kNN
 \end_inset
 
 ).
- During training, they determined a number, 
+ In it, during training, they determined a number, 
 \begin_inset Formula $k$
 \end_inset
 
@@ -1762,10 +1791,10 @@ In another dataset, AUTHORS_YEAR used the GEO dataset for training, the
 \end_layout
 
 \begin_layout Standard
-Learning in this data set, where multiple input sources were combined, is
- therefore prone to the batch-effect.
- Nevertheless, the performance ranking of the methods is the same, but worse
- than the data set without batch-effect.
+Learning in this data set is harder since the input is from multiple sources,
+ and therefore prone to the batch-effect.
+ Nevertheless, the performance ranking of the methods was the same, but
+ worse than the data set without batch-effect.
  KNN scored worst, with an average prediction error of 0.6520.
  Linear regression with L1-regularization had an average prediction error
  of 0.5667.
@@ -1777,6 +1806,8 @@ Learning in this data set, where multiple input sources were combined, is
  error of 0.4393 (which is equivalent to a relative error of 4%).
  On the validation data set of this data set, the average prediction error
  was 0.7467, which is a relative error of 6.8%.
+ This shows that Artificial Neuronal Networks are capable of processing
+ input from multiple sources, with an acceptable gain in error.
 \end_layout
 
 \begin_layout Standard
@@ -1794,39 +1825,6 @@ oinformatics_btw074-supplementary.pdf, Figure S3, that there seem to be hub
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Personalized Medicine
-\end_layout
-
-\begin_layout Standard
-A medium-term goal of medicine is 
-\begin_inset Quotes eld
-\end_inset
-
-personalized medicine
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-personalized medicine
-\end_layout
-
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
-, whose goal is to provide custom-tailored health care for everyone on an
- individual basis.
- For example, a standard treatment for breast cancer is chemotherapy, but
- not all patients profit from this treatment.
- If there were a predictor that could tell the physicist how likely a patient
- is to benefit from chemotherapy, and if the chance for complete response
- to it is small, it could be replaced by another therapy.
- The goal of this work is to contribute to such a predictor.
 \end_layout
 
 \begin_layout Standard
