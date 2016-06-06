@@ -834,6 +834,8 @@ status open
 \align center
 \begin_inset Graphics
 	filename images/breast_cancer_12-smoothed_accuracy-aa.png
+	lyxscale 50
+	width 50page%
 
 \end_inset
 
@@ -865,10 +867,6 @@ smoothed curves used for model selection.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1295,8 +1293,8 @@ breast_cancer_0
 \end_layout
 
 \begin_layout Standard
-To evaluate the (lossy) compression potental of RBMs, an RBM was trained
- on GSE25055 and GSE25065.
+To evaluate the (lossy) compression potental of Restricted Boltzmann Machines,
+ an RBM was trained on GSE25055 and GSE25065.
  Both data sets were randomly split into training and test set, regardless
  of label, according to the scheme shown in table 
 \begin_inset CommandInset ref
@@ -1316,6 +1314,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="4" columns="4">
 <features rotate="0" tabularvalignment="middle">
@@ -1522,7 +1521,80 @@ Then the 10,000 most variable genes on GSE25055 were determined.
  (The decreasing was stochastic, i.e.
  some iterations had slightly higher reconstruction error than the one of
  the iteration before, but on average, the reconstruction error of both
- training and test set decreased.)
+ training and test set decreased.) 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/summer_school_2014-reconstruction-error-heatmap.png
+	lyxscale 50
+	width 30page%
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: (TODO: insert the 2 plots of the RBM training experiment in LISP whose
+ results are reported in ~/uni/publication/summer_school_2014/summer_school_2014.
+pdf on slide 17.) -> also include the boxplot here, when I find it.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Left: True (x-axis) versus reconstructed (y-axis) expression values of data
+ set breast_cancer_0.
+ The heatmap shows pixels from red over yellow to white.
+ A pixel in red means zero genes and in white means many genes that have
+ the pixel's true and reconstructed expression value.
+ Right: TODO
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: include the two images here
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1532,12 +1604,6 @@ Although the 10,000 numbers were compressed into only 50 numbers, the mean
  to a relative error of 2%.
  This demonstrated that RBMs are able to reduce dimensionality of a high-dimensi
 onal data set while preserving most information.
-\end_layout
-
-\begin_layout Standard
-(TODO: insert the 2 plots of the RBM training experiment in LISP whose results
- are reported in ~/uni/publication/summer_school_2014/summer_school_2014.pdf
- on slide 17.)
 \end_layout
 
 \begin_layout Paragraph
@@ -2212,8 +2278,9 @@ name "tab:training-and-validation-sets-of-breast_cancer_06"
 \end_inset
 
 Sample distribution of training and validation sets of data set breast_cancer_06.
- There are less and less labeled training and validation samples for the
- 5 defined data sets, for each of which there are 5 subsampled repetitions.
+ There are less and less labeled training and validation samples from GSE25055
+ for the 5 defined data sets, for each of which there are 5 subsampled repetitio
+ns.
  Note that the number of samples is not balanced between label 0 and label
  1 samples.
 \end_layout
@@ -2480,7 +2547,7 @@ name "tab:Testing-set-for-breast_cancer_06"
 
 \end_inset
 
-Testing set for data set breast_cancer_06.
+Testing set for data set breast_cancer_06 is taken from GSE25065.
 \end_layout
 
 \end_inset
@@ -2500,7 +2567,17 @@ on using a pre-trained RBM, back-propagation using a pre-trained autoencoder,
 \end_layout
 
 \begin_layout Standard
-(TODO: accuracy plots für SVM und TSVM machen und hier einfügen.)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(probably not TODO (since I didn't compute SVM and TSVM models for breast_cancer
+_06 yet): accuracy plots für SVM und TSVM machen und hier einfügen.)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -4712,6 +4789,8 @@ name "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 Settings for the classifiers breast_cancer_04_aa - ad.
  Each classifier is initialized using an unsupervisedly pre-trained RBM,
  and trained supervisedly on data set breast_cancer_06.
+ No entry in a cell means that it has the same value as the cell to the
+ left.
  The only difference between the four configurations is the hidden layer
  1 size (
 \begin_inset Formula $dimensions$
@@ -4722,8 +4801,6 @@ Settings for the classifiers breast_cancer_04_aa - ad.
 \end_inset
 
 ).
- No entry in a cell means that it has the same value as the cell to the
- left.
 \end_layout
 
 \end_inset
@@ -7296,6 +7373,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="9" columns="6">
 <features rotate="0" tabularvalignment="middle">
@@ -8114,6 +8192,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="10">
 <features rotate="0" tabularvalignment="middle">
@@ -13757,6 +13836,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="7" columns="9">
 <features rotate="0" tabularvalignment="middle">
@@ -15107,6 +15187,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="2" columns="9">
 <features rotate="0" tabularvalignment="middle">
@@ -15518,6 +15599,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="31" columns="9">
 <features rotate="0" tabularvalignment="middle">
@@ -20619,6 +20701,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="16" columns="9">
 <features rotate="0" tabularvalignment="middle">
