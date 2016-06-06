@@ -78,7 +78,7 @@ Originally we wanted to find a data set that had something to do with drug
  sensitivity and resistance.
  Therefore a GEO (TODO: cite GEO) database search was conducted.
  All data sets uploaded to GEO between January 1st 2000, and August 31st
- 2013 were considered and searched for 
+ 2013 were considered and their titles and abstracts searched for 
 \begin_inset Quotes eld
 \end_inset
 
@@ -95,8 +95,8 @@ resist
 \end_inset
 
 .
- The ones having a match in title or abstract were sorted by the number
- of samples in the data set.
+ The ones having a match were sorted by the number of samples in the data
+ set.
  GSE25055 and GSE25065 were among those that really had something to do
  with drug sensitivity and had a relatively high sample count.
 \end_layout
@@ -132,12 +132,6 @@ RD
  The classifier was then tested on an independently measured data set, GSE25065.
  The classifier's performance was tested based on (TODO: review something
  about the results of the GSE25055 paper by Hatzis & Symmans).
-\end_layout
-
-\begin_layout Standard
-(TODO: hier eine Tabelle mit Anzahl an Samples in GSE25055 und GSE25065
- einfügen.
- Label 0 und label 1 samples)
 \end_layout
 
 \begin_layout Standard
@@ -576,13 +570,16 @@ As we will see, none of the attempts with artificial neuronal networks showed
  However, also TSVM did not show improvement when adding unlabeled data
  to training.
  We therefore think that it is probably the fault of the data set.
- Contrary to the data sets (hand-written digit classification and graphical
- object recognition) on which the discussed artificial neuronal networks
+ Contrary to the hand-written digit classification and graphical object
+ recognition data sets on which the discussed artificial neuronal networks
  were developed, and on which they are among the best-performing predictors,
- expression data sets have sizes which are several magnitudes smaller.
+ expression data sets differ in two aspects: their dimensionality is a higher
+ (~1000 pixels versus ~20,000 genes), but the training set sizes are several
+ magnitudes smaller (tenthousands versus hundreds).
  This is probably due to the price of microarrays (and RNASeq), which is
- magnitudes larger than the price to take pictures of hand-written digits
- or objects.
+ magnitudes larger (hundreds of Euros or dollars) than the price to take
+ and label pictures of hand-written digits or objects (ubiquitous on the
+ internet).
 \end_layout
 
 \begin_layout Paragraph
@@ -597,7 +594,7 @@ deepnet
 deepnet
 \emph default
  (TODO: cite) is a neuronal network implementation written by Nitish Srivastava
- and uses a matrix library written by Krishevski (TODO: oder so).
+ and uses a matrix library written by Vlad Mnih and Alex Krizhevsky.
  It can run on NVIDIA graphics cards supporting CUDA.
  Due to graphics cards having a highly parallel architecture, this means
  faster training times.
@@ -611,14 +608,19 @@ deepnet
 \emph default
  loads all data sets at the beginning of computation onto the graphics card,
  this means that the data sets may not be larger than 4 GB.
- However, as mentioned, the matrix library can also run on the normal floating-p
-oint unit of normal CPU.
- There was a bug in 
-\emph on
-deepnet
-\emph default
- when run on 64-bit CPUs, which I fixed.
- (TODO: include the bugfix here).
+ However, there is another matrix library (with the same interface), which
+ runs on the normal floating-point unit of normal CPU.
+ There was a bug in this library when run on 64-bit CPUs, which I fixed
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(maybe TODO: include the bugfix here?)
+\end_layout
+
+\end_inset
+
+.
  Most of the data sets were trained on rhskl11, which has 128GB of RAM (TODO:
  or 256GB?), which was more than enough for the data sets tested.
 \end_layout
@@ -692,9 +694,22 @@ knows
 \end_inset
 
  about the unlabeled samples.
- The learning rate of the second training run should be small enough not
- to diverge from the unlabeled training configuration in too large steps
- (per iteration).
+ The learning rate of the second training (
+\emph on
+fine-tuning
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fine-tuning
+\end_layout
+
+\end_inset
+
+) run should be small enough not to diverge from the unlabeled training
+ configuration in too large steps (per iteration).
 \end_layout
 
 \begin_layout Paragraph
@@ -702,15 +717,37 @@ Training Iterations and Evaluations
 \end_layout
 
 \begin_layout Standard
-We trained for a pre-determined number of iterations (/deepnet/ setting
- /stopcondition.steps/ in train.pbtxt), often 1,000,000 iterations, and usually
- evaluated the neuronal network after every 500 iterations (/deepnet/ setting
- /eval_after/ in train.pbtxt).
+We trained for a pre-determined number of iterations, often 1,000,000 iterations
+ (
+\emph on
+deepnet
+\emph default
+ setting 
+\emph on
+stopcondition.steps
+\emph default
+ in train.pbtxt), and usually evaluated the neuronal network after every
+ 500 iterations (
+\emph on
+deepnet
+\emph default
+ setting 
+\emph on
+eval_after
+\emph default
+ in train.pbtxt).
  Evaluation means computing the training set, validation set, and testing
  set reconstruction error (in unsupervised training) or accuracy (in supervised
  training).
- The neuronal network itself was usually saved every 10,000 iterations (/deepnet
-/ setting /checkpoint_after/ in train.pbtxt).
+ The neuronal network itself was usually saved every 10,000 iterations (
+\emph on
+deepnet
+\emph default
+ setting 
+\emph on
+checkpoint_after
+\emph default
+ in train.pbtxt).
 \end_layout
 
 \begin_layout Paragraph
@@ -11823,18 +11860,22 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
+
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_learn ./input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
+
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
