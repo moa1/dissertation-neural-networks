@@ -68,6 +68,20 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Maybe this list is not summary of results, but considered as items
+ for the discussion part of the dissertation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Itemize
 Das was meine Arbeit von anderen abhebt (und was meines Wissens nach neu
  ist), ist, dass ich direkt auf Expressionsdaten neuronale Netze trainiere,
