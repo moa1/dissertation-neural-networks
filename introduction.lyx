@@ -1138,29 +1138,32 @@ autoassociator
 tric counterpart, the decoder network.
  The encoder starts in the first iteration as a network that consists of
  the input layer and one hidden layer on top.
- The decoder network consists of the very same hidden layer and the output
- layer on top, which must have the same dimensions as the input layer.
+ The (overlapping) decoder network consists of the very same hidden layer
+ and the output layer on top, which must have the same dimensions as the
+ input layer.
 \end_layout
 
 \begin_layout Standard
-When training this first iteration of the network, standard back-propagation
- is used to adapt the weights between input layer and hidden layer and between
- hidden layer and output layer so that the network reconstructs its input
- patterns as the output patterns (i.e.
- the values of the nodes in the output layer).
- The input patterns are taken from the training data set.
- Usually the number of nodes in the hidden layer is chosen to be smaller
- than the number of nodes in the input (and output) layer.
- In this way the autoassociator learns to reconstruct its input from a compresse
-d representation.
+When training this first iteration of the network, the input patterns are
+ taken from the training data set.
+ Standard back-propagation is used to adapt the weights between input layer
+ and hidden layer and between hidden layer and output layer.
+ The goal of training is that the network reconstructs as output patterns
+ the input patterns.
+ You might think that that is too easy, but usually the number of nodes
+ in the hidden layer is chosen to be smaller than the number of nodes in
+ the input (and output) layer.
+ In this way the autoassociator is forced to reconstruct its input from
+ a compressed representation.
  (TODO: hier ein Bild eines autoassociator networks.) Once back-propagation
  does not improve the reconstruction error on the test set anymore, the
  second iteration starts.
 \end_layout
 
 \begin_layout Standard
-In the second iteration, the encoder network is enlarged by an additional
- hidden layer put on top of its existing 1st hidden layer.
+In the second iteration, both encoder and decoder are extended by one layer.
+ The encoder network is enlarged by an additional hidden layer put on top
+ of its existing 1st hidden layer.
  The weights between the 1st and 2nd (new) hidden layer are initialized
  randomly.
  The biases of the nodes in the 2nd (new) hidden layer are also initialized
@@ -1332,8 +1335,8 @@ Regularizations for Training Artificial Neuronal Networks
 Several regularization methods have been developed over the years.
  They have in common that they artificially constrain the search space of
  weights and biases in order to let the model find better error minima or
- to prevent overfitting, that means that the neuronal network does less
- 
+ to prevent overfitting.
+ The neuronal network should do less 
 \begin_inset Quotes eld
 \end_inset
 
