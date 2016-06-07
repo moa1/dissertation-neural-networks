@@ -9686,7 +9686,6 @@ Reconstruction error for differently normalized data.
  The numbers are rounded to two significant digits.
  MAS5 normalization is indicated by italic font style, and COMBAT batch
  effect correction is in the lower half of the table.
- (TODO: transpose this table, otherwise it doesn't fit on paper.)
 \end_layout
 
 \end_inset
@@ -9762,6 +9761,10 @@ After pre-training, the artificial neuronal networks are fine-tuned using
 
 \begin_layout Subsection
 Supervised classification with unsupervised pre-trained autoencoder
+\end_layout
+
+\begin_layout Standard
+The architecture of the classifier network was 500-1000-2.
 \end_layout
 
 \begin_layout Standard
@@ -9944,7 +9947,7 @@ reference "tab:Mean-accuracies-for-each-normalization"
 
 \end_inset
 
- for such a table.
+.
 \end_layout
 
 \begin_layout Standard
@@ -10062,7 +10065,7 @@ data set
 \begin_inset Text
 
 \begin_layout Plain Layout
-rma-data.pbtxt
+rma
 \end_layout
 
 \end_inset
@@ -10109,7 +10112,7 @@ rma-data.pbtxt
 \begin_inset Text
 
 \begin_layout Plain Layout
-mas5-data.pbtxt
+mas5
 \end_layout
 
 \end_inset
@@ -10156,7 +10159,7 @@ mas5-data.pbtxt
 \begin_inset Text
 
 \begin_layout Plain Layout
-rma_combat-data.pbtxt
+rma,combat
 \end_layout
 
 \end_inset
@@ -10203,7 +10206,7 @@ rma_combat-data.pbtxt
 \begin_inset Text
 
 \begin_layout Plain Layout
-mas5_combat-data.pbtxt
+mas5,combat
 \end_layout
 
 \end_inset
@@ -10280,7 +10283,7 @@ It shows the following:
 \end_layout
 
 \begin_layout Itemize
-rma-data.pbtxt (i.e.
+RMA alone (i.e.
  without Combat pre-processing) out-performs all other tested combinations
  of normalization method and pre-processing in all data sets tested.
 \end_layout
@@ -10380,7 +10383,11 @@ Data set design
 Following the same arguments as in creating data set breast_cancer_08, we
  aimed for the following properties.
  All training/validation data sets should have an equal number of 0/1 samples,
- otherwise deepnet's predictions are biased towards the larger group.
+ otherwise 
+\emph on
+deepnet
+\emph default
+'s predictions are biased towards the larger group.
  Samples used in the unlabeled training/validation data set are also used
  for labeled training/validation, otherwise there are not enough samples.
 \end_layout
@@ -10403,7 +10410,8 @@ The labeled samples are held constant across all 6 data sets within one
  repetition.
  This is to be able to directly compare performance e.g.
  between data set 1 and 3.
- The difference between data set 1 and 3 is only the unlabeled pre-training.
+ The difference between data set 1 and 3 is only the unlabeled pre-training
+ data.
 \end_layout
 
 \begin_layout Standard
@@ -12923,18 +12931,22 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
+
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_learn ./input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
+
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
@@ -13116,15 +13128,15 @@ This can be quantified using a paired and two-sided Wilcoxon test.
 
 \begin_layout Standard
 By experiment we mean the predictions that are stored in the accuracies
- in 
+ in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Accuracy-comparison-of-breast_cancer_12"
 
 \end_inset
 
- when keeping constant the prediction method and sub-data-set of breast_cancer_1
-2, but varying the repetition.
+ when keeping the prediction method and sub-data-set of breast_cancer_12
+ constant, but varying the repetition.
  This means there are 1 FFN, 5 DBN, 1 SVM, and 6 TSVM experiments.
 \end_layout
 
@@ -13139,9 +13151,9 @@ fishing for significance
 \begin_inset Quotes erd
 \end_inset
 
-, and we would have to correct the significances for multiple testing.
+, and we would have to correct the p-values for multiple testing.
  If comparing all against all, there are 
-\begin_inset Formula $(1+5+1+6)^{2}=169$
+\begin_inset Formula $(1+5+1+6)*(1+5+1+6-1)/2=78$
 \end_inset
 
  comparisons, and we would lose a lot of power due to comparisons that are
@@ -24255,10 +24267,21 @@ r(h,t) & = & \frac{22283*t}{22283*h+h*h+h*h+h*o}
 \begin_inset Formula $r(h,t)$
 \end_inset
 
- is:
-\end_layout
+ is shown in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:breast_cancer_12-number-r"
 
-\begin_layout Standard
+\end_inset
+
+.
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="7">
 <features rotate="0" tabularvalignment="middle">
@@ -24613,12 +24636,31 @@ data set
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:breast_cancer_12-number-r"
+
+\end_inset
+
+The number r (see text) for 10 hidden nodes in data set breast_cancer_12.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 As the 
 \begin_inset Formula $r$
 \end_inset
 
-s in the table above are around 20 (for data set 6), both for 
+s in the table are around 20 (for data set 6), both for 
 \begin_inset Formula $t_{quad}$
 \end_inset
 
