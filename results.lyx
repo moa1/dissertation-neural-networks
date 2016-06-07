@@ -69,7 +69,11 @@
 
 \begin_body
 
-\begin_layout Paragraph
+\begin_layout Section
+General Remarks
+\end_layout
+
+\begin_layout Subsection
 Reasons for choosing GSE25055 and GSE25065 as the data set
 \end_layout
 
@@ -512,7 +516,7 @@ pathologic complete response
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Goal of this work
 \end_layout
 
@@ -570,19 +574,19 @@ As we will see, none of the attempts with artificial neuronal networks showed
  However, also TSVM did not show improvement when adding unlabeled data
  to training.
  We therefore think that it is probably the fault of the data set.
- Contrary to the hand-written digit classification and graphical object
- recognition data sets on which the discussed artificial neuronal networks
- were developed, and on which they are among the best-performing predictors,
- expression data sets differ in two aspects: their dimensionality is a higher
- (~1000 pixels versus ~20,000 genes), but the training set sizes are several
- magnitudes smaller (tenthousands versus hundreds).
+ In the hand-written digit classification and graphical object recognition
+ data sets on which the discussed artificial neuronal networks were developed,
+ they are among the best-performing predictors.
+ Expression data sets differ from these data sets in two aspects: their
+ dimensionality is higher (~1000 pixels versus ~20,000 genes), but the training
+ set sizes are several magnitudes smaller (tenthousands versus hundreds).
  This is probably due to the price of microarrays (and RNASeq), which is
  magnitudes larger (hundreds of Euros or dollars) than the price to take
- and label pictures of hand-written digits or objects (ubiquitous on the
- internet).
+ and label pictures of hand-written digits or objects (images ubiquitous
+ on the internet, and relatively cheap manual or computer-assisted labeling).
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Issues in running 
 \emph on
 deepnet
@@ -625,7 +629,7 @@ status open
  or 256GB?), which was more than enough for the data sets tested.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 How unlabeled data was used in training Auto-Encoders
 \end_layout
 
@@ -712,7 +716,7 @@ fine-tuning
  configuration in too large steps (per iteration).
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Training Iterations and Evaluations
 \end_layout
 
@@ -750,7 +754,7 @@ checkpoint_after
  in train.pbtxt).
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Model selection
 \end_layout
 
@@ -878,29 +882,33 @@ smoothed curves used for model selection.
 \begin_layout Standard
 Note that this procedure allows reporting test set accuracies which seem
  impossible.
- For example in a test set with 10 members, only an accuracy in {0, 0.1,
+ For example in a test set with 10 samples, only an accuracy in {0, 0.1,
  0.2, ..., 1} would seem possible, but smoothing allows all rational numbers
  between 0 and 1 to be returned as accuracy.
 \end_layout
 
 \begin_layout Paragraph
-How unlabeled data was used when pre-training a Restricted Boltzmann Machine
- and fine-tuning using back-propagation
+(TODO: How unlabeled data was used when pre-training a Restricted Boltzmann
+ Machine and fine-tuning using back-propagation)
 \end_layout
 
 \begin_layout Paragraph
-How unlabeled data was used in training Deep Belief Networks
+(TODO: How unlabeled data was used in training Deep Belief Networks)
 \end_layout
 
-\begin_layout Paragraph
-Settings for 
+\begin_layout Subsection
+Initial Training Trials
+\end_layout
+
+\begin_layout Subparagraph
+(TODO: Settings for 
 \emph on
 deepnet
 \emph default
- that work with the breast cancer data set
+ that work with the breast cancer data set)
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Learn rate: 
 \emph on
 
@@ -928,9 +936,8 @@ deepnet
 .
  It controls by what factor the gradient of each weight is multiplied with
  to influence the parameters of the neuronal network in the next iteration.
- If it is too large, the neuronal network will oscillate and make too large
- steps between iterations, so that it will not be able to ascend an energy
- optimum.
+ If it is too large, the neuronal network will alter weights in too large
+ steps and oscillate, so that it will not be able to ascend an energy optimum.
  If it is too small, learning will take too long.
 \end_layout
 
@@ -946,6 +953,7 @@ The following settings for
  were tried: 1.0, 0.1, 0.01, 0.001, 0.0001.
  An example of the reconstruction error reached for various learning rates
  is shown in the following table.
+ In this case, 0.01 was a good tradeoff between accuracy and speed.
 \end_layout
 
 \begin_layout Standard
@@ -1270,6 +1278,9 @@ min T_E
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -1283,12 +1294,16 @@ status open
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 (TODO: describe here all tested features of deepnet and illustrate with
  results from .../nnet/notes/.)
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Section
+Unsupervised Reconstruction of Expression Values
+\end_layout
+
+\begin_layout Subsection
 breast_cancer_0
 \end_layout
 
@@ -1600,14 +1615,18 @@ TODO: include the two images here
 \begin_layout Standard
 Although the 10,000 numbers were compressed into only 50 numbers, the mean
  reconstruction error of the 10,000 genes was only 0.33.
- Considering that microarray have log-intensities in [0;16], this is equivalent
+ Considering that microarrays have log-intensities in [0;16], this is equivalent
  to a relative error of 2%.
  This demonstrated that RBMs are able to reduce dimensionality of a high-dimensi
 onal data set while preserving most information.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_06: Increasing number of labeled samples
+\begin_layout Section
+Increasing Prediction Quality with Increasing Number of labeled samples
+\end_layout
+
+\begin_layout Subsection
+Increasing number of labeled samples (breast_cancer_06)
 \end_layout
 
 \begin_layout Standard
@@ -2561,9 +2580,10 @@ Testing set for data set breast_cancer_06 is taken from GSE25065.
 \end_layout
 
 \begin_layout Standard
-Models of data set breast_cancer_06 were trained using SVM, TSVM, back-propagati
-on using a pre-trained RBM, back-propagation using a pre-trained autoencoder,
- and back-propagation without pre-training.
+Models of data set breast_cancer_06 were trained using back-propagation
+ using a pre-trained RBM, and back-propagation using a pre-trained autoencoder.
+ The settings for unsupervised pre-training are as follows in the next paragraph
+s.
 \end_layout
 
 \begin_layout Standard
@@ -2575,13 +2595,41 @@ status open
 _06 yet): accuracy plots für SVM und TSVM machen und hier einfügen.)
 \end_layout
 
+\begin_layout Plain Layout
+I did compute models without pre-training (
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+named breast_cancer_06_ai, breast_cancer_06_aj
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ in notes/breast_cancer_06/breast_cancer_06.lyx), but didn't plot them yet.
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_04_bg - bj: unsupervised pre-training
+\begin_layout Subsubsection
+Unsupervised pre-training using RBM (breast_cancer_04_bg - bj)
 \end_layout
 
 \begin_layout Standard
@@ -2597,6 +2645,15 @@ reference "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
  Unsupervised training was done on data set breast_cancer_02, which consists
  of (TODO: look up whether I'm correct in guessing that breast_cancer_02
  consists of all GSE25055 samples).
+ The corresponding reconstruction errors at the input layer are shown in
+ figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3570,7 +3627,7 @@ name "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
 
 \end_inset
 
-Settings for pre-training RBMs breast_cancer_04_bg - bj.
+Settings for unsupervised pre-training RBMs breast_cancer_04_bg - bj.
  No entry in a cell means that it has the same value as the cell to the
  left.
 \end_layout
@@ -3583,18 +3640,6 @@ Settings for pre-training RBMs breast_cancer_04_bg - bj.
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-The corresponding reconstruction errors at the input layer are shown in
- figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -3641,9 +3686,9 @@ _04_bg, bh, bi, bj.
 
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_06_aa - ad: supervised classification with unsupervisedly
- pre-trained RBM
+\begin_layout Subsubsection
+Supervised classification with unsupervisedly pre-trained RBM (breast_cancer_06_
+aa - ad)
 \end_layout
 
 \begin_layout Standard
@@ -3655,8 +3700,8 @@ reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 \end_inset
 
 .
- Note that the only differences are the number of nodes in hidden layer
- 1 (setting 
+ Note that the only differences between network settings in different trials
+ are the number of nodes in hidden layer 1 (setting 
 \begin_inset Formula $dimensions$
 \end_inset
 
@@ -4826,8 +4871,7 @@ For each of the
 \begin_inset Formula $4$
 \end_inset
 
- differently pre-trained RBMs, the a supervisedly trained classifier was
- trained.
+ differently pre-trained RBMs, a classifier was trained supervisedly.
  So altogether 
 \begin_inset Formula $5*5*4=100$
 \end_inset
@@ -4898,18 +4942,889 @@ Surprisingly, the neuronal network accuracies do not improve with increasing
  perform worst.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_06_ae - ah: supervised classification with unsupervised pre-traine
-d autoencoder
+\begin_layout Subsubsection
+Unsupervised pre-training using autoencoder (breast_cancer_03_ai, _03_al,
+ _03_am, _03_ao)
+\end_layout
+
+\begin_layout Standard
+Settings for unsupervised pre-training of the autoencoders are given in
+ table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:deepnet-settings-for-breast_cancer_03_ai,_al,_am,_ao"
+
+\end_inset
+
+.
+ The only differences between the models are in 
+\begin_inset Formula $base\mbox{\_}epsilon$
+\end_inset
+
+ and 
+\begin_inset Formula $activation$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="16" columns="5">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+network instance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+_03_ai
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+_03_al
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+_03_am
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+_03_ao
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+network setting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $base\textrm{\_}epsilon$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.01
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.01
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $activation$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LOGISTIC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RECTIFIED_LINEAR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LOGISTIC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $initial\textrm{\_}momentum$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $final\_momentum$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.99
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $momentum\textrm{\_}change\textrm{\_}steps$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dropout$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+true
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dropout\textrm{\_}prob$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $apply\textrm{\_}l2\textrm{\_}decay$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+false
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $l2\textrm{\_}decay$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+input layer setting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dimensions$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dropout\textrm{\_}prob$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+hidden layer 1 setting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+value
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $dimensions$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:deepnet-settings-for-breast_cancer_03_ai,_al,_am,_ao"
+
+\end_inset
+
+Settings for the unsupervised pre-training autoencoders breast_cancer_03_ai,
+ _03_al, _03_am, _03_ao.
+ No entry in a cell means that it has the same value as the cell to the
+ left.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Supervised classification with unsupervised pre-trained autoencoder (breast_canc
+er_06_ae - ah)
 \end_layout
 
 \begin_layout Standard
 When training a neuronal network using back-propagation that was pre-trained
- using auto-encoder, the resulting accuracy plots look similar to the ones
- when pre-training with an RBM (plots not shown).
+ using one of the auto-encoders breast_cancer_03_ai, _03_al, _03_am, _03_ao,
+ the resulting accuracy plots look similar to the ones when pre-training
+ with an RBM (plots not shown).
+ This seems to imply that the difficulty of the repetition rather than the
+ prediction quality differences between RBM and autoencoder are mirrored
+ in the accuracy differences.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Standard
+(TODO: settings erklären?)
+\end_layout
+
+\begin_layout Subsubsection
 Examining the output of breast_cancer_06_aa/_n302_cv1
 \begin_inset CommandInset label
 LatexCommand label
@@ -4924,11 +5839,8 @@ name "par:Examining-biased-classifier"
 However, when examining the predictions of model breast_cancer_06_aa/_n302_cv1
  (the first network pre-trained on 302 samples), it becomes evident that
  the training is sub-optimal, because label 0 is predicted almost exclusively.
-\end_layout
-
-\begin_layout Standard
-The step at which the network performs best on the validation data set is
- 95,500.
+ The step at which the network performs best on the validation data set
+ is 95,500.
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5104,9 +6016,9 @@ There is a heavy bias in favor of label 0.
  Therefore, the next data set was balanced in this regard.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_07: Increasing number of labeled samples, with equal number
- of class labels
+\begin_layout Subsection
+Increasing number of labeled samples, with equal number of class labels
+ (breast_cancer_07)
 \end_layout
 
 \begin_layout Standard
@@ -5115,10 +6027,8 @@ To check whether the artificial neuronal networks work at all, we created
  a decreasing number of labeled samples.
  In contrast to data set breast_cancer_06, each data set contains as many
  label 0 samples as label 1 samples.
-\end_layout
-
-\begin_layout Standard
-The testing data set is still all GSE25065 samples, see table 
+ The testing data set exclusively consists of GSE25065 samples, see table
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Testing-set-for-breast_cancer_06"
@@ -5812,8 +6722,8 @@ _cancer_07/breast_cancer_07.lyx einfügen, ein plot pro algorithmus.)(TODO:
 breast_cancer_07/breast_cancer_07.lyx einfügen.)
 \end_layout
 
-\begin_layout Paragraph
-SVM accuracy on breast_cancer-07
+\begin_layout Subsubsection
+SVM Accuracies
 \end_layout
 
 \begin_layout Standard
@@ -5872,8 +6782,8 @@ reference "fig:Accuracy-bar-plots-of-SVM-on-breast_cancer_07"
  the testing set to predict on.
 \end_layout
 
-\begin_layout Paragraph
-TSVM performance
+\begin_layout Subsubsection
+TSVM Accuracies
 \end_layout
 
 \begin_layout Standard
@@ -5897,9 +6807,9 @@ See ~/uni/nnet/notes/breast_cancer_07/svmlight-performance.
 TODO: create accuracy plots like for SVM.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_07_aa - ad: supervised classification with unsupervised pre-traine
-d RBM
+\begin_layout Subsubsection
+Supervised classification with unsupervised pre-trained RBM (breast_cancer_07_aa
+ - ad)
 \end_layout
 
 \begin_layout Standard
@@ -5972,18 +6882,19 @@ Accuracy bar plots of a feed-forward neuronal network pre-trained with an
 
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_07_ae - ah: supervised classification with unsupervised pre-traine
-d autoencoder
+\begin_layout Subsubsection
+Supervised classification with unsupervised pre-trained autoencoder (breast_canc
+er_07_ae - ah)
 \end_layout
 
 \begin_layout Standard
-(TODO: settings erklären?)
-\end_layout
-
-\begin_layout Standard
-Pre-training with an autoencoder yields similar accuracy plots to pre-training
- with an RBM, as is shown in figure 
+The settings for 
+\emph on
+deepnet 
+\emph default
+training were as those for breast_cancer_06_ae - ah.
+ The results were that pre-training with an autoencoder yields similar accuracy
+ plots to pre-training with an RBM, as is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ae-ah"
@@ -6037,13 +6948,12 @@ Accuracy bar plots of a feed-forward neuronal network pre-trained with an
 
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_07_ai - aj: Supervised classification without pre-training
+\begin_layout Subsubsection
+Supervised classification without pre-training (breast_cancer_07_ai - aj)
 \end_layout
 
 \begin_layout Standard
-Finally, in breast_cancer_07 we trained the neuronal networks with no pre-traini
-ng at all.
+Finally, we trained the neuronal networks with no pre-training at all.
  The 
 \emph on
 deepnet
@@ -6904,7 +7814,7 @@ r_07 are lower than those on breast_cancer_06, indicating the higher difficulty
  of the classification task when the labels are balanced.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Examining the output of breast_cancer_07_aa/_n090_cv1
 \end_layout
 
@@ -7096,40 +8006,11 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
+<lyxtabular version="3" rows="3" columns="3">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-true
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
@@ -7144,7 +8025,7 @@ true
 \begin_inset Text
 
 \begin_layout Plain Layout
-label 0
+true label 0
 \end_layout
 
 \end_inset
@@ -7153,7 +8034,7 @@ label 0
 \begin_inset Text
 
 \begin_layout Plain Layout
-label 1
+true label 1
 \end_layout
 
 \end_inset
@@ -7274,6 +8155,10 @@ reference "fig:Histogram-of-probabilities-of-breast_cancer_07"
 \end_inset
 
 .
+ The histogram shows that the probabilities for the true class of mis-classified
+ samples are not mostly near 0.5, but in the middle of the possible range.
+ (0.5 is the maximum probability, otherwise the sample would not be mis-classifie
+d.)
 \end_layout
 
 \begin_layout Standard
@@ -7320,15 +8205,8 @@ n090_cv1.
 
 \end_layout
 
-\begin_layout Standard
-The histogram shows that the probabilities for the true class of mis-classified
- samples are not mostly near 0.5, but in the middle of the possible range.
- (0.5 is the maximum probability, otherwise the sample would not be mis-classifie
-d.)
-\end_layout
-
-\begin_layout Paragraph
-breast_cancer_08: Different normalizations
+\begin_layout Section
+Different normalizations (breast_cancer_08)
 \end_layout
 
 \begin_layout Standard
@@ -7336,6 +8214,10 @@ The data set breast_cancer_08 was created to search for normalizations that
  are beneficial to pre-training and classification.
  To achieve that goal, GSE25055 and GSE25065 build data sets with a constant
  number of labeled samples and an increasing number of unlabeled samples.
+\end_layout
+
+\begin_layout Subsection
+Data set design
 \end_layout
 
 \begin_layout Standard
@@ -7974,7 +8856,7 @@ TODO: FIXME: How can there be 58 label 0 samples, if GSE25055 has only 57
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Normalizations
 \end_layout
 
@@ -8176,13 +9058,8 @@ sub:bb_ic-Reconstruction-error-plots
 .)
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_08: Reconstruction Error
-\end_layout
-
-\begin_layout Standard
-Before looking at the accuracies of the supervised classifier, we look at
- unsupervised pre-training.
+\begin_layout Subsection
+Unsupervised Reconstruction Error in Pre-training
 \end_layout
 
 \begin_layout Standard
@@ -9117,11 +9994,9 @@ n error.
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-The reconstruction error for each normalization is shown in table 
+Before looking at the accuracies of the supervised classifier, we look at
+ unsupervised pre-training.
+ The reconstruction error for each normalization is shown in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Reconstruction-error-for-breast_cancer_08"
@@ -9183,9 +10058,8 @@ After pre-training, the artificial neuronal networks are fine-tuned using
  measured.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_08: supervised classification with unsupervised pre-trained
- autoencoder
+\begin_layout Subsection
+Supervised classification with unsupervised pre-trained autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -9353,7 +10227,7 @@ Box-plot for neuronal network prediction pre-trained with an autoencoder
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Different normalizations
 \end_layout
 
@@ -9719,7 +10593,7 @@ Using Combat as pre-processing leads to worse accuracies on the RMA-normalized
  data, but improves accuracies when using MAS5 (except in data set 3).
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 ZCA normalization
 \end_layout
 
@@ -9737,7 +10611,7 @@ We also tried applying ZCA normalization after all 4 normalizations tried
  why this does not help in expression data.)
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Does adding unlabeled samples help in semi-supervised neuronal network training?
 \end_layout
 
@@ -9792,8 +10666,12 @@ A flaw in the design of the data sets of breast_cancer_08 is that the number
  training samples.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_12: data set design
+\begin_layout Section
+More repeats for statistical power (breast_cancer_12)
+\end_layout
+
+\begin_layout Subsection
+Data set design
 \end_layout
 
 \begin_layout Standard
@@ -9813,7 +10691,7 @@ There are the following differences between breast_cancer_12 and breast_cancer_0
  multiple hidden layers in a DBN.
  The normalization is only RMA (without ComBat), because it performed best
  in data set breast_cancer_08.
- There are 20 repetitions for each data set.
+ There are 20 instead of 5 repetitions for each data set.
  The repetitions are made by selecting the samples at random from the eligible
  samples.
 \end_layout
@@ -12249,7 +13127,7 @@ reference "tab:design-of-breast_cancer_12"
  describes the 6 data sets of breast_cancer_12.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 DBN training
 \end_layout
 
@@ -12324,8 +13202,8 @@ eval_after: 500
  the validation data set very early in training.
 \end_layout
 
-\begin_layout Paragraph
-TSVM: Use both training and validation data sets for training
+\begin_layout Subsection
+Use both training and validation data sets for training TSVMs
 \end_layout
 
 \begin_layout Standard
@@ -12362,12 +13240,8 @@ echo "classifying testing data"
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_12: 
-\emph on
-deepnet 
-\emph default
-results
+\begin_layout Subsection
+Comparison of Neuronal Networks with Support Vector Machines
 \end_layout
 
 \begin_layout Standard
@@ -12590,7 +13464,7 @@ reference "fig:Accuracy-comparison-of-breast_cancer_12"
  We adjust the p-values within each comparison only.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Comparison FFN versus DBN
 \end_layout
 
@@ -13812,7 +14686,7 @@ The lowest adjusted p-value is 0.637, which means there is no significant
  difference between FFN and DBN.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Comparison SVM versus TSVM
 \end_layout
 
@@ -15162,7 +16036,7 @@ The lowest adjusted p-value is 0.158 between SVM and TSVM on data set 1.
  Some people consider this significant.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Comparison FFN versus SVM
 \end_layout
 
@@ -15574,7 +16448,7 @@ reference "tab:breast_cancer_12-FFN-versus-DBN"
 The p-value is 0.926 and not significant.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Comparison DBN versus TSVM
 \end_layout
 
@@ -20674,7 +21548,7 @@ The result that the TSVM is better than the DBN on data set 1, and not on
  is better than one on less unlabeled samples.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Comparison TSVM versus TSVM
 \end_layout
 
@@ -23408,8 +24282,8 @@ The lowest adjusted p-value is 0.098 between data set 1 and data set 6.
  data to the semi-supervised TSVM is beneficial to the prediction accuracy.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_15: higher ratio of training numbers to network parameters
+\begin_layout Section
+Higher ratio of training numbers to network parameters (breast_cancer_15)
 \end_layout
 
 \begin_layout Standard
@@ -23417,6 +24291,10 @@ Since breast_cancer_12 has a negative result in summary, we designed data
  set breast_cancer_15 by considering the differences in data sources and
  artificial neuronal network configurations between our and the ones in
  image recognition, where DBNs are successful.
+\end_layout
+
+\begin_layout Subsection
+Too many free parameters
 \end_layout
 
 \begin_layout Standard
@@ -23578,8 +24456,8 @@ r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o}
  cases have a binary label.
 \end_layout
 
-\begin_layout Paragraph
-breast_cancer_15: data set design
+\begin_layout Subsection
+Data set design
 \end_layout
 
 \begin_layout Standard
