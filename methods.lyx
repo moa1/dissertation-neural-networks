@@ -27,7 +27,7 @@ fix-cm
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing onehalf
 \use_hyperref false
 \papersize a4paper
