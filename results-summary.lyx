@@ -73,8 +73,22 @@
 status open
 
 \begin_layout Plain Layout
-TODO: Maybe this list is not summary of results, but considered as items
- for the discussion part of the dissertation.
+TODO: Maybe this list is not summary of results, but should be considered
+ as items for the discussion part of the dissertation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Das was ich über survival time prediction in ~/uni/nnet/datasets/breast_cancer_1
+0/README.lyx geschrieben habe.
 \end_layout
 
 \end_inset
@@ -154,14 +168,17 @@ we used feed-forward neural networks (aka multi-layer perceptron?) to predict
  cancer recurrence
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
 instances of those networks perform well for image classification
 \end_layout
 
+\end_deeper
 \begin_layout Itemize
 does pre-training improve prediction accuracy?
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
 pre-training using autoencoder or RBM (breast_cancer_04)
 \end_layout
@@ -172,39 +189,16 @@ there does not seem to be a difference in accuracy on the testing set between
 \end_layout
 
 \begin_layout Itemize
-we tried different normalization methods (breast_cancer_08): RMA and MAS5
- normalization, COMBAT batch effect correction, ZCA whitening.
-\end_layout
+reconstruction error during pre-training converged well for our cases, sometimes
+ you have to wait a few iterations though (die 
+\begin_inset Quotes eld
+\end_inset
 
-\begin_deeper
-\begin_layout Itemize
-reconstruction error plots seem to depend on the normalization used
-\end_layout
+Höcker
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Itemize
-insert the breast_cancer_11 experiment here (taking the log2 after MAS5
- normalization).
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-do the different normalization methods influence prediction accuracy on
- the testing set?
-\end_layout
-
-\begin_layout Itemize
-we also tried networks with two hidden layers
-\end_layout
-
-\begin_layout Itemize
-the networks with two hidden layers seem to not perform better than those
- with one hidden layer
-\end_layout
-
-\begin_layout Itemize
-I should still try networks with a larger hidden layer 1 size (larger than
- the number of input neurons), and with larger hidden layer 2 size.
- (This is actually probably a not-so-good idea, since 
+ im reconstruction error plot)
 \end_layout
 
 \begin_layout Itemize
@@ -214,6 +208,80 @@ we used an increasing number of unlabeled data in pre-training.
 \begin_deeper
 \begin_layout Itemize
 does this improve testing set accuracy?
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+we tried different normalization methods (breast_cancer_08): RMA and MAS5
+ normalization, COMBAT batch effect correction, ZCA whitening.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+reconstruction error plots seem to depend on the normalization used
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+MAS5 normalized data seem to have lower reconstruction error than RMA normalized
+ data.
+\end_layout
+
+\begin_layout Itemize
+Additional COMBAT batch effect correction does not seem to alter the reconstruct
+ion error of RMA or MAS5 normalized data, except for MAS5 normalization
+ without ZCA whitening, where additional COMBAT does seem to lead to an
+ increased reconstruction error
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+insert the breast_cancer_11 experiment here (taking the log2 after MAS5
+ normalization).
+\end_layout
+
+\begin_layout Itemize
+the different normalization methods influence test set prediction accuracy?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Of all normalizations tested, RMA with no additional pre-processing yields
+ the best accuracies in all data sets tested.
+\end_layout
+
+\begin_layout Itemize
+A low reconstruction error rate does not imply a good accuracy on the test
+ set: Although the neural nets using MAS5 normalized data have a lower reconstru
+ction error than their RMA counterparts, the former have a lower accuracy
+ than the latter.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+From notes/breast_cancer_11/breast_cancer_11.lyx
+\end_layout
+
+\end_inset
+
+when doing subsequent Combat pre-processing, taking the log2 beforehand
+ helps improve accuracy.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+we also tried networks with two and three hidden layers
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+the networks with two hidden layers seem to not perform better than those
+ with one hidden layer
 \end_layout
 
 \end_deeper
@@ -234,61 +302,22 @@ Die Ergebnisse vom StatComp-Poster müssen hier rein.
 
 \end_deeper
 \begin_layout Itemize
-reconstruction error during pre-training converged well for our cases, sometimes
- you have to wait a few iterations though (die 
-\begin_inset Quotes eld
-\end_inset
-
-Höcker
-\begin_inset Quotes erd
-\end_inset
-
- im reconstruction error plot)
-\end_layout
-
-\begin_layout Itemize
 we used validation set accuracy to select the neural network which is used
  to predict testing data recurrence status
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
-I should also try to do regression using the neural network to predict expected
- survival time at time of diagnosis
+we smoothed the training, validation, and test set accuracies
 \end_layout
 
-\begin_layout Itemize
-insert the findings from breast_cancer_08.lyx (see label 
-\begin_inset Quotes eld
-\end_inset
-
-sub:bb_ic-Reconstruction-error-plots
-\begin_inset Quotes erd
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Itemize
-The test set accuracies depend on the normalization procedure of the microarray
- data
-\end_layout
-
-\begin_layout Itemize
-A low reconstruction error rate does not imply a good accuracy on the test
- set: Although the neural nets using MAS5 normalized data have a lower reconstru
-ction error than their RMA counterparts, the former have a lower accuracy
- than the latter.
-\end_layout
-
-\begin_layout Itemize
-Das was ich in ~/uni/nnet/datasets/breast_cancer_10/README.lyx geschrieben
- habe.
-\end_layout
-
+\end_deeper
 \begin_layout Itemize
 The accuracy of the classifier in the GSE25055-paper is 65% on the testing
  data.
  I should compare that to the accuracies that my classifiers achieve.
+ (Of note should be however, that they did not optimize for accuracy, but
+ for another measure.)
 \end_layout
 
 \begin_deeper
@@ -302,10 +331,10 @@ also calculate and tabulate sensitivity, selectivity, Diagnostic likelihood
 When looking at the accuracies of the TSVM on the data sets with more and
  more unlabeled data, accuracy does not increase with more unlabeled data.
  (like the nnets).
- It's just that TSVM seems to be (or is it just random noise; TODO: make
- the paired T-Test or Wilcoxon-Rank-Test (see ~/uni/journal.txt) to check
- if the differences between accuracies of TSVM and NNet are just by chance
- or systematic.)
+ It's just that TSVM seems to be better than nnets.
+ (Or is it just random noise; TODO: make the paired T-Test or Wilcoxon-Rank-Test
+ (see ~/uni/journal.txt) to check if the differences between accuracies of
+ TSVM and NNet are just by chance or systematic.)
 \end_layout
 
 \begin_layout Itemize
@@ -335,206 +364,13 @@ name "inputs-to-weights-ratio"
 
 \end_inset
 
-Comparing my data sets and neuronal network configurations to the ones in
- handwritten digit classification:
+We tried different training parameters, different network architectures
+ (with many free parameters relative to training data set size, and with
+ few free parameters), different normalizations, different data set compositions.
+ None gave a clear result that using additional unlabeled data during training
+ yields higher accuracies on the testing data set.
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-[A Fast Learning Algorithm for Deep Belief Nets; by Hinton, Osindero, Teh]
- write that they use a 3-hidden-layer network with about 
-\begin_inset Formula $1.7*10^{6}$
-\end_inset
-
- weights.
- (
-\begin_inset Quotes eld
-\end_inset
-
-Section 6 shows the pattern recognition performance of a network with three
- hidden layers and about 1.7 million weights on the MNIST set of handwritten
- digits.
-\begin_inset Quotes erd
-\end_inset
-
-) I believe they used 44000 training samples (
-\begin_inset Quotes eld
-\end_inset
-
-The network shown in Figure 1 was trained on 44,000 of the training images
-\begin_inset Quotes erd
-\end_inset
-
-) with 28*28 pixels each (their Figure 1: 
-\begin_inset Quotes eld
-\end_inset
-
-28 x 28 pixel image
-\begin_inset Quotes erd
-\end_inset
-
-).
- So altogether they have about 34.5 million 
-\begin_inset Quotes eld
-\end_inset
-
-training numbers
-\begin_inset Quotes erd
-\end_inset
-
-, and 1.7 million weights that have to be determined.
-\end_layout
-
-\begin_layout Itemize
-In contrast to that I have (in data set breast_cancer_12, data set 6) 238
- training samples, each of which has 500 expression levels, i.e.
- 238*500=119000 
-\begin_inset Quotes eld
-\end_inset
-
-training numbers
-\begin_inset Quotes erd
-\end_inset
-
-.
- The networks whose performances I compared for the statcomp poster are
- breast_cancer_12_aa - dv.
- They all (see 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/nnet/configs/make-config-breast_cancer_12-01
-\begin_inset Quotes erd
-\end_inset
-
-) have an architecture of 500 input nodes, 1000 hidden layer 1 nodes, 1000
- hidden layer 2 nodes, 2000 hidden layer 3 nodes, and 1 output layer node.
- This means there are 
-\begin_inset Formula $500*1000+1000*1000+1000*2000+2000*1\approx3.5*10^{6}$
-\end_inset
-
- weights to be learnt.
- How could this work? I'm surprised that I didn't notice that before.
-\end_layout
-
-\begin_layout Itemize
-I could reduce the number of input (and subsequently hidden) nodes:
-\begin_inset Newline newline
-\end_inset
-
-Let 
-\begin_inset Formula $i$
-\end_inset
-
- be the number of input nodes and 
-\begin_inset Formula $h$
-\end_inset
-
- be the number of hidden nodes.
- Assume that 
-\begin_inset Formula $h=i/2$
-\end_inset
-
-, and 
-\begin_inset Formula $o=1$
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-\begin_inset Formula 
-\begin{eqnarray*}
-\frac{i*238+i*h+h*h+h*o}{i*238} & = & =\frac{i*238+i*i/2+i/2*i/2+i/2*1}{i*238}\\
- & = & \frac{i*(238+i/2+i/4+1/2)}{i*238}\\
- & = & \frac{238+i/2+i/4+1/2}{238}
-\end{eqnarray*}
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-This is linear in 
-\begin_inset Formula $i$
-\end_inset
-
-, so it doesn't help.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-But I could have all 22283 genes as inputs, and only a very small 
-\begin_inset Formula $h$
-\end_inset
-
-.
- If I take 
-\begin_inset Formula $i=22283$
-\end_inset
-
-, and there are 238 training samples (in fact I have only 20 labeled+100
- unlabeled training samples in data set breast_cancer_12), then I have 
-\begin_inset Formula $22283*238=5303354$
-\end_inset
-
- measured numbers.
- In 
-\begin_inset Quotes eld
-\end_inset
-
-A Fast Learning Algorithm for Deep Belief Nets
-\begin_inset Quotes erd
-\end_inset
-
-, they have 
-\begin_inset Formula $\frac{44000*28*28}{28*28*500+500*500+500*2000+2000*10}=20.8$
-\end_inset
-
- measured numbers per weight.
- Let's say I also wanted such a ratio.
- Then
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Formula $r(h)=\frac{22283*238}{22283*h+h*h+h*h+h*o}$
-\end_inset
-
-; 
-\begin_inset Formula $r(12)\approx19.8$
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-So I could use 
-\begin_inset Formula $h=12$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-See 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/nnet/datasets/breast_cancer_15/README.lyx
-\begin_inset Quotes erd
-\end_inset
-
- for the 
-\begin_inset Formula $h$
-\end_inset
-
- that I chose.
-\end_layout
-
-\end_deeper
 \begin_layout Itemize
 "~/uni/publication/zusammenfassung/applications/Bioinformatics-2016-Chen-bioinfo
 rmatics_btw074.pdf" lernen auf der hidden layer representations of the training
@@ -558,6 +394,27 @@ To dissect the nonlinear contribution, we took a relatively simple approach
  eine SVM zu lernen.
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+they come to the conclusion that apparently the neuronal network has captured
+ some non-linear dependencies within the raw data that would not be captured
+ by linear regression.
+ However, they do not believe that 
+\begin_inset Quotes eld
+\end_inset
+
+adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ characterizes the capturing of the non-linearity well.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 (vielleicht nicht in die results, aber in die conclusion.
  oder vielleicht noch besser in der Überleitung von results in die discussion)
@@ -639,5 +496,20 @@ Our work differs from the Chen paper in that they use purely unsupervised
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+In terms of 
+\begin_inset Quotes eld
+\end_inset
+
+Semi-supervised learning survey
+\begin_inset Quotes erd
+\end_inset
+
+ by Xiaojin Zhu, I'm learning an efficient coding of the domain from unlabeled
+ data (see their chapter 8).
+ They also notice that one has to constrain the class proportions (in my
+ case 50% for class 0,50% for class 1).
+\end_layout
+
 \end_body
 \end_document
