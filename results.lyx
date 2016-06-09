@@ -8897,8 +8897,10 @@ Normalizations
 \end_layout
 
 \begin_layout Standard
-Normalization methods were RMA (TODO: cite), MAS5 (TODO: cite), RMA+ComBat,
- MAS5+ComBat.
+Normalization methods were RMA (TODO: cite), MAS5 (TODO: cite), MAS5+log2,
+ RMA+ComBat, MAS5+ComBat, MAS5+log2+ComBat.
+ Because MAS5 does not logarithmize the data, but RMA does, MAS5 was tried
+ with additional logarithmizing of the data.
  ComBat (TODO: cite) was designed as a batch-effect correction method.
  This means it tries to produce a data set with the same size as the original
  one, but with a possible batch-effect between samples removed.
@@ -9141,10 +9143,21 @@ sub:bb_ic-Reconstruction-error-plots
 \end_layout
 
 \begin_layout Subsection
-Unsupervised Reconstruction Error in Pre-training
+Unsupervised Reconstruction Error in Autoencoder Pre-training
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert reconstruction errors for MAS5-normalized data with additional
+ logarithmizing.
+\end_layout
+
+\end_inset
+
+
 \begin_inset Float table
 wide false
 sideways false
@@ -9696,7 +9709,7 @@ Reconstruction error for differently normalized data.
 \end_inset
 
 Before looking at the accuracies of the supervised classifier, we look at
- unsupervised pre-training.
+ unsupervised pre-training using an autoencoder.
  The reconstruction error for each normalization is shown in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9959,7 +9972,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="5">
+<lyxtabular version="3" rows="8" columns="5">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -10159,6 +10172,101 @@ mas5
 \begin_inset Text
 
 \begin_layout Plain Layout
+mas5,log2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.61
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.62
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 rma,combat
 \end_layout
 
@@ -10202,7 +10310,7 @@ rma,combat
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -10211,7 +10319,7 @@ mas5,combat
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -10220,7 +10328,7 @@ mas5,combat
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -10229,7 +10337,7 @@ mas5,combat
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -10238,10 +10346,105 @@ mas5,combat
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.64
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+mas5,log2,combat
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.66
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+0.64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
 0.64
 \end_layout
 
@@ -10296,6 +10499,11 @@ RMA seems to perform consistently better than MAS5 (an exception is data
 \begin_layout Itemize
 Using Combat as pre-processing leads to worse accuracies on the RMA-normalized
  data, but improves accuracies when using MAS5 (except in data set 3).
+\end_layout
+
+\begin_layout Itemize
+Taking the log2 of MAS5-normalized data only improves accuracies when the
+ data is ComBat pre-processed.
 \end_layout
 
 \begin_layout Subsubsection
@@ -12931,22 +13139,18 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
-
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_learn ./input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
-
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
