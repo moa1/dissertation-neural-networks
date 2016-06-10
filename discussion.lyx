@@ -1,0 +1,489 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Maybe this list is not summary of results, but should be considered
+ as items for the discussion part of the dissertation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We tried finding evidence that adding unlabeled data to training is beneficial
+ in the training of deep neuronal networks, when predicting breast cancer
+ recurrence after chemotherapy.
+\end_layout
+
+\begin_layout Paragraph
+Using Tumour Expression Data Directly to Classify Recurrence
+\end_layout
+
+\begin_layout Standard
+We predicted recurrence directly from expression data.
+ Papers that use neuronal networks to classify cancerous tissue are for
+ example (TODO: cite D.-R.
+ Chen, R.-F.
+ Chang, W.-J.
+ Kuo, M.-C.
+ Chen, and Y.-L.
+ Huang, “Diagnosis of breast tumors with sonographic texture analysis using
+ wavelet transform and neural networks,” Ultra- sound in Medicine and Biology,
+ vol.
+ 28, no.
+ 10, pp.
+ 1301–1310, 2002.) and (TODO: cite F.
+ Ercal, A.
+ Chawla, W.
+ V.
+ Stoecker, H.-C.
+ Lee, and R.
+ H.
+ Moss, “Neural network diagnosis of malignant melanoma from color images,”
+ IEEE Transactions on Biomedical Engineering, vol.
+ 41, no.
+ 9, pp.
+ 837–845, 1994.) In (cite 
+\begin_inset Quotes eld
+\end_inset
+
+Sharaf Tsokos 2015 neural networks for modeling discrete survival time of
+ censored data.pdf
+\begin_inset Quotes erd
+\end_inset
+
+), Sharaf et al predict from 4 input variables the survival time by training
+ a neuronal network on 69,000 patients.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+see Figure 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We selected the GSE25055 and GSE25065 data sets because they are among the
+ biggest labeled cancer data sets in GEO that come from a single source.
+ Like (TODO: cite Hatzis et al.
+ paper), the larger GSE25055 was used for training a classifier, and the
+ independently measured data set GSE25065 was used for testing the classifier.
+ We used artificial neuronal networks as classifier by predicting the class
+ 1 probability of the samples.
+\end_layout
+
+\begin_layout Paragraph
+Neuronal Networks are attractive
+\end_layout
+
+\begin_layout Standard
+In our view, neuronal networks have attractive properties: they are non-linear,
+ they can be used generatively, their implementations are often modular
+ (e.g.
+ regularizations and network parameters), in prediction they show better
+ accuracies than raw SVMs, deep neuronal networks are among the best predictors
+ in several fields.
+ They can be used unsupervisedly as well as supervisedly.
+ For example, to obtain a probability for a class like done in (TODO: cite
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Estimating classification probabilities in high-dimensional diagnostic studies,
+ Bioinformatics, 27(18):2563-2570.
+\begin_inset Quotes erd
+\end_inset
+
+), a procedure that justifies its own paper, is straightforward, because
+ the network outputs class probabilities anyways.
+ However, neuronal networks' versatility can also be a disadvantage: it
+ is often not clear what to modify to achieve a desired result.
+\end_layout
+
+\begin_layout Paragraph
+Different network configurations
+\end_layout
+
+\begin_layout Standard
+We tried several different approaches: we tried different pre-training algorithm
+s, Autoencoders and Restricted Boltzmann Machines.
+ There does not seem to be a difference in accuracy on the test set between
+ these two pre-training algorithms (breast_cancer_04 and breast_cancer_06).
+ However, some authors have reported that autoencoders are harder to train
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: cite a paper that reported this
+\end_layout
+
+\end_inset
+
+.
+ In general, reconstruction error during pre-training converged well for
+ our cases.
+ Sometimes you have to wait a few iterations for the network to travel through
+ configurations that do not seem to change the resulting reconstruction
+ error.
+\end_layout
+
+\begin_layout Paragraph
+Different normalizations
+\end_layout
+
+\begin_layout Standard
+We tried using different normalizations of the raw expression data: RMA
+ and MAS5 normalization, logarithmizing, COMBAT batch effect correction,
+ ZCA whitening.
+ We observed the effect of normalization on reconstruction error during
+ pre-training as well as on classification accuracy.
+ The reconstruction error plots seem to depend on the normalization used.
+ MAS5 normalized data seem to have lower reconstruction error than RMA normalize
+d data.
+ The effect of normalizations on accuracy were the other way around: Of
+ all normalizations tested, RMA with no additional pre-processing yielded
+ the best accuracies in all data sets tested.
+ Of note is that a low reconstruction error rate does not imply a good accuracy
+ on the test set: Although the neural nets using MAS5 normalized data had
+ a lower reconstruction error than their RMA counterparts, the former had
+ a lower accuracy than the latter.
+\end_layout
+
+\begin_layout Paragraph
+Deep Networks
+\end_layout
+
+\begin_layout Standard
+We also tried deeper networks with two hidden layers.
+ Using these did not improve accuracy.
+\end_layout
+
+\begin_layout Paragraph
+Model Selection
+\end_layout
+
+\begin_layout Standard
+We always selected the iteration/model of the neuronal network that had
+ the highest validation set accuracy.
+ There was the problem that very few samples lead to very few different
+ possible accuracy values.
+ To be able to choose the best model among candidates that have only few
+ possible accuracies, we smoothed the accuracies over time/iteration.
+ We deem this justified because the network's state of parameters at a specific
+ iteration is closest to its state of parameters at the closest iterations.
+ Networks change only little every iteration.
+\end_layout
+
+\begin_layout Paragraph
+Does utilizing more unlabeled samples lead to better neuronal network classifier
+s?
+\end_layout
+
+\begin_layout Standard
+We used an increasing number of unlabeled samples during pre-training to
+ find out whether this has an effect on the accuracy achieved during fine-tuning.
+ In terms of (TODO: cite 
+\begin_inset Quotes eld
+\end_inset
+
+Semi-supervised learning survey
+\begin_inset Quotes erd
+\end_inset
+
+ by Xiaojin Zhu), we are learning an efficient coding of the domain from
+ unlabeled data and then perform supervised learning on the coded samples
+ (see their chapter 8).
+ Like (TODO: cite 
+\begin_inset Quotes eld
+\end_inset
+
+Semi-supervised learning survey
+\begin_inset Quotes erd
+\end_inset
+
+ by Xiaojin Zhu), we also noticed that during data set creation for semi-supervi
+sed learning, one has to constrain the class proportions (in our case 50%
+ for class 0 and 50% for class 1), otherwise the semi-supervised training
+ often fails with predictions biased in favor of the larger class.
+ None of the approaches tried showed a significant benefit between those
+ networks trained using more unlabeled samples over those trained using
+ less unlabeled samples.
+ In different settings this approach worked well (TODO: cite papers where
+ they use unlabeled samples in pre-training).
+ However, there are some differences between those fields and the scenario
+ of microarray expression data: The dimensionality of microarrays is usually
+ higher than that of images or phonemes.
+ The difficulty of the learning task seems higher than that of recognizing
+ digits, where accuracies of 96% can be achieved by nearest neighbor classifiers.
+ There are much less number of labeled and unlabeled samples in expression
+ data than those available in image recognition.
+\end_layout
+
+\begin_layout Paragraph
+Multiplying of Training Samples
+\end_layout
+
+\begin_layout Standard
+In most applications of deep learning there is some algorithm involved to
+ multiply the number of available training data sets.
+ For example, in image classification the training images are usually translated
+ by pixel or subpixel shifts, or small non-linear deformations are applied
+ using a warped mesh.
+ This has the effect that a local feature of an input training image (for
+ example, a red pixel on green background) is present in different input
+ pixels in the transformed training images.
+ This allows producing a large number of similar training images from an
+ input training set.
+ The neuronal network is thereby forced to learn the property of a feature
+ regardless of its position in the image.
+ Nevertheless the position of the feature will probably vary in 
+\begin_inset Quotes eld
+\end_inset
+
+real
+\begin_inset Quotes erd
+\end_inset
+
+ (not modified) images as well.
+\end_layout
+
+\begin_layout Standard
+Having such a transformation for expression data would be very useful, not
+ only for classification using neuronal networks, but also other machine
+ learning algorithms.
+ However, it is not at all clear what a pre-processing equivalent to the
+ local image deformations could look like for mRNA abundance.
+ Straightforward application of the image deformation scheme would provide
+ the neuronal network with input for a gene in the dimension of a maybe
+ completely unrelated gene.
+ (Note that adding some sort of noise onto the expression levels would be
+ equivalent to adding noise to the image, which is not equivalent to shifting
+ the image.) A possible approach could be to look for gene modules that consist
+ of redundant genes, and permute their expression values among the redundacy
+ group.
+ This would require knowledge about gene modules in advance.
+ Maybe one could increase the number of input samples by creating additional
+ samples by composing them of random subsets of other input samples.
+ For example, take gene 1-1000 from sample 1, gene 1001-2001 from samples
+ 2, and so on.
+ Or maybe even better use gene modules as learned by an RBM (see the _hub_featur
+es_ in Figure S3 of TODO: cite ".../zusammenfassung/applications/Bioinformatics-201
+6-Chen-bioinformatics_btw074-supplementary.pdf").
+ There seem to be hub genes, that have outgoing connections to many output
+ layer genes, with many of the hub genes having either positive (i.e.
+ that positively affect the expression of a target gene) or negative outgoing
+ weights, but not both.
+\end_layout
+
+\begin_layout Standard
+The algorithm would work like this: Determine for each 
+\emph on
+measured
+\emph default
+ input sample the gene hub activation (by training an RBM or unsupervised
+ DBN on all input samples).
+ This results in a vector of numbers, one vector for each input sample;
+ each number stands for one gene hub activation.
+ Permute the gene hub activations between the learned representations, but
+ only use representations from samples that have the same class label.
+ Due to the number of permutations this creates a large number of labeled
+ training samples (each training sample is labeled like the measured samples
+ used in the training sample generation).
+ Use these generated training samples as input for a supervised DBN.
+\end_layout
+
+\begin_layout Paragraph
+Compared Methods: neuronal networks, SVM and TSVM
+\end_layout
+
+\begin_layout Standard
+We compared SVM and TSVM to the artificial neuronal networks.
+ TSVM is a semi-supervised version of the normal supervised SVM, and the
+ artificial neuronal networks were used with (semi-supervised) and without
+ (supervised) pre-training.
+ We compared the semi-supervised and the supervised versions of both neuronal
+ network and Support Vector Machine.
+ We found that neither TSVM nor semi-supervised neuronal network improved
+ significantly in accuracy when adding unlabeled data.
+ Two TSVM classifiers (trained using very little unlabeled samples) were
+ significantly better than all trained Deep Belief Networks.
+\end_layout
+
+\begin_layout Itemize
+The accuracy of the classifier in the GSE25055-paper is 65% on the testing
+ data.
+ I should compare that to the accuracies that my classifiers achieve.
+ (Of note should be however, that they did not optimize for accuracy, but
+ for another measure.)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+also calculate and tabulate sensitivity, selectivity, Diagnostic likelihood
+ ratios
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Biganzoli 1998 neural networks for censored survival data.pdf
+\begin_inset Quotes erd
+\end_inset
+
+: from that paper on page 3: 
+\begin_inset Quotes eld
+\end_inset
+
+Feed forward ANNs, are strictly equivalent to non-linear multivariate regression
+ methods.
+\begin_inset Quotes erd
+\end_inset
+
+ (Or maybe reference 15 of that paper showed it earlier.)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset CommandInset label
+LatexCommand label
+name "inputs-to-weights-ratio"
+
+\end_inset
+
+We tried different training parameters, different network architectures
+ (with many free parameters relative to training data set size, and with
+ few free parameters), different normalizations, different data set compositions.
+ None gave a clear result that using additional unlabeled data during training
+ yields higher accuracies on the testing data set.
+\end_layout
+
+\begin_layout Itemize
+"~/uni/publication/zusammenfassung/applications/Bioinformatics-2016-Chen-bioinfo
+rmatics_btw074.pdf" learn on the hidden layer representation of the training
+ data a linear model to predict the expression value of the genes.
+ (Siehe ihre Seite 7 links unten 
+\begin_inset Quotes eld
+\end_inset
+
+To dissect the nonlinear contribution, we took a relatively simple approach
+ by focusing on the representation (activations) from the last hidden layer.
+ Each of the hidden units in that layer can be viewed as a feature generated
+ through some nonlinear transformation of the landmark genes.
+ We then studied whether a linear regression based on these nonlinear features
+ can achieve better performance than a linear regression based solely on
+ the landmark genes.
+\begin_inset Quotes erd
+\end_inset
+
+).
+ Das ist so ähnlich wie mein Versuch, auf der hidden layer representation
+ eine SVM zu lernen.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+they come to the conclusion that apparently the neuronal network has captured
+ some non-linear dependencies within the raw data that would not be captured
+ by linear regression.
+ However, they do not believe that 
+\begin_inset Quotes eld
+\end_inset
+
+adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ characterizes the capturing of the non-linearity well.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Our work differs from the Chen paper in that they use purely supervised
+ learning, and we try semi-supervised learning.
+\end_layout
+
+\end_body
+\end_document
