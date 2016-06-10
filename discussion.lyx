@@ -69,23 +69,9 @@
 \begin_body
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Maybe this list is not summary of results, but should be considered
- as items for the discussion part of the dissertation.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-We tried finding evidence that adding unlabeled data to training is beneficial
- in the training of deep neuronal networks, when predicting breast cancer
- recurrence after chemotherapy.
+We tried finding evidence that adding unlabeled data to semi-supervised
+ training is beneficial in deep neuronal networks, when predicting breast
+ cancer recurrence after chemotherapy.
 \end_layout
 
 \begin_layout Paragraph
@@ -161,6 +147,33 @@ In our view, neuronal networks have attractive properties: they are non-linear,
  regularizations and network parameters), in prediction they show better
  accuracies than raw SVMs, deep neuronal networks are among the best predictors
  in several fields.
+ As (TODO: cite 
+\begin_inset Quotes eld
+\end_inset
+
+Biganzoli 1998 neural networks for censored survival data.pdf
+\begin_inset Quotes erd
+\end_inset
+
+) 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+on page 3
+\end_layout
+
+\end_inset
+
+ put it: 
+\begin_inset Quotes eld
+\end_inset
+
+Feed forward ANNs are strictly equivalent to non-linear multivariate regression
+ methods.
+\begin_inset Quotes erd
+\end_inset
+
  They can be used unsupervisedly as well as supervisedly.
  For example, to obtain a probability for a class like done in (TODO: cite
  
@@ -175,7 +188,7 @@ Estimating classification probabilities in high-dimensional diagnostic studies,
 ), a procedure that justifies its own paper, is straightforward, because
  the network outputs class probabilities anyways.
  However, neuronal networks' versatility can also be a disadvantage: it
- is often not clear what to modify to achieve a desired result.
+ is often not clear what component to modify to achieve a desired result.
 \end_layout
 
 \begin_layout Paragraph
@@ -271,6 +284,34 @@ Semi-supervised learning survey
  by Xiaojin Zhu), we are learning an efficient coding of the domain from
  unlabeled data and then perform supervised learning on the coded samples
  (see their chapter 8).
+ The approach is similar to that of (TODO: cite "~/uni/publication/zusammenfassu
+ng/applications/Bioinformatics-2016-Chen-bioinformatics_btw074.pdf"), where
+ they used the representation of a sample at the deepest hidden layer to
+ classify the sample, using a supervised algorithm
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Siehe ihre Seite 7 links unten 
+\begin_inset Quotes eld
+\end_inset
+
+To dissect the nonlinear contribution, we took a relatively simple approach
+ by focusing on the representation (activations) from the last hidden layer.
+ Each of the hidden units in that layer can be viewed as a feature generated
+ through some nonlinear transformation of the landmark genes.
+ We then studied whether a linear regression based on these nonlinear features
+ can achieve better performance than a linear regression based solely on
+ the landmark genes.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
  Like (TODO: cite 
 \begin_inset Quotes eld
 \end_inset
@@ -387,6 +428,22 @@ We compared SVM and TSVM to the artificial neuronal networks.
  significantly better than all trained Deep Belief Networks.
 \end_layout
 
+\begin_layout Paragraph
+In summary
+\end_layout
+
+\begin_layout Standard
+To sum up, we tried different training parameters, different network architectur
+es (with many free parameters relative to training data set size, and with
+ few free parameters), different normalizations, different data set compositions.
+ None gave a clear result that using additional unlabeled data during training
+ yields higher accuracies on the testing data set.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
 \begin_layout Itemize
 The accuracy of the classifier in the GSE25055-paper is 65% on the testing
  data.
@@ -403,86 +460,14 @@ also calculate and tabulate sensitivity, selectivity, Diagnostic likelihood
 
 \end_deeper
 \begin_layout Itemize
-\begin_inset Quotes eld
-\end_inset
-
-Biganzoli 1998 neural networks for censored survival data.pdf
-\begin_inset Quotes erd
-\end_inset
-
-: from that paper on page 3: 
-\begin_inset Quotes eld
-\end_inset
-
-Feed forward ANNs, are strictly equivalent to non-linear multivariate regression
- methods.
-\begin_inset Quotes erd
-\end_inset
-
- (Or maybe reference 15 of that paper showed it earlier.)
+Our work differs from the ".../zusammenfassung/applications/Bioinformatics-2016-Che
+n-bioinformatics_btw074-supplementary.pdf" paper in that they use purely
+ supervised learning, and we try semi-supervised learning.
 \end_layout
 
-\begin_layout Itemize
-\begin_inset CommandInset label
-LatexCommand label
-name "inputs-to-weights-ratio"
-
-\end_inset
-
-We tried different training parameters, different network architectures
- (with many free parameters relative to training data set size, and with
- few free parameters), different normalizations, different data set compositions.
- None gave a clear result that using additional unlabeled data during training
- yields higher accuracies on the testing data set.
-\end_layout
-
-\begin_layout Itemize
-"~/uni/publication/zusammenfassung/applications/Bioinformatics-2016-Chen-bioinfo
-rmatics_btw074.pdf" learn on the hidden layer representation of the training
- data a linear model to predict the expression value of the genes.
- (Siehe ihre Seite 7 links unten 
-\begin_inset Quotes eld
-\end_inset
-
-To dissect the nonlinear contribution, we took a relatively simple approach
- by focusing on the representation (activations) from the last hidden layer.
- Each of the hidden units in that layer can be viewed as a feature generated
- through some nonlinear transformation of the landmark genes.
- We then studied whether a linear regression based on these nonlinear features
- can achieve better performance than a linear regression based solely on
- the landmark genes.
-\begin_inset Quotes erd
-\end_inset
-
-).
- Das ist so ähnlich wie mein Versuch, auf der hidden layer representation
- eine SVM zu lernen.
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-they come to the conclusion that apparently the neuronal network has captured
- some non-linear dependencies within the raw data that would not be captured
- by linear regression.
- However, they do not believe that 
-\begin_inset Quotes eld
-\end_inset
-
-adjusted 
-\begin_inset Formula $R^{2}$
 \end_inset
 
 
-\begin_inset Quotes erd
-\end_inset
-
- characterizes the capturing of the non-linearity well.
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Our work differs from the Chen paper in that they use purely supervised
- learning, and we try semi-supervised learning.
 \end_layout
 
 \end_body
