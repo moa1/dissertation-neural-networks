@@ -24,7 +24,8 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
+\spacing onehalf
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -112,8 +113,7 @@ Sharaf Tsokos 2015 neural networks for modeling discrete survival time of
 \end_inset
 
 ), Sharaf et al predict from 4 input variables the survival time by training
- a neuronal network on 69,000 patients.
- 
+ a neuronal network on 69,000 patients
 \begin_inset Note Note
 status open
 
@@ -123,13 +123,13 @@ see Figure 1
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 We selected the GSE25055 and GSE25065 data sets because they are among the
  biggest labeled cancer data sets in GEO that come from a single source.
- Like (TODO: cite Hatzis et al.
+ Like in (TODO: cite Hatzis et al.
  paper), the larger GSE25055 was used for training a classifier, and the
  independently measured data set GSE25065 was used for testing the classifier.
  We used artificial neuronal networks as classifier by predicting the class

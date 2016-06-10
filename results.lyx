@@ -4978,6 +4978,11 @@ Surprisingly, the neuronal network accuracies do not improve with increasing
  perform worst.
 \end_layout
 
+\begin_layout Standard
+We also tried using 2 hidden layers instead of 1.
+ This did not improve accuracy.
+\end_layout
+
 \begin_layout Subsubsection
 Unsupervised pre-training using autoencoder (breast_cancer_03_ai, _03_al,
  _03_am, _03_ao)
@@ -5854,6 +5859,8 @@ When training a neuronal network using back-propagation that was pre-trained
  This seems to imply that the difficulty of the repetition rather than the
  prediction quality differences between RBM and autoencoder are mirrored
  in the accuracy differences.
+ Like for RBMs, we also tried using 2 hidden layers instead of 1, which
+ did not improve accuracy.
 \end_layout
 
 \begin_layout Standard
@@ -13139,18 +13146,22 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
+
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_learn ./input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
+
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
