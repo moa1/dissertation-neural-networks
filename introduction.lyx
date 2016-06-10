@@ -1871,17 +1871,5 @@ Learning in this data set is harder since the input is from multiple sources,
  input from multiple sources, with an acceptable gain in error.
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-btprint "btPrintAll"
-bibfiles "zusammenfassung"
-options "plain"
-
-\end_inset
-
-
-\end_layout
-
 \end_body
 \end_document

@@ -3,6 +3,10 @@
 \begin_document
 \begin_header
 \textclass article
+\begin_preamble
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,brackets={square}}
+\end_preamble
 \use_default_options true
 \begin_modules
 fix-cm
@@ -42,9 +46,9 @@ fix-cm
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine basic
-\cite_engine_type default
-\biblio_style plain
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style 
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -193,7 +197,7 @@ filename "discussion.lyx"
 LatexCommand bibtex
 btprint "btPrintAll"
 bibfiles "zusammenfassung"
-options "bibtotoc,plainnat"
+options "bibtotoc,abbrvnat"
 
 \end_inset
 
