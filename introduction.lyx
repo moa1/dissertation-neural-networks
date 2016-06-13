@@ -119,6 +119,7 @@ Neurons as basic signal processing units
 
 \begin_layout Standard
 The real, biological neurons are defined (according to the neuron doctrine
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BullockDouglas2005"
@@ -127,8 +128,8 @@ key "BullockDouglas2005"
 
 ) as the smallest units whose state change may be called signal processing,
  so they are the basic signal processing units.
- They have multiple inputs -- dendrites -- and multiple outputs -- axons
- -- 
+ They have multiple inputs, called dendrites, and multiple outputs, called
+ axons 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ByrneDafny1997"

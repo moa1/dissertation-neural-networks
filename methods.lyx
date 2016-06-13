@@ -1180,7 +1180,7 @@ name "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
 \end_layout
 
 \begin_layout Standard
-The 
+A formal definition is provided by the 
 \emph on
 Hammersley-Clifford theorem
 \emph default
@@ -1198,14 +1198,14 @@ Hammersley-Clifford theorem
 \emph on
  
 \emph default
-(
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HammersleyClifford1971"
 
 \end_inset
 
-) provides a formal definition.
+.
  It states that when we have a vector of random variables 
 \begin_inset Formula $\mathbf{X}=\{X_{1},\dots,X_{n}\}$
 \end_inset
