@@ -136,7 +136,7 @@ We selected the GSE25055 and GSE25065 data sets because they are among the
  Like in (TODO: cite Hatzis et al.
  paper), the larger GSE25055 was used for training a classifier, and the
  independently measured data set GSE25065 was used for testing the classifier.
- We used artificial neuronal networks as classifier by predicting the class
+ We used artificial neuronal networks as classifiers by predicting the class
  1 probability of the samples.
 \end_layout
 
@@ -148,9 +148,9 @@ Neuronal Networks are attractive
 In our view, neuronal networks have attractive properties: they are non-linear,
  they can be used generatively, their implementations are often modular
  (e.g.
- regularizations and network parameters), in prediction they show better
- accuracies than raw SVMs, deep neuronal networks are among the best predictors
- in several fields.
+ regularizations and network parameters), in prediction they often show
+ better accuracies than normal SVMs, deep neuronal networks are among the
+ best predictors in several fields.
  As (TODO: cite 
 \begin_inset Quotes eld
 \end_inset
@@ -191,6 +191,10 @@ Estimating classification probabilities in high-dimensional diagnostic studies,
 
 ), a procedure that justifies its own paper, is straightforward, because
  the network outputs class probabilities anyways.
+ Last, but not least, artificial neuronal networks are supposed to be plausible
+ models of the real biological neuronal networks, which are the control
+ centers of many animals, and were shaped by evolution during millions of
+ years.
  However, neuronal networks' versatility can also be a disadvantage: it
  is often not clear what component to modify to achieve a desired result.
 \end_layout
@@ -235,13 +239,13 @@ We tried using different normalizations of the raw expression data: RMA
  The reconstruction error plots seem to depend on the normalization used.
  MAS5 normalized data seem to have lower reconstruction error than RMA normalize
 d data.
- The effect of normalizations on accuracy were the other way around: Of
- all normalizations tested, RMA with no additional pre-processing yielded
+ The effect of different normalizations on accuracy were the other way around:
+ Of all normalizations tested, RMA with no additional pre-processing yielded
  the best accuracies in all data sets tested.
  Of note is that a low reconstruction error rate does not imply a good accuracy
- on the test set: Although the neural nets using MAS5 normalized data had
- a lower reconstruction error than their RMA counterparts, the former had
- a lower accuracy than the latter.
+ on the test set: Although the neuronal nets using MAS5 normalized data
+ had a lower reconstruction error than their RMA counterparts, the former
+ had a lower accuracy than the latter.
 \end_layout
 
 \begin_layout Paragraph
@@ -263,15 +267,14 @@ We always selected the iteration/model of the neuronal network that had
  There was the problem that very few samples lead to very few different
  possible accuracy values.
  To be able to choose the best model among candidates that have only few
- possible accuracies, we smoothed the accuracies over time/iteration.
+ possible accuracies, we smoothed the accuracies over time/iterations.
  We deem this justified because the network's state of parameters at a specific
  iteration is closest to its state of parameters at the closest iterations.
- Networks change only little every iteration.
+ The artificial neuronal networks change only little every iteration.
 \end_layout
 
 \begin_layout Paragraph
-Does utilizing more unlabeled samples lead to better neuronal network classifier
-s?
+Does semi-supervised learning lead to better neuronal network classifiers?
 \end_layout
 
 \begin_layout Standard
@@ -325,8 +328,8 @@ Semi-supervised learning survey
 \end_inset
 
  by Xiaojin Zhu), we also noticed that during data set creation for semi-supervi
-sed learning, one has to constrain the class proportions (in our case 50%
- for class 0 and 50% for class 1), otherwise the semi-supervised training
+sed learning, one has to constrain the class proportions (in our case to
+ 50% for class 0 and 50% for class 1), otherwise the semi-supervised training
  often fails with predictions biased in favor of the larger class.
  None of the approaches tried showed a significant benefit between those
  networks trained using more unlabeled samples over those trained using
@@ -389,11 +392,14 @@ Having such a transformation for expression data would be very useful, not
  samples by composing them of random subsets of other input samples.
  For example, take gene 1-1000 from sample 1, gene 1001-2001 from samples
  2, and so on.
- Or maybe even better use gene modules as learned by an RBM (see the _hub_featur
-es_ in Figure S3 of TODO: cite ".../zusammenfassung/applications/Bioinformatics-201
-6-Chen-bioinformatics_btw074-supplementary.pdf").
- There seem to be hub genes, that have outgoing connections to many output
- layer genes, with many of the hub genes having either positive (i.e.
+ Or maybe even better use gene modules as learned by an RBM (see the 
+\emph on
+hub features 
+\emph default
+in Figure S3 of TODO: cite ".../zusammenfassung/applications/Bioinformatics-2016-Ch
+en-bioinformatics_btw074-supplementary.pdf").
+ There seem to be hub networks, that have outgoing connections to many output
+ layer genes, with many of the hub networks having either positive (i.e.
  that positively affect the expression of a target gene) or negative outgoing
  weights, but not both.
 \end_layout
