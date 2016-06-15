@@ -118,8 +118,7 @@ Neurons as basic signal processing units
 \end_layout
 
 \begin_layout Standard
-The real, biological neurons are defined (according to the neuron doctrine
- 
+The biological neurons are defined (according to the neuron doctrine 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BullockDouglas2005"
@@ -308,16 +307,6 @@ TODO: how does light on rhodopsin lead to glutamate release inhibition?
 
 \end_inset
 
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: cite _Kolb 2003 How the Retina Works.pdf_ here.
-\end_layout
-
-\end_inset
-
 In the eye, specialized cells, the rods and cones detect light
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -426,7 +415,16 @@ Drosophila
  perception of complex odor mixtures.
  On the other hand, species with dense connectivity should have better performan
 ce in detecting low concentrations of simple odor mixtures.
- (TODO: confirm the last sentence.)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(TODO: confirm the last sentence.)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -696,7 +694,8 @@ Hebbian learning rule
 status open
 
 \begin_layout Plain Layout
-TODO: Hier weitermachen mit Erklären und Zitieren der 
+TODO: Hier evtl.
+ weitermachen mit Erklären und Zitieren der 
 \begin_inset Quotes eld
 \end_inset
 
@@ -967,12 +966,9 @@ An advantage of semi-supervised learning over supervised learning is that
  it does not need labels for all input patterns, because labels are often
  time-consuming or costly to acquire.
  For example, the Gene Expression Omnibus data base (GEO) 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: citation
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BarrettSoboleva2013"
 
 \end_inset
 
@@ -1085,18 +1081,7 @@ key "HintonTeh2006"
  conditions or are viewed from different angles (
 \begin_inset CommandInset citation
 LatexCommand cite
-key "HintonSalakhutdinov2006"
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: cite one of the YouTube video learning papers by Salakhutdinov and
- Srivastava (iirc).
-\end_layout
+key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
 
 \end_inset
 
@@ -1143,19 +1128,20 @@ Back-propagation
 Before deep learning, artificial neuronal networks were usually trained
  using only back-propagation without regularizations.
  Back-propagation learns from labeled samples the weights and biases of
- an artificial neuronal network.
- (TODO: cite Rumelhart, D.
- E., Hinton, G.
- E., and Williams, R.
- J.
- (1988).
- Learning representations by back-propagating errors.
- Cognitive modeling, 5.) This supervised training procedure sets input activation
-s in the input layer according to the input pattern to be learned, computes
- the activations of the hidden layers and the output layer, and then computes
- the error at each node in the output layer by subtracting the computed
- activation from the target activation as given by the desired output pattern
- for the particular input pattern that was fed into the network.
+ an artificial neuronal network 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RumelhartWilliams1988"
+
+\end_inset
+
+.
+ This supervised training procedure sets input activations in the input
+ layer according to the input pattern to be learned, computes the activations
+ of the hidden layers and the output layer, and then computes the error
+ at each node in the output layer by subtracting the computed activation
+ from the target activation as given by the desired output pattern for the
+ particular input pattern that was fed into the network.
  The error for each node is then back-propagated in reverse input direction
  to the hidden layers and finally to the input layer.
  The purpose of this is to be able to adjust the weights of the artificial
@@ -1545,9 +1531,14 @@ Sparsity regularization is a method to make only a small fraction of nodes
  interpretable.
  It has three meta-parameters.
  One of them is the fraction of nodes that should be active within a neuronal
- network layer at any given time.
- (TODO: cite .../zusammenfassung/rbm/restricted_boltzmann_machine/guideTR.pdf
- by Hinton.)
+ network layer at any given time 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton2010"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1650,7 +1641,14 @@ Both underlying distributions often have many correlated dimensions.
 \begin_layout Standard
 For transcriptomic data, one almost always observes many correlated genes.
  The correlations can be due to many genes being regulated by the same transcrip
-tion factor.
+tion factor 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TornowMewes2003,KlebanovYakovlev2007"
+
+\end_inset
+
+.
  
 \begin_inset Note Note
 status open
@@ -1668,6 +1666,10 @@ TODO: add some statistics of correlations, e.g.
 
 \begin_layout Plain Layout
 TODO: add some citations for reasons of high correlation in expression data.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: read TornowMewes2003, KlebanovYakovlev2007.
 \end_layout
 
 \end_inset
@@ -1704,11 +1706,16 @@ Transductive Support Vector Machine
 \end_layout
 
 \begin_layout Standard
-(TODO: Cite TSVM here.
- TSVM is mentioned in the wikipedia article 'semi-supervised learning'.)
- We compare our artificial neuronal network approach with another, older,
+We compare our artificial neuronal network approach with another, older,
  and established semi-supervised method, the Transductive Support Vector
- Machine (TSVM).
+ Machine (TSVM) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Joachims1999"
+
+\end_inset
+
+.
  Despite the name, it supports transductive as well as inductive learning.
  A standard Support Vector Machine searches for a decision boundary such
  that the margin between samples with differing labels is maximal.
