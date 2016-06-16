@@ -156,24 +156,12 @@ TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
 status open
 
 \begin_layout Plain Layout
-TODO: make the citations look like 
-\begin_inset Quotes eld
-\end_inset
-
-[FischerIgel2012]
-\begin_inset Quotes erd
-\end_inset
-
-, not 
-\begin_inset Quotes eld
-\end_inset
-
-[1]
-\begin_inset Quotes erd
-\end_inset
-
-.
- This is probably done using a Bibtex style file?
+TODO: At the end of the manuscript, I could add a list of 
+\emph on
+emphasized 
+\emph default
+terms introduced, together with the page number they were introduced on.
+ Die emphasized Terms suche ich wahrscheinlich am besten im LyX-Quelltext.
 \end_layout
 
 \end_inset
@@ -260,24 +248,6 @@ Set Vectors or sets are written in bold font.
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: At the end of the manuscript, I could add a list of 
-\emph on
-emphasized 
-\emph default
-terms introduced, together with the page number they were introduced on.
- Die emphasized Terms suche ich wahrscheinlich am besten im LyX-Quelltext.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -852,27 +822,6 @@ maximal clique
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: add definition of 
-\begin_inset Quotes eld
-\end_inset
-
-separate
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 A set of nodes 
 \begin_inset Formula $\mathbf{N_{A}}\subset\mathbf{N}$
 \end_inset
@@ -980,8 +929,11 @@ status open
 \begin_layout Plain Layout
 TODO: I should write somewhere that the edges in a directed graph encode
  the dependence and independence relationships between the random variables.
- TODO: What do the edges encode in an undirected graph? (Answer: the factorizati
-on of the joint.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: What do the edges encode in an undirected graph? (Answer: the factorizatio
+n of the joint.
  (Or, rather cliques than edges encode the factorization).)
 \end_layout
 
@@ -1059,12 +1011,21 @@ chain graphs
 \emph default
  
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
-TODO: reference.
- Referenz zu chain graph ist http://www.cs.ubc.ca/~murphyk/Bayes/bnintro.html
- (
+probably not TODO (since I won't go into chain graphs): reference.
+ Referenz zu chain graph ist 
+\begin_inset Quotes eld
+\end_inset
+
+Chain graph models and their causal interpretations Steffen L.
+ Lauritzen Aalborg University, Denmark and Thomas S.
+ Richardson
+\begin_inset Quotes erd
+\end_inset
+
+ oder http://www.cs.ubc.ca/~murphyk/Bayes/bnintro.html (
 \begin_inset Quotes erd
 \end_inset
 
@@ -1421,7 +1382,10 @@ nodes
 \end_inset
 
  is overused.
- TODO: replace 
+\end_layout
+
+\begin_layout Plain Layout
+TODO: replace 
 \begin_inset Formula $X$
 \end_inset
 
@@ -2327,26 +2291,6 @@ ELIMINATE
 
  and exercise it for an instance of a directed and undirected graph.
  This would be more systematic than it is now.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: In the introduction of this section (
-\begin_inset Quotes eld
-\end_inset
-
-Inference in Graphical Models
-\begin_inset Quotes erd
-\end_inset
-
-) I should cite the paper 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ChandrasekaranHarsha2012"
-
-\end_inset
-
- when stating that inference in graphical models is NP-hard in the general
- case.
 \end_layout
 
 \end_inset
@@ -6316,25 +6260,14 @@ cross-entropy error
 
 \end_inset
 
-:
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: cite something.
- Defined like this in the last line of the leftmost column of 
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "HintonSalakhutdinov2006"
+key "NasrJoun2002"
 
 \end_inset
 
-.
-\end_layout
-
-\end_inset
-
-
+:
 \begin_inset Formula 
 \[
 -\sum_{i}p_{i}\log\hat{p_{i}}-\sum_{i}(1-p_{i})\log(1-\hat{p_{i}})
@@ -6369,7 +6302,6 @@ status open
 
 \begin_layout Plain Layout
 TODO: formula for the updating in the back-propagation algorithm.
- TODO: cite some paper.
 \end_layout
 
 \end_inset
@@ -6638,21 +6570,9 @@ weight-cost
 
  of L2 weight decay.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Cite 
-\begin_inset Quotes eld
-\end_inset
-
-Hinton, 2010, A Practical Guide to Training Restricted Boltzmann Machines
- Version 1
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton2010"
 
 \end_inset
 
@@ -6705,22 +6625,10 @@ Nair, V.
 \end_inset
 
 An RBM that has few hidden neurons turned on is usually easier to interpret
- than one in which half are turned on
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Cite 
-\begin_inset Quotes eld
-\end_inset
-
-Hinton, 2010, A Practical Guide to Training Restricted Boltzmann Machines
- Version 1
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
+ than one in which half are turned on 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton2010"
 
 \end_inset
 
@@ -6738,26 +6646,7 @@ sparsity
 \end_inset
 
  target for a neuron allows specifying at what fraction of time a neuron
- should be on, on average
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Cite 
-\begin_inset Quotes eld
-\end_inset
-
-Hinton, 2010, A Practical Guide to Training Restricted Boltzmann Machines
- Version 1
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
+ should be on, on average.
 \end_layout
 
 \begin_layout Standard
@@ -6990,20 +6879,9 @@ The conditional probability distribution for a hidden node
 \end_inset
 
  and is defined by 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: cite 
-\begin_inset Quotes eld
-\end_inset
-
-Learning and Relearning in Boltzmann Machines
-\begin_inset Quotes erd
-\end_inset
-
- by Hinton and Sejnowski
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonSejnowski1986"
 
 \end_inset
 
@@ -7480,6 +7358,13 @@ sible node connections and no hidden-to-hidden node connections.
 
 \begin_layout Standard
 As originally proposed by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Smolensky1986"
+
+\end_inset
+
+ 
 \begin_inset Note Note
 status open
 

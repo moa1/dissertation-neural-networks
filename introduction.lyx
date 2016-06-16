@@ -1729,18 +1729,14 @@ Previous Work: Gene Expression Inference With Deep Learning
 
 \begin_layout Standard
 Very recently, 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(TODO: insert citation of Yifei Chen, Xiaohui Xie, (Gene expression inference
- with deep learning) here)
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
 
 \end_inset
 
- AUTHORS_YEAR published work on compressing expression data into fewer dimension
-s on a large scale using deep learning.
+ published work on compressing expression data into fewer dimensions on
+ a large scale using deep learning.
  Input data were all ~111,000 genome-wide expression profiles from the GEO
  database of Affymetrix microarrays, which were partitioned into training,
  validation, and testing data sets.
@@ -1835,28 +1831,29 @@ n error of 0.3204 implies an average error of about 3% on the GEO dataset.
 \end_layout
 
 \begin_layout Standard
-In another dataset, AUTHORS_YEAR used the GEO dataset for training, the
- 1000 Genomes data for validation (TODO: cite Lappalainen, T., Sammeth, M.,
- FriedlÂ¨ander, M.
- R., ACt Hoen, P., Monlong, J., Rivas, M.
- A., Gonz`alez-Porta, M., Kurbatova, N., Griebel, T., Ferreira, P.
- G., et al.
- (2013).
- Transcriptome and genome sequencing uncovers functional variation in humans.
- Nature, 501(7468), 506-511), and GTEx data for testing (TODO: cite Ardlie,
- K.
- G., Deluca, D.
- S., Segr`e, A.
- V., Sullivan, T.
- J., Young, T.
- R., Gelfand, E.
- T., Trowbridge, C.
- A., Maller, J.
- B., Tukiainen, T., Lek, M., et al.
- (2015).
- The genotype-tissue expression (gtex) pilot analysis: Multitissue gene
- regulation in humans.
- Science, 348(6235), 648-660).
+In another dataset, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
+\end_inset
+
+ used the GEO dataset for training, the 1000 Genomes data for validation
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LappalainenPedro2013"
+
+\end_inset
+
+, and GTEx data for testing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ArdlieLek2015"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
