@@ -80,7 +80,14 @@ Reasons for choosing GSE25055 and GSE25065 as the data set
 \begin_layout Standard
 Originally we wanted to find a data set that had something to do with drug
  sensitivity and resistance.
- Therefore a GEO (TODO: cite GEO) database search was conducted.
+ Therefore a GEO database search was conducted 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BarrettSoboleva2013"
+
+\end_inset
+
+.
  All data sets uploaded to GEO between January 1st 2000, and August 31st
  2013 were considered and their titles and abstracts searched for 
 \begin_inset Quotes eld
@@ -106,11 +113,18 @@ resist
 \end_layout
 
 \begin_layout Standard
-GSE25055 and GSE25065 are data sets produced for the same paper, namely
- (TODO: cite the GEO25055 paper, I think it is by Hatzis et al.).
- In this paper, GSE25055 was used to generate a classifier for the prognosis
- of breast cancer patients that received reductive surgery followed by taxane-an
-thracycline chemotherapy.
+GSE25055 and GSE25065 are microarray expression data sets produced for the
+ same paper, namely 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HatzisSymmans2011"
+
+\end_inset
+
+.
+ They used GSE25055 to generate a classifier for the prognosis of breast
+ cancer patients that received reductive surgery followed by taxane-anthracyclin
+e chemotherapy.
  All patients had ERBB2 (HER2 or HER2/neu)-negative breast cancer.
  The tissue extracted in reductive surgery was measured on Affymetrix HG-U133A
  microarrays.
@@ -543,9 +557,30 @@ Two types of neuronal networks that lend themselves for semi-supervised
 
 \begin_layout Standard
 Four normalization methods were tried: two microarray normalization methods
- were tried: Robust Multi-Chip Average (RMA) (TODO: cite), MAS5 (TODO: cite).
- These were tried without or with subsequent ComBat (TODO: cite) batch-effect
- correction.
+ were tried: Robust Multi-Chip Average (RMA) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BolstadSpeed2003"
+
+\end_inset
+
+, MAS5 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Affymetrix2001"
+
+\end_inset
+
+.
+ These were tried without or with subsequent ComBat batch-effect correction
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JohnsonRabinovic2007"
+
+\end_inset
+
+.
  Two prediction goals were tried: (TODO: look up the exact labels that were
  used for prediction.)
 \end_layout
@@ -597,8 +632,15 @@ deepnet
 \emph on
 deepnet
 \emph default
- (TODO: cite) is a neuronal network implementation written by Nitish Srivastava
- and uses a matrix library written by Vlad Mnih and Alex Krizhevsky.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Deepnet2014"
+
+\end_inset
+
+ is a neuronal network implementation written by Nitish Srivastava and uses
+ a matrix library written by Vlad Mnih and Alex Krizhevsky.
  It can run on NVIDIA graphics cards supporting CUDA.
  Due to graphics cards having a highly parallel architecture, this means
  faster training times.
@@ -8911,11 +8953,32 @@ Normalizations
 \end_layout
 
 \begin_layout Standard
-Normalization methods were RMA (TODO: cite), MAS5 (TODO: cite), MAS5+log2,
- RMA+ComBat, MAS5+ComBat, MAS5+log2+ComBat.
+Normalization methods were RMA 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BolstadSpeed2003"
+
+\end_inset
+
+, MAS5 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Affymetrix2001"
+
+\end_inset
+
+, MAS5+log2, RMA+ComBat, MAS5+ComBat, MAS5+log2+ComBat (for ComBat, see
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "JohnsonRabinovic2007"
+
+\end_inset
+
+).
  Because MAS5 does not logarithmize the data, but RMA does, MAS5 was tried
  with additional logarithmizing of the data.
- ComBat (TODO: cite) was designed as a batch-effect correction method.
+ ComBat was designed as a batch-effect correction method.
  This means it tries to produce a data set with the same size as the original
  one, but with a possible batch-effect between samples removed.
  As input, ComBat needs the expression matrix and, for each sample, the
@@ -10536,15 +10599,24 @@ ZCA normalization
 \begin_layout Standard
 We also tried applying ZCA normalization after all 4 normalizations tried
  above.
- This step helped in face recognition, for example (TODO: cite the (a bit
- older, maybe from 1999?) paper from Toronto).
+ This step helped in face recognition, for example 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KrizhevskyHinton2009"
+
+\end_inset
+
+.
  However, for our data set it resulted in random classifiers, i.e.
  their accuracies were around 0.5.
 \end_layout
 
 \begin_layout Standard
-(TODO: write what ZCA does in images (contrast enhacement?) and hypothesize
- why this does not help in expression data.)
+On second thought, ZCA whitening is non-sensical in expression data since
+ it is a linear transformation on the whole expression matrix.
+ It can be seen as creating artificial features by linearly combining genes
+ such that .
+ Those genes may not have anything in common
 \end_layout
 
 \begin_layout Subsection

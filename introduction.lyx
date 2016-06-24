@@ -298,37 +298,40 @@ The eye, a visual system
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: how does light on rhodopsin lead to glutamate release inhibition?
-\end_layout
-
-\end_inset
-
-In the eye, specialized cells, the rods and cones detect light
+In the eye, specialized cells called rods and cones detect light
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Kolb2003"
+key "Biochemistry2002,Kolb2003"
 
 \end_inset
 
 .
- In these cells, light elicits a transformation of cis-rhodopsin to trans-rhodop
-sin, which receives a G protein binding site.
- Transducin binds to the activated rhodopsin, and GDP acquires a phosphate
- group to form GTP.
- 
-\end_layout
-
-\begin_layout Standard
-Rods are more sensitive to dim light, while cones only react to bright light
- only but can see colors.
+ Rods are more sensitive to dim light, while cones only react to bright
+ light only but can see colors.
  Both release the neurotransmitter glutamate continuously into the synaptic
  cleft, but when hit by light, suspend this emission for the duration of
  the light.
- The area that must be lit for a cell to emit neurotransmitter is called
+ Specifically, light elicits a transformation of cis-rhodopsin to trans-rhodopsi
+n, which receives a G protein binding site.
+ The G-protein transducin binds to the activated rhodopsin, and GDP acquires
+ a phosphate group to form GTP.
+ The 
+\begin_inset Formula $\alpha$
+\end_inset
+
+-subunit of transducin activates a cGMP phosphodiesterase, which in turn
+ hydrolyzes cGMP to GMP.
+ The reduction in the concentration of cGMP causes cGMP-gated ion channels
+ to close.
+ This in turn hyperpolarizes the photosensitive cell, causing glutamate
+ to be released into the synaptic cleft at a slower rate.
+ The long pathway between cis-rhodopsin to glutamate release inhibition
+ facilitates an amplification of the signal at every step, which allows
+ rod cells to send a signal in response to a single photon.
+\end_layout
+
+\begin_layout Standard
+The area that must be lit for a cell to emit neurotransmitter is called
  the 
 \emph on
 receptive field
@@ -382,8 +385,8 @@ The machinery facilitating propagation and transmission of information in
 status open
 
 \begin_layout Plain Layout
-Hier ein Bild einfügen, das links ein biologisches neuronales Netz zeigt,
- und rechts ein artifizielles.
+TODO: Hier ein Bild einfügen, das links ein biologisches neuronales Netz
+ zeigt, und rechts ein artifizielles.
 \end_layout
 
 \end_inset
@@ -397,14 +400,82 @@ Odor sensing in the olfactory system
 
 \begin_layout Standard
 The olfactory system of mammals and insects contains neurons that detect
- odor molecules called glomeruli.
+ odor molecules called glomeruli
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZhangSharpee2016"
+
+\end_inset
+
+.
  In humans, there are about 500 different types of glomeruli [1], but it
  is hypothesized that a human can perceive around 10,000 different odors.
- A single odorant consisting of a mixture of different odor molecules can
- excite one or more glomeruli.
- Each glomerulus is connected to one or more neurons in the olfactory cortex
- in the mammalian brain, or to one or more Kenyon Cells in insects.
- For example, in 
+ Each 
+\begin_inset Quotes eld
+\end_inset
+
+atomic
+\begin_inset Quotes erd
+\end_inset
+
+ odor excites one or more glomeruli, and the compression requires each glomerulu
+s to signal the presence of one or more than one odor.
+ The excitation pattern of multiple glomeruli must be resolved in the olfactory
+ neuronal system so that a low-dimensional vector of (~500) glomeruli activation
+s is resolved to a high-dimensional representation of (~10,000) odors in
+ the brain.
+\end_layout
+
+\begin_layout Standard
+Each glomerulus is connected to one or more Kenyon Cells in insects.
+ The activation of a Kenyon cell signals to the insect nervous system the
+ presence of one specific odor.
+ (In the mammalian brain, a single odor is represented by neurons in the
+ olfactory cortex.) The circuit connecting glomeruli to Kenyon cells is feed-forw
+ard only, i.e.
+ without recurrent connections (loops).
+ The structure of a feed-forward compressed sensing circuitry is of interest,
+ because standard compressed sensing circuits are dynamic systems that converge
+ to one of their attractor states.
+ In addition to quick decoding of odors, experimental evidence shows that
+ the compressed sensing circuitry is robust to noise, i.e.
+ spurious neuronal spikes in or experimental inhibition of glomeruli.
+\end_layout
+
+\begin_layout Standard
+It has been proposed 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZhangSharpee2016"
+
+\end_inset
+
+ that a possible feed-forward architecture could facilitate odor decoding
+ simply by implementing a logical AND over all glomeruli known to be active
+ when a specific odor is present.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+That is, odor component i will be detected as present if all glomeruli that
+ feed signals to node i in the reconstruction layer are activated.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For example, in 
 \emph on
 Drosophila
 \emph default
