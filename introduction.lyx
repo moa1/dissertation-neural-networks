@@ -400,7 +400,7 @@ Odor sensing in the olfactory system
 
 \begin_layout Standard
 The olfactory system of mammals and insects contains neurons that detect
- odor molecules called glomeruli
+ odor molecules, called glomeruli
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ZhangSharpee2016"
@@ -418,42 +418,52 @@ atomic
 \begin_inset Quotes erd
 \end_inset
 
- odor excites one or more glomeruli, and the compression requires each glomerulu
-s to signal the presence of one or more than one odor.
+ odor consisting of a few (<100) molecular species excites one or more glomeruli
+, and the compression requires each glomerulus to signal the presence of
+ one or more than one odor.
  The excitation pattern of multiple glomeruli must be resolved in the olfactory
  neuronal system so that a low-dimensional vector of (~500) glomeruli activation
-s is resolved to a high-dimensional representation of (~10,000) odors in
- the brain.
+s is decompressed to a high-dimensional representation of (~10,000) odors
+ in the brain.
 \end_layout
 
 \begin_layout Standard
 Each glomerulus is connected to one or more Kenyon Cells in insects.
- The activation of a Kenyon cell signals to the insect nervous system the
- presence of one specific odor.
+ It is assumed that the activation of a Kenyon cell signals to the insect
+ nervous system the presence of one specific odor.
  (In the mammalian brain, a single odor is represented by neurons in the
- olfactory cortex.) The circuit connecting glomeruli to Kenyon cells is feed-forw
-ard only, i.e.
+ olfactory cortex.) Experiments show that the circuit connecting glomeruli
+ to Kenyon cells is feed-forward only, i.e.
  without recurrent connections (loops).
  The structure of a feed-forward compressed sensing circuitry is of interest,
- because standard compressed sensing circuits are dynamic systems that converge
- to one of their attractor states.
+ because standard compressed sensing circuits are recurrent dynamic systems
+ that converge to one of their attractor states.
  In addition to quick decoding of odors, experimental evidence shows that
- the compressed sensing circuitry is robust to noise, i.e.
- spurious neuronal spikes in or experimental inhibition of glomeruli.
+ the biological compressed sensing circuitry is robust to noise, i.e.
+ spurious neuronal spikes in or experimental inhibition
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Also experimental modifications of glomeruli have been made so that half
+ of all glomeruli always express only one type of receptor.
+\end_layout
+
+\end_inset
+
+ of glomeruli.
 \end_layout
 
 \begin_layout Standard
-It has been proposed 
+The theoretical work of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ZhangSharpee2016"
 
 \end_inset
 
- that a possible feed-forward architecture could facilitate odor decoding
- simply by implementing a logical AND over all glomeruli known to be active
- when a specific odor is present.
- 
+ proposed that a possible feed-forward architecture could facilitate odor
+ decoding simply by implementing a logical AND
 \begin_inset Note Note
 status open
 
@@ -471,7 +481,75 @@ That is, odor component i will be detected as present if all glomeruli that
 
 \end_inset
 
+.
+ The neuronal AND-circuit could require for at least (for example) 80% of
+ glomeruli known to be active when a specific odor is present and then activate
+ this specific odor's Kenyon cell.
+ On a cellular level, this could be realized by connecting the glomeruli
+ associated with an odor with the odor's Kenyon cell, and a threshold at
+ the Kenyon cell's input.
+\end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The following is from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZhangSharpee2016"
+
+\end_inset
+
+'s discussion section.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZhangSharpee2016"
+
+\end_inset
+
+ showed that the optimal connectivity between glomeruli and Kenyon cells
+ 
+\begin_inset Formula $p_{m}$
+\end_inset
+
+ only depends on the sparseness (i.e.
+ number of molecular species in an odor) 
+\begin_inset Formula $K$
+\end_inset
+
+: 
+\begin_inset Formula $p_{m}=1/(K+1)$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+A prediction of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ZhangSharpee2016"
+
+\end_inset
+
+ is that the number of glomeruli activated by a single odor should be close
+ to the number of glomeruli that are connected to a Kenyon cell.
+ This means that the validity of the feed-forward model can be tested by
+ measuring the odor sparseness in the environment of an animal species and
+ comparing it to its average number of connections from glomeruli to Kenyon
+ cells.
 \end_layout
 
 \begin_layout Standard
@@ -480,22 +558,17 @@ For example, in
 Drosophila
 \emph default
 , about 9% of the glomeruli are excited by an odorant, and the connectivity
- between glomeruli and Kenyon Cells is between 6.5% and 12.5%.
- However, these numbers vary greatly between species.
- It is hypothesized that species with sparse connectivity have better odor
- perception of complex odor mixtures.
- On the other hand, species with dense connectivity should have better performan
-ce in detecting low concentrations of simple odor mixtures.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(TODO: confirm the last sentence.)
+ rate between glomeruli and Kenyon Cells is between 6.5% and 12.5%.
+ In the locust, a projection neuron (the equivalent to a glomerulus) is
+ activated by half of the odorants and the connectivity rate is about 50%.
+ This is in agreement with the proposed model.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Standard
+The model also predicts that species with sparse connectivity have better
+ odor perception of complex odor mixtures.
+ On the other hand, species with dense connectivity should have better olfactory
+ performance in detecting simple odor mixtures.
 \end_layout
 
 \begin_layout Subsection
@@ -898,12 +971,15 @@ In unsupervised learning, there are only input data and the goal is to find
  to output space, where both spaces can differ in their dimensionality.
  This can be used for example for dimensionality reduction, or data re-represent
 ation and abstraction.
- Examples of supervised learning algorithms are (linear or logistic) regression,
- k-Nearest-Neighbor (k-NN), support vector machines (SVMs), backpropagation
- neuronal networks, Deep Belief Networks (DBNs).
- Examples for unsupervised learning algorithms are clustering, self-organising
- maps (SOMs), principal component analysis (PCA), Restricted Boltzmann Machine
- (RBM).
+\end_layout
+
+\begin_layout Standard
+Examples of supervised learning algorithms are (linear or logistic) regression,
+ k-Nearest Neighbor (k-NN) regression, support vector machines (SVMs), backpropa
+gation neuronal networks, Deep Belief Networks (DBNs).
+ Examples for unsupervised learning algorithms are (hierarchical or kNN)
+ clustering, self-organising maps (SOMs), principal component analysis (PCA),
+ Restricted Boltzmann Machines (RBMs).
 \end_layout
 
 \begin_layout Subsection
@@ -1070,8 +1146,8 @@ iid
 ).
  In an ideal world, GEO samples could be assumed to be identically distributed
  within a data set.
- However, even within the same GEO data set there often is systematic variation
- between samples, called the 
+ Unfortunately even within the same GEO data set there often is systematic
+ variation between samples, called the 
 \emph on
 batch-effect
 \emph default
@@ -1160,6 +1236,7 @@ key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
  Such results seem to imply that DBNs are able to abstract the images, which
  are given as vectors of pixels, into encodings of relevant features and
  compute a classifier on these abstract features.
+ This can be seen as a form of batch-effect correction.
 \end_layout
 
 \begin_layout Standard
