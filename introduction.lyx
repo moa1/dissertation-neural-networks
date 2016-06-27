@@ -1310,6 +1310,44 @@ status open
 
  However, back-propagation was not able to train networks with more than
  very few hidden layers.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/introduction-backpropagation-data-flow.dia
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Data flow in training a neuronal network with three layers using back-propagatio
+n.
+ The input layer is at the bottom, the hidden layer in the middle, and the
+ output layer at the top.
+ The black arrows denote information flow about the activation state from
+ the node at the arrow tail to the node at the arrow head.
+ Each arrow is associated with a weight from tail to head.
+ The orange arrows denote information flow during error back-propagation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
