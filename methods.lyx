@@ -77,67 +77,6 @@ fix-cm
 status open
 
 \begin_layout Plain Layout
-TODO: replace the 
-\begin_inset Quotes eld
-\end_inset
-
-|
-\begin_inset Quotes erd
-\end_inset
-
- in all conditional probabilities 
-\begin_inset Formula $P(A|B)$
-\end_inset
-
- with the 
-\backslash
-mid sign, e.g.
- 
-\begin_inset Formula $P(A\mid B)$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: in all formulas, replace brackets near a sum sign (as in 
-\begin_inset Formula $\sum_{i}(\frac{a}{b})$
-\end_inset
-
-) with large brackets (key 
-\begin_inset Quotes eld
-\end_inset
-
-Alt+m (
-\begin_inset Quotes erd
-\end_inset
-
-): 
-\begin_inset Formula $\sum_{i}\left(\frac{a}{b}\right)$
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
  graphical, RBM, DBN) immer gleich strukturieren: 1.
  structure (i.e.
@@ -401,11 +340,7 @@ graph
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-is a tuple 
+ is a tuple 
 \begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
 \end_inset
 
@@ -454,6 +389,10 @@ edge
 \end_inset
 
  connected by an edge are called 
+\emph on
+neighbors
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -463,12 +402,12 @@ neighbor
 
 \end_inset
 
-
-\emph on
-neighbors
-\emph default
 .
  A 
+\emph on
+complete graph
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -478,11 +417,7 @@ complete graph
 
 \end_inset
 
-
-\emph on
-complete graph 
-\emph default
-is a graph where there exists an edge 
+ is a graph where there exists an edge 
 \begin_inset Formula $E=(N_{1},N_{2})$
 \end_inset
 
@@ -573,6 +508,10 @@ undirected graph
 \end_inset
 
  is called the 
+\emph on
+parent
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -582,15 +521,15 @@ parent
 
 \end_inset
 
-
-\emph on
-parent
-\emph default
  and 
 \begin_inset Formula $C$
 \end_inset
 
  the 
+\emph on
+child
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -600,10 +539,6 @@ child
 
 \end_inset
 
-
-\emph on
-child
-\emph default
 .
 \end_layout
 
@@ -675,6 +610,10 @@ ancestor
 \end_inset
 
  is called  
+\emph on
+descendant
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -684,11 +623,7 @@ descendant
 
 \end_inset
 
-
-\emph on
-descendant 
-\emph default
-of 
+ of 
 \begin_inset Formula $P_{p}$
 \end_inset
 
@@ -723,6 +658,10 @@ of
 \end_inset
 
  is called a 
+\emph on
+cycle
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -732,10 +671,6 @@ cycle
 
 \end_inset
 
-
-\emph on
-cycle
-\emph default
 .
 \end_layout
 
@@ -754,11 +689,7 @@ directed acyclic graph
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-(DAG
+ (DAG
 \begin_inset Index idx
 status collapsed
 
@@ -786,11 +717,7 @@ clique
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-in an undirected graph is a subset of nodes 
+ in an undirected graph is a subset of nodes 
 \begin_inset Formula $\mathbf{N_{C}}\subset\mathbf{N}$
 \end_inset
 
@@ -840,11 +767,7 @@ separation of nodes
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-from a set of nodes 
+ from a set of nodes 
 \begin_inset Formula $\mathbf{N_{B}}\subset\mathbf{N}$
 \end_inset
 
@@ -1111,11 +1034,7 @@ We want to encode a joint probability distribution
 .
  Every random variable corresponds to a node.
  The missing edges encode conditional independencies.
- 
-\emph on
-A complete graph 
-\emph default
-would encode no conditional independencies.
+ A complete graph would encode no conditional independencies.
  However, to minimize computation time we normally want to get a minimal
  graph that still encodes the joint probability distribution faithfully.
  What properties does thee joint probability distribution 
@@ -1155,11 +1074,7 @@ Hammersley-Clifford theorem
 
 \end_inset
 
-
-\emph on
  
-\emph default
-
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HammersleyClifford1971"
@@ -1221,11 +1136,7 @@ Gibbs distribution
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-that factorizes according to the maximal cliques 
+ that factorizes according to the maximal cliques 
 \begin_inset Formula $\mathbf{C_{1}},\dots,\mathbf{C_{m}}$
 \end_inset
 
@@ -1324,6 +1235,8 @@ name "local-Markov-property"
 the 
 \emph on
 local Markov property
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1333,9 +1246,7 @@ local Markov property
 
 \end_inset
 
- 
-\emph default
-holds for the graph 
+ holds for the graph 
 \begin_inset Formula $G$
 \end_inset
 
@@ -1428,11 +1339,7 @@ global Markov property
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-holds for the graph 
+ holds for the graph 
 \begin_inset Formula $G$
 \end_inset
 
@@ -2042,6 +1949,10 @@ A directed graphical model is defined by the directed graph
 \end_inset
 
  (this is called the 
+\emph on
+local Markov property
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -2051,10 +1962,6 @@ local Markov property
 
 \end_inset
 
-
-\emph on
-local Markov property
-\emph default
  of directed graphs):
 \begin_inset Formula 
 \[
@@ -2770,6 +2677,10 @@ For example let a directed acyclic graph be defined by the following directed
 .
  This layered architecture, where each node in a layer is connected to all
  nodes in adjacent layers, defines a directed graphical model called 
+\emph on
+Deep Belief Network
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -2779,10 +2690,6 @@ Deep Belief Network
 
 \end_inset
 
-
-\emph on
-Deep Belief Network
-\emph default
 .
  (We will discuss them in 
 \begin_inset CommandInset ref
@@ -2916,6 +2823,10 @@ This does not look too complicated, but note that if there are
 
  except one, and this for all variables.
  The phenomenon that leads to this computational problem is called 
+\emph on
+explaining away
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -2925,10 +2836,6 @@ explaining away
 
 \end_inset
 
-
-\emph on
-explaining away
-\emph default
 .
  
 \begin_inset Note Note
@@ -3407,9 +3314,19 @@ Markov property: Memorylessness
 \begin_layout Standard
 A 
 \emph on
-Markov Chain 
+Markov Chain
 \emph default
-is a time sequence of random variables 
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Markov Chain
+\end_layout
+
+\end_inset
+
+ is a time sequence of random variables 
 \begin_inset Formula $X_{t}$
 \end_inset
 
@@ -3431,7 +3348,7 @@ is a time sequence of random variables
  
 \begin_inset Formula 
 \[
-P(X_{t}=x_{t}|X_{0}=x_{0},\dots,X_{t-1}=x_{t-1})=P(X_{t}=x_{t}|X_{t-1}=x_{t-1})
+P(X_{t}=x_{t}\mid X_{0}=x_{0},\dots,X_{t-1}=x_{t-1})=P(X_{t}=x_{t}\mid X_{t-1}=x_{t-1})
 \]
 
 \end_inset
@@ -3526,7 +3443,7 @@ time-homogeneous Markov Chain
  
 \begin_inset Formula 
 \[
-P(X_{t}=x_{t}|X_{t-1}=x_{t-1})=P(X_{t-1}=x_{t-1}|X_{t-2}=x_{t-2})
+P(X_{t}=x_{t}\mid X_{t-1}=x_{t-1})=P(X_{t-1}=x_{t-1}\mid X_{t-2}=x_{t-2})
 \]
 
 \end_inset
@@ -3591,13 +3508,37 @@ TODO: In the following, do I have to replace
 \noun off
 \color none
  
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
 \begin_inset Formula 
 \[
-P(X_{t}=j|X_{t-1}=i)\eqqcolon p_{ij}
+P(X_{t}=j\mid X_{t-1}=i)\eqqcolon p_{ij}
 \]
 
 \end_inset
 
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
  is independent of the current time 
 \begin_inset Formula $t$
 \end_inset
@@ -3671,11 +3612,7 @@ probability vector
 
 \end_inset
 
-
-\emph on
  
-\emph default
-
 \begin_inset Formula $d^{(t)}$
 \end_inset
 
@@ -3777,11 +3714,7 @@ invariant distribution
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-or 
+ or 
 \emph on
 stationary distribution
 \emph default
@@ -3834,6 +3767,10 @@ A Markov chain with transition matrix
 \end_inset
 
  satisfies 
+\emph on
+detailed balance
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -3845,7 +3782,7 @@ detailed balance
 
 
 \emph on
-detailed balance 
+ 
 \emph default
 if there exists a probability distribution 
 \begin_inset Formula $\pi=(\pi_{1},\pi_{2},\dots\pi_{n})$
@@ -4032,6 +3969,16 @@ Under what conditions does a Markov chain have an unique stationary distribution
 Fundamental Theorem of Markov Chains
 \emph default
 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Fundamental Theorem of Markov Chains
+\end_layout
+
+\end_inset
+
+
 \begin_inset Note Note
 status open
 
@@ -4199,7 +4146,7 @@ positive recurrent
  is 
 \begin_inset Formula 
 \[
-f_{ij}^{(k)}:=P(X_{1}\neq j,X_{2}\neq j,\dots,X_{k-1}\neq j,X_{k}=j|X_{0}=i)
+f_{ij}^{(k)}:=P(X_{1}\neq j,X_{2}\neq j,\dots,X_{k-1}\neq j,X_{k}=j\mid X_{0}=i)
 \]
 
 \end_inset
@@ -4401,6 +4348,16 @@ The definition of an
 \emph on
 aperiodic
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+aperiodic
+\end_layout
+
+\end_inset
+
  state is shorter.
  The period of a state
 \begin_inset Index idx
@@ -4428,7 +4385,7 @@ period of a state
  before: 
 \begin_inset Formula 
 \[
-period(i)=gcd(\{k|k\geq0,p_{ii}^{k}>0\})
+period(i)=gcd(\{k\mid k\geq0,p_{ii}^{k}>0\})
 \]
 
 \end_inset
@@ -4446,16 +4403,6 @@ period(i)=gcd(\{k|k\geq0,p_{ii}^{k}>0\})
 \emph on
 aperiodic
 \emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-aperiodic
-\end_layout
-
-\end_inset
-
 .
  If all states of a Markov chain are aperiodic, the Markov chain is called
  aperiodic.
@@ -4573,11 +4520,7 @@ key "GemanGeman1984"
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-is an instance of a Markov Chain Monte Carlo (MCMC) algorithm.
+ is an instance of a Markov Chain Monte Carlo (MCMC) algorithm.
  Its goal is to generate samples from a multivariate joint probability distribut
 ion, without having to know its closed form.
  The generated samples can then be used to compute an approximation of the
@@ -4613,7 +4556,7 @@ This means that a precondition to being able to use a Gibbs Sampler is that
  be known in closed form: 
 \begin_inset Formula 
 \[
-P(X_{i}|\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},X_{n})
+P(X_{i}\mid\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},X_{n})
 \]
 
 \end_inset
@@ -4914,7 +4857,7 @@ Then an iterative process is started.
  from the conditional probability distribution 
 \begin_inset Formula 
 \begin{equation}
-P(X_{i}|X_{1}=x_{1}^{(t-1)},\dots,X_{i-1}=x_{i-1}^{(t-1)},X_{i+1}=x_{i+1}^{(t-1)},\dots,X_{n}=x_{n}^{(t-1)})\label{eq:Gibbs sampling: CPD}
+P(X_{i}\mid X_{1}=x_{1}^{(t-1)},\dots,X_{i-1}=x_{i-1}^{(t-1)},X_{i+1}=x_{i+1}^{(t-1)},\dots,X_{n}=x_{n}^{(t-1)})\label{eq:Gibbs sampling: CPD}
 \end{equation}
 
 \end_inset
@@ -4937,7 +4880,7 @@ block
  of multiple random variables can be sampled from the conditional distribution
  given all the other random variables (e.g.
  
-\begin_inset Formula $P(X_{i_{1}},X_{i_{2}},X_{i_{3}}|\mathbf{X_{j}=x_{j}^{(t-1)}},j\in\{1,\dots,n\}\backslash\{i_{1},i_{2},i_{3}\})$
+\begin_inset Formula $P(X_{i_{1}},X_{i_{2}},X_{i_{3}}\mid\mathbf{X_{j}=x_{j}^{(t-1)}},j\in\{1,\dots,n\}\backslash\{i_{1},i_{2},i_{3}\})$
 \end_inset
 
 ).
@@ -5075,13 +5018,9 @@ samples.
 
 \begin_layout Standard
 This can be mitigated by returning only the states of every 
-\emph on
-
 \begin_inset Formula $n$
 \end_inset
 
-
-\emph default
 th iteration, where 
 \begin_inset Formula $n$
 \end_inset
@@ -5278,7 +5217,7 @@ Given the states of all variables
 \end_inset
 
  from its conditional distribution 
-\begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}|X_{1}=x_{1}^{(t)},\dots,X_{i-1}=x_{i-1}^{(t)},X_{i+1}=x_{i+1}^{(t)},\dots,X_{n}=x_{n}^{(t)})$
+\begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}\mid X_{1}=x_{1}^{(t)},\dots,X_{i-1}=x_{i-1}^{(t)},X_{i+1}=x_{i+1}^{(t)},\dots,X_{n}=x_{n}^{(t)})$
 \end_inset
 
 .
@@ -5290,7 +5229,7 @@ reference "par:Hammersley-Clifford-theorem"
 \end_inset
 
  this conditional probability is equal to 
-\begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}|\mathbf{X}_{Neighborhood(X_{i})})$
+\begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}\mid\mathbf{X}_{Neighborhood(X_{i})})$
 \end_inset
 
 .
@@ -5452,7 +5391,7 @@ reference "eq:Gibbs sampling: CPD"
  is 
 \begin_inset Formula 
 \[
-P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}|\mathbf{X}_{Neighborhood(X_{i})})
+P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{Neighborhood(X_{i})})
 \]
 
 \end_inset
@@ -5462,7 +5401,7 @@ P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}|\mathbf{X}_{Neighborhoo
  be 
 \begin_inset Formula 
 \[
-P(X_{i}|X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}|\mathbf{X}_{MarkovBlanket(X_{i})})
+P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})})
 \]
 
 \end_inset
@@ -5721,7 +5660,7 @@ The network is updated asynchronously: At each time point
 : 
 \begin_inset Formula 
 \[
-n_{i}^{(t)}=f(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i})
+n_{i}^{(t)}=f\left(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i}\right)
 \]
 
 \end_inset
@@ -6161,19 +6100,20 @@ Back-propagation
 \end_layout
 
 \begin_layout Standard
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-Back-propagation
-\end_layout
-
-\end_inset
-
 
 \emph on
 Back-propagation
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+back-propagation
+\end_layout
+
+\end_inset
+
  is the adaptation of weights and biases of the network to make its set
  of actual outputs better fit a set of desired outputs for a given set of
  inputs.
@@ -6397,7 +6337,7 @@ momentum
 \emph default
 
 \begin_inset Index idx
-status open
+status collapsed
 
 \begin_layout Plain Layout
 momentum
@@ -6405,11 +6345,7 @@ momentum
 
 \end_inset
 
-
-\emph on
- 
-\emph default
-term.
+ term.
  
 \begin_inset Note Note
 status open
@@ -7122,7 +7058,7 @@ L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
  is 
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}(\sum_{\mathbf{s}}P(\mathbf{S=s}\mid\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j})
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\left(\sum_{\mathbf{s}}P(\mathbf{S=s}\mid\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j}\right)
 \]
 
 \end_inset
@@ -7494,7 +7430,7 @@ L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
  is 
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}(P(H_{i}=1\mid\mathbf{V=v})v_{j}-\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})v_{j})
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\left(P(H_{i}=1\mid\mathbf{V=v})v_{j}-\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})v_{j}\right)
 \]
 
 \end_inset
@@ -7806,7 +7742,7 @@ ty associated with node
  and can be expressed as a sigmoid function 
 \begin_inset Formula 
 \begin{eqnarray*}
-P(N_{i} & = & n_{i}|\mathbf{N_{j}=n_{j}}:\mathbf{j}<i)=\sigma((2n_{i}-1)\sum_{j<i}n_{j}w_{ij})
+P(N_{i} & = & n_{i}\mid\mathbf{N_{j}=n_{j}}:\mathbf{j}<i)=\sigma((2n_{i}-1)\sum_{j<i}n_{j}w_{ij})
 \end{eqnarray*}
 
 \end_inset
@@ -7881,7 +7817,7 @@ in equation 27
 , it is
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\sum_{\mathbf{s}}P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})(2s_{i}-1)s_{j}\sigma((-2s_{i}+1)\sum_{k<i}s_{k}w_{ik})
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\sum_{\mathbf{s}}P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})(2s_{i}-1)s_{j}\sigma\left((-2s_{i}+1)\sum_{k<i}s_{k}w_{ik}\right)
 \]
 
 \end_inset
@@ -8296,6 +8232,16 @@ It is an important property that single as well as stacked RBMs
 \emph on
 pre-training
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pre-training
+\end_layout
+
+\end_inset
+
 .
  Furthermore, another neural network can be put on top of the pre-trained
  converted DBN, where the final (output) layer has neurons corresponding
