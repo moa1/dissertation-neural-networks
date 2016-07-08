@@ -214,8 +214,9 @@ Schema of a chemical synapse.
  Green and blue: ion transporters maintain intracellular ion concentrations.
  Purple: receptors signal to the inside of the cell the absence or presence
  of neurotransmitter on the outside of the cell.
- Red: neurotransmitter is stored inside the cell and emitted into the synaptic
- cleft upon an electric potential arriving at the terminal.
+ Red: neurotransmitter is stored inside the cell in vesicles and emitted
+ into the synaptic cleft upon an electric potential arriving at the axon
+ terminal.
 \end_layout
 
 \end_inset
@@ -1626,10 +1627,8 @@ key "BengioDelalleau2007"
 status open
 
 \begin_layout Plain Layout
-TODO: cite Bengio and Delalleau, 2007, Justifying and Generalizing Contrastive
- Divergence.
- Wahrscheinlich sollte der ganze Satz hier in die Methods, nicht die Introductio
-n.
+Evtl.
+ sollte der ganze Satz hier in die Methods, nicht die Introduction.
 \end_layout
 
 \end_inset
@@ -1921,11 +1920,393 @@ TODO: give an overview of the recognition rates in image recognition papers.
 \end_layout
 
 \begin_layout Subsubsection
+The ImageNet Large Scale Visual Recognition Challenge
+\end_layout
+
+\begin_layout Standard
+This shall be exemplified by image classification in the ImageNet Large
+ Scale Visual Recognition Challenge (TODO: cite 1409.0575v3.pdf on Arxiv).
+ It is a yearly contest, wherein participants are given around 1.2 million
+ training images.
+ Each training image is labeled with one of 1.000 possible object categories
+ describing the main object appearing in the image, for example 
+\begin_inset Quotes eld
+\end_inset
+
+trumpet
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+butterfly
+\begin_inset Quotes erd
+\end_inset
+
+.
+ After training an image classification algorithm, each contestant must
+ compute up to 5 labels for each of 100.000 test images.
+ Each test image has a label, which is kept hidden by the contest organizer.
+ A test image is scored as correctly classified if the correct label appears
+ in the (up to 5) labels submitted by the contestant.
+ Finally, the accuracy of an contestant is computed as the average fraction
+ of correctly classified test images.
+\end_layout
+
+\begin_layout Standard
+There have been dramatic improvements in the accuracy of the winning contestant,
+ starting in 2012.
+ In the last years, all top contestants have moved to using deep neuronal
+ networks.
+ See table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:ILSVRC-Test-set-accuracies"
+
+\end_inset
+
+ for the winning contestants between 2010 and 2014.
+ Significant differences before and after 2012 are the usage of neuronal
+ networks directly on the image pixel data, and not using pre-computed features
+ in a supervised learning algorithm like a Support Vector Machine.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="4">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Year
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Winner
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Accuracy
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Technique
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2010
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NEC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+71.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SIFT and LBP image features classified by SVM
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2011
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+XRCE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+74.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+image signatures classified by one-vs-all SVMs
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2012
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SuperVision
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+83.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+deep convolutional neuronal network
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2013
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Clarifai
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+88.3%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+deep convolutional neuronal networks averaged
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2014
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GoogLeNet
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+93.3%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+deep convolutional neuronal network
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:ILSVRC-Test-set-accuracies"
+
+\end_inset
+
+Test set accuracies and techniques of winning contestants in the ImageNet
+ Large Scale Visual Recognition Challenge from 2010-2014.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 Highly correlated inputs
 \end_layout
 
 \begin_layout Standard
-Both underlying distributions often have many correlated dimensions.
+We will now discuss similarities between image classification and expression
+ data classification.
+\end_layout
+
+\begin_layout Standard
+Both underlying distributions -- of images and of expression data -- often
+ have many correlated dimensions.
  For images, adjacent pixels often display the same object and have therefore
  correlated values.
  In some face recognition tasks for example, the faces are scaled and translated

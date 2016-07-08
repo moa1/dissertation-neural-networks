@@ -133,8 +133,14 @@ see Figure 1
 \begin_layout Standard
 We selected the GSE25055 and GSE25065 data sets because they are among the
  biggest labeled cancer data sets in GEO that come from a single source.
- Like in (TODO: cite Hatzis et al.
- paper), the larger GSE25055 was used for training a classifier, and the
+ Like in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HatzisSymmans2011"
+
+\end_inset
+
+, the larger data set GSE25055 was used for training a classifier, and the
  independently measured data set GSE25065 was used for testing the classifier.
  We used artificial neuronal networks as classifiers by predicting the class
  1 probability of the samples.
@@ -343,6 +349,10 @@ sed learning, one has to constrain the class proportions (in our case to
  digits, where accuracies of 96% can be achieved by nearest neighbor classifiers.
  There are much less number of labeled and unlabeled samples in expression
  data than those available in image recognition.
+ For example, in the image classification task in the ImageNet Large Scale
+ Visual Recognition Challenge (TODO: cite 1409.0575v3.pdf on Arxiv), there
+ are an average of ~1.200 images per class, while in the GSE25055 data set,
+ there are 249 class 0 and 57 class 1 samples.
 \end_layout
 
 \begin_layout Paragraph
