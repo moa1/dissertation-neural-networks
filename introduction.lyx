@@ -127,8 +127,8 @@ key "BullockDouglas2005"
 
 ) as the smallest units whose state change may be called signal processing,
  so they are the basic signal processing units.
- They have multiple inputs, called dendrites, and multiple outputs, called
- axons 
+ They have multiple inputs at dendrites, and multiple outputs at axon terminals
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ByrneDafny1997"
@@ -136,16 +136,96 @@ key "ByrneDafny1997"
 \end_inset
 
 .
- (TODO: insert the two hand-drawn images here, that I drew: of neurons,
- and of a synapse) In most real neurons, the signal transmission and processing
- is facilitated by alternating small electric (action) potentials (along
- the axons) and chemical transmissions (at chemical synapses between axon
- and dendrite).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/neurons.pdf
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schematic image of three biological neurons.
+ A: neuron body B: nucleus C: dendrite D: synapse E: axon projecting from
+ a distant neuron.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In most real neurons, the signal transmission and processing is facilitated
+ by alternating small electric (action) potentials (along the axons) and
+ chemical transmissions (at chemical synapses between axon and dendrite).
  The electric potential is transmitted along the dendrites of a neuron,
  and flows to the axon of the neuron, which can lead to the release of neurotran
-smitters in the axon terminals.
- The neurotransmitters cause ion channels in the adjacent dendrites of other
- neurons to open, which changes their membrane potential.
+smitters stored in the axon terminals into the synaptic cleft.
+ The released neurotransmitters are detected by receptors and cause ion
+ channels in the adjacent dendrites of other neurons to open, which changes
+ their membrane potential.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/synapse.pdf
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schema of a chemical synapse.
+ The signal is transmitted from the axon terminal (right) to the dendrite
+ (left).
+ Grey: membranes of neurons.
+ Green and blue: ion transporters maintain intracellular ion concentrations.
+ Purple: receptors signal to the inside of the cell the absence or presence
+ of neurotransmitter on the outside of the cell.
+ Red: neurotransmitter is stored inside the cell and emitted into the synaptic
+ cleft upon an electric potential arriving at the terminal.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -306,8 +386,8 @@ key "Biochemistry2002,Kolb2003"
 \end_inset
 
 .
- Rods are more sensitive to dim light, while cones only react to bright
- light only but can see colors.
+ Rods are more sensitive to dim light, while cones react to bright light
+ only but can see colors.
  Both release the neurotransmitter glutamate continuously into the synaptic
  cleft, but when hit by light, suspend this emission for the duration of
  the light.
@@ -327,20 +407,30 @@ n, which receives a G protein binding site.
  to be released into the synaptic cleft at a slower rate.
  The long pathway between cis-rhodopsin to glutamate release inhibition
  facilitates an amplification of the signal at every step, which allows
- rod cells to send a signal in response to a single photon.
+ rod cells to send a signal in response to it being hit by a single photon.
 \end_layout
 
 \begin_layout Standard
-The area that must be lit for a cell to emit neurotransmitter is called
+The area that elicits a response in the cell upon being illuminated is called
  the 
 \emph on
 receptive field
 \emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+receptive field
+\end_layout
+
+\end_inset
+
 , and is just as large as the top of the photoreceptor for rods and cones.
- The glutamate binds to receptors on the cell outside of bipolar cells,
- and, depending on the type of bipolar cell, cause either an action potential
- to be generated when the photoreceptor is lit and the surrounding area
- is dark (
+ The released glutamate binds to receptors on the cell outside of bipolar
+ cells, and, depending on the type of bipolar cell, cause either an action
+ potential to be generated when the photoreceptor is lit and the surrounding
+ area is dark (
 \emph on
 ON 
 \emph default
@@ -350,15 +440,16 @@ bipolar cell), or when the photoreceptor is dark against a bright background
 OFF 
 \emph default
 bipolar cell).
- Horizontal cells integrate signals from surrounding cone cells, and feed
- their signal back to the cones, or directly to bipolar cells.
+ Another type of cell, the horizontal cell integrates signals from surrounding
+ cone cells, and feed their signal back to the cones, or directly to bipolar
+ cells.
  This enhances contrast.
  The signal from several bipolar cells is fed into a ganglion cell, which
  therefore has a larger receptive field than its connected bipolar cells.
  ON bipolar cells only excite ON ganglion cells, and OFF bipolar cells excite
  only OFF ganglion cells.
- Finally, there are more than a million nerve fibers from ganglion cells
- to the visual cortex of the brain.
+ Finally, in primates, there are more than a million nerve fibers from ganglion
+ cells to the visual cortex of the brain.
  Altogether, the basic cell types are, depending on the species, 1 to 4
  horizontal types of cell, 11 types of bipolar cells, 22 to 30 types of
  amacrine cells, and 20 types of ganglion cells.
@@ -482,9 +573,9 @@ That is, odor component i will be detected as present if all glomeruli that
 \end_inset
 
 .
- The neuronal AND-circuit could require for at least (for example) 80% of
- glomeruli known to be active when a specific odor is present and then activate
- this specific odor's Kenyon cell.
+ They suggest that the neuronal AND-circuit requires at least (for example)
+ 80% of glomeruli with receptors to a specific odor to respond and then
+ activates this specific odor's Kenyon cell.
  On a cellular level, this could be realized by connecting the glomeruli
  associated with an odor with the odor's Kenyon cell, and a threshold at
  the Kenyon cell's input.
@@ -547,9 +638,19 @@ key "ZhangSharpee2016"
  is that the number of glomeruli activated by a single odor should be close
  to the number of glomeruli that are connected to a Kenyon cell.
  This means that the validity of the feed-forward model can be tested by
- measuring the odor sparseness in the environment of an animal species and
- comparing it to its average number of connections from glomeruli to Kenyon
- cells.
+ measuring the odor sparseness
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Odor sparseness is the average number of different molecular species in
+ an odor.
+\end_layout
+
+\end_inset
+
+ in the environment of an animal species and comparing it to its average
+ number of connections from glomeruli to Kenyon cells.
 \end_layout
 
 \begin_layout Standard
@@ -671,7 +772,7 @@ TODO: Hier eine Figure mit dem Plot von
 
 \end_inset
 
-The effect of an incoming axon onto a neuron, that is, the different types
+ The effect of an incoming axon onto a neuron, that is, the different types
  of receptors that can be present on the outside of a real dendrite, and
  the effected de- or hyperpolarization of the dendrite are abstracted away
  by using real-numbered weights.
@@ -863,6 +964,10 @@ key "BermudezFederico2007"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Paragraph
+The Hebbian learning rule is local
 \end_layout
 
 \begin_layout Standard
@@ -1161,7 +1266,8 @@ batch-effect
 
 \end_inset
 
-.
+, caused, for example, by different sample handling or conditions at measurement
+ time.
  This means if one wants to use samples from different GEO data sets simultaneou
 sly, one either has to correct for a possible batch-effect manually, or
  use an algorithm that has some built-in mechanism to make such a correction.
@@ -1273,8 +1379,8 @@ Back-propagation
 \end_layout
 
 \begin_layout Standard
-Before deep learning, artificial neuronal networks were usually trained
- using only back-propagation without regularizations.
+Before deep learning, supervised artificial neuronal networks were usually
+ trained using back-propagation.
  Back-propagation learns from labeled samples the weights and biases of
  an artificial neuronal network 
 \begin_inset CommandInset citation
@@ -1296,18 +1402,6 @@ key "RumelhartWilliams1988"
  neuronal network such that when the current input pattern pair is presented
  to the network, its computed output pattern gets closer and closer to the
  desired output pattern.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(TODO: hier vielleicht eine figure mit dem Daten-strom von input layer über
- hidden layers in output layers, und dann backprop-daten-strom in reverse
- direction)
-\end_layout
-
-\end_inset
-
  However, back-propagation was not able to train networks with more than
  very few hidden layers.
 \begin_inset Float figure
@@ -1521,6 +1615,13 @@ contrastive divergence
 
 \begin_layout Standard
 (As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BengioDelalleau2007"
+
+\end_inset
+
+ 
 \begin_inset Note Note
 status open
 
@@ -1806,6 +1907,17 @@ Motivations for using Deep Belief Networks on transcriptomic data
 \begin_layout Standard
 The motivations for using Deep Belief Networks on transcriptomic data come
  from those networks' successes when used on image data.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: give an overview of the recognition rates in image recognition papers.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
