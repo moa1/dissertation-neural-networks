@@ -74,7 +74,7 @@ General Remarks
 \end_layout
 
 \begin_layout Subsection
-Reasons for choosing GSE25055 and GSE25065 as the data set
+Reasons for choosing GSE25055 and GSE25065 as data set
 \end_layout
 
 \begin_layout Standard
@@ -716,7 +716,7 @@ d.
 \begin_layout Standard
 The decoder network of the trained autoencoder was then thrown away, so
  that only the encoder remained.
- Classification was done on the compressed respresentation of the input.
+ Classification was done on the compressed representation of the input.
  The classifier network was built on top of the encoder, and the compressed
  output layer of the encoder was connected to the input layer of the classifier.
 \end_layout
@@ -764,7 +764,7 @@ Example scheme showing how the supervised network is trained on top of a
 
 \begin_layout Standard
 The weights of the classifier were initialized randomly, and standard back-propa
-gtion was used to train the whole network to classify samples.
+gation was used to train the whole network to classify samples.
  This means that the encoder can be modified by back-propagation training,
  but pre-training with the auto-encoder initializes it to a configuration
  that 
@@ -799,8 +799,10 @@ Training Iterations and Evaluations
 \end_layout
 
 \begin_layout Standard
-We trained for a pre-determined number of iterations, often 1,000,000 iterations
- (
+We trained for a pre-determined number of iterations.
+ This number was determined by a trial run on one data set, so that the
+ improvement of the neuronal network was only marginal at the end.
+ There were usually around 1,000,000 iterations (
 \emph on
 deepnet
 \emph default
@@ -808,8 +810,8 @@ deepnet
 \emph on
 stopcondition.steps
 \emph default
- in train.pbtxt), and usually evaluated the neuronal network after every
- 500 iterations (
+ in train.pbtxt), and we evaluated the neuronal network after every 500 iteration
+s (
 \emph on
 deepnet
 \emph default
@@ -821,7 +823,7 @@ eval_after
  Evaluation means computing the training set, validation set, and testing
  set reconstruction error (in unsupervised training) or accuracy (in supervised
  training).
- The neuronal network itself was usually saved every 10,000 iterations (
+ The neuronal network itself was saved every 10,000 iterations (
 \emph on
 deepnet
 \emph default
@@ -1386,7 +1388,7 @@ breast_cancer_0
 \end_layout
 
 \begin_layout Standard
-To evaluate the (lossy) compression potental of Restricted Boltzmann Machines,
+To evaluate the (lossy) compression potential of Restricted Boltzmann Machines,
  an RBM was trained on GSE25055 and GSE25065.
  Both data sets were randomly split into training and test set, regardless
  of label, according to the scheme shown in table 
@@ -13473,7 +13475,7 @@ reference "fig:Accuracy-comparison-of-breast_cancer_12"
 
  row-wise and column-wise, because these comparisons allow an interpretation.
  That way there are only 
-\begin_inset Formula $(1*5)+(1*6)+(1*1)+(5*6)=42$
+\begin_inset Formula $1*5+1*6+1*1+5*6=42$
 \end_inset
 
  comparisons.

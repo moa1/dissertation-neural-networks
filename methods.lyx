@@ -90,24 +90,6 @@ TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: At the end of the manuscript, I could add a list of 
-\emph on
-emphasized 
-\emph default
-terms introduced, together with the page number they were introduced on.
- Die emphasized Terms suche ich wahrscheinlich am besten im LyX-Quelltext.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section*
 Notation
 \end_layout
@@ -194,34 +176,21 @@ Machine Learning
 \end_layout
 
 \begin_layout Standard
-(TODO: Definition of supervised, unsupervised, and semi-supervised learning.)
-\end_layout
-
-\begin_layout Paragraph
-Generative and Discriminative Models
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: I'm not sure this belongs here, but I should introduce the concept
- of a 
-\begin_inset Quotes eld
-\end_inset
-
-Generative Model
-\begin_inset Quotes erd
-\end_inset
-
- to be able to refer to it later when introducing Deep Belief Networks from
- RBMs.
+maybe TODO (but I already have a short section on these in the introduction):
+ Definition of supervised, unsupervised, and semi-supervised learning.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Generative and Discriminative Models
 \end_layout
 
 \begin_layout Standard
@@ -281,10 +250,10 @@ discriminative model
 \end_layout
 
 \begin_layout Standard
-An advantage of a generative over a discriminative model is that its parameters
- are constrained by the number of bits required to encode the training samples,
- while the parameters of a discriminative model are only constrained by
- the number of bits required to encode the label.
+An advantage of training a generative over a discriminative model is that
+ its parameters are constrained by the number of bits required to encode
+ the training samples, while the parameters of a discriminative model are
+ only constrained by the number of bits required to encode the label.
 \end_layout
 
 \begin_layout Section
@@ -810,58 +779,11 @@ y distribution.
  of the graph are equivalent to the joint probability distribution.
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Vielleicht sollten die beiden Examples (eins für directed und eins für undirecte
-d graphical model) jeweils am Anfang der Unterabschnitte 
-\begin_inset Quotes eld
-\end_inset
-
-(un)directed graphical model
-\begin_inset Quotes erd
-\end_inset
-
- stehen.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: hier muss ein Beispiel mit einer Tabelle einer joint probability distribut
-ion stehen.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: Hier eine Figure mit einem DAG und einem MRF.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Paragraph
 Directed and Undirected Graphical Models
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: I should write somewhere that the edges in a directed graph encode
- the dependence and independence relationships between the random variables.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: What do the edges encode in an undirected graph? (Answer: the factorizatio
-n of the joint.
- (Or, rather cliques than edges encode the factorization).)
-\end_layout
-
-\end_inset
-
 In the following, we will introduce and discuss directed graphical models
  and undirected graphical models.
  Directed graphical models are also called 
@@ -992,7 +914,55 @@ name "par:Hammersley-Clifford-theorem"
 status open
 
 \begin_layout Plain Layout
-TODO: Hier muß eine formale Definition von 
+TODO: hier muss ein Beispiel mit einer Tabelle einer joint probability distribut
+ion stehen.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: Hier eine Figure mit einem MRF: insert example graphics with an undirected
+ graph with node names.
+ The figure text should denote the maximal cliques text and illustrate the
+ local Markov property for a node 
+\begin_inset Formula $N$
+\end_inset
+
+ and the global Markov property for two nodes 
+\begin_inset Formula $N_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $N_{2}$
+\end_inset
+
+ separated by a set of nodes 
+\begin_inset Formula $\mathbf{N_{S}}$
+\end_inset
+
+.
+ Maybe also print definitions of the potential functions for the maximal
+ cliques (but these are probably too large).
+ The graphics could be similar to Figure 2.3 in 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/graphical model/Koller+al_SRL07.pdf
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Hier muß eine formale Definition von 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1001,7 +971,7 @@ undirected graphical model
 \end_inset
 
  stehen: d.h.
- Erkläre wie man aus dem graph zusammen mit den potentials (die üder die
+ Erkläre wie man aus dem graph zusammen mit den potentials (die über die
  Cliquen des Graphs definiert sind) die joint probability distribution berechnen
  kann.
  (das produkt der potentials ist die joint).
@@ -1083,25 +1053,25 @@ key "HammersleyClifford1971"
 
 .
  It states that when we have a vector of random variables 
-\begin_inset Formula $\mathbf{X}=\{X_{1},\dots,X_{n}\}$
+\begin_inset Formula $\mathbf{N}=\{N_{1},\dots,N_{n}\}$
 \end_inset
 
 , its strictly positive joint probability distribution 
-\begin_inset Formula $P(\mathbf{X})$
+\begin_inset Formula $P(\mathbf{N})$
 \end_inset
 
  with 
-\begin_inset Formula $P(\mathbf{x})>0$
+\begin_inset Formula $P(\mathbf{n})>0$
 \end_inset
 
  for all possible values 
-\begin_inset Formula $\mathbf{x}$
+\begin_inset Formula $\mathbf{n}$
 \end_inset
 
  of 
 \series bold
 
-\begin_inset Formula $\mathbf{X}$
+\begin_inset Formula $\mathbf{N}$
 \end_inset
 
 
@@ -1112,14 +1082,14 @@ key "HammersleyClifford1971"
 
  with each node corresponding to a random variable (i.e.
  
-\begin_inset Formula $\mathbf{N}=\{X_{1},\dots,X_{n}\}$
+\begin_inset Formula $\mathbf{N}=\{N_{1},\dots,N_{n}\}$
 \end_inset
 
 ), then the following statements are equivalent:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $P(\mathbf{X})$
+\begin_inset Formula $P(\mathbf{N})$
 \end_inset
 
  is a 
@@ -1146,7 +1116,7 @@ Gibbs distribution
 
 , i.e.
  
-\begin_inset Formula $P(\mathbf{X})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\dots\cdot\phi_{m}(\mathbf{C_{m}})$
+\begin_inset Formula $P(\mathbf{N})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\dots\cdot\phi_{m}(\mathbf{C_{m}})$
 \end_inset
 
  where 
@@ -1168,7 +1138,7 @@ partition function
 \end_inset
 
  such that 
-\begin_inset Formula $\sum_{\mathbf{x}}P(\mathbf{X}=\mathbf{x})=1$
+\begin_inset Formula $\sum_{\mathbf{x}}P(\mathbf{N}=\mathbf{n})=1$
 \end_inset
 
 , and 
@@ -1191,7 +1161,7 @@ potential function
 
 , which depend only on the states of the random variables in the clique
  
-\begin_inset Formula $\mathbf{C_{i}}=(X_{i_{1}},\dots,X_{i_{n}})$
+\begin_inset Formula $\mathbf{C_{i}}=(N_{i_{1}},\dots,N_{i_{n}})$
 \end_inset
 
  and must be positive for all possible states.
@@ -1255,62 +1225,15 @@ local Markov property
 \end_inset
 
 : A node 
-\begin_inset Formula $N$
+\begin_inset Formula $N_{i}$
 \end_inset
 
  is conditionally independent from all non-neighbor nodes 
-\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor}}$
+\begin_inset Formula $\mathbf{N}\backslash\mathbf{N_{neighbor(i)}}$
 \end_inset
 
 , given the states of the random variables 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: isn't using 
-\begin_inset Formula $\mathbf{N}$
-\end_inset
-
- (
-\begin_inset Quotes eld
-\end_inset
-
-nodes
-\begin_inset Quotes erd
-\end_inset
-
-) as a synonym for the random variables 
-\begin_inset Formula $\mathbf{X}$
-\end_inset
-
- confusing? Yes it is confusing.
- I will use only 
-\begin_inset Formula $N$
-\end_inset
-
- from now on, because 
-\begin_inset Formula $X$
-\end_inset
-
- is overused.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: replace 
-\begin_inset Formula $X$
-\end_inset
-
- by 
-\begin_inset Formula $N$
-\end_inset
-
- in the following.
-\end_layout
-
-\end_inset
-
-
-\begin_inset Formula $\mathbf{N_{neighbor}}$
+\begin_inset Formula $\mathbf{N_{neighbor(i)}}$
 \end_inset
 
  immediately connected to 
@@ -1318,7 +1241,7 @@ TODO: replace
 \end_inset
 
 : 
-\begin_inset Formula $P(X_{i}\mid\mathbf{N_{neighbor}})=P(X_{i}|\mathbf{N})$
+\begin_inset Formula $P(N_{i}\mid\mathbf{N_{neighbor(i)}})=P(N_{i}\mid\mathbf{N})$
 \end_inset
 
 .
@@ -1383,48 +1306,6 @@ global Markov property
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: insert example graphics with an undirected graph with node names.
- The figure text should denote the maximal cliques text and illustrate the
- local Markov property for a node 
-\begin_inset Formula $N$
-\end_inset
-
- and the global Markov property for two nodes 
-\begin_inset Formula $N_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $N_{2}$
-\end_inset
-
- separated by a set of nodes 
-\begin_inset Formula $\mathbf{N_{S}}$
-\end_inset
-
-.
- Maybe also print definitions of the potential functions for the maximal
- cliques (but these are probably too large).
- The graphics could be similar to Figure 2.3 in 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/graphical model/Koller+al_SRL07.pdf
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 This means that when we have a strictly positive joint probability distribution
  
 \begin_inset Formula $P$
@@ -1449,7 +1330,7 @@ This means that when we have a strictly positive joint probability distribution
 status open
 
 \begin_layout Plain Layout
-TODO: conditionally independent on what? I think that's the crux of being
+NOTE: conditionally independent on what? I think that's the crux of being
  NP; we probably have to enumerate all possible separators...?
 \end_layout
 
@@ -1490,15 +1371,15 @@ Example of an Undirected Graphical Model
 
 \begin_layout Standard
 For example, if there are the three cliques 
-\begin_inset Formula $\mathbf{C_{1}}=\{X_{1},X_{2},X_{3}\}$
+\begin_inset Formula $\mathbf{C_{1}}=\{N_{1},N_{2},N_{3}\}$
 \end_inset
 
 , 
-\begin_inset Formula $\mathbf{C_{2}}=\{X_{3},X_{4}\}$
+\begin_inset Formula $\mathbf{C_{2}}=\{N_{3},N_{4}\}$
 \end_inset
 
 , and 
-\begin_inset Formula $\mathbf{C_{3}}=\{X_{3},X_{5}\}$
+\begin_inset Formula $\mathbf{C_{3}}=\{N_{3},N_{5}\}$
 \end_inset
 
 , then the joint probability distribution 
@@ -1518,13 +1399,13 @@ Gibbs distribution
 Gibbs distribution) can be written as: 
 \begin_inset Formula 
 \[
-P(X_{1},\dots,X_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
+P(N_{1},\dots,N_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
 \]
 
 \end_inset
 
 , where 
-\begin_inset Formula $\phi_{1}(\mathbf{C_{1}})=\phi(X_{1},X_{2},X_{3})$
+\begin_inset Formula $\phi_{1}(\mathbf{C_{1}})=\phi(N_{1},N_{2},N_{3})$
 \end_inset
 
  is the potential function of clique 1 (
@@ -1542,7 +1423,7 @@ clique potential
 \end_inset
 
 ), and is a function of the 3 random variables 
-\begin_inset Formula $X_{1},X_{2},X_{3}$
+\begin_inset Formula $N_{1},N_{2},N_{3}$
 \end_inset
 
  in the clique.
@@ -1567,7 +1448,7 @@ Z=\sum_{X_{1},\dots,X_{n}}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{
 
 \begin_layout Standard
 In practice, 
-\begin_inset Formula $\phi_{1}(X_{1},X_{2},X_{3})$
+\begin_inset Formula $\phi_{1}(N_{1},N_{2},N_{3})$
 \end_inset
 
  can be represented by a table that has, for each possible combination of
@@ -1630,7 +1511,7 @@ In practice,
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $\phi(X_{1}=x_{1},X_{2}=x_{2},X_{3}=x_{3})$
+\begin_inset Formula $\phi(N_{1}=n_{1},N_{2}=n_{2},N_{3}=n_{3})$
 \end_inset
 
 
@@ -1853,6 +1734,24 @@ Directed Graphical Models
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: hier muss ein Beispiel mit einer Tabelle einer joint probability distribut
+ion stehen.
+\end_layout
+
+\begin_layout Plain Layout
+TODO: Hier eine Figure mit einem DAG.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Directed graphical models are also called 
 \emph on
 Bayesian Networks
@@ -1890,19 +1789,6 @@ Like undirected graphical models, directed graphical models represent an
  in the model.
  The graph must be directed and acyclic, and each node of the graph is associate
 d with a random variable.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: example figure
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2180,7 +2066,7 @@ TODO: Do
 status open
 
 \begin_layout Plain Layout
-TODO: Maybe I should explain the algorithm 
+NOTE: Maybe I should explain the algorithm 
 \begin_inset Quotes eld
 \end_inset
 
