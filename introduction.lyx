@@ -1893,10 +1893,53 @@ personalized medicine
  individual basis.
  For example, a standard treatment for breast cancer is chemotherapy, but
  not all patients profit from this treatment.
- If there were a predictor that could tell the physicist how likely a patient
- is to benefit from chemotherapy, and if the chance for complete response
- to it were small, it could be replaced by another therapy.
- The goal of this work is to contribute to such a predictor.
+ The event that a patient has no sign of breast cancer after reductive surgery
+ followed by chemotherapy is called 
+\emph on
+pathologic complete response
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pathologic complete response
+\end_layout
+
+\end_inset
+
+, and the opposite event that the patient still has cancerous tissue after
+ this procedure is called 
+\emph on
+residual disease
+\emph default
+
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+residual disease
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Suppose there were a predictor that could tell the physicist how likely
+ a patient is to benefit from chemotherapy.
+ If the prediction for a certain patient were such that complete response
+ to chemotherapy were unlikely, chemotherapy could be replaced by another
+ therapy.
+\end_layout
+
+\begin_layout Standard
+The goal of this work is to contribute to such a predictor.
+ The prediction is made in the form of a number between 0 and 1, where 0
+ means the patient is predicted with absolute certainty to have residual
+ disease, and 1 means the patient is predicted with absolute certainty to
+ have pathologic complete response.
 \end_layout
 
 \begin_layout Subsection

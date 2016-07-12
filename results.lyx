@@ -128,8 +128,21 @@ e chemotherapy.
  All patients had ERBB2 (HER2 or HER2/neu)-negative breast cancer.
  The tissue extracted in reductive surgery was measured on Affymetrix HG-U133A
  microarrays.
- After a mean of 3 years, the patients were labeled as either showing pathologic
- complete response (
+ After a mean of 3 years, the patients were labeled as either showing 
+\emph on
+pathologic complete response
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pathologic complete response, pCR
+\end_layout
+
+\end_inset
+
+ (
 \begin_inset Quotes eld
 \end_inset
 
@@ -138,7 +151,21 @@ pCR
 \end_inset
 
 ; class 1; there was no sign of a remaining breast cancer) to chemotherapy
- or residual disease (
+ or 
+\emph on
+residual disease
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+residual disease, RD
+\end_layout
+
+\end_inset
+
+ (
 \begin_inset Quotes eld
 \end_inset
 
@@ -528,6 +555,18 @@ pathologic complete response
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+More sophisticated prediction schemes can be imagined that the prediction
+ made produces more than one number: For example, in addition to the severity
+ of the disease after therapy (a number between 0 and 1), the number of
+ metastases (a natural number) could be trained and predicted.
+ Such a prediction is not made in this work, due to the number of metastases
+ not having been recorded in the data set used.
+ However, in the neuronal network it would be straightforward to predict
+ such two numbers by adding an additional (properly scaled) number to the
+ output layer in the training set.
 \end_layout
 
 \begin_layout Subsection
@@ -13243,18 +13282,22 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
+
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_learn input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
+
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
