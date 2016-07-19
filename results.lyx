@@ -74,13 +74,35 @@ General Remarks
 \end_layout
 
 \begin_layout Subsection
-Reasons for choosing GSE25055 and GSE25065 as data set
+Treatment Sensitivity Prediction for Personalized Medicine
 \end_layout
 
 \begin_layout Standard
-Originally we wanted to find a data set that had something to do with drug
+The goal of personalized medicine is to provide custom-tailored medicine
+ to each patient.
+ An essential part of this is to select an appropriate treatment for a specific
+ patient out of the available treatments.
+ The treatment should have a high probability of succeeding.
+ One way of approaching this is through machine learning on the expression
+ data from a patients tissue to predict the treatment outcome.
+ Such a prediction requires similar expression data from multiple patients
+ that already underwent the treatment in question and where the therapy
+ outcome is known.
+\end_layout
+
+\begin_layout Standard
+Therefore we wanted to find a data set that had something to do with drug
  sensitivity and resistance.
- Therefore a GEO database search was conducted 
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+Gene Expression Omnibus
+\begin_inset Quotes erd
+\end_inset
+
+ is a database of expression data, mostly from high-dimensional microarray
+ and RNA-Seq experiments 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BarrettSoboleva2013"
@@ -88,6 +110,7 @@ key "BarrettSoboleva2013"
 \end_inset
 
 .
+ We conducted a GEO database search.
  All data sets uploaded to GEO between January 1st 2000, and August 31st
  2013 were considered and their titles and abstracts searched for 
 \begin_inset Quotes eld
@@ -107,7 +130,10 @@ resist
 
 .
  The ones having a match were sorted by the number of samples in the data
+ set because deep neuronal network learning seems to require big data sets,
+ and we have to split samples into a training, validation, and test data
  set.
+ We read the abstracts of this list, starting from the top.
  GSE25055 and GSE25065 were among those that really had something to do
  with drug sensitivity and had a relatively high sample count.
 \end_layout
@@ -122,10 +148,10 @@ key "HatzisSymmans2011"
 \end_inset
 
 .
- They used GSE25055 to generate a classifier for the prognosis of breast
- cancer patients that received reductive surgery followed by taxane-anthracyclin
-e chemotherapy.
- All patients had ERBB2 (HER2 or HER2/neu)-negative breast cancer.
+ The authors used GSE25055 to generate a classifier for the prognosis of
+ breast cancer patients that received reductive surgery followed by taxane-anthr
+acycline chemotherapy.
+ All patients had ERBB2 (also called HER2 or HER2/neu)-negative breast cancer.
  The tissue extracted in reductive surgery was measured on Affymetrix HG-U133A
  microarrays.
  After a mean of 3 years, the patients were labeled as either showing 
@@ -175,8 +201,20 @@ RD
 
 ; class 0; there was still cancerous tissue).
  The classifier was then tested on an independently measured data set, GSE25065.
- The classifier's performance was tested based on (TODO: review something
+ The input to the prediction was the expression data and the desired output
+ a label of either RD or pCR.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The classifier's performance was tested based on (maybe review something
  about the results of the GSE25055 paper by Hatzis & Symmans).
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -562,8 +600,8 @@ More sophisticated prediction schemes can be imagined that the prediction
  made produces more than one number: For example, in addition to the severity
  of the disease after therapy (a number between 0 and 1), the number of
  metastases (a natural number) could be trained and predicted.
- Such a prediction is not made in this work, due to the number of metastases
- not having been recorded in the data set used.
+ Such a prediction is not made in this work, due to only little clinical
+ data having been recorded in the data set used.
  However, in the neuronal network it would be straightforward to predict
  such two numbers by adding an additional (properly scaled) number to the
  output layer in the training set.
@@ -595,24 +633,23 @@ Two types of neuronal networks that lend themselves for semi-supervised
 \end_layout
 
 \begin_layout Standard
-Four normalization methods were tried: two microarray normalization methods
- were tried: Robust Multi-Chip Average (RMA) 
+To diminish the possibility that the input to the algorithms does not contain
+ the information required for prediction, four normalization methods were
+ tried: Robust Multi-Chip Average (RMA) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BolstadSpeed2003"
 
 \end_inset
 
-, MAS5 
+, and MAS5 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Affymetrix2001"
 
 \end_inset
 
-.
- These were tried without or with subsequent ComBat batch-effect correction
- 
+, without and with subsequent ComBat batch-effect correction 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "JohnsonRabinovic2007"
@@ -620,8 +657,6 @@ key "JohnsonRabinovic2007"
 \end_inset
 
 .
- Two prediction goals were tried: (TODO: look up the exact labels that were
- used for prediction.)
 \end_layout
 
 \begin_layout Standard
@@ -645,19 +680,21 @@ One label was on a data set whose prediction reached an accuracy (of about
 \begin_layout Standard
 As we will see, none of the attempts with artificial neuronal networks showed
  that adding unlabeled data in training leads to better classifiers.
- However, also TSVM did not show improvement when adding unlabeled data
- to training.
+ However, also the established semi-supervised TSVM did not show improvement
+ when adding unlabeled data to training.
  We therefore think that it is probably the fault of the data set.
  In the hand-written digit classification and graphical object recognition
  data sets on which the discussed artificial neuronal networks were developed,
  they are among the best-performing predictors.
  Expression data sets differ from these data sets in two aspects: their
  dimensionality is higher (~1000 pixels versus ~20,000 genes), but the training
- set sizes are several magnitudes smaller (tenthousands versus hundreds).
+ set sizes are several magnitudes smaller (thousands to tenthousands versus
+ tens to hundreds).
  This is probably due to the price of microarrays (and RNASeq), which is
  magnitudes larger (hundreds of Euros or dollars) than the price to take
- and label pictures of hand-written digits or objects (images ubiquitous
- on the internet, and relatively cheap manual or computer-assisted labeling).
+ and label pictures of hand-written digits or objects (images are ubiquitous
+ on the internet, and manual or computer-assisted labeling is relatively
+ cheap).
 \end_layout
 
 \begin_layout Subsection
@@ -13282,22 +13319,18 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
-
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_learn input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
-
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
