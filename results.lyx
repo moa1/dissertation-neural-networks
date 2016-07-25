@@ -27303,5 +27303,107 @@ breast_cancer_15 contains 37|37 labeled testing, 10|10 labeled training,
 
 \end_layout
 
+\begin_layout Subsubsection
+Different training parameters
+\end_layout
+
+\begin_layout Standard
+In comparison to breast_cancer_12, the unsupervised learning rate (
+\emph on
+base_epsilon
+\emph default
+) was decreased from 0.01 to 0.001 for the pre-training of hidden layer 1,
+ and from 0.001 to 0.0001 for pre-training hidden layers 2 and 3.
+ We also changed the batch size from 100 to 1000, which is more inefficient,
+ but iterates over all training samples before changing weights, and thus
+ approximates the derivative of the weights more faithfully.
+\end_layout
+
+\begin_layout Subsection
+Accuracy of DBN fine-tuned with back-propagation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/breast_cancer_15-accuracies-testing-aa_dv.pdf
+	width 68page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Accuracy-in-breast_cancer_15"
+
+\end_inset
+
+Box plots of test set accuracies for different data sets with more and more
+ unlabeled training samples in breast_cancer_15.
+ The x-axis are the data sets (except data set 1, which cannot be used in
+ DBNs because it does not contain unlabeled data).
+ The y-axis is the accuracy.
+ Each dot represents the accuracy on a repetition.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-in-breast_cancer_15"
+
+\end_inset
+
+ shows the accuracies obtained for data set breast_cancer_15.
+ The accuracies are better than those obtained in breast_cancer_12: The
+ median accuracy is near 0.7 for all data sets except data set 3, while it
+ was slightly above 0.65 in breast_cancer_12.
+ This may be due to less overfitting because there are less model parameters,
+ but it may also be due to the training having used more input data (22283
+ genes instead of the 500 most significant).
+\end_layout
+
+\begin_layout Standard
+However, there still is no dependence of accuracies on the amount of unlabeled
+ samples available to training.
+ Again, only the silhouette (i.e.
+ the extremum accuracies) seems to point slightly upwards from left to right.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: TSVM
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
