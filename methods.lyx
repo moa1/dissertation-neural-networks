@@ -6520,6 +6520,13 @@ which has a simple derivative of
 
 \begin_layout Paragraph
 Dropout
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Dropout"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6561,7 +6568,7 @@ Dropout specifies a probability
  to the input of the next layer.
  This greatly constrains complex co-adaptations between nodes, in which
  nodes are only useful in the context of a large number of other nodes.
- It thereby prevents overfitting.
+ It thereby reduces overfitting.
  To use all trained nodes during testing, all nodes contribute to the computatio
 n of input to a layer, but their total input must then be multiplied by
  
@@ -7622,7 +7629,7 @@ reference "The-sigmoid-activation-function"
 \end_inset
 
 ) conditional probability function.
- A Sigmoid Belief Network is a belief network in which the conditional probabili
+ A Sigmoid Belief Network is a Belief Network in which the conditional probabili
 ty associated with node 
 \begin_inset Formula $N_{i}$
 \end_inset
@@ -7775,7 +7782,11 @@ key "HintonTeh2006"
  came up with a trick: The posterior is equal to the product of prior times
  likelihood.
  If the prior were so that it would cancel the correlations of the likelihood,
- then the product would factor according to the hidden nodes: 
+ then the product would factor according to the hidden nodes 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+: 
 \begin_inset Formula 
 \[
 P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})
@@ -7784,7 +7795,12 @@ P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})
 \end_inset
 
 .
- They showed that such priors exist and have the form
+ (
+\begin_inset Formula $\mathbf{\mathbf{x}}$
+\end_inset
+
+ are the visible nodes.) They showed that such priors exist and have the
+ form
 \begin_inset Formula 
 \[
 P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\right)
@@ -7879,7 +7895,15 @@ reference "eq:DBN-y-given-x"
  equilibrium.
  However, we can also view this induction as taking place in a Deep Belief
  Network that is infinitely deep, has alternating visible and hidden layers
- and has shared weights at all layers.
+ and has shared (
+\begin_inset Quotes eld
+\end_inset
+
+tied
+\begin_inset Quotes erd
+\end_inset
+
+) weights at all layers.
  The weights matrix between the DBN layers are 
 \begin_inset Formula $W$
 \end_inset

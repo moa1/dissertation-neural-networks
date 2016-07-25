@@ -69,6 +69,19 @@
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: use past and present tense consistently in this text.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 General Remarks
 \end_layout
@@ -625,6 +638,11 @@ to assess performance of the classifier on an independently measured data
  set.
 \end_layout
 
+\begin_layout Enumerate
+to evaluate whether artificial neuronal networks can compete with established
+ classification algorithms like SVMs.
+\end_layout
+
 \begin_layout Standard
 Two types of neuronal networks that lend themselves for semi-supervised
  training were used: auto-encoders and deep belief networks.
@@ -682,7 +700,8 @@ As we will see, none of the attempts with artificial neuronal networks showed
  that adding unlabeled data in training leads to better classifiers.
  However, also the established semi-supervised TSVM did not show improvement
  when adding unlabeled data to training.
- We therefore think that it is probably the fault of the data set.
+ Due to the limited amount of samples in gene expression datasets, artificial
+ neural networks in their current form cannot benefit from unlabelled data.
  In the hand-written digit classification and graphical object recognition
  data sets on which the discussed artificial neuronal networks were developed,
  they are among the best-performing predictors.
@@ -716,23 +735,24 @@ key "Deepnet2014"
 \end_inset
 
  is a neuronal network implementation written by Nitish Srivastava and uses
- a matrix library written by Vlad Mnih and Alex Krizhevsky.
- It can run on NVIDIA graphics cards supporting CUDA.
+ a matrix library (called cudamat) written by Vlad Mnih and Alex Krizhevsky.
+ It can run on graphics cards (supporting CUDA).
  Due to graphics cards having a highly parallel architecture, this means
  faster training times.
  However, because graphics cards have to process large data, their RAM is
  more expensive than normal RAM for PCs.
- The NVIDIA graphics cards in the Regensburg Athene cluster computers have
- 4 GB of RAM installed.
+ The graphics cards in the Regensburg Athene cluster computers have 4 GB
+ of RAM installed.
  Because 
 \emph on
 deepnet
 \emph default
- loads all data sets at the beginning of computation onto the graphics card,
- this means that the data sets may not be larger than 4 GB.
- However, there is another matrix library (with the same interface), which
- runs on the normal floating-point unit of normal CPU.
- There was a bug in this library when run on 64-bit CPUs, which I fixed
+ loads all data sets at the beginning of the computation onto the graphics
+ card, this means that the data sets may not be larger than 4 GB.
+ However, there is another matrix library (called eigenmat and with the
+ same interface as cudamat), which runs on the normal floating-point unit
+ of a normal CPU.
+ There was a bug in this library when run on 64-bit CPUs, which we fixed
 \begin_inset Note Note
 status open
 
@@ -743,11 +763,15 @@ status open
 \end_inset
 
 .
- Most of the data sets were trained on rhskl11, which has 128GB of RAM (TODO:
+ Most of the data sets were trained on rhskl11 that has 128GB of RAM (TODO:
  or 256GB?), which was more than enough for the data sets tested.
 \end_layout
 
 \begin_layout Subsection
+How unlabeled data was used in training
+\end_layout
+
+\begin_layout Subsubsection
 How unlabeled data was used in training Auto-Encoders
 \end_layout
 
@@ -870,6 +894,39 @@ fine-tuning
  configuration in too large steps (per iteration).
 \end_layout
 
+\begin_layout Subsubsection
+How unlabeled data was used when pre-training a Restricted Boltzmann Machine
+ and fine-tuning using back-propagation
+\end_layout
+
+\begin_layout Standard
+When using the unsupervised Restricted Boltzmann Machine to find the approximate
+ weights of a neuronal network, the unlabeled data were used to train the
+ Restricted Boltzmann Machine.
+ The resulting neuronal network was then extended with the network layer
+ for supervised classification, and the complete network was trained using
+ (supervised) back-propagation on the labeled data.
+\end_layout
+
+\begin_layout Subsubsection
+How unlabeled data was used in training Deep Belief Networks
+\end_layout
+
+\begin_layout Standard
+As was said in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Deep-Belief-Network"
+
+\end_inset
+
+, Deep Belief Networks are an unsupervised algorithm and thus were trained
+ using unlabeled data.
+ As with Restricted Boltzmann Machines, the resulting network was then extended
+ with the classifier layer, and the complete network was fine-tuned using
+ back-propagation on the labeled data.
+\end_layout
+
 \begin_layout Subsection
 Training Iterations and Evaluations
 \end_layout
@@ -908,10 +965,28 @@ deepnet
 checkpoint_after
 \emph default
  in train.pbtxt).
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: hier muss stehen, wieviele Minuten das Training von 1,000,000 Iterations
+ dauert.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
 Model selection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Model-selection"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -926,7 +1001,14 @@ early stopping
 \begin_inset Quotes erd
 \end_inset
 
-, but selected the neuronal network that was best (on the validation data)
+ (see 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Early-stopping"
+
+\end_inset
+
+), but selected the neuronal network that was best on the validation data
  among all evaluated iterations.
 \end_layout
 
@@ -953,19 +1035,19 @@ We used model selection in training the (supervised) classifiers, because
  the validation and test data.
  This means we defined three data sets: a training data set, which was used
  to iteratively train the neuronal network; a validation data set, which
- was used to pick the model (see below); a test data set, which was used
- to evaluate the accuracy of the neuronal network picked using the validation
- data set.
+ was used to pick the model (see below); and a test data set, which was
+ used to evaluate the accuracy of the neuronal network picked using the
+ validation data set.
 \end_layout
 
 \begin_layout Standard
 Usually model selection works by picking the neuronal network defined in
  the iteration with the highest validation data set accuracy.
- However, we sometimes had only few labeled samples in the validation data
- set.
+ However, we sometimes had only few (in the tens) labeled samples in the
+ validation data set.
  This led to a very coarse resolution in accuracy plots, and also to noisy
- validation data set accuracy plots, which often jittered (TODO: i want
- to say "wackelt") between two accuracies from one iteration to the next.
+ validation data set accuracy plots, which often jittered between two accuracies
+ from one iteration to the next.
  See figure 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -982,6 +1064,21 @@ loess
  smoother with a span of 0.125.
  Then we selected the iteration where the smoothed validation set accuracy
  was highest, and reported the smoothed test set accuracy at that iteration.
+ (If there were more than one iterations that had the highest validation
+ set accuracy, we reported the mean and the median of the smoothed test
+ set accuracies at these iterations, and plotted all these accuracies in
+ a box plot
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+see e.g.
+ ~/uni/nnet/notes/breast_cancer_15/loess-aa_dv.R
+\end_layout
+
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
@@ -1039,17 +1136,8 @@ smoothed curves used for model selection.
 Note that this procedure allows reporting test set accuracies which seem
  impossible.
  For example in a test set with 10 samples, only an accuracy in {0, 0.1,
- 0.2, ..., 1} would seem possible, but smoothing allows all rational numbers
- between 0 and 1 to be returned as accuracy.
-\end_layout
-
-\begin_layout Paragraph
-(TODO: How unlabeled data was used when pre-training a Restricted Boltzmann
- Machine and fine-tuning using back-propagation)
-\end_layout
-
-\begin_layout Paragraph
-(TODO: How unlabeled data was used in training Deep Belief Networks)
+ 0.2, ..., 1} would be possible, but smoothing allows all rational numbers between
+ 0 and 1 to be returned as accuracy.
 \end_layout
 
 \begin_layout Subsection
@@ -1108,8 +1196,15 @@ The following settings for
 \emph default
  were tried: 1.0, 0.1, 0.01, 0.001, 0.0001.
  An example of the reconstruction error reached for various learning rates
- is shown in the following table.
- In this case, 0.01 was a good tradeoff between accuracy and speed.
+ is shown in table 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "tab:Effect-of-learning-rate-on-reconstruction-error"
+
+\end_inset
+
+.
+ In this case, 0.01 was a good tradeoff between accuracy and training speed.
 \end_layout
 
 \begin_layout Standard
@@ -1405,6 +1500,12 @@ T_E was still falling
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Effect-of-learning-rate-on-reconstruction-error"
+
+\end_inset
+
 Example of the effect of the learning rate on reconstruction error.
  
 \begin_inset Quotes eld
@@ -1414,7 +1515,7 @@ T_E
 \begin_inset Quotes erd
 \end_inset
 
- is the reconstruction error.
+ is the reconstruction error on the training data set.
  
 \begin_inset Quotes eld
 \end_inset
@@ -1423,7 +1524,7 @@ min T_E
 \begin_inset Quotes erd
 \end_inset
 
- means the minimal reconstruction error after 5,100,000 iterations.
+ is the minimal reconstruction error of 5,100,000 iterations.
 \end_layout
 
 \end_inset
@@ -1450,9 +1551,18 @@ status open
 
 \end_layout
 
-\begin_layout Subparagraph
-(TODO: describe here all tested features of deepnet and illustrate with
- results from .../nnet/notes/.)
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(maybe TODO: describe here all tested features of deepnet and illustrate
+ with results from .../nnet/notes/.)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1684,9 +1794,15 @@ Split of GEO data sets GSE25055 and GSE25065 into training and test set.
 \begin_layout Standard
 Then the 10,000 most variable genes on GSE25055 were determined.
  They were used as input genes, to halve computation time (from 22,283 genes).
- An RBM was trained, with 10,000 input nodes, and 50 hidden nodes.
- (Both layer's node types were gaussian.) The RBM was trained for about 70,000
- iterations.
+ An RBM with 10,000 input nodes and 50 hidden nodes was trained.
+ (Both layer's node types were gaussian 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonSalakhutdinov2006"
+
+\end_inset
+
+.) The RBM was trained for about 70,000 iterations.
  Training and testing data set reconstruction errors were still decreasing
  by small amounts each iteration.
  (The decreasing was stochastic, i.e.
@@ -1771,10 +1887,20 @@ TODO: include the two images here
 \begin_layout Standard
 Although the 10,000 numbers were compressed into only 50 numbers, the mean
  reconstruction error of the 10,000 genes was only 0.33.
- Considering that microarrays have log-intensities in [0;16], this is equivalent
- to a relative error of 2%.
- This demonstrated that RBMs are able to reduce dimensionality of a high-dimensi
-onal data set while preserving most information.
+ (The reconstruction error of a visible node is the difference between its
+ original value in the data set and the visible node's value obtained when
+ computing original visible layer 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ hidden layer 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ visible layer.) Considering that microarrays have log-intensities in [0;16],
+ this is equivalent to a relative error of 2%.
+ This demonstrated that RBMs are able to reduce dimensionality of an expression
+ data set while preserving most information.
 \end_layout
 
 \begin_layout Section
@@ -1786,15 +1912,360 @@ Increasing number of labeled samples (breast_cancer_06)
 \end_layout
 
 \begin_layout Standard
-breast_cancer_06 defines several supervised learning samples which have
- less and less labeled training and test samples.
- This is to see if classifiers improve when using a pre-trained network
- using unlabeled samples over when they don't.
+The goal of breast_cancer_06 was to verify if basic training works, i.e.
+ whether the classifier improves with an increasing amount of labeled examples.
+ Therefore we trained using all unlabeled samples, and defined supervised
+ learning data sets which have less and less labeled training and test samples.
+ Models were pre-trained using either an RBM or auto-encoder and fine-tuned
+ with supervised back-propagation.
+\end_layout
+
+\begin_layout Paragraph
+Definition of unlabeled data sets
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Definition-of-unlabeled-data-sets-for-breast_cancer_06"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-The smaller and smaller training data sets were defined by taking smaller
- and smaller fractions of the total 306 available labeled GSE25055 samples.
+A summary of unlabeled training, validation, and testing data sets is shown
+ in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:unlabeled-data-sets-of-breast_cancer_06"
+
+\end_inset
+
+.
+ Samples from GSE17705 were included to give unsupervised training access
+ to more samples.
+ (In later experiments, GSE17705 was left out to increase the probability
+ that samples are from the same distribution.)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="7">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GSE17705
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GSE25055
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+GSE25065
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sum$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+training
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+239
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+248
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+159
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+646
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+validation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+79
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+testing
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+31
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+81
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:unlabeled-data-sets-of-breast_cancer_06"
+
+\end_inset
+
+Sources of the unlabeled data sets.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Definition of labeled data sets
+\end_layout
+
+\begin_layout Standard
+The smaller and smaller labeled training data sets were defined by taking
+ smaller and smaller fractions of the total 306 available labeled GSE25055
+ samples.
  The fractions were as displayed in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1803,24 +2274,6 @@ reference "tab:training-and-validation-sets-of-breast_cancer_06"
 \end_inset
 
 .
- 
-\begin_inset Quotes eld
-\end_inset
-
-rep
-\begin_inset Quotes erd
-\end_inset
-
- means 
-\begin_inset Quotes eld
-\end_inset
-
-repetitions
-\begin_inset Quotes erd
-\end_inset
-
-, so there are 5 independently drawn training and validation sets to be
- able to draw error bars in the accuracy plots to be drawn.
 \end_layout
 
 \begin_layout Standard
@@ -2453,9 +2906,27 @@ name "tab:training-and-validation-sets-of-breast_cancer_06"
 \end_inset
 
 Sample distribution of training and validation sets of data set breast_cancer_06.
- There are less and less labeled training and validation samples from GSE25055
- for the 5 defined data sets, for each of which there are 5 subsampled repetitio
-ns.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
+fraction
+\begin_inset Quotes erd
+\end_inset
+
+ in a data set denotes the fraction of the 306 labeled samples GSE25055.
+ The fraction of labeled samples used in a row is split between training
+ and validation data.
+ Each of the 5 defined data sets (rows) has 5 sub-sampled repetitions (
+\begin_inset Quotes eld
+\end_inset
+
+rep
+\begin_inset Quotes erd
+\end_inset
+
+).
+ This is to be able to draw error bars.
  Note that the number of samples is not balanced between label 0 and label
  1 samples.
 \end_layout
@@ -2480,8 +2951,8 @@ reference "tab:Testing-set-for-breast_cancer_06"
 
 \end_inset
 
-.) Betting on the largest group 0 yields an accuracy of 
-\begin_inset Formula $140/182=0.76923$
+.) Thus, betting on the largest group 0 yields an accuracy of 
+\begin_inset Formula $140/182\approx0.769$
 \end_inset
 
 .
@@ -2722,7 +3193,8 @@ name "tab:Testing-set-for-breast_cancer_06"
 
 \end_inset
 
-Testing set for data set breast_cancer_06 is taken from GSE25065.
+The testing set for data set breast_cancer_06 consists of all labeled GSE25065
+ samples.
 \end_layout
 
 \end_inset
@@ -2736,10 +3208,8 @@ Testing set for data set breast_cancer_06 is taken from GSE25065.
 \end_layout
 
 \begin_layout Standard
-Models of data set breast_cancer_06 were trained using back-propagation
- using a pre-trained RBM, and back-propagation using a pre-trained autoencoder.
- The settings for unsupervised pre-training are as follows in the next paragraph
-s.
+In the next subsections, we describe the settings for pre-training and fine-tuni
+ng.
 \end_layout
 
 \begin_layout Standard
@@ -2789,8 +3259,8 @@ Unsupervised pre-training using RBM (breast_cancer_04_bg - bj)
 \end_layout
 
 \begin_layout Standard
-The settings used for unsupervised (omitting labels) pre-training an RBM
- on the training data set breast_cancer_02 are denoted in table 
+For unsupervised pre-training of the RBM, we tried different configurations
+ that are denoted in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
@@ -2798,11 +3268,8 @@ reference "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
 \end_inset
 
 .
- Unsupervised training was done on data set breast_cancer_02, which consists
- of (TODO: look up whether I'm correct in guessing that breast_cancer_02
- consists of all GSE25055 samples).
- The corresponding reconstruction errors at the input layer are shown in
- figure 
+ The reconstruction errors observed at the input layer during training are
+ shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
@@ -2810,6 +3277,13 @@ reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Of note in this plot is that there is no overfitting since training reconstructi
+on error does not rise at the end of training.
+ Also note that reconstruction error is not normalized to the number of
+ samples.
 \end_layout
 
 \begin_layout Standard
@@ -3828,8 +4302,8 @@ name "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
 Reconstruction errors of training (T_E), validation (V_E) and testing (E_E)
  data sets for unsupervised training of an RBM with configurations breast_cancer
 _04_bg, bh, bi, bj.
- The y-axis is the reconstruction error, and the x-axis the training step
- of neuronal network training.
+ The y-axis is the reconstruction error, not normalized for the number of
+ samples, and the x-axis is the training step of neuronal network training.
 \end_layout
 
 \end_inset
@@ -3851,7 +4325,7 @@ Supervised classification with unsupervisedly pre-trained RBM
 \end_layout
 
 \begin_layout Standard
-The settings for training were as described in table 
+The settings for supervised training were as described in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
@@ -3859,8 +4333,8 @@ reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 \end_inset
 
 .
- Note that the only differences between network settings in different trials
- are the number of nodes in hidden layer 1 (setting 
+ Four different models were tested, differing in number of nodes in hidden
+ layer 1 (setting 
 \begin_inset Formula $dimensions$
 \end_inset
 
@@ -5030,14 +5504,13 @@ For each of the
 \begin_inset Formula $4$
 \end_inset
 
- differently pre-trained RBMs, a classifier was trained supervisedly.
- So altogether 
+ differently pre-trained RBMs, a classifier was trained.
+ (So altogether 
 \begin_inset Formula $5*5*4=100$
 \end_inset
 
- classifiers were trained.
- Performance was then assessed through the accuracy, as shown in figure
- 
+ classifiers were trained.) Performance was then assessed through the accuracy,
+ as shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
@@ -5045,6 +5518,7 @@ reference "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
 \end_inset
 
 .
+ As there are 
 \end_layout
 
 \begin_layout Standard
@@ -5074,13 +5548,18 @@ name "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
 
 \end_inset
 
-Bar plots showing the accuracies of the models breast_cancer_06_aa - ad.
+Box plots showing the accuracies of the models breast_cancer_06_aa - ad.
  Each panel shows one of the four configurations breast_cancer_06_aa - ad.
- In each panel, the x-axis shows the increasing numbers of labeled samples
+ In each panel, the x-axis shows the decreasing numbers of labeled samples
  in the 5 different data sets.
- The y-axis shows the (smoothed) accuracy of the model on the testing set
- GSE25065 at the network iteration where the smoothed validation data set
- accuracy was maximal.
+ The y-axis shows the smoothed accuracy, as described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Model-selection"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -5099,6 +5578,15 @@ Surprisingly, the neuronal network accuracies do not improve with increasing
  Instead it seems that the classifiers using the least and most (18 and
  302) samples perform best, and all others (especially those using 76 samples)
  perform worst.
+ As we will see in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-breast_cancer_07"
+
+\end_inset
+
+, this is due to an uneven number of label 0 and label 1 samples in the
+ training set.
 \end_layout
 
 \begin_layout Standard
@@ -5109,6 +5597,13 @@ We also tried using 2 hidden layers instead of 1.
 \begin_layout Subsubsection
 Unsupervised pre-training using autoencoder (breast_cancer_03_ai, _03_al,
  _03_am, _03_ao)
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,_al,_am,_ao)"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5976,18 +6471,29 @@ er_06_ae - ah)
 
 \begin_layout Standard
 When training a neuronal network using back-propagation that was pre-trained
- using one of the auto-encoders breast_cancer_03_ai, _03_al, _03_am, _03_ao,
- the resulting accuracy plots look similar to the ones when pre-training
+ using one of the four auto-encoders described in the previous section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,_al,_am,_ao)"
+
+\end_inset
+
+, the resulting accuracy plots look similar to the ones when pre-training
  with an RBM (plots not shown).
- This seems to imply that the difficulty of the repetition rather than the
- prediction quality differences between RBM and autoencoder are mirrored
- in the accuracy differences.
- Like for RBMs, we also tried using 2 hidden layers instead of 1, which
- did not improve accuracy.
+ As we will see in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-breast_cancer_07"
+
+\end_inset
+
+, similar to pre-training using RBMs, this is due to an uneven number of
+ label 0 and label 1 samples in the training set.
 \end_layout
 
 \begin_layout Standard
-(TODO: settings erklären?)
+Like for RBMs, we also tried using 2 hidden layers instead of 1, which did
+ not improve accuracy.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6002,11 +6508,25 @@ name "par:Examining-biased-classifier"
 \end_layout
 
 \begin_layout Standard
-However, when examining the predictions of model breast_cancer_06_aa/_n302_cv1
- (the first network pre-trained on 302 samples), it becomes evident that
- the training is sub-optimal, because label 0 is predicted almost exclusively.
- The step at which the network performs best on the validation data set
- is 95,500.
+The lack of the accuracy increasing with the number of labeled training
+ samples can be explained by the following observation.
+\end_layout
+
+\begin_layout Standard
+When examining the predictions of model breast_cancer_06_aa/_n302_cv1 (the
+ first network pre-trained on 302 samples), it becomes evident that the
+ training is sub-optimal, because label 0 is predicted almost exclusively.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The step at which the network performs best on the validation data set is
+ 95,500.
+\end_layout
+
+\end_inset
+
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6185,16 +6705,45 @@ There is a heavy bias in favor of label 0.
 \begin_layout Subsection
 Increasing number of labeled samples, with equal number of class labels
  (breast_cancer_07)
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-breast_cancer_07"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-To check whether the artificial neuronal networks work at all, we created
- a training data set that is composed of multiple labeled data sets with
- a decreasing number of labeled samples.
- In contrast to data set breast_cancer_06, each data set contains as many
- label 0 samples as label 1 samples.
- The testing data set exclusively consists of GSE25065 samples, see table
- 
+As in the previous section on breast_cancer_06, we wanted to check whether
+ the artificial neuronal networks accuracies improve with an increasing
+ number of labeled samples.
+ Unlabeled data sets were like for breast_cancer_06, see table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:unlabeled-data-sets-of-breast_cancer_06"
+
+\end_inset
+
+ in subsection 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Definition-of-unlabeled-data-sets-for-breast_cancer_06"
+
+\end_inset
+
+.
+ In contrast to the previous data set breast_cancer_06, each labeled data
+ set contains as many label 0 samples as label 1 samples (see table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Data-set-breast_cancer_07"
+
+\end_inset
+
+).
+ The testing data set is the same as in breast_cancer_06 and exclusively
+ consists of GSE25065 samples, see table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Testing-set-for-breast_cancer_06"
@@ -6826,6 +7375,12 @@ label 1
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Data-set-breast_cancer_07"
+
+\end_inset
+
 Data set breast_cancer_07.
  
 \begin_inset Quotes eld
@@ -6853,14 +7408,15 @@ rep
 
 \begin_layout Standard
 Only the 500 most variable genes were used.
- The training and validation data sets are generated from subsets of GSE25055.
- Each training data set has an equal number of samples from class 0 and
+ The training and validation data sets were generated from subsets of GSE25055.
+ Each training data set had an equal number of samples from class 0 and
  class 1.
- Due to there being only 57 label 1 samples in GSE25055, the validation
- data sets contain a larger number of class 0 samples, however.
+ However, the validation data sets contained a larger number of class 0
+ samples, because there were only 57 label 1 samples in GSE25055, and 45
+ of them were needed for training.
  The test data set is composed of all GSE25065 samples.
- Each data set was drawn 5 times from the legal samples for the respective
- data set.
+ Each data set was drawn 5 times from the samples as described for training
+ and validation data set.
  This is to repeat the experiment 5 times and to be able to obtain error
  bars for the accuracies.
 \end_layout
@@ -6882,11 +7438,8 @@ If we were to bet on the larger test set class we would achieve an accuracy
 The following machine learning algorithms were tested on this data set:
  SVM, TSVM, supervised classification with unsupervised pre-trained RBM,
  supervised classification with unsupervised pre-trained autoencoder, supervised
- classification without pre-training.(TODO: hier die plots aus .../nnet/notes/breast
-_cancer_07/breast_cancer_07.lyx einfügen, ein plot pro algorithmus.)(TODO:
- hier die ganze section 7 mitsamt confusion table (nicht mehr nötig, ist
- schon eingefügt) und histogram aus .../nnet/notes/breast_cancer_07/breast_cancer_0
-7.lyx einfügen.)
+ classification without pre-training.
+ Unsupervised pre-training was performed as for breast_cancer_06.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6983,8 +7536,12 @@ Supervised classification with unsupervised pre-trained RBM
 \end_layout
 
 \begin_layout Standard
-The settings for the training run breast_cancer_07_aa - ad were the same
- as those for breast_cancer_06_aa - ad (see table 
+The 
+\emph on
+deepnet 
+\emph default
+settings for training runs breast_cancer_07_aa - ad were the same as those
+ for breast_cancer_06_aa - ad (see table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
@@ -7063,15 +7620,15 @@ The settings for
 deepnet 
 \emph default
 training were as those for breast_cancer_06_ae - ah.
- The results were that pre-training with an autoencoder yields similar accuracy
- plots to pre-training with an RBM, as is shown in figure 
+ As is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ae-ah"
 
 \end_inset
 
-.
+, the results were that pre-training with an autoencoder yields similar
+ accuracies as pre-training with an RBM.
 \end_layout
 
 \begin_layout Standard
@@ -7971,17 +8528,38 @@ reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ai-aj"
 
  in breast_cancer_07_ai yields better accuracies than not using it in in
  breast_cancer_07_aj.
- In addition, comparing (e.g.
- breast_cancer_07_ai) with the neuronal networks pre-trained using RBM or
- auto-encoder (e.g.
- breast_cancer_07_ag) seems to indicate a slight advantage of not using
- pre-training (but using dropout) in the data sets with little labeled samples.
+ Recall from section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Dropout"
+
+\end_inset
+
+ that 
+\emph on
+
+\begin_inset Formula $dropout$
+\end_inset
+
+
+\emph default
+ reduces overfitting.
+ In addition, comparing with the neuronal networks pre-trained using RBM
+ or auto-encoder (e.g.
+ breast_cancer_07_ai versus breast_cancer_07_ag) might indicate a slight
+ advantage of not using pre-training (but using 
+\begin_inset Formula $dropout$
+\end_inset
+
+) in the data sets with little labeled samples.
+ However, this assertion should be re-done with more than 5 repetitions.
 \end_layout
 
 \begin_layout Standard
 As seen in the above sections, the accuracies of the classifiers on breast_cance
 r_07 are lower than those on breast_cancer_06, indicating the higher difficulty
  of the classification task when the labels are balanced.
+ We will look into this in the following.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8295,7 +8873,7 @@ Confusion table of the predictions made by breast_cancer_07_aa/_n090_cv1
 \end_layout
 
 \begin_layout Standard
-A confusion table was made on the predictions on the testing data set.
+We made a confusion table on the predictions in the testing data set.
  It shows that most predicted label 1 samples are actually label 0 samples
  (
 \begin_inset Formula $\frac{39}{39+26}$
@@ -8311,6 +8889,24 @@ A confusion table was made on the predictions on the testing data set.
 \end_inset
 
  of the true label 1 samples.
+ This may indicate that predicting label 1 samples, which means 
+\begin_inset Quotes eld
+\end_inset
+
+pathologic complete response
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ no remaining breast cancer, is more difficult than predicting 
+\begin_inset Quotes eld
+\end_inset
+
+residual disease
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -8380,10 +8976,14 @@ Different normalizations (breast_cancer_08)
 \end_layout
 
 \begin_layout Standard
-The data set breast_cancer_08 was created to search for normalizations that
- are beneficial to pre-training and classification.
- To achieve that goal, GSE25055 and GSE25065 build data sets with a constant
+One of the goals of this work was to show that adding unlabeled samples
+ increases accuracy in semi-supervised classification.
+ To achieve that goal, in breast_cancer_08, we built data sets with a constant
  number of labeled samples and an increasing number of unlabeled samples.
+ As we will see this goal was not achieved.
+ To alleviate the effects of systematic errors in the raw data, we tried
+ different normalizations in order to search for normalizations that are
+ beneficial to pre-training and classification.
 \end_layout
 
 \begin_layout Subsection
@@ -8401,7 +9001,11 @@ reference "tab:design-of-breast_cancer_08"
  shows the assignment of samples to data sets.
  Note that labeled training and validation data are exclusively from GSE25055,
  and labeled testing data are exclusively from GSE25065.
- Labeled training and testing data are balanced with respect to the number
+ This 
+\end_layout
+
+\begin_layout Standard
+Labeled training and testing data are balanced with respect to the number
  of label 0 and label 1 samples.
  If a data set were unbalanced, this would lead to a biased classifier which
  prefers the label it was shown more often during training.

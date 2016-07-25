@@ -74,6 +74,35 @@
 status open
 
 \begin_layout Plain Layout
+TODO: maybe replace 
+\begin_inset Quotes eld
+\end_inset
+
+neuronal network
+\begin_inset Quotes erd
+\end_inset
+
+ with 
+\begin_inset Quotes eld
+\end_inset
+
+neural network
+\begin_inset Quotes erd
+\end_inset
+
+, which is the correct term according to dict.cc.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 This is supposed to be a high-level description of neuronal networks, to
  be used in the thesis before the mathematical description of neuronal networks
  (currently 
@@ -1861,12 +1890,28 @@ key "Hinton2010"
 
 \begin_layout Subsubsection
 Early stopping
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Early-stopping"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Early stopping is not really a regularization method, but nevertheless a
- method to prevent overfitting in supervised training of an artificial neuronal
- network.
+Early stopping 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+early stopping
+\end_layout
+
+\end_inset
+
+ is not really a regularization method, but nevertheless a method to prevent
+ overfitting in supervised training of an artificial neuronal network.
  It is used by splitting the training data set into a real training data
  set and a validation data set, and using only the real training data set
  for adapting the weights and biases during learning.
