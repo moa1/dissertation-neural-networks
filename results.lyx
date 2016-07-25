@@ -8981,7 +8981,11 @@ One of the goals of this work was to show that adding unlabeled samples
  To achieve that goal, in breast_cancer_08, we built data sets with a constant
  number of labeled samples and an increasing number of unlabeled samples.
  As we will see this goal was not achieved.
- To alleviate the effects of systematic errors in the raw data, we tried
+ 
+\end_layout
+
+\begin_layout Standard
+To alleviate the effects of systematic errors in the raw data, we tried
  different normalizations in order to search for normalizations that are
  beneficial to pre-training and classification.
 \end_layout
@@ -9001,7 +9005,6 @@ reference "tab:design-of-breast_cancer_08"
  shows the assignment of samples to data sets.
  Note that labeled training and validation data are exclusively from GSE25055,
  and labeled testing data are exclusively from GSE25065.
- This 
 \end_layout
 
 \begin_layout Standard
@@ -9607,17 +9610,6 @@ unlabeled training
 \end_inset
 
  rows.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: FIXME: How can there be 58 label 0 samples, if GSE25055 has only 57
- label 0 samples?
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -9681,7 +9673,7 @@ reference "tab:normalizations-for-breast_cancer_08"
 
 \end_inset
 
- shows the complete list of different normalizations:
+ shows a list of different normalizations:
 \end_layout
 
 \begin_layout Standard
@@ -9874,7 +9866,7 @@ Data set normalizations tested in breast_cancer_08.
 \end_layout
 
 \begin_layout Standard
-For each of 4 different normalization pre-processing combinations, we create
+For each of 4 different normalization pre-processing combinations, we created
  each of the 4 data sets described in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9883,7 +9875,7 @@ reference "tab:design-of-breast_cancer_08"
 \end_inset
 
 .
- The normalization steps are done in this order: first RMA/MAS5 normalization
+ The normalization steps were done in this order: first RMA/MAS5 normalization
  and summarization (to default HG_U133A probe sets), then combat (if enabled),
  then splitting of the data matrices into the sub-data-sets according to
  table 
@@ -9894,20 +9886,6 @@ reference "tab:design-of-breast_cancer_08"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-(TODO: maybe before showing the accuracies, show the reconstruction error
- table from ~/uni/nnet/notes/breast_cancer_08/breast_cancer_08.lyx Section
- 
-\begin_inset Quotes eld
-\end_inset
-
-sub:bb_ic-Reconstruction-error-plots
-\begin_inset Quotes erd
-\end_inset
-
-.)
 \end_layout
 
 \begin_layout Subsection
@@ -9934,24 +9912,14 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="6">
+<lyxtabular version="3" rows="6" columns="5">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
 <row>
-<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-config
-\end_layout
-
-\end_inset
-</cell>
 <cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -9999,15 +9967,6 @@ data set
 </cell>
 </row>
 <row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
 <cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -10103,15 +10062,6 @@ data set
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-_bb - bx
-\end_layout
-
-\end_inset
-</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -10137,7 +10087,7 @@ rma
 \uwave off
 \noun off
 \color none
-0.23(.0032)
+0.23 (.0032)
 \end_layout
 
 \end_inset
@@ -10158,7 +10108,7 @@ rma
 \uwave off
 \noun off
 \color none
-0.41(.0075)
+0.41 (.0075)
 \end_layout
 
 \end_inset
@@ -10179,7 +10129,7 @@ rma
 \uwave off
 \noun off
 \color none
-0.61(.0061)
+0.61 (.0061)
 \end_layout
 
 \end_inset
@@ -10200,28 +10150,17 @@ rma
 \uwave off
 \noun off
 \color none
-1.02(.016)
+1.02 (.016)
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-_by - cu
-\end_layout
-
-\end_inset
-</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
 mas5
 \end_layout
 
@@ -10231,9 +10170,7 @@ mas5
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.045(.0022)
+0.045 (.0022)
 \end_layout
 
 \end_inset
@@ -10242,9 +10179,7 @@ mas5
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.053(.00041)
+0.053 (.00041)
 \end_layout
 
 \end_inset
@@ -10253,9 +10188,7 @@ mas5
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.058(.002)
+0.058 (.002)
 \end_layout
 
 \end_inset
@@ -10264,24 +10197,13 @@ mas5
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.068(.0029)
+0.068 (.0029)
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-_ep - fl
-\end_layout
-
-\end_inset
-</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
@@ -10307,7 +10229,7 @@ rma,combat
 \uwave off
 \noun off
 \color none
-0.24(.0038)
+0.24 (.0038)
 \end_layout
 
 \end_inset
@@ -10328,7 +10250,7 @@ rma,combat
 \uwave off
 \noun off
 \color none
-0.4(.0028)
+0.4 (.0028)
 \end_layout
 
 \end_inset
@@ -10349,7 +10271,7 @@ rma,combat
 \uwave off
 \noun off
 \color none
-0.6(.0052)
+0.6 (.0052)
 \end_layout
 
 \end_inset
@@ -10370,28 +10292,17 @@ rma,combat
 \uwave off
 \noun off
 \color none
-1.02(.016)
+1.02 (.016)
 \end_layout
 
 \end_inset
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-_fm - gi
-\end_layout
-
-\end_inset
-</cell>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
 mas5,combat
 \end_layout
 
@@ -10401,9 +10312,7 @@ mas5,combat
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.057(.0035)
+0.057 (.0035)
 \end_layout
 
 \end_inset
@@ -10412,9 +10321,7 @@ mas5,combat
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.07(.0011)
+0.07 (.0011)
 \end_layout
 
 \end_inset
@@ -10423,9 +10330,7 @@ mas5,combat
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.079(.0033)
+0.079 (.0033)
 \end_layout
 
 \end_inset
@@ -10434,9 +10339,7 @@ mas5,combat
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\emph on
-0.088(.0034)
+0.088 (.0034)
 \end_layout
 
 \end_inset
@@ -10465,8 +10368,6 @@ Reconstruction error for differently normalized data.
  Each cell in the table contains mean(and standard deviation in brackets)
  of the reconstruction error.
  The numbers are rounded to two significant digits.
- MAS5 normalization is indicated by italic font style, and COMBAT batch
- effect correction is in the lower half of the table.
 \end_layout
 
 \end_inset
@@ -10476,8 +10377,8 @@ Reconstruction error for differently normalized data.
 
 \end_inset
 
-Before looking at the accuracies of the supervised classifier, we look at
- unsupervised pre-training using an autoencoder.
+Before looking at the accuracies of the supervised classifier, we looked
+ at unsupervised pre-training using an autoencoder.
  The reconstruction error for each normalization is shown in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -10535,8 +10436,14 @@ There is no clear trend in the table above how COMBAT influences standard
 
 \end_deeper
 \begin_layout Standard
-After pre-training, the artificial neuronal networks are fine-tuned using
- backpropagation and their accuracy to predict chemotherapy efficacy is
+Although it may seem beneficial to achieve a low reconstruction error as
+ possible, we will see that a better (lower) reconstruction error does not
+ necessarily translate into a better (higher) accuracy.
+\end_layout
+
+\begin_layout Standard
+After pre-training, the artificial neuronal networks were fine-tuned using
+ backpropagation and their accuracy to predict chemotherapy efficacy was
  measured.
 \end_layout
 
@@ -11297,7 +11204,7 @@ key "KrizhevskyHinton2009"
 On second thought, ZCA whitening is non-sensical in expression data since
  it is a linear transformation on the whole expression matrix.
  It can be seen as creating artificial features by linearly combining genes
- such that .
+ such that TODO.
  Those genes may not have anything in common
 \end_layout
 
@@ -11348,16 +11255,23 @@ Silhouette
  pre-trained classifier.
 \end_layout
 
+\begin_layout Section
+More repetitions for statistical power (breast_cancer_12)
+\end_layout
+
 \begin_layout Standard
 A flaw in the design of the data sets of breast_cancer_08 is that the number
  of label 0 and label 1 samples is not balanced.
  This is due to the class imbalance in GSE25055 and GSE25065.
- The next data set breast_cancer_12 thus has balanced classes in the unlabeled
+ The next data set breast_cancer_12 thus had balanced classes in the unlabeled
  training samples.
 \end_layout
 
-\begin_layout Section
-More repeats for statistical power (breast_cancer_12)
+\begin_layout Standard
+To see a possible rise in accuracy with a rising number of unlabled samples,
+ we also increased the number of sub-sampling repetitions.
+ In addition, instead of using autoencoder or RBM for pre-training, we pre-train
+ed a Deep Belief Network.
 \end_layout
 
 \begin_layout Subsection
@@ -11373,29 +11287,29 @@ Following the same arguments as in creating data set breast_cancer_08, we
 deepnet
 \emph default
 's predictions are biased towards the larger group.
- Samples used in the unlabeled training/validation data set are also used
+ Samples used in the unlabeled training/validation data set were also used
  for labeled training/validation, otherwise there are not enough samples.
 \end_layout
 
 \begin_layout Standard
 There are the following differences between breast_cancer_12 and breast_cancer_0
 8.
- breast_cancer_12 includes an unlabeled validation data set: the purpose
- is to be able to early-stop pre-training, which is necessary for learning
+ breast_cancer_12 includes an unlabeled validation data set whose purpose
+ is to be able to early-stop pre-training, which was necessary for learning
  multiple hidden layers in a DBN.
- The normalization is only RMA (without ComBat), because it performed best
- in data set breast_cancer_08.
+ The only normalization used was RMA (without ComBat), because it performed
+ best in data set breast_cancer_08.
  There are 20 instead of 5 repetitions for each data set.
- The repetitions are made by selecting the samples at random from the eligible
- samples.
+ Again the sub-sampling repetitions were made by selecting the samples at
+ random from the eligible samples.
 \end_layout
 
 \begin_layout Standard
-The labeled samples are held constant across all 6 data sets within one
+The labeled samples were held constant across all 6 data sets within one
  repetition.
- This is to be able to directly compare performance e.g.
- between data set 1 and 3.
- The difference between data set 1 and 3 is only the unlabeled pre-training
+ This is to be able to directly compare performance between e.g.
+ data sets 1 and 3 within a repetition.
+ The only difference between data sets 1 and 3 is the unlabeled pre-training
  data.
 \end_layout
 
@@ -13793,9 +13707,49 @@ name "tab:design-of-breast_cancer_12"
 \end_inset
 
 In data set breast_cancer_12, there are always 42|42 testing samples.
- There is no overlap between UT (unlabeled training), UV (unlabeled validation),
- LT (labeled training), and LV (labeled validation) samples.
- The number of labeled samples is held constant at 20|20 across data sets.
+ There is no overlap between 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+UT
+\end_layout
+
+\end_inset
+
+ unlabeled training, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+UV
+\end_layout
+
+\end_inset
+
+ unlabeled validation, 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+LT
+\end_layout
+
+\end_inset
+
+ labeled training, and 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+LV
+\end_layout
+
+\end_inset
+
+ labeled validation samples.
+ The number of labeled samples is held constant at 20|20 (10|10 for training
+ and validation) across data sets.
  The number of training and validation samples is almost equal in each data
  set (the difference is at most 1, for the unlabeled data).
  The number of unlabeled samples is increased linearly from 0|0 (0|0 in
@@ -13819,7 +13773,7 @@ reference "tab:design-of-breast_cancer_12"
 
 \end_inset
 
- describes the 6 data sets of breast_cancer_12.
+ shows the number of samples used in the 6 data sets of breast_cancer_12.
 \end_layout
 
 \begin_layout Subsection
@@ -13832,13 +13786,15 @@ g the hidden layers, it uses the model performing best on the validation
  data, not the model of the last training iteration.
  This is possible because there is an unlabeled validation data set in breast_ca
 ncer_12.
+ In addition, instead of using RBMs or autoencoders, DBNs were used for
+ pre-training.
 \end_layout
 
 \begin_layout Standard
-The architecture of the DBNs is 500-1000-1000-2000-1, that means the input
+The architecture of the DBNs was 500-1000-1000-2000-1, that means the input
  layer has 500 nodes for the 500 most significant genes, then there are
  three hidden layers with sizes 1000, 1000, and 2000, and the output layer
- has 1 node, that outputs the probability that the input sample has label
+ has 1 node which outputs the probability that the input sample has label
  1.
 \end_layout
 
@@ -13851,7 +13807,7 @@ base_epsilon: 0.01
 \begin_inset Quotes erd
 \end_inset
 
- to 0.001, and increase 
+ to 0.001, and increased 
 \begin_inset Quotes eld
 \end_inset
 
@@ -13879,8 +13835,8 @@ Another difference is that the supervised learning rate in breast_cancer_12_aa
  (TODO: cite "Srivastava Salakhutdinov 2014 dropout.pdf") says in section
  5.2 that when choosing the learning rate smaller than the best learning
  rate for randomly initialized nets, the information in the pretrained weights
- seem to be retained, and finetuning improves the final generalization error
- compared to not using dropout when finetuning.
+ seems to be retained, and finetuning improves the final generalization
+ error compared to not using dropout when finetuning.
 \end_layout
 
 \begin_layout Standard
@@ -13912,9 +13868,9 @@ Use both training and validation data sets for training TSVMs
 To predict using TSVM, for every repetition and every data set, we joined
  labeled training, labeled validation data, unlabeled training, and unlabeled
  validation data to the training input file to be used by TSVM.
- This is because deepnet also has access to these labeled and unlabeled
+ This was done because deepnet also has access to these labeled and unlabeled
  samples.
- The testing data set is equivalent to that for deepnet.
+ The testing data set was the same as that used for the neuronal networks.
 \end_layout
 
 \begin_layout Standard
@@ -13923,18 +13879,22 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
+
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_learn input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
+
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
@@ -14102,7 +14062,7 @@ reference "fig:Accuracy-comparison-of-breast_cancer_12"
 \end_inset
 
  shows that there is no clear improvement by increasing the number of unlabeled
- samples, when using neither a DBN, nor a TSVM.
+ samples, neither when using a DBN, nor a TSVM.
 \end_layout
 
 \begin_layout Standard
@@ -15354,7 +15314,9 @@ p_value
 \emph on
 estimate
 \emph default
- is the estimated difference in accuracy of the comparison, 
+ is the estimated difference in accuracy of the comparison (e.g.
+ 0.1 would mean method1's accuracy is better by an estimated 10 percent points),
+ 
 \emph on
 ci_lower
 \emph default
@@ -22234,8 +22196,8 @@ Due to their p-values being smaller than 5%, we can conclude that the TSVM
  on data set 1 is significantly better than the DBN on all data sets.
  In addition, the SVM on data set 2 is significantly better than the DBN
  on data set 3.
- For example, the TSVM trained on sub-data-set 1 is better than DBN trained
- on sub-data-set 2 by 2.3 percent points in accuracy.
+ For example, the TSVM trained on sub-data-set 1 is better than the DBN
+ trained on sub-data-set 2 by 2.3 percent points in accuracy.
 \end_layout
 
 \begin_layout Standard
@@ -22245,14 +22207,29 @@ The result that the TSVM on data set 1 is better than the DBNs, and not
  samples is better than one on less unlabeled samples.
 \end_layout
 
+\begin_layout Standard
+The table also shows that the advantage of using a TSVM over a DBN becomes
+ negligible when adding more unlabeled data to training.
+ (The 
+\begin_inset Quotes eld
+\end_inset
+
+estimate
+\begin_inset Quotes erd
+\end_inset
+
+ value declines with increasing data set, from 2.0% on data set 2 versus
+ data set 2 to 0.1% on data set 6 versus data set 6.)
+\end_layout
+
 \begin_layout Subsubsection
 Comparison TSVM versus TSVM
 \end_layout
 
 \begin_layout Standard
 The largest differences in prediction accuracy are within TSVM.
- Due to it being semi-supervised we are interested whether there are significant
- accuracy differences within the sub-data-sets of breast_cancer_12.
+ Due to it being semi-supervised we were interested in whether there are
+ significant accuracy differences within the sub-data-sets of breast_cancer_12.
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -24981,10 +24958,11 @@ Ratio of training numbers to network parameters (breast_cancer_15)
 \end_layout
 
 \begin_layout Standard
-Since breast_cancer_12 has a negative result in summary, we designed data
- set breast_cancer_15 by considering the differences in data sources and
- artificial neuronal network configurations between our and the ones in
- image recognition, where DBNs are successful.
+Since breast_cancer_12 has a negative result in summary, because it cannot
+ confirm the benefit of adding unlabled samples to training, in data set
+ breast_cancer_15 we considered the differences in data sources and artificial
+ neuronal network configurations between our and the ones in image recognition,
+ where DBNs are successful.
 \end_layout
 
 \begin_layout Subsection
@@ -25013,7 +24991,7 @@ Section 6 shows the pattern recognition performance of a network with three
 \begin_inset Quotes erd
 \end_inset
 
-) We believe they used 44000 training samples (
+) They used 44000 training samples (
 \begin_inset Quotes eld
 \end_inset
 
@@ -25039,7 +25017,7 @@ training numbers
 \end_inset
 
 , and 1.7 million weights that have to be determined.
- Precisely, their ratio of input numbers to weights is 
+ Precisely, their ratio of input numbers to number of weights is 
 \begin_inset Formula 
 \begin{eqnarray*}
 \frac{\mbox{input numbers}}{\mbox{weights}} & = & \frac{44000*28*28}{28*28*500+500*500+500*2000+2000*10}\approx20.8
@@ -25116,13 +25094,12 @@ This can be changed by using all
 \end_inset
 
 , and there are 238 training samples (in fact we have only 20 labeled plus
- 100 unlabeled training samples in data set breast_cancer_12), then we have
- 
+ 100 unlabeled training samples in breast_cancer_12), then we have 
 \begin_inset Formula $22,283*238=5,303,354$
 \end_inset
 
  measured numbers.
- If we also wanted a ratio as in 
+ If we also wanted a similar ratio to 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "HintonTeh2006"
@@ -25130,7 +25107,7 @@ key "HintonTeh2006"
 \end_inset
 
 .
- Then the ratio 
+ Then the ratio is
 \begin_inset Formula 
 \begin{eqnarray*}
 r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o}
@@ -25157,15 +25134,15 @@ Data set design
 \begin_layout Standard
 To exclude the possibility that a batch effect between GSE25055 and GSE25065
  ruins semi-supervised learning, in breast_cancer_15 we only use GSE25055
- and again want 10|10 labeled training and validation samples.
+ and again we use 10|10 labeled training and validation samples.
  This leaves us with remaining 
 \begin_inset Formula $57-20=37$
 \end_inset
 
- label 1 samples for testing, and also use 37 label 0 samples.
+ label 1 samples for testing, and we also use 37 label 0 samples.
  Like in previous data sets, all samples for the labeled training and validation
  data sets can be re-used in the unlabeled data set, because the labels
- are not given to the neural network during pre-training.
+ are not given to the neuronal network during pre-training.
 \end_layout
 
 \begin_layout Standard
@@ -25178,7 +25155,11 @@ We choose a reasonably large unlabeled validation data set of 28 samples
 
 .
  To have a sufficient number of label 1 unlabeled validation samples, we
- use 100|25 (where 
+ use 
+\begin_inset Formula $100|25$
+\end_inset
+
+ (where 
 \begin_inset Formula $x|y$
 \end_inset
 
@@ -25191,7 +25172,11 @@ We choose a reasonably large unlabeled validation data set of 28 samples
 \end_inset
 
  label 1 samples) unlabeled validation samples, where the 25 label 1 samples
- are replicated 4 times.
+ are replicated 4 times (written 
+\begin_inset Formula $100|25*4$
+\end_inset
+
+).
  This leaves 
 \begin_inset Formula $57-25=32$
 \end_inset
@@ -25243,7 +25228,7 @@ r(h,t) & = & \frac{22283*t}{22283*h+h*h+h*h+h*o}
 \end_inset
 
 .
- For the 6 different data sets, and 
+ For a hidden layer size of 
 \begin_inset Formula $h=10$
 \end_inset
 
@@ -25258,7 +25243,12 @@ reference "tab:breast_cancer_12-number-r"
 
 \end_inset
 
-.
+ for the 6 different data sets (containing an increasing number of samples
+ 
+\begin_inset Formula $t$
+\end_inset
+
+).
 \begin_inset Float table
 wide false
 sideways false
