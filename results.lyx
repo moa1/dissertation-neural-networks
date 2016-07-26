@@ -92,7 +92,7 @@ Treatment Sensitivity Prediction for Personalized Medicine
 
 \begin_layout Standard
 The goal of personalized medicine is to provide custom-tailored medicine
- to each patient.
+ to every patient.
  An essential part of this is to select an appropriate treatment for a specific
  patient out of the available treatments.
  The treatment should have a high probability of succeeding.

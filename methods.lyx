@@ -257,9 +257,11 @@ An advantage of training a generative over a discriminative model is that
 \end_layout
 
 \begin_layout Standard
-We will later discuss Restricted Boltzmann Machines, which are generative
+Restricted Boltzmann Machines and Deep Belief Networks are both generative
  models.
- These are used to train Deep Belief Networks, also explained later.
+ On the other hand, a neuronal network trained only with back-propagation
+ is a discriminative model.
+ All of these will be discussed later.
 \end_layout
 
 \begin_layout Section
@@ -782,7 +784,7 @@ n with the help of a graph.
 y distribution.
  The edges of the graph encode the factors of the joint probability distribution.
  The graph, together with probability functions over the structural elements
- of the graph are equivalent to the joint probability distribution.
+ of the graph is equivalent to the joint probability distribution.
 \end_layout
 
 \begin_layout Paragraph
@@ -1335,23 +1337,42 @@ name "par:Example-of-an-Undirected-Graphical-Model"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-Ein Beispiel mit einer Tabelle einer joint probability distribution steht
- in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:Example-of-an-Undirected-Graphical-Model"
+\align center
+\begin_inset Graphics
+	filename images/undirected-graphical-model-example.dia
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Plain Layout
-TODO: In 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of an Undirected Graph encoding the following conditional independencies
+: the node pairs (N1,N4), (N1,N5), (N2,N4), (N2,N5),(N4,N5) are conditionally
+ independent given node N3.
+ (But not (N1,N2).)
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+probably don't add potential functions, since I cannot show local and global
+ Markov property.
+ Potentials would be defined from the conditional independencies of the
+ graph, and confirming them by computation from the potentials would be
+ self-fulfilling, since they were defined from the structure of the graph.
+\end_layout
+
+\begin_layout Plain Layout
+Der to do Eintrag war mal: In 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Example-of-an-Undirected-Graphical-Model"
@@ -1389,6 +1410,16 @@ reference "par:Example-of-an-Undirected-Graphical-Model"
 \end_inset
 
 .
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1758,6 +1789,46 @@ B
 
 \begin_layout Subsubsection
 Directed Graphical Models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/directed-graphical-model-example.dia
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-a-Directed-Graph"
+
+\end_inset
+
+Example of a Directed Graph.
+ Note that the graph is acyclic, and the nodes are layed out in layers.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2563,6 +2634,14 @@ For example let a directed acyclic graph be defined by the following directed
 
 , 
 \begin_inset Formula $H_{2}\rightarrow V_{2}$
+\end_inset
+
+.
+ Such a graph is displayed in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-a-Directed-Graph"
+
 \end_inset
 
 .
