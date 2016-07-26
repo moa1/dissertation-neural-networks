@@ -1799,8 +1799,14 @@ Dropout Regularization
 
 \begin_layout Standard
 Dropout is a regularization method to make the nodes in the hidden layers,
- which can be seen as feature detectors, less dependent on each other (TODO:
- cite Dropout: A Simple Way to Prevent Neural Networks from Overfitting).
+ which can be seen as feature detectors, less dependent on each other 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SrivastavaSalakhutdinov2014"
+
+\end_inset
+
+.
  This is enforced by 
 \begin_inset Quotes eld
 \end_inset
@@ -2047,7 +2053,14 @@ The ImageNet Large Scale Visual Recognition Challenge
 
 \begin_layout Standard
 This shall be exemplified by image classification in the ImageNet Large
- Scale Visual Recognition Challenge (TODO: cite 1409.0575v3.pdf on Arxiv).
+ Scale Visual Recognition Challenge 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RussakovskyFeiFei2015"
+
+\end_inset
+
+.
  It is a yearly contest, wherein participants are given around 1.2 million
  training images.
  Each training image is labeled with one of 1.000 possible object categories
@@ -2427,7 +2440,7 @@ We will now discuss similarities between image classification and expression
 \end_layout
 
 \begin_layout Standard
-Both underlying distributions -- of images and of expression data -- often
+Both underlying distributions – of images and of expression data – often
  have many correlated dimensions.
  For images, adjacent pixels often display the same object and have therefore
  correlated values.
@@ -2675,6 +2688,14 @@ Learning in this data set is harder since the input is from multiple sources,
  was 0.7467, which is a relative error of 6.8%.
  This shows that Artificial Neuronal Networks are capable of processing
  input from multiple sources, with an acceptable gain in error.
+ We also had a similar result, in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Unsupervised-Reconstruction-of-Expression-Values"
+
+\end_inset
+
+.
 \end_layout
 
 \end_body

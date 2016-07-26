@@ -752,19 +752,12 @@ deepnet
  However, there is another matrix library (called eigenmat and with the
  same interface as cudamat), which runs on the normal floating-point unit
  of a normal CPU.
- There was a bug in this library when run on 64-bit CPUs, which we fixed
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(maybe TODO: include the bugfix here?)
-\end_layout
-
-\end_inset
-
-.
- Most of the data sets were trained on rhskl11 that has 128GB of RAM (TODO:
- or 256GB?), which was more than enough for the data sets tested.
+ There was a bug in this library when run on 64-bit CPUs, which we fixed.
+ Most of the data sets were trained on 
+\emph on
+rhskl11
+\emph default
+ that has 256GB of RAM, which was more than enough for the data sets tested.
 \end_layout
 
 \begin_layout Subsection
@@ -935,7 +928,7 @@ Training Iterations and Evaluations
 We trained for a pre-determined number of iterations.
  This number was determined by a trial run on one data set, so that the
  improvement of the neuronal network was only marginal at the end.
- There were usually around 1,000,000 iterations (
+ There were usually between 100,000 and 1,000,000 iterations (
 \emph on
 deepnet
 \emph default
@@ -965,17 +958,52 @@ deepnet
 checkpoint_after
 \emph default
  in train.pbtxt).
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: hier muss stehen, wieviele Minuten das Training von 1,000,000 Iterations
- dauert.
+Timings were measured like this in ~/uni/nnet/outputs/breast_cancer_15_aa/:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+stat classifier_1452806285; stat classifier_LAST
+\begin_inset Quotes erd
+\end_inset
+
+ and taking the difference
 \end_layout
 
 \end_inset
 
+Training 100,000 (unsupervised) DBN iterations of the first hidden layer
+ of breast_cancer_15_aa, which consists of a 22283-10-10-10-1 network, took
+ 2 hours on rhskl11.
+ The second and third hidden layer took about 15 minutes.
+ Computing 1,000,000 (supervised) back-propagation iterations of the same
+ run took a little less than 6 hours.
+ The parameters that the running time mainly depends on are the network
+ architecture, the learning rate, and number of training iterations.
+ Classifying a sample took about as long as 1 supervised training iteration
+ and was almost instant.
+\end_layout
 
+\begin_layout Standard
+SVMlight and the R package e1071 
+\emph on
+svm
+\emph default
+ function 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Joachims1999,R2008"
+
+\end_inset
+
+ took a few minutes to train and classify breast_cancer_15_aa.
 \end_layout
 
 \begin_layout Subsection
@@ -1145,11 +1173,20 @@ Initial Training Trials
 \end_layout
 
 \begin_layout Subparagraph
+\begin_inset Note Note
+status open
+
+\begin_layout Subparagraph
 (TODO: Settings for 
 \emph on
 deepnet
 \emph default
  that work with the breast cancer data set)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subparagraph
@@ -1542,20 +1579,6 @@ min T_E
 status open
 
 \begin_layout Plain Layout
-(maybe TODO: insert the graph in section "1.1 training step vs.
- training error T_E" from "notes/breast_cancer_02" with figure caption here.)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 (maybe TODO: describe here all tested features of deepnet and illustrate
  with results from .../nnet/notes/.)
 \end_layout
@@ -1567,6 +1590,13 @@ status open
 
 \begin_layout Section
 Unsupervised Reconstruction of Expression Values
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Unsupervised-Reconstruction-of-Expression-Values"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1803,7 +1833,24 @@ key "HintonSalakhutdinov2006"
 \end_inset
 
 .) The RBM was trained for about 70,000 iterations.
- Training and testing data set reconstruction errors were still decreasing
+ 
+\end_layout
+
+\begin_layout Standard
+The reconstruction error was computed after each iteration.
+ The reconstructed value of a visible node is obtained by initializing the
+ visible layer with the original data, computing the hidden layer's nodes
+ from the visible layer, computing the visible layer from the hidden layer's
+ nodes, and these values are the reconstructed values.
+ The reconstruction error of a visible node is the (absolute) difference
+ between its original value in the data set and the visible node's reconstructed
+ value.
+ The reconstruction error is a measure of how well a network can compress
+ visible data in the hidden layer.
+\end_layout
+
+\begin_layout Standard
+Training and testing data set reconstruction errors were still decreasing
  by small amounts each iteration.
  (The decreasing was stochastic, i.e.
  some iterations had slightly higher reconstruction error than the one of
@@ -1835,14 +1882,10 @@ status open
 \end_inset
 
 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: (TODO: insert the 2 plots of the RBM training experiment in LISP whose
- results are reported in ~/uni/publication/summer_school_2014/summer_school_2014.
-pdf on slide 17.) -> also include the boxplot here, when I find it.
-\end_layout
+\begin_inset Graphics
+	filename images/summer_school_2014-reconstruction-error-boxplot.png
+	lyxscale 50
+	width 30page%
 
 \end_inset
 
@@ -1858,25 +1901,13 @@ Left: True (x-axis) versus reconstructed (y-axis) expression values of data
  The heatmap shows pixels from red over yellow to white.
  A pixel in red means zero genes and in white means many genes that have
  the pixel's true and reconstructed expression value.
- Right: TODO
+ Right: Boxplot of reconstruction errors of the 10,000 most variable genes.
+ Most genes have a very low reconstruction error.
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: include the two images here
 \end_layout
 
 \end_inset
@@ -1886,19 +1917,9 @@ TODO: include the two images here
 
 \begin_layout Standard
 Although the 10,000 numbers were compressed into only 50 numbers, the mean
- reconstruction error of the 10,000 genes was only 0.33.
- (The reconstruction error of a visible node is the difference between its
- original value in the data set and the visible node's value obtained when
- computing original visible layer 
-\begin_inset Formula $\rightarrow$
-\end_inset
-
- hidden layer 
-\begin_inset Formula $\rightarrow$
-\end_inset
-
- visible layer.) Considering that microarrays have log-intensities in [0;16],
- this is equivalent to a relative error of 2%.
+ reconstruction error of the 10,000 genes was only 0.563.
+ Considering that microarrays have log-intensities in [0;16], this is equivalent
+ to a relative error of 3.5%.
  This demonstrated that RBMs are able to reduce dimensionality of an expression
  data set while preserving most information.
 \end_layout
@@ -13832,11 +13853,17 @@ explode
 \begin_layout Standard
 Another difference is that the supervised learning rate in breast_cancer_12_aa
  - dv is 0.0001, not 0.001.
- (TODO: cite "Srivastava Salakhutdinov 2014 dropout.pdf") says in section
- 5.2 that when choosing the learning rate smaller than the best learning
- rate for randomly initialized nets, the information in the pretrained weights
- seems to be retained, and finetuning improves the final generalization
- error compared to not using dropout when finetuning.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SrivastavaSalakhutdinov2014"
+
+\end_inset
+
+ says in section 5.2 that when choosing the learning rate smaller than the
+ best learning rate for randomly initialized nets, the information in the
+ pretrained weights seems to be retained, and finetuning improves the final
+ generalization error compared to not using dropout when finetuning.
 \end_layout
 
 \begin_layout Standard

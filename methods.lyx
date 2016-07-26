@@ -4040,11 +4040,11 @@ positive recurrent
 \begin_inset Formula $j$
 \end_inset
 
- is visited for the first time -- at time step 
+ is visited for the first time – at time step 
 \begin_inset Formula $k$
 \end_inset
 
- -- after the Markov Chain had been in state 
+ – after the Markov Chain had been in state 
 \begin_inset Formula $i$
 \end_inset
 
@@ -6254,19 +6254,6 @@ TODO: Formel hinschreiben
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: maybe the following paragraph should go into Results, not Introduction.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Because the momentum term includes a coefficient that is the fraction of
  the weight deltas in the previous time step to be added to the current
  weight deltas, it adds another meta-parameter to training.
@@ -6429,34 +6416,11 @@ Sparsity Target
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: read how sparsity works, maybe in 
-\begin_inset Quotes eld
-\end_inset
-
-Nair, V.
- and Hinton, G.
- E.
- (2009).
- 3-d object recognition with deep belief nets.
- In Advances in Neural Information Processing Systems, volume 22, pages
- 1339–1347.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 An RBM that has few hidden neurons turned on is usually easier to interpret
  than one in which half are turned on 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Hinton2010"
+key "Hinton2010,NairHinton2009"
 
 \end_inset
 
@@ -6541,7 +6505,14 @@ Dropout
 \end_inset
 
  can be used in any neuronal network whose input to a node is computed from
- several input nodes.
+ several input nodes 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SrivastavaSalakhutdinov2014"
+
+\end_inset
+
+.
  Dropout prevents complex co-adaptations of nodes in a layer, by randomly
  
 \begin_inset Quotes eld
@@ -7196,25 +7167,6 @@ As originally proposed by
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Smolensky1986"
-
-\end_inset
-
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO cite: P.
- Smolensky.
- Information processing in dynamical systems: Foundations of harmony theory.
- In D.
- E.
- Rumelhart and J.
- L.
- McClelland, editors, Parallel Distributed Processing: Volume 1: Foundations,
- pages 194â281.
- MIT Press, Cambridge, 1986.
-\end_layout
 
 \end_inset
 
@@ -7992,7 +7944,7 @@ untied
 \begin_inset Formula $\mathbf{V_{0}}$
 \end_inset
 
-, and weights 
+, and directed weights 
 \begin_inset Formula $W^{T}$
 \end_inset
 
