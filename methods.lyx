@@ -6369,7 +6369,7 @@ Regularizations of Neuronal Networks
 \end_layout
 
 \begin_layout Standard
-The regularizations
+Several regularization
 \begin_inset Index idx
 status collapsed
 
@@ -6379,8 +6379,24 @@ regularization
 
 \end_inset
 
- described here apply to most artificial neuronal networks, not just multilayer
- perceptrons.
+ methods have been developed over the years.
+ They have in common that they artificially constrain the search space of
+ weights and biases in order to let the model find better error minima or
+ to prevent overfitting.
+ The neuronal network should do less 
+\begin_inset Quotes eld
+\end_inset
+
+learning by heart
+\begin_inset Quotes erd
+\end_inset
+
+ and instead make its predictions more general.
+\end_layout
+
+\begin_layout Standard
+The regularizations described here apply to most artificial neuronal networks,
+ not just multilayer perceptrons.
 \end_layout
 
 \begin_layout Paragraph
@@ -6422,20 +6438,29 @@ L2 weight decay
 \end_inset
 
  penalize large weights by moving them towards zero.
- L1 weight decay uses in the updating of the weights, instead of the default
+ Both weight decay methods decrease the absolute value of each weight in
+ each training iteration, in order to prevent large weights.
+ This can be necessary because for some training samples, some weights tend
+ to escape, i.e.
+ become larger and larger in value, making subsequent changes to the weights
+ more difficult.
+\end_layout
+
+\begin_layout Standard
+L1 weight decay uses in the updating of the weights, instead of the default
  weight delta 
 \begin_inset Formula $\Delta w_{ij}$
 \end_inset
 
 , the penalized 
-\begin_inset Formula $\Delta w_{ij}-w_{1}*sgn(w_{ij})$
+\begin_inset Formula $\Delta w_{ij}-c*sgn(w_{ij})$
 \end_inset
 
 , where 
-\begin_inset Formula $w_{1}\in\mathbb{R}^{+}$
+\begin_inset Formula $c\in\mathbb{R}^{+}$
 \end_inset
 
- is a small positive number, the 
+ is a small positive constant meta-parameter, the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6462,11 +6487,11 @@ weight-cost
 \end_inset
 
  with 
-\begin_inset Formula $\Delta w_{ij}-w_{ij}*w_{2}$
+\begin_inset Formula $\Delta w_{ij}-w_{ij}*c$
 \end_inset
 
 , where 
-\begin_inset Formula $w_{2}\in\mathbb{R}^{+}$
+\begin_inset Formula $c\in\mathbb{R}^{+}$
 \end_inset
 
  is the small positive 
@@ -6478,7 +6503,9 @@ weight-cost
 \end_inset
 
  of L2 weight decay.
- 
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hinton2010"
@@ -6510,18 +6537,7 @@ Sparsity Target
 \end_layout
 
 \begin_layout Standard
-An RBM that has few hidden neurons turned on is usually easier to interpret
- than one in which half are turned on 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hinton2010,NairHinton2009"
-
-\end_inset
-
-.
- In addition, sparse activity constrains the space of possible parameters
- of the model, to avoid overfitting.
- A sparsity
+Sparsity
 \begin_inset Index idx
 status collapsed
 
@@ -6531,8 +6547,18 @@ sparsity
 
 \end_inset
 
- target for a neuron allows specifying at what fraction of time a neuron
- should be on, on average.
+ regularization is a method to make only a small fraction of nodes output
+ an activation different from zero.
+ This helps to generalize the output, and also makes neuronal networks more
+ interpretable 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton2010,NairHinton2009"
+
+\end_inset
+
+.
+ Sparse activity constrains the space of possible parameters of the model.
 \end_layout
 
 \begin_layout Standard
@@ -6593,13 +6619,13 @@ Dropout
 status collapsed
 
 \begin_layout Plain Layout
-Dropout
+dropout
 \end_layout
 
 \end_inset
 
- can be used in any neuronal network whose input to a node is computed from
- several input nodes 
+ is a regularization method to make the nodes in the hidden layers, which
+ can be seen as feature detectors, less dependent on each other 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "SrivastavaSalakhutdinov2014"
@@ -6607,44 +6633,68 @@ key "SrivastavaSalakhutdinov2014"
 \end_inset
 
 .
- Dropout prevents complex co-adaptations of nodes in a layer, by randomly
- 
+ This is enforced by 
 \begin_inset Quotes eld
 \end_inset
 
-dropping out
+dropping
 \begin_inset Quotes erd
 \end_inset
 
- input nodes from the input layer.
+ each training iteration a random subset of nodes in a layer.
+ This prevents subsequent layers from adapting to specific combinations
+ of node activations in the previous layer.
+ Dropout can be used in any neuronal network whose input to a node is computed
+ from several input nodes.
+ 
 \end_layout
 
 \begin_layout Standard
 Dropout specifies a probability 
-\begin_inset Formula $w$
+\begin_inset Formula $d$
 \end_inset
 
- for nodes in a layer to be active.
- During training, at each iteration only the fraction of 
-\begin_inset Formula $w$
+ for nodes in a layer to be active during a training iteration.
+ In each iteration, on average only 
+\begin_inset Formula $d*n$
 \end_inset
 
- nodes are computed and the other nodes are set to contribute nothing (zero)
- to the input of the next layer.
+ nodes' output values are computed and the other nodes are set to contribute
+ nothing (zero) to the input to the next layer.
  This greatly constrains complex co-adaptations between nodes, in which
  nodes are only useful in the context of a large number of other nodes.
  It thereby reduces overfitting.
- To use all trained nodes during testing, all nodes contribute to the computatio
-n of input to a layer, but their total input must then be multiplied by
- 
-\begin_inset Formula $w$
+ To utilize all trained nodes during testing, all nodes contribute to the
+ computation of input to a layer, but their total input must then be multiplied
+ by 
+\begin_inset Formula $d$
 \end_inset
 
 , to simulate that only a fraction of 
-\begin_inset Formula $w$
+\begin_inset Formula $d$
 \end_inset
 
  nodes are active.
+\end_layout
+
+\begin_layout Standard
+The theory behind dropout is that for a network with 
+\begin_inset Formula $n$
+\end_inset
+
+ nodes, there are 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ possible ways to drop out those nodes.
+ During testing, a network trained with dropout implicitly averages its
+ output over all these 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ networks with shared weights.
+ Dropping out a random fraction of nodes prevents single nodes from co-adapting
+ to the specific working of a large number of other nodes.
 \end_layout
 
 \begin_layout Standard
@@ -6670,12 +6720,52 @@ Weight normalization
 \end_layout
 
 \begin_layout Plain Layout
-TODO: I think weight normalization is described a bit in the dropout paper.
+probably not TODO: I think weight normalization is described a bit in the
+ dropout paper.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Paragraph
+Early stopping
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Early-stopping"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Early stopping
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+early stopping
+\end_layout
+
+\end_inset
+
+ is not really a regularization method, but nevertheless a method to prevent
+ overfitting in supervised training of an artificial neuronal network.
+ It is used by splitting the training data set into a real training data
+ set and a validation data set, and using only the real training data set
+ for adapting the weights and biases during learning.
+ After each learning iteration, the validation data set is used to compute
+ the output error of the current network.
+ After a defined number of training iterations, the neuronal network that
+ had the lowest output error on the validation data set is used as the final
+ network to be used in making predictions.
+\end_layout
+
+\begin_layout Standard
+This prevents the training procedure from overfitting to sampling error
+ present in the training data set.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6717,6 +6807,11 @@ discriminative model
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Examples for generative models are the Restricted Boltzmann Machine or Deep
+ Belief Network, both of which will be introduced in the following.
 \end_layout
 
 \begin_layout Subsection

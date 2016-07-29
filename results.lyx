@@ -1032,7 +1032,7 @@ early stopping
  (see 
 \begin_inset CommandInset ref
 LatexCommand vref
-reference "sub:Early-stopping"
+reference "par:Early-stopping"
 
 \end_inset
 
@@ -13906,22 +13906,18 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
-
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_learn input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
-
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 

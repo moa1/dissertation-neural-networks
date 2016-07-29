@@ -144,6 +144,94 @@ TODO: Was meint Claudio mit
 \end_layout
 
 \begin_layout Section
+Personalized Medicine
+\end_layout
+
+\begin_layout Standard
+A medium-term goal of medicine is 
+\begin_inset Quotes eld
+\end_inset
+
+personalized medicine
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+personalized medicine
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+, whose goal is to provide custom-tailored health care on an individual
+ basis.
+ For example, a standard treatment for breast cancer is chemotherapy, but
+ not all patients profit from this treatment.
+ The event that a patient has no sign of breast cancer after reductive surgery
+ followed by chemotherapy is called 
+\emph on
+pathologic complete response
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pathologic complete response
+\end_layout
+
+\end_inset
+
+, and the opposite event that the patient still has cancerous tissue after
+ this procedure is called 
+\emph on
+residual disease
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+residual disease
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Suppose there were a predictor that could tell the physicist how likely
+ a patient is to benefit from chemotherapy.
+ If the prediction for a certain patient was such that complete response
+ to chemotherapy was unlikely, chemotherapy could be replaced by another
+ therapy.
+\end_layout
+
+\begin_layout Standard
+The goal of this work is to contribute to such a predictor.
+ The input to the predictor is the molecular expression data, i.e.
+ measures of the number of RNA copies of specific genes present in the cancer
+ tissue.
+ An artificial neuronal network then processes this data.
+ The prediction is output by the network in the form of a number between
+ 0 and 1.
+ Here, 0 means the patient is predicted with absolute certainty to have
+ residual disease, and 1 means the patient is predicted with absolute certainty
+ to have pathologic complete response.
+\end_layout
+
+\begin_layout Standard
+The study of biological neuronal network prompted the development of artificial
+ neuronal networks.
+ After an introduction to biological and artificial neuronal networks we
+ will introduce machine learning and then introduce to the work done.
+\end_layout
+
+\begin_layout Section
 Biological and Artificial Neuronal Networks
 \end_layout
 
@@ -832,10 +920,14 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset space \hfill{}
+\end_inset
+
+
 \begin_inset Graphics
 	filename images/plot-sigmoid.pdf
 	lyxscale 50
-	width 32page%
+	width 45col%
 
 \end_inset
 
@@ -846,8 +938,12 @@ status open
 
 \begin_inset Graphics
 	filename images/neuronal-network-example.dia
-	width 32page%
+	width 45col%
 
+\end_inset
+
+
+\begin_inset space \hfill{}
 \end_inset
 
 
@@ -1797,201 +1893,6 @@ DBN
 ).
 \end_layout
 
-\begin_layout Subsection
-Regularizations in Training Artificial Neuronal Networks
-\end_layout
-
-\begin_layout Standard
-Several regularization methods have been developed over the years.
- They have in common that they artificially constrain the search space of
- weights and biases in order to let the model find better error minima or
- to prevent overfitting.
- The neuronal network should do less 
-\begin_inset Quotes eld
-\end_inset
-
-learning by heart
-\begin_inset Quotes erd
-\end_inset
-
- and instead make its predictions more general.
-\end_layout
-
-\begin_layout Subsubsection
-L1 and L2 Weight Decay Regularization
-\end_layout
-
-\begin_layout Standard
-L1 weight decay decreases the absolute value of each weight in each training
- iteration, in order to prevent large weights.
- This can be necessary because for some training samples, some weights tend
- to escape, i.e.
- become larger and larger in value.
- L1 weight decay decreases the absolute value of all weights 
-\begin_inset Formula $w_{ij}$
-\end_inset
-
- by a small positive constant 
-\begin_inset Formula $c$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-L2 weight decay is similar to L1 weight decay but penalizes large weights
- even more.
- It decreases the weights by 
-\begin_inset Formula $c*w_{ij}$
-\end_inset
-
-, where 
-\begin_inset Formula $c$
-\end_inset
-
- is a constant small positive meta-parameter between 0 and 0.1.
-\end_layout
-
-\begin_layout Subsubsection
-Dropout Regularization
-\end_layout
-
-\begin_layout Standard
-Dropout is a regularization method to make the nodes in the hidden layers,
- which can be seen as feature detectors, less dependent on each other 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "SrivastavaSalakhutdinov2014"
-
-\end_inset
-
-.
- This is enforced by 
-\begin_inset Quotes eld
-\end_inset
-
-dropping
-\begin_inset Quotes erd
-\end_inset
-
- each training iteration a random subset of nodes in a layer.
- This prevents subsequent layers from adapting to specific combinations
- of node activations in the previous layer.
-\end_layout
-
-\begin_layout Standard
-Its meta-parameter is a single value, between 0 and 1 for each layer, the
- 
-\emph on
-dropout rate
-\emph default
- 
-\begin_inset Formula $d$
-\end_inset
-
-.
- It is the fraction of nodes in the layer whose input and output weights
- should temporarily be set to 0 during one learning iteration.
- This makes the incoming activations in the layer after the current layer
- smaller by the factor 
-\begin_inset Formula $d$
-\end_inset
-
- on average.
- During prediction (or testing) time, no node is dropped out, and the value
- 
-\begin_inset Formula $d$
-\end_inset
-
- is set to 0, so that all nodes are used in calculating the output.
- To compensate for the larger average activation input in the next layer,
- all incoming weights are multiplied by the factor 
-\begin_inset Formula $d$
-\end_inset
-
-.
- The theory behind dropout is that for a network with 
-\begin_inset Formula $d$
-\end_inset
-
- nodes, there are 
-\begin_inset Formula $2^{n}$
-\end_inset
-
- possible ways to drop out 
-\begin_inset Formula $n$
-\end_inset
-
- nodes and a network trained with dropout, in testing, implicitly averages
- its output over all these 
-\begin_inset Formula $2^{n}$
-\end_inset
-
- networks with shared weights.
- Dropping out a random fraction of nodes prevents single nodes from co-adapting
- to the specific working of a large number of other nodes.
-\end_layout
-
-\begin_layout Subsubsection
-Sparsity Regularization
-\end_layout
-
-\begin_layout Standard
-Sparsity regularization is a method to make only a small fraction of nodes
- output an activation different from zero.
- This helps to generalize the output, and also makes neuronal networks more
- interpretable.
- It has three meta-parameters.
- One of them is the fraction of nodes that should be active within a neuronal
- network layer at any given time 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hinton2010"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsubsection
-Early stopping
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Early-stopping"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Early stopping 
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-early stopping
-\end_layout
-
-\end_inset
-
- is not really a regularization method, but nevertheless a method to prevent
- overfitting in supervised training of an artificial neuronal network.
- It is used by splitting the training data set into a real training data
- set and a validation data set, and using only the real training data set
- for adapting the weights and biases during learning.
- After each learning iteration, the validation data set is used to compute
- the output error of the current network.
- After a defined number of training iterations, the neuronal network that
- had the lowest output error on the validation data set is used as the final
- network to be used in making predictions.
-\end_layout
-
-\begin_layout Standard
-This prevents the training procedure from overfitting to sampling error
- present in the training data set.
-\end_layout
-
 \begin_layout Section
 Overview of Own and Related Work
 \end_layout
@@ -2001,89 +1902,13 @@ In the work that is described later, we used auto-associators, Deep Belief
  Networks, and TSVMs on expression data to predict whether breast cancer
  patients will show pathologic complete response to chemotherapy or residual
  disease.
- The expression data are high-dimensional (~22000 genes) and we use a relatively
- large data set (~500 patients).
+ The expression data are high-dimensional (~22,000 genes) and we use a relativel
+y large data set (~500 patients).
 \end_layout
 
 \begin_layout Standard
 Here we give an overview of the motivation, other applicable methods, and
  other related work.
-\end_layout
-
-\begin_layout Subsection
-Personalized Medicine
-\end_layout
-
-\begin_layout Standard
-A medium-term goal of medicine is 
-\begin_inset Quotes eld
-\end_inset
-
-personalized medicine
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-personalized medicine
-\end_layout
-
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
-, whose goal is to provide custom-tailored health care on an individual
- basis.
- For example, a standard treatment for breast cancer is chemotherapy, but
- not all patients profit from this treatment.
- The event that a patient has no sign of breast cancer after reductive surgery
- followed by chemotherapy is called 
-\emph on
-pathologic complete response
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-pathologic complete response
-\end_layout
-
-\end_inset
-
-, and the opposite event that the patient still has cancerous tissue after
- this procedure is called 
-\emph on
-residual disease
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-residual disease
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Suppose there were a predictor that could tell the physicist how likely
- a patient is to benefit from chemotherapy.
- If the prediction for a certain patient was such that complete response
- to chemotherapy was unlikely, chemotherapy could be replaced by another
- therapy.
-\end_layout
-
-\begin_layout Standard
-The goal of this work is to contribute to such a predictor.
- The prediction is made in the form of a number between 0 and 1, where 0
- means the patient is predicted with absolute certainty to have residual
- disease, and 1 means the patient is predicted with absolute certainty to
- have pathologic complete response.
 \end_layout
 
 \begin_layout Subsection
