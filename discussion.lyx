@@ -132,7 +132,7 @@ see Figure 1
 
 \begin_layout Standard
 We selected the GSE25055 and GSE25065 data sets because they are among the
- biggest labeled cancer data sets in GEO that come from a single source.
+ largest labeled cancer data sets in GEO that come from a single source.
  Like in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -155,8 +155,8 @@ In our view, neuronal networks have attractive properties: they are non-linear,
  they can be used generatively, their implementations are often modular
  (e.g.
  regularizations and network parameters), in prediction they often show
- better accuracies than normal SVMs, deep neuronal networks are among the
- best predictors in several fields.
+ better accuracies than normal SVMs, and deep neuronal networks are among
+ the best predictors in several fields.
  As (TODO: cite 
 \begin_inset Quotes eld
 \end_inset
@@ -202,7 +202,8 @@ Estimating classification probabilities in high-dimensional diagnostic studies,
  centers of many animals, and were shaped by evolution during millions of
  years.
  However, neuronal networks' versatility can also be a disadvantage: it
- is often not clear what component to modify to achieve a desired result.
+ is often not clear what component or parameter to modify to achieve a desired
+ result.
 \end_layout
 
 \begin_layout Paragraph
@@ -211,7 +212,7 @@ Different network configurations
 
 \begin_layout Standard
 We tried several different approaches: we tried different pre-training algorithm
-s, Autoencoders and Restricted Boltzmann Machines.
+s, autoencoders and Restricted Boltzmann Machines.
  There does not seem to be a difference in accuracy on the test set between
  these two pre-training algorithms (breast_cancer_04 and breast_cancer_06).
  However, some authors have reported that autoencoders are harder to train
@@ -227,7 +228,7 @@ TODO: cite a paper that reported this
 .
  In general, reconstruction error during pre-training converged well for
  our cases.
- Sometimes you have to wait a few iterations for the network to travel through
+ Sometimes one has to wait a few iterations for the network to travel through
  configurations that do not seem to change the resulting reconstruction
  error.
 \end_layout
@@ -250,8 +251,8 @@ d data.
  the best accuracies in all data sets tested.
  Of note is that a low reconstruction error rate does not imply a good accuracy
  on the test set: Although the neuronal nets using MAS5 normalized data
- had a lower reconstruction error than their RMA counterparts, the former
- had a lower accuracy than the latter.
+ had a lower reconstruction error than their RMA counterparts, MAS5 yielded
+ a lower accuracy than RMA.
 \end_layout
 
 \begin_layout Paragraph
@@ -259,8 +260,8 @@ Deep Networks
 \end_layout
 
 \begin_layout Standard
-We also tried deeper networks with two hidden layers.
- Using these did not improve accuracy.
+We also tried deeper networks with more than one hidden layer.
+ Using these did not always improve accuracy.
 \end_layout
 
 \begin_layout Paragraph
@@ -351,12 +352,16 @@ sed learning, one has to constrain the class proportions (in our case to
  data than those available in image recognition.
  For example, in the image classification task in the ImageNet Large Scale
  Visual Recognition Challenge (TODO: cite 1409.0575v3.pdf on Arxiv), there
- are an average of ~1.200 images per class, while in the GSE25055 data set,
- there are 249 class 0 and 57 class 1 samples.
+ are an average of 
+\begin_inset Formula $\approx$
+\end_inset
+
+1,200 images per class, while in the GSE25055 data set, there are 249 class
+ 0 and 57 class 1 samples.
 \end_layout
 
 \begin_layout Paragraph
-Multiplying of Training Samples
+Outlook: Multiplying of Training Samples
 \end_layout
 
 \begin_layout Standard

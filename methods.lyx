@@ -90,7 +90,12 @@ TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
 
 \end_layout
 
-\begin_layout Section*
+\begin_layout Standard
+Here we will introduce the methods used to train deep neuronal networks,
+ as applied in the results part.
+\end_layout
+
+\begin_layout Section
 Notation
 \end_layout
 
@@ -262,6 +267,8 @@ Restricted Boltzmann Machines and Deep Belief Networks are both generative
  On the other hand, a neuronal network trained only with back-propagation
  is a discriminative model.
  These neuronal networks will be discussed later.
+ Graphical Models will be needed for the introduction of Restricted Boltzmann
+ Machines and Deep Belief Networks, and will be introduced next.
 \end_layout
 
 \begin_layout Section
@@ -817,7 +824,7 @@ Belief Networks
 status collapsed
 
 \begin_layout Plain Layout
-Belief Networks
+Belief network
 \end_layout
 
 \end_inset
@@ -845,7 +852,7 @@ Markov Networks
 status collapsed
 
 \begin_layout Plain Layout
-Markov Networks
+Markov network
 \end_layout
 
 \end_inset
@@ -1346,6 +1353,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename images/undirected-graphical-model-example.dia
+	width 45col%
 
 \end_inset
 
@@ -1359,7 +1367,7 @@ status open
 Example of an Undirected Graph encoding the following conditional independencies
 : the node pairs (N1,N4), (N1,N5), (N2,N4), (N2,N5),(N4,N5) are conditionally
  independent given node N3.
- (But not (N1,N2).)
+ (But (N1,N2) are not conditionally independent given N3.)
 \begin_inset Note Note
 status collapsed
 
@@ -1801,6 +1809,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename images/directed-graphical-model-example.dia
+	width 30col%
 
 \end_inset
 
@@ -1841,7 +1850,7 @@ Bayesian Networks
 status collapsed
 
 \begin_layout Plain Layout
-Bayesian Networks
+Bayesian network
 \end_layout
 
 \end_inset
@@ -1855,7 +1864,7 @@ Belief Networks
 status collapsed
 
 \begin_layout Plain Layout
-Belief Networks
+Belief network
 \end_layout
 
 \end_inset
@@ -2512,16 +2521,16 @@ P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & =\\
 \begin_layout Standard
 The runtime of this formula is dominated by the largest clique, and so the
  runtime is 
-\begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{C_{l}}|})$
+\begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{C_{m}}|})$
 \end_inset
 
 , where 
-\begin_inset Formula $\mathbf{C_{l}}$
+\begin_inset Formula $\mathbf{C_{m}}$
 \end_inset
 
  is the clique with the largest number of variables in it (in our example
  
-\begin_inset Formula $\mathbf{C_{l}}=\mathbf{C_{3}}$
+\begin_inset Formula $\mathbf{C_{m}}=\mathbf{C_{3}}$
 \end_inset
 
 , because 
@@ -2679,7 +2688,7 @@ Deep Belief Network
 \end_inset
 
 .
- (We will discuss them in 
+ (We will discuss them in section  
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Deep-Belief-Network"
@@ -3082,7 +3091,7 @@ The run-time can be shortened by marginalizing variables out as early as
 \end_layout
 
 \begin_layout Subsubsection
-Intractability of Inference
+Intractability of Exact Inference
 \end_layout
 
 \begin_layout Standard
@@ -3832,7 +3841,7 @@ reversible Markov chain
 
 \end_inset
 
-
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Norris1997"
@@ -4496,7 +4505,7 @@ Gibbs Sampling
 status collapsed
 
 \begin_layout Plain Layout
-Gibbs Sampling
+Gibbs sampling
 \end_layout
 
 \end_inset
@@ -5054,7 +5063,7 @@ name "par:Gibbs-Sampling-in-Markov-Random-Fields"
 \end_layout
 
 \begin_layout Standard
-In 
+In section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
@@ -5064,7 +5073,7 @@ reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
  we described how exact inference in Markov Random Fields can be done by
  conditioning on the known random variables and marginalizing out the uninterest
 ing variables.
- 
+ Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
@@ -5078,7 +5087,7 @@ reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
 
 \begin_layout Standard
 The random variables of the Markov Random Field will be named like those
- in 
+ in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
@@ -5149,7 +5158,7 @@ name "enu:For-each-time"
 \end_inset
 
 For each time point 
-\begin_inset Formula $t\in\{2,3,\dots\}$
+\begin_inset Formula $t\in\{1,2,\dots\}$
 \end_inset
 
  do
@@ -5209,7 +5218,7 @@ reference "par:Hammersley-Clifford-theorem"
 \end_deeper
 \end_deeper
 \begin_layout Enumerate
-Repeat (
+Repeat step (
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "enu:For-each-time"
@@ -5261,7 +5270,15 @@ P(X_{i}=x_{i}\mid\mathbf{X_{j}}=\mathbf{x_{j}}:j\neq i)=P(X_{i}=x_{i}\mid\mathbf
 
 \end_inset
 
-.
+, where 
+\begin_inset Formula $\mathbf{X}_{MarkovBlanket(X_{i})}$
+\end_inset
+
+ is the set of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+'s parents and children, and its children's parents.
  This conditional probability is needed for Gibbs Sampling from a Bayesian
  Network: We use the same algorithmic structure as for Markov Random Fields
  above (
@@ -5283,15 +5300,39 @@ reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $P(X_{i}=x_{i}\mid X_{MarkovBlanket(X_{i})})$
+Due to the definition of the joint probability distribution in section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:The-Joint-Encoded-by-Directed-Graphical-Model"
+
+\end_inset
+
+, and parallel to section 4.1 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1993"
+
+\end_inset
+
+, 
+\begin_inset Formula $P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})})$
 \end_inset
 
  is equal to:
+\begin_inset Formula 
+\begin{eqnarray*}
+P(x_{i}\mid\{x_{i}:i\neq k\}) & = & P(x_{i}\mid\mathbf{x}_{MarkovBlanket(X_{i})})\\
+ & = & \frac{P(x_{i}\mid\mathbf{x}_{Parent(i)})\prod_{j\in Child(i)}P(x_{j}\mid x_{i},\mathbf{x}_{Parent(j)\backslash i})}{\sum_{\tilde{x}_{i}}P(\tilde{x}_{i}\mid\mathbf{x}_{Parent(i)})\prod_{j\in Child(i)}P(x_{j}\mid\tilde{x}_{i},\mathbf{x}_{Parent(j)\backslash i})}
+\end{eqnarray*}
+
+\end_inset
+
+
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: rewrite the algorithm from 
+rewrote the algorithm from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neal1993"
@@ -5312,7 +5353,7 @@ We start the Gibbs sampling procedure by fixing the observed variables to
 \begin_inset Quotes erd
 \end_inset
 
- Diese Formel hier einfügen.
+ Diese Formel wurde hier eingefügt.
 \end_layout
 
 \end_inset
@@ -5411,11 +5452,12 @@ Artificial Neuronal Networks
 \end_layout
 
 \begin_layout Standard
-Here we will introduce Artificial Neuronal Networks that have been developed
- by various people since about the middle of the last century.
+Here we will introduce artificial neuronal networks that have been developed
+ as models of biological neuronal networks by various people since about
+ the middle of the last century.
  The introduced artificial neuronal networks all have something to do with
  Deep Belief Networks and are Hopfield networks, Multilayer Perceptrons,
- (Restricted) Boltzmann Machines.
+ and (Restricted) Boltzmann Machines.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6365,6 +6407,52 @@ explosion
 \end_layout
 
 \begin_layout Subsubsection
+Difficulties in training multi-layer neural networks
+\end_layout
+
+\begin_layout Standard
+Training a randomly initialized feed-forward neural network with more than
+ 1 hidden layer using back-propagation is difficult and usually does not
+ succeed.
+ When attempting to train such a network, each node in the output layer
+ often just outputs the mean value of the desired output of the training
+ cases, independently of the input.
+ One problem is that there are many local maxima (generated by repeatedly
+ adding weighted sigmoid functions) of the implicitly optimized energy function
+ during back-propagation.
+ Another problem is that in discriminative learning, each training case
+ only contributes as many bits to the specification of the parameters of
+ the network as needed to specify the label.
+ This makes generative models
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+generative model
+\end_layout
+
+\end_inset
+
+ with a discriminative part put on top, as will be shown later, more attractive
+ than pure discriminative models
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+discriminative model
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Examples for generative models are the Restricted Boltzmann Machine or Deep
+ Belief Network.
+\end_layout
+
+\begin_layout Subsection
 Regularizations of Neuronal Networks
 \end_layout
 
@@ -6399,7 +6487,7 @@ The regularizations described here apply to most artificial neuronal networks,
  not just multilayer perceptrons.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 L1 and L2 Weight Decay
 \end_layout
 
@@ -6516,8 +6604,24 @@ key "Hinton2010"
  generalization of the resulting network, making the weights more interpretable
  by shrinking large weights, penalize network nodes that are always firmly
  on or off due to large inputs caused by large weights, and improve the
- mixing rate of contrastive divergence, where small weights increase the
- mixing rate of the Gibbs chain.
+ mixing rate of contrastive divergence
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Contrastive divergence is explained in section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Training-Restricted-Boltzmann-Machines-using-Contrastive-Divergence"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+, where small weights increase the mixing rate of the Gibbs chain.
 \end_layout
 
 \begin_layout Standard
@@ -6532,7 +6636,7 @@ key "FischerIgel2012"
  assuming a zero-mean Gaussian prior on the parameters.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Sparsity Target
 \end_layout
 
@@ -6602,11 +6706,11 @@ which has a simple derivative of
 , scaled by the sparsity cost.
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Dropout
 \begin_inset CommandInset label
 LatexCommand label
-name "par:Dropout"
+name "sub:Dropout"
 
 \end_inset
 
@@ -6729,11 +6833,11 @@ probably not TODO: I think weight normalization is described a bit in the
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Early stopping
 \begin_inset CommandInset label
 LatexCommand label
-name "par:Early-stopping"
+name "sub:Early-stopping"
 
 \end_inset
 
@@ -6766,52 +6870,6 @@ early stopping
 \begin_layout Standard
 This prevents the training procedure from overfitting to sampling error
  present in the training data set.
-\end_layout
-
-\begin_layout Subsubsection
-Difficulties in training multi-layer neural networks
-\end_layout
-
-\begin_layout Standard
-Training a randomly initialized feed-forward neural network with more than
- 1 hidden layer using back-propagation is difficult and usually does not
- succeed.
- When attempting to train such a network, each node in the output layer
- often just outputs the mean value of the desired output of the training
- cases, independently of the input.
- One problem is that there are many local maxima (generated by repeatedly
- adding weighted sigmoid functions) of the implicitly optimized energy function
- during back-propagation.
- Another problem is that in discriminative learning, each training case
- only contributes as many bits to the specification of the parameters of
- the network as needed to specify the label.
- This makes generative models
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-generative model
-\end_layout
-
-\end_inset
-
- with a discriminative part put on top, as will be shown later, more attractive
- than pure discriminative models
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-discriminative model
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Examples for generative models are the Restricted Boltzmann Machine or Deep
- Belief Network, both of which will be introduced in the following.
 \end_layout
 
 \begin_layout Subsection
@@ -7004,7 +7062,7 @@ key "Neal1993"
 \end_inset
 
  applies.
- See 
+ See section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Inference-in-Markov-Random-Fields"
@@ -7140,7 +7198,7 @@ negative phase
 \begin_inset Formula $P(\mathbf{S=s})s_{i}s_{j}$
 \end_inset
 
- is approximated
+ is approximated 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neal1992"
@@ -7291,8 +7349,8 @@ key "Neal1993"
 \begin_inset Quotes eld
 \end_inset
 
-Generalized to allow J and H to vary from spin to spin, and to allow interaction
-s between any two spins, the Ising model becomes the 
+Generalized to allow [parameters] to vary from spin to spin, and to allow
+ interactions between any two spins, the Ising model becomes the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -7363,23 +7421,22 @@ key "Smolensky1986"
  There are extensions to real-valued nodes, however.
 \end_layout
 
-\begin_layout Paragraph
-Analogy to Hopfield Networks
+\begin_layout Standard
+A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
 \end_layout
 
 \begin_layout Standard
-A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
- When choosing a zero temperature 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+When choosing a zero temperature 
 \begin_inset Formula $T=0$
 \end_inset
 
 , the Restricted Boltzmann Machine becomes deterministic and equivalent
  to a Hopfield network.
 \end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
 
 \begin_layout Plain Layout
 The energy of a hopfield network was defined in equation 
@@ -7419,6 +7476,13 @@ TODO: repeat energy of equation
 
 \begin_layout Subsubsection
 Training Restricted Boltzmann Machines using Contrastive Divergence
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Training-Restricted-Boltzmann-Machines-using-Contrastive-Divergence"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7510,12 +7574,12 @@ Negative Phase
 \end_layout
 
 \begin_layout Standard
-The negative phase is not as straightforward to compute.
- 
+The negative phase 
 \begin_inset Formula $\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})$
 \end_inset
 
- can be computed by running a Gibbs chain until convergence.
+ is not as straightforward to compute.
+ It may be approximated by running a Gibbs chain until convergence.
  This means initializing the network with any state, and then alternatingly
  computing 
 \begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
@@ -7698,7 +7762,7 @@ Structure
 status collapsed
 
 \begin_layout Plain Layout
-Belief Network
+Belief network
 \end_layout
 
 \end_inset
@@ -7873,7 +7937,7 @@ in equation 27
 \begin_layout Standard
 Since exact inference of the hidden nodes given the visible nodes is intractable
 , we must resort to the approximate Gibbs Sampling.
- This works as shown in 
+ This works as shown in section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
@@ -7901,7 +7965,7 @@ key "HintonTeh2006"
 \end_layout
 
 \begin_layout Standard
-As mentioned in 
+As mentioned in section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
@@ -7935,13 +7999,12 @@ P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})
 
 \end_inset
 
-.
- (
+, where 
 \begin_inset Formula $\mathbf{\mathbf{x}}$
 \end_inset
 
- are the visible nodes.) They showed that such priors exist and have the
- form
+ are the visible nodes.
+ They showed that such priors exist and have the form
 \begin_inset Formula 
 \[
 P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\right)
@@ -8033,10 +8096,10 @@ reference "eq:DBN-y-given-x"
  Inference in an RBM works by repeatedly and alternatingly evaluating these
  two conditional probabilities.
  The correctly inferred distribution is obtained once the Markov chain reaches
- equilibrium.
- However, we can also view this induction as taking place in a Deep Belief
- Network that is infinitely deep, has alternating visible and hidden layers
- and has shared (
+ equilibrium in iterating.
+ However, we can also view this iterative induction as taking place in a
+ Deep Belief Network that is infinitely deep, has alternating visible and
+ hidden layers and has shared (
 \begin_inset Quotes eld
 \end_inset
 
@@ -8229,7 +8292,7 @@ tly deep.
 \end_layout
 
 \begin_layout Paragraph
-The RBM seen as the DBN's Markov Chain in Reverse
+The RBM Seen as the DBN's Markov Chain in Reverse
 \end_layout
 
 \begin_layout Standard
@@ -8314,7 +8377,7 @@ fine-tuned
 status collapsed
 
 \begin_layout Plain Layout
-fine-tuning (using backpropagation)
+fine-tuning
 \end_layout
 
 \end_inset

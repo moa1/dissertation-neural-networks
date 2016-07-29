@@ -176,7 +176,17 @@ pathologic complete response
 status collapsed
 
 \begin_layout Plain Layout
-pathologic complete response, pCR
+pathologic complete response
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pCR
 \end_layout
 
 \end_inset
@@ -199,7 +209,17 @@ residual disease
 status collapsed
 
 \begin_layout Plain Layout
-residual disease, RD
+residual disease
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+RD
 \end_layout
 
 \end_inset
@@ -980,15 +1000,15 @@ stat classifier_1452806285; stat classifier_LAST
 \end_inset
 
 Training 100,000 (unsupervised) DBN iterations of the first hidden layer
- of breast_cancer_15_aa, which consists of a 22283-10-10-10-1 network, took
- 2 hours on rhskl11.
+ of classification run breast_cancer_15_aa, which consists of a 22283-10-10-10-1
+ network, took 2 hours on rhskl11.
  The second and third hidden layer took about 15 minutes.
  Computing 1,000,000 (supervised) back-propagation iterations of the same
  run took a little less than 6 hours.
  The parameters that the running time mainly depends on are the network
  architecture, the learning rate, and number of training iterations.
  Classifying a sample took about as long as 1 supervised training iteration
- and was almost instant.
+ and thus was almost instant.
 \end_layout
 
 \begin_layout Standard
@@ -1032,7 +1052,7 @@ early stopping
  (see 
 \begin_inset CommandInset ref
 LatexCommand vref
-reference "par:Early-stopping"
+reference "sub:Early-stopping"
 
 \end_inset
 
@@ -1121,6 +1141,17 @@ status open
 	filename images/breast_cancer_12-smoothed_accuracy-aa.png
 	lyxscale 50
 	width 50page%
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: replace this with a pdf version, and possibly resize it so that it
+ doesn't use a separate page in dissertation.pdf.
+\end_layout
 
 \end_inset
 
@@ -1561,7 +1592,7 @@ min T_E
 \begin_inset Quotes erd
 \end_inset
 
- is the minimal reconstruction error of 5,100,000 iterations.
+ is the minimal reconstruction error in 5,100,000 iterations.
 \end_layout
 
 \end_inset
@@ -1606,7 +1637,15 @@ breast_cancer_0
 \begin_layout Standard
 To evaluate the (lossy) compression potential of Restricted Boltzmann Machines,
  an RBM was trained on GSE25055 and GSE25065.
- Both data sets were randomly split into training and test set, regardless
+ This procedure is similar to the one performed by 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
+\end_inset
+
+.
+ Both data sets were split randomly into training and test set, regardless
  of label, according to the scheme shown in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -6499,7 +6538,7 @@ reference "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,
 
 \end_inset
 
-, the resulting accuracy plots look similar to the ones when pre-training
+, the resulting accuracy plots looked similar to the ones when pre-training
  with an RBM (plots not shown).
  As we will see in section 
 \begin_inset CommandInset ref
@@ -6513,8 +6552,8 @@ reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-la
 \end_layout
 
 \begin_layout Standard
-Like for RBMs, we also tried using 2 hidden layers instead of 1, which did
- not improve accuracy.
+Like for RBMs, we also tried using 2 hidden layers instead of 1, but this
+ did not improve accuracy.
 \end_layout
 
 \begin_layout Subsubsection
@@ -7482,6 +7521,17 @@ status open
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: replace with the pdf version and use appropriate labels for x and
+ y axis.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -7601,6 +7651,17 @@ status open
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: replace with the pdf version and use appropriate labels for x and
+ y axis.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -7663,6 +7724,17 @@ status open
 \begin_inset Graphics
 	filename images/breast_cancer_07-accuracies-ae_ah.png
 	width 68page%
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: replace with the pdf version and use appropriate labels for x and
+ y axis.
+\end_layout
 
 \end_inset
 
@@ -8472,6 +8544,17 @@ status open
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: replace with the pdf version and use appropriate labels for x and
+ y axis.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -8552,7 +8635,7 @@ reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ai-aj"
  Recall from section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "par:Dropout"
+reference "sub:Dropout"
 
 \end_inset
 
@@ -8960,6 +9043,16 @@ status open
 	filename images/breast_cancer_07-true-label-probabilities-of-misclassified-samples.png
 	lyxscale 50
 	width 34page%
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: replace with the pdf version.
+\end_layout
 
 \end_inset
 
@@ -10606,7 +10699,9 @@ mas5_combat-data.pbtxt
 status open
 
 \begin_layout Plain Layout
-TODO: remove from plot the columns for data sets 5,6,7
+TODO: remove from plot the columns for data sets 5,6,7.
+ Use appropriate labels for x and y axes.
+ Rescale font size appropriately.
 \end_layout
 
 \end_inset
@@ -13906,18 +14001,22 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
+
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
-svm_learn input.txt model.model
+
+svm_learn training-input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
+
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
+
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
@@ -14047,6 +14146,16 @@ status open
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: use appropriate font sizes.
+\end_layout
 
 \end_inset
 
@@ -27404,7 +27513,7 @@ reference "fig:Accuracy-in-breast_cancer_15"
  median accuracy is near 0.7 for all data sets except data set 3, while it
  was slightly above 0.65 in breast_cancer_12.
  This may be due to less overfitting because there are less model parameters,
- but it may also be due to the training having used more input data (22283
+ but it may also be due to the training having used more input data (22,283
  genes instead of the 500 most significant).
 \end_layout
 

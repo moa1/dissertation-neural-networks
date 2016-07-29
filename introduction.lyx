@@ -185,6 +185,16 @@ pathologic complete response
 
 \end_inset
 
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pCR
+\end_layout
+
+\end_inset
+
 , and the opposite event that the patient still has cancerous tissue after
  this procedure is called 
 \emph on
@@ -196,6 +206,16 @@ status collapsed
 
 \begin_layout Plain Layout
 residual disease
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+RD
 \end_layout
 
 \end_inset
@@ -236,18 +256,18 @@ Biological and Artificial Neuronal Networks
 \end_layout
 
 \begin_layout Standard
+Artificial neuronal networks
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-Artificial neuronal networks
+artificial neuronal networks
 \end_layout
 
 \end_inset
 
-Artificial neuronal networks are mathematical constructs, designed to imitate
- the signal processing capabilities of real neurons, found in nearly all
- animals.
+ are mathematical constructs, designed to imitate the signal processing
+ capabilities of real neurons, found in nearly all animals.
  Like their biological counterparts, artificial neuronal networks consist
  of simpler building blocks, the neurons.
 \end_layout
@@ -653,9 +673,16 @@ atomic
 , and the compression requires each glomerulus to signal the presence of
  one or more than one odor.
  The excitation pattern of multiple glomeruli must be resolved in the olfactory
- neuronal system so that a low-dimensional vector of (~500) glomeruli activation
-s is decompressed to a high-dimensional representation of (~10,000) odors
- in the brain.
+ neuronal system so that a low-dimensional vector of (
+\begin_inset Formula $\approx$
+\end_inset
+
+500) glomeruli activations is decompressed to a high-dimensional representation
+ of (
+\begin_inset Formula $\approx$
+\end_inset
+
+10,000) odors in the brain.
 \end_layout
 
 \begin_layout Standard
@@ -780,7 +807,7 @@ key "ZhangSharpee2016"
  This means that the validity of the feed-forward model can be tested by
  measuring the odor sparseness
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Odor sparseness is the average number of different molecular species in
@@ -1367,7 +1394,7 @@ Illustration of semi-supervised learning in two dimensions.
  Each axis is a dimension.
  Circles are samples; filled circles are labeled samples; unfilled circles
  are unlabeled samples.
- A: Supervised SVM learning.
+ A: Supervised SVM learning produces a maximum-margin classifier.
  B: Supervised learning ignores and probably mis-classifies some unlabeled
  samples.
  C: Semi-supervised learning regards densities of unlabeled samples and
@@ -1560,7 +1587,7 @@ Before we motivate using DBNs on expression data, we first introduce deep
 status collapsed
 
 \begin_layout Plain Layout
-Deep learning
+deep learning
 \end_layout
 
 \end_inset
@@ -1620,7 +1647,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename images/introduction-backpropagation-data-flow.dia
-	width 60col%
+	width 34col%
 
 \end_inset
 
@@ -1656,7 +1683,7 @@ Networks with multiple hidden layers
 \end_layout
 
 \begin_layout Subsubsection
-Autoassociator
+Auto-associator
 \end_layout
 
 \begin_layout Standard
@@ -1682,12 +1709,12 @@ TODO: Hier sollte ein Bild von einem Auto-associator stehen.
 \end_inset
 
 An algorithm that can train an artificial neuronal network with more than
- one hidden layer is the autoassociator 
+ one hidden layer is the auto-associator 
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-autoassociator
+auto-associator
 \end_layout
 
 \end_inset
@@ -1765,16 +1792,17 @@ Deep learning
 \end_layout
 
 \begin_layout Standard
+Deep learning
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-Deep learning
+deep learning
 \end_layout
 
 \end_inset
 
-Deep learning, as demonstrated by 
+, as demonstrated by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HintonTeh2006"
@@ -1902,8 +1930,15 @@ In the work that is described later, we used auto-associators, Deep Belief
  Networks, and TSVMs on expression data to predict whether breast cancer
  patients will show pathologic complete response to chemotherapy or residual
  disease.
- The expression data are high-dimensional (~22,000 genes) and we use a relativel
-y large data set (~500 patients).
+ The expression data are high-dimensional (
+\begin_inset Formula $\approx$
+\end_inset
+
+22,000 genes) and we use a relatively large data set (
+\begin_inset Formula $\approx$
+\end_inset
+
+500 patients).
 \end_layout
 
 \begin_layout Standard
@@ -2435,9 +2470,13 @@ key "ChenXie2015"
 
  published work on compressing expression data into fewer dimensions on
  a large scale using deep learning.
- Input data were all ~111,000 genome-wide expression profiles from the GEO
- database of Affymetrix microarrays, which were partitioned into training,
- validation, and testing data sets.
+ Input data were all 
+\begin_inset Formula $\approx$
+\end_inset
+
+111,000 genome-wide expression profiles from the GEO database of Affymetrix
+ microarrays, which were partitioned into training, validation, and testing
+ data sets.
  For each sample, the same subset of 943 "landmark" genes was chosen and
  9,520 other genes were predicted from the landmark genes.
 \end_layout
