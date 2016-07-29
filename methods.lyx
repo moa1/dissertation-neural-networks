@@ -261,7 +261,7 @@ Restricted Boltzmann Machines and Deep Belief Networks are both generative
  models.
  On the other hand, a neuronal network trained only with back-propagation
  is a discriminative model.
- All of these will be discussed later.
+ These neuronal networks will be discussed later.
 \end_layout
 
 \begin_layout Section
@@ -6273,7 +6273,14 @@ The sigmoid activation function is a standard activation function, often
  used in neural networks.
  It has the property that it is almost linear for inputs around zero, tends
  to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
- infinity.
+ infinity (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:sigmoid-function"
+
+\end_inset
+
+).
 \begin_inset Formula 
 \[
 \sigma(x)=\frac{1}{1+e^{-x}}
@@ -6285,16 +6292,24 @@ The sigmoid activation function is a standard activation function, often
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
+Another commonly used activation function is the hyperbolic tangent function
+ 
+\begin_inset Formula $tanh$
+\end_inset
 
-\begin_layout Plain Layout
-TODO: Kurve einer sigmoid-Funktion hier einfügen.
-\end_layout
+: 
+\begin_inset Formula 
+\[
+tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}
+\]
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+In this work, only the sigmoid activation function was used.
 \end_layout
 
 \begin_layout Paragraph

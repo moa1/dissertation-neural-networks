@@ -788,7 +788,7 @@ activation of an artificial neuron
 \begin_layout Standard
 \begin_inset Formula 
 \[
-o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(v_{i})}
+o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(-v_{i})}
 \]
 
 \end_inset
@@ -824,7 +824,66 @@ TODO: Hier eine Figure mit dem Plot von
 
 \end_inset
 
- The effect of an incoming axon onto a neuron, that is, the different types
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/plot-sigmoid.pdf
+	lyxscale 50
+	width 32page%
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/neuronal-network-example.dia
+	width 32page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:sigmoid-function"
+
+\end_inset
+
+Left: The sigmoid function 
+\begin_inset Formula $\sigma$
+\end_inset
+
+.
+ Right: Schema of the computational steps in a neuronal feed-forward network
+ from input layer to output layer.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The effect of an incoming axon onto a neuron, that is, the different types
  of receptors that can be present on the outside of a real dendrite, and
  the effected de- or hyperpolarization of the dendrite are abstracted away
  by using real-numbered weights.
