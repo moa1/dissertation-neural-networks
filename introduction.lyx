@@ -273,7 +273,7 @@ artificial neuronal networks
 \end_layout
 
 \begin_layout Subsection
-Neurons as basic signal processing units
+Neurons As Basic Signal Processing Units
 \end_layout
 
 \begin_layout Standard
@@ -389,7 +389,7 @@ Schema of a chemical synapse.
 \end_layout
 
 \begin_layout Subsubsection
-Action potentials, their propagation, and chemical synapses 
+Action Potentials, Their Propagation, and Chemical Synapses 
 \end_layout
 
 \begin_layout Standard
@@ -482,7 +482,7 @@ spike
 \end_layout
 
 \begin_layout Subsubsection
-Encoding of information in action potentials
+Encoding of Information in Action Potentials
 \end_layout
 
 \begin_layout Standard
@@ -530,11 +530,11 @@ Examples for neuronal networks that have been partly decoded are the eye
 \end_layout
 
 \begin_layout Subsection
-Examples of biological neuronal networks
+Examples of Biological Neuronal Networks
 \end_layout
 
 \begin_layout Subsubsection
-The eye, a visual system
+The Eye, a Visual System
 \end_layout
 
 \begin_layout Standard
@@ -646,7 +646,7 @@ TODO: Hier ein Bild einfügen, das links ein biologisches neuronales Netz
 \end_layout
 
 \begin_layout Subsubsection
-Odor sensing in the olfactory system
+Odor Sensing in the Olfactory System
 \end_layout
 
 \begin_layout Standard
@@ -840,7 +840,7 @@ The model also predicts that species with sparse connectivity have better
 \end_layout
 
 \begin_layout Subsection
-Artificial neurons as simple models of biological neurons
+Artificial Neurons as Simple Models of Biological Neurons
 \end_layout
 
 \begin_layout Standard
@@ -1444,7 +1444,7 @@ inductive semi-supervised learning
 \end_layout
 
 \begin_layout Subsubsection
-Properties of semi-supervised learning
+Properties of Semi-supervised Learning
 \end_layout
 
 \begin_layout Standard
@@ -1679,11 +1679,11 @@ n.
 \end_layout
 
 \begin_layout Subsection
-Networks with multiple hidden layers
+Networks with Multiple Hidden Layers
 \end_layout
 
 \begin_layout Subsubsection
-Auto-associator
+Autoassociator
 \end_layout
 
 \begin_layout Standard
@@ -1788,7 +1788,7 @@ The autoassociator can be used in a supervised fashion by first training
 \end_layout
 
 \begin_layout Subsubsection
-Deep learning
+Deep Learning
 \end_layout
 
 \begin_layout Standard
@@ -1947,7 +1947,7 @@ Here we give an overview of the motivation, other applicable methods, and
 \end_layout
 
 \begin_layout Subsection
-Motivations for using Deep Belief Networks on transcriptomic data
+Motivations for Using Deep Belief Networks on Transcriptomic Data
 \end_layout
 
 \begin_layout Standard
@@ -2350,7 +2350,7 @@ Test set accuracies and techniques of winning contestants in the ImageNet
 \end_layout
 
 \begin_layout Subsubsection
-Highly correlated inputs
+Highly Correlated Inputs
 \end_layout
 
 \begin_layout Standard
@@ -2411,7 +2411,7 @@ TODO: read TornowMewes2003, KlebanovYakovlev2007.
 \end_layout
 
 \begin_layout Subsubsection
-Deep Belief Networks find correlated nodes
+Deep Belief Networks Find Correlated Nodes
 \end_layout
 
 \begin_layout Standard
@@ -2458,6 +2458,13 @@ key "Joachims1999"
 
 \begin_layout Subsection
 Previous Work: Gene Expression Inference With Deep Learning
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Previous-Work:Gene-Expression-Inference-with-Deep-Learning"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

@@ -2073,7 +2073,7 @@ P(\mathbf{N})=P(N_{1}=n_{1},N_{2}=n_{2},\dots,N_{n}=n_{n})=\prod_{i=1}^{n}P(N_{i
 \end_layout
 
 \begin_layout Paragraph
-Example how to represent the conditional probability distribution
+Example How to Represent the Conditional Probability Distribution
 \end_layout
 
 \begin_layout Standard
@@ -2081,12 +2081,8 @@ Example how to represent the conditional probability distribution
 status open
 
 \begin_layout Plain Layout
-TODO: hier muss ein Beispiel mit einer Tabelle einer joint probability distribut
-ion stehen.
-\end_layout
-
-\begin_layout Plain Layout
-TODO: Hier eine Figure mit einem DAG.
+maybe TODO: hier muss ein Beispiel mit einer Tabelle einer joint probability
+ distribution stehen.
 \end_layout
 
 \end_inset
@@ -2563,32 +2559,9 @@ Here we show an example how inference in a specific directed graphical model
  layers, where the nodes within a layer are not connected, and they have
  outgoing directed connections only to nodes in the adjacent layer below.
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: insert graphics here that looks like a the directed graph 
-\begin_inset Formula $\mathbf{G}\rightarrow\mathbf{H}\rightarrow\mathbf{V}$
-\end_inset
-
-, but with individual nodes in 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{V}$
-\end_inset
-
-, and that I can use to explain why inference in a densely connected directed
- graphical model is hard.
 \end_layout
 
-\end_inset
-
+\begin_layout Standard
 When the probability distribution of the parent nodes are known, inferring
  the probability distributions of child nodes is easy: just multiply the
  probability of the parents with the conditional probability of the child.
@@ -3853,7 +3826,7 @@ key "Norris1997"
 status open
 
 \begin_layout Plain Layout
-Lemma 1.9.3
+Theorem 1.9.3
 \end_layout
 
 \end_inset
@@ -5461,7 +5434,7 @@ Here we will introduce artificial neuronal networks that have been developed
 \end_layout
 
 \begin_layout Subsubsection
-Distinction between a deterministic and stochastic network
+Distinction Between a Deterministic and Stochastic Network
 \end_layout
 
 \begin_layout Standard
@@ -6040,7 +6013,7 @@ recurrent neuronal network
 \end_layout
 
 \begin_layout Subsubsection
-Multilayer feedforward networks as universal function approximators
+Multilayer Feedforward Networks as Universal Function Approximators
 \end_layout
 
 \begin_layout Standard
@@ -6407,7 +6380,7 @@ explosion
 \end_layout
 
 \begin_layout Subsubsection
-Difficulties in training multi-layer neural networks
+Difficulties in Training Multi-layer Neural Networks
 \end_layout
 
 \begin_layout Standard
@@ -6834,7 +6807,7 @@ probably not TODO: I think weight normalization is described a bit in the
 \end_layout
 
 \begin_layout Subsubsection
-Early stopping
+Early Stopping
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Early-stopping"
@@ -8304,7 +8277,7 @@ Another way to view the unrolling is to regard the infinitely Deep Belief
 \end_layout
 
 \begin_layout Subsubsection
-Deep Belief Networks interpreted as feed-forward neural networks
+Deep Belief Networks Interpreted as Feed-forward Neural Networks
 \end_layout
 
 \begin_layout Standard

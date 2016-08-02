@@ -60,11 +60,12 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\tracking_changes false
-\output_changes false
+\tracking_changes true
+\output_changes true
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author 2090766911 "toni" 
 \end_header
 
 \begin_body
@@ -147,7 +148,13 @@ key "HatzisSymmans2011"
 \end_layout
 
 \begin_layout Paragraph
-Neuronal Networks are attractive
+Neuronal Networks are 
+\change_deleted 2090766911 1470154321
+a
+\change_inserted 2090766911 1470154321
+A
+\change_unchanged
+ttractive
 \end_layout
 
 \begin_layout Standard
@@ -207,7 +214,19 @@ Estimating classification probabilities in high-dimensional diagnostic studies,
 \end_layout
 
 \begin_layout Paragraph
-Different network configurations
+Different 
+\change_deleted 2090766911 1470154322
+n
+\change_inserted 2090766911 1470154322
+N
+\change_unchanged
+etwork 
+\change_deleted 2090766911 1470154322
+c
+\change_inserted 2090766911 1470154322
+C
+\change_unchanged
+onfigurations
 \end_layout
 
 \begin_layout Standard
@@ -234,7 +253,13 @@ TODO: cite a paper that reported this
 \end_layout
 
 \begin_layout Paragraph
-Different normalizations
+Different 
+\change_deleted 2090766911 1470154322
+n
+\change_inserted 2090766911 1470154322
+N
+\change_unchanged
+ormalizations
 \end_layout
 
 \begin_layout Standard
@@ -281,7 +306,49 @@ We always selected the iteration/model of the neuronal network that had
 \end_layout
 
 \begin_layout Paragraph
-Does semi-supervised learning lead to better neuronal network classifiers?
+Does 
+\change_deleted 2090766911 1470154322
+s
+\change_inserted 2090766911 1470154322
+S
+\change_unchanged
+emi-supervised 
+\change_deleted 2090766911 1470154322
+l
+\change_inserted 2090766911 1470154322
+L
+\change_unchanged
+earning 
+\change_deleted 2090766911 1470154322
+l
+\change_inserted 2090766911 1470154322
+L
+\change_unchanged
+ead to 
+\change_deleted 2090766911 1470154322
+b
+\change_inserted 2090766911 1470154322
+B
+\change_unchanged
+etter 
+\change_deleted 2090766911 1470154322
+n
+\change_inserted 2090766911 1470154322
+N
+\change_unchanged
+euronal 
+\change_deleted 2090766911 1470154322
+n
+\change_inserted 2090766911 1470154322
+N
+\change_unchanged
+etwork 
+\change_deleted 2090766911 1470154322
+c
+\change_inserted 2090766911 1470154322
+C
+\change_unchanged
+lassifiers?
 \end_layout
 
 \begin_layout Standard
@@ -437,7 +504,19 @@ measured
 \end_layout
 
 \begin_layout Paragraph
-Compared Methods: neuronal networks, SVM and TSVM
+Compared Methods: 
+\change_deleted 2090766911 1470154323
+n
+\change_inserted 2090766911 1470154323
+N
+\change_unchanged
+euronal 
+\change_deleted 2090766911 1470154323
+n
+\change_inserted 2090766911 1470154323
+N
+\change_unchanged
+etworks, SVM and TSVM
 \end_layout
 
 \begin_layout Standard
@@ -454,7 +533,13 @@ We compared SVM and TSVM to the artificial neuronal networks.
 \end_layout
 
 \begin_layout Paragraph
-In summary
+In 
+\change_deleted 2090766911 1470154323
+s
+\change_inserted 2090766911 1470154323
+S
+\change_unchanged
+ummary
 \end_layout
 
 \begin_layout Standard

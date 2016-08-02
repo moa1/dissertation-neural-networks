@@ -641,7 +641,7 @@ More sophisticated prediction schemes can be imagined that the prediction
 \end_layout
 
 \begin_layout Subsection
-Goal of this work
+Goal of this Work
 \end_layout
 
 \begin_layout Standard
@@ -737,7 +737,7 @@ As we will see, none of the attempts with artificial neuronal networks showed
 \end_layout
 
 \begin_layout Subsection
-Issues in running 
+Issues in Running 
 \emph on
 deepnet
 \end_layout
@@ -781,11 +781,11 @@ rhskl11
 \end_layout
 
 \begin_layout Subsection
-How unlabeled data was used in training
+How Unlabeled Data Was Used in Training
 \end_layout
 
 \begin_layout Subsubsection
-How unlabeled data was used in training Auto-Encoders
+How unlabeled data was used in training auto-Encoders
 \end_layout
 
 \begin_layout Standard
@@ -1027,7 +1027,7 @@ key "Joachims1999,R2008"
 \end_layout
 
 \begin_layout Subsection
-Model selection
+Model Selection
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Model-selection"
@@ -1630,13 +1630,9 @@ name "sec:Unsupervised-Reconstruction-of-Expression-Values"
 
 \end_layout
 
-\begin_layout Subsection
-breast_cancer_0
-\end_layout
-
 \begin_layout Standard
 To evaluate the (lossy) compression potential of Restricted Boltzmann Machines,
- an RBM was trained on GSE25055 and GSE25065.
+ an RBM was trained on unlabeled data of GSE25055 and GSE25065.
  This procedure is similar to the one performed by 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1644,8 +1640,31 @@ key "ChenXie2015"
 
 \end_inset
 
-.
- Both data sets were split randomly into training and test set, regardless
+ (summarized in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Previous-Work:Gene-Expression-Inference-with-Deep-Learning"
+
+\end_inset
+
+), who found compression using deep learning to be superior to linear regression
+ and k-Nearest-Neighbor on expression data of 
+\begin_inset Formula $\approx$
+\end_inset
+
+22,000 genes on 
+\begin_inset Formula $\approx$
+\end_inset
+
+111,000 gene expression profiles from GEO.
+\end_layout
+
+\begin_layout Subsection
+Data Set Design of breast_cancer_0
+\end_layout
+
+\begin_layout Standard
+Both data sets were split randomly into training and test set, regardless
  of label, according to the scheme shown in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1863,7 +1882,14 @@ Split of GEO data sets GSE25055 and GSE25065 into training and test set.
 \begin_layout Standard
 Then the 10,000 most variable genes on GSE25055 were determined.
  They were used as input genes, to halve computation time (from 22,283 genes).
- An RBM with 10,000 input nodes and 50 hidden nodes was trained.
+\end_layout
+
+\begin_layout Subsection
+RBM Parameters and Its Reconstruction Error
+\end_layout
+
+\begin_layout Standard
+An RBM with 10,000 input nodes and 50 hidden nodes was trained.
  (Both layer's node types were gaussian 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1964,16 +1990,17 @@ Although the 10,000 numbers were compressed into only 50 numbers, the mean
 \end_layout
 
 \begin_layout Section
-Increasing Prediction Quality with Increasing Number of labeled samples
+Prediction Quality From Labeled Samples
 \end_layout
 
 \begin_layout Subsection
-Increasing number of labeled samples (breast_cancer_06)
+Increasing Number of Labeled Samples (breast_cancer_06)
 \end_layout
 
 \begin_layout Standard
-The goal of breast_cancer_06 was to verify if basic training works, i.e.
- whether the classifier improves with an increasing amount of labeled examples.
+The goal of breast_cancer_06 was to verify if basic training works.
+ This was verified by testing whether the classifier improves with an increasing
+ amount of labeled examples.
  Therefore we trained using all unlabeled samples, and defined supervised
  learning data sets which have less and less labeled training and test samples.
  Models were pre-trained using either an RBM or auto-encoder and fine-tuned
@@ -3315,7 +3342,7 @@ named breast_cancer_06_ai, breast_cancer_06_aj
 \end_layout
 
 \begin_layout Subsubsection
-Unsupervised pre-training using RBM (breast_cancer_04_bg - bj)
+Unsupervised Pre-training Using RBM (breast_cancer_04_bg - bj)
 \end_layout
 
 \begin_layout Standard
@@ -4377,7 +4404,7 @@ _04_bg, bh, bi, bj.
 \end_layout
 
 \begin_layout Subsubsection
-Supervised classification with unsupervisedly pre-trained RBM
+Supervised Classification with Unsupervisedly Pre-trained RBM
 \begin_inset Newline newline
 \end_inset
 
@@ -5655,7 +5682,7 @@ We also tried using 2 hidden layers instead of 1.
 \end_layout
 
 \begin_layout Subsubsection
-Unsupervised pre-training using autoencoder (breast_cancer_03_ai, _03_al,
+Unsupervised Pre-training Using Autoencoder (breast_cancer_03_ai, _03_al,
  _03_am, _03_ao)
 \begin_inset CommandInset label
 LatexCommand label
@@ -6525,7 +6552,7 @@ Settings for the unsupervised pre-training autoencoders breast_cancer_03_ai,
 \end_layout
 
 \begin_layout Subsubsection
-Supervised classification with unsupervised pre-trained autoencoder (breast_canc
+Supervised Classification with Unsupervised Pre-trained Autoencoder (breast_canc
 er_06_ae - ah)
 \end_layout
 
@@ -6557,7 +6584,7 @@ Like for RBMs, we also tried using 2 hidden layers instead of 1, but this
 \end_layout
 
 \begin_layout Subsubsection
-Examining the output of breast_cancer_06_aa/_n302_cv1
+Examining the Output of breast_cancer_06_aa/_n302_cv1
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Examining-biased-classifier"
@@ -6763,8 +6790,7 @@ There is a heavy bias in favor of label 0.
 \end_layout
 
 \begin_layout Subsection
-Increasing number of labeled samples, with equal number of class labels
- (breast_cancer_07)
+Equal Number of Class Labels (breast_cancer_07)
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-breast_cancer_07"
@@ -7599,7 +7625,7 @@ TODO: create accuracy plots like for SVM.
 \end_layout
 
 \begin_layout Subsubsection
-Supervised classification with unsupervised pre-trained RBM
+Supervised Classification with Unsupervised Pre-trained RBM
 \begin_inset Newline newline
 \end_inset
 
@@ -7692,7 +7718,7 @@ Accuracy bar plots of a feed-forward neuronal network pre-trained with an
 \end_layout
 
 \begin_layout Subsubsection
-Supervised classification with unsupervised pre-trained autoencoder (breast_canc
+Supervised Classification with Unsupervised Pre-trained Autoencoder (breast_canc
 er_07_ae - ah)
 \end_layout
 
@@ -7769,7 +7795,7 @@ Accuracy bar plots of a feed-forward neuronal network pre-trained with an
 \end_layout
 
 \begin_layout Subsubsection
-Supervised classification without pre-training (breast_cancer_07_ai - aj)
+Supervised Classification without Pre-training (breast_cancer_07_ai - aj)
 \end_layout
 
 \begin_layout Standard
@@ -8667,7 +8693,7 @@ r_07 are lower than those on breast_cancer_06, indicating the higher difficulty
 \end_layout
 
 \begin_layout Subsubsection
-Examining the output of breast_cancer_07_aa/_n090_cv1
+Examining the Output of breast_cancer_07_aa/_n090_cv1
 \end_layout
 
 \begin_layout Standard
@@ -9086,7 +9112,7 @@ n090_cv1.
 \end_layout
 
 \begin_layout Section
-Different normalizations (breast_cancer_08)
+Different Normalizations (breast_cancer_08)
 \end_layout
 
 \begin_layout Standard
@@ -9105,7 +9131,7 @@ To alleviate the effects of systematic errors in the raw data, we tried
 \end_layout
 
 \begin_layout Subsection
-Data set design
+Data Set Design
 \end_layout
 
 \begin_layout Standard
@@ -10562,7 +10588,7 @@ After pre-training, the artificial neuronal networks were fine-tuned using
 \end_layout
 
 \begin_layout Subsection
-Supervised classification with unsupervised pre-trained autoencoder
+Supervised Classification with Unsupervised Pre-trained Autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -10737,7 +10763,7 @@ Box-plot for neuronal network prediction pre-trained with an autoencoder
 \end_layout
 
 \begin_layout Subsubsection
-Different normalizations
+Different Normalizations
 \end_layout
 
 \begin_layout Standard
@@ -11298,7 +11324,7 @@ Taking the log2 of MAS5-normalized data only improves accuracies when the
 \end_layout
 
 \begin_layout Subsubsection
-ZCA normalization
+ZCA Normalization
 \end_layout
 
 \begin_layout Standard
@@ -11325,7 +11351,7 @@ On second thought, ZCA whitening is non-sensical in expression data since
 \end_layout
 
 \begin_layout Subsection
-Does adding unlabeled samples help in semi-supervised neuronal network training?
+Does Adding Unlabeled Samples Help in Semi-supervised Neuronal Network Training?
 \end_layout
 
 \begin_layout Standard
@@ -11372,7 +11398,7 @@ Silhouette
 \end_layout
 
 \begin_layout Section
-More repetitions for statistical power (breast_cancer_12)
+Comparison of SVM, TSVM, FFN, DBN (breast_cancer_12)
 \end_layout
 
 \begin_layout Standard
@@ -11391,7 +11417,7 @@ ed a Deep Belief Network.
 \end_layout
 
 \begin_layout Subsection
-Data set design
+Data Set Design
 \end_layout
 
 \begin_layout Standard
@@ -13893,7 +13919,7 @@ reference "tab:design-of-breast_cancer_12"
 \end_layout
 
 \begin_layout Subsection
-DBN training
+DBN Training
 \end_layout
 
 \begin_layout Standard
@@ -13983,7 +14009,7 @@ Because Deep Belief Networks need unlabeled samples during pre-training,
 \end_layout
 
 \begin_layout Subsection
-Use both training and validation data sets for training TSVMs
+Using Both Training and Validation Data Sets for Training TSVMs
 \end_layout
 
 \begin_layout Standard
@@ -14255,7 +14281,7 @@ reference "fig:Accuracy-comparison-of-breast_cancer_12"
 \end_layout
 
 \begin_layout Subsubsection
-Comparison FFN versus DBN
+Comparison of FFN Versus DBN
 \end_layout
 
 \begin_layout Standard
@@ -15482,7 +15508,7 @@ The lowest adjusted p-value is 0.637, which means there is no significant
 \end_layout
 
 \begin_layout Subsubsection
-Comparison SVM versus TSVM
+Comparison of SVM Versus TSVM
 \end_layout
 
 \begin_layout Standard
@@ -16830,7 +16856,7 @@ The lowest adjusted p-value is 0.158 between SVM and TSVM on data set 1.
 \end_layout
 
 \begin_layout Subsubsection
-Comparison FFN versus SVM
+Comparison of FFN Versus SVM
 \end_layout
 
 \begin_layout Standard
@@ -17238,7 +17264,7 @@ The p-value is 0.926 and not significant.
 \end_layout
 
 \begin_layout Subsubsection
-Comparison DBN versus TSVM
+Comparison of DBN Versus TSVM
 \end_layout
 
 \begin_layout Standard
@@ -22355,7 +22381,7 @@ estimate
 \end_layout
 
 \begin_layout Subsubsection
-Comparison TSVM versus TSVM
+Comparison of TSVM Versus TSVM
 \end_layout
 
 \begin_layout Standard
@@ -25086,7 +25112,7 @@ n accuracy.
 \end_layout
 
 \begin_layout Section
-Ratio of training numbers to network parameters (breast_cancer_15)
+Less Network Parameters (breast_cancer_15)
 \end_layout
 
 \begin_layout Standard
@@ -25098,7 +25124,7 @@ Since breast_cancer_12 has a negative result in summary, because it cannot
 \end_layout
 
 \begin_layout Subsection
-Too many free parameters
+Too Many Free Parameters
 \end_layout
 
 \begin_layout Standard
@@ -25260,7 +25286,7 @@ r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o}
 \end_layout
 
 \begin_layout Subsection
-Data set design
+Data Set Design
 \end_layout
 
 \begin_layout Standard
@@ -27436,7 +27462,7 @@ breast_cancer_15 contains 37|37 labeled testing, 10|10 labeled training,
 \end_layout
 
 \begin_layout Subsubsection
-Different training parameters
+Different Training Parameters
 \end_layout
 
 \begin_layout Standard
@@ -27452,7 +27478,7 @@ base_epsilon
 \end_layout
 
 \begin_layout Subsection
-Accuracy of DBN fine-tuned with back-propagation
+Accuracy of DBN Fine-tuned with Back-propagation
 \end_layout
 
 \begin_layout Standard
