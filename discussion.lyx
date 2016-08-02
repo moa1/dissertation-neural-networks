@@ -60,12 +60,11 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\tracking_changes true
-\output_changes true
+\tracking_changes false
+\output_changes false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
-\author 2090766911 "toni" 
 \end_header
 
 \begin_body
@@ -87,38 +86,30 @@ Using Tumour Expression Data Directly to Classify Recurrence
 \begin_layout Standard
 We predicted recurrence directly from expression data.
  Papers that use neuronal networks to classify cancerous tissue are for
- example (TODO: cite D.-R.
- Chen, R.-F.
- Chang, W.-J.
- Kuo, M.-C.
- Chen, and Y.-L.
- Huang, “Diagnosis of breast tumors with sonographic texture analysis using
- wavelet transform and neural networks,” Ultra- sound in Medicine and Biology,
- vol.
- 28, no.
- 10, pp.
- 1301–1310, 2002.) and (TODO: cite F.
- Ercal, A.
- Chawla, W.
- V.
- Stoecker, H.-C.
- Lee, and R.
- H.
- Moss, “Neural network diagnosis of malignant melanoma from color images,”
- IEEE Transactions on Biomedical Engineering, vol.
- 41, no.
- 9, pp.
- 837–845, 1994.) In (cite 
-\begin_inset Quotes eld
+ example 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenHuang2002"
+
 \end_inset
 
-Sharaf Tsokos 2015 neural networks for modeling discrete survival time of
- censored data.pdf
-\begin_inset Quotes erd
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ErcalMoss1994"
+
 \end_inset
 
-), Sharaf et al predict from 4 input variables the survival time by training
- a neuronal network on 69,000 patients
+.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SharafTsokos2015"
+
+\end_inset
+
+, Sharaf and Tsokos predict from 4 input variables the survival time by
+ training a neuronal network on 69,000 patients
 \begin_inset Note Note
 status open
 
@@ -148,13 +139,7 @@ key "HatzisSymmans2011"
 \end_layout
 
 \begin_layout Paragraph
-Neuronal Networks are 
-\change_deleted 2090766911 1470154321
-a
-\change_inserted 2090766911 1470154321
-A
-\change_unchanged
-ttractive
+Neuronal Networks are Attractive
 \end_layout
 
 \begin_layout Standard
@@ -164,15 +149,14 @@ In our view, neuronal networks have attractive properties: they are non-linear,
  regularizations and network parameters), in prediction they often show
  better accuracies than normal SVMs, and deep neuronal networks are among
  the best predictors in several fields.
- As (TODO: cite 
-\begin_inset Quotes eld
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BiganzoliMarubini1998"
+
 \end_inset
 
-Biganzoli 1998 neural networks for censored survival data.pdf
-\begin_inset Quotes erd
-\end_inset
-
-) 
+ 
 \begin_inset Note Note
 status open
 
@@ -192,18 +176,14 @@ Feed forward ANNs are strictly equivalent to non-linear multivariate regression
 \end_inset
 
  They can be used unsupervisedly as well as supervisedly.
- For example, to obtain a probability for a class like done in (TODO: cite
- 
-\begin_inset Quotes eld
+ For example, to obtain a probability for a class like done in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AppelSpang2011"
+
 \end_inset
 
-Estimating classification probabilities in high-dimensional diagnostic studies,
- Bioinformatics, 27(18):2563-2570.
-\begin_inset Quotes erd
-\end_inset
-
-), a procedure that justifies its own paper, is straightforward, because
- the network outputs class probabilities anyways.
+ is straightforward, because the network outputs class probabilities anyways.
  Last, but not least, artificial neuronal networks are supposed to be plausible
  models of the real biological neuronal networks, which are the control
  centers of many animals, and were shaped by evolution during millions of
@@ -214,19 +194,7 @@ Estimating classification probabilities in high-dimensional diagnostic studies,
 \end_layout
 
 \begin_layout Paragraph
-Different 
-\change_deleted 2090766911 1470154322
-n
-\change_inserted 2090766911 1470154322
-N
-\change_unchanged
-etwork 
-\change_deleted 2090766911 1470154322
-c
-\change_inserted 2090766911 1470154322
-C
-\change_unchanged
-onfigurations
+Different Network Configurations
 \end_layout
 
 \begin_layout Standard
@@ -253,13 +221,7 @@ TODO: cite a paper that reported this
 \end_layout
 
 \begin_layout Paragraph
-Different 
-\change_deleted 2090766911 1470154322
-n
-\change_inserted 2090766911 1470154322
-N
-\change_unchanged
-ormalizations
+Different Normalizations
 \end_layout
 
 \begin_layout Standard
@@ -306,69 +268,31 @@ We always selected the iteration/model of the neuronal network that had
 \end_layout
 
 \begin_layout Paragraph
-Does 
-\change_deleted 2090766911 1470154322
-s
-\change_inserted 2090766911 1470154322
-S
-\change_unchanged
-emi-supervised 
-\change_deleted 2090766911 1470154322
-l
-\change_inserted 2090766911 1470154322
-L
-\change_unchanged
-earning 
-\change_deleted 2090766911 1470154322
-l
-\change_inserted 2090766911 1470154322
-L
-\change_unchanged
-ead to 
-\change_deleted 2090766911 1470154322
-b
-\change_inserted 2090766911 1470154322
-B
-\change_unchanged
-etter 
-\change_deleted 2090766911 1470154322
-n
-\change_inserted 2090766911 1470154322
-N
-\change_unchanged
-euronal 
-\change_deleted 2090766911 1470154322
-n
-\change_inserted 2090766911 1470154322
-N
-\change_unchanged
-etwork 
-\change_deleted 2090766911 1470154322
-c
-\change_inserted 2090766911 1470154322
-C
-\change_unchanged
-lassifiers?
+Does Semi-supervised Learning Lead to Better Neuronal Network Classifiers?
 \end_layout
 
 \begin_layout Standard
 We used an increasing number of unlabeled samples during pre-training to
  find out whether this has an effect on the accuracy achieved during fine-tuning.
- In terms of (TODO: cite 
-\begin_inset Quotes eld
+ In terms of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhu2005"
+
 \end_inset
 
-Semi-supervised learning survey
-\begin_inset Quotes erd
+, we are learning an efficient coding of the domain from unlabeled data
+ and then perform supervised learning on the coded samples (see their chapter
+ 8).
+ The approach is similar to that of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
 \end_inset
 
- by Xiaojin Zhu), we are learning an efficient coding of the domain from
- unlabeled data and then perform supervised learning on the coded samples
- (see their chapter 8).
- The approach is similar to that of (TODO: cite "~/uni/publication/zusammenfassu
-ng/applications/Bioinformatics-2016-Chen-bioinformatics_btw074.pdf"), where
- they used the representation of a sample at the deepest hidden layer to
- classify the sample, using a supervised algorithm
+, where they used the representation of a sample at the deepest hidden layer
+ to classify the sample, using a supervised algorithm
 \begin_inset Note Note
 status collapsed
 
@@ -393,23 +317,28 @@ To dissect the nonlinear contribution, we took a relatively simple approach
 \end_inset
 
 .
- Like (TODO: cite 
-\begin_inset Quotes eld
+ Like 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhu2005"
+
 \end_inset
 
-Semi-supervised learning survey
-\begin_inset Quotes erd
-\end_inset
-
- by Xiaojin Zhu), we also noticed that during data set creation for semi-supervi
-sed learning, one has to constrain the class proportions (in our case to
- 50% for class 0 and 50% for class 1), otherwise the semi-supervised training
- often fails with predictions biased in favor of the larger class.
+, we also noticed that during data set creation for semi-supervised learning,
+ one has to constrain the class proportions (in our case to 50% for class
+ 0 and 50% for class 1), otherwise the semi-supervised training often fails
+ with predictions biased in favor of the larger class.
  None of the approaches tried showed a significant benefit between those
  networks trained using more unlabeled samples over those trained using
  less unlabeled samples.
- In different settings this approach worked well (TODO: cite papers where
- they use unlabeled samples in pre-training).
+ In different settings this approach worked well 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ErhanBengio2010"
+
+\end_inset
+
+.
  However, there are some differences between those fields and the scenario
  of microarray expression data: The dimensionality of microarrays is usually
  higher than that of images or phonemes.
@@ -418,8 +347,14 @@ sed learning, one has to constrain the class proportions (in our case to
  There are much less number of labeled and unlabeled samples in expression
  data than those available in image recognition.
  For example, in the image classification task in the ImageNet Large Scale
- Visual Recognition Challenge (TODO: cite 1409.0575v3.pdf on Arxiv), there
- are an average of 
+ Visual Recognition Challenge 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RussakovskyFeiFei2015"
+
+\end_inset
+
+, there are an average of 
 \begin_inset Formula $\approx$
 \end_inset
 
@@ -478,8 +413,14 @@ Having such a transformation for expression data would be very useful, not
 \emph on
 hub features 
 \emph default
-in Figure S3 of TODO: cite ".../zusammenfassung/applications/Bioinformatics-2016-Ch
-en-bioinformatics_btw074-supplementary.pdf").
+in Figure S3 of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
+\end_inset
+
+).
  There seem to be hub networks, that have outgoing connections to many output
  layer genes, with many of the hub networks having either positive (i.e.
  that positively affect the expression of a target gene) or negative outgoing
@@ -504,19 +445,7 @@ measured
 \end_layout
 
 \begin_layout Paragraph
-Compared Methods: 
-\change_deleted 2090766911 1470154323
-n
-\change_inserted 2090766911 1470154323
-N
-\change_unchanged
-euronal 
-\change_deleted 2090766911 1470154323
-n
-\change_inserted 2090766911 1470154323
-N
-\change_unchanged
-etworks, SVM and TSVM
+Compared Methods: Neuronal Networks, SVM and TSVM
 \end_layout
 
 \begin_layout Standard
@@ -533,13 +462,7 @@ We compared SVM and TSVM to the artificial neuronal networks.
 \end_layout
 
 \begin_layout Paragraph
-In 
-\change_deleted 2090766911 1470154323
-s
-\change_inserted 2090766911 1470154323
-S
-\change_unchanged
-ummary
+In Summary
 \end_layout
 
 \begin_layout Standard
