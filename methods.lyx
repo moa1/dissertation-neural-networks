@@ -6426,6 +6426,88 @@ Examples for generative models are the Restricted Boltzmann Machine or Deep
 \end_layout
 
 \begin_layout Subsection
+Autoassociator
+\end_layout
+
+\begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Autoassociator-introduction"
+
+\end_inset
+
+, an autoassociator was described as one of the first networks with a deep
+ architecture that could be trained effectively.
+ The training is done by iteratively adding layers to the network, and it
+ starts with three layers: input layer, where input data is applied, the
+ internal hidden layer, which usually has a smaller size than the input
+ and output layers, and the output layer, which has the same size as the
+ input layer and where the original input should be reconstructed as closely
+ as possible.
+\end_layout
+
+\begin_layout Standard
+When training this first iteration of the network, the input patterns are
+ taken from the training data set.
+ Standard back-propagation is used to adapt the weights between input layer
+ and hidden layer and between hidden layer and output layer.
+ The goal of training is that the network reconstructs as output patterns
+ the input patterns.
+ One might think that that is too easy, but usually the number of nodes
+ in the hidden layer is chosen to be smaller than the number of nodes in
+ the input (and output) layer.
+ In this way the autoassociator is forced to reconstruct its input from
+ a compressed representation.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(TODO: hier ein Bild eines autoassociator networks.)
+\end_layout
+
+\end_inset
+
+ Once back-propagation does not improve the reconstruction error on the
+ test set anymore, the second step starts.
+\end_layout
+
+\begin_layout Standard
+In the second step, both encoder and decoder are extended by one layer.
+ The encoder network is enlarged by an additional hidden layer put on top
+ of its existing 1st hidden layer.
+ The weights between the 1st and 2nd (new) hidden layer are initialized
+ randomly.
+ The biases of the nodes in the 2nd (new) hidden layer are also initialized
+ (randomly or constantly zero).
+ The decoder network is constructed on top of the new hidden 2nd layer by
+ inserting weights initialized randomly, copying the 1st hidden layer to
+ form the 3rd hidden layer, copying the weights between hidden layer 1 (from
+ the first iteration) to the output layer, and copying the output layer
+ (from the first iteration).
+ Then back-propagation is used to train the autoassociator consisting of
+ the new encoder network with the new decoder network on top.
+ This establishes values for the values of the initialized weights and biases.
+\end_layout
+
+\begin_layout Subsubsection
+Autoassociator with classifier on top
+\end_layout
+
+\begin_layout Standard
+The autoassociator as described is an unsupervised algorithm, because it
+ only reconstructs its input.
+ The autoassociator can however be used in a supervised fashion by first
+ training its encoder and decoder networks up to sufficient depth, and then
+ removing the decoder network and replacing it by a single output layer
+ that has the dimension of the training label.
+ The weights between the last hidden layer of the encoder and the new output
+ layer as well as the biases of the new output layer are initialized randomly
+ (or to constantly zero), and trained using back-propagation.
+\end_layout
+
+\begin_layout Subsection
 Regularizations of Neuronal Networks
 \end_layout
 
@@ -6440,7 +6522,7 @@ regularization
 
 \end_inset
 
- methods have been developed over the years.
+ methods for neuronal networks have been developed over the years.
  They have in common that they artificially constrain the search space of
  weights and biases in order to let the model find better error minima or
  to prevent overfitting.
@@ -6605,7 +6687,7 @@ key "FischerIgel2012"
 
 \end_inset
 
- note, adding an L2 weight decay term to the updating term corresponds to
+ note, using an L2 weight decay term in the updating term corresponds to
  assuming a zero-mean Gaussian prior on the parameters.
 \end_layout
 

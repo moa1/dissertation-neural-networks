@@ -240,15 +240,17 @@ The goal of this work is to contribute to such a predictor.
  The prediction is output by the network in the form of a number between
  0 and 1.
  Here, 0 means the patient is predicted with absolute certainty to have
- residual disease, and 1 means the patient is predicted with absolute certainty
- to have pathologic complete response.
+ residual disease, 1 means the patient is predicted with absolute certainty
+ to have pathologic complete response, and a number in-between is interpreted
+ as the probability for pathologic complete response.
 \end_layout
 
 \begin_layout Standard
-The study of biological neuronal network prompted the development of artificial
+The study of neuronal networks in biology prompted the development of artificial
  neuronal networks.
  After an introduction to biological and artificial neuronal networks we
- will introduce machine learning and then introduce to the work done.
+ will introduce machine learning and then introduce the own work done in
+ this manuscript.
 \end_layout
 
 \begin_layout Section
@@ -338,8 +340,8 @@ In most real neurons, the signal transmission and processing is facilitated
  by alternating small electric (action) potentials (along the axons) and
  chemical transmissions (at chemical synapses between axon and dendrite).
  The electric potential is transmitted along the dendrites of a neuron,
- and flows to the axon of the neuron, which can lead to the release of neurotran
-smitters stored in the axon terminals into the synaptic cleft.
+ and flows to the axon of the neuron, where it can lead to the release of
+ neurotransmitters stored in the axon terminals into the synaptic cleft.
  The released neurotransmitters are detected by receptors and cause ion
  channels in the adjacent dendrites of other neurons to open, which changes
  their membrane potential.
@@ -1684,6 +1686,13 @@ Networks with Multiple Hidden Layers
 
 \begin_layout Subsubsection
 Autoassociator
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Autoassociator-introduction"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1709,7 +1718,7 @@ TODO: Hier sollte ein Bild von einem Auto-associator stehen.
 \end_inset
 
 An algorithm that can train an artificial neuronal network with more than
- one hidden layer is the auto-associator 
+ one hidden layer is the auto-associator
 \begin_inset Index idx
 status collapsed
 
@@ -1729,41 +1738,7 @@ tric counterpart, the decoder network.
  The (overlapping) decoder network consists of the very same hidden layer
  and the output layer on top, which must have the same dimensions as the
  input layer.
-\end_layout
-
-\begin_layout Standard
-When training this first iteration of the network, the input patterns are
- taken from the training data set.
- Standard back-propagation is used to adapt the weights between input layer
- and hidden layer and between hidden layer and output layer.
- The goal of training is that the network reconstructs as output patterns
- the input patterns.
- One might think that that is too easy, but usually the number of nodes
- in the hidden layer is chosen to be smaller than the number of nodes in
- the input (and output) layer.
- In this way the autoassociator is forced to reconstruct its input from
- a compressed representation.
- (TODO: hier ein Bild eines autoassociator networks.) Once back-propagation
- does not improve the reconstruction error on the test set anymore, the
- second step starts.
-\end_layout
-
-\begin_layout Standard
-In the second step, both encoder and decoder are extended by one layer.
- The encoder network is enlarged by an additional hidden layer put on top
- of its existing 1st hidden layer.
- The weights between the 1st and 2nd (new) hidden layer are initialized
- randomly.
- The biases of the nodes in the 2nd (new) hidden layer are also initialized
- (randomly or constantly zero).
- The decoder network is constructed on top of the new hidden 2nd layer by
- inserting weights initialized randomly, copying the 1st hidden layer to
- form the 3rd hidden layer, copying the weights between hidden layer 1 (from
- the first iteration) to the output layer, and copying the output layer
- (from the first iteration).
- Then back-propagation is used to train the autoassociator consisting of
- the new encoder network with the new decoder network on top.
- This establishes values for the values of the initialized weights and biases.
+ Training an autoencoder slowly adds internal layers to en- and decoder.
 \end_layout
 
 \begin_layout Standard
@@ -1771,22 +1746,6 @@ Because the network size increases iteratively from only 3 layers, to 5
  layers, to 7 layers, and so on, and only 2 weight layers are initialized
  randomly in each iteration, back-propagation is often able to find parameters
  for a network that is not stuck in a poor local optimum.
-\end_layout
-
-\begin_layout Paragraph
-Autoassociator with classifier on top
-\end_layout
-
-\begin_layout Standard
-The autoassociator as described is a unsupervised algorithm, because it
- only reconstructs its input.
- The autoassociator can however be used in a supervised fashion by first
- training its encoder and decoder networks up to sufficient depth, and then
- removing the decoder network and replacing it by a single output layer
- that has the dimension of the training label.
- The weights between the last hidden layer of the encoder and the new output
- layer as well as the biases of the new output layer are initialized randomly
- (or to constantly zero), and trained using back-propagation.
 \end_layout
 
 \begin_layout Subsubsection
