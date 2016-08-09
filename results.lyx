@@ -74,7 +74,31 @@
 status open
 
 \begin_layout Plain Layout
-TODO: check screens on RHSKL11 and download updated files
+TODO: download 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/nnet/notes/breast_cancer_12
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+uni/nnet/svmlight/breast_cancer_07
+\begin_inset Quotes erd
+\end_inset
+
+ from rhskl11 when both 
+\begin_inset Quotes eld
+\end_inset
+
+rhskl11$ screen -l
+\begin_inset Quotes erd
+\end_inset
+
+ are done.
 \end_layout
 
 \end_inset
@@ -1164,8 +1188,8 @@ status open
 status open
 
 \begin_layout Plain Layout
-TODO: replace this with a pdf version, and possibly resize it so that it
- doesn't use a separate page in dissertation.pdf.
+TODO: possibly resize this so that it doesn't use a separate page in dissertatio
+n.pdf.
 \end_layout
 
 \end_inset
@@ -5622,7 +5646,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/breast_cancer_06-loess-aa_ad.png
+	filename images/breast_cancer_06-loess-aa_ad.pdf
 	width 68page%
 
 \end_inset
@@ -9095,16 +9119,6 @@ status open
 \end_inset
 
 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: replace with the pdf version.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -11410,7 +11424,11 @@ Silhouette
 \end_layout
 
 \begin_layout Section
-Comparison of SVM, TSVM, FFN, DBN (breast_cancer_12)
+Comparison of SVM, TSVM, FFN, DBN
+\begin_inset Newline newline
+\end_inset
+
+(breast_cancer_12)
 \end_layout
 
 \begin_layout Standard
@@ -14245,6 +14263,8 @@ This can be quantified using a paired and two-sided Wilcoxon test.
  difference is the amount of unlabeled data used during training.
  It is two-sided because we do not know before the experiment which algorithm
  on a data set will perform better than another.
+ The null hypothesis is that the true accuracy shift between the two compared
+ experiments is zero.
 \end_layout
 
 \begin_layout Standard
@@ -27560,10 +27580,23 @@ reference "fig:Accuracy-in-breast_cancer_15"
 \end_layout
 
 \begin_layout Standard
-However, there still is no dependence of accuracies on the amount of unlabeled
- samples available to training.
- Again, only the silhouette (i.e.
- the extremum accuracies) seems to point slightly upwards from left to right.
+To check whether there is a dependence of accuracies on the amount of unlabeled
+ samples available to training, we use a paired (over the repetitions) and
+ two-sided Wilcoxon test (see 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
+
+\end_inset
+
+).
+ The p-value for the accuracy difference between data sets 2 and 6 is 8.9%,
+ which some people consider significant.
+ The estimated difference between accuracies of data sets 2 and 6 is 2.8
+ percent points.
+ (The 95% confidence interval for the difference is [-0.46; 6.7] percent points.)
+ Depending on what one considers significant, this shows a dependence of
+ accuracy on the number of unlabeled samples.
 \end_layout
 
 \begin_layout Subsection
@@ -27644,6 +27677,19 @@ reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
  interval is [2.02; 6.08].
  This means that in breast_cancer_15, TSVM succeeded in increasing accuracy
  slightly by learning from unlabeled samples.
+\end_layout
+
+\begin_layout Standard
+When training a TSVM only on the training data (but leaving away the validation
+ data), in addition to data set 2, also data set 3 fails to train a proper
+ model with almost all their accuracies at 0.5, and data set 4 has a median
+ accuracy of only 
+\begin_inset Formula $\approx$
+\end_inset
+
+0.575 (data not shown).
+ This may show that semi-supervised training using a TSVM fails when not
+ a sufficient number of unlabeled training samples is available.
 \end_layout
 
 \end_body
