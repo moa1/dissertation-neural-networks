@@ -1738,18 +1738,18 @@ When training this first iteration of the network, the input patterns are
  and hidden layer and between hidden layer and output layer.
  The goal of training is that the network reconstructs as output patterns
  the input patterns.
- You might think that that is too easy, but usually the number of nodes
+ One might think that that is too easy, but usually the number of nodes
  in the hidden layer is chosen to be smaller than the number of nodes in
  the input (and output) layer.
  In this way the autoassociator is forced to reconstruct its input from
  a compressed representation.
  (TODO: hier ein Bild eines autoassociator networks.) Once back-propagation
  does not improve the reconstruction error on the test set anymore, the
- second iteration starts.
+ second step starts.
 \end_layout
 
 \begin_layout Standard
-In the second iteration, both encoder and decoder are extended by one layer.
+In the second step, both encoder and decoder are extended by one layer.
  The encoder network is enlarged by an additional hidden layer put on top
  of its existing 1st hidden layer.
  The weights between the 1st and 2nd (new) hidden layer are initialized
@@ -1778,10 +1778,12 @@ Autoassociator with classifier on top
 \end_layout
 
 \begin_layout Standard
-The autoassociator can be used in a supervised fashion by first training
- its encoder and decoder networks up to sufficient depth, and then removing
- the decoder network and replacing it by a single output layer that has
- the dimension of the training output patterns.
+The autoassociator as described is a unsupervised algorithm, because it
+ only reconstructs its input.
+ The autoassociator can however be used in a supervised fashion by first
+ training its encoder and decoder networks up to sufficient depth, and then
+ removing the decoder network and replacing it by a single output layer
+ that has the dimension of the training label.
  The weights between the last hidden layer of the encoder and the new output
  layer as well as the biases of the new output layer are initialized randomly
  (or to constantly zero), and trained using back-propagation.

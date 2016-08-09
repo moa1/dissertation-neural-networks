@@ -74,7 +74,22 @@
 status open
 
 \begin_layout Plain Layout
-TODO: use past and present tense consistently in this text.
+TODO: check screens on RHSKL11 and download updated files
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+use past and present tense consistently in this text.
+ When talking about something that was done, use past tense, and when talking
+ about a fact, use present tense.
 \end_layout
 
 \end_inset
@@ -629,7 +644,7 @@ pathologic complete response
 \end_layout
 
 \begin_layout Standard
-More sophisticated prediction schemes can be imagined that the prediction
+More sophisticated prediction schemes can be imagined so that the prediction
  made produces more than one number: For example, in addition to the severity
  of the disease after therapy (a number between 0 and 1), the number of
  metastases (a natural number) could be trained and predicted.
@@ -1138,7 +1153,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/breast_cancer_12-smoothed_accuracy-aa.png
+	filename images/breast_cancer_15-smoothed_accuracy-at.pdf
 	lyxscale 50
 	width 50page%
 
@@ -1170,7 +1185,7 @@ name "fig:Example-of-supervised-model-selection"
 
 Example of supervised model selection.
  The x-axis is the training iteration, the y-axis the accuracy.
- The turqoise, green, and black circle clouds are the raw accuracies on
+ The turquoise, green, and black circle clouds are the raw accuracies on
  the training, validation, and test set, respectively.
  The thin lines overlayed on the point clouds are the 
 \emph on
@@ -1203,7 +1218,7 @@ Note that this procedure allows reporting test set accuracies which seem
 Initial Training Trials
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -1215,16 +1230,6 @@ deepnet
  that work with the breast cancer data set)
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subparagraph
-Learn rate: 
-\emph on
-
-\begin_inset Formula $base\textrm{\_}epsilon$
 \end_inset
 
 
@@ -1254,7 +1259,7 @@ deepnet
 \end_layout
 
 \begin_layout Standard
-The following settings for 
+In an initial learning trial, the following settings for 
 \emph on
 
 \begin_inset Formula $base\textrm{\_}epsilon$
@@ -1890,14 +1895,15 @@ RBM Parameters and Its Reconstruction Error
 
 \begin_layout Standard
 An RBM with 10,000 input nodes and 50 hidden nodes was trained.
- (Both layer's node types were gaussian 
+ Both layer's node types were gaussian 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HintonSalakhutdinov2006"
 
 \end_inset
 
-.) The RBM was trained for about 70,000 iterations.
+.
+ The RBM was trained for about 70,000 iterations.
  
 \end_layout
 
@@ -5605,7 +5611,6 @@ reference "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
 \end_inset
 
 .
- As there are 
 \end_layout
 
 \begin_layout Standard
@@ -5647,6 +5652,7 @@ reference "sub:Model-selection"
 \end_inset
 
 .
+ Each dot is the accuracy of a repetition in the respective data set.
 \end_layout
 
 \end_inset
@@ -7541,19 +7547,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/breast_cancer_07-accuracies-svm-testing.png
+	filename images/breast_cancer_07-accuracies-svm-testing.pdf
 	width 34page%
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: replace with the pdf version and use appropriate labels for x and
- y axis.
-\end_layout
 
 \end_inset
 
@@ -7566,11 +7561,11 @@ TODO: replace with the pdf version and use appropriate labels for x and
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Accuracy-bar-plots-of-SVM-on-breast_cancer_07"
+name "fig:Accuracy-box-plots-of-SVM-on-breast_cancer_07"
 
 \end_inset
 
-Accuracy bar plots of SVM predicting the testing data set of breast_cancer_07.
+Accuracy box plots of SVM predicting the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
  On the y-axis are the accuracies obtained on the testing data.
@@ -7590,7 +7585,7 @@ Accuracy bar plots of SVM predicting the testing data set of breast_cancer_07.
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Accuracy-bar-plots-of-SVM-on-breast_cancer_07"
+reference "fig:Accuracy-box-plots-of-SVM-on-breast_cancer_07"
 
 \end_inset
 
@@ -7614,6 +7609,66 @@ transductive SVM
 \end_inset
 
 ).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: fix plot
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/breast_cancer_07-accuracies-svmlight.pdf
+	width 34page%
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: fix plot
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Accuracy box plots of SVM predicting the testing data set of breast_cancer_07.
+ On the x-axis are the sizes of the data sets containing an increasing number
+ of labeled samples.
+ On the y-axis are the accuracies obtained on the testing data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7652,7 +7707,7 @@ reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 The accuracy plots in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Accuracy-bar-plots-of-breast_cancer_07_aa-ad"
+reference "fig:Accuracy-box-plots-of-breast_cancer_07_aa-ad"
 
 \end_inset
 
@@ -7671,19 +7726,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/breast_cancer_07-accuracies-aa_ad.png
+	filename images/breast_cancer_07-accuracies-aa_ad.pdf
 	width 68page%
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: replace with the pdf version and use appropriate labels for x and
- y axis.
-\end_layout
 
 \end_inset
 
@@ -7696,11 +7740,11 @@ TODO: replace with the pdf version and use appropriate labels for x and
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Accuracy-bar-plots-of-breast_cancer_07_aa-ad"
+name "fig:Accuracy-box-plots-of-breast_cancer_07_aa-ad"
 
 \end_inset
 
-Accuracy bar plots of a feed-forward neuronal network pre-trained with an
+Accuracy box plots of a feed-forward neuronal network pre-trained with an
  RBM, predicting the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
@@ -7731,7 +7775,7 @@ training were as those for breast_cancer_06_ae - ah.
  As is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ae-ah"
+reference "fig:Accuracy-box-plots-of-breast_cancer_07_ae-ah"
 
 \end_inset
 
@@ -7748,19 +7792,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/breast_cancer_07-accuracies-ae_ah.png
+	filename images/breast_cancer_07-accuracies-ae_ah.pdf
 	width 68page%
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: replace with the pdf version and use appropriate labels for x and
- y axis.
-\end_layout
 
 \end_inset
 
@@ -7773,11 +7806,11 @@ TODO: replace with the pdf version and use appropriate labels for x and
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Accuracy-bar-plots-of-breast_cancer_07_ae-ah"
+name "fig:Accuracy-box-plots-of-breast_cancer_07_ae-ah"
 
 \end_inset
 
-Accuracy bar plots of a feed-forward neuronal network pre-trained with an
+Accuracy box plots of a feed-forward neuronal network pre-trained with an
  autoencoder, predicting the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
@@ -8564,19 +8597,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/breast_cancer_07-accuracies-ai_aj.png
+	filename images/breast_cancer_07-accuracies-ai_aj.pdf
 	width 68page%
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: replace with the pdf version and use appropriate labels for x and
- y axis.
-\end_layout
 
 \end_inset
 
@@ -8589,11 +8611,11 @@ TODO: replace with the pdf version and use appropriate labels for x and
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Accuracy-bar-plots-of-breast_cancer_07_ai-aj"
+name "fig:Accuracy-box-plots-of-breast_cancer_07_ai-aj"
 
 \end_inset
 
-Accuracy bar plots of feed-forward neuronal networks not pre-trained, predicting
+Accuracy box plots of feed-forward neuronal networks not pre-trained, predicting
  the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
@@ -8647,7 +8669,7 @@ breast_cancer_07_aj
 The accuracy plots are shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Accuracy-bar-plots-of-breast_cancer_07_ai-aj"
+reference "fig:Accuracy-box-plots-of-breast_cancer_07_ai-aj"
 
 \end_inset
 
@@ -9066,9 +9088,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename images/breast_cancer_07-true-label-probabilities-of-misclassified-samples.png
+	filename images/breast_cancer_07-true-label-probabilities-of-misclassified-samples.pdf
 	lyxscale 50
-	width 34page%
+	width 68col%
 
 \end_inset
 
@@ -9127,7 +9149,9 @@ One of the goals of this work was to show that adding unlabeled samples
 \begin_layout Standard
 To alleviate the effects of systematic errors in the raw data, we tried
  different normalizations in order to search for normalizations that are
- beneficial to pre-training and classification.
+ beneficial to classification accuracy.
+ We assessed the effect of different normalizations on unsupervised pre-training
+ and supervised classification accuracy.
 \end_layout
 
 \begin_layout Subsection
@@ -10634,7 +10658,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename images/breast_cancer_08-accuracies-testing-bb_bx.png
+	filename images/breast_cancer_08-accuracies-testing-bb_bu.pdf
 	lyxscale 12
 	width 34page%
 
@@ -10650,7 +10674,7 @@ mas5-data.pbtxt
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename images/breast_cancer_08-accuracies-testing-by_cu.png
+	filename images/breast_cancer_08-accuracies-testing-by_cr.pdf
 	lyxscale 12
 	width 34page%
 
@@ -10688,7 +10712,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename images/breast_cancer_08-accuracies-testing-ep_fl.png
+	filename images/breast_cancer_08-accuracies-testing-ep_fi.pdf
 	lyxscale 12
 	width 34page%
 
@@ -10704,7 +10728,7 @@ mas5_combat-data.pbtxt
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename images/breast_cancer_08-accuracies-testing-fm_gi.png
+	filename images/breast_cancer_08-accuracies-testing-fm_gf.pdf
 	lyxscale 12
 	width 34page%
 
@@ -10717,18 +10741,6 @@ mas5_combat-data.pbtxt
 </cell>
 </row>
 </lyxtabular>
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: remove from plot the columns for data sets 5,6,7.
- Use appropriate labels for x and y axes.
- Rescale font size appropriately.
-\end_layout
 
 \end_inset
 
@@ -14027,27 +14039,30 @@ The default settings for TSVM were used.
 \end_layout
 
 \begin_layout Verbatim
-
 echo "learning model"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_learn training-input.txt model.model
 \end_layout
 
 \begin_layout Verbatim
-
 echo "classifying testing data"
 \end_layout
 
 \begin_layout Verbatim
-
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
 \begin_layout Subsection
 Comparison of Neuronal Networks with Support Vector Machines
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -27491,7 +27506,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename images/breast_cancer_15-accuracies-testing-aa_dv.pdf
-	width 68page%
+	width 68col%
 
 \end_inset
 
@@ -27511,7 +27526,8 @@ name "fig:Accuracy-in-breast_cancer_15"
 Box plots of test set accuracies for different data sets with more and more
  unlabeled training samples in breast_cancer_15.
  The x-axis are the data sets (except data set 1, which cannot be used in
- DBNs because it does not contain unlabeled data).
+ DBNs because it does not contain unlabeled data) in the order of rising
+ number of unlabeled samples.
  The y-axis is the accuracy.
  Each dot represents the accuracy on a repetition.
 \end_layout
@@ -27550,17 +27566,84 @@ However, there still is no dependence of accuracies on the amount of unlabeled
  the extremum accuracies) seems to point slightly upwards from left to right.
 \end_layout
 
+\begin_layout Subsection
+TSVM Accuracies
+\end_layout
+
 \begin_layout Standard
-\begin_inset Note Note
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-TODO: TSVM
+\align center
+\begin_inset Graphics
+	filename images/breast_cancer_15-accuracies-svmlight.pdf
+	width 68col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Accuracy-box-plots-of-breast_cancer_15"
+
+\end_inset
+
+TSVM accuracies box plots on breast_cancer_15.
+ On the x-axis are the data sets in order of increasing number of unlabeled
+ samples.
+ The y-axis are the accuracies.
+ Each dot is the accuracy of a repetition of a data set of breast_cancer_15.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A TSVM was trained on the training and validation data of each repetition
+ of all data sets in breast_cancer_15.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Accuracy-box-plots-of-breast_cancer_15"
+
+\end_inset
+
+ shows the accuracies on the test sets.
+ Training failed in data set 2.
+ Except for data set 2, one can see a slight accuracy increase from data
+ set 1 to data set 6, i.e.
+ from the data set with the no unlabeled samples to the data set with the
+ most unlabeled samples.
+ Following the same rationale as in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
+
+\end_inset
+
+, the accuracy difference between data sets 1 and 6 was tested for significance
+ with a paired (over the repetitions) and two-sided Wilcoxon test.
+ It is significant with a p-value of 0.29%, and the accuracy difference between
+ data 1 and 6 is an estimated 3.38 percent points, while its 95% confidence
+ interval is [2.02; 6.08].
+ This means that in breast_cancer_15, TSVM succeeded in increasing accuracy
+ slightly by learning from unlabeled samples.
 \end_layout
 
 \end_body
