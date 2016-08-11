@@ -1914,17 +1914,9 @@ Motivations for Using Deep Belief Networks on Transcriptomic Data
 \begin_layout Standard
 The motivations for using Deep Belief Networks on transcriptomic data come
  from those networks' successes when used on image data.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: give an overview of the recognition rates in image recognition papers.
-\end_layout
-
-\end_inset
-
-
+ In the hand-written digit classification and graphical object recognition
+ data sets on which the deep artificial neuronal networks were developed,
+ they are among the best-performing predictors.
 \end_layout
 
 \begin_layout Subsubsection

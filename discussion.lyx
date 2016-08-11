@@ -328,10 +328,17 @@ key "Zhu2005"
  one has to constrain the class proportions (in our case to 50% for class
  0 and 50% for class 1), otherwise the semi-supervised training often fails
  with predictions biased in favor of the larger class.
- None of the approaches tried showed a significant benefit between those
- networks trained using more unlabeled samples over those trained using
- less unlabeled samples.
- In different settings this approach worked well 
+ Only the very last approaches tried (data set breast_cancer_15) showed
+ a (partially) significant benefit between those networks trained using
+ more unlabeled samples over those trained using less unlabeled samples.
+\end_layout
+
+\begin_layout Paragraph
+Differences Between Object Recognition Tasks and Cancer Recurrence Prediction
+\end_layout
+
+\begin_layout Standard
+In different settings this approach worked well 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ErhanBengio2010"
@@ -339,13 +346,13 @@ key "ErhanBengio2010"
 \end_inset
 
 .
- However, there are some differences between those fields and the scenario
- of microarray expression data: The dimensionality of microarrays is usually
- higher than that of images or phonemes.
- The difficulty of the learning task seems higher than that of recognizing
- digits, where accuracies of 96% can be achieved by nearest neighbor classifiers.
- There are much less number of labeled and unlabeled samples in expression
- data than those available in image recognition.
+ There are some differences between those fields and the scenario of microarray
+ expression data: The dimensionality of microarrays is usually higher than
+ that of images or phonemes.
+ Expression data sets differ from these data sets in mainly two aspects:
+ their dimensionality is higher (~1000 pixels versus ~20,000 genes), but
+ the training set sizes are several magnitudes smaller (thousands to tenthousand
+s versus tens to hundreds).
  For example, in the image classification task in the ImageNet Large Scale
  Visual Recognition Challenge 
 \begin_inset CommandInset citation
@@ -360,6 +367,24 @@ key "RussakovskyFeiFei2015"
 
 1,200 images per class, while in the GSE25055 data set, there are 249 class
  0 and 57 class 1 samples.
+\end_layout
+
+\begin_layout Standard
+The fact that there are much less number of labeled and unlabeled samples
+ in expression data than those available in image recognition is probably
+ due to prices.
+ The price of microarrays (and RNASeq) is magnitudes larger (hundreds of
+ Euros or dollars) than the price to take and label pictures of hand-written
+ digits or objects (images are ubiquitous on the internet, and manual or
+ computer-assisted labeling is relatively cheap).
+\end_layout
+
+\begin_layout Standard
+The difficulty of the learning task seems higher than that of recognizing
+ digits, where accuracies of 96% can be achieved by nearest neighbor classifiers.
+ However, it may be comparable to the object recognition tasks, that had
+ accuracies around 70% using SVMs in the ImageNet Large Scale Visual Recognition
+ Challenge.
 \end_layout
 
 \begin_layout Paragraph
@@ -469,8 +494,8 @@ In Summary
 To sum up, we tried different training parameters, different network architectur
 es (with many free parameters relative to training data set size, and with
  few free parameters), different normalizations, different data set compositions.
- None gave a clear result that using additional unlabeled data during training
- yields higher accuracies on the testing data set.
+ Only a small improvement in testing set accuracy was achieved by using
+ additional unlabeled data during training.
 \end_layout
 
 \begin_layout Standard
