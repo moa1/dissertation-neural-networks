@@ -2466,47 +2466,24 @@ Factorization in Undirected Graphical Models
 In the case of an undirected graphical model, this can be improved by factorizin
 g the joint probability into independent sub-joint-probabilities, if possible.
  For example, if the random variables 
-\begin_inset Formula $\mathbf{U}=\{U_{1},U_{2},\dots,U_{7}\}$
+\begin_inset Formula $\mathbf{U}=\{U_{1},U_{2},\dots,U_{m}\}$
 \end_inset
 
- can be partitioned into three pairwise independent cliques 
-\begin_inset Formula $\mathbf{C_{1}}=\{U_{1},U_{2}\},$
-\end_inset
-
- 
-\begin_inset Formula $\mathbf{C_{2}}=\{U_{2},U_{3}\}$
-\end_inset
-
-, 
-\begin_inset Formula $\mathbf{C_{3}}=\{U_{3},U_{4},U_{5}\}$
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Note that the random variables 
-\begin_inset Formula $U$
-\end_inset
-
- overlap between clusters, so that the clusters are connected.
-\end_layout
-
+ are composed of cliques 
+\begin_inset Formula $\mathbf{C_{1}},\mathbf{C_{2}},\dots,\mathbf{C_{n}}$
 \end_inset
 
 , so that 
-\begin_inset Formula $P(\mathbf{U})=P(\mathbf{C_{1}})P(\mathbf{C_{2}})P(\mathbf{C_{3}})$
+\begin_inset Formula $P(\mathbf{U})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\dots\phi_{n}(\mathbf{C_{n}})$
 \end_inset
 
-, then above sum can be written as: 
+, then above sum can be written, using Hammersley-Clifford, as:
 \begin_inset Formula 
 \begin{eqnarray*}
-P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & =\\
- & = & \sum_{\mathbf{C_{1}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{1}}|\mathbf{K}=\mathbf{k})*\\
- &  & \sum_{\mathbf{C_{2}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{2}}|\mathbf{K}=\mathbf{k})*\\
- &  & \sum_{\mathbf{C_{3}}}P(\mathbf{W}=\mathbf{w},\mathbf{C_{3}}|\mathbf{K}=\mathbf{k})\\
- & = & \prod_{\mathbf{C}\in\{\mathbf{C_{1}},\mathbf{C_{2}},\mathbf{C_{3}}\}}\sum_{\mathbf{C}}P(\mathbf{W}=\mathbf{w},\mathbf{C}|\mathbf{K}=\mathbf{k})
+ & P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k})\\
+= & \sum_{U_{1}}\sum_{U_{2}}\cdots\sum_{U_{n}}\frac{P(\mathbf{W}=\mathbf{w},U_{1}=u_{1},U_{2}=u_{2},\dots,U_{n}=u_{n},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\\
+= & \sum_{\mathbf{C}_{1}}\cdots\sum_{\mathbf{C}_{n}\backslash\{C_{1},\dots,C_{n-1}\}}\frac{\frac{1}{Z}\mbox{\phi}_{1}(\mathbf{W}=\mathbf{w},\mathbf{C}_{1}=\mathbf{c}_{1},\mathbf{K}=\mathbf{k})\cdot\ldots\cdot\mbox{\phi}_{n}(\mathbf{W}=\mathbf{w},\mathbf{C}_{n}=\mathbf{c}_{n},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\\
+= & \frac{\frac{1}{Z}\left(\sum_{\mathbf{C}_{1}}\mbox{\phi}_{1}(\mathbf{W}=\mathbf{w},\mathbf{C}_{1}=\mathbf{c}_{1},\mathbf{K}=\mathbf{k})\cdot\ldots\cdot\left(\sum_{\mathbf{C}_{n}\backslash\{C_{1},\dots,C_{n-1}\}}\mbox{\phi}_{n}(\mathbf{W}=\mathbf{w},\mathbf{C}_{n}=\mathbf{c}_{n},\mathbf{K}=\mathbf{k})\right)\right)}{P(\mathbf{K}=\mathbf{k})}
 \end{eqnarray*}
 
 \end_inset
@@ -2515,8 +2492,15 @@ P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & =\\
 \end_layout
 
 \begin_layout Standard
-The runtime of this formula is dominated by the largest clique, and so the
- runtime is 
+The sums in the last line are nested sums that sum over all possible states
+ in the corresponding cluster.
+ (If we order cliques descendingly by the number of clique members then
+ 
+\begin_inset Formula $\mathbf{C_{1}}$
+\end_inset
+
+ is the largest clique.) Because we still need to sum over the state combinations
+ in the largest clique, this means that the run-time is at least 
 \begin_inset Formula $O(|\mathbf{u}|^{|\mathbf{C_{m}}|})$
 \end_inset
 
@@ -2524,21 +2508,30 @@ The runtime of this formula is dominated by the largest clique, and so the
 \begin_inset Formula $\mathbf{C_{m}}$
 \end_inset
 
- is the clique with the largest number of variables in it (in our example
- 
-\begin_inset Formula $\mathbf{C_{m}}=\mathbf{C_{3}}$
-\end_inset
-
-, because 
-\begin_inset Formula $|\mathbf{C_{3}}|=3$
-\end_inset
-
-, and 
-\begin_inset Formula $|\mathbf{C_{1}}|=|\mathbf{C_{2}}|=2$
-\end_inset
-
-).
+ is the clique with the largest number of variables in it.
  This is still an exponential run-time.
+\end_layout
+
+\begin_layout Standard
+An algorithm that systematizes exact inference in graphical model is the
+ 
+\emph on
+junction tree
+\emph default
+ 
+\emph on
+algorithm
+\emph default
+.
+ (It is not discussed here, see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jordan2004"
+
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Subsubsection
