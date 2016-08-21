@@ -125,11 +125,11 @@ Value,
 \begin_inset space ~
 \end_inset
 
-Normal
+Scalar
 \begin_inset space ~
 \end_inset
 
-variable The value of a random variable and a normal variable are written
+Variable The value of a random variable and a scalar variable are written
  lower-case.
  For example, the value of random variable 
 \begin_inset Formula $X$
@@ -165,11 +165,11 @@ Set Vectors or sets are written in bold font.
 \begin_inset Formula $\mathbf{x}$
 \end_inset
 
- could mean the values 
+ could mean the value 
 \begin_inset Formula $\{x_{1},x_{2},x_{3}\}$
 \end_inset
 
- of the variables 
+ of the variable 
 \begin_inset Formula $\mathbf{X}$
 \end_inset
 
@@ -235,10 +235,7 @@ generative model
  is such a more general problem: its aim is to model the input data set
  such that hypothetical samples can be generated from the model which might
  as well be found in the original input data set.
-\end_layout
-
-\begin_layout Standard
-A discriminative model
+ A discriminative model
 \begin_inset Index idx
 status collapsed
 
@@ -255,10 +252,43 @@ discriminative model
 \end_layout
 
 \begin_layout Standard
-An advantage of training a generative over a discriminative model is that
- its parameters are constrained by the number of bits required to encode
- the training samples, while the parameters of a discriminative model are
- only constrained by the number of bits required to encode the label.
+In a discriminative model, the possible values of the parameters (weights)
+ are constrained by the information it takes to specify the class label
+ of a training sample.
+ In a generative model, however, the parameters need to encode the whole
+ sample, and are therefore constrained by the information it takes to encode
+ the training sample.
+ The number of bits required to specify the class label is usually much
+ smaller than the number of bits required to specify a whole training sample
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton2010"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+guideTR.pdf: 
+\begin_inset Quotes eld
+\end_inset
+
+When learning generative models of high-dimensional data, however, it is
+ the number of bits that it takes to specify a data vector that determines
+ how much constraint each training case imposes on the parameters of the
+ model.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -789,7 +819,7 @@ n with the help of a graph.
  of all graphical models.
  Each node of the graph corresponds to a random variable of the joint probabilit
 y distribution.
- The edges of the graph encode the factors of the joint probability distribution.
+ The edges of the graph encode the conditional probability distributions.
  The graph, together with probability functions over the structural elements
  of the graph is equivalent to the joint probability distribution.
 \end_layout
@@ -974,7 +1004,7 @@ We want to encode a joint probability distribution
  A complete graph would encode no conditional independencies.
  However, to minimize computation time we normally want to get a minimal
  graph that still encodes the joint probability distribution faithfully.
- What properties does thee joint probability distribution 
+ What properties does the joint probability distribution 
 \begin_inset Formula $P$
 \end_inset
 
@@ -1083,7 +1113,7 @@ Gibbs distribution
 
 , i.e.
  
-\begin_inset Formula $P(\mathbf{N})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\dots\cdot\phi_{m}(\mathbf{C_{m}})$
+\begin_inset Formula $P(\mathbf{N})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\ldots\cdot\phi_{m}(\mathbf{C_{m}})$
 \end_inset
 
  where 
@@ -1105,7 +1135,7 @@ partition function
 \end_inset
 
  such that 
-\begin_inset Formula $\sum_{\mathbf{x}}P(\mathbf{N}=\mathbf{n})=1$
+\begin_inset Formula $\sum_{\mathbf{n}}P(\mathbf{N}=\mathbf{n})=1$
 \end_inset
 
 , and 
@@ -1524,10 +1554,24 @@ In practice,
 \begin_inset Formula $2^{3}$
 \end_inset
 
- entries) could look like this:
+ entries) could look like in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Example-of-potential-function"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
+\align center
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="6" columns="4">
@@ -1541,7 +1585,7 @@ In practice,
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $x_{1}$
+\begin_inset Formula $n_{1}$
 \end_inset
 
 
@@ -1553,7 +1597,7 @@ In practice,
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $x_{2}$
+\begin_inset Formula $n_{2}$
 \end_inset
 
 
@@ -1565,7 +1609,7 @@ In practice,
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $x_{3}$
+\begin_inset Formula $n_{3}$
 \end_inset
 
 
@@ -1795,6 +1839,33 @@ B
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Example-of-potential-function"
+
+\end_inset
+
+Example of a potential function 
+\begin_inset Formula $\phi$
+\end_inset
+
+ represented as a table.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Directed Graphical Models
 \end_layout
@@ -2017,7 +2088,7 @@ In a directed graphical model, the random variables
 \end_inset
 
  has associated with it the conditional probability 
-\begin_inset Formula $P(N_{i}=n_{i}|\mathbf{N_{j}}=\mathbf{n_{j}}:\mathbf{j}<i)$
+\begin_inset Formula $P(N_{i}=n_{i}\mid N_{j}=n_{j}\forall j<i)$
 \end_inset
 
 .
@@ -2036,21 +2107,21 @@ The probability that the random variable
  given that the random variables 
 \series bold
 
-\begin_inset Formula $\mathbf{N_{j}}$
+\begin_inset Formula $N_{j}$
 \end_inset
 
  
 \series default
 are equal to 
-\begin_inset Formula $\mathbf{n_{j}}$
+\begin_inset Formula $n_{j}$
 \end_inset
 
  where all subscripts 
-\begin_inset Formula $\mathbf{j}$
+\begin_inset Formula $j$
 \end_inset
 
- fulfill the condition that 
-\begin_inset Formula $j<i$
+ that are smaller than 
+\begin_inset Formula $i$
 \end_inset
 
 .
@@ -2064,7 +2135,7 @@ are equal to
 The joint probability distribution encoded by the graph is
 \begin_inset Formula 
 \[
-P(\mathbf{N})=P(N_{1}=n_{1},N_{2}=n_{2},\dots,N_{n}=n_{n})=\prod_{i=1}^{n}P(N_{i}=n_{i}|\mathbf{N_{j}=n_{j}}:\mathbf{j}<i)
+P(\mathbf{N})=P(N_{1}=n_{1},N_{2}=n_{2},\dots,N_{n}=n_{n})=\prod_{i=1}^{n}P(N_{i}=n_{i}\mid N_{j}=n_{j}\forall j<i)
 \]
 
 \end_inset
@@ -2111,7 +2182,7 @@ For example, if the
 
  possible states, then the table must contain one probability for each of
  the 
-\begin_inset Formula $s^{a}*(s-1)$
+\begin_inset Formula $s^{a}\cdot(s-1)$
 \end_inset
 
  possible states.
@@ -2477,7 +2548,7 @@ g the joint probability into independent sub-joint-probabilities, if possible.
 \begin_inset Formula $P(\mathbf{U})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\dots\phi_{n}(\mathbf{C_{n}})$
 \end_inset
 
-, then above sum can be written, using Hammersley-Clifford, as:
+, then the above sum can be written, using Hammersley-Clifford, as:
 \begin_inset Formula 
 \begin{eqnarray*}
  & P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k})\\
@@ -2614,7 +2685,7 @@ For example let a directed acyclic graph be defined by the following directed
 .
  Such a graph is displayed in figure 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "fig:Example-of-a-Directed-Graph"
 
 \end_inset
@@ -2678,19 +2749,19 @@ Now assume that
 \end_inset
 
  are given and we want to infer 
-\begin_inset Formula $P(G_{1})$
+\begin_inset Formula $P(G_{1}\mid\mathbf{V})$
 \end_inset
 
 , 
-\begin_inset Formula $P(G_{2})$
+\begin_inset Formula $P(G_{2}\mid\mathbf{V})$
 \end_inset
 
 , 
-\begin_inset Formula $P(H_{1})$
+\begin_inset Formula $P(H_{1}\mid\mathbf{V})$
 \end_inset
 
 , 
-\begin_inset Formula $P(H_{2})$
+\begin_inset Formula $P(H_{2}\mid\mathbf{V})$
 \end_inset
 
 .
@@ -2703,22 +2774,19 @@ Now assume that
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{eqnarray*}
-P(H_{1},H_{2}|V_{1},V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\\
- & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})}{P(V_{1},V_{2})}\\
- & = & \frac{1}{Z}*P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})\\
- &  & *P(G_{1})P(G_{2})P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})
-\end{eqnarray*}
+\begin{eqnarray}
+P(H_{1},H_{2}|V,V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V_{1},V_{2})}\nonumber \\
+ & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})\left(\sum_{g_{1}}\sum_{g_{2}}P(g_{1})P(g_{2})P(H_{1}|g_{1},g_{2})P(H_{2}|g_{1},g_{2})\right)}{P(V_{1},V_{2})}\nonumber \\
+ & = & \frac{1}{P(V_{1},V_{2})}*P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})\nonumber \\
+ &  & *\left(\sum_{g_{1}}\sum_{g_{2}}P(g_{1})P(g_{2})P(H_{1}|g_{1},g_{2})P(H_{2}|g_{1},g_{2})\right)\label{eq:deep-network-conditional-probability}
+\end{eqnarray}
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
-Z=\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_{2}=h_{2})P(H_{1}=h_{1},H_{2}=h_{2})
+P(V_{1},V_{2})=\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_{2}=h_{2})P(H_{1}=h_{1},H_{2}=h_{2})
 \]
 
 \end_inset
@@ -2749,82 +2817,11 @@ We can make the last transformation because
 \end_inset
 
  out:
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray*}
 P(H_{1}|V_{1},V_{2}) & = & \sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})\\
 P(H_{2}|V_{1},V_{2}) & = & \sum_{h_{1}}P(H_{1}=h_{1},H_{2}|V_{1},V_{2})
 \end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This does not look too complicated, but note that if there are 
-\begin_inset Formula $n$
-\end_inset
-
- binary variables in 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
-, then the computation of 
-\begin_inset Formula $P(\mathbf{H}|\mathbf{V})$
-\end_inset
-
- takes 
-\begin_inset Formula $O(2^{n-1}n)$
-\end_inset
-
- due to having to marginalize out all variables in 
-\begin_inset Formula $\mathbf{H}$
-\end_inset
-
- except one, and this for all variables.
- The phenomenon that leads to this computational problem is called 
-\emph on
-explaining away
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-explaining away
-\end_layout
-
-\end_inset
-
-.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: 
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/graphical model/explaining_away/pami93.pdf
-\begin_inset Quotes erd
-\end_inset
-
- says that explaining away can not only decrease but also INCREASE belief:
- (in the abstract) 
-\begin_inset Quotes eld
-\end_inset
-
-The opposite of explaining away also can occur, where the confirmation of
- one cause increases belief in another.
-\begin_inset Quotes erd
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
@@ -2876,11 +2873,11 @@ P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v
 \end_inset
 
 , we can repeat the steps to determine 
-\begin_inset Formula $P(G_{1})$
+\begin_inset Formula $P(G_{1}\mid\mathbf{H})$
 \end_inset
 
  and 
-\begin_inset Formula $P(G_{2})$
+\begin_inset Formula $P(G_{2}\mid\mathbf{H})$
 \end_inset
 
 .
@@ -2899,41 +2896,120 @@ name "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
 
 \begin_layout Standard
 This shows that exact inference in a directed graphical model with densely
- connected layers is complicated since written out (using the previous equations
-), the posterior is
-\begin_inset Note Note
-status open
+ connected layers is complicated.
+ If there are 
+\begin_inset Formula $n$
+\end_inset
+
+ binary variables in 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{G}$
+\end_inset
+
+, then the computation of 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
+\end_inset
+
+ takes 
+\begin_inset Formula $O(2^{n-1}n)$
+\end_inset
+
+ due to having to marginalize out all variables in 
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+ except one (the term 
+\begin_inset Formula $2^{n-1}$
+\end_inset
+
+), and this for all variables (the term 
+\begin_inset Formula $n$
+\end_inset
+
+).
+ In addition, this applies only if 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
+\end_inset
+
+ is known already.
+ But in the computation of 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
+\end_inset
+
+, equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:deep-network-conditional-probability"
+
+\end_inset
+
+, there are sums over the variables 
+\begin_inset Formula $g_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $g_{2}$
+\end_inset
+
+, which takes another 
+\begin_inset Formula $O(2^{n})$
+\end_inset
+
+.
+ The phenomenon that leads to this computational problem is called 
+\emph on
+explaining away
+\emph default
+
+\begin_inset Index idx
+status collapsed
 
 \begin_layout Plain Layout
-TODO: is this really the posterior? Wikipedia 
-\begin_inset Quotes eld
-\end_inset
-
-posterior
-\begin_inset Quotes erd
-\end_inset
-
-?
+explaining away
 \end_layout
 
 \end_inset
 
-: 
-\begin_inset Formula 
-\begin{eqnarray}
-P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
- & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}P(H_{1},H_{2}=h_{2}|V_{1},V_{2})P(V_{1}=v_{1},V_{2}=v_{2})\nonumber \\
- & = & \sum_{v_{1}}\sum_{v_{2}}\sum_{h_{2}}\frac{1}{Z}P(V_{1}|H_{1},H_{2})P(V_{2}|H_{1},H_{2})P(G_{1})P(G_{2})\label{eq:deep-belief-net-posterior-is-complicated}\\
- &  & *P(H_{1}\mid G_{1},G_{2})P(H_{2}\mid G_{1},G_{2})*P(V_{1}=v_{1},V_{2}=v_{2})
-\end{eqnarray}
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: 
+\begin_inset Quotes eld
+\end_inset
+
+~/uni/publication/zusammenfassung/graphical model/explaining_away/pami93.pdf
+\begin_inset Quotes erd
+\end_inset
+
+ says that explaining away can not only decrease but also INCREASE belief:
+ (in the abstract) 
+\begin_inset Quotes eld
+\end_inset
+
+The opposite of explaining away also can occur, where the confirmation of
+ one cause increases belief in another.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 The posterior of 
 \begin_inset Formula $H_{1}$
 \end_inset
 
- depends on all conditioal probabilities of the model, in this example,
+ depends on all conditional probabilities of the model, in this example,
  
 \begin_inset Formula $P(\mathbf{V}\mid\mathbf{H})$
 \end_inset
@@ -2983,31 +3059,13 @@ weights
 \end_inset
 
 .
- A further problem is that, were there an additional layer above 
-\begin_inset Formula $\mathbf{G}$
+ A further problem is that we have to integrate over all variables in all
+ layers above 
+\begin_inset Formula $\mathbf{H}$
 \end_inset
 
-, we would have to integrate over all possibile configurations of 
-\begin_inset Formula $\mathbf{G}$
-\end_inset
-
- to be able to calculate 
-\begin_inset Formula $P(G_{1})$
-\end_inset
-
-, 
-\begin_inset Formula $\ldots$
-\end_inset
-
-, 
-\begin_inset Formula $P(G_{n})$
-\end_inset
-
- in equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:deep-belief-net-posterior-is-complicated"
-
+ if we are interested in 
+\begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
 \end_inset
 
 .
@@ -3067,7 +3125,8 @@ key "ChandrasekaranHarsha2012"
 
 \end_inset
 
- showed that under some assumptions, 
+ showed that under some assumptions, and given that arbitrary potential
+ functions should be allowed, 
 \emph on
 treewidth
 \emph default
@@ -3084,7 +3143,7 @@ treewidth
  is the only structural property that ensures polynomial run-time of exact
  inference on arbitrary graphs
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 the paper says on page 1: 
@@ -3102,7 +3161,7 @@ Among these problems is inference in graphi- cal models, which, as mentioned
 
 \end_inset
 
-, given that arbitrary potential functions should be allowed.
+.
 \end_layout
 
 \begin_layout Standard
@@ -7671,6 +7730,21 @@ contrastive divergence
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+(As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BengioDelalleau2007"
+
+\end_inset
+
+ showed, training using contrastive divergence (CD-1) and training using
+ reconstruction error as error metric in an autoassociator are linked.
+ They showed that the weight learning gradient used with the reconstruction
+ error is a more biased approximator of the log-likelihood than the gradient
+ computed by CD-1.)
 \end_layout
 
 \begin_layout Subsubsection

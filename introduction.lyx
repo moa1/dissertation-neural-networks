@@ -249,8 +249,8 @@ The goal of this work is to contribute to such a predictor.
 The study of neuronal networks in biology prompted the development of artificial
  neuronal networks.
  After an introduction to biological and artificial neuronal networks we
- will introduce machine learning and then introduce the own work done in
- this manuscript.
+ will give an overview of machine learning and then introduce the own work
+ done in this manuscript.
 \end_layout
 
 \begin_layout Section
@@ -369,15 +369,15 @@ status open
 
 \begin_layout Plain Layout
 Schema of a chemical synapse.
- The signal is transmitted from the axon terminal (right) to the dendrite
- (left).
+ The signal is transmitted from the axon terminal (left) to the dendrite
+ (right).
  Grey: membranes of neurons.
  Green and blue: ion transporters maintain intracellular ion concentrations.
- Purple: receptors signal to the inside of the cell the absence or presence
- of neurotransmitter on the outside of the cell.
  Red: neurotransmitter is stored inside the cell in vesicles and emitted
  into the synaptic cleft upon an electric potential arriving at the axon
  terminal.
+ Purple: receptors signal to the inside of the cell the absence or presence
+ of neurotransmitter on the outside of the cell.
 \end_layout
 
 \end_inset
@@ -397,7 +397,7 @@ Action Potentials, Their Propagation, and Chemical Synapses
 \begin_layout Standard
 The action potentials are realized by cells in the form of different ion
  concentrations inside and outside the cell.
- These ion gradients are maintained in the resting state by 
+ These ion gradients are maintained in the resting state by the 
 \begin_inset Formula $Na^{+}/K^{+}$
 \end_inset
 
@@ -409,7 +409,7 @@ The action potentials are realized by cells in the form of different ion
 \begin_inset Formula $K^{+}$
 \end_inset
 
- ions into the cell for every ATP molecule
+ ions into the cell for every ATP molecule 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LodishZipursky2000"
@@ -548,15 +548,19 @@ key "Biochemistry2002,Kolb2003"
 \end_inset
 
 .
- Rods are more sensitive to dim light, while cones react to bright light
- only but can see colors.
- Both release the neurotransmitter glutamate continuously into the synaptic
- cleft, but when hit by light, suspend this emission for the duration of
- the light.
- Specifically, light elicits a transformation of cis-rhodopsin to trans-rhodopsi
-n, which receives a G protein binding site.
- The G-protein transducin binds to the activated rhodopsin, and GDP acquires
- a phosphate group to form GTP.
+ Rods are more sensitive to dim light, while the three types of cones react
+ to bright light only but can differentiate between colors.
+ Both rods and cones release the neurotransmitter glutamate continuously
+ into the synaptic cleft, but when hit by light, suspend this emission for
+ the duration of the light.
+ This is implemented by the cell by a long pathway.
+\end_layout
+
+\begin_layout Standard
+Specifically, light elicits a transformation of cis-rhodopsin to trans-rhodopsin
+, which presents on its surface a G protein binding site.
+ The G protein transducin binds to the activated rhodopsin, and in this
+ process GDP acquires a phosphate group to form GTP.
  The 
 \begin_inset Formula $\alpha$
 \end_inset
@@ -567,9 +571,9 @@ n, which receives a G protein binding site.
  to close.
  This in turn hyperpolarizes the photosensitive cell, causing glutamate
  to be released into the synaptic cleft at a slower rate.
- The long pathway between cis-rhodopsin to glutamate release inhibition
+ This long pathway between cis-rhodopsin and glutamate release inhibition
  facilitates an amplification of the signal at every step, which allows
- rod cells to send a signal in response to it being hit by a single photon.
+ rod cells to signal a spike in response to it being hit by a single photon.
 \end_layout
 
 \begin_layout Standard
@@ -589,7 +593,7 @@ receptive field
 \end_inset
 
 , and is just as large as the top of the photoreceptor for rods and cones.
- The released glutamate binds to receptors on the cell outside of bipolar
+ The released glutamate binds to receptors present on the outside of bipolar
  cells, and, depending on the type of bipolar cell, cause either an action
  potential to be generated when the photoreceptor is lit and the surrounding
  area is dark (
@@ -613,11 +617,11 @@ bipolar cell).
  Finally, in primates, there are more than a million nerve fibers from ganglion
  cells to the visual cortex of the brain.
  Altogether, the basic cell types are, depending on the species, 1 to 4
- horizontal types of cell, 11 types of bipolar cells, 22 to 30 types of
+ types of horizontal cells, 11 types of bipolar cells, 22 to 30 types of
  amacrine cells, and 20 types of ganglion cells.
- Among their known functions are brightness-dependent size regulation of
- the receptive field of amacrine cells, integration of a large number of
- rods to provide sight in little light, and an additional photoreceptor
+ Among those cell types' known functions are integration of a large number
+ of rods to provide sight in little light, brightness-dependent size regulation
+ of the receptive field of amacrine cells, and an additional photoreceptor
  distinct from rods and cones
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -626,11 +630,6 @@ key "Kolb2003"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-The machinery facilitating propagation and transmission of information in
- and between biological neurons is highly simplified in artificial neurons.
 \end_layout
 
 \begin_layout Standard
@@ -700,7 +699,8 @@ Each glomerulus is connected to one or more Kenyon Cells in insects.
  that converge to one of their attractor states.
  In addition to quick decoding of odors, experimental evidence shows that
  the biological compressed sensing circuitry is robust to noise, i.e.
- spurious neuronal spikes in or experimental inhibition
+ to spurious neuronal spikes in glomeruli, or noise due to experimental
+ inhibition
 \begin_inset Foot
 status open
 
@@ -722,10 +722,10 @@ key "ZhangSharpee2016"
 
 \end_inset
 
- proposed that a possible feed-forward architecture could facilitate odor
- decoding simply by implementing a logical AND
+ proposed that a feed-forward architecture could facilitate odor decoding
+ simply by implementing a logical AND
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Quotes eld
@@ -742,9 +742,9 @@ That is, odor component i will be detected as present if all glomeruli that
 \end_inset
 
 .
- They suggest that the neuronal AND-circuit requires at least (for example)
- 80% of glomeruli with receptors to a specific odor to respond and then
- activates this specific odor's Kenyon cell.
+ They suggest that in the neuronal AND-circuit a specific odor's Kenyon
+ cell is activated when at least (for example) 80% of the glomeruli with
+ receptors to this odor are active.
  On a cellular level, this could be realized by connecting the glomeruli
  associated with an odor with the odor's Kenyon cell, and a threshold at
  the Kenyon cell's input.
@@ -806,8 +806,8 @@ key "ZhangSharpee2016"
 
  is that the number of glomeruli activated by a single odor should be close
  to the number of glomeruli that are connected to a Kenyon cell.
- This means that the validity of the feed-forward model can be tested by
- measuring the odor sparseness
+ They postulated further that the validity of their feed-forward model can
+ be tested by measuring the odor sparseness
 \begin_inset Foot
 status open
 
@@ -846,6 +846,8 @@ Artificial Neurons as Simple Models of Biological Neurons
 \end_layout
 
 \begin_layout Standard
+The machinery facilitating propagation and transmission of information in
+ and between biological neurons is highly simplified in artificial neurons
 \begin_inset Index idx
 status collapsed
 
@@ -855,10 +857,11 @@ artificial neuron signal processing
 
 \end_inset
 
-Signal processing of a real neuron is modelled in an artificial neuron as
- a mathematical function that has multiple input variables, computes a value
- according to the function formula and its parameters and outputs its computed
- value to multiple neurons, which use it as an input variable.
+.
+ Signal processing of a real neuron is modelled in an artificial neuron
+ as a mathematical function that has multiple input variables, computes
+ a value according to the function formula and its parameters and outputs
+ its computed value to multiple neurons, which use it as an input variable.
  Herein, the processes of neurotransmitter release, de- and hyperpolarization,
  and propagation of the action potential are abstracted away into discrete
  time steps.
@@ -1012,13 +1015,8 @@ The effect of an incoming axon onto a neuron, that is, the different types
  of receptors that can be present on the outside of a real dendrite, and
  the effected de- or hyperpolarization of the dendrite are abstracted away
  by using real-numbered weights.
- These are parameters to the mathematical function describing the accumulation
- and modulation of the vector of outputs of artificial neurons to form the
- single input value 
-\begin_inset Formula $v$
-\end_inset
-
- of an artificial neuron connected to them.
+ Weights are parameters to the mathematical function describing the conversion
+ of outputs of neurons to the single input of the next connected neuron.
  Usually the following formula is used to describe the computation of the
  input 
 \begin_inset Formula $v_{i}$
@@ -1110,7 +1108,7 @@ In biological neuronal systems, this is possible by altering existing synapses
  or by creating and abandoning existing synapses (i.e.
  connecting the axon terminals of a neuron to different neurons).
  There are several known cellular mechanisms for that, among them LTP, LTD,
- PTP
+ and PTP
 \begin_inset Note Note
 status open
 
@@ -1169,8 +1167,8 @@ Hebbian learning rule
 .
  The molecular mechanisms responsible for this phenomenon are not yet completely
  understood.
- It is known that they differ between brain regions, and also types of synapses
- in the same brain region.
+ It is known that they differ between brain regions, and also between types
+ of synapses in the same brain region.
 \begin_inset Note Note
 status open
 
@@ -1323,6 +1321,45 @@ gation neuronal networks, Deep Belief Networks (DBNs).
  Restricted Boltzmann Machines (RBMs).
 \end_layout
 
+\begin_layout Standard
+The samples are split into training, validation and test data sets.
+ The training samples
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+training data set
+\end_layout
+
+\end_inset
+
+ are used to train a machine learning algorithms.
+ Some machine learning algorithms have meta-parameters, which are optimized
+ using the validation data set
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+validation data set
+\end_layout
+
+\end_inset
+
+.
+ At the end of all training, the performance of the machine learning algorithm
+ must be evaluated on previously unseen samples, the testing data set
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+testing data set
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Semi-supervised Machine Learning
 \end_layout
@@ -1349,8 +1386,9 @@ semi-supervised learning
  structure in all input data sets and then use the known labels to assign
  probable labels to the found structure (or just the unlabeled input samples).
  This assumes that samples close in the (high-dimensional) input space probably
- have the same label, or conversely, that samples distant from each other
- probably have different labels.
+ have the same label.
+ Another assumption is that samples distant from each other probably have
+ different labels.
 \end_layout
 
 \begin_layout Standard
@@ -1392,13 +1430,21 @@ A
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Illustration-of-semi-supervised-learning"
+
+\end_inset
+
 Illustration of semi-supervised learning in two dimensions.
  Each axis is a dimension.
  Circles are samples; filled circles are labeled samples; unfilled circles
  are unlabeled samples.
+ The blue circles are samples with label 1, the orange circles are samples
+ with label 2.
  A: Supervised SVM learning produces a maximum-margin classifier.
  B: Supervised learning ignores and probably mis-classifies some unlabeled
- samples.
+ samples (the red crossed-out samples).
  C: Semi-supervised learning regards densities of unlabeled samples and
  may give better results than supervised learning on the labeled samples
  alone.
@@ -1427,7 +1473,7 @@ transductive semi-supervised learning
 
 \end_inset
 
- is to predict the class label of a pre-specified list of unlabeled input
+ is to predict the class labels of a pre-specified list of unlabeled input
  patterns, while the goal of inductive
 \begin_inset Index idx
 status collapsed
@@ -1462,9 +1508,13 @@ key "BarrettSoboleva2013"
 
  contains 41,379 expression data sets that were uploaded between Jan 1st,
  2000, and August 31st, 2013.
- Many of these are potentially usable as unlabeled data sets.
- However, machine learning algorithms usually require samples to be independetly
- and identically distributed
+ Many of these are potentially usable as unlabeled data sets in semi-supervised
+ learning.
+\end_layout
+
+\begin_layout Standard
+However in practice, many machine learning algorithms require samples to
+ be independetly and identically distributed
 \begin_inset Index idx
 status collapsed
 
@@ -1504,9 +1554,10 @@ batch-effect
 
 , caused, for example, by different sample handling or conditions at measurement
  time.
- This means if one wants to use samples from different GEO data sets simultaneou
-sly, one either has to correct for a possible batch-effect manually, or
- use an algorithm that has some built-in mechanism to make such a correction.
+ This means one either has to use samples from one data set only, or, if
+ one wants to use samples from different GEO data sets simultaneously, correct
+ for a possible batch-effect manually, or use an algorithm that has some
+ built-in mechanism to make such a correction.
 \end_layout
 
 \begin_layout Standard
@@ -1575,6 +1626,8 @@ key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
 \end_inset
 
 ).
+ In this setting, the batch effect would be the lightning condition or viewing
+ angle.
  Such results seem to imply that DBNs are able to abstract the images, which
  are given as vectors of pixels, into encodings of relevant features and
  compute a classifier on these abstract features.
@@ -1594,20 +1647,13 @@ deep learning
 
 \end_inset
 
- is a term used in conjunction with artificial neuronal networks.
- Those 
-\begin_inset Quotes eld
-\end_inset
-
-deep artificial
-\begin_inset space ~
-\end_inset
-
-neuronal networks
-\begin_inset Quotes erd
-\end_inset
-
- usually have several hidden layers.
+ is a term used in conjunction with artificial neuronal networks which have
+ several hidden layers.
+ The advantage of a deep network over a network with just one hidden layer
+ is that it can model a problem more compactly using less hidden neurons
+ in total, because it has more than one intermediate computation step.
+ Before deep learning there was back-propagation, which has problems coping
+ with more than one hidden layer.
 \end_layout
 
 \begin_layout Subsection
@@ -1634,12 +1680,17 @@ key "RumelhartWilliams1988"
  particular input pattern that was fed into the network.
  The error for each node is then back-propagated in reverse input direction
  to the hidden layers and finally to the input layer.
- The purpose of this is to be able to adjust the weights of the artificial
- neuronal network such that when the current input pattern pair is presented
- to the network, its computed output pattern gets closer and closer to the
- desired output pattern.
+ The purpose of error back-propagation is to be able to adjust the weights
+ of the artificial neuronal network following the gradient, such that when
+ the current input pattern pair is presented to the network, its computed
+ output pattern gets closer and closer to the desired output pattern.
  However, back-propagation was not able to train networks with more than
- very few hidden layers.
+ one or two hidden layers, because it got stuck in poor local energy optima.
+ Having artificial neuronal networks with more than one hidden layer is
+ desirable from a computational power standpoint.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -1685,7 +1736,7 @@ Networks with Multiple Hidden Layers
 \end_layout
 
 \begin_layout Subsubsection
-Autoassociator
+Autoassociator, Auto-encoder
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Autoassociator-introduction"
@@ -1724,6 +1775,16 @@ status collapsed
 
 \begin_layout Plain Layout
 auto-associator
+\end_layout
+
+\end_inset
+
+, or autoencoder
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+autoencoder
 \end_layout
 
 \end_inset
@@ -1817,32 +1878,6 @@ contrastive divergence
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-(As 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BengioDelalleau2007"
-
-\end_inset
-
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Evtl.
- sollte der ganze Satz hier in die Methods, nicht die Introduction.
-\end_layout
-
-\end_inset
-
- showed, training using contrastive divergence (CD-1) and training using
- reconstruction error as error metric in an autoassociator are linked.
- They showed that the weight learning gradient used with the reconstruction
- error is a more biased approximator of the log-likelihood than the gradient
- computed by CD-1.)
 \end_layout
 
 \begin_layout Standard
@@ -2404,9 +2439,28 @@ key "Joachims1999"
 .
  Despite the name, it supports transductive as well as inductive learning.
  A standard Support Vector Machine searches for a decision boundary such
- that the margin between samples with differing labels is maximal.
+ that the margin between samples with differing labels is maximal (see figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Illustration-of-semi-supervised-learning"
+
+\end_inset
+
+).
  The TSVM seeks a labeling of the unlabeled samples so that the decision
  boundary has the maximal margin between all samples with differing classes.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: TSVM verstehen und dann besser erklären.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2450,8 +2504,7 @@ Their artificial neuronal network architecture had between 1 and 3 hidden
 
 \begin_layout Standard
 In addition to the (non-linear) neuronal network, they tried linear regression
- with no regularization, L1-, and L2-regularization (to keep the weights
- between input layer and output layer small).
+ with no regularization, L1-, and L2-regularization.
 \end_layout
 
 \begin_layout Standard
@@ -2554,8 +2607,8 @@ key "ArdlieLek2015"
 \end_layout
 
 \begin_layout Standard
-Learning in this data set is harder since the input is from multiple sources,
- and therefore prone to the batch-effect.
+Learning in this data set is harder since the input is measured in different
+ ways, and therefore prone to the batch-effect.
  Nevertheless, the performance ranking of the methods was the same, but
  worse than the data set without batch-effect.
  KNN scored worst, with an average prediction error of 0.6520.
