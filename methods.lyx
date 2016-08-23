@@ -2530,7 +2530,7 @@ However, in this example we have not considered the structure of the graph.
 \end_layout
 
 \begin_layout Paragraph
-Factorization in Undirected Graphical Models
+Factorization in Undirected Graphical Models (Markov Random Fields)
 \end_layout
 
 \begin_layout Standard
@@ -3565,7 +3565,29 @@ P(X_{t}=j\mid X_{t-1}=i)\eqqcolon p_{ij}
 \begin_inset Formula $t$
 \end_inset
 
- and can be written as the two-dimensional matrix 
+ and can be written as the 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+two-dimensional
+\end_layout
+
+\end_inset
+
+matrix 
 \begin_inset Formula $p$
 \end_inset
 
@@ -3813,7 +3835,7 @@ if there exists a probability distribution
  such that 
 \begin_inset Formula 
 \[
-\pi_{j}p_{ji}=\pi_{i}p_{ij}
+\pi_{j}p_{ji}=\pi_{i}p_{ij}\,\,\forall i,j
 \]
 
 \end_inset
@@ -4035,7 +4057,7 @@ key "Behrends2000"
 
  is irreducible, positive-recurrent and aperiodic
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Theorem 7.4 in ~/uni/publication/zusammenfassung/markov chains/markovbuch2008.pdf.
@@ -4153,11 +4175,11 @@ positive recurrent
 \begin_inset Formula $j$
 \end_inset
 
- is visited for the first time – at time step 
+ is visited at time step 
 \begin_inset Formula $k$
 \end_inset
 
- – after the Markov Chain had been in state 
+ for the first time after the Markov Chain had been in state 
 \begin_inset Formula $i$
 \end_inset
 
@@ -4407,7 +4429,7 @@ period of a state
  before: 
 \begin_inset Formula 
 \[
-period(i)=gcd(\{k\mid k\geq0,p_{ii}^{k}>0\})
+period(i)=gcd(\{k\mid k\geq0,(p^{k})_{ii}>0\})
 \]
 
 \end_inset
@@ -4584,9 +4606,9 @@ P(X_{i}\mid\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}\mid X_{1},\dots
 \end_inset
 
 .
- (In addition, Gibbs Sampling, which requires sampling from the conditional
- probability distribution and iterating, should be faster than sampling
- from the joint target probability distribution directly.
+ (Another prerequisite is that Gibbs Sampling, which requires sampling from
+ the conditional probability distribution and iterating, should be faster
+ than sampling from the joint target probability distribution directly.
  We already showed in 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4640,6 +4662,10 @@ Above, Markov chains were defined for a single state variable
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 For example, say there are 3 variables, each of which can assume 2 states,
  and we want to encode these 
 \begin_inset Formula $2^{3}$
@@ -4651,6 +4677,11 @@ For example, say there are 3 variables, each of which can assume 2 states,
 \end_inset
 
  different possible states.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -4751,7 +4782,11 @@ on page 45
 
 , to make the Markov chain irreducible.
  At each time-point 
-\begin_inset Formula $as+k-1$
+\begin_inset Formula $a*s+k-1$
+\end_inset
+
+ with 
+\begin_inset Formula $a\in\mathbf{\mathbb{N}}$
 \end_inset
 
 , the next single base transition 
@@ -4877,7 +4912,20 @@ P(X_{i}\mid X_{1}=x_{1}^{(t-1)},\dots,X_{i-1}=x_{i-1}^{(t-1)},X_{i+1}=x_{i+1}^{(
 \end_inset
 
 .
- Then all the other variables must be updated.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ Then all the other variables 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ must be updated.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5052,8 +5100,8 @@ thinning
 \end_layout
 
 \begin_layout Standard
-Again, also here there is currently no straightforward analytic way to determine
- what a sufficiently large 
+Again, there is currently no straightforward analytic way to determine what
+ a sufficiently large 
 \begin_inset Formula $n$
 \end_inset
 
@@ -5485,7 +5533,7 @@ Here we will introduce artificial neuronal networks that have been developed
  and (Restricted) Boltzmann Machines.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Paragraph
 Distinction Between a Deterministic and Stochastic Network
 \end_layout
 
@@ -5606,7 +5654,7 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_inset
 
 .
- (As there is no connection from node 
+ As there is no connection from node 
 \begin_inset Formula $i$
 \end_inset
 
@@ -5622,7 +5670,17 @@ As this is not a stochastic network, I don't think it makes sense to define
 \begin_inset Formula $i$
 \end_inset
 
-.) There is also a real-valued bias 
+.
+ This means each node has 
+\begin_inset Formula $m-1$
+\end_inset
+
+ outgoing connections and 
+\begin_inset Formula $m-1$
+\end_inset
+
+ incoming connections.
+ There is also a real-valued bias 
 \begin_inset Formula $b_{i}\in\mathbb{R}$
 \end_inset
 
@@ -5631,25 +5689,36 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_inset
 
 .
- (This means each node has 
-\begin_inset Formula $m-1$
-\end_inset
-
- outgoing connections and 
-\begin_inset Formula $m-1$
-\end_inset
-
- incoming connections.)
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-TODO: Hier fehlt ein Bild von einem Hopfield-Netzwerk: Die connections sollten
- directed sein, d.h.
- Pfeile am Ende haben.
+\align center
+\begin_inset Graphics
+	filename images/hopfield-network-example.dia
+	width 30col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of a Hopfield Network.
+ The circles are the nodes; the arrows are the (directed) connections.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5814,7 +5883,8 @@ stepping function
 
 \end_inset
 
-, with negative values mapped to 0, and positive values mapped to 1: 
+, with nonpositive values mapped to 0, and positive values mapped to 1:
+ 
 \begin_inset Note Note
 status open
 
@@ -5867,14 +5937,31 @@ Each neuron samples its input at random times.
 \end_inset
 
 ), updating the network synchronously (i.e.
- all nodes are updated at the same time) is also possible as this is a special
- case of asynchronous updating.
+ all nodes are updated at the same time) is also possible
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ as this is a special case of asynchronous updating
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Although a Hopfield network is recurrent, Hopfield proved that the updating
- rule converges to a (possibly local) minimum given that the weights are
- symmetric (i.e.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Although a Hopfield network is recurrent, 
+\end_layout
+
+\end_inset
+
+Hopfield proved that the updating rule converges to a (possibly local) minimum
+ of the energy function, given that the weights are symmetric (i.e.
  
 \begin_inset Formula $w_{ij}=w_{ji}$
 \end_inset
@@ -6013,6 +6100,7 @@ associative memory
 \end_inset
 
 .
+ Training is not described here.
 \end_layout
 
 \begin_layout Paragraph
@@ -6076,8 +6164,8 @@ key "HornikWhite1989"
 \end_inset
 
  found that artificial feedforward neural networks with as few as one hidden
- layer are capable of modeling virtually any function within a given error,
- provided the following conditions are met:
+ layer are capable of modeling virtually any (Borel measurable) function
+ within a given error, provided the following conditions are met:
 \end_layout
 
 \begin_layout Itemize
@@ -6221,6 +6309,8 @@ squared-error sum
  and the desired output value) with respect to a particular weight and then
  increasing or decreasing the weight by the computed derivative multiplied
  by the learning rate.
+ Likewise, the bias is updated by taking the derivative of the error with
+ respect to the bias, and using this as a delta to update the bias.
 \end_layout
 
 \begin_layout Paragraph
@@ -6299,9 +6389,8 @@ name "sub:Parameters-of-Training-a-Multilayer-Perceptron"
 \end_layout
 
 \begin_layout Standard
-Although described here for multilayer perceptrons, the parameters described
- here apply to most artificial neuronal networks, not just multilayer perceptron
-s.
+Although described here for multilayer perceptrons, the parameters apply
+ to most artificial neuronal networks, not just multilayer perceptrons.
 \end_layout
 
 \begin_layout Paragraph
@@ -6316,7 +6405,8 @@ name "The-sigmoid-activation-function"
 \end_layout
 
 \begin_layout Standard
-The hidden and visible nodes are a function of the sum of their inputs.
+The value (activation) of hidden and visible nodes are a function of the
+ sum of their inputs.
  The function that maps the sum of the inputs of a node to its value is
  called the 
 \emph on
@@ -6442,7 +6532,7 @@ Training a randomly initialized feed-forward neural network with more than
  When attempting to train such a network, each node in the output layer
  often just outputs the mean value of the desired output of the training
  cases, independently of the input.
- One problem is that there are many local maxima (generated by repeatedly
+ One problem is that there are many local minima (generated by repeatedly
  adding weighted sigmoid functions) of the implicitly optimized energy function
  during back-propagation.
  Another problem is that in discriminative learning, each training case
@@ -6541,10 +6631,12 @@ In the second step, both encoder and decoder are extended by one layer.
  Then back-propagation is used to train the autoassociator consisting of
  the new encoder network with the new decoder network on top.
  This establishes values for the values of the initialized weights and biases.
+ This process can be repeated until a sufficient number of hidden layers
+ has been trained.
 \end_layout
 
 \begin_layout Subsubsection
-Autoassociator with classifier on top
+Autoassociator with a classifier on top
 \end_layout
 
 \begin_layout Standard
@@ -6740,7 +6832,7 @@ key "FischerIgel2012"
 \end_inset
 
  note, using an L2 weight decay term in the updating term corresponds to
- assuming a zero-mean Gaussian prior on the parameters.
+ assuming a zero-mean Gaussian prior on the parameters in a Bayesian framework.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6776,10 +6868,22 @@ key "Hinton2010,NairHinton2009"
 Setting a sparsity target works by scaling the total input to a node by
  a value controlled by three meta-parameters: the sparsity target, the decay
  rate, and the sparsity cost.
- The idea is to scale the total input to a node so that its activity distributio
-n approaches that of a target distribution.
- The actual probability of being active is registered by using an exponentially
- decaying average of the mean probability:
+ The idea is to scale the total input to a node so that its probability
+ of being active 
+\begin_inset Formula $q$
+\end_inset
+
+ approaches that of a choosable target probability 
+\begin_inset Formula $p\ll1$
+\end_inset
+
+ (the sparsity target).
+ The actual probability of being active 
+\begin_inset Formula $q$
+\end_inset
+
+ is registered by using an exponentially decaying average of the mean probabilit
+y:
 \begin_inset Formula 
 \[
 q_{new}=\lambda q_{old}+(1-\lambda)q_{current}
@@ -6792,8 +6896,8 @@ where
 \end_inset
 
  is the decay rate.
- The total input is then penalized by the derivative of the cross entropy
- between the desired and actual activity distribution:
+ The penalty to the input is measured using the cross entropy between the
+ desired distribution and actual activity distribution: 
 \begin_inset Formula 
 \[
 \mbox{sparsity penalty}\propto-p\log q-(1-p)\log(1-q)
@@ -6801,16 +6905,16 @@ where
 
 \end_inset
 
-which has a simple derivative of 
+.
+ The derivative of the cross entropy with respect to the total input to
+ a node is 
 \begin_inset Formula $q-p$
 \end_inset
 
- with respect to the total input to a node, for nodes with sigmoid activation
- function.
- The derivative of the penalty should be 0 when the desired is equal to
- the actual activity distribution.
- Both the bias and the incoming weights must then be adjusted by this derivative
-, scaled by the sparsity cost.
+, for nodes with sigmoid activation function.
+ (The derivative of the penalty is 0 when the desired is equal to the actual
+ activity distribution.) Both the bias and the incoming weights must then
+ be adjusted by this derivative, scaled by the sparsity cost.
 \end_layout
 
 \begin_layout Subsubsection
@@ -7013,7 +7117,7 @@ Boltzmann Machine
 
  is an undirected graphical model that has a specific form of the conditional
  probability distribution defined at each node.
- There are visible and hidden nodes.
+ There are visible and hidden nodes, all of which have a binary state.
  In contrast to the Restricted Boltzmann Machine, its two kinds of nodes
  are not arranged in the visible and hidden layer, but the (undirected)
  connections can be between any two nodes.
@@ -7258,11 +7362,12 @@ Connectionist learning for belief networks
 
 \end_inset
 
-
+The goal of training a Boltzmann Machine is to make the probability of the
+ training data maximal.
+ The log-likelihood is
 \end_layout
 
 \begin_layout Standard
-The log-likelihood is 
 \begin_inset Formula 
 \begin{eqnarray*}
 L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
