@@ -84,6 +84,20 @@ use past and present tense consistently in this text.
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: use passive and active consistently in this text, i.e.
+ make up a rule when to use passive and use active otherwise.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 General Remarks
 \end_layout
@@ -201,8 +215,8 @@ pCR
 \begin_inset Quotes erd
 \end_inset
 
-; class 1; there was no sign of a remaining breast cancer) to chemotherapy
- or 
+; class 1; label 1; there was no sign of a remaining breast cancer) to chemother
+apy or 
 \emph on
 residual disease
 \emph default
@@ -234,7 +248,7 @@ RD
 \begin_inset Quotes erd
 \end_inset
 
-; class 0; there was still cancerous tissue).
+; class 0; label 0; there was still cancerous tissue).
  The classifier was then tested on an independently measured data set, GSE25065.
  The input to the prediction was the expression data and the desired output
  a label of either RD or pCR.
@@ -635,8 +649,8 @@ More sophisticated prediction schemes can be imagined so that the prediction
  made produces more than one number: For example, in addition to the severity
  of the disease after therapy (a number between 0 and 1), the number of
  metastases (a natural number) could be trained and predicted.
- Such a prediction is not made in this work, due to only little clinical
- data having been recorded in the data set used.
+ Such a prediction is not made in this work, because only little clinical
+ data was recorded in the used data set.
  However, in the neuronal network it would be straightforward to predict
  such two numbers by adding an additional (properly scaled) number to the
  output layer in the training set.
@@ -666,8 +680,8 @@ to evaluate whether artificial neuronal networks can compete with established
 \end_layout
 
 \begin_layout Standard
-Two types of neuronal networks that lend themselves for semi-supervised
- training were used: auto-encoders and deep belief networks.
+Two types of neuronal networks that lend themselves to semi-supervised training
+ were used: autoencoders and deep belief networks.
  Parallel to these, the performance of a semi-supervised version of Support
  Vector Machines, namely the Transductive SVM was evaluated.
 \end_layout
@@ -765,7 +779,17 @@ deepnet
  However, there is another matrix library (called eigenmat and with the
  same interface as cudamat), which runs on the normal floating-point unit
  of a normal CPU.
- There was a bug in this library when run on 64-bit CPUs, which we fixed.
+ There was a bug in this library when run on 64-bit CPUs, which we fixed
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: upload git repository with fixes to github
+\end_layout
+
+\end_inset
+
+.
  Most of the data sets were trained on 
 \emph on
 rhskl11
@@ -778,16 +802,16 @@ How Unlabeled Data Was Used in Training
 \end_layout
 
 \begin_layout Subsubsection
-How Unlabeled Data was Used in Training Auto-encoders
+How Unlabeled Data was Used in Training Autoencoders
 \end_layout
 
 \begin_layout Standard
-Because auto-encoders
+Because autoencoders
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-auto-encoders
+autoencoder
 \end_layout
 
 \end_inset
@@ -815,8 +839,15 @@ decoder
  and the encoder tries to compress the input data and the decoder tries
  to reconstruct the input from its compressed form, training them is unsupervise
 d.
- The unlabeled data are therefore handled like the labeled data, because
- the label is unused in training the autoencoder.
+ As a general rule only the samples designated as 
+\begin_inset Quotes eld
+\end_inset
+
+unlabeled
+\begin_inset Quotes erd
+\end_inset
+
+ were used in training the unsupervised part of an algorithm.
 \end_layout
 
 \begin_layout Standard
@@ -824,7 +855,7 @@ The decoder network of the trained autoencoder was then thrown away, so
  that only the encoder remained.
  Classification was done on the compressed representation of the input.
  The classifier network was built on top of the encoder, and the compressed
- output layer of the encoder was connected to the input layer of the classifier.
+ output layer of the encoder was used as the input layer of the classifier.
 \end_layout
 
 \begin_layout Standard
@@ -872,7 +903,7 @@ Example scheme showing how the supervised network is trained on top of a
 The weights of the classifier were initialized randomly, and standard back-propa
 gation was used to train the whole network to classify samples.
  This means that the encoder can be modified by back-propagation training,
- but pre-training with the auto-encoder initializes it to a configuration
+ but pre-training with the autoencoder initializes it to a configuration
  that 
 \begin_inset Quotes eld
 \end_inset
@@ -882,7 +913,7 @@ knows
 \end_inset
 
  about the unlabeled samples.
- The learning rate of the second training (
+ The learning rate of the second training run (
 \emph on
 fine-tuning
 \emph default
@@ -896,8 +927,8 @@ fine-tuning
 
 \end_inset
 
-) run should be small enough not to diverge from the unlabeled training
- configuration in too large steps (per iteration).
+) should be small enough not to diverge from the unlabeled training configuratio
+n in too large steps (per iteration).
 \end_layout
 
 \begin_layout Subsubsection
@@ -938,7 +969,8 @@ Training Iterations and Evaluations
 \end_layout
 
 \begin_layout Standard
-We trained for a pre-determined number of iterations.
+We trained both the unsupervised as well as the supervised network for a
+ pre-determined number of iterations.
  This number was determined by a trial run on one data set, so that the
  improvement of the neuronal network was only marginal at the end.
  There were usually between 100,000 and 1,000,000 iterations (
@@ -1055,18 +1087,18 @@ reference "sub:Early-stopping"
 
 \begin_layout Standard
 We normally did not use any model selection for the unsupervised training,
- since the reconstruction error plots of pre-training using auto-encoder
+ since the reconstruction error plots of pre-training using autoencoder
  or RBM did not show overfitting on the validation data set.
- See 
+ Instead we selected the neuronal network from the last iteration that was
+ computed.
+ An example of the plot can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
 
 \end_inset
 
- for an example of the plot.
- Instead we selected the neuronal network from the last iteration that was
- computed.
+.
 \end_layout
 
 \begin_layout Standard
@@ -1165,6 +1197,7 @@ Example of supervised model selection.
  The x-axis is the training iteration, the y-axis the accuracy.
  The turquoise, green, and black circle clouds are the raw accuracies on
  the training, validation, and test set, respectively.
+ They are in discrete steps, because there are few samples.
  The thin lines overlayed on the point clouds are the 
 \emph on
 loess 
@@ -1233,33 +1266,111 @@ The default settings for SVM were used, except the kernel, which was a linear
  In particular, the calls to the svm function were like the following:
 \end_layout
 
-\begin_layout Verbatim
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
 SVM <- svm(labeled_training_matrix, labeled_training_labels, kernel="linear")
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
+\noindent
 The default settings for TSVM were used.
  In particular, the command lines were equivalent to the following:
 \end_layout
 
-\begin_layout Verbatim
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
 echo "learning model"
 \end_layout
 
-\begin_layout Verbatim
+\begin_layout Plain Layout
+
 svm_learn training-input.txt model.model
 \end_layout
 
-\begin_layout Verbatim
+\begin_layout Plain Layout
+
 echo "classifying testing data"
 \end_layout
 
-\begin_layout Verbatim
+\begin_layout Plain Layout
+
 svm_classify testing-input.txt model.model predictions.txt
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Initial Training Trials
+\noindent
+
+\emph on
+deepnet 
+\emph default
+Parameters
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+deepnet 
+\emph default
+parameters are set in a configuration file which first describes default
+ parameters, and then layer-wise parameters taking precedence over the default
+ parameters, if set.
+ The different types of parameters are described in the following.
 \end_layout
 
 \begin_layout Standard
@@ -1279,9 +1390,23 @@ deepnet
 
 \end_layout
 
-\begin_layout Standard
-One of the crucial settings when training artificial neuronal networks is
- the learning rate.
+\begin_layout Description
+
+\emph on
+base_epsilon
+\emph default
+ One of the crucial settings when training artificial neuronal networks
+ is the learning rate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+learning rate
+\end_layout
+
+\end_inset
+
+.
  It is named 
 \emph on
 
@@ -1298,11 +1423,11 @@ deepnet
  It controls by what factor the gradient of each weight is multiplied with
  to influence the parameters of the neuronal network in the next iteration.
  If it is too large, the neuronal network will alter weights in too large
- steps and oscillate, so that it will not be able to ascend an energy optimum.
+ steps and oscillate, and will not be able to reach an energy optimum.
  If it is too small, learning will take too long.
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
 In an initial learning trial, the following settings for 
 \emph on
 
@@ -1322,9 +1447,11 @@ reference "tab:Effect-of-learning-rate-on-reconstruction-error"
 
 .
  In this case, 0.01 was a good tradeoff between accuracy and training speed.
-\end_layout
+ However, the optimal value can vary greatly between different data sets.
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
+
 \begin_inset Float table
 wide false
 sideways false
@@ -1623,7 +1750,8 @@ name "tab:Effect-of-learning-rate-on-reconstruction-error"
 
 \end_inset
 
-Example of the effect of the learning rate on reconstruction error.
+Example of the effect of the learning rate base_epsilon on reconstruction
+ error.
  
 \begin_inset Quotes eld
 \end_inset
@@ -1652,6 +1780,236 @@ min T_E
 \end_inset
 
 
+\end_layout
+
+\begin_layout Description
+
+\emph on
+activation 
+\emph default
+This is the type of activation function used for the nodes in the described
+ layer.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+LOGISTIC
+\begin_inset Quotes erd
+\end_inset
+
+ is the sigmoid activation function, see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "The-sigmoid-activation-function"
+
+\end_inset
+
+.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+RECTIFIED_LINEAR
+\begin_inset Quotes erd
+\end_inset
+
+ is the rectified linear activation function, see section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:Rectified-linear-activation-function"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+
+\emph on
+initial_momentum
+\emph default
+,
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+final_momentum
+\emph default
+,
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+momentum_change_steps 
+\emph default
+These are the settings for the momentum of the learning rate, see section
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:Momentum-of-the-learning-rule"
+
+\end_inset
+
+.
+ The momentum is linearly scaled up from 
+\emph on
+initial_momentum
+\emph default
+ at iteration 0 to 
+\emph on
+final_momentum 
+\emph default
+at iteration 
+\emph on
+momentum_change_steps
+\emph default
+.
+\end_layout
+
+\begin_layout Description
+
+\emph on
+sparsity
+\emph default
+,
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+sparsity_target
+\emph default
+,
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+sparsity_cost
+\emph default
+,
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+sparsity_damping
+\emph default
+ These are the parameters of the sparsity regularization.
+ sparsity is either true or false and controls whether sparsity regularization
+ is used or not, and the other three parameters are described in section
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Sparsity-Target"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+
+\emph on
+dropout
+\emph default
+,
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+dropout_prob
+\emph default
+ 
+\emph on
+dropout 
+\emph default
+controls whether the dropout regularization is enabled or not, and 
+\emph on
+dropout_prob 
+\emph default
+is the dropout probability, described in section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Dropout"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+
+\emph on
+apply_l2_decay
+\emph default
+,
+\begin_inset space ~
+\end_inset
+
+
+\emph on
+l2_decay
+\emph default
+ 
+\emph on
+apply_l2_decay
+\emph default
+ controls whether l2 decay regularization is used or not, and 
+\emph on
+l2_decay
+\emph default
+ is its constant weight cost, described in section 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:L1-and-L2-Weight-Decay"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Description
+
+\emph on
+dimensions
+\emph default
+ This parameter sets the number of nodes in the described layer.
+\end_layout
+
+\begin_layout Description
+
+\emph on
+loss_function
+\emph default
+ If set to 
+\begin_inset Quotes eld
+\end_inset
+
+SQUARED_LOSS
+\begin_inset Quotes erd
+\end_inset
+
+, the sum of squared differences is optimized, while 
+\begin_inset Quotes eld
+\end_inset
+
+CROSS_ENTROPY
+\begin_inset Quotes erd
+\end_inset
+
+ optimizes the cross entropy.
+ Both are described in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "par:Optimizing-the-Sum-of-Squared-DIfferences"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1929,8 +2287,9 @@ Split of GEO data sets GSE25055 and GSE25065 into training and test set.
 \end_layout
 
 \begin_layout Standard
-Then the 10,000 most variable genes on GSE25055 were determined.
- They were used as input genes, to halve computation time (from 22,283 genes).
+Then the 10,000 most variable genes (of 22,283 genes) on GSE25055 were determine
+d.
+ Only these were used as input genes, to halve computation time.
 \end_layout
 
 \begin_layout Subsection
@@ -1957,16 +2316,16 @@ The reconstruction error was computed after each iteration.
  visible layer with the original data, computing the hidden layer's nodes
  from the visible layer, computing the visible layer from the hidden layer's
  nodes, and these values are the reconstructed values.
- The reconstruction error of a visible node is the (absolute) difference
- between its original value in the data set and the visible node's reconstructed
+ The reconstruction error of a visible node is the euclidean distance between
+ its original value in the data set and the visible node's reconstructed
  value.
  The reconstruction error is a measure of how well a network can compress
  visible data in the hidden layer.
 \end_layout
 
 \begin_layout Standard
-Training and testing data set reconstruction errors were still decreasing
- by small amounts each iteration.
+In the last of the fixed number of iterations, training and testing data
+ set reconstruction errors were still decreasing by small amounts each iteration.
  (The decreasing was stochastic, i.e.
  some iterations had slightly higher reconstruction error than the one of
  the iteration before, but on average, the reconstruction error of both
@@ -2033,8 +2392,8 @@ Left: True (x-axis) versus reconstructed (y-axis) expression values of data
 \begin_layout Standard
 Although the 10,000 numbers were compressed into only 50 numbers, the mean
  reconstruction error of the 10,000 genes was only 0.563.
- Considering that microarrays have log-intensities in [0;16], this is equivalent
- to a relative error of 3.5%.
+ Considering that the possible range (log2-intensities) of microarray values
+ is in [0;16], this is equivalent to a relative error of 3.5%.
  This demonstrated that RBMs are able to reduce dimensionality of an expression
  data set while preserving most information.
 \end_layout
@@ -2050,10 +2409,10 @@ Increasing Number of Labeled Samples (breast_cancer_06)
 \begin_layout Standard
 The goal of breast_cancer_06 was to verify if basic training works.
  This was verified by testing whether the classifier improves with an increasing
- amount of labeled examples.
+ amount of labeled samples.
  Therefore we trained using all unlabeled samples, and defined supervised
  learning data sets which have less and less labeled training and test samples.
- Models were pre-trained using either an RBM or auto-encoder and fine-tuned
+ Models were pre-trained using either an RBM or autoencoder and fine-tuned
  with supervised back-propagation.
 \end_layout
 
@@ -2073,7 +2432,7 @@ A summary of unlabeled training, validation, and testing data sets is shown
  in table 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:unlabeled-data-sets-of-breast_cancer_06"
+reference "tab:unlabeled-data-sets-of-breast_cancer_06"
 
 \end_inset
 
@@ -2085,7 +2444,7 @@ reference "fig:unlabeled-data-sets-of-breast_cancer_06"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
+\begin_inset Float table
 wide false
 sideways false
 status open
@@ -2378,7 +2737,7 @@ testing
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:unlabeled-data-sets-of-breast_cancer_06"
+name "tab:unlabeled-data-sets-of-breast_cancer_06"
 
 \end_inset
 
@@ -3405,8 +3764,9 @@ reference "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
 \end_inset
 
 .
- The reconstruction errors observed at the input layer during training are
- shown in figure 
+ (They were re-used from the runs labeled breast_cancer_04, which are not
+ described here.) The reconstruction errors observed at the input layer during
+ training are shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
@@ -5686,8 +6046,8 @@ name "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
 
 Box plots showing the accuracies of the models breast_cancer_06_aa - ad.
  Each panel shows one of the four configurations breast_cancer_06_aa - ad.
- In each panel, the x-axis shows the decreasing numbers of labeled samples
- in the 5 different data sets.
+ In each panel, the x-axis shows the number of labeled samples in the 5
+ different data sets.
  The y-axis shows the smoothed accuracy, as described in section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5722,8 +6082,8 @@ reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-la
 
 \end_inset
 
-, this is due to an uneven number of label 0 and label 1 samples in the
- training set.
+, this is due to an unbalanced number of label 0 and label 1 samples in
+ the training set.
 \end_layout
 
 \begin_layout Standard
@@ -6608,7 +6968,7 @@ er_06_ae - ah)
 
 \begin_layout Standard
 When training a neuronal network using back-propagation that was pre-trained
- using one of the four auto-encoders described in the previous section 
+ using one of the four autoencoders described in the previous section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,_al,_am,_ao)"
@@ -6834,7 +7194,7 @@ Predictions of the network breast_cancer_06_aa/_n302_cv1.
 
 \begin_layout Standard
 There is a heavy bias in favor of label 0.
- Our hypothesis was that this is due to the uneven class label distribution
+ Our hypothesis was that this is due to the unbalanced class label distribution
  in data set breast_cancer_06.
  Therefore, the next data set is balanced in this regard.
 \end_layout
@@ -6854,17 +7214,27 @@ name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-
 As in the previous section on breast_cancer_06, we wanted to check whether
  the artificial neuronal networks accuracies improve with an increasing
  number of labeled samples.
- Unlabeled data sets were like for breast_cancer_06, see table 
+ Unlabeled data sets were the same as for breast_cancer_06, see table 
 \begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:unlabeled-data-sets-of-breast_cancer_06"
+LatexCommand vref
+reference "tab:unlabeled-data-sets-of-breast_cancer_06"
 
 \end_inset
 
- in subsection 
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Definition-of-unlabeled-data-sets-for-breast_cancer_06"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -8726,7 +9096,7 @@ reference "sub:Dropout"
 \emph default
  reduces overfitting.
  In addition, comparing with the neuronal networks pre-trained using RBM
- or auto-encoder (e.g.
+ or autoencoder (e.g.
  breast_cancer_07_ai versus breast_cancer_07_ag) might indicate a slight
  advantage of not using pre-training (but using 
 \begin_inset Formula $dropout$
@@ -11372,11 +11742,20 @@ key "KrizhevskyHinton2009"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 On second thought, ZCA whitening is non-sensical in expression data since
  it is a linear transformation on the whole expression matrix.
  It can be seen as creating artificial features by linearly combining genes
  such that TODO.
  Those genes may not have anything in common
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection

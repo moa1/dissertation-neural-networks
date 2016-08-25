@@ -1736,7 +1736,7 @@ Networks with Multiple Hidden Layers
 \end_layout
 
 \begin_layout Subsubsection
-Autoassociator, Auto-encoder
+Autoassociator, Autoencoder
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Autoassociator-introduction"

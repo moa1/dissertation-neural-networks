@@ -3,6 +3,9 @@
 \begin_document
 \begin_header
 \textclass article
+\begin_preamble
+% Added by lyx2lyx
+\end_preamble
 \use_default_options true
 \begin_modules
 fix-cm
@@ -37,7 +40,7 @@ fix-cm
 \use_package cancel 1
 \use_package esint 1
 \use_package mathdots 1
-\use_package mathtools 1
+\use_package mathtools 2
 \use_package mhchem 1
 \use_package stackrel 1
 \use_package stmaryrd 1
@@ -289,6 +292,33 @@ When learning generative models of high-dimensional data, however, it is
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Another advantage of a generative model is that one can draw samples from
+ its distribution (
+\begin_inset Quotes eld
+\end_inset
+
+generate samples
+\begin_inset Quotes erd
+\end_inset
+
+) to easily find out what the model has learned.
+\end_layout
+
+\begin_layout Standard
+Due to their greater generality, generative models have the disadvantage
+ that they are slower than discriminative models.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ note, however, the class of too computationally intensive models is being
+ eroded by Moore's Law.
 \end_layout
 
 \begin_layout Standard
@@ -6255,6 +6285,13 @@ back-propagation
 
 \begin_layout Paragraph
 Optimizing the Sum of Squared Differences
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Optimizing-the-Sum-of-Squared-DIfferences"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6308,13 +6345,30 @@ squared-error sum
  node (which is a function of the outputs of the nodes in the above layer
  and the desired output value) with respect to a particular weight and then
  increasing or decreasing the weight by the computed derivative multiplied
- by the learning rate.
+ by the learning rate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+learning rate
+\end_layout
+
+\end_inset
+
+.
  Likewise, the bias is updated by taking the derivative of the error with
  respect to the bias, and using this as a delta to update the bias.
 \end_layout
 
 \begin_layout Paragraph
 Optimizing the Cross-entropy Error
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Optimizing-the-Cross-entropy-error"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6471,6 +6525,13 @@ In this work, only the sigmoid activation function was used.
 
 \begin_layout Paragraph
 Momentum of the Learning Rule
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Momentum-of-the-learning-rule"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6688,6 +6749,13 @@ The regularizations described here apply to most artificial neuronal networks,
 
 \begin_layout Subsubsection
 L1 and L2 Weight Decay
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:L1-and-L2-Weight-Decay"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6837,6 +6905,13 @@ key "FischerIgel2012"
 
 \begin_layout Subsubsection
 Sparsity Target
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Sparsity-Target"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7117,10 +7192,26 @@ Boltzmann Machine
 
  is an undirected graphical model that has a specific form of the conditional
  probability distribution defined at each node.
- There are visible and hidden nodes, all of which have a binary state.
+ A Boltzmann Machine is a stochastic version of a Hopfield network.
+ There are visible (
+\series bold
+
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+
+\series default
+) and hidden nodes (
+\begin_inset Formula $\mathbf{H}$
+\end_inset
+
+), all of which have a binary state.
  In contrast to the Restricted Boltzmann Machine, its two kinds of nodes
  are not arranged in the visible and hidden layer, but the (undirected)
  connections can be between any two nodes.
+ Like Restricted Boltzmann Machines, a Boltzmann Machine is a way to store
+ a joint probability distribution.
+ 
 \begin_inset Note Note
 status open
 
@@ -7130,19 +7221,15 @@ TODO: Example figure of a BM.
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Standard
 The conditional probability distribution for a hidden node 
-\begin_inset Formula $H_{i}$
+\begin_inset Formula $H_{i}\in\mathbf{H}$
 \end_inset
 
- depends on the states of all visible nodes 
-\begin_inset Formula $\mathbf{V}$
-\end_inset
-
- and is defined by 
+ depends on the states of all other nodes and is defined by 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HintonSejnowski1986"
@@ -7165,7 +7252,7 @@ in Eq 2, page 6, and Eq 3, page 8
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-P(H_{i}=1\mid\mathbf{V}=\mathbf{v})=\sigma\left(-\sum_{j}v_{j}w_{ij}+b_{i}\right)\label{eq:RBM p(h=1|v)}
+P(H_{i}=1\mid\mathbf{S_{j}}=\mathbf{s_{j}}:j\neq i)=\sigma\left(\sum_{j}s_{j}w_{ij}-b_{i}\right)\label{eq:Boltzmann Machine p(h=1|S)}
 \end{equation}
 
 \end_inset
@@ -7181,6 +7268,18 @@ status open
 \end_inset
 
 where 
+\begin_inset Formula $\mathbf{S}=\mathbf{V}\cup\mathbf{H}$
+\end_inset
+
+, 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ is the state of node 
+\begin_inset Formula $S_{j}$
+\end_inset
+
+, 
 \begin_inset Formula $\sigma(x)=\frac{1}{1+\exp(-x)}$
 \end_inset
 
@@ -7192,8 +7291,8 @@ where
 \begin_inset Formula $H_{i}$
 \end_inset
 
- and visible node 
-\begin_inset Formula $V_{j}$
+ and (visible or hidden) node 
+\begin_inset Formula $S_{j}$
 \end_inset
 
 , and 
@@ -7208,17 +7307,21 @@ where
  Similarly,
 \begin_inset Formula 
 \[
-P(V_{j}=1\mid\mathbf{H}=\mathbf{h})=\sigma\left(-\sum_{i}h_{i}w_{ij}+c_{j}\right)
+P(V_{j}=1\mid\mathbf{S_{i}}=\mathbf{s_{i}}:i\neq j)=\sigma\left(\sum_{i}s_{i}w_{ij}-c_{j}\right)
 \]
 
 \end_inset
 
 where 
-\begin_inset Formula $w_{ij}$
+\begin_inset Formula $V_{j}$
 \end_inset
 
- is the weight between hidden node 
-\begin_inset Formula $H_{i}$
+ is a visible node, 
+\begin_inset Formula $w_{ij}=w_{ji}$
+\end_inset
+
+ is the weight between node 
+\begin_inset Formula $S_{i}$
 \end_inset
 
  and visible node 
@@ -7234,6 +7337,23 @@ where
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Finding the values 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ from the conditional probabilities 
+\begin_inset Formula $P(H_{i}=1\mid\mathbf{S})$
+\end_inset
+
+ or 
+\begin_inset Formula $P(V_{j}=1\mid\mathbf{S})$
+\end_inset
+
+ works by drawing a one with these conditional probabilities and a zero
+ otherwise.
 \end_layout
 
 \begin_layout Standard
@@ -7362,8 +7482,11 @@ Connectionist learning for belief networks
 
 \end_inset
 
-The goal of training a Boltzmann Machine is to make the probability of the
- training data maximal.
+The goal of training a Boltzmann Machine is to find parameters, i.e.
+ weights and biases, such that the the probability of the training data
+ becomes maximal.
+ The visible nodes are set to a training sample.
+ Remember that Boltzmann Machines store a joint probability distribution.
  The log-likelihood is
 \end_layout
 
@@ -7392,9 +7515,53 @@ L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
 
 \end_inset
 
+, where 
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+ is 
+\begin_inset Formula $\mathbf{V}\cup\mathbf{H}$
+\end_inset
+
+, and 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ is the state of node 
+\begin_inset Formula $S_{i}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1992"
+
+\end_inset
+
 .
- It can be approximated by the difference between two parallel Gibbs sampling
- steps: the 
+ The goal is to find a delta for each weight 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+, which can be added to the weight, so that the likelihood for the training
+ sample increases.
+ The derivative of the log-likelihood with respect to a weight 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ multiplied by a learning rate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+learning rate
+\end_layout
+
+\end_inset
+
+ provides such a delta.
+ This derivative can be approximated by the difference between two parallel
+ Gibbs sampling steps: the 
 \emph on
 positive phase
 \emph default
@@ -7418,6 +7585,7 @@ key "Neal1992"
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Paragraph
@@ -7455,7 +7623,7 @@ positive phase
  from its conditional probability distribution given the states of all other
  variables (i.e.
  
-\begin_inset Formula $P(S_{i}=s_{i}\mid\mathbf{S_{j:j\neq i}}=\mathbf{s_{j}})$
+\begin_inset Formula $P(S_{i}=s_{i}\mid\mathbf{S_{j}}=\mathbf{s_{j}}:j\neq i)$
 \end_inset
 
 ) until the Gibbs sampler reaches equilibrium, and recording the state 
@@ -7505,7 +7673,7 @@ negative phase
  Again, we start in any configuration of the network.
  Then we repeatedly sample from the conditional probability distributions
  
-\begin_inset Formula $P(S_{i}=s_{i}\mid S_{j:j\neq i}=s_{j})$
+\begin_inset Formula $P(S_{i}=s_{i}\mid S_{j}=s_{j}:j\neq i)$
 \end_inset
 
  for all variables 
@@ -7539,8 +7707,17 @@ Training Iterations
 
 \begin_layout Standard
 The derivatives obtained by the positive and negative phases are multiplied
- by the learning rate (a small positive real constant) and added to the
- current weights.
+ by the learning rate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+learning rate
+\end_layout
+
+\end_inset
+
+ (a small positive real constant) and added to the current weights.
  Then another training iteration is started.
  This is repeated until the derivatives all converge to zero.
 \end_layout
@@ -7619,6 +7796,9 @@ RBM
  each node in the visible layer is connected to all hidden nodes by undirected
  edges, but in contrast to general Boltzmann Machines there are no visible-to-vi
 sible node connections and no hidden-to-hidden node connections.
+ In a Restricted Boltzmann Machine, the visible nodes represent the observable
+ features of a training set, while the hidden nodes are feature detectors
+ which are computed from the states of all visible nodes.
 \end_layout
 
 \begin_layout Standard
@@ -7634,7 +7814,34 @@ key "Smolensky1986"
 \end_layout
 
 \begin_layout Standard
-A Restricted Boltzmann Machine is a stochastic version of a Hopfield network.
+The conditional probabilities are defined analogous to Boltzmann Machines
+ (see equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Boltzmann Machine p(h=1|S)"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P(H_{i}=1\mid\mathbf{V}=\mathbf{v})=\sigma\left(\sum_{j}v_{j}w_{ij}-b_{i}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+P(V_{j}=1\mid\mathbf{H}=\mathbf{h})=\sigma\left(\sum_{i}h_{i}w_{ij}-c_{j}\right)
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7726,7 +7933,9 @@ contrastive divergence
 \end_layout
 
 \begin_layout Standard
-Like for Boltzmann Machines, the log-likelihood is 
+Like for Boltzmann Machines, the goal of training is to find parameters
+ such that the the probability of the training data becomes maximal.
+ The log-likelihood is 
 \begin_inset Formula 
 \begin{eqnarray*}
 L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
@@ -7751,7 +7960,25 @@ L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
 
 \end_inset
 
-.
+(see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FischerIgel2012"
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Formel 29 auf Seite 26
+\end_layout
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Paragraph
@@ -7766,7 +7993,7 @@ The positive phase, i.e.
 
  can be computed directly by setting the visible nodes to the training sample,
  and then computing 
-\begin_inset Formula $P(H_{i}=1\mid\mathbf{V=v})=\sigma\left(-\sum_{j}v_{j}w_{ij}+b_{i}\right)$
+\begin_inset Formula $P(H_{i}=1\mid\mathbf{V=v})=\sigma\left(\sum_{j}v_{j}w_{ij}-b_{i}\right)$
 \end_inset
 
 .
@@ -7901,11 +8128,19 @@ key "HintonSalakhutdinov2006"
 
  proposed a way to extend Restricted Boltzmann Machines with only binary
  values to nodes with real values.
- However, this was largely replaced by rectified linear nodes.
+ However, this extension was largely replaced by rectified linear nodes
+ because they performed better.
 \end_layout
 
 \begin_layout Paragraph
 Rectified linear activation function
+\begin_inset CommandInset label
+LatexCommand label
+name "par:Rectified-linear-activation-function"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -8023,7 +8258,7 @@ DBN
 \begin_inset Quotes eld
 \end_inset
 
-Deep
+deep
 \begin_inset Quotes erd
 \end_inset
 
@@ -8033,12 +8268,12 @@ Deep
 \end_layout
 
 \begin_layout Standard
-Because they are a directed graphical model, the computation of the values
+Because they are directed graphical models, the computation of the values
  of children nodes does not affect the value of parent nodes.
- In contrast to undirected graphical models, this allows generating from
- the model in a single pass.
- Thus, a Deep Belief Network is, by itself, an unsupervised algorithm that
- can be used to generate samples distributed like a training data set.
+ In contrast to undirected graphical models, this allows generating (drawing
+ a sample) from the model in a single pass.
+ Thus, a Deep Belief Network can be used in an unsupervised algorithm to
+ generate samples distributed like a training data set.
 \end_layout
 
 \begin_layout Paragraph
@@ -8070,15 +8305,101 @@ ty associated with node
 \begin_inset Formula $\mathbf{N_{j}}$
 \end_inset
 
- and can be expressed as a sigmoid function 
+ (where parents must come before children).
+ The conditional probbilities can be expressed as a sigmoid function 
 \begin_inset Formula 
 \begin{eqnarray*}
-P(N_{i} & = & n_{i}\mid\mathbf{N_{j}=n_{j}}:\mathbf{j}<i)=\sigma((2n_{i}-1)\sum_{j<i}n_{j}w_{ij})
+P(N_{i} & = & 1_{i}\mid\mathbf{N_{j}=n_{j}}:j<i)=\sigma(\sum_{j<i}n_{j}w_{ij}-b_{i})
 \end{eqnarray*}
 
 \end_inset
 
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Note that Neal defines on page 10, 
+\begin_inset Formula $P(S_{i}=s_{i}\mid S_{j}=s_{j}:j<i)=\sigma(s_{i}^{*}\sum_{j<i}s_{j}w_{ij})$
+\end_inset
+
 .
+ The 
+\begin_inset Formula $s_{i}^{*}$
+\end_inset
+
+ is defined as 
+\begin_inset Formula $2s_{i}-1$
+\end_inset
+
+ for 0/1-valued nodes.
+ Since I write 
+\begin_inset Formula $P(N_{i}=1\mid...)$
+\end_inset
+
+ above, I can substitute 
+\begin_inset Formula $1$
+\end_inset
+
+ where 
+\begin_inset Formula $s_{i}^{*}$
+\end_inset
+
+ is written on the right side.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Neal says on the bottom of page 3: 
+\begin_inset Quotes eld
+\end_inset
+
+"Bias" weights, wi0, from a fictitious unit 0 whose value is aways 1 are
+ also assumed to be present.
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, where 
+\begin_inset Formula $n_{j}$
+\end_inset
+
+ is the binary state of node 
+\begin_inset Formula $N_{j}$
+\end_inset
+
+, 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ is the directed weight from node 
+\begin_inset Formula $N_{j}$
+\end_inset
+
+ to node 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+, and 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ is the bias of node 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+.
+ Thus the conditional probabilities of a Sigmoid Belief Network are parameterize
+d with the weights and biases.
 \end_layout
 
 \begin_layout Paragraph
@@ -8126,8 +8447,8 @@ Training a Deep Sigmoid Belief Network
 Training a Sigmoid Belief Network is the process of finding weights between
  hidden and visible nodes such that the likelihood given the training samples
  becomes maximal.
- This means we have to find the derivative of the likelihood with respect
- to a weight.
+ Doing gradient ascent means we have to find the derivative of the likelihood
+ with respect to a weight.
  As 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -8148,13 +8469,23 @@ in equation 27
 , it is
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\sum_{\mathbf{s}}P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})(2s_{i}-1)s_{j}\sigma\left((-2s_{i}+1)\sum_{k<i}s_{k}w_{ik}\right)
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\sum_{\mathbf{s}}P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})s_{j}\sigma\left(-s_{i}\sum_{k<i}s_{k}w_{ik}\right)
 \]
 
 \end_inset
 
-.
- This means we have to evaluate the conditional probability 
+, where 
+\begin_inset Formula $\mathbf{S}$
+\end_inset
+
+ are the nodes, and 
+\begin_inset Formula $\mathbf{V}\subset\mathbf{S}$
+\end_inset
+
+ are the arbitrarily chosen visible nodes.
+ However, in the Deep Belief Network below, the visible nodes are always
+ in the last (bottom) layer.
+ In the likelihood we have to evaluate the conditional probability 
 \begin_inset Formula $P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})$
 \end_inset
 
@@ -8166,14 +8497,16 @@ Since exact inference of the hidden nodes given the visible nodes is intractable
 , we must resort to the approximate Gibbs Sampling.
  This works as shown in section 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
 
 \end_inset
 
 .
  However, in Gibbs Sampling, all hidden variables (of all layers simultaneously)
- have to be inferred together, and this scales poorly as models become larger.
+ are inferred together (at the same time), and this scales poorly as models
+ become larger.
+ Therefore another learning algorithm is needed.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8239,7 +8572,19 @@ P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\
 
 \end_inset
 
-.
+, where 
+\begin_inset Formula $C$
+\end_inset
+
+ is a normalization constant, 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ is a function of the visible states and the 
+\begin_inset Formula $\alpha_{j}$
+\end_inset
+
+ are functions depending on the visible nodes individually.
  The desired factorial form of the posterior means that all 
 \begin_inset Formula $y_{j}$
 \end_inset
@@ -8263,6 +8608,20 @@ reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
 \begin{equation}
 P(\mathbf{x},\mathbf{y})=\frac{1}{C}\exp\left(\sum_{j}\Phi_{j}(\mathbf{x},y_{j})+\beta(\mathbf{x})+\sum_{j}\alpha_{j}(y_{j})\right)\label{eq:DBN-joint-probability-with-dependencies-between-visible}
 \end{equation}
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Susi findet, dass das 
+\begin_inset Formula $\Phi$
+\end_inset
+
+ hier dem Phi aus Hammersley-Clifford zu ähnlich ist.
+\end_layout
 
 \end_inset
 
@@ -8473,7 +8832,16 @@ Infer the hidden layer representation at
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
-.
+ (i.e.
+ feed the activations of the visible layer 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ through the activation function of 
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+).
  Now train the copied RBM between layers 
 \begin_inset Formula $\mathbf{V_{1}}$
 \end_inset
@@ -8531,7 +8899,7 @@ Another way to view the unrolling is to regard the infinitely Deep Belief
 \end_layout
 
 \begin_layout Subsubsection
-Deep Belief Networks Interpreted as Feed-forward Neural Networks
+Deep Belief Networks Interpreted as Feed-forward Neuronal Networks
 \end_layout
 
 \begin_layout Standard
@@ -8595,7 +8963,7 @@ pre-training
  to variables to be predicted.
  Usually the network consists of only one layer, due to difficulties in
  training freshly initialized multi-layer neural networks.
- The resulting network can be then be 
+ The resulting network can then be 
 \emph on
 fine-tuned
 \emph default
