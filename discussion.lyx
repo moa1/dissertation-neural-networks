@@ -393,9 +393,8 @@ key "RussakovskyFeiFei2015"
 \end_layout
 
 \begin_layout Standard
-The fact that there are much less number of labeled and unlabeled samples
- in expression data than those available in image recognition is probably
- due to prices.
+The fact that there is a much smaller number of labeled and unlabeled samples
+ in expression data than in image recognition is probably due to prices.
  The price of microarrays (and RNASeq) is magnitudes larger (hundreds of
  Euros or dollars) than the price to take and label pictures of hand-written
  digits or objects (images are ubiquitous on the internet, and manual or

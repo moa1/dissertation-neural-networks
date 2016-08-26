@@ -98,6 +98,19 @@ TODO: use passive and active consistently in this text, i.e.
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: explain batch size in the section that explains the deepnet parameters.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 General Remarks
 \end_layout
@@ -11926,8 +11939,9 @@ A flaw in the design of the data sets of breast_cancer_08 is that the number
 \end_layout
 
 \begin_layout Standard
-To see a possible rise in accuracy with a rising number of unlabled samples,
- we also increased the number of sub-sampling repetitions.
+To be able to statistically detect a possible rise in accuracy with a rising
+ number of unlabled samples, we also increased the number of sub-sampling
+ repetitions.
  In addition, instead of using autoencoder or RBM for pre-training, we pre-train
 ed a Deep Belief Network.
 \end_layout
@@ -11964,8 +11978,7 @@ There are the following differences between breast_cancer_12 and breast_cancer_0
 
 \begin_layout Standard
 The labeled samples were held constant across all 6 data sets within one
- repetition.
- This is to be able to directly compare performance between e.g.
+ repetition, to be able to directly compare performance between e.g.
  data sets 1 and 3 within a repetition.
  The only difference between data sets 1 and 3 is the unlabeled pre-training
  data.
@@ -14410,9 +14423,8 @@ LV
  and validation) across data sets.
  The number of training and validation samples is almost equal in each data
  set (the difference is at most 1, for the unlabeled data).
- The number of unlabeled samples is increased linearly from 0|0 (0|0 in
- GSE25055 and 0|0 in GSE25065) to the maximum number of remaining samples
- 50|50 (29|29 in GSE25055 and 21|21 in GSE25065).
+ The number of unlabeled samples is increased linearly from 0|0 to the maximum
+ number of remaining samples 50|50 (29|29 in GSE25055 and 21|21 in GSE25065).
  The labeled data are equal across all data sets (but different between
  different repetitions).
 \end_layout
@@ -14497,10 +14509,20 @@ key "SrivastavaSalakhutdinov2014"
 
 \end_inset
 
- says in section 5.2 that when choosing the learning rate smaller than the
- best learning rate for randomly initialized nets, the information in the
- pretrained weights seems to be retained, and finetuning improves the final
- generalization error compared to not using dropout when finetuning.
+ says 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+in section 5.2 
+\end_layout
+
+\end_inset
+
+that when choosing the learning rate smaller than the best learning rate
+ for randomly initialized nets, the information in the pretrained weights
+ seems to be retained, and finetuning improves the final generalization
+ error compared to not using dropout when finetuning.
 \end_layout
 
 \begin_layout Standard
@@ -14532,8 +14554,8 @@ Using Both Training and Validation Data Sets for Training TSVMs
 To predict using TSVM, for every repetition and every data set, we joined
  labeled training, labeled validation data, unlabeled training, and unlabeled
  validation data to the training input file to be used by TSVM.
- This was done because deepnet also has access to these labeled and unlabeled
- samples.
+ This was done to be fair to TSVM, because deepnet also has access to these
+ labeled and unlabeled samples.
  The testing data set was the same as that used for the neuronal networks.
 \end_layout
 
@@ -14723,8 +14745,7 @@ This can be quantified using a paired and two-sided Wilcoxon test.
 \end_layout
 
 \begin_layout Standard
-By experiment we mean the predictions that are stored in the accuracies
- in figure 
+By experiment we mean the set of accuracies in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Accuracy-comparison-of-breast_cancer_12"
@@ -25689,7 +25710,8 @@ training numbers
 
 \begin_layout Standard
 In contrast to that we have (in data set breast_cancer_12, data set 6) 238
- training samples, each of which has 500 expression levels, i.e.
+ training and validation samples, each of which has 500 expression levels,
+ i.e.
  
 \begin_inset Formula $238*500=119,000$
 \end_inset
@@ -25730,7 +25752,7 @@ have an architecture of 500-1000-1000-2000-1 (500 input nodes, 1000 hidden
 
  weights to be learnt.
  The ratio of 
-\begin_inset Formula $\frac{\mbox{input numbers}}{\mbox{weights}}\approx0.034$
+\begin_inset Formula $\frac{\mbox{input numbers}}{\mbox{weights}}\approx0.034\ll20.8$
 \end_inset
 
  is much lower in our case than in the image recognition case.
@@ -25748,7 +25770,7 @@ This can be changed by using all
 
 .
  If we take 
-\begin_inset Formula $i=22283$
+\begin_inset Formula $i=22,283$
 \end_inset
 
 , and there are 238 training samples (in fact we have only 20 labeled plus
@@ -25757,15 +25779,7 @@ This can be changed by using all
 \end_inset
 
  measured numbers.
- If we also wanted a similar ratio to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "HintonTeh2006"
-
-\end_inset
-
-.
- Then the ratio is
+ The ratio formula is
 \begin_inset Formula 
 \begin{eqnarray*}
 r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o}
@@ -25787,12 +25801,20 @@ r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o}
 
 \begin_layout Subsection
 Data Set Design
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Data-Set-Design-of-breast_cancer_15"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 To exclude the possibility that a batch effect between GSE25055 and GSE25065
- ruins semi-supervised learning, in breast_cancer_15 we only use GSE25055
- and again we use 10|10 labeled training and validation samples.
+ ruins semi-supervised learning, in breast_cancer_15 we only use GSE25055,
+ also for testing.
+ Again we use 10|10 labeled training and validation samples.
  This leaves us with remaining 
 \begin_inset Formula $57-20=37$
 \end_inset
@@ -26278,21 +26300,32 @@ name "tab:breast_cancer_12-number-r"
 
 \end_inset
 
-The number r (see text) for 10 hidden nodes in data set breast_cancer_12.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-As the 
+The number 
 \begin_inset Formula $r$
 \end_inset
 
-s in the table are around 20 (for data set 6), both for 
+ (see text, section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Data-Set-Design-of-breast_cancer_15"
+
+\end_inset
+
+) for 10 hidden nodes in data set breast_cancer_15.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+As the values for 
+\begin_inset Formula $r$
+\end_inset
+
+ in the table are around 20 (for data set 6), both for 
 \begin_inset Formula $t_{quad}$
 \end_inset
 
@@ -27711,7 +27744,7 @@ GSE25065
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -27815,7 +27848,7 @@ GSE25065
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" rotate="90" usebox="none">
+<cell multicolumn="1" alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -27824,7 +27857,7 @@ repeats
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+<cell multicolumn="2" alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -27833,7 +27866,7 @@ repeats
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -28014,7 +28047,8 @@ name "fig:Accuracy-in-breast_cancer_15"
 \end_inset
 
 Box plots of test set accuracies for different data sets with more and more
- unlabeled training samples in breast_cancer_15.
+ unlabeled training samples in a neuronal network pre-trained with DBN on
+ breast_cancer_15.
  The x-axis are the data sets (except data set 1, which cannot be used in
  DBNs because it does not contain unlabeled data) in the order of rising
  number of unlabeled samples.
@@ -28060,10 +28094,10 @@ reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
 \end_inset
 
 ).
- The p-value for the accuracy difference between data sets 2 and 6 is 8.9%,
+ The p-value for the accuracy difference between data sets 2 and 6 is 0.089,
  which some people consider significant.
  The estimated difference between accuracies of data sets 2 and 6 is 2.8
- percent points.
+ percent points (0.028).
  (The 95% confidence interval for the difference is [-0.46; 6.7] percent points.)
  Depending on what one considers significant, this shows a dependence of
  accuracy on the number of unlabeled samples.
@@ -28131,8 +28165,8 @@ reference "fig:Accuracy-box-plots-of-breast_cancer_15"
  Training failed in data set 2.
  Except for data set 2, one can see a slight accuracy increase from data
  set 1 to data set 6, i.e.
- from the data set with the no unlabeled samples to the data set with the
- most unlabeled samples.
+ from the data set with no unlabeled samples to the data set with the most
+ unlabeled samples.
  Following the same rationale as in section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -28142,10 +28176,10 @@ reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
 
 , the accuracy difference between data sets 1 and 6 was tested for significance
  with a paired (over the repetitions) and two-sided Wilcoxon test.
- It is significant with a p-value of 0.29%, and the accuracy difference between
- data 1 and 6 is an estimated 3.38 percent points, while its 95% confidence
- interval is [2.02; 6.08].
- This means that in breast_cancer_15, TSVM succeeded in increasing accuracy
+ It is significant with a p-value of 0.0029, and the accuracy difference
+ between data 1 and 6 is an estimated 3.38 percent points (0.0338), while
+ its 95% confidence interval is [2.02; 6.08] percent points.
+ This means that in breast_cancer_15, the TSVM succeeded in increasing accuracy
  slightly by learning from unlabeled samples.
 \end_layout
 
@@ -28160,6 +28194,7 @@ When training a TSVM only on the training data (but leaving away the validation
 0.575 (data not shown).
  This may show that semi-supervised training using a TSVM fails when not
  a sufficient number of unlabeled training samples is available.
+ Training the TSVM (supervisedly) using data set 1 did not fail.
 \end_layout
 
 \end_body
