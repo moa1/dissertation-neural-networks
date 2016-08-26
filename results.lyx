@@ -686,10 +686,52 @@ Two types of neuronal networks that lend themselves to semi-supervised training
  Vector Machines, namely the Transductive SVM was evaluated.
 \end_layout
 
+\begin_layout Paragraph
+Overview Over the Following Sections
+\end_layout
+
 \begin_layout Standard
-To diminish the possibility that the input to the algorithms does not contain
- the information required for prediction, four normalization methods were
- tried: Robust Multi-Chip Average (RMA) 
+First we compressed the 10,000 most variable genes of GSE25055 into only
+ 50 numbers and observed only little reconstruction error for most genes,
+ in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Unsupervised-Reconstruction-of-Expression-Values"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Then the performance benefit of neuronal networks using an increasing number
+ of labeled samples was assessed.
+ The benefit of using more labeled training samples on testing set accuracy
+ is well-established in machine learning, and was also observed in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:breast_cancer_06-and-breast_cancer_07"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:breast_cancer_08"
+
+\end_inset
+
+, we started to investigate the question whether adding unlabeled samples
+ to pre-training improves the testing set accuracy.
+ To diminish the possibility that the input to the algorithms does not contain
+ the information required for prediction, we measured prediction accuracy
+ after using four normalization methods: Robust Multi-Chip Average (RMA)
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BolstadSpeed2003"
@@ -714,6 +756,33 @@ key "JohnsonRabinovic2007"
 \end_layout
 
 \begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:breast_cancer_12"
+
+\end_inset
+
+, we used Deep Belief Networks instead of RBM and autoencoder used previously
+ for pre-training, and systematically compared SVM, TSVM, and supervised
+ and semi-supervised neuronal network variants.
+\end_layout
+
+\begin_layout Standard
+Finally, in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:breast_cancer_15"
+
+\end_inset
+
+, we drastically reduced the number of neuronal network parameters by reducing
+ the number of hidden nodes compared to the previous networks.
+ At the same time, we increased the number of input genes from the 500 most
+ variable genes to all 22,283 genes.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -733,8 +802,8 @@ One label was on a data set whose prediction reached an accuracy (of about
 
 \begin_layout Standard
 As we will see, only the very last attempts with artificial neuronal networks
- showed partially that adding unlabeled data in training leads to better
- classifiers.
+ showed partially that adding unlabeled data in training leads to slightly
+ better classifiers.
  This is also true for the established semi-supervised TSVM, which only
  showed improvement for the last attempts when adding unlabeled data to
  training.
@@ -2400,6 +2469,13 @@ Although the 10,000 numbers were compressed into only 50 numbers, the mean
 
 \begin_layout Section
 Prediction Quality From Labeled Samples
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:breast_cancer_06-and-breast_cancer_07"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -8004,8 +8080,7 @@ reference "fig:Accuracy-box-plots-of-SVM-on-breast_cancer_07"
 \end_inset
 
  shows there is the tendency that adding more samples to supervised learning
- yields better accuracy, using both the validation (plot not shown) and
- the testing set to predict on.
+ yields better accuracy.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8062,7 +8137,7 @@ name "fig:Accuracy-box-plots-of-TSVM-on-breast_cancer_07"
 
 \end_inset
 
-Accuracy box plots of SVM predicting the testing data set of breast_cancer_07.
+Accuracy box plots of TSVM predicting the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
  On the y-axis are the accuracies obtained on the testing data.
@@ -8110,7 +8185,7 @@ reference "fig:Accuracy-box-plots-of-breast_cancer_07_aa-ad"
 
 \end_inset
 
-show that all 4 neuronal networks perform better, the more labeled samples
+ show that all 4 neuronal networks perform better, the more labeled samples
  there are in training.
  In addition the variance of the accuracies decreases, the more labeled
  samples there are in training.
@@ -8231,7 +8306,8 @@ Supervised Classification without Pre-training (breast_cancer_07_ai - aj)
 \end_layout
 
 \begin_layout Standard
-Finally, we trained the neuronal networks with no pre-training at all.
+Finally, we trained the neuronal networks with no pre-training at all, but
+ using only back-propagation.
  The 
 \emph on
 deepnet
@@ -8966,7 +9042,8 @@ name "tab:deepnet-settings-for-breast_cancer_07_ai-aj"
 
 \end_inset
 
-Settings for the classifiers breast_cancer_07_ai - aj.
+Settings for the classifiers breast_cancer_07_ai - aj, which is trained
+ using backpropagation only (without pre-training).
  Each classifier is trained supervisedly on data set breast_cancer_07.
  The only difference between the two configurations is the use of 
 \begin_inset Formula $dropout$
@@ -9524,6 +9601,24 @@ n090_cv1.
 
 \begin_layout Section
 Different Normalizations (breast_cancer_08)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:breast_cancer_08"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+maybe TODO: evtl.
+ einen kurzen Literatur-Abschnitt zu Normalization methods machen.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9538,7 +9633,7 @@ To alleviate the effects of systematic errors in the raw data, we tried
  different normalizations in order to search for normalizations that are
  beneficial to classification accuracy.
  We assessed the effect of different normalizations on unsupervised pre-training
- and supervised classification accuracy.
+ using an autoencoder and supervised classification accuracy.
 \end_layout
 
 \begin_layout Subsection
@@ -10117,7 +10212,7 @@ name "tab:design-of-breast_cancer_08"
 The design of data set breast_cancer_08.
  There are 4 sub-data-sets that have a constant number of labeled training,
  labeled validation, and labeled testing samples.
- The unlabeled training samples have an increasing number of samples.
+ The unlabeled data sets have an increasing number of samples.
  The syntax 
 \begin_inset Quotes eld
 \end_inset
@@ -10224,7 +10319,7 @@ reference "tab:normalizations-for-breast_cancer_08"
 
 \end_inset
 
- shows a list of different normalizations:
+ shows a list of different normalizations.
 \end_layout
 
 \begin_layout Standard
@@ -10351,7 +10446,7 @@ rma,combat
 \begin_inset Text
 
 \begin_layout Plain Layout
-RMA, combat batch effect correction
+RMA, ComBat batch effect correction
 \end_layout
 
 \end_inset
@@ -10380,7 +10475,7 @@ mas5,combat
 \begin_inset Text
 
 \begin_layout Plain Layout
-MAS5, combat batch effect correction
+MAS5, ComBat batch effect correction
 \end_layout
 
 \end_inset
@@ -10427,7 +10522,7 @@ reference "tab:design-of-breast_cancer_08"
 
 .
  The normalization steps were done in this order: first RMA/MAS5 normalization
- and summarization (to default HG_U133A probe sets), then combat (if enabled),
+ and summarization (to default HG_U133A probe sets), then ComBat (if enabled),
  then splitting of the data matrices into the sub-data-sets according to
  table 
 \begin_inset CommandInset ref
@@ -10543,7 +10638,7 @@ data set
 \uwave off
 \noun off
 \color none
-1, mean
+1
 \end_layout
 
 \end_inset
@@ -10564,7 +10659,7 @@ data set
 \uwave off
 \noun off
 \color none
-2, mean
+2
 \end_layout
 
 \end_inset
@@ -10585,7 +10680,7 @@ data set
 \uwave off
 \noun off
 \color none
-3, mean
+3
 \end_layout
 
 \end_inset
@@ -10606,7 +10701,7 @@ data set
 \uwave off
 \noun off
 \color none
-4, mean
+4
 \end_layout
 
 \end_inset
@@ -10916,8 +11011,8 @@ name "tab:Reconstruction-error-for-breast_cancer_08"
 Reconstruction error for differently normalized data.
  In the rows are the different normalizations, and in the columns the data
  sets.
- Each cell in the table contains mean(and standard deviation in brackets)
- of the reconstruction error.
+ Each cell in the table contains the mean (and standard deviation in brackets)
+ of the reconstruction error over all repeats.
  The numbers are rounded to two significant digits.
 \end_layout
 
@@ -10975,21 +11070,21 @@ The standard deviation of the reconstruction errors across replicates (i.e.
 
 \end_deeper
 \begin_layout Itemize
-Additional COMBAT batch effect correction does not seem to alter the reconstruct
-ion error of RMA or MAS5 normalized data.
+Additional ComBat batch effect correction does not seem to improve the reconstru
+ction error of RMA or MAS5 normalized data.
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-There is no clear trend in the table above how COMBAT influences standard
+There is no clear trend in the table above how ComBat influences standard
  deviation (across replications) of reconstruction errors.
 \end_layout
 
 \end_deeper
 \begin_layout Standard
-Although it may seem beneficial to achieve a low reconstruction error as
- possible, we will see that a better (lower) reconstruction error does not
- necessarily translate into a better (higher) accuracy.
+Although it may seem beneficial to achieve reconstruction error as a low
+ as possible, we will see that a better (lower) reconstruction error does
+ not necessarily translate into a better (higher) accuracy.
 \end_layout
 
 \begin_layout Standard
@@ -11003,7 +11098,7 @@ Supervised Classification with Unsupervised Pre-trained Autoencoder
 \end_layout
 
 \begin_layout Standard
-The architecture of the classifier network was 500-1000-2.
+The architecture of the classifier network was 500-1000-1.
 \end_layout
 
 \begin_layout Standard
@@ -11046,7 +11141,7 @@ mas5-data.pbtxt
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/breast_cancer_08-accuracies-testing-bb_bu.pdf
-	lyxscale 12
+	lyxscale 50
 	width 34page%
 
 \end_inset
@@ -11062,7 +11157,7 @@ mas5-data.pbtxt
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/breast_cancer_08-accuracies-testing-by_cr.pdf
-	lyxscale 12
+	lyxscale 50
 	width 34page%
 
 \end_inset
@@ -11100,7 +11195,7 @@ mas5_combat-data.pbtxt
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/breast_cancer_08-accuracies-testing-ep_fi.pdf
-	lyxscale 12
+	lyxscale 50
 	width 34page%
 
 \end_inset
@@ -11116,7 +11211,7 @@ mas5_combat-data.pbtxt
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename images/breast_cancer_08-accuracies-testing-fm_gf.pdf
-	lyxscale 12
+	lyxscale 50
 	width 34page%
 
 \end_inset
@@ -11703,18 +11798,20 @@ It shows the following:
 
 \begin_layout Itemize
 RMA alone (i.e.
- without Combat pre-processing) out-performs all other tested combinations
+ without ComBat pre-processing) out-performs all other tested combinations
  of normalization method and pre-processing in all data sets tested.
 \end_layout
 
 \begin_layout Itemize
-RMA seems to perform consistently better than MAS5 (an exception is data
- set 3 with Combat pre-processing).
+Using ComBat as pre-processing leads to worse accuracies on the RMA-normalized
+ data, but improves accuracies when using MAS5 (except in data set 3).
 \end_layout
 
 \begin_layout Itemize
-Using Combat as pre-processing leads to worse accuracies on the RMA-normalized
- data, but improves accuracies when using MAS5 (except in data set 3).
+RMA seems to perform consistently better than MAS5 without log2 (an exceptions
+ is data set 3 with ComBat pre-processing), but MAS5 with log2 and ComBat
+ perform better than RMA with ComBat (due to RMA taking a performance hit
+ when used together with ComBat).
 \end_layout
 
 \begin_layout Itemize
@@ -11773,14 +11870,14 @@ reference "fig:accuracy-plots-for-breast_cancer_08"
  shows the accuracies box plots for the different normalizations tried.
  None of the plots show a clear increasing accuracy from data set 1 to data
  set 4.
- However, the silhouettes of the box-plots of 
+ However, the silhouettes of the box-plots of figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:accuracy-plots-for-breast_cancer_08"
 
 \end_inset
 
- show an increasing accuracy.
+ seem to show increasing accuracy.
  
 \begin_inset Quotes eld
 \end_inset
@@ -11792,17 +11889,17 @@ Silhouette
  means, for each data set, the interval from the accuracy of the repetition
  with lowest to the accuracy of the repetition with highest accuracy; or
  differently, the maximal outliers.
- In addition, the median of the accuracies of data set 1 is greater than
+ In addition, the median of the accuracies of data set 1 is smaller than
  the median of the accuracies of both data set 3 and 4, for every normalization.
  The fact that the median of the accuracies of data set 2 is not always
  greater than the median of the accuracies of data set 1 could be due to
  randomness in data subsampling when creating the 5 repetitions.
- Another reason could be that only 28 additional unlabeled samples (
+ Another reason could be that the 28 additional unlabeled samples (
 \begin_inset Formula $29-15=14$
 \end_inset
 
- label 0 samples, and 14 label 1 samples) are not enough to lead to a better
- pre-trained classifier.
+ label 0 samples, and 14 label 1 samples) provide little benefit to a pre-traine
+d classifier.
 \end_layout
 
 \begin_layout Section
@@ -11811,6 +11908,13 @@ Comparison of SVM, TSVM, FFN, DBN
 \end_inset
 
 (breast_cancer_12)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:breast_cancer_12"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -25499,6 +25603,13 @@ n accuracy.
 
 \begin_layout Section
 Less Network Parameters (breast_cancer_15)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:breast_cancer_15"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -25507,6 +25618,9 @@ Since breast_cancer_12 has a negative result in summary, because it cannot
  breast_cancer_15 we considered the differences in data sources and artificial
  neuronal network configurations between our and the ones in image recognition,
  where DBNs are successful.
+ We also increased the number of input genes from the 500 most variable
+ genes used as input genes in previous data sets to all 22,283 available
+ genes.
 \end_layout
 
 \begin_layout Subsection
@@ -26192,7 +26306,12 @@ s in the table are around 20 (for data set 6), both for
 
 .
  The architecture for artificial neuronal networks of breast_cancer_15 is
- 22283-10-10-10-2.
+ 22283-10-10-10-1.
+\end_layout
+
+\begin_layout Standard
+Another big change compared to previous data sets is the use of all 22,283
+ genes as input instead of only the 500 most variable genes.
 \end_layout
 
 \begin_layout Standard

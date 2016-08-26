@@ -199,9 +199,9 @@ Different Network Configurations
 
 \begin_layout Standard
 We tried several different approaches: we tried different pre-training algorithm
-s, autoencoders and Restricted Boltzmann Machines.
- There does not seem to be a difference in accuracy on the test set between
- these two pre-training algorithms (breast_cancer_04 and breast_cancer_06).
+s, autoencoders Restricted Boltzmann Machines, and Deep Belief Networks.
+ There seemed to be only little difference in test set accuracy between
+ these pre-training algorithms.
  However, some authors have reported that autoencoders are harder to train
 \begin_inset Note Note
 status open
@@ -249,6 +249,8 @@ Deep Networks
 \begin_layout Standard
 We also tried deeper networks with more than one hidden layer.
  Using these did not always improve accuracy.
+ However, using more than a few hidden layers was not systematically investigate
+d due to limits in computation time.
 \end_layout
 
 \begin_layout Paragraph
@@ -265,6 +267,19 @@ We always selected the iteration/model of the neuronal network that had
  We deem this justified because the network's state of parameters at a specific
  iteration is closest to its state of parameters at the closest iterations.
  The artificial neuronal networks change only little every iteration.
+\end_layout
+
+\begin_layout Paragraph
+Compared Methods: Neuronal Networks, SVM and TSVM
+\end_layout
+
+\begin_layout Standard
+We compared SVM and TSVM to the artificial neuronal networks.
+ TSVM is a semi-supervised version of the normal supervised SVM, and the
+ artificial neuronal networks were used with (semi-supervised) and without
+ (supervised) pre-training.
+ We compared the semi-supervised and the supervised versions of both neuronal
+ network and Support Vector Machine.
 \end_layout
 
 \begin_layout Paragraph
@@ -331,6 +346,14 @@ key "Zhu2005"
  Only the very last approaches tried (data set breast_cancer_15) showed
  a (partially) significant benefit between those networks trained using
  more unlabeled samples over those trained using less unlabeled samples.
+ There are three differences between these approaches and the ones before:
+ First, we used less hidden layer neurons.
+ Second, we used all 22,283 genes as input instead of only the 500 most
+ variable genes.
+ Third, we tested on GSE25055 instead of GSE25065.
+ The benefit using unlabeled samples is not due to the first point, since
+ TSVM was not influenced by this point, but also showed the benefit.
+ Whether the benefit is due to the second or third point remains to be seen.
 \end_layout
 
 \begin_layout Paragraph
@@ -467,23 +490,6 @@ measured
  training samples (each training sample is labeled like the measured samples
  used in the training sample generation).
  Use these generated training samples as input for a supervised DBN.
-\end_layout
-
-\begin_layout Paragraph
-Compared Methods: Neuronal Networks, SVM and TSVM
-\end_layout
-
-\begin_layout Standard
-We compared SVM and TSVM to the artificial neuronal networks.
- TSVM is a semi-supervised version of the normal supervised SVM, and the
- artificial neuronal networks were used with (semi-supervised) and without
- (supervised) pre-training.
- We compared the semi-supervised and the supervised versions of both neuronal
- network and Support Vector Machine.
- We found that neither TSVM nor semi-supervised neuronal network improved
- significantly in accuracy when adding unlabeled data.
- Two TSVM classifiers (trained using very little unlabeled samples) were
- significantly better than all trained Deep Belief Networks.
 \end_layout
 
 \begin_layout Paragraph
