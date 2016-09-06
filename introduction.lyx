@@ -236,6 +236,8 @@ The goal of this work is to contribute to such a predictor.
  The input to the predictor is the molecular expression data, i.e.
  measures of the number of RNA copies of specific genes present in the cancer
  tissue.
+ These gene expression measurements are ususally measured using microarrays
+ or next generation sequencing.
  An artificial neuronal network then processes this data.
  The prediction is output by the network in the form of a number between
  0 and 1.
@@ -270,6 +272,7 @@ artificial neuronal networks
 
  are mathematical constructs, designed to imitate the signal processing
  capabilities of real neurons, found in nearly all animals.
+ Neurons can be connected to form complex neuronal networks.
  Like their biological counterparts, artificial neuronal networks consist
  of simpler building blocks, the neurons.
 \end_layout
@@ -297,6 +300,14 @@ key "ByrneDafny1997"
 \end_inset
 
 .
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schematic-image-of-biological-neurons"
+
+\end_inset
+
+ gives a schematic overview of these elements.
 \end_layout
 
 \begin_layout Standard
@@ -320,6 +331,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schematic-image-of-biological-neurons"
+
+\end_inset
+
 Schematic image of three biological neurons.
  A: neuron body B: nucleus C: dendrite D: synapse E: axon projecting from
  a distant neuron.
@@ -345,6 +362,14 @@ In most real neurons, the signal transmission and processing is facilitated
  The released neurotransmitters are detected by receptors and cause ion
  channels in the adjacent dendrites of other neurons to open, which changes
  their membrane potential.
+ See figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-of-chemical-synapse"
+
+\end_inset
+
+ for a depiction of axon, synaptic cleft, and dendrite.
 \end_layout
 
 \begin_layout Standard
@@ -368,6 +393,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schema-of-chemical-synapse"
+
+\end_inset
+
 Schema of a chemical synapse.
  The signal is transmitted from the axon terminal (left) to the dendrite
  (right).
@@ -930,21 +961,15 @@ where
 \end_inset
 
 .
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Hier eine Figure mit dem Plot von 
-\begin_inset Formula $\sigma(x)$
-\end_inset
-
- einfügen.
-\end_layout
+ See figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:sigmoid-function"
 
 \end_inset
 
-
+ for a plot of the sigmoid function and a schema of an artificial neuronal
+ network.
 \begin_inset Float figure
 wide false
 sideways false
@@ -1389,6 +1414,15 @@ semi-supervised learning
  have the same label.
  Another assumption is that samples distant from each other probably have
  different labels.
+ An example of a possible improvement of a semi-supervised classification
+ of a supervised classification is given in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Illustration-of-semi-supervised-learning"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1680,14 +1714,14 @@ key "RumelhartWilliams1988"
  particular input pattern that was fed into the network.
  The error for each node is then back-propagated in reverse input direction
  to the hidden layers and finally to the input layer.
- The purpose of error back-propagation is to be able to adjust the weights
- of the artificial neuronal network following the gradient, such that when
- the current input pattern pair is presented to the network, its computed
- output pattern gets closer and closer to the desired output pattern.
- However, back-propagation was not able to train networks with more than
- one or two hidden layers, because it got stuck in poor local energy optima.
- Having artificial neuronal networks with more than one hidden layer is
- desirable from a computational power standpoint.
+ See figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Data-flow-in-back-propagation"
+
+\end_inset
+
+ for an illustration of the two data flow directions.
 \end_layout
 
 \begin_layout Standard
@@ -1711,6 +1745,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Data-flow-in-back-propagation"
+
+\end_inset
+
 Data flow in training a neuronal network with three layers using back-propagatio
 n.
  The input layer is at the bottom, the hidden layer in the middle, and the
@@ -1729,6 +1769,17 @@ n.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The purpose of error back-propagation is to be able to adjust the weights
+ of the artificial neuronal network following the gradient, such that when
+ the current input pattern pair is presented to the network, its computed
+ output pattern gets closer and closer to the desired output pattern.
+ However, back-propagation was not able to train networks with more than
+ one or two hidden layers, because it got stuck in poor local energy optima.
+ Having artificial neuronal networks with more than one hidden layer is
+ desirable from a computational power standpoint.
 \end_layout
 
 \begin_layout Subsection
@@ -2325,6 +2376,40 @@ name "tab:ILSVRC-Test-set-accuracies"
 
 Test set accuracies and techniques of winning contestants in the ImageNet
  Large Scale Visual Recognition Challenge from 2010-2014.
+ Column 
+\begin_inset Quotes eld
+\end_inset
+
+Year
+\begin_inset Quotes erd
+\end_inset
+
+ is the year of the contest, 
+\begin_inset Quotes eld
+\end_inset
+
+Winner
+\begin_inset Quotes erd
+\end_inset
+
+ the team name of the winner of this year, 
+\begin_inset Quotes eld
+\end_inset
+
+Accuracy
+\begin_inset Quotes erd
+\end_inset
+
+ the test set accuracy of the winner's submission, and 
+\begin_inset Quotes eld
+\end_inset
+
+Technique
+\begin_inset Quotes erd
+\end_inset
+
+ a summary of the winner's algorithm technique.
+ SVM, support vector machine.
 \end_layout
 
 \end_inset
@@ -2493,6 +2578,9 @@ key "ChenXie2015"
  data sets.
  For each sample, the same subset of 943 "landmark" genes was chosen and
  9,520 other genes were predicted from the landmark genes.
+ This is in contrast to our work, because we classified breast cancer samples
+ using gene expression levels, while they did regression of gene expression
+ levels using other gene expression levels.
 \end_layout
 
 \begin_layout Standard
@@ -2500,10 +2588,7 @@ Their artificial neuronal network architecture had between 1 and 3 hidden
  layers with either 3,000, 6,000, or 9,000 nodes.
  It had 943 input expression values (one for each landmark gene), and a
  total of 9,520 output expression values (one for each gene to be predicted).
-\end_layout
-
-\begin_layout Standard
-In addition to the (non-linear) neuronal network, they tried linear regression
+ In addition to the (non-linear) neuronal network, they tried linear regression
  with no regularization, L1-, and L2-regularization.
 \end_layout
 
@@ -2576,8 +2661,21 @@ k-Nearest Neighbor performed worst, with an average prediction error of
  The neuronal network-based average prediction errors were between 0.3421
  and 0.3204, with the network having 3 hidden layers of size 9000, and 10%
  dropout rate performing best.
- Because the input expression values were between 4 and 15, an average predictio
-n error of 0.3204 implies an average error of about 3% on the GEO dataset.
+ (
+\emph on
+Dropout 
+\emph default
+is a regularization technique for neuronal networks, explained in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Dropout"
+
+\end_inset
+
+.) Because the input expression values were between 4 and 15, an average
+ prediction error of 0.3204 implies an average error of about 3% on the GEO
+ dataset.
 \end_layout
 
 \begin_layout Standard
