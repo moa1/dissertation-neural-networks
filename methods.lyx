@@ -255,7 +255,11 @@ discriminative model
 \end_layout
 
 \begin_layout Standard
-In a discriminative model, the possible values of the parameters (weights)
+Restricted Boltzmann Machines and Deep Belief Networks are both generative
+ models.
+ On the other hand, a neuronal network trained only with back-propagation
+ is a discriminative model.
+ In a discriminative model, the possible values of the parameters (weights)
  are constrained by the information it takes to specify the class label
  of a training sample.
  In a generative model, however, the parameters need to encode the whole
@@ -305,10 +309,7 @@ generate samples
 \end_inset
 
 ) to easily find out what the model has learned.
-\end_layout
-
-\begin_layout Standard
-Due to their greater generality, generative models have the disadvantage
+ Due to their greater generality, generative models have the disadvantage
  that they are slower than discriminative models.
  As 
 \begin_inset CommandInset citation
@@ -322,13 +323,9 @@ key "HintonTeh2006"
 \end_layout
 
 \begin_layout Standard
-Restricted Boltzmann Machines and Deep Belief Networks are both generative
- models.
- On the other hand, a neuronal network trained only with back-propagation
- is a discriminative model.
- These neuronal networks will be discussed later.
- Graphical Models will be needed for the introduction of Restricted Boltzmann
- Machines and Deep Belief Networks, and will be introduced next.
+The neuronal networks will be discussed later.
+ Graphical Models will be needed for Restricted Boltzmann Machines and Deep
+ Belief Networks, and will be introduced next.
 \end_layout
 
 \begin_layout Section
@@ -1424,6 +1421,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-an-Undirected-Graph"
+
+\end_inset
+
 Example of an Undirected Graph encoding the following conditional independencies
 : the node pairs (N1,N4), (N1,N5), (N2,N4), (N2,N5),(N4,N5) are conditionally
  independent given node N3.
@@ -1508,7 +1511,14 @@ For example, if there are the three cliques
 \begin_inset Formula $\mathbf{C_{3}}=\{N_{3},N_{5}\}$
 \end_inset
 
-, then the joint probability distribution 
+ (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-an-Undirected-Graph"
+
+\end_inset
+
+), then the joint probability distribution 
 \begin_inset Formula $P$
 \end_inset
 
@@ -5558,9 +5568,9 @@ Artificial Neuronal Networks
 Here we will introduce artificial neuronal networks that have been developed
  as models of biological neuronal networks by various people since about
  the middle of the last century.
- The introduced artificial neuronal networks all have something to do with
- Deep Belief Networks and are Hopfield networks, Multilayer Perceptrons,
- and (Restricted) Boltzmann Machines.
+ The artificial neuronal networks introduced here are related with Deep
+ Belief Networks, namely Hopfield networks, Multilayer Perceptrons, and
+ (Restricted) Boltzmann Machines.
 \end_layout
 
 \begin_layout Paragraph
@@ -5719,6 +5729,14 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_inset
 
 .
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-a-Hopfield-Network"
+
+\end_inset
+
+ shows an example of the structure of a Hopfield Network.
 \end_layout
 
 \begin_layout Standard
@@ -5742,6 +5760,12 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-a-Hopfield-Network"
+
+\end_inset
+
 Example of a Hopfield Network.
  The circles are the nodes; the arrows are the (directed) connections.
 \end_layout
