@@ -133,7 +133,8 @@ The goal of personalized medicine is to provide custom-tailored medicine
 \end_layout
 
 \begin_layout Standard
-Therefore we wanted to find a data set that had something to do with drug
+In order to evaluate the usefulness of deep learning in the context of personali
+zed medicine, we searched for a data set that had something to do with drug
  sensitivity and resistance.
  The 
 \begin_inset Quotes eld
@@ -190,13 +191,58 @@ key "HatzisSymmans2011"
 \end_inset
 
 .
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:GSE25055-GSE25065-sample-number"
+
+\end_inset
+
+ shows the number of samples of each label in both data sets.
  The authors used GSE25055 to generate a classifier for the prognosis of
  breast cancer patients that received reductive surgery followed by taxane-anthr
 acycline chemotherapy.
  All patients had ERBB2 (also called HER2 or HER2/neu)-negative breast cancer.
- The tissue extracted in reductive surgery was measured on Affymetrix HG-U133A
- microarrays.
- After a mean of 3 years, the patients were labeled as either showing 
+ From each patient tissue was extracted in reductive surgery and measured
+ for genome-wide gene expression on Affymetrix HG-U133A microarrays.
+ 
+\end_layout
+
+\begin_layout Standard
+After a mean of 3 years, the patients were labeled as either showing 
+\emph on
+pCR
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+pCR
+\end_layout
+
+\end_inset
+
+ or 
+\emph on
+RD
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+RD
+\end_layout
+
+\end_inset
+
+ to chemotherapy.
+ 
+\emph on
+pCR 
+\emph default
+is an abbreviation of 
 \emph on
 pathologic complete response
 \emph default
@@ -210,26 +256,29 @@ pathologic complete response
 
 \end_inset
 
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-pCR
-\end_layout
-
-\end_inset
-
- (
+ and means that there was no sign of a remaining breast cancer.
+ In the following it will be labeled as 
 \begin_inset Quotes eld
 \end_inset
 
-pCR
+class 1
 \begin_inset Quotes erd
 \end_inset
 
-; class 1; label 1; there was no sign of a remaining breast cancer) to chemother
-apy or 
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+label 1
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\emph on
+RD
+\emph default
+ abbreviates 
 \emph on
 residual disease
 \emph default
@@ -243,28 +292,44 @@ residual disease
 
 \end_inset
 
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-RD
-\end_layout
-
-\end_inset
-
- (
+ and means there was still cancerous tissue.
+ It will be termed 
 \begin_inset Quotes eld
 \end_inset
 
-RD
+class 0
 \begin_inset Quotes erd
 \end_inset
 
-; class 0; label 0; there was still cancerous tissue).
- The classifier was then tested on an independently measured data set, GSE25065.
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+label 0
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HatzisSymmans2011"
+
+\end_inset
+
+ then tested their classifier on an independently measured data set, GSE25065.
  The input to the prediction was the expression data and the desired output
- a label of either RD or pCR.
+ a label of either 
+\emph on
+RD 
+\emph default
+or 
+\emph on
+pCR
+\emph default
+.
  
 \begin_inset Note Note
 status open
@@ -296,56 +361,6 @@ status open
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-GSE25055
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sum$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -359,7 +374,7 @@ GSE25055
 \begin_inset Text
 
 \begin_layout Plain Layout
-label 0
+label 0, RD
 \end_layout
 
 \end_inset
@@ -368,7 +383,7 @@ label 0
 \begin_inset Text
 
 \begin_layout Plain Layout
-label 1
+label 1, pCR
 \end_layout
 
 \end_inset
@@ -382,10 +397,13 @@ label NA
 
 \end_inset
 </cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\sum$
+\end_inset
+
 
 \end_layout
 
@@ -393,16 +411,16 @@ label NA
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-number of samples
+GSE25055
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -411,7 +429,7 @@ number of samples
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -420,7 +438,7 @@ number of samples
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -429,7 +447,7 @@ number of samples
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -439,126 +457,12 @@ number of samples
 \end_inset
 </cell>
 </row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="5">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 GSE25065
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="3" alignment="center" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $\sum$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-label 0
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-label 1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-label NA
-\end_layout
-
-\end_inset
-</cell>
-<cell multirow="4" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-number of samples
 \end_layout
 
 \end_inset
@@ -611,12 +515,18 @@ number of samples
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Overview over GEO datasets GSE25055 and GSE25065.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:GSE25055-GSE25065-sample-number"
+
+\end_inset
+
+Number of samples in GEO datasets GSE25055 and GSE25065.
  
 \begin_inset Quotes eld
 \end_inset
 
-label 0
+label 0, RD
 \begin_inset Quotes erd
 \end_inset
 
@@ -632,7 +542,7 @@ residual disease
 \begin_inset Quotes eld
 \end_inset
 
-label 1
+label 1, pCR
 \begin_inset Quotes erd
 \end_inset
 
@@ -645,6 +555,16 @@ pathologic complete response
 \end_inset
 
 .
+ 
+\begin_inset Quotes eld
+\end_inset
+
+label NA
+\begin_inset Quotes erd
+\end_inset
+
+ means that microarray data for the patient is available, but not his/her
+ disease status.
 \end_layout
 
 \end_inset
@@ -655,18 +575,6 @@ pathologic complete response
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-More sophisticated prediction schemes can be imagined so that the prediction
- made produces more than one number: For example, in addition to the severity
- of the disease after therapy (a number between 0 and 1), the number of
- metastases (a natural number) could be trained and predicted.
- Such a prediction is not made in this work, because only little clinical
- data was recorded in the used data set.
- However, in the neuronal network it would be straightforward to predict
- such two numbers by adding an additional (properly scaled) number to the
- output layer in the training set.
 \end_layout
 
 \begin_layout Subsection
@@ -674,7 +582,16 @@ Goal of this Work
 \end_layout
 
 \begin_layout Standard
-The goals of this work were: 
+The context of this work is the use of classifiers on high-dimensional data
+ as supporting tools for treatment decisions.
+ Two types of neuronal networks that lend themselves to semi-supervised
+ training were used: autoencoders and deep belief networks.
+ Parallel to these, the performance of a semi-supervised version of Support
+ Vector Machines, namely the Transductive SVM was evaluated.
+\end_layout
+
+\begin_layout Standard
+The specific goals were:
 \end_layout
 
 \begin_layout Enumerate
@@ -690,13 +607,6 @@ to assess performance of the classifier on an independently measured data
 \begin_layout Enumerate
 to evaluate whether artificial neuronal networks can compete with established
  classification algorithms like SVMs.
-\end_layout
-
-\begin_layout Standard
-Two types of neuronal networks that lend themselves to semi-supervised training
- were used: autoencoders and deep belief networks.
- Parallel to these, the performance of a semi-supervised version of Support
- Vector Machines, namely the Transductive SVM was evaluated.
 \end_layout
 
 \begin_layout Paragraph
@@ -850,200 +760,68 @@ key "Deepnet2014"
  faster training times.
  However, because graphics cards have to process large data, their RAM is
  more expensive than normal RAM for PCs.
- The graphics cards in the Regensburg Athene cluster computers have 4 GB
- of RAM installed.
- Because 
+ The graphics cards tried have 4 GB of RAM installed.
+ 
 \emph on
 deepnet
 \emph default
- loads all data sets at the beginning of the computation onto the graphics
- card, this means that the data sets may not be larger than 4 GB.
- However, there is another matrix library (called eigenmat and with the
- same interface as cudamat), which runs on the normal floating-point unit
- of a normal CPU.
- There was a bug in this library when run on 64-bit CPUs, which we fixed
+ loads all data sets onto the graphics card at the beginning of the computation.
+ In addition, the parameter matrices have to be held in memory.
+ 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: upload git repository with fixes to github
-\end_layout
+TODO: estimate the memory usage of deepnet, or start a run and see how much
+ it needs with 
+\begin_inset Quotes eld
+\end_inset
 
+top
+\begin_inset Quotes erd
 \end_inset
 
 .
- Most of the data sets were trained on 
-\emph on
-rhskl11
-\emph default
- that has 256GB of RAM, which was more than enough for the data sets tested.
+\end_layout
+
+\end_inset
+
+However, there is another matrix library (called eigenmat and with the same
+ interface as cudamat), which runs on the normal floating-point unit of
+ a normal CPU.
+ Most of the data sets were trained on a computer that has 256GB of RAM
+ and 32 cores, which was more than enough for the data sets tested.
+ There was a bug in this library when run on 64-bit CPUs, which we fixed.
+ The deepnet version used can be downloaded from 
+\begin_inset CommandInset href
+LatexCommand href
+target "https://github.com/moa1/deepnet/tree/nnet"
+
+\end_inset
+
+, revision 963C.
 \end_layout
 
 \begin_layout Subsection
-How Unlabeled Data Was Used in Training
-\end_layout
-
-\begin_layout Subsubsection
-How Unlabeled Data was Used in Training Autoencoders
+Nomenclature of Data Sets and Training Runs
 \end_layout
 
 \begin_layout Standard
-Because autoencoders
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-autoencoder
-\end_layout
-
-\end_inset
-
- are composed of an encoder
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-encoder
-\end_layout
-
-\end_inset
-
- and a decoder
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-decoder
-\end_layout
-
-\end_inset
-
- and the encoder tries to compress the input data and the decoder tries
- to reconstruct the input from its compressed form, training them is unsupervise
-d.
- As a general rule only the samples designated as 
+The data sets created all have a prefix of 
 \begin_inset Quotes eld
 \end_inset
 
-unlabeled
+breast_cancer_
 \begin_inset Quotes erd
 \end_inset
 
- were used in training the unsupervised part of an algorithm.
+, followed by a consecutive number.
+ For example, breast_cancer_04 is the fourth data set created.
 \end_layout
 
 \begin_layout Standard
-The decoder network of the trained autoencoder was then thrown away, so
- that only the encoder remained.
- Classification was done on the compressed representation of the input.
- The classifier network was built on top of the encoder, and the compressed
- output layer of the encoder was used as the input layer of the classifier.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/progress_report_201411-unsupervised-to-supervised.eps
-	width 35page%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Example scheme showing how the supervised network is trained on top of a
- pre-trained unsupervised network.
- The network receives input from the bottom, and the resulting label is
- read off at the top.
- The unsupervised network can be more than 2 layers deep.
- It is trained first during pre-training.
- Then the supervised network is appended onto the top and trained together
- with the unsupervised network.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The weights of the classifier were initialized randomly, and standard back-propa
-gation was used to train the whole network to classify samples.
- This means that the encoder can be modified by back-propagation training,
- but pre-training with the autoencoder initializes it to a configuration
- that 
-\begin_inset Quotes eld
-\end_inset
-
-knows
-\begin_inset Quotes erd
-\end_inset
-
- about the unlabeled samples.
- The learning rate of the second training run (
-\emph on
-fine-tuning
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-fine-tuning
-\end_layout
-
-\end_inset
-
-) should be small enough not to diverge from the unlabeled training configuratio
-n in too large steps (per iteration).
-\end_layout
-
-\begin_layout Subsubsection
-How Unlabeled Data was Used When Pre-training a Restricted Boltzmann Machine
- and Fine-tuning Using Back-propagation
-\end_layout
-
-\begin_layout Standard
-When using the unsupervised Restricted Boltzmann Machine to find the approximate
- weights of a neuronal network, the unlabeled data were used to train the
- Restricted Boltzmann Machine.
- The resulting neuronal network was then extended with the network layer
- for supervised classification, and the complete network was trained using
- (supervised) back-propagation on the labeled data.
-\end_layout
-
-\begin_layout Subsubsection
-How Unlabeled Data was Used in Training Deep Belief Networks
-\end_layout
-
-\begin_layout Standard
-As was said in 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Deep-Belief-Network"
-
-\end_inset
-
-, Deep Belief Networks are an unsupervised algorithm and thus were trained
- using unlabeled data.
- As with Restricted Boltzmann Machines, the resulting network was then extended
- with the classifier layer, and the complete network was fine-tuned using
- back-propagation on the labeled data.
+A training run on a data set is indicated by appending two letters to the
+ name of the data set, for example breast_cancer_04_aa.
 \end_layout
 
 \begin_layout Subsection
@@ -1106,16 +884,19 @@ stat classifier_1452806285; stat classifier_LAST
 
 \end_inset
 
-Training 100,000 (unsupervised) DBN iterations of the first hidden layer
- of classification run breast_cancer_15_aa, which consists of a 22283-10-10-10-1
- network, took 2 hours on rhskl11.
+For example, training 100,000 (unsupervised) DBN iterations of the first
+ hidden layer of classification run breast_cancer_15_aa, which consists
+ of a 22283-10-10-10-1 network, took 2 hours on 1 core of the aforementioned
+ 32 cores computer.
  The second and third hidden layer took about 15 minutes.
  Computing 1,000,000 (supervised) back-propagation iterations of the same
  run took a little less than 6 hours.
- The parameters that the running time mainly depends on are the network
- architecture, the learning rate, and number of training iterations.
+ The running time mainly depends on the network architecture, the learning
+ rate, and number of training iterations.
  Classifying a sample took about as long as 1 supervised training iteration
  and thus was almost instant.
+ (Note that running time here does not mean time until convergence, which
+ depends on the specific training samples.)
 \end_layout
 
 \begin_layout Standard
@@ -1279,7 +1060,7 @@ Example of supervised model selection.
  The x-axis is the training iteration, the y-axis the accuracy.
  The turquoise, green, and black circle clouds are the raw accuracies on
  the training, validation, and test set, respectively.
- They are in discrete steps, because there are few samples.
+ They are in discrete steps, because there are only 20 samples.
  The thin lines overlayed on the point clouds are the 
 \emph on
 loess 
@@ -2154,7 +1935,7 @@ Data Set Design of breast_cancer_0
 
 \begin_layout Standard
 Both data sets were split randomly into training and test set, regardless
- of label, according to the scheme shown in table 
+ of label, according to table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:training-and-testing-set-of-breast_cancer_0"
@@ -2162,6 +1943,8 @@ reference "tab:training-and-testing-set-of-breast_cancer_0"
 \end_inset
 
 .
+ The test set here served the purpose of measuring reconstruction error
+ on unseen samples.
  The data set was named breast_cancer_0.
 \end_layout
 
@@ -2375,7 +2158,7 @@ d.
 \end_layout
 
 \begin_layout Subsection
-RBM Parameters and Its Reconstruction Error
+Reconstruction Error
 \end_layout
 
 \begin_layout Standard
@@ -2425,7 +2208,7 @@ status open
 \begin_inset Graphics
 	filename images/summer_school_2014-reconstruction-error-heatmap.png
 	lyxscale 50
-	width 30page%
+	width 30col%
 
 \end_inset
 
@@ -2441,7 +2224,23 @@ status open
 \begin_inset Graphics
 	filename images/summer_school_2014-reconstruction-error-boxplot.png
 	lyxscale 50
-	width 30page%
+	width 30col%
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/summer_school_2014-reconstruction-error-histogram.png
+	lyxscale 50
+	width 30col%
 
 \end_inset
 
@@ -2452,13 +2251,21 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Reconstruction-error-breast_cancer_0"
+
+\end_inset
+
 Left: True (x-axis) versus reconstructed (y-axis) expression values of data
  set breast_cancer_0.
  The heatmap shows pixels from red over yellow to white.
  A pixel in red means zero genes and in white means many genes that have
  the pixel's true and reconstructed expression value.
- Right: Boxplot of reconstruction errors of the 10,000 most variable genes.
- Most genes have a very low reconstruction error.
+ Middle: Boxplot of reconstruction errors of the 10,000 most variable genes.
+ Right: Histogram of reconstruction errors of the 10,000 most variable genes.
+ Most genes have a low reconstruction error.
+ Displayed are the mean reconstruction error over all test samples.
 \end_layout
 
 \end_inset
@@ -2473,7 +2280,14 @@ Left: True (x-axis) versus reconstructed (y-axis) expression values of data
 
 \begin_layout Standard
 Although the 10,000 numbers were compressed into only 50 numbers, the mean
- reconstruction error of the 10,000 genes was only 0.563.
+ reconstruction error of the 10,000 genes was only 0.563 (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Reconstruction-error-breast_cancer_0"
+
+\end_inset
+
+ middle).
  Considering that the possible range (log2-intensities) of microarray values
  is in [0;16], this is equivalent to a relative error of 3.5%.
  This demonstrated that RBMs are able to reduce dimensionality of an expression
@@ -2526,6 +2340,7 @@ reference "tab:unlabeled-data-sets-of-breast_cancer_06"
 \end_inset
 
 .
+ Validation samples were defined in case they were needed.
  Samples from GSE17705 were included to give unsupervised training access
  to more samples.
  (In later experiments, GSE17705 was left out to increase the probability

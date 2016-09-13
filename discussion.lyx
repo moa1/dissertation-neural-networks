@@ -410,6 +410,22 @@ The difficulty of the learning task seems higher than that of recognizing
 \end_layout
 
 \begin_layout Paragraph
+Outlook: More output
+\end_layout
+
+\begin_layout Standard
+More sophisticated prediction schemes can be imagined so that the prediction
+ made produces more than one number: For example, in addition to the severity
+ of the disease after therapy (a number between 0 and 1), the number of
+ metastases (a natural number) could be trained and predicted.
+ Such a prediction is not made in this work, because only little clinical
+ data was recorded in GSE25055 and GSE25065.
+ However, in the neuronal network it would be straightforward to predict
+ such two numbers by adding an additional (properly scaled) number to the
+ output layer in the training set.
+\end_layout
+
+\begin_layout Paragraph
 Outlook: Multiplying of Training Samples
 \end_layout
 

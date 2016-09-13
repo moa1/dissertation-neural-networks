@@ -9035,5 +9035,185 @@ TODO: HIER WEITERMACHEN.
 
 \end_layout
 
+\begin_layout Subsection
+How Unlabeled Data Was Used in Training
+\end_layout
+
+\begin_layout Subsubsection
+How Unlabeled Data was Used in Training Autoencoders
+\end_layout
+
+\begin_layout Standard
+Because autoencoders
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+autoencoder
+\end_layout
+
+\end_inset
+
+ are composed of an encoder
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+encoder
+\end_layout
+
+\end_inset
+
+ and a decoder
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+decoder
+\end_layout
+
+\end_inset
+
+ and the encoder tries to compress the input data and the decoder tries
+ to reconstruct the input from its compressed form, training them is unsupervise
+d.
+ As a general rule only the samples designated as 
+\begin_inset Quotes eld
+\end_inset
+
+unlabeled
+\begin_inset Quotes erd
+\end_inset
+
+ were used in training the unsupervised part of an algorithm.
+\end_layout
+
+\begin_layout Standard
+The decoder network of the trained autoencoder was then thrown away, so
+ that only the encoder remained.
+ Classification was done on the compressed representation of the input.
+ The classifier network was built on top of the encoder (see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:supervised-network-on-top-of-unsupervised"
+
+\end_inset
+
+), and the compressed output layer of the encoder was used as the input
+ layer of the classifier.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/progress_report_201411-unsupervised-to-supervised.eps
+	width 35page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:supervised-network-on-top-of-unsupervised"
+
+\end_inset
+
+Example scheme showing how the supervised network is trained on top of a
+ pre-trained unsupervised network.
+ The network receives input from the bottom, and the resulting label is
+ read off at the top.
+ The unsupervised network can be more than 2 layers deep.
+ It is trained first during pre-training.
+ Then the supervised network is appended onto the top and trained together
+ with the unsupervised network.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The weights of the classifier were initialized randomly, and standard back-propa
+gation was used to train the whole network to classify samples.
+ This means that the encoder can be modified by back-propagation training,
+ but pre-training with the autoencoder initializes it to a configuration
+ that 
+\begin_inset Quotes eld
+\end_inset
+
+knows
+\begin_inset Quotes erd
+\end_inset
+
+ about the unlabeled samples.
+ The learning rate of the second training run (
+\emph on
+fine-tuning
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+fine-tuning
+\end_layout
+
+\end_inset
+
+) should be small enough not to diverge from the unlabeled training configuratio
+n in too large steps (per iteration).
+\end_layout
+
+\begin_layout Subsubsection
+How Unlabeled Data was Used When Pre-training a Restricted Boltzmann Machine
+ and Fine-tuning Using Back-propagation
+\end_layout
+
+\begin_layout Standard
+When using the unsupervised Restricted Boltzmann Machine to find the approximate
+ weights of a neuronal network, the unlabeled data were used to train the
+ Restricted Boltzmann Machine.
+ The resulting neuronal network was then extended with the network layer
+ for supervised classification, and the complete network was trained using
+ (supervised) back-propagation on the labeled data.
+\end_layout
+
+\begin_layout Subsubsection
+How Unlabeled Data was Used in Training Deep Belief Networks
+\end_layout
+
+\begin_layout Standard
+As was said in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Deep-Belief-Network"
+
+\end_inset
+
+, Deep Belief Networks are an unsupervised algorithm and thus were trained
+ using unlabeled data.
+ As with Restricted Boltzmann Machines, the resulting network was then extended
+ with the classifier layer, and the complete network was fine-tuned using
+ back-propagation on the labeled data.
+\end_layout
+
 \end_body
 \end_document
