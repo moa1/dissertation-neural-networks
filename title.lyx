@@ -1,0 +1,434 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+% how to get rid of overfull hboxes:
+\tolerance=1600
+%\sloppy
+%\setlength\emergencystretch{2em}
+\end_preamble
+\use_default_options true
+\begin_modules
+fix-cm
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing onehalf
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 23.25mm
+\topmargin 24.75mm
+\rightmargin 31.5mm
+\bottommargin 49.5mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle headings
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\begin_inset VSpace -1.4cm
+\end_inset
+
+
+\series bold
+Semi-supervised Classification
+\begin_inset Newline newline
+\end_inset
+
+of Breast Cancer Expression Profiles
+\begin_inset Newline newline
+\end_inset
+
+Using Neuronal Networks
+\end_layout
+
+\begin_layout Date
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -1.5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename images/sigillum.png
+	lyxscale 50
+	width 25page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 1.5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\shape smallcaps
+\size large
+Dissertation zur Erlangung des Doktorgrades
+\begin_inset Newline newline
+\end_inset
+
+ der Naturwissenschaften (Dr.
+ rer.
+ nat.)
+\begin_inset Newline newline
+\end_inset
+
+ der Fakultät für Biologie und Vorklinische Medizin 
+\begin_inset Newline newline
+\end_inset
+
+der Universität Regensburg
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 1.2cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+vorgelegt von
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\shape smallcaps
+\size larger
+Anton Georg Moll
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+aus Starnberg
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 0.5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size large
+im Jahr 2016
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 2cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent{
+\end_layout
+
+\end_inset
+
+Promotionsgesuch eingereicht am: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace 1cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+noindent{
+\end_layout
+
+\end_inset
+
+Die Arbeit wurde angeleitet von:
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Prof.
+ Dr.
+ Rainer Spang
+\end_layout
+
+\begin_layout Enumerate
+Prof.
+ Dr.
+ Rainer Merkl
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 12cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Anton Moll
+\begin_inset space \hfill{}
+\end_inset
+
+Regensburg
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Acknowledgements
+\end_layout
+
+\begin_layout Standard
+This work was carried out in the department for 
+\emph on
+Statistical Bioinformatics
+\emph default
+ of the Institute of Functional Genomics at the University of Regensburg.
+ I am grateful to Rainer Spang for the opportunity to work in his group.
+\end_layout
+
+\begin_layout Standard
+I would like to thank my two supervisors 
+\emph on
+Rainer Spang 
+\emph default
+and 
+\emph on
+Rainer Merkl 
+\emph default
+for their constant advice.
+ Especially I would like to thank my advisor 
+\emph on
+Claudio Lottaz 
+\emph default
+for the scientific discussions and input he gave me during the past years.
+\end_layout
+
+\begin_layout Standard
+I thank all past and present colleagues for the pleasant working athmosphere
+ and fruitful scientific and non-scientific discussions.
+ In particular I would like to thank my past and present office mates 
+\emph on
+Christian H.,
+\emph default
+ 
+\emph on
+Farhad
+\emph default
+, 
+\emph on
+Frank
+\emph default
+, 
+\emph on
+Franziska
+\emph default
+, 
+\emph on
+Julia
+\emph default
+, 
+\emph on
+Nicholas
+\emph default
+, 
+\emph on
+Martin, 
+\emph default
+and 
+\emph on
+Qian.
+\end_layout
+
+\begin_layout Standard
+Special thanks go to my sister 
+\emph on
+Susanne
+\emph default
+ for reading and commenting on a draft of this thesis.
+ I would also like to thank my whole family for their support.
+\end_layout
+
+\end_body
+\end_document

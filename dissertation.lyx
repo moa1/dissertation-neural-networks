@@ -61,9 +61,9 @@ fix-cm
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 20.25mm
+\leftmargin 23.25mm
 \topmargin 24.75mm
-\rightmargin 34.5mm
+\rightmargin 31.5mm
 \bottommargin 49.5mm
 \secnumdepth 3
 \tocdepth 3
@@ -82,18 +82,117 @@ fix-cm
 
 \begin_body
 
-\begin_layout Title
-Semi-supervised Classification of Breast Cancer Expression Profiles Using
- Neuronal Networks
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand input
+filename "title.lyx"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Abstract
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+In classification tasks of biological data, there are usually fewer labeled
+ than unlabeled samples because labeling samples is costly or time-consuming.
+ In addition, labeled data sets can be re-used in different contexts as
+ additional unlabeled data sets.
+ For example, when searching the Gene Expression Omnibus (GEO) repository
+ for microarray data of drug sensitivity and resistance experiments, the
+ largest one has 2,522 samples, but the median has only 12 samples.
+\end_layout
+
+\begin_layout Standard
+In machine learning in general, utilizing unlabeled data in classification
+ tasks is called semi-supervised learning.
+ Artificial neuronal networks can be used to pre-train on unlabeled data
+ before fine-tuning via back-propagation with labeled data.
+ Such artificial neuronal networks enabling deep learning have gained attention
+ since around 2010, since when they have been among the best-performing
+ algorithms in visual object recognition.
+\end_layout
+
+\begin_layout Standard
+Here we compared the three aforementioned artificial neuronal networks and
+ support vector machines, both in supervised and semi-supervised mode.
+ We measured accuracies in the task of classifying tissue taken from breast
+ cancer patients at reductive surgery as chemotherapy-resistant or -sensitive.
+\end_layout
+
+\begin_layout Standard
+Different data sets were constructed by subsampling from GEO data set GSE25055
+ and GSE25065.
+ Using these data sets, we compared classification accuracy of the relatively
+ new neuronal networks Autoencoder, Restricted Boltzmann Machine, Deep Belief
+ Network (DBN) and the established support vector machine (SVM), and Transductiv
+e SVM (TSVM).
+ 
+\end_layout
+
+\begin_layout Standard
+Transcriptomic data and visual images are both similar in that they have
+ highly correlated dimensions, and dissimilar because the number of available
+ unlabeled samples is much higher for images than expression data.
+ We found that smoothing the validation set accuracies obtained during training
+ iterations helped in model selection of the best classifier.
+\end_layout
+
+\begin_layout Standard
+We also investigated the effect of different normalization procedures on
+ the classification accuracy.
+ Before classifying, the data were normalized with either RMA or MAS5, followed
+ by either no batch-effect correction or Combat batch-effect correction.
+ Only MAS5 profited from added Combat batch-effect correction, but normalization
+ with RMA alone yielded the best classification accuracy.
+\end_layout
+
+\begin_layout Standard
+In particular, we were interested whether classification accuracies improve
+ when adding unlabeled samples in semi-supervised learning.
+ Overall, neuronal networks and support vector machines performed similar.
+ We found a slight improvement of classification accuracy when the number
+ of unlabeled samples presented to DBN and TSVM was increased to the maximal
+ number of samples in our data sets.
+ However, this effect was only observed when the learning algorithms were
+ presented the expression values of all genes, not just a subset of the
+ 500 most variable genes.
 \end_layout
 
 \begin_layout Standard
@@ -187,11 +286,20 @@ filename "discussion.lyx"
 
 \end_layout
 
-\begin_layout Section
-List of Figures
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{List of Figures}
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
+
 \begin_inset FloatList figure
 
 \end_inset
@@ -206,8 +314,20 @@ List of Figures
 
 \end_layout
 
-\begin_layout Section
-List of Tables
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{List of Tables}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -242,6 +362,25 @@ options "bibtotoc,dcbib"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Index}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset index_print
 LatexCommand printindex
 type "idx"
