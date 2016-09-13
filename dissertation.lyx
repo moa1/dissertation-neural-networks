@@ -142,15 +142,15 @@ In classification tasks of biological data, there are usually fewer labeled
 \begin_layout Standard
 In machine learning in general, utilizing unlabeled data in classification
  tasks is called semi-supervised learning.
- Artificial neuronal networks can be used to pre-train on unlabeled data
- before fine-tuning via back-propagation with labeled data.
- Such artificial neuronal networks enabling deep learning have gained attention
+ Artificial neural networks can be used to pre-train on unlabeled data before
+ fine-tuning via back-propagation with labeled data.
+ Such artificial neural networks enabling deep learning have gained attention
  since around 2010, since when they have been among the best-performing
  algorithms in visual object recognition.
 \end_layout
 
 \begin_layout Standard
-Here we compared the three aforementioned artificial neuronal networks and
+Here we compared the three aforementioned artificial neural networks and
  support vector machines, both in supervised and semi-supervised mode.
  We measured accuracies in the task of classifying tissue taken from breast
  cancer patients at reductive surgery as chemotherapy-resistant or -sensitive.
@@ -160,7 +160,7 @@ Here we compared the three aforementioned artificial neuronal networks and
 Different data sets were constructed by subsampling from GEO data set GSE25055
  and GSE25065.
  Using these data sets, we compared classification accuracy of the relatively
- new neuronal networks Autoencoder, Restricted Boltzmann Machine, Deep Belief
+ new neural networks Autoencoder, Restricted Boltzmann Machine, Deep Belief
  Network (DBN) and the established support vector machine (SVM), and Transductiv
 e SVM (TSVM).
  
@@ -186,7 +186,7 @@ We also investigated the effect of different normalization procedures on
 \begin_layout Standard
 In particular, we were interested whether classification accuracies improve
  when adding unlabeled samples in semi-supervised learning.
- Overall, neuronal networks and support vector machines performed similar.
+ Overall, neural networks and support vector machines performed similar.
  We found a slight improvement of classification accuracy when the number
  of unlabeled samples presented to DBN and TSVM was increased to the maximal
  number of samples in our data sets.

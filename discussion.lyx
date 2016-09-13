@@ -75,7 +75,7 @@ Discussion
 
 \begin_layout Standard
 We tried finding evidence that adding unlabeled data to semi-supervised
- training is beneficial in deep neuronal networks, when predicting breast
+ training is beneficial in deep neural networks, when predicting breast
  cancer recurrence after chemotherapy.
 \end_layout
 
@@ -85,7 +85,7 @@ Using Tumour Expression Data Directly to Classify Recurrence
 
 \begin_layout Standard
 We predicted recurrence directly from expression data.
- Papers that use neuronal networks to classify cancerous tissue are for
+ Papers that use neural networks to classify cancerous tissue are for
  example 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -109,7 +109,7 @@ key "SharafTsokos2015"
 \end_inset
 
 , Sharaf and Tsokos predict from 4 input variables the survival time by
- training a neuronal network on 69,000 patients
+ training a neural network on 69,000 patients
 \begin_inset Note Note
 status open
 
@@ -134,20 +134,20 @@ key "HatzisSymmans2011"
 
 , the larger data set GSE25055 was used for training a classifier, and the
  independently measured data set GSE25065 was used for testing the classifier.
- We used artificial neuronal networks as classifiers by predicting the class
+ We used artificial neural networks as classifiers by predicting the class
  1 probability of the samples.
 \end_layout
 
 \begin_layout Paragraph
-Neuronal Networks are Attractive
+Neural Networks are Attractive
 \end_layout
 
 \begin_layout Standard
-In our view, neuronal networks have attractive properties: they are non-linear,
+In our view, neural networks have attractive properties: they are non-linear,
  they can be used generatively, their implementations are often modular
  (e.g.
  regularizations and network parameters), in prediction they often show
- better accuracies than normal SVMs, and deep neuronal networks are among
+ better accuracies than normal SVMs, and deep neural networks are among
  the best predictors in several fields.
  As 
 \begin_inset CommandInset citation
@@ -184,11 +184,11 @@ key "AppelSpang2011"
 \end_inset
 
  is straightforward, because the network outputs class probabilities anyways.
- Last, but not least, artificial neuronal networks are supposed to be plausible
- models of the real biological neuronal networks, which are the control
+ Last, but not least, artificial neural networks are supposed to be plausible
+ models of the real biological neural networks, which are the control
  centers of many animals, and were shaped by evolution during millions of
  years.
- However, neuronal networks' versatility can also be a disadvantage: it
+ However, neural networks' versatility can also be a disadvantage: it
  is often not clear what component or parameter to modify to achieve a desired
  result.
 \end_layout
@@ -258,7 +258,7 @@ Model Selection
 \end_layout
 
 \begin_layout Standard
-We always selected the iteration/model of the neuronal network that had
+We always selected the iteration/model of the neural network that had
  the highest validation set accuracy.
  There was the problem that very few samples lead to very few different
  possible accuracy values.
@@ -266,24 +266,24 @@ We always selected the iteration/model of the neuronal network that had
  possible accuracies, we smoothed the accuracies over time/iterations.
  We deem this justified because the network's state of parameters at a specific
  iteration is closest to its state of parameters at the closest iterations.
- The artificial neuronal networks change only little every iteration.
+ The artificial neural networks change only little every iteration.
 \end_layout
 
 \begin_layout Paragraph
-Compared Methods: Neuronal Networks, SVM and TSVM
+Compared Methods: Neural Networks, SVM and TSVM
 \end_layout
 
 \begin_layout Standard
-We compared SVM and TSVM to the artificial neuronal networks.
+We compared SVM and TSVM to the artificial neural networks.
  TSVM is a semi-supervised version of the normal supervised SVM, and the
- artificial neuronal networks were used with (semi-supervised) and without
+ artificial neural networks were used with (semi-supervised) and without
  (supervised) pre-training.
  We compared the semi-supervised and the supervised versions of both neuronal
  network and Support Vector Machine.
 \end_layout
 
 \begin_layout Paragraph
-Does Semi-supervised Learning Lead to Better Neuronal Network Classifiers?
+Does Semi-supervised Learning Lead to Better Neural Network Classifiers?
 \end_layout
 
 \begin_layout Standard
@@ -420,7 +420,7 @@ More sophisticated prediction schemes can be imagined so that the prediction
  metastases (a natural number) could be trained and predicted.
  Such a prediction is not made in this work, because only little clinical
  data was recorded in GSE25055 and GSE25065.
- However, in the neuronal network it would be straightforward to predict
+ However, in the neural network it would be straightforward to predict
  such two numbers by adding an additional (properly scaled) number to the
  output layer in the training set.
 \end_layout
@@ -440,7 +440,7 @@ In most applications of deep learning there is some algorithm involved to
  pixels in the transformed training images.
  This allows producing a large number of similar training images from an
  input training set.
- The neuronal network is thereby forced to learn the property of a feature
+ The neural network is thereby forced to learn the property of a feature
  regardless of its position in the image.
  Nevertheless the position of the feature will probably vary in 
 \begin_inset Quotes eld
@@ -455,12 +455,12 @@ real
 
 \begin_layout Standard
 Having such a transformation for expression data would be very useful, not
- only for classification using neuronal networks, but also other machine
+ only for classification using neural networks, but also other machine
  learning algorithms.
  However, it is not at all clear what a pre-processing equivalent to the
  local image deformations could look like for mRNA abundance.
  Straightforward application of the image deformation scheme would provide
- the neuronal network with input for a gene in the dimension of a maybe
+ the neural network with input for a gene in the dimension of a maybe
  completely unrelated gene.
  (Note that adding some sort of noise onto the expression levels would be
  equivalent to adding noise to the image, which is not equivalent to shifting

@@ -78,7 +78,7 @@ TODO: maybe replace
 \begin_inset Quotes eld
 \end_inset
 
-neuronal network
+neural network
 \begin_inset Quotes erd
 \end_inset
 
@@ -103,8 +103,8 @@ neural network
 status open
 
 \begin_layout Plain Layout
-This is supposed to be a high-level description of neuronal networks, to
- be used in the thesis before the mathematical description of neuronal networks
+This is supposed to be a high-level description of neural networks, to be
+ used in the thesis before the mathematical description of neural networks
  (currently 
 \begin_inset Quotes eld
 \end_inset
@@ -238,7 +238,7 @@ The goal of this work is to contribute to such a predictor.
  tissue.
  These gene expression measurements are ususally measured using microarrays
  or next generation sequencing.
- An artificial neuronal network then processes this data.
+ An artificial neural network then processes this data.
  The prediction is output by the network in the form of a number between
  0 and 1.
  Here, 0 means the patient is predicted with absolute certainty to have
@@ -248,32 +248,32 @@ The goal of this work is to contribute to such a predictor.
 \end_layout
 
 \begin_layout Standard
-The study of neuronal networks in biology prompted the development of artificial
- neuronal networks.
- After an introduction to biological and artificial neuronal networks we
- will give an overview of machine learning and then introduce the own work
- done in this manuscript.
+The study of neural networks in biology prompted the development of artificial
+ neural networks.
+ After an introduction to biological and artificial neural networks we will
+ give an overview of machine learning and then introduce the own work done
+ in this manuscript.
 \end_layout
 
 \begin_layout Section
-Biological and Artificial Neuronal Networks
+Biological and Artificial Neural Networks
 \end_layout
 
 \begin_layout Standard
-Artificial neuronal networks
+Artificial neural networks
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-artificial neuronal networks
+artificial neural networks
 \end_layout
 
 \end_inset
 
  are mathematical constructs, designed to imitate the signal processing
  capabilities of real neurons, found in nearly all animals.
- Neurons can be connected to form complex neuronal networks.
- Like their biological counterparts, artificial neuronal networks consist
+ Neurons can be connected to form complex neural networks.
+ Like their biological counterparts, artificial neural networks consist
  of simpler building blocks, the neurons.
 \end_layout
 
@@ -558,12 +558,12 @@ key "DebanneRama2013"
 \end_layout
 
 \begin_layout Standard
-Examples for neuronal networks that have been partly decoded are the eye
- (visual system) and the nose (olfactory system).
+Examples for neural networks that have been partly decoded are the eye (visual
+ system) and the nose (olfactory system).
 \end_layout
 
 \begin_layout Subsection
-Examples of Biological Neuronal Networks
+Examples of Biological Neural Networks
 \end_layout
 
 \begin_layout Subsubsection
@@ -1253,7 +1253,7 @@ Supervised and Unsupervised Machine Learning
 \end_layout
 
 \begin_layout Standard
-In artificial neuronal networks, the goals of learning are defined by humans.
+In artificial neural networks, the goals of learning are defined by humans.
  In machine learning in general, there are two major types of learning:
  
 \emph on
@@ -1340,7 +1340,7 @@ ation and abstraction.
 \begin_layout Standard
 Examples of supervised learning algorithms are (linear or logistic) regression,
  k-Nearest Neighbor (k-NN) regression, support vector machines (SVMs), backpropa
-gation neuronal networks, Deep Belief Networks (DBNs).
+gation neural networks, Deep Belief Networks (DBNs).
  Examples for unsupervised learning algorithms are (hierarchical or kNN)
  clustering, self-organising maps (SOMs), principal component analysis (PCA),
  Restricted Boltzmann Machines (RBMs).
@@ -1681,7 +1681,7 @@ deep learning
 
 \end_inset
 
- is a term used in conjunction with artificial neuronal networks which have
+ is a term used in conjunction with artificial neural networks which have
  several hidden layers.
  The advantage of a deep network over a network with just one hidden layer
  is that it can model a problem more compactly using less hidden neurons
@@ -1695,10 +1695,10 @@ Back-propagation
 \end_layout
 
 \begin_layout Standard
-Before deep learning, supervised artificial neuronal networks were usually
+Before deep learning, supervised artificial neural networks were usually
  trained using back-propagation.
  Back-propagation learns from labeled samples the weights and biases of
- an artificial neuronal network 
+ an artificial neural network 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RumelhartWilliams1988"
@@ -1751,8 +1751,7 @@ name "fig:Data-flow-in-back-propagation"
 
 \end_inset
 
-Data flow in training a neuronal network with three layers using back-propagatio
-n.
+Data flow in training a neural network with three layers using back-propagation.
  The input layer is at the bottom, the hidden layer in the middle, and the
  output layer at the top.
  The black arrows denote information flow about the activation state from
@@ -1773,13 +1772,13 @@ n.
 
 \begin_layout Standard
 The purpose of error back-propagation is to be able to adjust the weights
- of the artificial neuronal network following the gradient, such that when
+ of the artificial neural network following the gradient, such that when
  the current input pattern pair is presented to the network, its computed
  output pattern gets closer and closer to the desired output pattern.
  However, back-propagation was not able to train networks with more than
  one or two hidden layers, because it got stuck in poor local energy optima.
- Having artificial neuronal networks with more than one hidden layer is
- desirable from a computational power standpoint.
+ Having artificial neural networks with more than one hidden layer is desirable
+ from a computational power standpoint.
 \end_layout
 
 \begin_layout Subsection
@@ -1819,7 +1818,7 @@ TODO: Hier sollte ein Bild von einem Auto-associator stehen.
 
 \end_inset
 
-An algorithm that can train an artificial neuronal network with more than
+An algorithm that can train an artificial neural network with more than
  one hidden layer is the auto-associator
 \begin_inset Index idx
 status collapsed
@@ -1937,7 +1936,7 @@ In unsupervised pre-training, unlabeled training samples can be used in
  While the pre-training phase is unsupervised, the fine-tuning phase can
  be unsupervised as well as supervised.
  After training, the multiple-hidden-layer-network forms a generative artificial
- neuronal network called a 
+ neural network called a 
 \emph on
 Deep Belief Network
 \emph default
@@ -2001,7 +2000,7 @@ Motivations for Using Deep Belief Networks on Transcriptomic Data
 The motivations for using Deep Belief Networks on transcriptomic data come
  from those networks' successes when used on image data.
  In the hand-written digit classification and graphical object recognition
- data sets on which the deep artificial neuronal networks were developed,
+ data sets on which the deep artificial neural networks were developed,
  they are among the best-performing predictors.
 \end_layout
 
@@ -2251,7 +2250,7 @@ SuperVision
 \uwave off
 \noun off
 \color none
-deep convolutional neuronal network
+deep convolutional neural network
 \end_layout
 
 \end_inset
@@ -2301,7 +2300,7 @@ Clarifai
 \uwave off
 \noun off
 \color none
-deep convolutional neuronal networks averaged
+deep convolutional neural networks averaged
 \end_layout
 
 \end_inset
@@ -2351,7 +2350,7 @@ GoogLeNet
 \uwave off
 \noun off
 \color none
-deep convolutional neuronal network
+deep convolutional neural network
 \end_layout
 
 \end_inset
@@ -2512,9 +2511,9 @@ Transductive Support Vector Machine
 \end_layout
 
 \begin_layout Standard
-We compare our artificial neuronal network approach with another, older,
- and established semi-supervised method, the Transductive Support Vector
- Machine (TSVM) 
+We compare our artificial neural network approach with another, older, and
+ established semi-supervised method, the Transductive Support Vector Machine
+ (TSVM) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Joachims1999"
@@ -2584,11 +2583,11 @@ key "ChenXie2015"
 \end_layout
 
 \begin_layout Standard
-Their artificial neuronal network architecture had between 1 and 3 hidden
+Their artificial neural network architecture had between 1 and 3 hidden
  layers with either 3,000, 6,000, or 9,000 nodes.
  It had 943 input expression values (one for each landmark gene), and a
  total of 9,520 output expression values (one for each gene to be predicted).
- In addition to the (non-linear) neuronal network, they tried linear regression
+ In addition to the (non-linear) neural network, they tried linear regression
  with no regularization, L1-, and L2-regularization.
 \end_layout
 
@@ -2658,14 +2657,14 @@ k-Nearest Neighbor performed worst, with an average prediction error of
  The three linear regression models performed about equally well, with average
  prediction errors of either 0.3784 or 0.3782, which means that regularization
  did not improve linear regression.
- The neuronal network-based average prediction errors were between 0.3421
- and 0.3204, with the network having 3 hidden layers of size 9000, and 10%
- dropout rate performing best.
+ The neural network-based average prediction errors were between 0.3421 and
+ 0.3204, with the network having 3 hidden layers of size 9000, and 10% dropout
+ rate performing best.
  (
 \emph on
 Dropout 
 \emph default
-is a regularization technique for neuronal networks, explained in section
+is a regularization technique for neural networks, explained in section
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2714,14 +2713,14 @@ Learning in this data set is harder since the input is measured in different
  of 0.5667.
  Linear regression without regularization and with L2-regularization had
  an average prediction error of 0.4702.
- The artificial neuronal networks all scored consistently better than KNN
- and linear regression, with the artificial neuronal network with 2 hidden
+ The artificial neural networks all scored consistently better than KNN
+ and linear regression, with the artificial neural network with 2 hidden
  layers of size 9000, and 25% dropout rate having the lowest prediction
  error of 0.4393 (which is equivalent to a relative error of 4%).
  On the validation data set of this data set, the average prediction error
  was 0.7467, which is a relative error of 6.8%.
- This shows that Artificial Neuronal Networks are capable of processing
- input from multiple sources, with an acceptable gain in error.
+ This shows that artificial neural networks are capable of processing input
+ from multiple sources, with an acceptable gain in error.
  We also had a similar result, in section 
 \begin_inset CommandInset ref
 LatexCommand ref

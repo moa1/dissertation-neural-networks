@@ -173,7 +173,7 @@ resist
 
 .
  The ones having a match were sorted by the number of samples in the data
- set because deep neuronal network learning seems to require big data sets,
+ set because deep neural network learning seems to require big data sets,
  and we have to split samples into a training, validation, and test data
  set.
  We read the abstracts of this list, starting from the top.
@@ -584,7 +584,7 @@ Goal of this Work
 \begin_layout Standard
 The context of this work is the use of classifiers on high-dimensional data
  as supporting tools for treatment decisions.
- Two types of neuronal networks that lend themselves to semi-supervised
+ Two types of neural networks that lend themselves to semi-supervised
  training were used: autoencoders and deep belief networks.
  Parallel to these, the performance of a semi-supervised version of Support
  Vector Machines, namely the Transductive SVM was evaluated.
@@ -596,7 +596,7 @@ The specific goals were:
 
 \begin_layout Enumerate
 to find out whether incorporating unlabeled expression data in the training
- of deep artificial neuronal networks enhances a classifier's performance.
+ of deep artificial neural networks enhances a classifier's performance.
 \end_layout
 
 \begin_layout Enumerate
@@ -605,7 +605,7 @@ to assess performance of the classifier on an independently measured data
 \end_layout
 
 \begin_layout Enumerate
-to evaluate whether artificial neuronal networks can compete with established
+to evaluate whether artificial neural networks can compete with established
  classification algorithms like SVMs.
 \end_layout
 
@@ -627,7 +627,7 @@ reference "sec:Unsupervised-Reconstruction-of-Expression-Values"
 \end_layout
 
 \begin_layout Standard
-Then the performance benefit of neuronal networks using an increasing number
+Then the performance benefit of neural networks using an increasing number
  of labeled samples was assessed.
  The benefit of using more labeled training samples on testing set accuracy
  is well-established in machine learning, and was also observed in section
@@ -688,7 +688,7 @@ reference "sec:breast_cancer_12"
 
 , we used Deep Belief Networks instead of RBM and autoencoder used previously
  for pre-training, and systematically compared SVM, TSVM, and supervised
- and semi-supervised neuronal network variants.
+ and semi-supervised neural network variants.
 \end_layout
 
 \begin_layout Standard
@@ -699,7 +699,7 @@ reference "sec:breast_cancer_15"
 
 \end_inset
 
-, we drastically reduced the number of neuronal network parameters by reducing
+, we drastically reduced the number of neural network parameters by reducing
  the number of hidden nodes compared to the previous networks.
  At the same time, we increased the number of input genes from the 500 most
  variable genes to all 22,283 genes.
@@ -724,7 +724,7 @@ One label was on a data set whose prediction reached an accuracy (of about
 \end_layout
 
 \begin_layout Standard
-As we will see, only the very last attempts with artificial neuronal networks
+As we will see, only the very last attempts with artificial neural networks
  showed partially that adding unlabeled data in training leads to slightly
  better classifiers.
  This is also true for the established semi-supervised TSVM, which only
@@ -753,7 +753,7 @@ key "Deepnet2014"
 
 \end_inset
 
- is a neuronal network implementation written by Nitish Srivastava, which
+ is a neural network implementation written by Nitish Srivastava, which
  uses a matrix library (called cudamat) written by Vlad Mnih and Alex Krizhevsky.
  It can run on graphics cards (supporting CUDA).
  Due to graphics cards having a highly parallel architecture, this means
@@ -832,7 +832,7 @@ Training Iterations and Evaluations
 We trained both the unsupervised as well as the supervised network for a
  pre-determined number of iterations.
  This number was determined by a trial run on one data set, so that the
- improvement of the neuronal network was only marginal at the end.
+ improvement of the neural network was only marginal at the end.
  There were usually between 100,000 and 1,000,000 iterations (
 \emph on
 deepnet
@@ -841,7 +841,7 @@ deepnet
 \emph on
 stopcondition.steps
 \emph default
- in train.pbtxt), and we evaluated the neuronal network after every 500 iteration
+ in train.pbtxt), and we evaluated the neural network after every 500 iteration
 s (
 \emph on
 deepnet
@@ -854,7 +854,7 @@ eval_after
  Evaluation means computing the training set, validation set, and testing
  set reconstruction error (in unsupervised training) or accuracy (in supervised
  training).
- The neuronal network itself was saved every 10,000 iterations (
+ The neural network itself was saved every 10,000 iterations (
 \emph on
 deepnet
 \emph default
@@ -926,7 +926,7 @@ name "sub:Model-selection"
 \end_layout
 
 \begin_layout Standard
-Because training an artificial neuronal network is an iterative process,
+Because training an artificial neural network is an iterative process,
  there are as many models as there are iterations.
  The question is which one to choose.
  We did not use 
@@ -944,7 +944,7 @@ reference "sub:Early-stopping"
 
 \end_inset
 
-), but selected the neuronal network that was best on the validation data
+), but selected the neural network that was best on the validation data
  among all evaluated iterations.
 \end_layout
 
@@ -952,7 +952,7 @@ reference "sub:Early-stopping"
 We normally did not use any model selection for the unsupervised training,
  since the reconstruction error plots of pre-training using autoencoder
  or RBM did not show overfitting on the validation data set.
- Instead we selected the neuronal network from the last iteration that was
+ Instead we selected the neural network from the last iteration that was
  computed.
  An example of the plot can be seen in figure 
 \begin_inset CommandInset ref
@@ -966,18 +966,18 @@ reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
 
 \begin_layout Standard
 We used model selection in training the (supervised) classifiers, because
- training a neuronal network for too many iterations using back-propagation
+ training a neural network for too many iterations using back-propagation
  has the tendency to overfit the training data and generalize poorly on
  the validation and test data.
  This means we defined three data sets: a training data set, which was used
- to iteratively train the neuronal network; a validation data set, which
+ to iteratively train the neural network; a validation data set, which
  was used to pick the model (see below); and a test data set, which was
- used to evaluate the accuracy of the neuronal network picked using the
+ used to evaluate the accuracy of the neural network picked using the
  validation data set.
 \end_layout
 
 \begin_layout Standard
-Usually model selection works by picking the neuronal network defined in
+Usually model selection works by picking the neural network defined in
  the iteration with the highest validation data set accuracy.
  However, we sometimes had only few (in the tens) labeled samples in the
  validation data set.
@@ -1097,7 +1097,7 @@ Besides using
 \emph on
 deepnet 
 \emph default
-by Nitish Srivastava as the neuronal network implementation, we used the
+by Nitish Srivastava as the neural network implementation, we used the
  R CRAN package e1071 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1258,7 +1258,7 @@ deepnet
 \emph on
 base_epsilon
 \emph default
- One of the crucial settings when training artificial neuronal networks
+ One of the crucial settings when training artificial neural networks
  is the learning rate
 \begin_inset Index idx
 status collapsed
@@ -1284,8 +1284,8 @@ deepnet
 \emph default
 .
  It controls by what factor the gradient of each weight is multiplied with
- to influence the parameters of the neuronal network in the next iteration.
- If it is too large, the neuronal network will alter weights in too large
+ to influence the parameters of the neural network in the next iteration.
+ If it is too large, the neural network will alter weights in too large
  steps and oscillate, and will not be able to reach an energy optimum.
  If it is too small, learning will take too long.
 \begin_inset Newline newline
@@ -4704,7 +4704,7 @@ Reconstruction errors of training (T_E), validation (V_E) and testing (E_E)
  data sets for unsupervised training of an RBM with configurations breast_cancer
 _04_bg, bh, bi, bj.
  The y-axis is the reconstruction error, not normalized for the number of
- samples, and the x-axis is the training step of neuronal network training.
+ samples, and the x-axis is the training step of neural network training.
 \end_layout
 
 \end_inset
@@ -5974,7 +5974,7 @@ reference "sub:Model-selection"
 \end_layout
 
 \begin_layout Standard
-Surprisingly, the neuronal network accuracies do not improve with increasing
+Surprisingly, the neural network accuracies do not improve with increasing
  number of labeled samples.
  Instead it seems that the classifiers using the least and most (18 and
  302) samples perform best, and all others (especially those using 76 samples)
@@ -6871,7 +6871,7 @@ er_06_ae - ah)
 \end_layout
 
 \begin_layout Standard
-When training a neuronal network using back-propagation that was pre-trained
+When training a neural network using back-propagation that was pre-trained
  using one of the four autoencoders described in the previous section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7116,7 +7116,7 @@ name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-
 
 \begin_layout Standard
 As in the previous section on breast_cancer_06, we wanted to check whether
- the artificial neuronal networks accuracies improve with an increasing
+ the artificial neural networks accuracies improve with an increasing
  number of labeled samples.
  Unlabeled data sets were the same as for breast_cancer_06, see table 
 \begin_inset CommandInset ref
@@ -8013,7 +8013,7 @@ reference "fig:Accuracy-box-plots-of-breast_cancer_07_aa-ad"
 
 \end_inset
 
- show that all 4 neuronal networks perform better, the more labeled samples
+ show that all 4 neural networks perform better, the more labeled samples
  there are in training.
  In addition the variance of the accuracies decreases, the more labeled
  samples there are in training.
@@ -8046,7 +8046,7 @@ name "fig:Accuracy-box-plots-of-breast_cancer_07_aa-ad"
 
 \end_inset
 
-Accuracy box plots of a feed-forward neuronal network pre-trained with an
+Accuracy box plots of a feed-forward neural network pre-trained with an
  RBM, predicting the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
@@ -8112,7 +8112,7 @@ name "fig:Accuracy-box-plots-of-breast_cancer_07_ae-ah"
 
 \end_inset
 
-Accuracy box plots of a feed-forward neuronal network pre-trained with an
+Accuracy box plots of a feed-forward neural network pre-trained with an
  autoencoder, predicting the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
@@ -8134,7 +8134,7 @@ Supervised Classification without Pre-training (breast_cancer_07_ai - aj)
 \end_layout
 
 \begin_layout Standard
-Finally, we trained the neuronal networks with no pre-training at all, but
+Finally, we trained the neural networks with no pre-training at all, but
  using only back-propagation.
  The 
 \emph on
@@ -8919,7 +8919,7 @@ name "fig:Accuracy-box-plots-of-breast_cancer_07_ai-aj"
 
 \end_inset
 
-Accuracy box plots of feed-forward neuronal networks not pre-trained, predicting
+Accuracy box plots of feed-forward neural networks not pre-trained, predicting
  the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
@@ -9000,7 +9000,7 @@ reference "sub:Dropout"
 
 \emph default
  reduces overfitting.
- In addition, comparing with the neuronal networks pre-trained using RBM
+ In addition, comparing with the neural networks pre-trained using RBM
  or autoencoder (e.g.
  breast_cancer_07_ai versus breast_cancer_07_ag) might indicate a slight
  advantage of not using pre-training (but using 
@@ -10940,7 +10940,7 @@ Although it may seem beneficial to achieve reconstruction error as a low
 \end_layout
 
 \begin_layout Standard
-After pre-training, the artificial neuronal networks were fine-tuned using
+After pre-training, the artificial neural networks were fine-tuned using
  backpropagation and their accuracy to predict chemotherapy efficacy was
  measured.
 \end_layout
@@ -11091,7 +11091,7 @@ name "fig:accuracy-plots-for-breast_cancer_08"
 
 \end_inset
 
-Box-plot for neuronal network prediction pre-trained with an autoencoder
+Box-plot for neural network prediction pre-trained with an autoencoder
  on the 4 differently normalized data sets rma-data.pbtxt, mas5-data.pbtxt,
  rma_combat-data.pbtxt, and mas5_combat-data.pbtxt in breast_cancer_08.
  The box-plot shows on the x-axis the 4 data sets, and on the y-axis the
@@ -11708,7 +11708,7 @@ On second thought, ZCA whitening is non-sensical in expression data since
 \end_layout
 
 \begin_layout Subsection
-Does Adding Unlabeled Samples Help in Semi-supervised Neuronal Network Training?
+Does Adding Unlabeled Samples Help in Semi-supervised Neural Network Training?
 \end_layout
 
 \begin_layout Standard
@@ -14398,11 +14398,11 @@ To predict using TSVM, for every repetition and every data set, we joined
  validation data to the training input file to be used by TSVM.
  This was done to be fair to TSVM, because deepnet also has access to these
  labeled and unlabeled samples.
- The testing data set was the same as that used for the neuronal networks.
+ The testing data set was the same as that used for the neural networks.
 \end_layout
 
 \begin_layout Subsection
-Comparison of Neuronal Networks with Support Vector Machines
+Comparison of Neural Networks with Support Vector Machines
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
@@ -25479,7 +25479,7 @@ name "sec:breast_cancer_15"
 Since breast_cancer_12 has a negative result in summary, because it cannot
  confirm the benefit of adding unlabled samples to training, in data set
  breast_cancer_15 we considered the differences in data sources and artificial
- neuronal network configurations between our and the ones in image recognition,
+ neural network configurations between our and the ones in image recognition,
  where DBNs are successful.
  We also increased the number of input genes from the 500 most variable
  genes used as input genes in previous data sets to all 22,283 available
@@ -25567,7 +25567,7 @@ training numbers
 \end_inset
 
  used totally in the input.
- The breast_cancer_12 artificial neuronal networks all 
+ The breast_cancer_12 artificial neural networks all 
 \begin_inset Note Note
 status open
 
@@ -25664,7 +25664,7 @@ To exclude the possibility that a batch effect between GSE25055 and GSE25065
  label 1 samples for testing, and we also use 37 label 0 samples.
  Like in previous data sets, all samples for the labeled training and validation
  data sets can be re-used in the unlabeled data set, because the labels
- are not given to the neuronal network during pre-training.
+ are not given to the neural network during pre-training.
 \end_layout
 
 \begin_layout Standard
@@ -26180,7 +26180,7 @@ As the values for
 \end_inset
 
 .
- The architecture for artificial neuronal networks of breast_cancer_15 is
+ The architecture for artificial neural networks of breast_cancer_15 is
  22283-10-10-10-1.
 \end_layout
 
@@ -27889,7 +27889,7 @@ name "fig:Accuracy-in-breast_cancer_15"
 \end_inset
 
 Box plots of test set accuracies for different data sets with more and more
- unlabeled training samples in a neuronal network pre-trained with DBN on
+ unlabeled training samples in a neural network pre-trained with DBN on
  breast_cancer_15.
  The x-axis are the data sets (except data set 1, which cannot be used in
  DBNs because it does not contain unlabeled data) in the order of rising

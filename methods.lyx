@@ -94,7 +94,7 @@ TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
 \end_layout
 
 \begin_layout Standard
-Here we will introduce the methods used to train deep neuronal networks,
+Here we will introduce the methods used to train deep neural networks,
  as applied in the results part.
 \end_layout
 
@@ -257,7 +257,7 @@ discriminative model
 \begin_layout Standard
 Restricted Boltzmann Machines and Deep Belief Networks are both generative
  models.
- On the other hand, a neuronal network trained only with back-propagation
+ On the other hand, a neural network trained only with back-propagation
  is a discriminative model.
  In a discriminative model, the possible values of the parameters (weights)
  are constrained by the information it takes to specify the class label
@@ -323,7 +323,7 @@ key "HintonTeh2006"
 \end_layout
 
 \begin_layout Standard
-The neuronal networks will be discussed later.
+The neural networks will be discussed later.
  Graphical Models will be needed for Restricted Boltzmann Machines and Deep
  Belief Networks, and will be introduced next.
 \end_layout
@@ -5561,14 +5561,14 @@ TODO: the above definition is from wikipedia, but I have to cite some paper.
 \end_layout
 
 \begin_layout Section
-Artificial Neuronal Networks
+Artificial Neural Networks
 \end_layout
 
 \begin_layout Standard
-Here we will introduce artificial neuronal networks that have been developed
- as models of biological neuronal networks by various people since about
+Here we will introduce artificial neural networks that have been developed
+ as models of biological neural networks by various people since about
  the middle of the last century.
- The artificial neuronal networks introduced here are related with Deep
+ The artificial neural networks introduced here are related with Deep
  Belief Networks, namely Hopfield networks, Multilayer Perceptrons, and
  (Restricted) Boltzmann Machines.
 \end_layout
@@ -6180,12 +6180,12 @@ Structure
 
 \begin_layout Standard
 A Multilayer Perceptron belongs to the class of deterministic feedforward
- neuronal networks
+ neural networks
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-feedforward neuronal network
+feedforward neural network
 \end_layout
 
 \end_inset
@@ -6198,7 +6198,7 @@ feedforward neuronal network
 status collapsed
 
 \begin_layout Plain Layout
-recurrent neuronal network
+recurrent neural network
 \end_layout
 
 \end_inset
@@ -6468,7 +6468,7 @@ name "sub:Parameters-of-Training-a-Multilayer-Perceptron"
 
 \begin_layout Standard
 Although described here for multilayer perceptrons, the parameters apply
- to most artificial neuronal networks, not just multilayer perceptrons.
+ to most artificial neural networks, not just multilayer perceptrons.
 \end_layout
 
 \begin_layout Paragraph
@@ -6737,7 +6737,7 @@ The autoassociator as described is an unsupervised algorithm, because it
 \end_layout
 
 \begin_layout Subsection
-Regularizations of Neuronal Networks
+Regularizations of Neural Networks
 \end_layout
 
 \begin_layout Standard
@@ -6751,11 +6751,11 @@ regularization
 
 \end_inset
 
- methods for neuronal networks have been developed over the years.
+ methods for neural networks have been developed over the years.
  They have in common that they artificially constrain the search space of
  weights and biases in order to let the model find better error minima or
  to prevent overfitting.
- The neuronal network should do less 
+ The neural network should do less 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6767,7 +6767,7 @@ learning by heart
 \end_layout
 
 \begin_layout Standard
-The regularizations described here apply to most artificial neuronal networks,
+The regularizations described here apply to most artificial neural networks,
  not just multilayer perceptrons.
 \end_layout
 
@@ -6951,7 +6951,7 @@ sparsity
 
  regularization is a method to make only a small fraction of nodes output
  an activation different from zero.
- This helps to generalize the output, and also makes neuronal networks more
+ This helps to generalize the output, and also makes neural networks more
  interpretable 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -7058,7 +7058,7 @@ dropping
  each training iteration a random subset of nodes in a layer.
  This prevents subsequent layers from adapting to specific combinations
  of node activations in the previous layer.
- Dropout can be used in any neuronal network whose input to a node is computed
+ Dropout can be used in any neural network whose input to a node is computed
  from several input nodes.
  
 \end_layout
@@ -7166,13 +7166,13 @@ early stopping
 \end_inset
 
  is not really a regularization method, but nevertheless a method to prevent
- overfitting in supervised training of an artificial neuronal network.
+ overfitting in supervised training of an artificial neural network.
  It is used by splitting the training data set into a real training data
  set and a validation data set, and using only the real training data set
  for adapting the weights and biases during learning.
  After each learning iteration, the validation data set is used to compute
  the output error of the current network.
- After a defined number of training iterations, the neuronal network that
+ After a defined number of training iterations, the neural network that
  had the lowest output error on the validation data set is used as the final
  network to be used in making predictions.
 \end_layout
@@ -8923,7 +8923,7 @@ Another way to view the unrolling is to regard the infinitely Deep Belief
 \end_layout
 
 \begin_layout Subsubsection
-Deep Belief Networks Interpreted as Feed-forward Neuronal Networks
+Deep Belief Networks Interpreted as Feed-forward Neural Networks
 \end_layout
 
 \begin_layout Standard
@@ -9189,9 +9189,9 @@ How Unlabeled Data was Used When Pre-training a Restricted Boltzmann Machine
 
 \begin_layout Standard
 When using the unsupervised Restricted Boltzmann Machine to find the approximate
- weights of a neuronal network, the unlabeled data were used to train the
+ weights of a neural network, the unlabeled data were used to train the
  Restricted Boltzmann Machine.
- The resulting neuronal network was then extended with the network layer
+ The resulting neural network was then extended with the network layer
  for supervised classification, and the complete network was trained using
  (supervised) back-propagation on the labeled data.
 \end_layout
