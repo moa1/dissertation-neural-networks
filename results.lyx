@@ -10070,6 +10070,15 @@ The design of data set breast_cancer_08.
 \begin_inset Quotes eld
 \end_inset
 
+repeats
+\begin_inset Quotes erd
+\end_inset
+
+ means that each data set was created 5 times, by random sampling.
+ The row 
+\begin_inset Quotes eld
+\end_inset
+
 proportions 0:1
 \begin_inset Quotes erd
 \end_inset
@@ -10131,6 +10140,7 @@ key "JohnsonRabinovic2007"
  one, but with a possible batch-effect between samples removed.
  As input, ComBat needs the expression matrix and, for each sample, the
  batch number it was measured in.
+ 
 \begin_inset Note Note
 status open
 
@@ -10140,6 +10150,7 @@ status open
 
 \end_inset
 
+We defined samples from the two sources GSE25055 and GSE25065 as batches.
  Table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -10341,7 +10352,8 @@ Data set normalizations tested in breast_cancer_08.
 
 \begin_layout Standard
 For each of 4 different normalization pre-processing combinations, we created
- each of the 4 data sets described in table 
+ each of the 4 data sets by random sampling from the designated samples
+ described in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:design-of-breast_cancer_08"
@@ -10842,6 +10854,18 @@ Reconstruction error for differently normalized data.
  Each cell in the table contains the mean (and standard deviation in brackets)
  of the reconstruction error over all repeats.
  The numbers are rounded to two significant digits.
+ Reconstruction errors shown for MAS5 were computed on not logarithmized
+ data.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: reconstruction error of logarithmized MAS5.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -11776,6 +11800,9 @@ deepnet
 's predictions are biased towards the larger group.
  Samples used in the unlabeled training/validation data set were also used
  for labeled training/validation, otherwise there are not enough samples.
+ Unlabeled validation data sets were defined to be able to do model selection
+ during unsupervised training.
+ As before, performance was measured on the unseen test data sets.
 \end_layout
 
 \begin_layout Standard
