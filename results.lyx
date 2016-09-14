@@ -803,28 +803,6 @@ target "https://github.com/moa1/deepnet/tree/nnet"
 \end_layout
 
 \begin_layout Subsection
-Nomenclature of Data Sets and Training Runs
-\end_layout
-
-\begin_layout Standard
-The data sets created all have a prefix of 
-\begin_inset Quotes eld
-\end_inset
-
-breast_cancer_
-\begin_inset Quotes erd
-\end_inset
-
-, followed by a consecutive number.
- For example, breast_cancer_04 is the fourth data set created.
-\end_layout
-
-\begin_layout Standard
-A training run on a data set is indicated by appending two letters to the
- name of the data set, for example breast_cancer_04_aa.
-\end_layout
-
-\begin_layout Subsection
 Training Iterations and Evaluations
 \end_layout
 
@@ -986,7 +964,7 @@ Usually model selection works by picking the neural network defined in the
  from one iteration to the next.
  See figure 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "fig:Example-of-supervised-model-selection"
 
 \end_inset
@@ -1303,7 +1281,7 @@ In an initial learning trial, the following settings for
  An example of the reconstruction error reached for various learning rates
  is shown in table 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "tab:Effect-of-learning-rate-on-reconstruction-error"
 
 \end_inset
@@ -1662,7 +1640,7 @@ LOGISTIC
 
  is the sigmoid activation function, see section 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "The-sigmoid-activation-function"
 
 \end_inset
@@ -1930,10 +1908,19 @@ reference "sub:Previous-Work:Gene-Expression-Inference-with-Deep-Learning"
 \end_layout
 
 \begin_layout Subsection
-Data Set Design of breast_cancer_0
+Data Set Design
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_0
+\end_layout
+
+\end_inset
+
 Both data sets were split randomly into training and test set, regardless
  of label, according to table 
 \begin_inset CommandInset ref
@@ -2265,7 +2252,7 @@ Left: True (x-axis) versus reconstructed (y-axis) expression values of data
  Middle: Boxplot of reconstruction errors of the 10,000 most variable genes.
  Right: Histogram of reconstruction errors of the 10,000 most variable genes.
  Most genes have a low reconstruction error.
- Displayed are the mean reconstruction error over all test samples.
+ Displayed is the mean reconstruction error over all test samples.
 \end_layout
 
 \end_inset
@@ -2295,6 +2282,44 @@ reference "fig:Reconstruction-error-breast_cancer_0"
 \end_layout
 
 \begin_layout Section
+Nomenclature of Data Sets and Training Runs
+\end_layout
+
+\begin_layout Standard
+The data sets created all have a prefix of 
+\begin_inset Quotes eld
+\end_inset
+
+breast_cancer_
+\begin_inset Quotes erd
+\end_inset
+
+, followed by a consecutive number.
+ For example, 
+\begin_inset Quotes eld
+\end_inset
+
+breast_cancer_04
+\begin_inset Quotes erd
+\end_inset
+
+ is the fourth data set created.
+\end_layout
+
+\begin_layout Standard
+A training run on a data set is indicated by appending two letters to the
+ name of the data set, for example 
+\begin_inset Quotes eld
+\end_inset
+
+breast_cancer_04_aa
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
 Prediction Quality From Labeled Samples
 \begin_inset CommandInset label
 LatexCommand label
@@ -2306,11 +2331,20 @@ name "sec:breast_cancer_06-and-breast_cancer_07"
 \end_layout
 
 \begin_layout Subsection
-Increasing Number of Labeled Samples (breast_cancer_06)
+Increasing Number of Labeled Samples
 \end_layout
 
 \begin_layout Standard
-The goal of breast_cancer_06 was to verify if basic training works.
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_06
+\end_layout
+
+\end_inset
+
+The goal of data set breast_cancer_06 was to verify if basic training works.
  This was verified by testing whether the classifier improves with an increasing
  amount of labeled samples.
  Therefore we trained using all unlabeled samples, and defined supervised
@@ -3655,10 +3689,19 @@ named breast_cancer_06_ai, breast_cancer_06_aj
 \end_layout
 
 \begin_layout Subsubsection
-Unsupervised Pre-training Using RBM (breast_cancer_04_bg - bj)
+Unsupervised Pre-training Using RBM
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_04_bg - bj
+\end_layout
+
+\end_inset
+
 For unsupervised pre-training of the RBM, we tried different configurations
  that are denoted in table 
 \begin_inset CommandInset ref
@@ -4683,7 +4726,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename images/breast_cancer_04-plot-bg_bj.png
-	width 34page%
+	width 35page%
 
 \end_inset
 
@@ -4719,14 +4762,20 @@ _04_bg, bh, bi, bj.
 
 \begin_layout Subsubsection
 Supervised Classification with Unsupervisedly Pre-trained RBM
-\begin_inset Newline newline
-\end_inset
-
-(breast_cancer_06_aa - ad)
 \end_layout
 
 \begin_layout Standard
-The settings for supervised training were as described in table 
+The settings for the supervised training runs 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_06_aa - ad
+\end_layout
+
+\end_inset
+
+breast_cancer_06_aa - ad were as described in table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
@@ -5865,7 +5914,7 @@ name "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 
 \end_inset
 
-Settings for the classifiers breast_cancer_04_aa - ad.
+Settings for the classifiers breast_cancer_06_aa - ad.
  Each classifier is initialized using an unsupervisedly pre-trained RBM,
  and trained supervisedly on data set breast_cancer_06.
  No entry in a cell means that it has the same value as the cell to the
@@ -5982,7 +6031,7 @@ Surprisingly, the neural network accuracies do not improve with increasing
  As we will see in section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-breast_cancer_07"
+reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels"
 
 \end_inset
 
@@ -5996,11 +6045,10 @@ We also tried using 2 hidden layers instead of 1.
 \end_layout
 
 \begin_layout Subsubsection
-Unsupervised Pre-training Using Autoencoder (breast_cancer_03_ai, _03_al,
- _03_am, _03_ao)
+Unsupervised Pre-training Using Autoencoder
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,_al,_am,_ao)"
+name "sub:Unsupervised-pre-training-using-autoencoder"
 
 \end_inset
 
@@ -6008,6 +6056,45 @@ name "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,_al,_
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_03_ai
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_03_al
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_03_am
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_03_ao
+\end_layout
+
+\end_inset
+
 Settings for unsupervised pre-training of the autoencoders are given in
  table 
 \begin_inset CommandInset ref
@@ -6016,7 +6103,7 @@ reference "tab:deepnet-settings-for-breast_cancer_03_ai,_al,_am,_ao"
 
 \end_inset
 
-.
+ (named breast_cancer_03_ai - am,ao).
  The only differences between the models are in 
 \begin_inset Formula $base\mbox{\_}epsilon$
 \end_inset
@@ -6866,16 +6953,24 @@ Settings for the unsupervised pre-training autoencoders breast_cancer_03_ai,
 \end_layout
 
 \begin_layout Subsubsection
-Supervised Classification with Unsupervised Pre-trained Autoencoder (breast_canc
-er_06_ae - ah)
+Supervised Classification with Unsupervised Pre-trained Autoencoder
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_06_ae - ah
+\end_layout
+
+\end_inset
+
 When training a neural network using back-propagation that was pre-trained
  using one of the four autoencoders described in the previous section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,_al,_am,_ao)"
+reference "sub:Unsupervised-pre-training-using-autoencoder"
 
 \end_inset
 
@@ -6884,7 +6979,7 @@ reference "sub:Unsupervised-pre-training-using-autoencoder-(breast_cancer_03_ai,
  As we will see in section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-breast_cancer_07"
+reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels"
 
 \end_inset
 
@@ -6898,7 +6993,7 @@ Like for RBMs, we also tried using 2 hidden layers instead of 1, but this
 \end_layout
 
 \begin_layout Subsubsection
-Examining the Output of breast_cancer_06_aa/_n302_cv1
+High Label Prediction Bias
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Examining-biased-classifier"
@@ -6909,6 +7004,15 @@ name "par:Examining-biased-classifier"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_06_aa/_n302_cv1
+\end_layout
+
+\end_inset
+
 The lack of the accuracy increasing with the number of labeled training
  samples can be explained by the following observation.
 \end_layout
@@ -7104,10 +7208,10 @@ There is a heavy bias in favor of label 0.
 \end_layout
 
 \begin_layout Subsection
-Equal Number of Class Labels (breast_cancer_07)
+Equal Number of Class Labels 
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-breast_cancer_07"
+name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels"
 
 \end_inset
 
@@ -7115,9 +7219,18 @@ name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-
 \end_layout
 
 \begin_layout Standard
-As in the previous section on breast_cancer_06, we wanted to check whether
- the artificial neural networks accuracies improve with an increasing number
- of labeled samples.
+As in the previous section on breast_cancer_06, in data set 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_07
+\end_layout
+
+\end_inset
+
+breast_cancer_07, we wanted to check whether the artificial neural networks
+ accuracies improve with an increasing number of labeled samples.
  Unlabeled data sets were the same as for breast_cancer_06, see table 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -7155,7 +7268,7 @@ reference "tab:Data-set-breast_cancer_07"
  The testing data set is the same as in breast_cancer_06 and exclusively
  consists of GSE25065 samples, see table 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "tab:Testing-set-for-breast_cancer_06"
 
 \end_inset
@@ -7983,10 +8096,6 @@ Accuracy box plots of TSVM predicting the testing data set of breast_cancer_07.
 
 \begin_layout Subsubsection
 Supervised Classification with Unsupervised Pre-trained RBM
-\begin_inset Newline newline
-\end_inset
-
-(breast_cancer_07_aa - ad)
 \end_layout
 
 \begin_layout Standard
@@ -7994,10 +8103,20 @@ The
 \emph on
 deepnet 
 \emph default
-settings for training runs breast_cancer_07_aa - ad were the same as those
- for breast_cancer_06_aa - ad (see table 
+settings for training runs 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_07_aa - ad
+\end_layout
+
+\end_inset
+
+breast_cancer_07_aa - ad were the same as those for breast_cancer_06_aa
+ - ad (see table 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 
 \end_inset
@@ -8006,14 +8125,14 @@ reference "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 \end_layout
 
 \begin_layout Standard
-The accuracy plots in figure 
+As expected, the accuracy plots in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Accuracy-box-plots-of-breast_cancer_07_aa-ad"
 
 \end_inset
 
- show that all 4 neural networks perform better, the more labeled samples
+ show that all 4 neural networks perform better the more labeled samples
  there are in training.
  In addition the variance of the accuracies decreases, the more labeled
  samples there are in training.
@@ -8064,8 +8183,7 @@ Accuracy box plots of a feed-forward neural network pre-trained with an
 \end_layout
 
 \begin_layout Subsubsection
-Supervised Classification with Unsupervised Pre-trained Autoencoder (breast_canc
-er_07_ae - ah)
+Supervised Classification with Unsupervised Pre-trained Autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -8073,7 +8191,17 @@ The settings for
 \emph on
 deepnet 
 \emph default
-training were as those for breast_cancer_06_ae - ah.
+training of 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_07_ae - ah
+\end_layout
+
+\end_inset
+
+breast_cancer_07_ae - ah were as those for breast_cancer_06_ae - ah.
  As is shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -8081,8 +8209,8 @@ reference "fig:Accuracy-box-plots-of-breast_cancer_07_ae-ah"
 
 \end_inset
 
-, the results were that pre-training with an autoencoder yields similar
- accuracies as pre-training with an RBM.
+, pre-training with an autoencoder yields similar accuracies as pre-training
+ with an RBM.
 \end_layout
 
 \begin_layout Standard
@@ -8130,12 +8258,22 @@ Accuracy box plots of a feed-forward neural network pre-trained with an
 \end_layout
 
 \begin_layout Subsubsection
-Supervised Classification without Pre-training (breast_cancer_07_ai - aj)
+Supervised Classification without Pre-training
 \end_layout
 
 \begin_layout Standard
-Finally, we trained the neural networks with no pre-training at all, but
- using only back-propagation.
+Finally, in 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_07_ai - aj
+\end_layout
+
+\end_inset
+
+breast_cancer_07_ai - aj, we trained the neural networks with no pre-training
+ at all, but using only back-propagation.
  The 
 \emph on
 deepnet
@@ -9019,7 +9157,7 @@ r_07 are lower than those on breast_cancer_06, indicating the higher difficulty
 \end_layout
 
 \begin_layout Subsubsection
-Examining the Output of breast_cancer_07_aa/_n090_cv1
+Confusion Table of Predicted Classes
 \end_layout
 
 \begin_layout Standard
@@ -9183,8 +9321,18 @@ name "tab:predictions-of-breast_cancer_07_aa"
 
 \end_inset
 
-Labels predicted by breast_cancer_07_aa/_n090_cv1 on training, validation,
- and testing data set.
+Labels predicted by 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_07_aa/_n090_cv1
+\end_layout
+
+\end_inset
+
+breast_cancer_07_aa/_n090_cv1 on training, validation, and testing data
+ set.
 \end_layout
 
 \end_inset
@@ -9313,6 +9461,12 @@ predicted label 1
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Confusion-table-of-breast_cancer_07_aa/_n090_cv1"
+
+\end_inset
+
 Confusion table of the predictions made by breast_cancer_07_aa/_n090_cv1
  (which was trained on 90 labeled samples) on the testing data set of data
  set breast_cancer_07.
@@ -9329,7 +9483,14 @@ Confusion table of the predictions made by breast_cancer_07_aa/_n090_cv1
 \end_layout
 
 \begin_layout Standard
-We made a confusion table on the predictions in the testing data set.
+The confusion table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Confusion-table-of-breast_cancer_07_aa/_n090_cv1"
+
+\end_inset
+
+ shows the predicted and true labels in the testing data set.
  It shows that most predicted label 1 samples are actually label 0 samples
  (
 \begin_inset Formula $\frac{39}{39+26}$
@@ -9428,7 +9589,7 @@ n090_cv1.
 \end_layout
 
 \begin_layout Section
-Different Normalizations (breast_cancer_08)
+Different Normalizations
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:breast_cancer_08"
@@ -9452,8 +9613,18 @@ maybe TODO: evtl.
 \begin_layout Standard
 One of the goals of this work was to show that adding unlabeled samples
  increases accuracy in semi-supervised classification.
- To achieve that goal, in breast_cancer_08, we built data sets with a constant
- number of labeled samples and an increasing number of unlabeled samples.
+ To achieve that goal, in 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_08
+\end_layout
+
+\end_inset
+
+breast_cancer_08, we built data sets with a constant number of labeled samples
+ and an increasing number of unlabeled samples.
 \end_layout
 
 \begin_layout Standard
@@ -9488,7 +9659,7 @@ Labeled training and testing data are balanced with respect to the number
  prefers the label it was shown more often during training.
  (See 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "par:Examining-biased-classifier"
 
 \end_inset
@@ -10374,22 +10545,7 @@ reference "tab:design-of-breast_cancer_08"
 .
 \end_layout
 
-\begin_layout Subsection
-Unsupervised Reconstruction Error in Autoencoder Pre-training
-\end_layout
-
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: insert reconstruction errors for MAS5-normalized data with additional
- logarithmizing.
-\end_layout
-
-\end_inset
-
-
 \begin_inset Float table
 wide false
 sideways false
@@ -10875,6 +11031,24 @@ TODO: reconstruction error of logarithmized MAS5.
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Subsection
+Unsupervised Reconstruction Error in Autoencoder Pre-training
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: insert reconstruction errors for MAS5-normalized data with additional
+ logarithmizing.
+\end_layout
+
+\end_inset
+
 Before looking at the accuracies of the supervised classifier, we looked
  at unsupervised pre-training using an autoencoder.
  The reconstruction error for each normalization is shown in table 
@@ -10947,10 +11121,6 @@ After pre-training, the artificial neural networks were fine-tuned using
 
 \begin_layout Subsection
 Supervised Classification with Unsupervised Pre-trained Autoencoder
-\end_layout
-
-\begin_layout Standard
-The architecture of the classifier network was 500-1000-1.
 \end_layout
 
 \begin_layout Standard
@@ -11105,7 +11275,40 @@ t-data.pbtxt, and mas5_combat-data.pbtxt in breast_cancer_08.
 
 \end_inset
 
+The architecture of the classifier network was 500-1000-1.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:accuracy-plots-for-breast_cancer_08"
 
+\end_inset
+
+ shows the resulting accuracy box plots for the different normalizations.
+ None of the plots show a clear increasing accuracy from data set 1 to data
+ set 4.
+ However, the silhouettes of the box-plots seem to show increasing accuracy.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+Silhouette
+\begin_inset Quotes erd
+\end_inset
+
+ means, for each data set, the interval from the accuracy of the repetition
+ with lowest to the accuracy of the repetition with highest accuracy; or
+ differently, the maximal outliers.
+ In addition, the median of the accuracies of data set 1 is smaller than
+ the median of the accuracies of both data set 3 and 4, for every normalization.
+ The fact that the median of the accuracies of data set 2 is not always
+ greater than the median of the accuracies of data set 1 could be due to
+ randomness in data subsampling when creating the 5 repetitions.
+ Another reason could be that the 28 additional unlabeled samples (
+\begin_inset Formula $29-15=14$
+\end_inset
+
+ label 0 samples, and 14 label 1 samples) provide little benefit to a pre-traine
+d classifier.
 \end_layout
 
 \begin_layout Subsubsection
@@ -11116,14 +11319,14 @@ Different Normalizations
 When comparing the accuracies yielded by the different normalizations to
  each other, a table of the mean accuracies for each normalization and data
  sets 1-4 is helpful.
- See table 
+ Table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Mean-accuracies-for-each-normalization"
 
 \end_inset
 
-.
+ shows the following:
 \end_layout
 
 \begin_layout Standard
@@ -11644,10 +11847,6 @@ Mean accuracies for each normalization and data set in breast_cancer_08.
 
 \end_layout
 
-\begin_layout Standard
-It shows the following:
-\end_layout
-
 \begin_layout Itemize
 RMA alone (i.e.
  without ComBat pre-processing) out-performs all other tested combinations
@@ -11707,59 +11906,8 @@ On second thought, ZCA whitening is non-sensical in expression data since
 
 \end_layout
 
-\begin_layout Subsection
-Does Adding Unlabeled Samples Help in Semi-supervised Neural Network Training?
-\end_layout
-
-\begin_layout Standard
-Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:accuracy-plots-for-breast_cancer_08"
-
-\end_inset
-
- shows the accuracies box plots for the different normalizations tried.
- None of the plots show a clear increasing accuracy from data set 1 to data
- set 4.
- However, the silhouettes of the box-plots of figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:accuracy-plots-for-breast_cancer_08"
-
-\end_inset
-
- seem to show increasing accuracy.
- 
-\begin_inset Quotes eld
-\end_inset
-
-Silhouette
-\begin_inset Quotes erd
-\end_inset
-
- means, for each data set, the interval from the accuracy of the repetition
- with lowest to the accuracy of the repetition with highest accuracy; or
- differently, the maximal outliers.
- In addition, the median of the accuracies of data set 1 is smaller than
- the median of the accuracies of both data set 3 and 4, for every normalization.
- The fact that the median of the accuracies of data set 2 is not always
- greater than the median of the accuracies of data set 1 could be due to
- randomness in data subsampling when creating the 5 repetitions.
- Another reason could be that the 28 additional unlabeled samples (
-\begin_inset Formula $29-15=14$
-\end_inset
-
- label 0 samples, and 14 label 1 samples) provide little benefit to a pre-traine
-d classifier.
-\end_layout
-
 \begin_layout Section
 Comparison of SVM, TSVM, FFN, DBN
-\begin_inset Newline newline
-\end_inset
-
-(breast_cancer_12)
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:breast_cancer_12"
@@ -11773,8 +11921,17 @@ name "sec:breast_cancer_12"
 A flaw in the design of the data sets of breast_cancer_08 is that the number
  of label 0 and label 1 samples is not balanced.
  This is due to the class imbalance in GSE25055 and GSE25065.
- The next data set breast_cancer_12 thus had balanced classes in the unlabeled
- training samples.
+ The next data set 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_12
+\end_layout
+
+\end_inset
+
+breast_cancer_12 thus had balanced classes in the unlabeled training samples.
 \end_layout
 
 \begin_layout Standard
@@ -25473,7 +25630,7 @@ n accuracy.
 \end_layout
 
 \begin_layout Section
-Less Network Parameters (breast_cancer_15)
+Less Network Parameters
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:breast_cancer_15"
@@ -25486,7 +25643,17 @@ name "sec:breast_cancer_15"
 \begin_layout Standard
 Since breast_cancer_12 has a negative result in summary, because it cannot
  confirm the benefit of adding unlabled samples to training, in data set
- breast_cancer_15 we considered the differences in data sources and artificial
+ 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+breast_cancer_15
+\end_layout
+
+\end_inset
+
+breast_cancer_15 we considered the differences in data sources and artificial
  neural network configurations between our and the ones in image recognition,
  where DBNs are successful.
  We also increased the number of input genes from the 500 most variable
@@ -27982,7 +28149,7 @@ To check whether there is a dependence of accuracies on the amount of unlabeled
  samples available to training, we use a paired (over the repetitions) and
  two-sided Wilcoxon test (see 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
 
 \end_inset
