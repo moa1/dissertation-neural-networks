@@ -521,6 +521,16 @@ name "tab:GSE25055-GSE25065-sample-number"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Number of samples in GEO datasets GSE25055 and GSE25065.
+\end_layout
+
+\end_inset
+
 Number of samples in GEO datasets GSE25055 and GSE25065.
  
 \begin_inset Quotes eld
@@ -1051,7 +1061,17 @@ name "fig:Example-of-supervised-model-selection"
 
 \end_inset
 
-Example of supervised model selection.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example of supervised model selection using accuracy smoothing.
+\end_layout
+
+\end_inset
+
+Example of supervised model selection using accuracy smoothing.
  The x-axis is the training iteration, the y-axis the accuracy.
  The turquoise, green, and black circle clouds are the raw accuracies on
  the training, validation, and test set, respectively.
@@ -1605,6 +1625,17 @@ T_E was still falling
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:Effect-of-learning-rate-on-reconstruction-error"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example of the effect of the learning rate base_epsilon on reconstruction
+ error.
+\end_layout
 
 \end_inset
 
@@ -2299,8 +2330,19 @@ name "fig:Reconstruction-error-breast_cancer_0"
 
 \end_inset
 
-Left: True (x-axis) versus reconstructed (y-axis) expression values of data
- set breast_cancer_0.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Rectionstruction error of data set breast_cancer_0.
+\end_layout
+
+\end_inset
+
+Rectionstruction error of data set breast_cancer_0.
+ Left: True (x-axis) versus reconstructed (y-axis) expression values of
+ data set breast_cancer_0.
  The heatmap shows pixels from red over yellow to white.
  A pixel in red means zero genes and in white means many genes that have
  the pixel's true and reconstructed expression value.
@@ -3353,6 +3395,16 @@ label 1
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:training-and-validation-sets-of-breast_cancer_06"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Sample distribution of training and validation sets of breast_cancer_06.
+\end_layout
 
 \end_inset
 
@@ -4718,6 +4770,16 @@ name "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Settings for unsupervised pre-training RBMs breast_cancer_04_bg - bj.
+\end_layout
+
+\end_inset
+
 Settings for unsupervised pre-training RBMs breast_cancer_04_bg - bj.
  No entry in a cell means that it has the same value as the cell to the
  left.
@@ -4757,6 +4819,16 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Reconstruction error of training, validation and testing data sets.
+\end_layout
 
 \end_inset
 
@@ -5931,7 +6003,24 @@ name "tab:deepnet-settings-for-breast_cancer_06_aa-ad"
 
 \end_inset
 
-Settings for the classifiers breast_cancer_06_aa - ad.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $deepnet$
+\end_inset
+
+ settings for the classifiers breast_cancer_06_aa - ad.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $deepnet$
+\end_inset
+
+ settings for the classifiers breast_cancer_06_aa - ad.
  Each classifier is initialized using an unsupervisedly pre-trained RBM,
  and trained supervisedly on data set breast_cancer_06.
  No entry in a cell means that it has the same value as the cell to the
@@ -6011,6 +6100,16 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:accuracy-plots-of-breast_cancer_06_aa-ad"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Box plots showing the accuracies of the models breast_cancer_06_aa - ad.
+\end_layout
 
 \end_inset
 
@@ -6953,8 +7052,19 @@ name "tab:deepnet-settings-for-breast_cancer_03_ai,_al,_am,_ao"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
 Settings for the unsupervised pre-training autoencoders breast_cancer_03_ai,
- _03_al, _03_am, _03_ao.
+ _03_al, _03_am, and _03_ao.
+\end_layout
+
+\end_inset
+
+Settings for the unsupervised pre-training autoencoders breast_cancer_03_ai,
+ _03_al, _03_am, and _03_ao.
  No entry in a cell means that it has the same value as the cell to the
  left.
 \end_layout
@@ -7921,7 +8031,17 @@ name "tab:Data-set-breast_cancer_07"
 
 \end_inset
 
-Data set breast_cancer_07.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Samples in data set breast_cancer_07.
+\end_layout
+
+\end_inset
+
+Samples in data set breast_cancer_07.
  
 \begin_inset Quotes eld
 \end_inset
@@ -8013,7 +8133,17 @@ name "fig:Accuracy-box-plots-of-SVM-on-breast_cancer_07"
 
 \end_inset
 
-Accuracy box plots of SVM predicting the testing data set of breast_cancer_07.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Accuracy box plots of SVM predicting data set breast_cancer_07.
+\end_layout
+
+\end_inset
+
+Accuracy box plots of SVM predicting the testing data of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
  of labeled samples.
  On the y-axis are the accuracies obtained on the testing data.
@@ -8092,6 +8222,16 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Accuracy-box-plots-of-TSVM-on-breast_cancer_07"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Accuracy box plots of TSVM predicting data set of breast_cancer_07.
+\end_layout
 
 \end_inset
 
@@ -8182,6 +8322,17 @@ name "fig:Accuracy-box-plots-of-breast_cancer_07_aa-ad"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Accuracy box plots of a feed-forward neural network pre-trained with an
+ RBM, predicting the testing data set of breast_cancer_07.
+\end_layout
+
+\end_inset
+
 Accuracy box plots of a feed-forward neural network pre-trained with an
  RBM, predicting the testing data set of breast_cancer_07.
  On the x-axis are the sizes of the data sets containing an increasing number
@@ -8254,6 +8405,17 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Accuracy-box-plots-of-breast_cancer_07_ae-ah"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Accuracy box plots of a feed-forward neural network pre-trained with an
+ autoencoder, predicting the testing data set of breast_cancer_07.
+\end_layout
 
 \end_inset
 
@@ -9025,6 +9187,16 @@ name "tab:deepnet-settings-for-breast_cancer_07_ai-aj"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Settings for the classifiers breast_cancer_07_ai - aj.
+\end_layout
+
+\end_inset
+
 Settings for the classifiers breast_cancer_07_ai - aj, which is trained
  using backpropagation only (without pre-training).
  Each classifier is trained supervisedly on data set breast_cancer_07.
@@ -9071,6 +9243,17 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Accuracy-box-plots-of-breast_cancer_07_ai-aj"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Accuracy box plots of feed-forward neural networks not pre-trained, predicting
+ the testing data set of breast_cancer_07.
+\end_layout
 
 \end_inset
 
@@ -9484,6 +9667,16 @@ name "tab:Confusion-table-of-breast_cancer_07_aa/_n090_cv1"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Confusion table of the predictions made by breast_cancer_07_aa/_n090.
+\end_layout
+
+\end_inset
+
 Confusion table of the predictions made by breast_cancer_07_aa/_n090_cv1
  (which was trained on 90 labeled samples) on the testing data set of data
  set breast_cancer_07.
@@ -9586,6 +9779,16 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Histogram-of-probabilities-of-breast_cancer_07"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Histogram of probabilities of samples predicted wrongly.
+\end_layout
 
 \end_inset
 
@@ -10222,6 +10425,16 @@ proportions 0:1
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:design-of-breast_cancer_08"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+The design of data set breast_cancer_08.
+\end_layout
 
 \end_inset
 
@@ -11021,6 +11234,16 @@ name "tab:Reconstruction-error-for-breast_cancer_08"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Reconstruction error for differently normalized data.
+\end_layout
+
+\end_inset
+
 Reconstruction error for differently normalized data.
  In the rows are the different normalizations, and in the columns the data
  sets.
@@ -11275,6 +11498,17 @@ mas5_combat-data.pbtxt
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:accuracy-plots-for-breast_cancer_08"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Box-plot for neural network prediction pre-trained with an autoencoder on
+ differently normalized data sets.
+\end_layout
 
 \end_inset
 
@@ -14393,7 +14627,18 @@ name "tab:design-of-breast_cancer_12"
 
 \end_inset
 
-In data set breast_cancer_12, there are always 42|42 testing samples.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Data set design of breast_cancer_12.
+\end_layout
+
+\end_inset
+
+Data set design of breast_cancer_12.
+ There are always 42|42 testing samples.
  There is no overlap between 
 \begin_inset Note Note
 status open
@@ -14733,9 +14978,21 @@ name "fig:Accuracy-comparison-of-breast_cancer_12"
 
 \end_inset
 
-Accuracy comparison of (a) supervised feed-forward network, (b) semi-supervised
- deep belief network, (c) supervised support vector machine (d) semi-supervised
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Accuracy comparison of supervised feed-forward network, semi-supervised
+ deep belief network, supervised support vector machine, and semi-supervised
  transductive support vector machine.
+\end_layout
+
+\end_inset
+
+Accuracy comparison of (a) supervised feed-forward network, (b) semi-supervised
+ deep belief network, (c) supervised support vector machine, and (d) semi-superv
+ised transductive support vector machine.
  On the x-axis of each plot are the sub-data-sets (of breast_cancer_12)
  predicted for each algorithm, on the y-axis is the accuracy.
 \end_layout
@@ -15978,6 +16235,16 @@ opt-vs-nnet_wipt.gnumeric)
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:breast_cancer_12-FFN-versus-DBN"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of FFN with DBN.
+\end_layout
 
 \end_inset
 
@@ -17367,6 +17634,16 @@ name "tab:breast_cancer_12-SVM-versus-TSVM"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of SVM with TSVM.
+\end_layout
+
+\end_inset
+
 Comparison of SVM with TSVM.
  See table 
 \begin_inset CommandInset ref
@@ -17773,6 +18050,16 @@ c, row
 \end_inset
 
 .
+\end_layout
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of FFN with SVM.
 \end_layout
 
 \end_inset
@@ -22868,6 +23155,16 @@ name "tab:breast_cancer_12-TSVM-versus-DBN"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of DBN with TSVM.
+\end_layout
+
+\end_inset
+
 Comparison of DBN with TSVM.
  See table 
 \begin_inset CommandInset ref
@@ -25622,7 +25919,17 @@ name "tab:breast_cancer_12-TSVM-versus-TSVM"
 
 \end_inset
 
-Comparison of TSVM with different numbers of unlabeled samples.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Comparison of TSVM with TSVM on different numbers of unlabeled samples.
+\end_layout
+
+\end_inset
+
+Comparison of TSVM with TSVM on different numbers of unlabeled samples.
  See table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -26365,6 +26672,20 @@ data set
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:breast_cancer_12-number-r"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+The number 
+\begin_inset Formula $r$
+\end_inset
+
+ for 10 hidden nodes in data set breast_cancer_15.
+\end_layout
 
 \end_inset
 
@@ -28015,8 +28336,19 @@ name "tab:design-of-breast_cancer_15"
 
 \end_inset
 
-breast_cancer_15 contains 37|37 labeled testing, 10|10 labeled training,
- 10|10 labeled validation, 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Data set design of breast_cancer_15.
+\end_layout
+
+\end_inset
+
+Data set design of breast_cancer_15.
+ It contains 37|37 labeled testing, 10|10 labeled training, 10|10 labeled
+ validation, 
 \begin_inset Formula $128|32*4$
 \end_inset
 
@@ -28124,6 +28456,17 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Accuracy-in-breast_cancer_15"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Test set accuracies for different data sets with more and more unlabeled
+ training samples in a DBN on breast_cancer_15.
+\end_layout
 
 \end_inset
 
@@ -28259,7 +28602,17 @@ name "fig:Accuracy-box-plots-of-breast_cancer_15"
 
 \end_inset
 
-TSVM accuracies box plots on breast_cancer_15.
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+TSVM accuracies box plots on data set breast_cancer_15.
+\end_layout
+
+\end_inset
+
+TSVM accuracies box plots on data set breast_cancer_15.
  On the x-axis are the data sets in order of increasing number of unlabeled
  samples.
  The y-axis are the accuracies.

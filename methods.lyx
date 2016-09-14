@@ -1427,6 +1427,16 @@ name "fig:Example-of-an-Undirected-Graph"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example of an Undirected Graph.
+\end_layout
+
+\end_inset
+
 Example of an Undirected Graph encoding the following conditional independencies
 : the node pairs (N1,N4), (N1,N5), (N2,N4), (N2,N5),(N4,N5) are conditionally
  independent given node N3.
@@ -1934,6 +1944,16 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Example-of-a-Directed-Graph"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example of a Directed Graph.
+\end_layout
 
 \end_inset
 
@@ -5748,6 +5768,16 @@ name "fig:Example-of-a-Hopfield-Network"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example of a Hopfield Network.
+\end_layout
+
+\end_inset
+
 Example of a Hopfield Network.
  The circles are the nodes; the arrows are the (directed) connections.
 \end_layout
@@ -9119,6 +9149,17 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:supervised-network-on-top-of-unsupervised"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+How a supervised network is trained on top of a pre-trained unsupervised
+ network.
+\end_layout
 
 \end_inset
 

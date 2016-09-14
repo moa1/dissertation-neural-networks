@@ -337,6 +337,16 @@ name "fig:Schematic-image-of-biological-neurons"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Schematic image of three biological neurons.
+\end_layout
+
+\end_inset
+
 Schematic image of three biological neurons.
  A: neuron body B: nucleus C: dendrite D: synapse E: axon projecting from
  a distant neuron.
@@ -396,6 +406,16 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Schema-of-chemical-synapse"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Schema of a chemical synapse.
+\end_layout
 
 \end_inset
 
@@ -1469,6 +1489,16 @@ name "fig:Illustration-of-semi-supervised-learning"
 
 \end_inset
 
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Illustration of semi-supervised learning in two dimensions.
+\end_layout
+
+\end_inset
+
 Illustration of semi-supervised learning in two dimensions.
  Each axis is a dimension.
  Circles are samples; filled circles are labeled samples; unfilled circles
@@ -1747,6 +1777,16 @@ status open
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Data-flow-in-back-propagation"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Data flow in training a neural network using back-propagation.
+\end_layout
 
 \end_inset
 
@@ -2369,6 +2409,17 @@ deep convolutional neural network
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:ILSVRC-Test-set-accuracies"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Test set accuracies and techniques of winning contestants in the ImageNet
+ Large Scale Visual Recognition Challenge from 2010-2014.
+\end_layout
 
 \end_inset
 
