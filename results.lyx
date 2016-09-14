@@ -22763,7 +22763,6 @@ sets.
 
 \begin_layout Standard
 \begin_inset Float table
-placement p
 wide false
 sideways false
 status open
@@ -25511,7 +25510,12 @@ key "HintonTeh2006"
 \end_inset
 
  weights.
- (
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+(
 \begin_inset Quotes eld
 \end_inset
 
@@ -25521,7 +25525,17 @@ Section 6 shows the pattern recognition performance of a network with three
 \begin_inset Quotes erd
 \end_inset
 
-) They used 44000 training samples (
+) 
+\end_layout
+
+\end_inset
+
+They used 44000 training samples
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+ (
 \begin_inset Quotes eld
 \end_inset
 
@@ -25529,7 +25543,17 @@ The network shown in Figure 1 was trained on 44,000 of the training images
 \begin_inset Quotes erd
 \end_inset
 
-) with 28*28 pixels each (their Figure 1: 
+)
+\end_layout
+
+\end_inset
+
+ with 28*28 pixels each
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+(their Figure 1: 
 \begin_inset Quotes eld
 \end_inset
 
@@ -25537,7 +25561,12 @@ The network shown in Figure 1 was trained on 44,000 of the training images
 \begin_inset Quotes erd
 \end_inset
 
-).
+)
+\end_layout
+
+\end_inset
+
+.
  So altogether they have about 34.5 million 
 \begin_inset Quotes eld
 \end_inset
@@ -25619,7 +25648,8 @@ This can be changed by using all
 \begin_inset Formula $h$
 \end_inset
 
-.
+ (assuming for simplicity that all hidden layers have the same number of
+ nodes).
  If we take 
 \begin_inset Formula $i=22,283$
 \end_inset
@@ -27861,9 +27891,22 @@ base_epsilon
 \emph default
 ) was decreased from 0.01 to 0.001 for the pre-training of hidden layer 1,
  and from 0.001 to 0.0001 for pre-training hidden layers 2 and 3.
- We also changed the batch size from 100 to 1000, which is more inefficient,
- but iterates over all training samples before changing weights, and thus
- approximates the derivative of the weights more faithfully.
+ We also changed the mini-batch
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In training, the network parameters' deltas are alternatingly computed,
+ then applied.
+ The mini-batch is the number of samples whose deltas are added before the
+ network parameters are changed.
+\end_layout
+
+\end_inset
+
+ size from 100 to 1000, which is more inefficient, but iterates over all
+ training samples before changing weights, and thus approximates the derivative
+ of the weights more faithfully.
 \end_layout
 
 \begin_layout Subsection
@@ -27945,61 +27988,15 @@ reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
 \end_inset
 
 ).
- The p-value for the accuracy difference between data sets 2 and 6 is 0.089,
- which some people consider significant.
+ The p-value for the accuracy difference between data sets 2 and 6 is 0.089.
  The estimated difference between accuracies of data sets 2 and 6 is 2.8
  percent points (0.028).
  (The 95% confidence interval for the difference is [-0.46; 6.7] percent points.)
- Depending on what one considers significant, this shows a dependence of
- accuracy on the number of unlabeled samples.
+ This shows a slight dependence of accuracy on the number of unlabeled samples.
 \end_layout
 
 \begin_layout Subsection
 TSVM Accuracies
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/breast_cancer_15-accuracies-svmlight.pdf
-	width 68col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Accuracy-box-plots-of-breast_cancer_15"
-
-\end_inset
-
-TSVM accuracies box plots on breast_cancer_15.
- On the x-axis are the data sets in order of increasing number of unlabeled
- samples.
- The y-axis are the accuracies.
- Each dot is the accuracy of a repetition of a data set of breast_cancer_15.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -28046,6 +28043,50 @@ When training a TSVM only on the training data (but leaving away the validation
  This may show that semi-supervised training using a TSVM fails when not
  a sufficient number of unlabeled training samples is available.
  Training the TSVM (supervisedly) using data set 1 did not fail.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/breast_cancer_15-accuracies-svmlight.pdf
+	width 68col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Accuracy-box-plots-of-breast_cancer_15"
+
+\end_inset
+
+TSVM accuracies box plots on breast_cancer_15.
+ On the x-axis are the data sets in order of increasing number of unlabeled
+ samples.
+ The y-axis are the accuracies.
+ Each dot is the accuracy of a repetition of a data set of breast_cancer_15.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

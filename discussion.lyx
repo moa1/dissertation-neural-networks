@@ -79,6 +79,10 @@ We tried finding evidence that adding unlabeled data to semi-supervised
  cancer recurrence after chemotherapy.
 \end_layout
 
+\begin_layout Subsection
+Related Work
+\end_layout
+
 \begin_layout Paragraph
 Using Tumour Expression Data Directly to Classify Recurrence
 \end_layout
@@ -190,6 +194,85 @@ key "AppelSpang2011"
  However, neural networks' versatility can also be a disadvantage: it is
  often not clear what component or parameter to modify to achieve a desired
  result.
+\end_layout
+
+\begin_layout Paragraph
+Differences Between Object Recognition Tasks and Cancer Recurrence Prediction
+\end_layout
+
+\begin_layout Standard
+In different settings the pre-training and back-propagation approach worked
+ well 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ErhanBengio2010"
+
+\end_inset
+
+.
+ There are some differences between those fields and the scenario of microarray
+ expression data: The dimensionality of microarrays is usually higher than
+ that of images or phonemes.
+ Expression data sets differ from these data sets in mainly two aspects:
+ their dimensionality is higher (~1000 pixels versus ~20,000 genes), but
+ the training set sizes are several magnitudes smaller (thousands to tenthousand
+s versus tens to hundreds).
+ For example, in the image classification task in the ImageNet Large Scale
+ Visual Recognition Challenge 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RussakovskyFeiFei2015"
+
+\end_inset
+
+, there are an average of 
+\begin_inset Formula $\approx$
+\end_inset
+
+1,200 images per class, while in the GSE25055 data set, there are 249 class
+ 0 and 57 class 1 samples.
+\end_layout
+
+\begin_layout Standard
+The fact that there is a much smaller number of labeled and unlabeled samples
+ in expression data than in image recognition is probably due to several
+ factors: price, logistical and ethical issues.
+ The price of microarrays (and RNASeq) is magnitudes larger (hundreds of
+ Euros or dollars) than the price to take and label pictures of hand-written
+ digits or objects (images are ubiquitous on the internet, and manual or
+ computer-assisted labeling is relatively cheap).
+ In addition, expression data aquisition does not merely consist of putting
+ cDNA onto microarrays, but the process also involves selection of patients
+ according to ethical criteria, keeping track of patients' whereabouts and
+ collecting clinical parameters over an extended time-span (
+\begin_inset Quotes eld
+\end_inset
+
+follow-up
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The difficulty of the learning task seems higher than that of recognizing
+ digits, where accuracies of 96% can be achieved by nearest neighbor classifiers.
+ However, it may be comparable to the object recognition tasks, that had
+ accuracies around 70% using SVMs in the ImageNet Large Scale Visual Recognition
+ Challenge.
+\end_layout
+
+\begin_layout Subsection
+Summary of Own Approaches
+\end_layout
+
+\begin_layout Standard
+To sum up, we tried different training parameters, different network architectur
+es (with many free parameters relative to training data set size, and with
+ few free parameters), different normalizations, different data set compositions.
+ A small improvement in testing set accuracy was achieved by using additional
+ unlabeled data during training.
 \end_layout
 
 \begin_layout Paragraph
@@ -358,61 +441,12 @@ Only the very last approaches tried (data set breast_cancer_15) showed a
  Whether the benefit is due to the second or third point remains to be seen.
 \end_layout
 
-\begin_layout Paragraph
-Differences Between Object Recognition Tasks and Cancer Recurrence Prediction
-\end_layout
-
-\begin_layout Standard
-In different settings this approach worked well 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ErhanBengio2010"
-
-\end_inset
-
-.
- There are some differences between those fields and the scenario of microarray
- expression data: The dimensionality of microarrays is usually higher than
- that of images or phonemes.
- Expression data sets differ from these data sets in mainly two aspects:
- their dimensionality is higher (~1000 pixels versus ~20,000 genes), but
- the training set sizes are several magnitudes smaller (thousands to tenthousand
-s versus tens to hundreds).
- For example, in the image classification task in the ImageNet Large Scale
- Visual Recognition Challenge 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RussakovskyFeiFei2015"
-
-\end_inset
-
-, there are an average of 
-\begin_inset Formula $\approx$
-\end_inset
-
-1,200 images per class, while in the GSE25055 data set, there are 249 class
- 0 and 57 class 1 samples.
-\end_layout
-
-\begin_layout Standard
-The fact that there is a much smaller number of labeled and unlabeled samples
- in expression data than in image recognition is probably due to prices.
- The price of microarrays (and RNASeq) is magnitudes larger (hundreds of
- Euros or dollars) than the price to take and label pictures of hand-written
- digits or objects (images are ubiquitous on the internet, and manual or
- computer-assisted labeling is relatively cheap).
-\end_layout
-
-\begin_layout Standard
-The difficulty of the learning task seems higher than that of recognizing
- digits, where accuracies of 96% can be achieved by nearest neighbor classifiers.
- However, it may be comparable to the object recognition tasks, that had
- accuracies around 70% using SVMs in the ImageNet Large Scale Visual Recognition
- Challenge.
+\begin_layout Subsection
+Outlook
 \end_layout
 
 \begin_layout Paragraph
-Outlook: More output
+More Advanced Prediction Schemes
 \end_layout
 
 \begin_layout Standard
@@ -428,7 +462,7 @@ More sophisticated prediction schemes can be imagined so that the prediction
 \end_layout
 
 \begin_layout Paragraph
-Outlook: Multiplying of Training Samples
+Multiplying of Training Samples
 \end_layout
 
 \begin_layout Standard
@@ -466,7 +500,26 @@ Having such a transformation for expression data would be very useful, not
  unrelated gene.
  (Note that adding some sort of noise onto the expression levels would be
  equivalent to adding noise to the image, which is not equivalent to shifting
- the image.) A possible approach could be to look for gene modules that consist
+ the image.)
+\end_layout
+
+\begin_layout Standard
+One approach could be to use different normalization methods, parameters,
+ and random number seeds used in some normalization methods to obtain multiple
+ copies of the same raw data set, but with small changes providing different
+ 
+\begin_inset Quotes eld
+\end_inset
+
+points of view
+\begin_inset Quotes erd
+\end_inset
+
+ of the data.
+\end_layout
+
+\begin_layout Standard
+Another possible approach could be to look for gene modules that consist
  of redundant genes, and permute their expression values among the redundacy
  group.
  This would require knowledge about gene modules in advance.
@@ -507,18 +560,6 @@ measured
  training samples (each training sample is labeled like the measured samples
  used in the training sample generation).
  Use these generated training samples as input for a supervised DBN.
-\end_layout
-
-\begin_layout Paragraph
-In Summary
-\end_layout
-
-\begin_layout Standard
-To sum up, we tried different training parameters, different network architectur
-es (with many free parameters relative to training data set size, and with
- few free parameters), different normalizations, different data set compositions.
- Only a small improvement in testing set accuracy was achieved by using
- additional unlabeled data during training.
 \end_layout
 
 \begin_layout Standard
