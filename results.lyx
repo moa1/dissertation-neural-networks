@@ -614,45 +614,55 @@ Overview Over the Following Sections
 \end_layout
 
 \begin_layout Standard
-First we compressed the 10,000 most variable genes of GSE25055 into only
- 50 numbers and observed only little reconstruction error for most genes,
- in section 
+In 
+\series bold
+section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Unsupervised-Reconstruction-of-Expression-Values"
 
 \end_inset
 
-.
+
+\series default
+ we compress the 10,000 most variable genes of GSE25055 into only 50 numbers
+ and observe only little reconstruction error for most genes.
 \end_layout
 
 \begin_layout Standard
 Then the performance benefit of neural networks using an increasing number
- of labeled samples was assessed.
+ of labeled samples is assessed.
  The benefit of using more labeled training samples on testing set accuracy
- is well-established in machine learning, and was also observed in section
- 
+ is well-established in machine learning, and is also observed in 
+\series bold
+section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:breast_cancer_06-and-breast_cancer_07"
 
 \end_inset
 
+
+\series default
 .
 \end_layout
 
 \begin_layout Standard
-In section 
+In 
+\series bold
+section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:breast_cancer_08"
 
 \end_inset
 
-, we started to investigate the question whether adding unlabeled samples
+
+\series default
+, we begin to investigate the question whether adding unlabeled samples
  to pre-training improves the testing set accuracy.
  To diminish the possibility that the input to the algorithms does not contain
- the information required for prediction, we measured prediction accuracy
+ the information required for prediction, we measur prediction accuracy
  after using four normalization methods: Robust Multi-Chip Average (RMA)
  
 \begin_inset CommandInset citation
@@ -679,29 +689,37 @@ key "JohnsonRabinovic2007"
 \end_layout
 
 \begin_layout Standard
-In section 
+In 
+\series bold
+section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:breast_cancer_12"
 
 \end_inset
 
-, we used Deep Belief Networks instead of RBM and autoencoder used previously
- for pre-training, and systematically compared SVM, TSVM, and supervised
+
+\series default
+, we use Deep Belief Networks instead of RBM and autoencoder used previously
+ for pre-training, and systematically compare SVM, TSVM, and supervised
  and semi-supervised neural network variants.
 \end_layout
 
 \begin_layout Standard
-Finally, in section 
+Finally, in 
+\series bold
+section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:breast_cancer_15"
 
 \end_inset
 
-, we drastically reduced the number of neural network parameters by reducing
+
+\series default
+, we drastically reduce the number of neural network parameters by reducing
  the number of hidden nodes compared to the previous networks.
- At the same time, we increased the number of input genes from the 500 most
+ At the same time, we increase the number of input genes from the 500 most
  variable genes to all 22,283 genes.
 \end_layout
 
@@ -725,11 +743,10 @@ One label was on a data set whose prediction reached an accuracy (of about
 
 \begin_layout Standard
 As we will see, only the very last attempts with artificial neural networks
- showed partially that adding unlabeled data in training leads to slightly
+ show partially that adding unlabeled data in training leads to slightly
  better classifiers.
  This is also true for the established semi-supervised TSVM, which only
- showed improvement for the last attempts when adding unlabeled data to
- training.
+ show improvement for the last attempts when adding unlabeled data to training.
  We therefore believe that it is mainly a property of the data set whether
  a semi-supervised machine learning algorithm can benefit from unlabelled
  data.
@@ -915,7 +932,7 @@ early stopping
 \begin_inset Quotes erd
 \end_inset
 
- (see 
+ (see section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Early-stopping"
@@ -1867,6 +1884,44 @@ status open
 
 \end_layout
 
+\begin_layout Subsection
+Nomenclature of Data Sets and Training Runs
+\end_layout
+
+\begin_layout Standard
+The data sets created all have a prefix of 
+\begin_inset Quotes eld
+\end_inset
+
+breast_cancer_
+\begin_inset Quotes erd
+\end_inset
+
+, followed by a consecutive number.
+ For example, 
+\begin_inset Quotes eld
+\end_inset
+
+breast_cancer_04
+\begin_inset Quotes erd
+\end_inset
+
+ is the fourth data set created.
+\end_layout
+
+\begin_layout Standard
+A training run on a data set is indicated by appending two letters to the
+ name of the data set, for example 
+\begin_inset Quotes eld
+\end_inset
+
+breast_cancer_04_aa
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Unsupervised Reconstruction of Expression Values
 \begin_inset CommandInset label
@@ -2279,44 +2334,6 @@ reference "fig:Reconstruction-error-breast_cancer_0"
  is in [0;16], this is equivalent to a relative error of 3.5%.
  This demonstrated that RBMs are able to reduce dimensionality of an expression
  data set while preserving most information.
-\end_layout
-
-\begin_layout Section
-Nomenclature of Data Sets and Training Runs
-\end_layout
-
-\begin_layout Standard
-The data sets created all have a prefix of 
-\begin_inset Quotes eld
-\end_inset
-
-breast_cancer_
-\begin_inset Quotes erd
-\end_inset
-
-, followed by a consecutive number.
- For example, 
-\begin_inset Quotes eld
-\end_inset
-
-breast_cancer_04
-\begin_inset Quotes erd
-\end_inset
-
- is the fourth data set created.
-\end_layout
-
-\begin_layout Standard
-A training run on a data set is indicated by appending two letters to the
- name of the data set, for example 
-\begin_inset Quotes eld
-\end_inset
-
-breast_cancer_04_aa
-\begin_inset Quotes erd
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Section
@@ -9657,7 +9674,7 @@ Labeled training and testing data are balanced with respect to the number
  of label 0 and label 1 samples.
  If a data set were unbalanced, this would lead to a biased classifier which
  prefers the label it was shown more often during training.
- (See 
+ (See section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "par:Examining-biased-classifier"
@@ -14800,7 +14817,7 @@ reference "fig:Accuracy-comparison-of-breast_cancer_12"
 \end_layout
 
 \begin_layout Subsubsection
-Comparison of FFN Versus DBN
+Comparison of FFN With DBN
 \end_layout
 
 \begin_layout Standard
@@ -15964,7 +15981,8 @@ name "tab:breast_cancer_12-FFN-versus-DBN"
 
 \end_inset
 
-Columns 
+Comparison of FFN with DBN.
+ Columns 
 \emph on
 n1
 \emph default
@@ -16027,7 +16045,7 @@ The lowest adjusted p-value is 0.637, which means there is no significant
 \end_layout
 
 \begin_layout Subsubsection
-Comparison of SVM Versus TSVM
+Comparison of SVM With TSVM
 \end_layout
 
 \begin_layout Standard
@@ -17349,7 +17367,8 @@ name "tab:breast_cancer_12-SVM-versus-TSVM"
 
 \end_inset
 
-See table 
+Comparison of SVM with TSVM.
+ See table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:breast_cancer_12-FFN-versus-DBN"
@@ -17375,7 +17394,7 @@ The lowest adjusted p-value is 0.158 between SVM and TSVM on data set 1.
 \end_layout
 
 \begin_layout Subsubsection
-Comparison of FFN Versus SVM
+Comparison of FFN With SVM
 \end_layout
 
 \begin_layout Standard
@@ -17758,7 +17777,8 @@ c, row
 
 \end_inset
 
-See table 
+Comparison of FFN with SVM.
+ See table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:breast_cancer_12-FFN-versus-DBN"
@@ -17783,7 +17803,7 @@ The p-value is 0.926 and not significant.
 \end_layout
 
 \begin_layout Subsubsection
-Comparison of DBN Versus TSVM
+Comparison of DBN With TSVM
 \end_layout
 
 \begin_layout Standard
@@ -22848,7 +22868,8 @@ name "tab:breast_cancer_12-TSVM-versus-DBN"
 
 \end_inset
 
-See table 
+Comparison of DBN with TSVM.
+ See table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:breast_cancer_12-FFN-versus-DBN"
@@ -22900,7 +22921,7 @@ estimate
 \end_layout
 
 \begin_layout Subsubsection
-Comparison of TSVM Versus TSVM
+Comparison of TSVM With TSVM
 \end_layout
 
 \begin_layout Standard
@@ -25601,7 +25622,8 @@ name "tab:breast_cancer_12-TSVM-versus-TSVM"
 
 \end_inset
 
-See table 
+Comparison of TSVM with different numbers of unlabeled samples.
+ See table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:breast_cancer_12-FFN-versus-DBN"
@@ -25746,13 +25768,12 @@ training numbers
  Precisely, their ratio of input numbers to number of weights is 
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{\mbox{input numbers}}{\mbox{weights}} & = & \frac{44000*28*28}{28*28*500+500*500+500*2000+2000*10}\approx20.8
+\frac{\mbox{input numbers}}{\mbox{weights}} & = & \frac{44000*28*28}{28*28*500+500*500+500*2000+2000*10}\approx20.8.
 \end{eqnarray*}
 
 \end_inset
 
-.
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -25830,12 +25851,12 @@ This can be changed by using all
  The ratio formula is
 \begin_inset Formula 
 \begin{eqnarray*}
-r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o}
+r(h) & = & \frac{22283*238}{22283*h+h*h+h*h+h*o},
 \end{eqnarray*}
 
 \end_inset
 
- where 
+where 
 \begin_inset Formula $h$
 \end_inset
 
@@ -25950,13 +25971,12 @@ Altogether, there are in the labeled and unlabeled training data
 The ratio is then 
 \begin_inset Formula 
 \begin{eqnarray*}
-r(h,t) & = & \frac{22283*t}{22283*h+h*h+h*h+h*o}
+r(h,t) & = & \frac{22283*t}{22283*h+h*h+h*h+h*o}.
 \end{eqnarray*}
 
 \end_inset
 
-.
- For a hidden layer size of 
+For a hidden layer size of 
 \begin_inset Formula $h=10$
 \end_inset
 
@@ -28147,7 +28167,7 @@ reference "fig:Accuracy-in-breast_cancer_15"
 \begin_layout Standard
 To check whether there is a dependence of accuracies on the amount of unlabeled
  samples available to training, we use a paired (over the repetitions) and
- two-sided Wilcoxon test (see 
+ two-sided Wilcoxon test (see section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"

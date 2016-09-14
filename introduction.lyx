@@ -933,13 +933,13 @@ activation of an artificial neuron
 
 \end_inset
 
-:
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(-v_{i})}
+o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(-v_{i})},
 \]
 
 \end_inset
@@ -1042,8 +1042,7 @@ The effect of an incoming axon onto a neuron, that is, the different types
  by using real-numbered weights.
  Weights are parameters to the mathematical function describing the conversion
  of outputs of neurons to the single input of the next connected neuron.
- Usually the following formula is used to describe the computation of the
- input 
+ Usually the input 
 \begin_inset Formula $v_{i}$
 \end_inset
 
@@ -1051,14 +1050,14 @@ The effect of an incoming axon onto a neuron, that is, the different types
 \begin_inset Formula $i$
 \end_inset
 
- from the outputs of its connected neurons 
+ is computed from the outputs of its connected neurons 
 \begin_inset Formula $\mathbf{c_{i}}$
 \end_inset
 
-:
+ as in
 \begin_inset Formula 
 \[
-v_{i}=-b_{i}-\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij}
+v_{i}=-b_{i}-\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij},
 \]
 
 \end_inset
@@ -2721,7 +2720,7 @@ Learning in this data set is harder since the input is measured in different
  was 0.7467, which is a relative error of 6.8%.
  This shows that artificial neural networks are capable of processing input
  from multiple sources, with an acceptable gain in error.
- We also had a similar result, in section 
+ We had a similar result, in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Unsupervised-Reconstruction-of-Expression-Values"

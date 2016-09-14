@@ -928,7 +928,7 @@ chain graphs
 \emph default
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 probably not (since I won't go into chain graphs): reference.
@@ -1190,7 +1190,7 @@ potential function
 
  and must be positive for all possible states.
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 On page 21 of the Hammersley-Clifford paper, the authors define the name
@@ -1351,7 +1351,7 @@ This means that when we have a strictly positive joint probability distribution
 
  whose ends are conditionally independent 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 NOTE: conditionally independent on what? I think that's the crux of being
@@ -1535,12 +1535,12 @@ Gibbs distribution
 Gibbs distribution) can be written as: 
 \begin_inset Formula 
 \[
-P(N_{1},\dots,N_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
+P(N_{1},\dots,N_{5})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}}),
 \]
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $\phi_{1}(\mathbf{C_{1}})=\phi(N_{1},N_{2},N_{3})$
 \end_inset
 
@@ -1574,7 +1574,7 @@ clique potential
  is a probability: 
 \begin_inset Formula 
 \[
-Z=\sum_{X_{1},\dots,X_{n}}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}})
+Z=\sum_{X_{1},\dots,X_{n}}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\phi_{3}(\mathbf{C_{3}}).
 \]
 
 \end_inset
@@ -2051,12 +2051,12 @@ local Markov property
  of directed graphs):
 \begin_inset Formula 
 \[
-X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(\mathrm{X})}})\mid\mathbf{N_{parent(\mathrm{X})}}
+X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(\mathrm{X})}})\mid\mathbf{N_{parent(\mathrm{X})}}.
 \]
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Paragraph
@@ -2175,12 +2175,12 @@ are equal to
 The joint probability distribution encoded by the graph is
 \begin_inset Formula 
 \[
-P(\mathbf{N})=P(N_{1}=n_{1},N_{2}=n_{2},\dots,N_{n}=n_{n})=\prod_{i=1}^{n}P(N_{i}=n_{i}\mid N_{j}=n_{j}\forall j<i)
+P(\mathbf{N})=P(N_{1}=n_{1},N_{2}=n_{2},\dots,N_{n}=n_{n})=\prod_{i=1}^{n}P(N_{i}=n_{i}\mid N_{j}=n_{j}\forall j<i).
 \]
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Paragraph
@@ -2478,12 +2478,11 @@ When we want to find the probability of configuration
 \begin_inset Formula $\mathbf{K}$
 \end_inset
 
-.
- 
+: 
 \begin_inset Formula 
 \begin{eqnarray}
 P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k}) & = & \sum_{\mathbf{U}}P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u}|\mathbf{K}=\mathbf{k})\nonumber \\
- & = & \sum_{\mathbf{U}}\frac{P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\label{eq:Inference in graphical models}
+ & = & \sum_{\mathbf{U}}\frac{P(\mathbf{W}=\mathbf{w},\mathbf{U}=\mathbf{u},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}.\label{eq:Inference in graphical models}
 \end{eqnarray}
 
 \end_inset
@@ -2501,12 +2500,12 @@ In the above formula there is a sum over all variables
 
 \series default
 .
- Writing this out, we obtain: 
+ Writing this out, we obtain 
 \begin_inset Formula 
 \begin{eqnarray}
 P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k})\nonumber \\
 = & \sum_{\mathbf{U}}\frac{P(\mathbf{W}=\mathbf{w},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\nonumber \\
-= & \sum_{U_{1}}\sum_{U_{2}}\cdots\sum_{U_{n}}\frac{P(\mathbf{W}=\mathbf{w},U_{1}=u_{1},U_{2}=u_{2},\dots,U_{n}=u_{n},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\label{eq:Inference in graphical models, written out}
+= & \sum_{U_{1}}\sum_{U_{2}}\cdots\sum_{U_{n}}\frac{P(\mathbf{W}=\mathbf{w},U_{1}=u_{1},U_{2}=u_{2},\dots,U_{n}=u_{n},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}.\label{eq:Inference in graphical models, written out}
 \end{eqnarray}
 
 \end_inset
@@ -2588,13 +2587,13 @@ g the joint probability into independent sub-joint-probabilities, if possible.
 \begin_inset Formula $P(\mathbf{U})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\phi_{2}(\mathbf{C_{2}})\dots\phi_{n}(\mathbf{C_{n}})$
 \end_inset
 
-, then the above sum can be written, using Hammersley-Clifford, as:
+, then the above sum can be written, using Hammersley-Clifford, as
 \begin_inset Formula 
 \begin{eqnarray*}
  & P(\mathbf{W}=\mathbf{w}|\mathbf{K}=\mathbf{k})\\
 = & \sum_{U_{1}}\sum_{U_{2}}\cdots\sum_{U_{n}}\frac{P(\mathbf{W}=\mathbf{w},U_{1}=u_{1},U_{2}=u_{2},\dots,U_{n}=u_{n},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\\
 = & \sum_{\mathbf{C}_{1}}\cdots\sum_{\mathbf{C}_{n}\backslash\{C_{1},\dots,C_{n-1}\}}\frac{\frac{1}{Z}\mbox{\phi}_{1}(\mathbf{W}=\mathbf{w},\mathbf{C}_{1}=\mathbf{c}_{1},\mathbf{K}=\mathbf{k})\cdot\ldots\cdot\mbox{\phi}_{n}(\mathbf{W}=\mathbf{w},\mathbf{C}_{n}=\mathbf{c}_{n},\mathbf{K}=\mathbf{k})}{P(\mathbf{K}=\mathbf{k})}\\
-= & \frac{\frac{1}{Z}\left(\sum_{\mathbf{C}_{1}}\mbox{\phi}_{1}(\mathbf{W}=\mathbf{w},\mathbf{C}_{1}=\mathbf{c}_{1},\mathbf{K}=\mathbf{k})\cdot\ldots\cdot\left(\sum_{\mathbf{C}_{n}\backslash\{C_{1},\dots,C_{n-1}\}}\mbox{\phi}_{n}(\mathbf{W}=\mathbf{w},\mathbf{C}_{n}=\mathbf{c}_{n},\mathbf{K}=\mathbf{k})\right)\right)}{P(\mathbf{K}=\mathbf{k})}
+= & \frac{\frac{1}{Z}\left(\sum_{\mathbf{C}_{1}}\mbox{\phi}_{1}(\mathbf{W}=\mathbf{w},\mathbf{C}_{1}=\mathbf{c}_{1},\mathbf{K}=\mathbf{k})\cdot\ldots\cdot\left(\sum_{\mathbf{C}_{n}\backslash\{C_{1},\dots,C_{n-1}\}}\mbox{\phi}_{n}(\mathbf{W}=\mathbf{w},\mathbf{C}_{n}=\mathbf{c}_{n},\mathbf{K}=\mathbf{k})\right)\right)}{P(\mathbf{K}=\mathbf{k})}.
 \end{eqnarray*}
 
 \end_inset
@@ -2809,7 +2808,7 @@ Now assume that
 \begin_inset Formula $\mbox{posterior}=\mbox{likelihood}*\mbox{prior}$
 \end_inset
 
-) we get:
+) we get
 \end_layout
 
 \begin_layout Standard
@@ -2826,7 +2825,7 @@ P(H_{1},H_{2}|V,V_{2}) & = & \frac{P(V_{1},V_{2}|H_{1},H_{2})P(H_{1},H_{2})}{P(V
 
 \begin_inset Formula 
 \[
-P(V_{1},V_{2})=\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_{2}=h_{2})P(H_{1}=h_{1},H_{2}=h_{2})
+P(V_{1},V_{2})=\sum_{h_{1}}\sum_{h_{2}}P(V_{1}|H_{1}=h_{1},H_{2}=h_{2})P(V_{2}|H_{1}=h_{1},H_{2}=h_{2})P(H_{1}=h_{1},H_{2}=h_{2}).
 \]
 
 \end_inset
@@ -2885,13 +2884,13 @@ Since we now have
 \begin_inset Formula $P(H_{1})$
 \end_inset
 
-:
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray*}
-P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2})
+P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v_{1},V_{2}=v_{2}).
 \end{eqnarray*}
 
 \end_inset
@@ -3765,12 +3764,12 @@ Given an initial distribution
 : 
 \begin_inset Formula 
 \[
-d^{(t)}=d^{(0)}p^{t}
+d^{(t)}=d^{(0)}p^{t}.
 \]
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Paragraph
@@ -3871,13 +3870,12 @@ if there exists a probability distribution
  such that 
 \begin_inset Formula 
 \[
-\pi_{j}p_{ji}=\pi_{i}p_{ij}\,\,\forall i,j
+\pi_{j}p_{ji}=\pi_{i}p_{ij}\,\,\forall i,j.
 \]
 
 \end_inset
 
-.
- Such a Markov chain is also
+Such a Markov chain is also
 \begin_inset Note Note
 status open
 
@@ -4226,13 +4224,12 @@ positive recurrent
  is 
 \begin_inset Formula 
 \[
-f_{ij}^{(k)}:=P(X_{1}\neq j,X_{2}\neq j,\dots,X_{k-1}\neq j,X_{k}=j\mid X_{0}=i)
+f_{ij}^{(k)}:=P(X_{1}\neq j,X_{2}\neq j,\dots,X_{k-1}\neq j,X_{k}=j\mid X_{0}=i).
 \]
 
 \end_inset
 
-.
- The probability that state 
+The probability that state 
 \begin_inset Formula $j$
 \end_inset
 
@@ -4243,13 +4240,12 @@ f_{ij}^{(k)}:=P(X_{1}\neq j,X_{2}\neq j,\dots,X_{k-1}\neq j,X_{k}=j\mid X_{0}=i)
  is 
 \begin_inset Formula 
 \[
-f_{ij}^{*}:=\sum_{k=1}^{\infty}f_{ij}^{(k)}
+f_{ij}^{*}:=\sum_{k=1}^{\infty}f_{ij}^{(k)}.
 \]
 
 \end_inset
 
-.
- With this, we can define the expected number of steps for the Markov Chain
+With this, we can define the expected number of steps for the Markov Chain
  to reach state 
 \begin_inset Formula $j$
 \end_inset
@@ -4261,7 +4257,7 @@ f_{ij}^{*}:=\sum_{k=1}^{\infty}f_{ij}^{(k)}
 :
 \begin_inset Formula 
 \[
-\mu_{ij}:=\sum_{k=1}^{\infty}kf_{ij}^{(k)}
+\mu_{ij}:=\sum_{k=1}^{\infty}kf_{ij}^{(k)}.
 \]
 
 \end_inset
@@ -4293,8 +4289,7 @@ key "Behrends2000"
 
 \end_inset
 
-.
- This number is also called the 
+This number is also called the 
 \emph on
 mean recurrence time
 \emph default
@@ -4465,13 +4460,12 @@ period of a state
  before: 
 \begin_inset Formula 
 \[
-period(i)=gcd(\{k\mid k\geq0,(p^{k})_{ii}>0\})
+period(i)=gcd(\{k\mid k\geq0,(p^{k})_{ii}>0\}).
 \]
 
 \end_inset
 
-.
- If 
+If 
 \begin_inset Formula $period(i)=1$
 \end_inset
 
@@ -4636,16 +4630,15 @@ This means that a precondition to being able to use a Gibbs Sampler is that
  be known in closed form: 
 \begin_inset Formula 
 \[
-P(X_{i}\mid\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},X_{n})
+P(X_{i}\mid\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},X_{n}).
 \]
 
 \end_inset
 
-.
- (Another prerequisite is that Gibbs Sampling, which requires sampling from
+(Another prerequisite is that Gibbs Sampling, which requires sampling from
  the conditional probability distribution and iterating, should be faster
  than sampling from the joint target probability distribution directly.
- We already showed in 
+ We already showed in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
@@ -4835,7 +4828,7 @@ on page 45
 \begin_layout Standard
 \begin_inset Formula 
 \[
-T_{as+k-1}(x,x')=B_{k}(x,x')
+T_{as+k-1}(x,x')=B_{k}(x,x').
 \]
 
 \end_inset
@@ -4942,12 +4935,12 @@ Then an iterative process is started.
  from the conditional probability distribution 
 \begin_inset Formula 
 \begin{equation}
-P(X_{i}\mid X_{1}=x_{1}^{(t-1)},\dots,X_{i-1}=x_{i-1}^{(t-1)},X_{i+1}=x_{i+1}^{(t-1)},\dots,X_{n}=x_{n}^{(t-1)})\label{eq:Gibbs sampling: CPD}
+P(X_{i}\mid X_{1}=x_{1}^{(t-1)},\dots,X_{i-1}=x_{i-1}^{(t-1)},X_{i+1}=x_{i+1}^{(t-1)},\dots,X_{n}=x_{n}^{(t-1)}).\label{eq:Gibbs sampling: CPD}
 \end{equation}
 
 \end_inset
 
-.
+
 \begin_inset Note Note
 status open
 
@@ -4987,7 +4980,7 @@ block
 \begin_layout Standard
 If the Markov chain fulfills irreducibility, positive recurrence, and aperiodici
 ty, then it is guaranteed to converge to its stationary distribution (see
- 
+ section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Fundamental-Theorem-of-Markov-Chains"
@@ -5182,15 +5175,8 @@ reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
  we described how exact inference in Markov Random Fields can be done by
  conditioning on the known random variables and marginalizing out the uninterest
 ing variables.
- Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
-
-\end_inset
-
- stated that the exponential runtime of exact inference can be circumvented
- by approximate methods like Gibbs sampling.
+ It was stated there that the exponential runtime of exact inference can
+ be circumvented by approximate methods like Gibbs sampling.
  Here we address that claim.
 \end_layout
 
@@ -5310,14 +5296,14 @@ Given the states of all variables
 \end_inset
 
 .
- Due to the Hammersley-Clifford theorem
+ Due to the Hammersley-Clifford theorem (section 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand vref
 reference "par:Hammersley-Clifford-theorem"
 
 \end_inset
 
- this conditional probability is equal to 
+) this conditional probability is equal to 
 \begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}\mid\mathbf{X}_{Neighborhood(X_{i})})$
 \end_inset
 
@@ -5374,12 +5360,12 @@ The conditional probability of
 
 \begin_inset Formula 
 \[
-P(X_{i}=x_{i}\mid\mathbf{X_{j}}=\mathbf{x_{j}}:j\neq i)=P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}=\mathbf{x}_{MarkovBlanket(X_{i})})
+P(X_{i}=x_{i}\mid\mathbf{X_{j}}=\mathbf{x_{j}}:j\neq i)=P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}=\mathbf{x}_{MarkovBlanket(X_{i})}),
 \]
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $\mathbf{X}_{MarkovBlanket(X_{i})}$
 \end_inset
 
@@ -5390,7 +5376,7 @@ P(X_{i}=x_{i}\mid\mathbf{X_{j}}=\mathbf{x_{j}}:j\neq i)=P(X_{i}=x_{i}\mid\mathbf
 's parents and children, and its children's parents.
  This conditional probability is needed for Gibbs Sampling from a Bayesian
  Network: We use the same algorithmic structure as for Markov Random Fields
- above (
+ above (section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
@@ -5427,11 +5413,11 @@ key "Neal1993"
 \begin_inset Formula $P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})})$
 \end_inset
 
- is equal to:
+ is equal to
 \begin_inset Formula 
 \begin{eqnarray*}
 P(x_{i}\mid\{x_{i}:i\neq k\}) & = & P(x_{i}\mid\mathbf{x}_{MarkovBlanket(X_{i})})\\
- & = & \frac{P(x_{i}\mid\mathbf{x}_{Parent(i)})\prod_{j\in Child(i)}P(x_{j}\mid x_{i},\mathbf{x}_{Parent(j)\backslash i})}{\sum_{\tilde{x}_{i}}P(\tilde{x}_{i}\mid\mathbf{x}_{Parent(i)})\prod_{j\in Child(i)}P(x_{j}\mid\tilde{x}_{i},\mathbf{x}_{Parent(j)\backslash i})}
+ & = & \frac{P(x_{i}\mid\mathbf{x}_{Parent(i)})\prod_{j\in Child(i)}P(x_{j}\mid x_{i},\mathbf{x}_{Parent(j)\backslash i})}{\sum_{\tilde{x}_{i}}P(\tilde{x}_{i}\mid\mathbf{x}_{Parent(i)})\prod_{j\in Child(i)}P(x_{j}\mid\tilde{x}_{i},\mathbf{x}_{Parent(j)\backslash i})}.
 \end{eqnarray*}
 
 \end_inset
@@ -5489,7 +5475,7 @@ reference "eq:Gibbs sampling: CPD"
 
 .
  This conditional probability is particularly simple for Markov Random Fields,
- because of the local Markov property (refer to 
+ because of the local Markov property (refer to section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "local-Markov-property"
@@ -5502,32 +5488,32 @@ reference "local-Markov-property"
 
  is independent of all other random variables given the states of the neighborin
 g random variables.
- This means that in Markov Random Fields, equation 
+ This means that in Markov Random Fields, the conditional probability (see
+ equation 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "eq:Gibbs sampling: CPD"
 
 \end_inset
 
- is 
+) is 
 \begin_inset Formula 
 \[
-P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{Neighborhood(X_{i})})
+P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{Neighborhood(X_{i})}).
 \]
 
 \end_inset
 
-.
- For comparison, in Bayesian Networks the conditional probability would
- be 
+For comparison, in Bayesian Networks the conditional probability would be
+ 
 \begin_inset Formula 
 \[
-P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})})
+P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}),
 \]
 
 \end_inset
 
-, where 
+where 
 \begin_inset Formula $\mathbf{X}_{MarkovBlanket(X_{i})}$
 \end_inset
 
@@ -5817,7 +5803,7 @@ The network is updated asynchronously: At each time point
 : 
 \begin_inset Formula 
 \[
-n_{i}^{(t)}=f\left(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i}\right)
+n_{i}^{(t)}=f\left(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i}\right).
 \]
 
 \end_inset
@@ -5954,7 +5940,7 @@ TODO: stimmt die Definition von
 f(x)=\begin{cases}
 0 & \mbox{for }x\leq0\\
 1 & \mbox{for }x>0
-\end{cases}
+\end{cases}.
 \]
 
 \end_inset
@@ -6094,7 +6080,7 @@ energy
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-E^{(t)}=-\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}\label{eq:Energy of a Hopfield network}
+E^{(t)}=-\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}.\label{eq:Energy of a Hopfield network}
 \end{equation}
 
 \end_inset
@@ -6339,7 +6325,7 @@ squared-error sum
  are minimized:
 \begin_inset Formula 
 \[
-\sum_{i}(\hat{x_{i}}-x_{i})^{2}
+\sum_{i}(\hat{x_{i}}-x_{i})^{2},
 \]
 
 \end_inset
@@ -6412,7 +6398,7 @@ key "NasrJoun2002"
 :
 \begin_inset Formula 
 \[
--\sum_{i}p_{i}\log\hat{p_{i}}-\sum_{i}(1-p_{i})\log(1-\hat{p_{i}})
+-\sum_{i}p_{i}\log\hat{p_{i}}-\sum_{i}(1-p_{i})\log(1-\hat{p_{i}}),
 \]
 
 \end_inset
@@ -6531,7 +6517,7 @@ Another commonly used activation function is the hyperbolic tangent function
 : 
 \begin_inset Formula 
 \[
-tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}
+tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}.
 \]
 
 \end_inset
@@ -6978,10 +6964,10 @@ Setting a sparsity target works by scaling the total input to a node by
 \end_inset
 
  is registered by using an exponentially decaying average of the mean probabilit
-y:
+y
 \begin_inset Formula 
 \[
-q_{new}=\lambda q_{old}+(1-\lambda)q_{current}
+q_{new}=\lambda q_{old}+(1-\lambda)q_{current},
 \]
 
 \end_inset
@@ -6992,17 +6978,16 @@ where
 
  is the decay rate.
  The penalty to the input is measured using the cross entropy between the
- desired distribution and actual activity distribution: 
+ desired distribution and actual activity distribution 
 \begin_inset Formula 
 \[
-\mbox{sparsity penalty}\propto-p\log q-(1-p)\log(1-q)
+\mbox{sparsity penalty}\propto-p\log q-(1-p)\log(1-q).
 \]
 
 \end_inset
 
-.
- The derivative of the cross entropy with respect to the total input to
- a node is 
+The derivative of the cross entropy with respect to the total input to a
+ node is 
 \begin_inset Formula $q-p$
 \end_inset
 
@@ -7258,7 +7243,7 @@ key "HintonSejnowski1986"
 
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 in Eq 2, page 6, and Eq 3, page 8
@@ -7272,14 +7257,14 @@ in Eq 2, page 6, and Eq 3, page 8
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-P(H_{i}=1\mid\mathbf{S_{j}}=\mathbf{s_{j}}:j\neq i)=\sigma\left(\sum_{j}s_{j}w_{ij}-b_{i}\right)\label{eq:Boltzmann Machine p(h=1|S)}
+P(H_{i}=1\mid\mathbf{S_{j}}=\mathbf{s_{j}}:j\neq i)=\sigma\left(\sum_{j}s_{j}w_{ij}-b_{i}\right),\label{eq:Boltzmann Machine p(h=1|S)}
 \end{equation}
 
 \end_inset
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 (this formula is only valid for 0/1-valued nodes.)
@@ -7327,7 +7312,7 @@ where
  Similarly,
 \begin_inset Formula 
 \[
-P(V_{j}=1\mid\mathbf{S_{i}}=\mathbf{s_{i}}:i\neq j)=\sigma\left(\sum_{i}s_{i}w_{ij}-c_{j}\right)
+P(V_{j}=1\mid\mathbf{S_{i}}=\mathbf{s_{i}}:i\neq j)=\sigma\left(\sum_{i}s_{i}w_{ij}-c_{j}\right),
 \]
 
 \end_inset
@@ -7513,7 +7498,7 @@ The goal of training a Boltzmann Machine is to find parameters, i.e.
 \begin_layout Standard
 \begin_inset Formula 
 \begin{eqnarray*}
-L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
+L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v}),
 \end{eqnarray*}
 
 \end_inset
@@ -7530,12 +7515,12 @@ L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
  is 
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\left(\sum_{\mathbf{s}}P(\mathbf{S=s}\mid\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j}\right)
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\left(\sum_{\mathbf{s}}P(\mathbf{S=s}\mid\mathbf{V=v})s_{i}s_{j}-\sum_{\mathbf{s}}P(\mathbf{S=s})s_{i}s_{j}\right),
 \]
 
 \end_inset
 
-, where 
+ where 
 \begin_inset Formula $\mathbf{S}$
 \end_inset
 
@@ -7837,7 +7822,7 @@ key "Smolensky1986"
 The conditional probabilities are defined analogous to Boltzmann Machines
  (see equation 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "eq:Boltzmann Machine p(h=1|S)"
 
 \end_inset
@@ -7856,7 +7841,7 @@ P(H_{i}=1\mid\mathbf{V}=\mathbf{v})=\sigma\left(\sum_{j}v_{j}w_{ij}-b_{i}\right)
 
 \begin_inset Formula 
 \[
-P(V_{j}=1\mid\mathbf{H}=\mathbf{h})=\sigma\left(\sum_{i}h_{i}w_{ij}-c_{j}\right)
+P(V_{j}=1\mid\mathbf{H}=\mathbf{h})=\sigma\left(\sum_{i}h_{i}w_{ij}-c_{j}\right).
 \]
 
 \end_inset
@@ -7958,7 +7943,7 @@ Like for Boltzmann Machines, the goal of training is to find parameters
  The log-likelihood is 
 \begin_inset Formula 
 \begin{eqnarray*}
-L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
+L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v}),
 \end{eqnarray*}
 
 \end_inset
@@ -7980,7 +7965,7 @@ L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v})
 
 \end_inset
 
-(see e.g.
+ (see e.g.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -8118,7 +8103,7 @@ Parameters of Training a Restricted Boltzmann Machine
 
 \begin_layout Standard
 In addition to the parameters for training a Multilayer Perceptron (see
- 
+ section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Parameters-of-Training-a-Multilayer-Perceptron"
@@ -8321,14 +8306,15 @@ key "Neal1992"
 
 \end_inset
 
- as a directed graphical model with a sigmoid (see 
+ as a directed graphical model with a sigmoid conditional probability function
+ (see section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "The-sigmoid-activation-function"
 
 \end_inset
 
-) conditional probability function.
+).
  A Sigmoid Belief Network is a Belief Network in which the conditional probabili
 ty associated with node 
 \begin_inset Formula $N_{i}$
@@ -8342,7 +8328,7 @@ ty associated with node
  The conditional probbilities can be expressed as a sigmoid function 
 \begin_inset Formula 
 \begin{eqnarray*}
-P(N_{i} & = & 1_{i}\mid\mathbf{N_{j}=n_{j}}:j<i)=\sigma(\sum_{j<i}n_{j}w_{ij}-b_{i})
+P(N_{i} & = & 1_{i}\mid\mathbf{N_{j}=n_{j}}:j<i)=\sigma(\sum_{j<i}n_{j}w_{ij}-b_{i}),
 \end{eqnarray*}
 
 \end_inset
@@ -8402,7 +8388,7 @@ Neal says on the bottom of page 3:
 
 \end_inset
 
-, where 
+ where 
 \begin_inset Formula $n_{j}$
 \end_inset
 
@@ -8502,12 +8488,12 @@ in equation 27
 , it is
 \begin_inset Formula 
 \[
-\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\sum_{\mathbf{s}}P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})s_{j}\sigma\left(-s_{i}\sum_{k<i}s_{k}w_{ik}\right)
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\sum_{\mathbf{s}}P(\mathbf{S}=\mathbf{s}\mid\mathbf{V}=\mathbf{v})s_{j}\sigma\left(-s_{i}\sum_{k<i}s_{k}w_{ik}\right),
 \]
 
 \end_inset
 
-, where 
+ where 
 \begin_inset Formula $\mathbf{S}$
 \end_inset
 
@@ -8530,7 +8516,7 @@ Since exact inference of the hidden nodes given the visible nodes is intractable
 , we must resort to the approximate Gibbs Sampling.
  This works as shown in section 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
 
 \end_inset
@@ -8587,12 +8573,12 @@ key "HintonTeh2006"
 : 
 \begin_inset Formula 
 \[
-P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})
+P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x}),
 \]
 
 \end_inset
 
-, where 
+ where 
 \begin_inset Formula $\mathbf{\mathbf{x}}$
 \end_inset
 
@@ -8600,12 +8586,12 @@ P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})
  They showed that such priors exist and have the form
 \begin_inset Formula 
 \[
-P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\right)
+P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\right),
 \]
 
 \end_inset
 
-, where 
+ where 
 \begin_inset Formula $C$
 \end_inset
 
@@ -8639,7 +8625,7 @@ reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
  visible nodes with a joint probability of the form
 \begin_inset Formula 
 \begin{equation}
-P(\mathbf{x},\mathbf{y})=\frac{1}{C}\exp\left(\sum_{j}\Phi_{j}(\mathbf{x},y_{j})+\beta(\mathbf{x})+\sum_{j}\alpha_{j}(y_{j})\right)\label{eq:DBN-joint-probability-with-dependencies-between-visible}
+P(\mathbf{x},\mathbf{y})=\frac{1}{C}\exp\left(\sum_{j}\Phi_{j}(\mathbf{x},y_{j})+\beta(\mathbf{x})+\sum_{j}\alpha_{j}(y_{j})\right).\label{eq:DBN-joint-probability-with-dependencies-between-visible}
 \end{equation}
 
 \end_inset
@@ -8658,8 +8644,7 @@ Susi findet, dass das
 
 \end_inset
 
-.
- For reasons that will become clear later, we also want to get rid of the
+For reasons that will become clear later, we also want to get rid of the
  dependencies between the visible nodes.
  The conditional probabilities are then of the form
 \begin_inset Formula 
@@ -8672,13 +8657,12 @@ P(\mathbf{x}\mid\mathbf{y})=\prod_{i}P(x_{i}\mid\mathbf{y})\label{eq:DBN-x-given
 
 \begin_inset Formula 
 \begin{equation}
-P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x})\label{eq:DBN-y-given-x}
+P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x}).\label{eq:DBN-y-given-x}
 \end{equation}
 
 \end_inset
 
-.
- Also by the Hammersley-Clifford theorem, the joint probability then specializes
+Also by the Hammersley-Clifford theorem, the joint probability then specializes
  from equation 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -8689,13 +8673,12 @@ reference "eq:DBN-joint-probability-with-dependencies-between-visible"
  to
 \begin_inset Formula 
 \[
-P(\mathbf{x},\mathbf{y})=\frac{1}{C}\exp\left(\sum_{j}\Phi_{j}(\mathbf{x},y_{j})+\sum_{i}\gamma_{i}(x_{i})+\sum_{j}\alpha_{j}(y_{j})\right)
+P(\mathbf{x},\mathbf{y})=\frac{1}{C}\exp\left(\sum_{j}\Phi_{j}(\mathbf{x},y_{j})+\sum_{i}\gamma_{i}(x_{i})+\sum_{j}\alpha_{j}(y_{j})\right).
 \]
 
 \end_inset
 
-.
- The reason we wanted to have both independencies as encoded by equations
+The reason we wanted to have both independencies as encoded by equations
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -9210,7 +9193,7 @@ How Unlabeled Data was Used in Training Deep Belief Networks
 \end_layout
 
 \begin_layout Standard
-As was said in 
+As was said in section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Deep-Belief-Network"
