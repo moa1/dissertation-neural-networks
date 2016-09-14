@@ -85,8 +85,8 @@ Using Tumour Expression Data Directly to Classify Recurrence
 
 \begin_layout Standard
 We predicted recurrence directly from expression data.
- Papers that use neural networks to classify cancerous tissue are for
- example 
+ Papers that use neural networks to classify cancerous tissue are for example
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ChenHuang2002"
@@ -146,9 +146,9 @@ Neural Networks are Attractive
 In our view, neural networks have attractive properties: they are non-linear,
  they can be used generatively, their implementations are often modular
  (e.g.
- regularizations and network parameters), in prediction they often show
- better accuracies than normal SVMs, and deep neural networks are among
- the best predictors in several fields.
+ regularizations and network parameters), and in prediction deep neural
+ networks often are among the best predictors in several machine learning
+ fields.
  As 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -185,11 +185,10 @@ key "AppelSpang2011"
 
  is straightforward, because the network outputs class probabilities anyways.
  Last, but not least, artificial neural networks are supposed to be plausible
- models of the real biological neural networks, which are the control
- centers of many animals, and were shaped by evolution during millions of
- years.
- However, neural networks' versatility can also be a disadvantage: it
- is often not clear what component or parameter to modify to achieve a desired
+ models of the real biological neural networks, which are the control centers
+ of animals, and were shaped by evolution during millions of years.
+ However, neural networks' versatility can also be a disadvantage: it is
+ often not clear what component or parameter to modify to achieve a desired
  result.
 \end_layout
 
@@ -198,11 +197,11 @@ Different Network Configurations
 \end_layout
 
 \begin_layout Standard
-We tried several different approaches: we tried different pre-training algorithm
-s, autoencoders Restricted Boltzmann Machines, and Deep Belief Networks.
+As pre-training algorithms we assessed Autoencoders, Restricted Boltzmann
+ Machines, and Deep Belief Networks.
  There seemed to be only little difference in test set accuracy between
  these pre-training algorithms.
- However, some authors have reported that autoencoders are harder to train
+ However, some authors have reported that Autoencoders are harder to train
 \begin_inset Note Note
 status open
 
@@ -258,8 +257,8 @@ Model Selection
 \end_layout
 
 \begin_layout Standard
-We always selected the iteration/model of the neural network that had
- the highest validation set accuracy.
+We always selected the iteration/model of the neural network that had the
+ highest validation set accuracy.
  There was the problem that very few samples lead to very few different
  possible accuracy values.
  To be able to choose the best model among candidates that have only few
@@ -343,9 +342,12 @@ key "Zhu2005"
  one has to constrain the class proportions (in our case to 50% for class
  0 and 50% for class 1), otherwise the semi-supervised training often fails
  with predictions biased in favor of the larger class.
- Only the very last approaches tried (data set breast_cancer_15) showed
- a (partially) significant benefit between those networks trained using
- more unlabeled samples over those trained using less unlabeled samples.
+\end_layout
+
+\begin_layout Standard
+Only the very last approaches tried (data set breast_cancer_15) showed a
+ (partially) significant benefit between those networks trained using more
+ unlabeled samples over those trained using less unlabeled samples.
  There are three differences between these approaches and the ones before:
  First, we used less hidden layer neurons.
  Second, we used all 22,283 genes as input instead of only the 500 most
@@ -420,9 +422,9 @@ More sophisticated prediction schemes can be imagined so that the prediction
  metastases (a natural number) could be trained and predicted.
  Such a prediction is not made in this work, because only little clinical
  data was recorded in GSE25055 and GSE25065.
- However, in the neural network it would be straightforward to predict
- such two numbers by adding an additional (properly scaled) number to the
- output layer in the training set.
+ However, in the neural network it would be straightforward to predict such
+ two numbers by adding an additional (properly scaled) number to the output
+ layer in the training set.
 \end_layout
 
 \begin_layout Paragraph
@@ -455,13 +457,13 @@ real
 
 \begin_layout Standard
 Having such a transformation for expression data would be very useful, not
- only for classification using neural networks, but also other machine
- learning algorithms.
+ only for classification using neural networks, but also other machine learning
+ algorithms.
  However, it is not at all clear what a pre-processing equivalent to the
  local image deformations could look like for mRNA abundance.
  Straightforward application of the image deformation scheme would provide
- the neural network with input for a gene in the dimension of a maybe
- completely unrelated gene.
+ the neural network with input for a gene in the dimension of a maybe completely
+ unrelated gene.
  (Note that adding some sort of noise onto the expression levels would be
  equivalent to adding noise to the image, which is not equivalent to shifting
  the image.) A possible approach could be to look for gene modules that consist

@@ -584,8 +584,8 @@ Goal of this Work
 \begin_layout Standard
 The context of this work is the use of classifiers on high-dimensional data
  as supporting tools for treatment decisions.
- Two types of neural networks that lend themselves to semi-supervised
- training were used: autoencoders and deep belief networks.
+ Two types of neural networks that lend themselves to semi-supervised training
+ were used: autoencoders and deep belief networks.
  Parallel to these, the performance of a semi-supervised version of Support
  Vector Machines, namely the Transductive SVM was evaluated.
 \end_layout
@@ -841,8 +841,8 @@ deepnet
 \emph on
 stopcondition.steps
 \emph default
- in train.pbtxt), and we evaluated the neural network after every 500 iteration
-s (
+ in train.pbtxt), and we evaluated the neural network after every 500 iterations
+ (
 \emph on
 deepnet
 \emph default
@@ -926,8 +926,8 @@ name "sub:Model-selection"
 \end_layout
 
 \begin_layout Standard
-Because training an artificial neural network is an iterative process,
- there are as many models as there are iterations.
+Because training an artificial neural network is an iterative process, there
+ are as many models as there are iterations.
  The question is which one to choose.
  We did not use 
 \begin_inset Quotes eld
@@ -970,15 +970,15 @@ We used model selection in training the (supervised) classifiers, because
  has the tendency to overfit the training data and generalize poorly on
  the validation and test data.
  This means we defined three data sets: a training data set, which was used
- to iteratively train the neural network; a validation data set, which
- was used to pick the model (see below); and a test data set, which was
- used to evaluate the accuracy of the neural network picked using the
- validation data set.
+ to iteratively train the neural network; a validation data set, which was
+ used to pick the model (see below); and a test data set, which was used
+ to evaluate the accuracy of the neural network picked using the validation
+ data set.
 \end_layout
 
 \begin_layout Standard
-Usually model selection works by picking the neural network defined in
- the iteration with the highest validation data set accuracy.
+Usually model selection works by picking the neural network defined in the
+ iteration with the highest validation data set accuracy.
  However, we sometimes had only few (in the tens) labeled samples in the
  validation data set.
  This led to a very coarse resolution in accuracy plots, and also to noisy
@@ -1097,8 +1097,8 @@ Besides using
 \emph on
 deepnet 
 \emph default
-by Nitish Srivastava as the neural network implementation, we used the
- R CRAN package e1071 
+by Nitish Srivastava as the neural network implementation, we used the R
+ CRAN package e1071 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "R2008"
@@ -1258,8 +1258,8 @@ deepnet
 \emph on
 base_epsilon
 \emph default
- One of the crucial settings when training artificial neural networks
- is the learning rate
+ One of the crucial settings when training artificial neural networks is
+ the learning rate
 \begin_inset Index idx
 status collapsed
 
@@ -7116,8 +7116,8 @@ name "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels-
 
 \begin_layout Standard
 As in the previous section on breast_cancer_06, we wanted to check whether
- the artificial neural networks accuracies improve with an increasing
- number of labeled samples.
+ the artificial neural networks accuracies improve with an increasing number
+ of labeled samples.
  Unlabeled data sets were the same as for breast_cancer_06, see table 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -9000,8 +9000,8 @@ reference "sub:Dropout"
 
 \emph default
  reduces overfitting.
- In addition, comparing with the neural networks pre-trained using RBM
- or autoencoder (e.g.
+ In addition, comparing with the neural networks pre-trained using RBM or
+ autoencoder (e.g.
  breast_cancer_07_ai versus breast_cancer_07_ag) might indicate a slight
  advantage of not using pre-training (but using 
 \begin_inset Formula $dropout$
@@ -10110,7 +10110,7 @@ Normalizations
 \end_layout
 
 \begin_layout Standard
-Normalization methods were RMA 
+We used RMA 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BolstadSpeed2003"
@@ -10124,8 +10124,8 @@ key "Affymetrix2001"
 
 \end_inset
 
-, MAS5+log2, RMA+ComBat, MAS5+ComBat, MAS5+log2+ComBat (for ComBat, see
- 
+, MAS5+log2, RMA+ComBat, MAS5+ComBat, and MAS5+log2+ComBat to normalize
+ the raw microarray data (for ComBat, see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "JohnsonRabinovic2007"
@@ -11091,9 +11091,9 @@ name "fig:accuracy-plots-for-breast_cancer_08"
 
 \end_inset
 
-Box-plot for neural network prediction pre-trained with an autoencoder
- on the 4 differently normalized data sets rma-data.pbtxt, mas5-data.pbtxt,
- rma_combat-data.pbtxt, and mas5_combat-data.pbtxt in breast_cancer_08.
+Box-plot for neural network prediction pre-trained with an autoencoder on
+ the 4 differently normalized data sets rma-data.pbtxt, mas5-data.pbtxt, rma_comba
+t-data.pbtxt, and mas5_combat-data.pbtxt in breast_cancer_08.
  The box-plot shows on the x-axis the 4 data sets, and on the y-axis the
  achieved accuracies on the testing data set for each of the 5 repetitions.
 \end_layout
@@ -14269,6 +14269,15 @@ LV
  number of remaining samples 50|50 (29|29 in GSE25055 and 21|21 in GSE25065).
  The labeled data are equal across all data sets (but different between
  different repetitions).
+ 
+\begin_inset Quotes eld
+\end_inset
+
+repeats
+\begin_inset Quotes erd
+\end_inset
+
+ are the number of sub-samples drawn.
 \end_layout
 
 \end_inset

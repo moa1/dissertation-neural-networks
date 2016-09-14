@@ -24,7 +24,8 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
+\spacing onehalf
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -106,7 +107,7 @@ Different data sets were constructed by subsampling from GEO data set GSE25055
  new neural networks Autoencoder, Restricted Boltzmann Machine, Deep Belief
  Network (DBN) and the established support vector machine (SVM), and Transductiv
 e SVM (TSVM).
- 
+ For the neural networks, we tried several different network architectures.
 \end_layout
 
 \begin_layout Standard

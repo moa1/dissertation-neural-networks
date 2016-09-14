@@ -94,8 +94,8 @@ TODO: Ich glaube ich sollte die model-beschreibungen (directed/undirected
 \end_layout
 
 \begin_layout Standard
-Here we will introduce the methods used to train deep neural networks,
- as applied in the results part.
+Here we will introduce the methods used to train deep neural networks, as
+ applied in the results part.
 \end_layout
 
 \begin_layout Section
@@ -3366,10 +3366,6 @@ TODO: Bild von einer Markov Chain.
 \end_layout
 
 \begin_layout Paragraph
-Definitions
-\end_layout
-
-\begin_layout Subparagraph
 Markov property: Memorylessness
 \end_layout
 
@@ -3474,7 +3470,7 @@ Markov property
 .
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Time-homogeneous Markov Chain and Transition Matrix
 \end_layout
 
@@ -3671,7 +3667,7 @@ transition matrix
  In the following we will only be dealing with time-homogeneous Markov chains.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Computing future states from the initial distribution
 \end_layout
 
@@ -3777,7 +3773,7 @@ d^{(t)}=d^{(0)}p^{t}
 .
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Stationary distribution
 \end_layout
 
@@ -3841,7 +3837,7 @@ If
  A Markov Chain can have more than one stationary distribution.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Detailed balance/Reversibility
 \end_layout
 
@@ -4110,7 +4106,7 @@ Theorem 7.4 in ~/uni/publication/zusammenfassung/markov chains/markovbuch2008.pd
  follow.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Irreducibility
 \end_layout
 
@@ -4172,7 +4168,7 @@ if
  is the set of possible states of the Markov Chain.)
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Positive Recurrence
 \end_layout
 
@@ -4423,7 +4419,7 @@ key "Behrends2000"
 ).
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Aperiodicity
 \end_layout
 
@@ -4492,7 +4488,7 @@ aperiodic
  aperiodic.
 \end_layout
 
-\begin_layout Subparagraph
+\begin_layout Paragraph
 Markov Chain Monte Carlo (MCMC)
 \end_layout
 
@@ -4511,7 +4507,7 @@ Markov Chain Monte Carlo algorithm
 
 \end_inset
 
- is a type of algorithm to sample from a multivariate probability distribution.
+ is an algorithm to sample from a multivariate probability distribution.
  It sets up a Markov Chain that has the desired stationary distribution
  and iterates it through time until the stationary distribution is approximated
  sufficiently.
@@ -5566,11 +5562,11 @@ Artificial Neural Networks
 
 \begin_layout Standard
 Here we will introduce artificial neural networks that have been developed
- as models of biological neural networks by various people since about
- the middle of the last century.
- The artificial neural networks introduced here are related with Deep
- Belief Networks, namely Hopfield networks, Multilayer Perceptrons, and
- (Restricted) Boltzmann Machines.
+ as models of biological neural networks by various people since about the
+ middle of the last century.
+ The artificial neural networks introduced here are related with Deep Belief
+ Networks, namely Hopfield networks, Multilayer Perceptrons, and (Restricted)
+ Boltzmann Machines.
 \end_layout
 
 \begin_layout Paragraph
@@ -8053,7 +8049,7 @@ The negative phase
 \end_inset
 
  until the stationary distribution is reached.
- The number of iterations is usually called 
+ The number of iterations is 
 \begin_inset Formula $k$
 \end_inset
 
@@ -8073,6 +8069,15 @@ contrastive divergence
 \end_inset
 
 .
+ Often 
+\begin_inset Formula $k=1$
+\end_inset
+
+ is used at the beginning of training and later 
+\begin_inset Formula $k$
+\end_inset
+
+ is incremented.
  
 \begin_inset Formula $\mathbf{v}$
 \end_inset
@@ -8100,7 +8105,11 @@ key "BengioDelalleau2007"
  reconstruction error as error metric in an autoassociator are linked.
  They showed that the weight learning gradient used with the reconstruction
  error is a more biased approximator of the log-likelihood than the gradient
- computed by CD-1.)
+ computed by 
+\begin_inset Formula $CD_{1}$
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Subsubsection
@@ -9191,9 +9200,9 @@ How Unlabeled Data was Used When Pre-training a Restricted Boltzmann Machine
 When using the unsupervised Restricted Boltzmann Machine to find the approximate
  weights of a neural network, the unlabeled data were used to train the
  Restricted Boltzmann Machine.
- The resulting neural network was then extended with the network layer
- for supervised classification, and the complete network was trained using
- (supervised) back-propagation on the labeled data.
+ The resulting neural network was then extended with the network layer for
+ supervised classification, and the complete network was trained using (supervis
+ed) back-propagation on the labeled data.
 \end_layout
 
 \begin_layout Subsubsection
