@@ -470,8 +470,15 @@ key "LodishZipursky2000"
 .
  Because ions are charged, there is an electric potential between the outside
  and inside of the cell.
- The resting potential is between -80mV and -40mV, depending on the type
- of neuron.
+ The resting potential is between 
+\begin_inset Formula $-80$
+\end_inset
+
+mV and 
+\begin_inset Formula $-40$
+\end_inset
+
+mV, depending on the type of neuron.
  The electric potential becoming more positive is called depolarization,
  and the opposite hyperpolarization.
 \end_layout
@@ -711,8 +718,16 @@ key "ZhangSharpee2016"
 \end_inset
 
 .
- In humans, there are about 500 different types of glomeruli [1], but it
- is hypothesized that a human can perceive around 10,000 different odors.
+ In humans, there are about 
+\begin_inset Formula $500$
+\end_inset
+
+ different types of glomeruli [1], but it is hypothesized that a human can
+ perceive around 
+\begin_inset Formula $10,000$
+\end_inset
+
+ different odors.
  Each 
 \begin_inset Quotes eld
 \end_inset
@@ -721,20 +736,23 @@ atomic
 \begin_inset Quotes erd
 \end_inset
 
- odor consisting of a few (<100) molecular species excites one or more glomeruli
-, and the compression requires each glomerulus to signal the presence of
- one or more than one odor.
+ odor consisting of a few (
+\begin_inset Formula $<100$
+\end_inset
+
+) molecular species excites one or more glomeruli, and the compression requires
+ each glomerulus to signal the presence of one or more than one odor.
  The excitation pattern of multiple glomeruli must be resolved in the olfactory
  neuronal system so that a low-dimensional vector of (
-\begin_inset Formula $\approx$
+\begin_inset Formula $\approx500$
 \end_inset
 
-500) glomeruli activations is decompressed to a high-dimensional representation
+) glomeruli activations is decompressed to a high-dimensional representation
  of (
-\begin_inset Formula $\approx$
+\begin_inset Formula $\approx10,000$
 \end_inset
 
-10,000) odors in the brain.
+) odors in the brain.
 \end_layout
 
 \begin_layout Standard
@@ -794,8 +812,11 @@ That is, odor component i will be detected as present if all glomeruli that
 
 .
  They suggest that in the neuronal AND-circuit a specific odor's Kenyon
- cell is activated when at least (for example) 80% of the glomeruli with
- receptors to this odor are active.
+ cell is activated when at least (for example) 
+\begin_inset Formula $80\%$
+\end_inset
+
+ of the glomeruli with receptors to this odor are active.
  On a cellular level, this could be realized by connecting the glomeruli
  associated with an odor with the odor's Kenyon cell, and a threshold at
  the Kenyon cell's input.
@@ -878,10 +899,26 @@ For example, in
 \emph on
 Drosophila
 \emph default
-, about 9% of the glomeruli are excited by an odorant, and the connectivity
- rate between glomeruli and Kenyon Cells is between 6.5% and 12.5%.
+, about 
+\begin_inset Formula $9\%$
+\end_inset
+
+ of the glomeruli are excited by an odorant, and the connectivity rate between
+ glomeruli and Kenyon Cells is between 
+\begin_inset Formula $6.5\%$
+\end_inset
+
+ and 
+\begin_inset Formula $12.5\%$
+\end_inset
+
+.
  In the locust, a projection neuron (the equivalent to a glomerulus) is
- activated by half of the odorants and the connectivity rate is about 50%.
+ activated by half of the odorants and the connectivity rate is about 
+\begin_inset Formula $50\%$
+\end_inset
+
+.
  This is in agreement with the proposed model.
 \end_layout
 
@@ -1273,6 +1310,7 @@ Supervised and Unsupervised Machine Learning
 
 \begin_layout Standard
 In artificial neural networks, the goals of learning are defined by humans.
+ Learning is hereby facilitated by changing the weights between neurons.
  In machine learning in general, there are two major types of learning:
  
 \emph on
@@ -1359,10 +1397,10 @@ ation and abstraction.
 \begin_layout Standard
 Examples of supervised learning algorithms are (linear or logistic) regression,
  k-Nearest Neighbor (k-NN) regression, support vector machines (SVMs), backpropa
-gation neural networks, Deep Belief Networks (DBNs).
+gation neural networks, and Deep Belief Networks (DBNs).
  Examples for unsupervised learning algorithms are (hierarchical or kNN)
  clustering, self-organising maps (SOMs), principal component analysis (PCA),
- Restricted Boltzmann Machines (RBMs).
+ and Restricted Boltzmann Machines (RBMs).
 \end_layout
 
 \begin_layout Standard
@@ -1433,8 +1471,8 @@ semi-supervised learning
  have the same label.
  Another assumption is that samples distant from each other probably have
  different labels.
- An example of a possible improvement of a semi-supervised classification
- of a supervised classification is given in figure 
+ An example of a possible improvement of semi-supervised classification
+ over supervised classification is given in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Illustration-of-semi-supervised-learning"
@@ -2016,14 +2054,14 @@ In the work that is described later, we used auto-associators, Deep Belief
  patients will show pathologic complete response to chemotherapy or residual
  disease.
  The expression data are high-dimensional (
-\begin_inset Formula $\approx$
+\begin_inset Formula $\approx22,000$
 \end_inset
 
-22,000 genes) and we use a relatively large data set (
-\begin_inset Formula $\approx$
+ genes) and we use a relatively large data set (
+\begin_inset Formula $\approx500$
 \end_inset
 
-500 patients).
+ patients).
 \end_layout
 
 \begin_layout Standard
@@ -2059,8 +2097,12 @@ key "RussakovskyFeiFei2015"
 .
  It is a yearly contest, wherein participants are given around 1.2 million
  training images.
- Each training image is labeled with one of 1.000 possible object categories
- describing the main object appearing in the image, for example 
+ Each training image is labeled with one of 
+\begin_inset Formula $1,000$
+\end_inset
+
+ possible object categories describing the main object appearing in the
+ image, for example 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2078,10 +2120,22 @@ butterfly
 
 .
  After training an image classification algorithm, each contestant must
- compute up to 5 labels for each of 100.000 test images.
+ compute up to 
+\begin_inset Formula $5$
+\end_inset
+
+ labels for each of 
+\begin_inset Formula $100,000$
+\end_inset
+
+ test images.
  Each test image has a label, which is kept hidden by the contest organizer.
  A test image is scored as correctly classified if the correct label appears
- in the (up to 5) labels submitted by the contestant.
+ in the (up to 
+\begin_inset Formula $5$
+\end_inset
+
+) labels submitted by the contestant.
  Finally, the accuracy of a contestant is computed as the average fraction
  of correctly classified test images.
 \end_layout
@@ -2619,24 +2673,53 @@ key "ChenXie2015"
  published work on compressing expression data into fewer dimensions on
  a large scale using deep learning.
  Input data were all 
-\begin_inset Formula $\approx$
+\begin_inset Formula $\approx111,000$
 \end_inset
 
-111,000 genome-wide expression profiles from the GEO database of Affymetrix
- microarrays, which were partitioned into training, validation, and testing
- data sets.
- For each sample, the same subset of 943 "landmark" genes was chosen and
- 9,520 other genes were predicted from the landmark genes.
+ genome-wide expression profiles from the GEO database of Affymetrix microarrays
+, which were partitioned into training, validation, and testing data sets.
+ For each sample, the same subset of 
+\begin_inset Formula $943$
+\end_inset
+
+ "landmark" genes was chosen and 
+\begin_inset Formula $9,520$
+\end_inset
+
+ other genes were predicted from the landmark genes.
  This is in contrast to our work, because we classified breast cancer samples
  using gene expression levels, while they did regression of gene expression
  levels using other gene expression levels.
 \end_layout
 
 \begin_layout Standard
-Their artificial neural network architecture had between 1 and 3 hidden
- layers with either 3,000, 6,000, or 9,000 nodes.
+Their artificial neural network architecture had between 
+\begin_inset Formula $1$
+\end_inset
+
+ and 
+\begin_inset Formula $3$
+\end_inset
+
+ hidden layers with either 
+\begin_inset Formula $3,000$
+\end_inset
+
+, 
+\begin_inset Formula $6,000$
+\end_inset
+
+, or 
+\begin_inset Formula $9,000$
+\end_inset
+
+ nodes.
  It had 943 input expression values (one for each landmark gene), and a
- total of 9,520 output expression values (one for each gene to be predicted).
+ total of 
+\begin_inset Formula $9,520$
+\end_inset
+
+ output expression values (one for each gene to be predicted).
  In addition to the (non-linear) neural network, they tried linear regression
  with no regularization, L1-, and L2-regularization.
 \end_layout
@@ -2703,13 +2786,42 @@ The input values were quantile normalized expression values between 4 and
 
 \begin_layout Standard
 k-Nearest Neighbor performed worst, with an average prediction error of
- 0.5866.
+ 
+\begin_inset Formula $0.5866$
+\end_inset
+
+.
  The three linear regression models performed about equally well, with average
- prediction errors of either 0.3784 or 0.3782, which means that regularization
- did not improve linear regression.
- The neural network-based average prediction errors were between 0.3421 and
- 0.3204, with the network having 3 hidden layers of size 9000, and 10% dropout
- rate performing best.
+ prediction errors of either 
+\begin_inset Formula $0.3784$
+\end_inset
+
+ or 
+\begin_inset Formula $0.3782$
+\end_inset
+
+, which means that regularization did not improve linear regression.
+ The neural network-based average prediction errors were between 
+\begin_inset Formula $0.3421$
+\end_inset
+
+ and 
+\begin_inset Formula $0.3204$
+\end_inset
+
+, with the network having 
+\begin_inset Formula $3$
+\end_inset
+
+ hidden layers of size 
+\begin_inset Formula $9,000$
+\end_inset
+
+, and 
+\begin_inset Formula $10\%$
+\end_inset
+
+ dropout rate performing best.
  (
 \emph on
 Dropout 
@@ -2722,9 +2834,23 @@ reference "sub:Dropout"
 
 \end_inset
 
-.) Because the input expression values were between 4 and 15, an average
- prediction error of 0.3204 implies an average error of about 3% on the GEO
- dataset.
+.) Because the input expression values were between 
+\begin_inset Formula $4$
+\end_inset
+
+ and 
+\begin_inset Formula $15$
+\end_inset
+
+, an average prediction error of 
+\begin_inset Formula $0.3204$
+\end_inset
+
+ implies an average error of about 
+\begin_inset Formula $3\%$
+\end_inset
+
+ on the GEO dataset.
 \end_layout
 
 \begin_layout Standard
@@ -2735,8 +2861,11 @@ key "ChenXie2015"
 
 \end_inset
 
- used the GEO dataset for training, the 1000 Genomes data for validation
- 
+ used the GEO dataset for training, the 
+\begin_inset Formula $1,000$
+\end_inset
+
+ Genomes data for validation 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LappalainenPedro2013"
@@ -2758,17 +2887,55 @@ Learning in this data set is harder since the input is measured in different
  ways, and therefore prone to the batch-effect.
  Nevertheless, the performance ranking of the methods was the same, but
  worse than the data set without batch-effect.
- KNN scored worst, with an average prediction error of 0.6520.
+ KNN scored worst, with an average prediction error of 
+\begin_inset Formula $0.6520$
+\end_inset
+
+.
  Linear regression with L1-regularization had an average prediction error
- of 0.5667.
+ of 
+\begin_inset Formula $0.5667$
+\end_inset
+
+.
  Linear regression without regularization and with L2-regularization had
- an average prediction error of 0.4702.
+ an average prediction error of 
+\begin_inset Formula $0.4702$
+\end_inset
+
+.
  The artificial neural networks all scored consistently better than KNN
- and linear regression, with the artificial neural network with 2 hidden
- layers of size 9000, and 25% dropout rate having the lowest prediction
- error of 0.4393 (which is equivalent to a relative error of 4%).
+ and linear regression, with the artificial neural network with 
+\begin_inset Formula $2$
+\end_inset
+
+ hidden layers of size 
+\begin_inset Formula $9,000$
+\end_inset
+
+, and 
+\begin_inset Formula $25\%$
+\end_inset
+
+ dropout rate having the lowest prediction error of 
+\begin_inset Formula $0.4393$
+\end_inset
+
+ (which is equivalent to a relative error of 
+\begin_inset Formula $4\%$
+\end_inset
+
+).
  On the validation data set of this data set, the average prediction error
- was 0.7467, which is a relative error of 6.8%.
+ was 
+\begin_inset Formula $0.7467$
+\end_inset
+
+, which is a relative error of 
+\begin_inset Formula $6.8\%$
+\end_inset
+
+.
  This shows that artificial neural networks are capable of processing input
  from multiple sources, with an acceptable gain in error.
  We had a similar result, in section 

@@ -9750,8 +9750,7 @@ reference "fig:Histogram-of-probabilities-of-breast_cancer_07"
 .
  The histogram shows that the probabilities for the true class of mis-classified
  samples are not mostly near 0.5, but in the middle of the possible range.
- (0.5 is the maximum probability, otherwise the sample would not be mis-classifie
-d.)
+ 0.5 is the maximum probability, otherwise the sample would not be mis-classified.
 \end_layout
 
 \begin_layout Standard
@@ -28473,9 +28472,10 @@ Test set accuracies for different data sets with more and more unlabeled
 Box plots of test set accuracies for different data sets with more and more
  unlabeled training samples in a neural network pre-trained with DBN on
  breast_cancer_15.
- The x-axis are the data sets (except data set 1, which cannot be used in
- DBNs because it does not contain unlabeled data) in the order of rising
- number of unlabeled samples.
+ The x-axis is the data sets in the order of rising number of unlabeled
+ samples; the y-axis is the test set accuracy.
+ Data set 1 cannot be used in DBNs because it does not contain unlabeled
+ data.
  The y-axis is the accuracy.
  Each dot represents the accuracy on a repetition.
 \end_layout
@@ -28615,7 +28615,7 @@ TSVM accuracies box plots on data set breast_cancer_15.
 TSVM accuracies box plots on data set breast_cancer_15.
  On the x-axis are the data sets in order of increasing number of unlabeled
  samples.
- The y-axis are the accuracies.
+ On the y-axis are the accuracies.
  Each dot is the accuracy of a repetition of a data set of breast_cancer_15.
 \end_layout
 

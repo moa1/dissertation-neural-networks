@@ -115,7 +115,8 @@ Transcriptomic data and visual images are both similar in that they have
  highly correlated dimensions, and dissimilar because the number of available
  unlabeled samples is much higher for images than expression data.
  We found that smoothing the validation set accuracies obtained during training
- iterations helped in model selection of the best classifier.
+ iterations to alleviate low sample numbers helped in model selection of
+ the best classifier.
 \end_layout
 
 \begin_layout Standard
@@ -135,8 +136,8 @@ In particular, we were interested whether classification accuracies improve
  of unlabeled samples presented to DBN and TSVM was increased to the maximal
  number of samples in our data sets.
  However, this effect was only observed when the learning algorithms were
- presented the expression values of all genes, not just a subset of the
- 500 most variable genes.
+ presented the expression values of all 22,283 genes, not just the 500 most
+ variable genes.
 \end_layout
 
 \end_body
