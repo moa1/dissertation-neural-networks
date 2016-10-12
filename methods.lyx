@@ -197,7 +197,7 @@ maybe TODO (but I already have a short section on these in the introduction):
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsection
 Generative and Discriminative Models
 \end_layout
 
@@ -326,6 +326,675 @@ key "HintonTeh2006"
 The neural networks will be discussed later.
  Graphical Models will be needed for Restricted Boltzmann Machines and Deep
  Belief Networks, and will be introduced next.
+\end_layout
+
+\begin_layout Subsection
+Support Vector Machines
+\end_layout
+
+\begin_layout Standard
+Here we will introduce inductive and transductive Support Vector Machines
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Support Vector Machine
+\end_layout
+
+\end_inset
+
+ (SVMs
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+SVM
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Inductive Support Vector Machines
+\end_layout
+
+\begin_layout Standard
+A linear SVM
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+inductive SVM
+\end_layout
+
+\end_inset
+
+ separates data points into two distinct classes using the hyperplane
+\begin_inset Formula 
+\[
+\mathbf{w}\cdot\mathbf{x}+b=0,
+\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $\mathbf{w}\in\mathbb{R}^{n}$
+\end_inset
+
+ is the vector perpendicular to the plane, 
+\begin_inset Formula $\mathbf{x}\in\mathbb{R}^{n}$
+\end_inset
+
+ is a point on the plane, and 
+\series bold
+
+\begin_inset Formula $b\in\mathbb{R}$
+\end_inset
+
+
+\series default
+ is the distance to the origin (in units of length 
+\begin_inset Formula $-\left\Vert \mathbf{w}\right\Vert $
+\end_inset
+
+)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "StatnikovGuyon2011"
+
+\end_inset
+
+.
+ The hyperplane is defined in the 
+\begin_inset Formula $n$
+\end_inset
+
+-dimensional space in which the samples lie, each sample having 
+\begin_inset Formula $n$
+\end_inset
+
+ features.
+ For a specific hyperplane defined by 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ and a sample 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, one can calculate the distance 
+\begin_inset Formula $d$
+\end_inset
+
+ between 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and the hyperplane using
+\begin_inset Formula 
+\[
+d=\mathbf{w}\cdot\mathbf{x}+b.
+\]
+
+\end_inset
+
+In particular, the sign of 
+\begin_inset Formula $d\in\mathbb{R}$
+\end_inset
+
+ is called the class of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Training a Hard-margin SVM
+\end_layout
+
+\begin_layout Standard
+When training a SVM by providing binary class labels 
+\begin_inset Formula $y_{i}\in\{-1,1\}$
+\end_inset
+
+ for all training samples 
+\begin_inset Formula $\mathbf{x_{i}}$
+\end_inset
+
+, the hyperplane is constructed such that it separates the two classes and
+ that it has the largest possible distance (
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+margin
+\end_layout
+
+\end_inset
+
+
+\emph on
+margin
+\emph default
+) to border-line samples (
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+support vectors
+\end_layout
+
+\end_inset
+
+
+\emph on
+support vectors
+\emph default
+).
+ Learning a hard-margin SVM means finding a 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+ so that its length is minimal
+\begin_inset Formula 
+\begin{equation}
+\mbox{minimize }\frac{1}{2}\left\Vert \mathbf{w}\right\Vert ^{2}\label{eq:hard-margin-SVM-min-w}
+\end{equation}
+
+\end_inset
+
+subject to the condition that all samples are classified correctly by 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+, 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ This means that the constraints 
+\begin_inset Formula 
+\begin{equation}
+y_{i}(\mathbf{w}\cdot\mathbf{x_{i}}+b)-1\geq0\label{eq:hard-margin-SVM-constraints}
+\end{equation}
+
+\end_inset
+
+ must be fulfilled for all samples 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ The two equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hard-margin-SVM-min-w"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hard-margin-SVM-constraints"
+
+\end_inset
+
+ are called the 
+\begin_inset Quotes eld
+\end_inset
+
+primal formulation of linear SVMs
+\begin_inset Quotes erd
+\end_inset
+
+.
+ This formulation can be solved by 
+\emph on
+convex quadratic programming
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+quadratic programming
+\end_layout
+
+\end_inset
+
+ with 
+\begin_inset Formula $n$
+\end_inset
+
+ variables, where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of features.
+ Using Lagrange multipliers 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "StatnikovGuyon2011"
+
+\end_inset
+
+, the primal formulation can be rewritten into the equivalent 
+\begin_inset Quotes eld
+\end_inset
+
+dual formulation
+\begin_inset Quotes erd
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{eqnarray}
+\mbox{minimize } &  & \sum_{i}^{N}\alpha_{i}-\frac{1}{2}\sum_{i,j}^{N}\alpha_{i}\alpha_{j}y_{i}y_{j}\mathbf{x_{i}}\mathbf{x_{j}}\label{eq:hard-margin-SVM-dual-formulation-min-w}\\
+\mbox{subject to } &  & \alpha_{i}\geq0\mbox{ and }\sum_{i}^{N}\alpha_{i}y_{i}=0,\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+where the 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+s are the 
+\begin_inset Formula $N$
+\end_inset
+
+ variables to be solved by quadratic programming, and 
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of samples.
+ After computing the solution for the dual formulation, the 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+-vector is given in terms of the 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+: 
+\begin_inset Formula $\mathbf{w}=\sum_{i}^{N}\alpha_{i}y_{i}\mathbf{x_{i}}$
+\end_inset
+
+ and the distance from the origin is 
+\begin_inset Formula $b=y_{i}-\mathbf{w}\mathbf{x_{i}}$
+\end_inset
+
+, for any sample 
+\begin_inset Formula $i$
+\end_inset
+
+ which has 
+\begin_inset Formula $\alpha_{i}\neq0$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BurbidgeBuxton2001"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+eq.
+ 13 on page 7
+\end_layout
+
+\end_inset
+
+.
+ The classifier is then 
+\begin_inset Formula $f(\mathbf{x})=sgn(\sum_{i}^{N}\alpha_{i}y_{i}\mathbf{x_{i}}\mathbf{x}+b)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+If there is no solution, i.e.
+ a separating hyperplane does not exist, one can do two things:
+\end_layout
+
+\begin_layout Itemize
+make the margin a soft margin, i.e.
+ allow some training samples to be misclassified.
+\end_layout
+
+\begin_layout Itemize
+implicitly map samples into a higher dimensional space where a separating
+ hyperplane exists.
+ This implicit mapping is called the 
+\emph on
+kernel trick
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Both actions will be described in the following.
+\end_layout
+
+\begin_layout Paragraph
+Training a Soft-margin SVM
+\end_layout
+
+\begin_layout Standard
+A soft-margin SVM is learned by introducing 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+slack variables
+\end_layout
+
+\end_inset
+
+
+\emph on
+slack variables 
+\emph default
+
+\begin_inset Formula $\xi_{i}$
+\end_inset
+
+ in the primal formulation:
+\begin_inset Formula 
+\begin{eqnarray*}
+\mbox{minimize } &  & \frac{1}{2}\left\Vert \mathbf{w}\right\Vert +C\sum_{i}^{N}\xi_{i}\\
+\mbox{subject to } &  & y_{i}(\mathbf{w}\cdot\mathbf{x_{i}}+b)\geq1-\xi_{i}\mbox{ for }i=1,\dots,N
+\end{eqnarray*}
+
+\end_inset
+
+and in the dual formulation:
+\begin_inset Formula 
+\begin{eqnarray}
+\mbox{minimize } &  & \sum_{i}^{N}\alpha_{i}-\frac{1}{2}\sum_{i,j}^{N}\alpha_{i}\alpha_{j}y_{i}y_{j}\mathbf{x_{i}}\mathbf{x_{j}}\label{eq:soft-margin-SVM-dual-formulation-min-w}\\
+\mbox{subject to } &  & 0\leq\alpha_{i}\leq C\mbox{ and }\sum_{i}^{N}\alpha_{i}y_{i}=0\mbox{ for }i=1,\dots,N,\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+where 
+\begin_inset Formula $C>0$
+\end_inset
+
+ is a meta-parameter that controls trading off a small margin size 
+\begin_inset Formula $\left\Vert \mathbf{w}\right\Vert $
+\end_inset
+
+ for admitting misclassifications of training samples.
+ Many SVM implementations have a default of 1.
+\end_layout
+
+\begin_layout Paragraph
+Kernel Trick
+\end_layout
+
+\begin_layout Standard
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+kernel trick
+\end_layout
+
+\end_inset
+
+The samples can be mapped into a higher-dimensional space where a separating
+ hyperplane exists or has a larger margin.
+ Mapping vectors 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ into a higher-dimensional space 
+\begin_inset Formula $\Phi(\mathbf{x})$
+\end_inset
+
+ explicitly requires computing all dimensions, which is time-consuming or
+ impossible for infinite-dimensional spaces.
+\end_layout
+
+\begin_layout Standard
+However, in the dual formulations in equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:hard-margin-SVM-dual-formulation-min-w"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:soft-margin-SVM-dual-formulation-min-w"
+
+\end_inset
+
+ above, the sample vectors 
+\begin_inset Formula $\mathbf{x_{i}}$
+\end_inset
+
+ only occur together with another sample 
+\begin_inset Formula $\mathbf{x_{j}}$
+\end_inset
+
+ in scalar products.
+ The mapping can be done implicitly by not computing 
+\begin_inset Formula $\Phi(\mathbf{x_{i}})\cdot\Phi(\mathbf{x_{j}})$
+\end_inset
+
+, but by defining a function that does this computation in one step: 
+\begin_inset Formula 
+\[
+K(\mathbf{x_{i}},\mathbf{x_{j}}):\mathbb{R}^{n}\times\mathbb{R}^{n}\rightarrow\mathbb{R}.
+\]
+
+\end_inset
+
+Calculating 
+\begin_inset Formula $K$
+\end_inset
+
+ is much cheaper than computing 
+\begin_inset Formula $\Phi(\mathbf{x_{i}})\cdot\Phi(\mathbf{x_{j}})$
+\end_inset
+
+.
+ Not every function can be a kernel, it has to satisfy the so-called Mercer
+ conditions.
+ Otherwise, the quadratic programming problem may not have a solution 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "StatnikovGuyon2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Transductive Support Vector Machines
+\end_layout
+
+\begin_layout Standard
+A Transductive SVM 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+transductive SVM
+\end_layout
+
+\end_inset
+
+ (TSVM) 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+TSVM
+\end_layout
+
+\end_inset
+
+ is a semi-supervised version of an inductive SVM 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Joachims1999a"
+
+\end_inset
+
+.
+ In addition to 
+\begin_inset Formula $N$
+\end_inset
+
+ training samples 
+\begin_inset Formula $\mathbf{x_{i}},$
+\end_inset
+
+ and their class labels 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+, we now know 
+\begin_inset Formula $N^{*}$
+\end_inset
+
+ test samples 
+\begin_inset Formula $\mathbf{x_{j}^{*}}$
+\end_inset
+
+.
+ The objective of training a TSVM is to find class labels 
+\begin_inset Formula $y_{j}^{*}$
+\end_inset
+
+ for the test samples, such that a separating hyperplane between the positive
+ and negative test and training samples has minimal length
+\begin_inset Formula 
+\begin{eqnarray*}
+\mbox{minimize } &  & \frac{1}{2}\left\Vert \mathbf{w}\right\Vert +C\sum_{i}^{N}\xi_{i}+C^{*}\sum_{j}^{N^{*}}\xi_{j}^{*}\\
+\mbox{subject to } &  & y_{i}\mathbf{w}\cdot\mathbf{x_{i}}+b\geq1-\xi_{i}\mbox{ for }i=1,\ldots,N\\
+ &  & y_{j}^{*}\mathbf{w}\cdot\mathbf{x_{j}^{*}}+b\geq1-\xi_{j}^{*}\mbox{ for }j=1,\ldots,N^{*}\\
+ &  & \xi_{i}>0\mbox{ for }i=1,\ldots,N\\
+ &  & \xi_{j}^{*}>0\mbox{ for }j=1,\ldots,N^{*},
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $C$
+\end_inset
+
+ is allows trading off margin size for misclassification errors of training
+ samples (as for the inductive case), and 
+\begin_inset Formula $C^{*}$
+\end_inset
+
+ controls the influence of test samples.
+ If 
+\begin_inset Formula $C^{*}$
+\end_inset
+
+ is zero, the formulation above is equivalent to the inductive case.
+\end_layout
+
+\begin_layout Standard
+Choosing class labels 
+\begin_inset Formula $y_{j}^{*}$
+\end_inset
+
+ for the test samples 
+\begin_inset Formula $\mathbf{x_{j}^{*}}$
+\end_inset
+
+ must be done before solving the quadratic programming problem, otherwise
+ it is not convex anymore (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CollobertBottou2006"
+
+\end_inset
+
+).
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Joachims1999a"
+
+\end_inset
+
+ does this by starting with an inductive SVM, i.e.
+ setting 
+\begin_inset Formula $C^{*}$
+\end_inset
+
+ to zero, and classifying the test samples 
+\begin_inset Formula $\mathbf{x_{j}^{*}}$
+\end_inset
+
+ to obtain class labels 
+\begin_inset Formula $y_{j}^{*}$
+\end_inset
+
+.
+ Then he proceeds by incrementing 
+\begin_inset Formula $C^{*}$
+\end_inset
+
+ while swapping two test samples' class labels if the objective function
+ decreases.
+ When 
+\begin_inset Formula $C^{*}$
+\end_inset
+
+ has reached a user-defined threshold, training stops and the current test
+ sample labels 
+\begin_inset Formula $y_{j}^{*}$
+\end_inset
+
+, and the separating hyperplane defined by parameters 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+
+\series bold
+ 
+\series default
+are returned.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Joachims1999a"
+
+\end_inset
+
+ notes that it is the co-occurrence of features that the transductive SVM
+ exploits to transduce labels from training samples to test samples.
+ For example, if a cluster of features always has a certain pattern in a
+ group of samples containing mostly positively labelled training samples,
+ then test samples showing that same feature pattern will likely also be
+ positively labelled.
 \end_layout
 
 \begin_layout Section
@@ -2120,6 +2789,23 @@ In a directed graphical model, the random variables
 \begin_inset Formula $N_{j}$
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1992"
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+equation 8, page 77 bottom
+\end_layout
+
+\end_inset
+
 .
  (This means there are graphs which have more than one compatible ordering,
  for example in the graph 
@@ -2354,14 +3040,14 @@ Since a graphical model is a representation of a joint probability distribution,
 
 \begin_layout Standard
 How to calculate the joint encoded by the graphical model was defined in
- 
+ section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
 
 \end_inset
 
- for undirected graphical models and in 
+ for undirected graphical models and in section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "par:The-Joint-Encoded-by-Directed-Graphical-Model"
@@ -9059,6 +9745,11 @@ TODO: HIER WEITERMACHEN.
 
 \begin_layout Subsection
 How Unlabeled Data Was Used in Training
+\end_layout
+
+\begin_layout Standard
+In the following, we will discuss how we used unlabeled data in semi-supervised
+ training.
 \end_layout
 
 \begin_layout Subsubsection
