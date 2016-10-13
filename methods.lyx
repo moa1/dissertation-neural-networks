@@ -324,8 +324,9 @@ key "HintonTeh2006"
 
 \begin_layout Standard
 The neural networks will be discussed later.
- Graphical Models will be needed for Restricted Boltzmann Machines and Deep
- Belief Networks, and will be introduced next.
+ Before introducing Graphical Models, needed for Restricted Boltzmann Machines
+ and Deep Belief Networks, the established Support Vector Machine will be
+ discussed.
 \end_layout
 
 \begin_layout Subsection
@@ -333,7 +334,7 @@ Support Vector Machines
 \end_layout
 
 \begin_layout Standard
-Here we will introduce inductive and transductive Support Vector Machines
+Here we will introduce supervised and transductive Support Vector Machines
 \begin_inset Index idx
 status collapsed
 
@@ -357,7 +358,7 @@ SVM
 \end_layout
 
 \begin_layout Subsubsection
-Inductive Support Vector Machines
+Supervised Support Vector Machines
 \end_layout
 
 \begin_layout Standard
@@ -366,7 +367,7 @@ A linear SVM
 status collapsed
 
 \begin_layout Plain Layout
-inductive SVM
+supervised SVM
 \end_layout
 
 \end_inset
@@ -639,7 +640,7 @@ s are the
 \begin_inset Formula $\alpha_{i}\neq0$
 \end_inset
 
-
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BurbidgeBuxton2001"
@@ -789,11 +790,11 @@ reference "eq:soft-margin-SVM-dual-formulation-min-w"
 \begin_inset Formula $\mathbf{x_{i}}$
 \end_inset
 
- only occur together with another sample 
+ only occur together in a scalar product with another sample 
 \begin_inset Formula $\mathbf{x_{j}}$
 \end_inset
 
- in scalar products.
+.
  The mapping can be done implicitly by not computing 
 \begin_inset Formula $\Phi(\mathbf{x_{i}})\cdot\Phi(\mathbf{x_{j}})$
 \end_inset
@@ -852,7 +853,7 @@ TSVM
 
 \end_inset
 
- is a semi-supervised version of an inductive SVM 
+ is a semi-supervised version of a SVM 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Joachims1999a"
@@ -902,8 +903,8 @@ where
 \begin_inset Formula $C$
 \end_inset
 
- is allows trading off margin size for misclassification errors of training
- samples (as for the inductive case), and 
+ allows trading off margin size for misclassification errors of training
+ samples (as for the supervised SVM), and 
 \begin_inset Formula $C^{*}$
 \end_inset
 
@@ -969,7 +970,7 @@ key "Joachims1999a"
 \begin_inset Formula $y_{j}^{*}$
 \end_inset
 
-, and the separating hyperplane defined by parameters 
+, and the separating hyperplane defined by the parameters 
 \begin_inset Formula $\mathbf{w}$
 \end_inset
 
