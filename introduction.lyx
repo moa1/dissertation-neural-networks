@@ -1492,7 +1492,7 @@ status open
 \align center
 A
 \begin_inset Graphics
-	filename images/summer_school_2014-intuitive2-semi_supervised_learning.eps
+	filename images/semi-supervised-advantage1.dia
 	lyxscale 30
 	width 30col%
 
@@ -1500,7 +1500,7 @@ A
 
  B
 \begin_inset Graphics
-	filename images/summer_school_2014-intuitive4-semi_supervised_learning.eps
+	filename images/semi-supervised-advantage2.dia
 	lyxscale 30
 	width 30col%
 
@@ -1508,7 +1508,7 @@ A
 
  C
 \begin_inset Graphics
-	filename images/summer_school_2014-intuitive5-semi_supervised_learning.eps
+	filename images/semi-supervised-advantage3.dia
 	lyxscale 30
 	width 30col%
 
