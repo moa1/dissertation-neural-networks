@@ -2671,6 +2671,15 @@ Belief network
 \end_inset
 
 .
+ (See e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "KollerTaskar2007,Neal1992"
+
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Standard
@@ -4048,6 +4057,15 @@ key "Neal1993"
 
 .
  To describe this, we first have to introduce Markov Chains.
+ See e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Norris1997,GrinsteadSnell2003"
+
+\end_inset
+
+ for reference.
 \end_layout
 
 \begin_layout Subsubsection
@@ -7370,7 +7388,14 @@ reference "sub:Autoassociator-introduction"
  internal hidden layer, which usually has a smaller size than the input
  and output layers, and the output layer, which has the same size as the
  input layer and where the original input should be reconstructed as closely
- as possible.
+ as possible 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BengioLarochelle2007"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

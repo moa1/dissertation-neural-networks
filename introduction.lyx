@@ -1916,6 +1916,13 @@ autoencoder
 
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BengioLarochelle2007"
+
+\end_inset
+
 .
  The algorithm is unsupervised and iteratively constructs deeper and deeper
  networks.
