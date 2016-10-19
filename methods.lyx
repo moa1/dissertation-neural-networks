@@ -9011,7 +9011,7 @@ DBN
 \end_inset
 
 ) are Belief Networks in which the nodes are organized in layers, and where
- the value of a node in a layer only depends on the value of nodes in the
+ the value of a node in a layer only depends on the values of nodes in the
  layer above.
  There are no loops in Deep Belief Networks.
  The word 
@@ -9022,7 +9022,8 @@ deep
 \begin_inset Quotes erd
 \end_inset
 
- refers to the number of hidden layers of a Deep Belief Network.
+ refers to the number of (more than a few) hidden layers of a Deep Belief
+ Network.
  Deep Belief Networks can be seen as the stochastic counterpart of deterministic
  feed-forward networks.
 \end_layout
@@ -9170,7 +9171,7 @@ Arbitrary Modelling Capability
 \begin_layout Standard
 Both Boltzmann machines and Sigmoid Belief Networks can represent arbitrary
  probability distributions over a set of an arbitrary number of visible
- nodes, provided that a sufficient number of hidden nodes is available
+ nodes, provided that a sufficient number of hidden nodes is available 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neal1992"
@@ -9486,9 +9487,19 @@ The Greedy Training Procedure
 \end_layout
 
 \begin_layout Standard
-This equivalence makes the following greedy training procedure for a Deep
- Belief Network possible.
- Start with a single RBM containing visible nodes 
+Instead of initializing the Deep Belief Network with random weights, as
+ we would have done before 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+, we initialize it with the weights of RBMs trained on each layer.
+\end_layout
+
+\begin_layout Standard
+At the first layer, start with a single RBM containing visible nodes 
 \begin_inset Formula $\mathbf{V_{0}}$
 \end_inset
 
@@ -9496,23 +9507,9 @@ This equivalence makes the following greedy training procedure for a Deep
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
- and train it using contrastive divergence to learn the weights 
-\begin_inset Formula $W$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Then copy the visible layer together with the weights, turn the copy upside-down
- (i.e.
- transpose the weights), and connect this new layer called 
-\begin_inset Formula $\mathbf{V_{1}}$
-\end_inset
-
- to the top of the hidden layer.
- This new 3-layer network is then further modified: The undirected weights
- between 
+ and train it using contrastive divergence to learn the weights.
+ Use these weights in the first layer of the Deep Belief Network.
+ Split the undirected connections between 
 \begin_inset Formula $\mathbf{V_{0}}$
 \end_inset
 
@@ -9520,36 +9517,13 @@ Then copy the visible layer together with the weights, turn the copy upside-down
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
- are 
+ into a connection going upwards and one going downwards.
+ This is called 
 \begin_inset Quotes eld
 \end_inset
 
-untied
+untying the weights
 \begin_inset Quotes erd
-\end_inset
-
- and replaced by directed weights 
-\begin_inset Formula $W$
-\end_inset
-
- going from 
-\begin_inset Formula $\mathbf{H_{0}}$
-\end_inset
-
- to 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
-
-, and directed weights 
-\begin_inset Formula $W^{T}$
-\end_inset
-
- going from 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
-
- to 
-\begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
 .
@@ -9559,20 +9533,11 @@ untied
 
  representation of the data, and the downward weights are generative and
  part of the model.
- Place the original RBM (that had been between 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
+\end_layout
 
- and 
+\begin_layout Standard
+Then infer a training data set for another RBM on hidden layers 
 \begin_inset Formula $\mathbf{H_{0}}$
-\end_inset
-
-) on top of the new layer 
-\begin_inset Formula $\mathbf{V_{1}}$
-\end_inset
-
-, so that it is now between 
-\begin_inset Formula $\mathbf{V_{1}}$
 \end_inset
 
  and 
@@ -9580,80 +9545,69 @@ untied
 \end_inset
 
 .
- Up to now this model is equivalent to running an RBM for one more iteration,
- which is implemented by the extra directed layer with shared weights below
- the RBM.
-\end_layout
-
-\begin_layout Standard
-Infer the hidden layer representation at 
+ This RBM needs training data in 
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
- (i.e.
- feed the activations of the visible layer 
+, but our training samples are for layer 
 \begin_inset Formula $\mathbf{V_{0}}$
 \end_inset
 
- through the activation function of 
+.
+ The conversion works by placing a training sample into the 
+\begin_inset Formula $\mathbf{V_{0}}$
+\end_inset
+
+ nodes, and then the upward connections are used to get a representation
+ at 
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
-).
- Now train the copied RBM between layers 
-\begin_inset Formula $\mathbf{V_{1}}$
+.
+ This is done for all training samples.
+ We now place an RBM between hidden layers 
+\begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
  and 
 \begin_inset Formula $\mathbf{H_{1}}$
 \end_inset
 
- and adapt its weights.
- This greedy step makes the weights different from those between 
-\begin_inset Formula $\mathbf{V_{0}}$
-\end_inset
-
-, 
+.
+ Up to now the model is equivalent to running the RBM for one more iteration,
+ which is implemented by the extra directed layer below the RBM.
+ But as we untied the weights, training the RBM on hidden layers 
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
-, and 
-\begin_inset Formula $\mathbf{V_{1}}$
+ and 
+\begin_inset Formula $\mathbf{H_{1}}$
 \end_inset
 
-, and thus the upward (inferring) weights between 
-\begin_inset Formula $\mathbf{V_{0}}\leftarrow\mathbf{H_{0}}$
+ using the converted training samples will learn different weights than
+ those between layers 
+\begin_inset Formula $\mathbf{V_{0}}$
 \end_inset
 
  and 
-\begin_inset Formula $\mathbf{H_{0}}\leftarrow\mathbf{V_{1}}$
+\begin_inset Formula $\mathbf{H_{0}}$
+\end_inset
+
+.
+ This means the upward (inferring) weights between 
+\begin_inset Formula $\mathbf{V_{0}}\leftarrow\mathbf{H_{0}}$
 \end_inset
 
  become incorrect in theory.
  In practice, however, this does not matter that much.
- The gain by training the RBM on top on re-represented data outweighs the
+ The gain by training the RBM on top of re-represented data outweighs the
  incorrectness of inference.
- Because the weights of the new RBM before training are initialized to be
- the same as that of the old RBM, additional constrastive divergence steps
- can only improve the model.
+ 
 \end_layout
 
 \begin_layout Standard
-Iteratively adding two new layers between the directed layers of the Deep
- Belief Network and the RBM on top can now continue until the model is sufficien
-tly deep.
-\end_layout
-
-\begin_layout Paragraph
-The RBM Seen as the DBN's Markov Chain in Reverse
-\end_layout
-
-\begin_layout Standard
-Another way to view the unrolling is to regard the infinitely Deep Belief
- Network as the process implementing the original Markov Chain.
- The Markov Chain implemented by the RBM in the unrolling of the DBN can
- then be regarded as simulating the same Markov Chain run in reverse, and
- the more layers we add to the DBN, the farther back we go in time.
+The steps of inferring a training data set for a deeper layer and training
+ an RBM on that data now continue until the model is sufficiently deep.
 \end_layout
 
 \begin_layout Subsubsection
@@ -9743,7 +9697,7 @@ fine-tuning
 \begin_layout Standard
 In such a composite structure, the (unsupervisedly trained) DBN weights
  take on the responsibility of re-representing the data so that it is in
- an abstracted form that has for example correlating variables replaced
+ an abstracted form where correlating variables, for example, are replaced
  by a single variable indicating whether a feature is present in the sample
  or not.
  The (supervisedly trained) weights on top of the network have the responsibilit
