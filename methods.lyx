@@ -1007,7 +1007,14 @@ Graphs
 \end_layout
 
 \begin_layout Standard
-In the following we will define some terms having to do with graphs.
+In the following we will define some terms having to do with graphs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barber2012"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2755,7 +2762,29 @@ X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(\mathrm{X})}})\mid\mathbf{N_{pa
 
 \end_inset
 
+(In general, independencies betweem any two sets of variables conditioned
+ on a third can be derived from the structure of the graph using 
+\begin_inset Index idx
+status collapsed
 
+\begin_layout Plain Layout
+d-separation
+\end_layout
+
+\end_inset
+
+
+\emph on
+d-separation
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barber2012"
+
+\end_inset
+
+.)
 \end_layout
 
 \begin_layout Paragraph
@@ -3027,11 +3056,11 @@ Inference in a graphical model is the task of answering a query about the
 \end_layout
 
 \begin_layout Standard
-We will now discuss a naive approach to inference.
+We will now discuss an approach to inference.
 \end_layout
 
 \begin_layout Subsubsection
-Naive Approach: Marginalizing the Joint 
+Marginalizing the Joint 
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
@@ -3361,7 +3390,7 @@ key "Jordan2004"
 \end_layout
 
 \begin_layout Subsubsection
-Example of Exact Inference in a Directed Graphical Model
+Example of Inference in a Directed Graphical Model
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Example-of-Exact-Inference-in-a-directed-graphical-model"
@@ -3387,16 +3416,6 @@ When the probability distribution of the parent nodes are known, inferring
  To keep the example interesting, given the probability distributions of
  the nodes in the bottom layer, we want to infer the probability distributions
  for all the other nodes.
- We want to determine the exact probability distributions, hence the term
- 
-\begin_inset Quotes eld
-\end_inset
-
-exact inference
-\begin_inset Quotes erd
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Paragraph
@@ -3639,7 +3658,7 @@ P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v
 \end_layout
 
 \begin_layout Paragraph
-Exact Inference in Deep Belief Networks is Complicated
+Inference in Deep Belief Networks is Complicated
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
@@ -3650,8 +3669,8 @@ name "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
 \end_layout
 
 \begin_layout Standard
-This shows that exact inference in a directed graphical model with densely
- connected layers is complicated.
+This shows that inference in a directed graphical model with densely connected
+ layers is complicated.
  If there are 
 \begin_inset Formula $n$
 \end_inset
@@ -3829,6 +3848,17 @@ weights
 \begin_layout Standard
 These procedures becomes infeasible in a Belief Network with more than a
  few parents per node.
+ This is a problem in learning.
+ If we want to learn the parameters of a Deep Belief Network, we have to
+ do inference.
+ However, as we will see in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:A-Fast-Learning-Algorithm-for-Deep-Belief-Networks"
+
+\end_inset
+
+, there is a fast approximate learning algorithm.
  
 \begin_inset Note Note
 status open
@@ -9273,6 +9303,13 @@ reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
 
 \begin_layout Subsubsection
 A Fast Learning Algorithm for Deep Belief Networks
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:A-Fast-Learning-Algorithm-for-Deep-Belief-Networks"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9442,8 +9479,8 @@ reference "eq:DBN-y-given-x"
  two conditional probabilities.
  The correctly inferred distribution is obtained once the Markov chain reaches
  equilibrium in iterating.
- However, we can also view this iterative induction as taking place in a
- Deep Belief Network that is infinitely deep, has alternating visible and
+ However, we can also view this iterative induction as taking place in an
+ infinitely deep directed graphical model that has alternating visible and
  hidden layers and has shared (
 \begin_inset Quotes eld
 \end_inset
@@ -9453,7 +9490,8 @@ tied
 \end_inset
 
 ) weights at all layers.
- The weights matrix between the DBN layers are 
+ The weights matrix between the layers in the directed graphical model are
+ 
 \begin_inset Formula $W$
 \end_inset
 
@@ -9464,7 +9502,7 @@ tied
  from visible to hidden layers.
  
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 TODO: insert graphics like Figure 3 in 
@@ -9479,7 +9517,8 @@ key "HintonTeh2006"
 
 \end_inset
 
-
+ It is this idea of unrolling the RBM in space that gives rise to the following
+ training procedure.
 \end_layout
 
 \begin_layout Paragraph
@@ -9576,7 +9615,7 @@ Then infer a training data set for another RBM on hidden layers
 .
  Up to now the model is equivalent to running the RBM for one more iteration,
  which is implemented by the extra directed layer below the RBM.
- But as we untied the weights, training the RBM on hidden layers 
+ Training the RBM on hidden layers 
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
@@ -9584,8 +9623,8 @@ Then infer a training data set for another RBM on hidden layers
 \begin_inset Formula $\mathbf{H_{1}}$
 \end_inset
 
- using the converted training samples will learn different weights than
- those between layers 
+ using the converted training samples will learn a different set of weights
+ than those between layers 
 \begin_inset Formula $\mathbf{V_{0}}$
 \end_inset
 
@@ -9594,14 +9633,22 @@ Then infer a training data set for another RBM on hidden layers
 \end_inset
 
 .
- This means the upward (inferring) weights between 
+ But as we untied the weights, this means the upward (inferring) weights
+ between 
 \begin_inset Formula $\mathbf{V_{0}}\leftarrow\mathbf{H_{0}}$
 \end_inset
 
  become incorrect in theory.
  In practice, however, this does not matter that much.
- The gain by training the RBM on top of re-represented data outweighs the
- incorrectness of inference.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+ note, the gain by training the RBM on top of re-represented data outweighs
+ the incorrectness of inference.
  
 \end_layout
 
