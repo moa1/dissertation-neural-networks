@@ -523,12 +523,20 @@ subject to the condition that all samples are classified correctly by
  This means that the constraints 
 \begin_inset Formula 
 \begin{equation}
-y_{i}(\mathbf{w}\cdot\mathbf{x_{i}}+b)-1\geq0\label{eq:hard-margin-SVM-constraints}
+y_{i}(\mathbf{w}\cdot\mathbf{x_{i}}+b)-1\geq0,\label{eq:hard-margin-SVM-constraints}
 \end{equation}
 
 \end_inset
 
- must be fulfilled for all samples 
+(where 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ is the true class of sample 
+\begin_inset Formula $i$
+\end_inset
+
+) must be fulfilled for all samples 
 \begin_inset Formula $i$
 \end_inset
 
@@ -710,7 +718,7 @@ slack variables
 slack variables 
 \emph default
 
-\begin_inset Formula $\xi_{i}$
+\begin_inset Formula $\xi_{i}\geq0$
 \end_inset
 
  in the primal formulation:
@@ -9557,15 +9565,6 @@ At the first layer, start with a single RBM containing visible nodes
 \end_inset
 
  into a connection going upwards and one going downwards.
- This is called 
-\begin_inset Quotes eld
-\end_inset
-
-untying the weights
-\begin_inset Quotes erd
-\end_inset
-
-.
  The upward weights serve the purpose of inferring the 
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
@@ -9615,7 +9614,18 @@ Then infer a training data set for another RBM on hidden layers
 .
  Up to now the model is equivalent to running the RBM for one more iteration,
  which is implemented by the extra directed layer below the RBM.
- Training the RBM on hidden layers 
+ This is because the weights between the two sets of layers are constrained
+ to be equal.
+ Now remove this restriction (
+\begin_inset Quotes eld
+\end_inset
+
+untie the weights
+\begin_inset Quotes erd
+\end_inset
+
+).
+ This means training the RBM on hidden layers 
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
@@ -9632,10 +9642,10 @@ Then infer a training data set for another RBM on hidden layers
 \begin_inset Formula $\mathbf{H_{0}}$
 \end_inset
 
-.
+ (unless the model was perfect already).
  But as we untied the weights, this means the upward (inferring) weights
  between 
-\begin_inset Formula $\mathbf{V_{0}}\leftarrow\mathbf{H_{0}}$
+\begin_inset Formula $\mathbf{V_{0}}\rightarrow\mathbf{H_{0}}$
 \end_inset
 
  become incorrect in theory.
@@ -9649,11 +9659,18 @@ key "HintonTeh2006"
 
  note, the gain by training the RBM on top of re-represented data outweighs
  the incorrectness of inference.
- 
+ They argue that the greedy algorithm is guaranteed to improve the generative
+ model, because 
+\begin_inset Formula $P(\mathbf{V_{0}})$
+\end_inset
+
+ has a lower bound that increases (or stays the same for a fully trained
+ model) when training an additional layer.
 \end_layout
 
 \begin_layout Standard
-The steps of inferring a training data set for a deeper layer and training
+The greedy algorithm now proceeds recursively, i.e.
+ the steps of inferring a training data set for a deeper layer and training
  an RBM on that data now continue until the model is sufficiently deep.
 \end_layout
 
