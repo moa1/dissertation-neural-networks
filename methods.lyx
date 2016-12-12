@@ -354,6 +354,16 @@ SVM
 
 \end_inset
 
+ and TSVMs
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+TSVM
+\end_layout
+
+\end_inset
+
 ).
 \end_layout
 
@@ -4077,7 +4087,7 @@ there exists a choice of potential functions ...
 
 .
  Therefore, in practice, the joint probability is approximated, for example
- by Gibbs sampling.
+ by Gibbs Sampling.
 \end_layout
 
 \begin_layout Subsection
@@ -5416,8 +5426,8 @@ A Markov Chain in Multiple Dimensions
 \end_layout
 
 \begin_layout Standard
-The variable updates in Gibbs sampling can be regarded as a Markov chain.
- However, we must first define how the random variables of Gibbs sampling
+The variable updates in Gibbs Sampling can be regarded as a Markov chain.
+ However, we must first define how the random variables of Gibbs Sampling
  are mapped to the random variable of the Markov chain.
  One theoretic possibility is to re-map the random variables and their states
  to a single random variable.
@@ -5429,13 +5439,13 @@ Above, Markov chains were defined for a single state variable
 \end_inset
 
 .
- But in Gibbs sampling there are usually more than one variable, written
+ But in Gibbs Sampling there are usually more than one variable, written
  
 \begin_inset Formula $X_{i}\in\{X_{1},\dots,X_{n}\}$
 \end_inset
 
  above.
- If there are a finite number of random variables in Gibbs sampling, i.e.,
+ If there are a finite number of random variables in Gibbs Sampling, i.e.,
  if 
 \begin_inset Formula $n$
 \end_inset
@@ -5821,7 +5831,7 @@ center
 
  of the equilibrium distribution is then one should use a value near that
  center as the starting point, however, in many cases such things are not
- known (and are the goal of Gibbs sampling in the first place).
+ known (and are the goal of Gibbs Sampling in the first place).
 \end_layout
 
 \begin_layout Standard
@@ -5939,7 +5949,7 @@ reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
  conditioning on the known random variables and marginalizing out the uninterest
 ing variables.
  It was stated there that the exponential runtime of exact inference can
- be circumvented by approximate methods like Gibbs sampling.
+ be circumvented by approximate methods like Gibbs Sampling.
  Here we address that claim.
 \end_layout
 
@@ -6201,7 +6211,7 @@ key "Neal1993"
 \begin_inset Quotes eld
 \end_inset
 
-We start the Gibbs sampling procedure by fixing the observed variables to
+We start the Gibbs Sampling procedure by fixing the observed variables to
  their known values, and setting the unobserved variables arbitrarily.
  We then repeatedly visit each unobserved variable in turn, each time randomly
  selecting a new value for the variable from its conditional distribution
@@ -8346,7 +8356,7 @@ learning rate
 
  provides such a delta.
  This derivative can be approximated by the difference between two parallel
- Gibbs sampling steps: the 
+ Gibbs Sampling steps: the 
 \emph on
 positive phase
 \emph default
@@ -8399,7 +8409,7 @@ positive phase
 \end_inset
 
 , and then the states of the remaining (i.e.
- hidden) nodes are sampled via Gibbs sampling.
+ hidden) nodes are sampled via Gibbs Sampling.
  This means starting in any (for example random) configuration of the hidden
  nodes, repeatedly sampling each remaining variable 
 \begin_inset Formula $S$
@@ -9497,7 +9507,17 @@ tied
 \begin_inset Quotes erd
 \end_inset
 
-) weights at all layers.
+) weights
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+tied weights
+\end_layout
+
+\end_inset
+
+ at all layers.
  The weights matrix between the layers in the directed graphical model are
  
 \begin_inset Formula $W$
@@ -9526,7 +9546,7 @@ key "HintonTeh2006"
 \end_inset
 
  It is this idea of unrolling the RBM in space that gives rise to the following
- training procedure.
+ training procedure for the weights of a Deep Belief Network.
 \end_layout
 
 \begin_layout Paragraph
@@ -9624,6 +9644,16 @@ untie the weights
 \begin_inset Quotes erd
 \end_inset
 
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+untied weights
+\end_layout
+
+\end_inset
+
 ).
  This means training the RBM on hidden layers 
 \begin_inset Formula $\mathbf{H_{0}}$
@@ -9666,12 +9696,14 @@ key "HintonTeh2006"
 
  has a lower bound that increases (or stays the same for a fully trained
  model) when training an additional layer.
+ Thus approximate Gibbs Sampling, which is feasible only for a few variables
+ per layer, can be replaced by the tractable greedy algorithm.
 \end_layout
 
 \begin_layout Standard
 The greedy algorithm now proceeds recursively, i.e.
  the steps of inferring a training data set for a deeper layer and training
- an RBM on that data now continue until the model is sufficiently deep.
+ an RBM on this data now continue until the model is sufficiently deep.
 \end_layout
 
 \begin_layout Subsubsection
@@ -9761,7 +9793,7 @@ fine-tuning
 \begin_layout Standard
 In such a composite structure, the (unsupervisedly trained) DBN weights
  take on the responsibility of re-representing the data so that it is in
- an abstracted form where correlating variables, for example, are replaced
+ an abstracted form where correlated variables, for example, are replaced
  by a single variable indicating whether a feature is present in the sample
  or not.
  The (supervisedly trained) weights on top of the network have the responsibilit
