@@ -74,11 +74,11 @@
 status open
 
 \begin_layout Plain Layout
-TODO: maybe replace 
+DONE: maybe replace 
 \begin_inset Quotes eld
 \end_inset
 
-neural network
+neuronal network
 \begin_inset Quotes erd
 \end_inset
 
@@ -251,8 +251,8 @@ The goal of this work is to contribute to such a predictor.
 The study of neural networks in biology prompted the development of artificial
  neural networks.
  After an introduction to biological and artificial neural networks we will
- give an overview of machine learning and then introduce the own work done
- in this manuscript.
+ give an overview of the relevant topics of machine learning and then introduce
+ the own work done in this manuscript.
 \end_layout
 
 \begin_layout Section
@@ -931,6 +931,13 @@ The model also predicts that species with sparse connectivity have better
 
 \begin_layout Subsection
 Artificial Neurons as Simple Models of Biological Neurons
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Artificial-Neurons-as-Simple-Models-of-Biological-Neurons"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -995,9 +1002,9 @@ activation of an artificial neuron
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(-v_{i})},
-\]
+\begin{equation}
+o_{i}=\sigma(v_{i})=\frac{1}{1+\exp(-v_{i})},\label{eq:sigmoid-function}
+\end{equation}
 
 \end_inset
 
@@ -1018,15 +1025,14 @@ where
 \end_inset
 
 .
- See figure 
+ See the left panel of figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:sigmoid-function"
 
 \end_inset
 
- for a plot of the sigmoid function and a schema of an artificial neuronal
- network.
+ for a plot of the sigmoid function.
 \begin_inset Float figure
 wide false
 sideways false
@@ -1078,7 +1084,16 @@ Left: The sigmoid function
 \end_inset
 
 .
- Right: Schema of the computational steps in a neuronal feed-forward network
+ Right: Schema of the computational steps in a neural feed-forward network
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+feed-forward network
+\end_layout
+
+\end_inset
+
  from input layer to output layer.
 \end_layout
 
@@ -1113,9 +1128,9 @@ The effect of an incoming axon onto a neuron, that is, the different types
 
  as in
 \begin_inset Formula 
-\[
-v_{i}=-b_{i}-\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij},
-\]
+\begin{equation}
+v_{i}=-b_{i}-\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij},\label{eq:input-to-a-neuron}
+\end{equation}
 
 \end_inset
 
@@ -1170,6 +1185,18 @@ of neuron
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+In an neural network the neurons are often arranged in layers.
+ See the right panel of figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:sigmoid-function"
+
+\end_inset
+
+ for an example of the structure of an artificial neural network.
 \end_layout
 
 \begin_layout Subsection
@@ -1340,6 +1367,13 @@ unsupervised machine learning
 
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barber2012"
+
+\end_inset
+
 .
  Both methods process data sets that are in matrix form: for example, in
  expression data, the rows usually denote different genes or transcripts,
@@ -1353,9 +1387,8 @@ unsupervised machine learning
 \end_layout
 
 \begin_layout Standard
-In supervised learning, for every input pattern in the data set there is
- defined an output pattern that the learner should compute from the input
- pattern.
+In supervised learning, for every input pattern in the data set an output
+ pattern is defined that the learner should compute from the input pattern.
  Herein, both input and output pattern can be one- or multi-dimensional
  vectors.
  The goal of supervised learning is to infer a function that maps from the
@@ -1374,7 +1407,9 @@ labels
 
 \end_inset
 
-, and one says that  
+.
+ (The fact that for every input pattern there is a defined output pattern
+ is termed 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1382,30 +1417,38 @@ the input data is labeled
 \begin_inset Quotes erd
 \end_inset
 
-.
+).
 \end_layout
 
 \begin_layout Standard
-In unsupervised learning, there are only input data and the goal is to find
- interesting underlying patterns in them.
- Unsupervised learning algorithms usually compute a mapping from input space
- to output space, where both spaces can differ in their dimensionality.
- This can be used for example for dimensionality reduction, or data re-represent
-ation and abstraction.
+In unsupervised learning, there is only an input data set and the goal is
+ to find its compact description.
+ The output of an unsupervised learning algorithm is the underlying structure
+ of the data according to the algorithm's objective function.
+ The objective of an unsupervised learning algorithm can range from dimensionali
+ty reduction to data re-representation to latent variable modelling.
 \end_layout
 
 \begin_layout Standard
 Examples of supervised learning algorithms are (linear or logistic) regression,
- k-Nearest Neighbor (k-NN) regression, support vector machines (SVMs), backpropa
-gation neural networks, and Deep Belief Networks (DBNs).
+ k-Nearest Neighbor (k-NN) regression, support vector machines (SVMs), and
+ backpropagation neural networks.
  Examples for unsupervised learning algorithms are (hierarchical or kNN)
  clustering, self-organising maps (SOMs), principal component analysis (PCA),
  and Restricted Boltzmann Machines (RBMs).
 \end_layout
 
 \begin_layout Standard
-The samples are split into training, validation and test data sets.
- The training samples
+A goal of both supervised and unsupervised learning is that the learned
+ rules should generalize well, i.e.
+ previously unseen data should be characterized correctly.
+ The samples are therefore split into training, validation and test data
+ sets.
+ The 
+\emph on
+training data set
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1415,9 +1458,16 @@ training data set
 
 \end_inset
 
- are used to train a machine learning algorithms.
- Some machine learning algorithms have meta-parameters, which are optimized
- using the validation data set
+ is used to train a machine learning algorithm.
+ Some machine learning algorithms have meta-parameters, i.e.
+ parameters that are needed for the algorithm, but that we are not really
+ interested in.
+ (An example is the number of hidden neurons in an artificial neural network.)
+ The meta-parameters are optimized using the 
+\emph on
+validation data set
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1428,8 +1478,12 @@ validation data set
 \end_inset
 
 .
- At the end of all training, the performance of the machine learning algorithm
- must be evaluated on previously unseen samples, the testing data set
+ At the end of training, the performance of the machine learning algorithm
+ must be evaluated on previously unseen samples, the 
+\emph on
+testing data set
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -1447,8 +1501,8 @@ Semi-supervised Machine Learning
 \end_layout
 
 \begin_layout Standard
-An intermediate form of these two machine learning modes is semi-supervised
- learning
+An intermediate form between supervised and unsupervised machine learning
+ is semi-supervised learning
 \begin_inset Index idx
 status collapsed
 
@@ -1460,17 +1514,17 @@ semi-supervised learning
 
 .
  In contrast to supervised machine learning, which has for every input pattern
- a corresponding target output pattern, semi-supervised learning does not
- need a target output pattern for every input pattern.
+ a target output pattern, semi-supervised learning does not need a target
+ output pattern for every input pattern.
  However, in contrast to fully unsupervised machine learning, it does need
  some labeled input data sets.
- Semi-supervised machine learning algorithms often try to find underlying
- structure in all input data sets and then use the known labels to assign
- probable labels to the found structure (or just the unlabeled input samples).
- This assumes that samples close in the (high-dimensional) input space probably
- have the same label.
- Another assumption is that samples distant from each other probably have
- different labels.
+ An common objective of semi-supervised machine learning algorithms is to
+ find underlying structure in all input data sets and then use the known
+ labels to assign labels to unlabeled input samples.
+ This assumes that samples close in the (high-dimensional) input space have
+ the same label.
+ Another assumption is that samples distant to each other have different
+ labels.
  An example of a possible improvement of semi-supervised classification
  over supervised classification is given in figure 
 \begin_inset CommandInset ref
@@ -1479,7 +1533,24 @@ reference "fig:Illustration-of-semi-supervised-learning"
 
 \end_inset
 
-.
+ (adapted from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Joachims1999a"
+
+\end_inset
+
+).
+ In the figure, the two-dimensional samples are either labeled orange or
+ blue, or unlabeled, and the task is to (1) find a straight line that separates
+ samples with the two colors and (2) color the unlabeled samples.
+ Supervised learning alone does not take into account the unlabeled samples,
+ while semi-supervised learning recognizes that there are two clouds of
+ samples, separated by a gap, where the labeled samples from each color
+ are on different sides of the gap.
+ It then draws the separating line in the middle of the gap, and colors
+ the unlabeled samples on the side with the orange samples orange, and the
+ unlabed samples on the other side blue.
 \end_layout
 
 \begin_layout Standard
@@ -1593,7 +1664,7 @@ inductive semi-supervised learning
 \end_layout
 
 \begin_layout Subsubsection
-Properties of Semi-supervised Learning
+Example Scenarios for Semi-supervised Learning
 \end_layout
 
 \begin_layout Standard
@@ -1615,7 +1686,7 @@ key "BarrettSoboleva2013"
 
 \begin_layout Standard
 However in practice, many machine learning algorithms require samples to
- be independetly and identically distributed
+ be independently and identically distributed
 \begin_inset Index idx
 status collapsed
 
@@ -1708,7 +1779,7 @@ DBN
 \emph on
 )
 \emph default
- that have been described by 
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HintonTeh2006"
@@ -1717,9 +1788,9 @@ key "HintonTeh2006"
 
 .
  This machine-learning algorithm (which can be used unsupervisedly, supervisedly
-, as well as semi-supervisedly) was shown to be able to learn from images
- of objects or faces, where the objects or faces are in different lighting
- conditions or are viewed from different angles (
+, as well as semi-supervisedly) can learn from images of objects or faces,
+ where the objects or faces are in different lighting conditions or are
+ viewed from different angles (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
@@ -1727,12 +1798,57 @@ key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
 \end_inset
 
 ).
- In this setting, the batch effect would be the lightning condition or viewing
+ In this setting, the batch effect would be the lighting condition or viewing
  angle.
  Such results seem to imply that DBNs are able to abstract the images, which
  are given as vectors of pixels, into encodings of relevant features and
  compute a classifier on these abstract features.
- This can be seen as a form of batch-effect correction.
+ This can be seen as a form of batch-effect correction
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+An extreme form of batch-effect correction is when all training data are
+ in batch 1 and all test data in batch 2.
+ For example, suppose that batch 1 are all face portraits (frontal view),
+ batch 2 are half profile faces (30 degree angle view) from -- not necessarily
+ the same -- people, and the task is to match faces seen from both viewing
+ angles to the same person.
+ During training, semi-supervised learning would have access to the unlabeled
+ faces from both viewing angles, but the half profiles would be unlabeled.
+ We are not aware of a study of that setting using artificial neural networks,
+ but a similar setting was studied for humans as learners
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BobakBate2015"
+
+\end_inset
+
+.
+ The participants of the study were asked to match a half profile to one
+ out of 10 portraits, or indicate that there is no matching face.
+ The accuracy of average people was 81%, while people who have extraordinary
+ face recognition abilities, so-called 
+\begin_inset Quotes eld
+\end_inset
+
+super-recognizers
+\begin_inset Quotes erd
+\end_inset
+
+, had 94% accuracy.
+ When there was no matching face, average people correctly rejected the
+ face in 65% of all cases, and super-recognizers did so in 92%.
+ For humans, the unsupervised training would consist in seeing people's
+ faces from different angles during normal day-to-day activity, but one
+ could argue that this is unfair, since humans have access to the label
+ for many half profiles, since they saw a person's portrait just moments
+ ago.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1748,13 +1864,12 @@ deep learning
 
 \end_inset
 
- is a term used in conjunction with artificial neural networks which have
- several hidden layers.
+ is a term used in artificial neural networks with several hidden layers.
  The advantage of a deep network over a network with just one hidden layer
  is that it can model a problem more compactly using less hidden neurons
  in total, because it has more than one intermediate computation step.
- Before deep learning there was back-propagation, which has problems coping
- with more than one hidden layer.
+ Before deep learning there was back-propagation, but as we will see in
+ a moment, this has problems coping with more than one hidden layer.
 \end_layout
 
 \begin_layout Subsection
@@ -1762,10 +1877,24 @@ Back-propagation
 \end_layout
 
 \begin_layout Standard
-Before deep learning, supervised artificial neural networks were usually
- trained using back-propagation.
- Back-propagation learns from labeled samples the weights and biases of
- an artificial neural network 
+Before deep learning, supervised artificial neural networks were trained
+ using back-propagation.
+ Back-propagation learns from labeled samples the parameters of the artificial
+ neural network, the weights and biases, using 
+\emph on
+gradient descent
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+gradient descent
+\end_layout
+
+\end_inset
+
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RumelhartWilliams1988"
@@ -1773,14 +1902,278 @@ key "RumelhartWilliams1988"
 \end_inset
 
 .
- This supervised training procedure sets input activations in the input
- layer according to the input pattern to be learned, computes the activations
- of the hidden layers and the output layer, and then computes the error
- at each node in the output layer by subtracting the computed activation
- from the target activation as given by the desired output pattern for the
- particular input pattern that was fed into the network.
- The error for each node is then back-propagated in reverse input direction
- to the hidden layers and finally to the input layer.
+ Each neuron's output is computed from the sum of its inputs (see section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Artificial-Neurons-as-Simple-Models-of-Biological-Neurons"
+
+\end_inset
+
+ ):
+\begin_inset Formula 
+\begin{equation}
+v_{j}=-b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},\label{eq:input-to-a-neuron-2}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ is the bias, 
+\begin_inset Formula $o_{i}$
+\end_inset
+
+ is the output of a neuron in the layer above, and 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ is the weight of the connection from neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ The input 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ is then scaled by the sigmoid function to produce a neuron's output 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+o_{j}=\sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.\label{eq:sigmoid-function-2}
+\end{equation}
+
+\end_inset
+
+The supervised training patterns are indexed by 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $x_{i,p}$
+\end_inset
+
+ is the input for neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in the input layer and pattern number 
+\begin_inset Formula $p$
+\end_inset
+
+, and 
+\begin_inset Formula $y_{i,p}$
+\end_inset
+
+ is the corresponding desired output for neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in the output layer.
+ This supervised training procedure first does the 
+\emph on
+forward pass
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+forward pass
+\end_layout
+
+\end_inset
+
+: it sets input activations 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ in the input layer according to the input pattern 
+\begin_inset Formula $x_{i,p}$
+\end_inset
+
+ to be learned, computes the activations of the hidden layers 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+ and the output layer 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+.
+ (Note that here, each neuron has a unique index, also among different layers.)
+\end_layout
+
+\begin_layout Standard
+In the 
+\emph on
+backward pass
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+backward pass
+\end_layout
+
+\end_inset
+
+, the training procedure computes the total error 
+\begin_inset Formula $E$
+\end_inset
+
+ of the network, which is defined as the squared sum of differences between
+ actual 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+ and desired output 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+E=\frac{1}{2}\sum_{p}\sum_{k}(o_{k,p}-y_{k,p})^{2}.
+\end{equation}
+
+\end_inset
+
+The error is then differentiated with respect to a weight 
+\begin_inset Formula $w_{kj}$
+\end_inset
+
+ for a connection from 
+\begin_inset Formula $j$
+\end_inset
+
+ to 
+\begin_inset Formula $k$
+\end_inset
+
+ (see 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RumelhartWilliams1988"
+
+\end_inset
+
+) 
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial E}{\partial w_{kj}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\label{eq:backpropagation-derivative-of-weight}
+\end{equation}
+
+\end_inset
+
+ and with respect to 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-1).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To perform gradient descent, we also need the derivatives of the error with
+ respect to the weights 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ and biases 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ for the connection between the last and the second last hidden layer.
+ It is
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\\
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot(-o_{j}),
+\end{eqnarray*}
+
+\end_inset
+
+ where
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}(v_{k}(o_{j}))\\
+ & = & \sum_{k}\frac{\partial}{\partial o_{j}}E_{k}(v_{k}(o_{j}))\\
+ & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(v_{k})\frac{\partial v_{k}}{\partial o_{j}}\\
+ & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(v_{k})\frac{\partial v_{k}}{\partial o_{j}}\\
+ & = & \sum_{k}\frac{\partial}{\partial o_{k}}E(o_{k})\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\\
+ & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})
+\end{eqnarray*}
+
+\end_inset
+
+and we take the value for 
+\begin_inset Formula $\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
+\end_inset
+
+ from the layer below, i.e.
+ from equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-derivative-of-weight"
+
+\end_inset
+
+.
+ For example, for the last hidden layer, we take 
+\begin_inset Formula $\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
+\end_inset
+
+ from the output layer: 
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\\
+ & = & \sum_{k}(o_{k}-y_{k})o_{k}(1-o_{k})(-w_{kj}).
+\end{eqnarray*}
+
+\end_inset
+
+Analogously, the derivative with respect to 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial b_{k}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}o_{j}(1-o_{j})(-1).\\
+ & = & (o_{k}-y_{k})o_{k}(1-o_{k})o_{j}(1-o_{j})(-1).
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The error for each node is thus back-propagated in reverse input direction
+ through the hidden layers.
  See figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1829,12 +2222,12 @@ Data flow in training a neural network using back-propagation.
 \end_inset
 
 Data flow in training a neural network with three layers using back-propagation.
- The input layer is at the bottom, the hidden layer in the middle, and the
- output layer at the top.
- The black arrows denote information flow about the activation state from
- the node at the arrow tail to the node at the arrow head.
- Each arrow is associated with a weight from tail to head.
- The orange arrows denote information flow during error back-propagation.
+ The input layer is at the top, the hidden layer in the middle, and the
+ output layer at the bottom.
+ The black arrows denote information flow during the forward pass.
+ Each black arrow is associated with a weight from tail to head.
+ The grey arrows denote information flow during the backward pass, which
+ propagates errors in the reverse direction.
 \end_layout
 
 \end_inset
@@ -1848,102 +2241,64 @@ Data flow in training a neural network with three layers using back-propagation.
 \end_layout
 
 \begin_layout Standard
-The purpose of error back-propagation is to be able to adjust the weights
- of the artificial neural network following the gradient, such that when
- the current input pattern pair is presented to the network, its computed
- output pattern gets closer and closer to the desired output pattern.
- However, back-propagation was not able to train networks with more than
- one or two hidden layers, because it got stuck in poor local energy optima.
- Having artificial neural networks with more than one hidden layer is desirable
- from a computational power standpoint.
-\end_layout
-
-\begin_layout Subsection
-Networks with Multiple Hidden Layers
-\end_layout
-
-\begin_layout Subsubsection
-Autoassociator, Autoencoder
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Autoassociator-introduction"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: vielleicht sollte die Beschreibung eines autoassociators hier kürzer
- sein, und diese lange Beschreibung stattdessen in den Methods-Teil, da
- sonst die Beschreibung von Deep learning danach sehr kurz wirkt.
-\end_layout
-
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Hier sollte ein Bild von einem Auto-associator stehen.
-\end_layout
-
-\end_inset
-
-An algorithm that can train an artificial neural network with more than
- one hidden layer is the auto-associator
+After computing the derivatives of the error with respect to the parameters
+ of the network, we can perform gradient descent and update the parameters
+ using the learning rate
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-auto-associator
-\end_layout
-
-\end_inset
-
-, or autoencoder
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-autoencoder
+learning rate
 \end_layout
 
 \end_inset
 
  
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, a small positive number:
+\begin_inset Formula 
+\begin{eqnarray*}
+\Delta w & = & -\epsilon\frac{\partial E}{\partial w}\\
+\Delta b & = & -\epsilon\frac{\partial E}{\partial b}.
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The purpose of error back-propagation is to adjust the weights of the artificial
+ neural network following the gradient, such that when the current input
+ pattern pair is presented to the network, its computed output pattern gets
+ closer and closer to the desired output pattern.
+ However, back-propagation was not able to train networks with more than
+ one or two hidden layers, because it is a gradient descent method and can
+ get stuck in poor local optima, and the error surface gets more rugged
+ the more hidden neurons and layers there are 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "BengioLarochelle2007"
+key "GoriTesi1992"
 
 \end_inset
 
 .
- The algorithm is unsupervised and iteratively constructs deeper and deeper
- networks.
- Its essential idea is the construction of an encoder network and its anti-symme
-tric counterpart, the decoder network.
- The encoder starts in the first iteration as a network that consists of
- the input layer and one hidden layer on top.
- The (overlapping) decoder network consists of the very same hidden layer
- and the output layer on top, which must have the same dimensions as the
- input layer.
- Training an autoencoder slowly adds internal layers to en- and decoder.
+ Having artificial neural networks with more than one hidden layer is desirable,
+ because it can perform the same computation with less total number of hidden
+ nodes compared to a network with less hidden layers, up to an exponential
+ factor 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hastad1987"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Standard
-Because the network size increases iteratively from only 3 layers, to 5
- layers, to 7 layers, and so on, and only 2 weight layers are initialized
- randomly in each iteration, back-propagation is often able to find parameters
- for a network that is not stuck in a poor local optimum.
-\end_layout
-
-\begin_layout Subsubsection
+\begin_layout Subsection
 Deep Learning
 \end_layout
 
@@ -1958,14 +2313,14 @@ deep learning
 
 \end_inset
 
-, as demonstrated by 
+ overcame the limitation of only a few hidden layers 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HintonTeh2006"
 
 \end_inset
 
- also overcame the limitation of only a few hidden layers.
+.
  It is separated into a pre-training phase and a fine-tuning phase.
  The pre-training phase is unsupervised.
  In this phase, hidden layers are iteratively added on top of the input
@@ -2056,10 +2411,9 @@ Overview of Own and Related Work
 \end_layout
 
 \begin_layout Standard
-In the work that is described later, we used auto-associators, Deep Belief
- Networks, and TSVMs on expression data to predict whether breast cancer
- patients will show pathologic complete response to chemotherapy or residual
- disease.
+We used auto-associators, Deep Belief Networks, and TSVMs on expression
+ data to predict whether breast cancer patients will show pathologic complete
+ response to chemotherapy or residual disease.
  The expression data are high-dimensional (
 \begin_inset Formula $\approx22,000$
 \end_inset
@@ -2069,11 +2423,6 @@ In the work that is described later, we used auto-associators, Deep Belief
 \end_inset
 
  patients).
-\end_layout
-
-\begin_layout Standard
-Here we give an overview of the motivation, other applicable methods, and
- other related work.
 \end_layout
 
 \begin_layout Subsection
@@ -2093,8 +2442,8 @@ The ImageNet Large Scale Visual Recognition Challenge
 \end_layout
 
 \begin_layout Standard
-This shall be exemplified by image classification in the ImageNet Large
- Scale Visual Recognition Challenge 
+An example for the success of deep neural network is image classification
+ in the ImageNet Large Scale Visual Recognition Challenge 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RussakovskyFeiFei2015"
@@ -2136,21 +2485,31 @@ butterfly
 \end_inset
 
  test images.
- Each test image has a label, which is kept hidden by the contest organizer.
+ Each test image has a single label, which is kept hidden by the contest
+ organizer.
  A test image is scored as correctly classified if the correct label appears
  in the (up to 
 \begin_inset Formula $5$
 \end_inset
 
 ) labels submitted by the contestant.
- Finally, the accuracy of a contestant is computed as the average fraction
- of correctly classified test images.
+ (Up to 5 labels may be submitted because for example a street scene may
+ contain, besides the correct 
+\begin_inset Quotes eld
+\end_inset
+
+car
+\begin_inset Quotes erd
+\end_inset
+
+ label also street signs and drivers.) Finally, the accuracy of a contestant
+ is computed as the average fraction of correctly classified test images.
 \end_layout
 
 \begin_layout Standard
-There have been dramatic improvements in the accuracy of the winning contestant,
+There have been notable improvements in the accuracy of the winning contestant,
  starting in 2012.
- In the last years, all top contestants have moved to using deep neuronal
+ In the last years, all top contestants have moved to using deep neural
  networks.
  See table 
 \begin_inset CommandInset ref
@@ -2160,8 +2519,8 @@ reference "tab:ILSVRC-Test-set-accuracies"
 \end_inset
 
  for the winning contestants between 2010 and 2014.
- Significant differences before and after 2012 are the usage of neuronal
- networks directly on the image pixel data, and not using pre-computed features
+ Significant differences before and after 2012 are the usage of neural networks
+ directly on the image pixel data, and not using pre-computed image features
  in a supervised learning algorithm like a Support Vector Machine.
 \end_layout
 
@@ -2542,8 +2901,8 @@ We will now discuss similarities between image classification and expression
 \end_layout
 
 \begin_layout Standard
-Both underlying distributions – of images and of expression data – often
- have many correlated dimensions.
+Both underlying distributions – of images and of expression data – have
+ many correlated features.
  For images, adjacent pixels often display the same object and have therefore
  correlated values.
  In some face recognition tasks for example, the faces are scaled and translated
@@ -2598,16 +2957,19 @@ Deep Belief Networks Find Correlated Nodes
 \end_layout
 
 \begin_layout Standard
-Deep Belief Networks can group correlated input nodes by increasing their
- weights to a single hidden node, and decreasing the weights to all other
- hidden nodes.
- This is a form of abstraction (and dimensionality reduction), since in
- this way, the many correlated input nodes are grouped into one hidden node.
+Deep Belief Networks can group correlated input nodes.
+ The network can do this by increasing the weights from the correlated group
+ to a single hidden node, and decreasing the weights from the group to all
+ other hidden nodes.
+ The hidden node becomes the representative of the correlated group of input
+ nodes.
+ This is a form of abstraction and dimensionality reduction.
  The hidden node will only be active if many of its highly-weighted input
  nodes are active and only few of its negatively-weighted input nodes are
  active.
- Repeated application of this principle of abstraction allows the Deep Belief
- Network to form more and more abstract representations of its input.
+ Repeated application of this principle of abstraction in deeper and deeper
+ hidden layers allows the Deep Belief Network to form more and more abstract
+ representations of its input.
 \end_layout
 
 \begin_layout Standard
@@ -2622,7 +2984,7 @@ Transductive Support Vector Machine
 \end_layout
 
 \begin_layout Standard
-We compare our artificial neural network approach with another, older, and
+We compare the artificial neural network approach with another, older, and
  established semi-supervised method, the Transductive Support Vector Machine
  (TSVM) 
 \begin_inset CommandInset citation
@@ -2679,7 +3041,49 @@ key "ChenXie2015"
 
  published work on compressing expression data into fewer dimensions on
  a large scale using deep learning.
- Input data were all 
+ The motivation for this work was that principal component analysis found
+ that 
+\begin_inset Formula $943$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+landmark
+\begin_inset Quotes erd
+\end_inset
+
+ genes can capture about 80% of the information in the CMAP data set.
+ This prompted the development of the 
+\begin_inset Quotes eld
+\end_inset
+
+L1000 Luminex bead technology
+\begin_inset Quotes erd
+\end_inset
+
+, which measures the expression of these 
+\begin_inset Formula $943$
+\end_inset
+
+ genes at a low cost, and computationally infers the remaining ~
+\begin_inset Formula $21,000$
+\end_inset
+
+ genes.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
+\end_inset
+
+ worked on improving this computational inference step.
+\end_layout
+
+\begin_layout Standard
+Input data were all 
 \begin_inset Formula $\approx111,000$
 \end_inset
 
@@ -2689,18 +3093,30 @@ key "ChenXie2015"
 \begin_inset Formula $943$
 \end_inset
 
- "landmark" genes was chosen and 
+ landmark genes was chosen and 
 \begin_inset Formula $9,520$
 \end_inset
 
  other genes were predicted from the landmark genes.
- This is in contrast to our work, because we classified breast cancer samples
- using gene expression levels, while they did regression of gene expression
- levels using other gene expression levels.
+ This is different from our work, because we classified breast cancer samples
+ using gene expression levels, while 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
+\end_inset
+
+ did regression of gene expression levels using other gene expression levels.
 \end_layout
 
 \begin_layout Standard
-Their artificial neural network architecture had between 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
+\end_inset
+
+'s artificial neural network architecture had between 
 \begin_inset Formula $1$
 \end_inset
 
@@ -2727,12 +3143,18 @@ Their artificial neural network architecture had between
 \end_inset
 
  output expression values (one for each gene to be predicted).
- In addition to the (non-linear) neural network, they tried linear regression
- with no regularization, L1-, and L2-regularization.
+ In addition to the (non-linear) neural network, they evaluated linear regressio
+n with no regularization, L1-, and L2-regularization.
 \end_layout
 
 \begin_layout Standard
-They also tried k-Nearest Neighbor 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ChenXie2015"
+
+\end_inset
+
+ also evaluated k-Nearest Neighbor 
 \begin_inset Index idx
 status collapsed
 
@@ -2753,7 +3175,7 @@ kNN
 \end_inset
 
 ).
- In it, during training, they determined a number, 
+ During training, they determined a number, 
 \begin_inset Formula $k$
 \end_inset
 
@@ -2798,16 +3220,20 @@ k-Nearest Neighbor performed worst, with an average prediction error of
 \end_inset
 
 .
- The three linear regression models performed about equally well, with average
- prediction errors of either 
+ Linear regression without regularization and with L2-regularization both
+ had an average prediction error of 
 \begin_inset Formula $0.3784$
 \end_inset
 
- or 
+.
+ Linear regression with L1-regularization had an average prediction error
+ of 
 \begin_inset Formula $0.3782$
 \end_inset
 
-, which means that regularization did not improve linear regression.
+.
+ As the three linear regression models performed about equally well, regularizat
+ion did not improve linear regression.
  The neural network-based average prediction errors were between 
 \begin_inset Formula $0.3421$
 \end_inset
@@ -2824,7 +3250,7 @@ k-Nearest Neighbor performed worst, with an average prediction error of
 \begin_inset Formula $9,000$
 \end_inset
 
-, and 
+ and 
 \begin_inset Formula $10\%$
 \end_inset
 
@@ -2841,7 +3267,17 @@ reference "sub:Dropout"
 
 \end_inset
 
-.) Because the input expression values were between 
+.)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer meint, ich sollte dropout vorher erklären.
+\end_layout
+
+\end_inset
+
+ Because the input expression values were between 
 \begin_inset Formula $4$
 \end_inset
 
@@ -2868,7 +3304,15 @@ key "ChenXie2015"
 
 \end_inset
 
- used the GEO dataset for training, the 
+ again predicted 
+\begin_inset Formula $9,520$
+\end_inset
+
+ genes from the 
+\begin_inset Formula $943$
+\end_inset
+
+ landmark genes, but used the GEO dataset for training, the 
 \begin_inset Formula $1,000$
 \end_inset
 
@@ -2887,11 +3331,9 @@ key "ArdlieLek2015"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Learning in this data set is harder since the input is measured in different
- ways, and therefore prone to the batch-effect.
+ Learning in this data set is harder since the training, validation, and
+ testing data sets are measured using different expression measurement technolog
+ies, and therefore prone to the batch-effect.
  Nevertheless, the performance ranking of the methods was the same, but
  worse than the data set without batch-effect.
  KNN scored worst, with an average prediction error of 
@@ -2905,8 +3347,8 @@ Learning in this data set is harder since the input is measured in different
 \end_inset
 
 .
- Linear regression without regularization and with L2-regularization had
- an average prediction error of 
+ Linear regression without regularization and with L2-regularization both
+ had an average prediction error of 
 \begin_inset Formula $0.4702$
 \end_inset
 
@@ -2933,8 +3375,7 @@ Learning in this data set is harder since the input is measured in different
 \end_inset
 
 ).
- On the validation data set of this data set, the average prediction error
- was 
+ On the validation data set, the average prediction error was 
 \begin_inset Formula $0.7467$
 \end_inset
 

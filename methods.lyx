@@ -7418,7 +7418,191 @@ Examples for generative models are the Restricted Boltzmann Machine or Deep
 \end_layout
 
 \begin_layout Subsection
-Autoassociator
+Autoassociator, Autoencoder
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Merge this note with the following text.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Autoassociator, Autoencoder
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Autoassociator-introduction"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: vielleicht sollte die Beschreibung eines autoassociators hier kürzer
+ sein, und diese lange Beschreibung stattdessen in den Methods-Teil, da
+ sonst die Beschreibung von Deep learning danach sehr kurz wirkt.
+\end_layout
+
+\end_inset
+
+An algorithm that can train an artificial neural network with more than
+ one hidden layer is the auto-associator
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+auto-associator
+\end_layout
+
+\end_inset
+
+, or autoencoder
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+autoencoder
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BengioLarochelle2007"
+
+\end_inset
+
+.
+ The algorithm is unsupervised and iteratively constructs deeper and deeper
+ networks.
+ Its essential idea is the construction of an encoder network and its anti-symme
+tric counterpart, the decoder network.
+ The encoder starts in the first iteration as a network that consists of
+ the input layer and one hidden layer on top.
+ The (overlapping) decoder network consists of the very same hidden layer
+ and the output layer on top, which must have the same dimensions as the
+ input layer.
+ Training an autoencoder slowly adds internal layers to en- and decoder,
+ see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Training-of-an-autoencoder"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space \hfill{}
+\end_inset
+
+A 
+\begin_inset Graphics
+	filename images/autoencoder-1.dia
+	width 40col%
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+B 
+\begin_inset Graphics
+	filename images/autoencoder-2.dia
+	width 40col%
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Training-of-an-autoencoder"
+
+\end_inset
+
+Training of an autoencoder iteratively adds hidden layers.
+ 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Training of an autoencoder.
+\end_layout
+
+\end_inset
+
+ A: It starts with a network architecture of an input layer, one hidden
+ layer, and an output layer with the same size as the input layer.
+ The parameters of this small network are initialized randomly (light gray
+ area) and the network is trained.
+ B: The hidden layer is copied and another hidden layer is inserted between
+ encoder and decoder.
+ The added weights are initialized randomly (light gray area), and the whole
+ network (
+\emph on
+including 
+\emph default
+the previously trained weights, dark gray area) is trained.
+ This procedure continues until the network has enough layers.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The network size increases iteratively from 3 layers, to 5 layers, to 7
+ layers, and so on, and only 2 weight layers are initialized randomly in
+ each iteration.
+ Therefore, back-propagation finds parameters for a network that is not
+ stuck in a poor local optimum, because there are only few new added weights.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7458,6 +7642,8 @@ When training this first iteration of the network, the input patterns are
  the input (and output) layer.
  In this way the autoassociator is forced to reconstruct its input from
  a compressed representation.
+ Once back-propagation does not improve the reconstruction error on the
+ test set anymore, the second step starts.
  
 \begin_inset Note Note
 status open
@@ -7468,8 +7654,7 @@ status open
 
 \end_inset
 
- Once back-propagation does not improve the reconstruction error on the
- test set anymore, the second step starts.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -7493,7 +7678,7 @@ In the second step, both encoder and decoder are extended by one layer.
 \end_layout
 
 \begin_layout Subsubsection
-Autoassociator with a classifier on top
+Autoassociator with a Classifier on Top
 \end_layout
 
 \begin_layout Standard
