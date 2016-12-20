@@ -146,7 +146,7 @@ Variable The value of a random variable and a scalar variable are written
 \begin_inset Formula $i$
 \end_inset
 
- is a normal variable.
+ is a scalar.
 \end_layout
 
 \begin_layout Description
@@ -159,7 +159,8 @@ Set Vectors or sets are written in bold font.
 \begin_inset Formula $\mathbf{X}$
 \end_inset
 
- could represent the random variables 
+ represents e.g.
+ the random variables 
 \begin_inset Formula $\{X_{1},X_{2},X_{3}\}$
 \end_inset
 
@@ -168,7 +169,8 @@ Set Vectors or sets are written in bold font.
 \begin_inset Formula $\mathbf{x}$
 \end_inset
 
- could mean the value 
+ stands for e.g.
+ the value 
 \begin_inset Formula $\{x_{1},x_{2},x_{3}\}$
 \end_inset
 
@@ -248,26 +250,20 @@ discriminative model
 
 \end_inset
 
- on the other hand receives the input samples and models the desired output
- values from these input samples.
- Usually the desired output values have much lower dimension than the input
- samples.
+ on the other hand receives the input samples and models the output from
+ these inputs.
+ Usually the outputs have lower dimension.
 \end_layout
 
 \begin_layout Standard
 Restricted Boltzmann Machines and Deep Belief Networks are both generative
- models.
- On the other hand, a neural network trained only with back-propagation
- is a discriminative model.
- In a discriminative model, the possible values of the parameters (weights)
- are constrained by the information it takes to specify the class label
- of a training sample.
- In a generative model, however, the parameters need to encode the whole
- sample, and are therefore constrained by the information it takes to encode
- the training sample.
- The number of bits required to specify the class label is usually much
- smaller than the number of bits required to specify a whole training sample
- 
+ models, while a neural network trained with back-propagation is a discriminativ
+e model.
+ In a discriminative model, the parameters (weights and biases) specify
+ the class label of a training sample.
+ In a generative model, the parameters need to encode the whole sample.
+ The number of bits required to specify the class label is much smaller
+ than the number of bits required to specify a whole training sample 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hinton2010"
@@ -323,10 +319,9 @@ key "HintonTeh2006"
 \end_layout
 
 \begin_layout Standard
-The neural networks will be discussed later.
- Before introducing Graphical Models, needed for Restricted Boltzmann Machines
- and Deep Belief Networks, the established Support Vector Machine will be
- discussed.
+We will discuss the established Support Vector Machines, Graphical Models,
+ several artificial neural networks, Restricted Boltzmann Machines, and
+ Deep Belief Networks.
 \end_layout
 
 \begin_layout Subsection
@@ -334,7 +329,7 @@ Support Vector Machines
 \end_layout
 
 \begin_layout Standard
-Here we will introduce supervised and transductive Support Vector Machines
+Here we review supervised and transductive Support Vector Machines
 \begin_inset Index idx
 status collapsed
 
@@ -410,7 +405,7 @@ supervised SVM
 \begin_inset Formula $-\left\Vert \mathbf{w}\right\Vert $
 \end_inset
 
-)
+) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "StatnikovGuyon2011"
@@ -705,7 +700,7 @@ kernel trick
 \end_layout
 
 \begin_layout Standard
-Both actions will be described in the following.
+Both strategies will be described in the following.
 \end_layout
 
 \begin_layout Paragraph
@@ -757,7 +752,7 @@ where
 \begin_inset Formula $\left\Vert \mathbf{w}\right\Vert $
 \end_inset
 
- for admitting misclassifications of training samples.
+ for allowing misclassifications of training samples.
  Many SVM implementations have a default of 1.
 \end_layout
 
@@ -814,10 +809,18 @@ reference "eq:soft-margin-SVM-dual-formulation-min-w"
 
 .
  The mapping can be done implicitly by not computing 
+\begin_inset Formula $\Phi(\mathbf{x_{i}})$
+\end_inset
+
+ and 
+\begin_inset Formula $\Phi(\mathbf{x_{j}})$
+\end_inset
+
+, but by defining a function that computes the scalar product 
 \begin_inset Formula $\Phi(\mathbf{x_{i}})\cdot\Phi(\mathbf{x_{j}})$
 \end_inset
 
-, but by defining a function that does this computation in one step: 
+ directly: 
 \begin_inset Formula 
 \[
 K(\mathbf{x_{i}},\mathbf{x_{j}}):\mathbb{R}^{n}\times\mathbb{R}^{n}\rightarrow\mathbb{R}.
@@ -830,13 +833,28 @@ Calculating
 \end_inset
 
  is much cheaper than computing 
-\begin_inset Formula $\Phi(\mathbf{x_{i}})\cdot\Phi(\mathbf{x_{j}})$
+\begin_inset Formula $\Phi(\mathbf{x_{i}})$
+\end_inset
+
+, 
+\begin_inset Formula $\Phi(\mathbf{x_{j}})$
 \end_inset
 
 .
- Not every function can be a kernel, it has to satisfy the so-called Mercer
- conditions.
- Otherwise, the quadratic programming problem may not have a solution 
+ Not every function can be a kernel, it has to satisfy the Mercer conditions:
+ for all square-integrable functions 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ the following integral must be non-negative:
+\begin_inset Formula 
+\[
+\int\int K(\mathbf{x_{i}},\mathbf{x_{j}})g(\mathbf{x_{i}})g(\mathbf{x_{j}})dxdy\geq0
+\]
+
+\end_inset
+
+Otherwise, the quadratic programming problem may not have a solution 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "StatnikovGuyon2011"
@@ -899,7 +917,7 @@ key "Joachims1999a"
 \begin_inset Formula $\mathbf{x_{j}^{*}}$
 \end_inset
 
-.
+ without labels.
  The objective of training a TSVM is to find class labels 
 \begin_inset Formula $y_{j}^{*}$
 \end_inset
@@ -1001,7 +1019,9 @@ key "Joachims1999a"
  
 \series default
 are returned.
- 
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Joachims1999a"
@@ -1014,6 +1034,124 @@ key "Joachims1999a"
  group of samples containing mostly positively labelled training samples,
  then test samples showing that same feature pattern will likely also be
  positively labelled.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:transductive-feature-co-occurrence"
+
+\end_inset
+
+ is adapted from 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Joachims1999a"
+
+\end_inset
+
+.
+ It shows samples and features.
+ Suppose sample A and F are given as training samples, with A labeled 
+\begin_inset Quotes eld
+\end_inset
+
+positive
+\begin_inset Quotes erd
+\end_inset
+
+ and F labeled 
+\begin_inset Quotes eld
+\end_inset
+
+negative
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Samples B-E are given as test samples and we have to label them.
+ Transductive learning can use the co-occurrence of features 1-3, and the
+ co-occurrence of features 4-6 to label samples B and C 
+\begin_inset Quotes eld
+\end_inset
+
+positive
+\begin_inset Quotes erd
+\end_inset
+
+ and samples D and E 
+\begin_inset Quotes eld
+\end_inset
+
+negative
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Even though feature 3 does not occur in sample A, sample C belongs to the
+ 
+\begin_inset Quotes eld
+\end_inset
+
+positive
+\begin_inset Quotes erd
+\end_inset
+
+ class because sample B links samples A and C, by having features 1 and
+ 3 present simultaneously.
+ Feature 7 has the same value in all samples and cannot contribute to the
+ labeling.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/TSVM-co-occurrence-pattern.dia
+	width 35col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:transductive-feature-co-occurrence"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example of the co-occurrence of features that transductive learning can
+ exploit.
+\end_layout
+
+\end_inset
+
+Example of co-occurrence of features (columns, 1-7) that transductive learning
+ can exploit to label samples (rows, A-F).
+ (See text.)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1025,14 +1163,7 @@ Graphs
 \end_layout
 
 \begin_layout Standard
-In the following we will define some terms having to do with graphs 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Barber2012"
-
-\end_inset
-
-.
+In the following we will define some graph nomenclature.
 \end_layout
 
 \begin_layout Standard
@@ -1153,7 +1284,7 @@ complete graph
 
 \end_inset
 
- is a graph where there exists an edge 
+ is a graph with an edge 
 \begin_inset Formula $E=(N_{1},N_{2})$
 \end_inset
 
@@ -1461,7 +1592,7 @@ clique
 \begin_inset Formula $N_{1},N_{2}\in\mathbf{N_{C}}$
 \end_inset
 
- is an edge in the graph: 
+ has an edge in the graph: 
 \begin_inset Formula $(N_{1},N_{2})\in\mathbf{E}$
 \end_inset
 
@@ -1480,8 +1611,8 @@ maximal clique
 
 \end_inset
 
- is a clique where there are no edges that can be added to it so that the
- resulting subset of nodes is still a clique.
+ is a clique where there are no nodes that can be added to it so that the
+ resulting set of nodes is still a clique.
 \end_layout
 
 \begin_layout Standard
@@ -1535,15 +1666,160 @@ Definition of Graphical Models
 \end_layout
 
 \begin_layout Standard
-Graphical models are an encoding of a factorizable joint probability distributio
-n with the help of a graph.
- There are different types of graphical models, but there are defining elements
- of all graphical models.
+Graphical models encode a factorization of a joint probability distribution
+ with the help of a graph.
  Each node of the graph corresponds to a random variable of the joint probabilit
 y distribution.
- The edges of the graph encode the conditional probability distributions.
+ The (union of the) edges of the graph encode the conditional probability
+ distributions.
+ Missing edges encode conditional independencies.
  The graph, together with probability functions over the structural elements
  of the graph is equivalent to the joint probability distribution.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-a-graphical-model"
+
+\end_inset
+
+ is an example of a (directed) graphical model.
+ The random variables are 
+\series bold
+
+\begin_inset Formula $\mathbf{Sun}$
+\end_inset
+
+
+\series default
+, 
+\begin_inset Formula $\mathbf{Clouds}$
+\end_inset
+
+, 
+\series bold
+
+\begin_inset Formula $\mathbf{Temperature}$
+\end_inset
+
+
+\series default
+, and 
+\series bold
+
+\begin_inset Formula $\mathbf{Icecream}$
+\end_inset
+
+
+\series default
+.
+ Each variable has two possible values, for example 
+\begin_inset Formula $\mathbf{Sun}$
+\end_inset
+
+ can be either 
+\begin_inset Quotes eld
+\end_inset
+
+S+
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+S-
+\begin_inset Quotes erd
+\end_inset
+
+.
+ The tables below 
+\begin_inset Formula $\mathbf{Sun}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{Clouds}$
+\end_inset
+
+ are called the priors, and the tables below 
+\begin_inset Formula $\mathbf{Temperature}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{Icecream}$
+\end_inset
+
+ are each conditional probability distributions.
+ The graph, together with the priors and the conditional probability distributio
+ns, encodes the joint probability distribution.
+ For example, the first entry in the joint proability distribution table
+ is 
+\begin_inset Formula $P(\mathbf{Sun}=\mbox{S+},\mathbf{Clouds}=\mbox{C+},\mathbf{Temperature}=\mbox{T+},\mathbf{Icecream}=\mbox{I+})=$
+\end_inset
+
+
+\begin_inset Formula $P(\mathbf{Sun}=\mbox{S+})*P(\mathbf{Clouds}=\mbox{C+})*P(\mathbf{Temperature}=\mbox{T+}\mid\mathbf{Sun}=\mbox{S+},\mathbf{Clouds}=\mbox{C+})$
+\end_inset
+
+
+\begin_inset Formula $*P(\mathbf{Icecream}=\mbox{I+}\mid\mathbf{Temperature}=\mbox{T+})$
+\end_inset
+
+
+\begin_inset Formula $=0.5*0.5*0.7*0.7=0.1225.$
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/graphical-model-example.pdf
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-a-graphical-model"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Example of a graphical model.
+\end_layout
+
+\end_inset
+
+Example of a graphical model.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -1661,8 +1937,7 @@ partially directed acyclic graphs
 \end_inset
 
 .
- We will consider only variables with discrete values in the joint probability
- distribution.
+ We will consider only models with discrete random variable values.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1724,36 +1999,24 @@ We want to encode a joint probability distribution
  Every random variable corresponds to a node.
  The missing edges encode conditional independencies.
  A complete graph would encode no conditional independencies.
- However, to minimize computation time we normally want to get a minimal
- graph that still encodes the joint probability distribution faithfully.
+ However, we normally want to get a graph with the least possible edges
+ (so that the independencies between random variables in the joint probability
+ distribution are all represented in the graph).
  What properties does the joint probability distribution 
 \begin_inset Formula $P$
 \end_inset
 
- have to fulfill and what does the minimal undirected graph 
+ have to fulfill so that it can be encoded in an undirected graph and what
+ does the minimal undirected graph 
 \begin_inset Formula $G$
 \end_inset
 
- look like?
-\end_layout
-
-\begin_layout Paragraph
-The Hammersley-Clifford theorem
-\begin_inset CommandInset label
-LatexCommand label
-name "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-A formal definition is provided by the 
+ look like? This is answered by the 
 \emph on
 Hammersley-Clifford theorem
 \emph default
-
+.
+ 
 \begin_inset Index idx
 status collapsed
 
@@ -1770,16 +2033,30 @@ key "HammersleyClifford1971"
 
 \end_inset
 
-.
- It states that when we have a vector of random variables 
+
+\end_layout
+
+\begin_layout Paragraph
+Hammersley-Clifford theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
 \begin_inset Formula $\mathbf{N}=\{N_{1},\dots,N_{n}\}$
 \end_inset
 
-, its strictly positive joint probability distribution 
+ be a vector of random variables, 
 \begin_inset Formula $P(\mathbf{N})$
 \end_inset
 
- with 
+ be a strictly positive joint probability distribution with 
 \begin_inset Formula $P(\mathbf{n})>0$
 \end_inset
 
@@ -1795,37 +2072,25 @@ key "HammersleyClifford1971"
 
 
 \series default
-, and an undirected graph 
+, and 
 \begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
 \end_inset
 
- with each node corresponding to a random variable (i.e.
+ be an undirected graph with each node corresponding to a random variable
+ (i.e.
  
 \begin_inset Formula $\mathbf{N}=\{N_{1},\dots,N_{n}\}$
 \end_inset
 
-), then the following statements are equivalent:
+).
+ Then the following statements are equivalent:
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Formula $P(\mathbf{N})$
 \end_inset
 
- is a 
-\emph on
-Gibbs distribution
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-Gibbs distribution
-\end_layout
-
-\end_inset
-
- that factorizes according to the maximal cliques 
+ factorizes according to the maximal cliques 
 \begin_inset Formula $\mathbf{C_{1}},\dots,\mathbf{C_{m}}$
 \end_inset
 
@@ -1838,48 +2103,24 @@ Gibbs distribution
 \begin_inset Formula $P(\mathbf{N})=\frac{1}{Z}\phi_{1}(\mathbf{C_{1}})\cdot\ldots\cdot\phi_{m}(\mathbf{C_{m}})$
 \end_inset
 
- where 
+, where 
 \begin_inset Formula $Z$
 \end_inset
 
- is the 
-\emph on
-partition function
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-partition function
-\end_layout
-
-\end_inset
-
- such that 
+ is a scalar such that 
 \begin_inset Formula $\sum_{\mathbf{n}}P(\mathbf{N}=\mathbf{n})=1$
 \end_inset
 
-, and 
+, i.e.
+ 
+\begin_inset Formula $Z=\sum_{N_{1},\dots,N_{n}}\phi_{1}(\mathbf{C_{1}})\cdot\ldots\cdot\phi_{3}(\mathbf{C_{3}})$
+\end_inset
+
+, and the 
 \begin_inset Formula $\phi_{i}(\mathbf{C_{i}})$
 \end_inset
 
- are the 
-\emph on
-potential functions
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-potential function
-\end_layout
-
-\end_inset
-
-, which depend only on the states of the random variables in the clique
- 
+ depend only on the states of the random variables in the clique 
 \begin_inset Formula $\mathbf{C_{i}}=(N_{i_{1}},\dots,N_{i_{n}})$
 \end_inset
 
@@ -1911,7 +2152,61 @@ Gibbsian ensemble
 
 \end_inset
 
+ 
+\begin_inset Formula $P(\mathbf{N})$
+\end_inset
 
+ is then called a 
+\emph on
+Gibbs distribution
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Gibbs distribution
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Formula $Z$
+\end_inset
+
+ is called the 
+\emph on
+partition function
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+partition function
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset Formula $\phi(\mathbf{C_{i}})$
+\end_inset
+
+ are called the 
+\emph on
+potential functions
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+potential function
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -2027,35 +2322,112 @@ global Markov property
 \begin_layout Standard
 This means that when we have a strictly positive joint probability distribution
  
-\begin_inset Formula $P$
+\begin_inset Formula $P(\mathbf{N})$
 \end_inset
 
-, we can determine the conditional independencies by considering the local
- or global Markov property, and construct the minimal undirected graph 
+, we can determine the corresponding minimal graph 
 \begin_inset Formula $G$
 \end_inset
 
- representing 
-\begin_inset Formula $P$
+ with the following 
+\begin_inset Quotes eld
 \end_inset
 
- by starting from the completely connected graph and deleting the edges
- 
-\begin_inset Formula $E_{12}=(N_{1},N_{2})$
+brute-force
+\begin_inset Quotes erd
 \end_inset
 
- whose ends are conditionally independent 
+ algorithm by using the local Markov property: Start with the empty graph.
+ For a variable 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+, consider all sets of possible neighbor nodes, i.e.
+ the power set 
+\begin_inset Formula $\mathbf{P}=\mathbb{\mathfrak{\mathcal{P}}}(\{\mathbf{N}\backslash N_{i}\})$
+\end_inset
+
+, and check for each such possible set of neighbors 
+\begin_inset Formula $\mathbf{N_{neighbors(i)}}$
+\end_inset
+
+, whether all non-neighbors 
+\begin_inset Formula $\mathbf{N_{nonneighbors(i)}}$
+\end_inset
+
+ are independent of 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+, given the neighbors
+\begin_inset Formula 
+\[
+N_{i}\bot\mathbf{N_{nonneighbors(i)}}\mid\mathbf{N_{neighbors(i)}},
+\]
+
+\end_inset
+
+
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
-NOTE: conditionally independent on what? I think that's the crux of being
- NP; we probably have to enumerate all possible separators...?
+TODO: the 
+\backslash
+bot 
+\begin_inset Formula $\bot$
+\end_inset
+
+ above should be two vertical lines with one horizontal line _||_, but I
+ don't know its latex name
 \end_layout
 
 \end_inset
 
+ i.e.
+ whether 
+\begin_inset Formula $P(N_{i}\mid\mathbf{N_{neighbors(i)}},\mathbf{N_{nonneighbors(i)}})=P(N_{i}\mid\mathbf{N_{neighbors(i)}})$
+\end_inset
+
 .
+ When a set of neighbors satisfying the conditional independency has been
+ found, we can draw an edge 
+\begin_inset Formula $E=(N_{i},N_{j})$
+\end_inset
+
+ between 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+ and all neighbors 
+\begin_inset Formula $N_{j}\in\mathbf{N_{neighbors(i)}}$
+\end_inset
+
+.
+ Repeat this for all variables 
+\begin_inset Formula $N_{i}\in\mathbf{N}$
+\end_inset
+
+.
+ Call the resulting set of edges 
+\begin_inset Formula $\mathbf{E}$
+\end_inset
+
+, and the minimal graph 
+\begin_inset Formula $G=(\mathbf{N},\mathbf{E})$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+NOTE: That's the crux of being NP; we have to enumerate all possible separators.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2292,8 +2664,8 @@ In practice,
 \begin_inset Formula $\phi_{1}(N_{1},N_{2},N_{3})$
 \end_inset
 
- can be represented by a table that has, for each possible combination of
- states of the three random variables, a positive real number.
+ can be represented by a table that holds, for each possible combination
+ of states of the three random variables, a positive real number.
  For example, if each of the three random variables has two states, then
  the table (with 
 \begin_inset Formula $2^{3}$
