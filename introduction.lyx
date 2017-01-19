@@ -1877,8 +1877,8 @@ Back-propagation
 \end_layout
 
 \begin_layout Standard
-Before deep learning, supervised artificial neural networks were trained
- using back-propagation.
+Before deep learning was known, supervised artificial neural networks were
+ trained using back-propagation.
  Back-propagation learns from labeled samples the parameters of the artificial
  neural network, the weights and biases, using 
 \emph on
@@ -2038,7 +2038,7 @@ backward pass
 \end_inset
 
  of the network, which is defined as the squared sum of differences between
- actual 
+ actual output 
 \begin_inset Formula $o_{k}$
 \end_inset
 
@@ -3012,7 +3012,14 @@ reference "fig:Illustration-of-semi-supervised-learning"
 status open
 
 \begin_layout Plain Layout
-TODO: TSVM verstehen und dann besser erklären.
+TSVM ist in Methods, section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Transductive-Support-Vector-Machines"
+
+\end_inset
+
+ erklärt.
 \end_layout
 
 \end_inset
