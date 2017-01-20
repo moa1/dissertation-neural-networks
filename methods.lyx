@@ -307,10 +307,11 @@ generate samples
 ) to easily find out what the model has learned.
  In a discriminative model, this can be substantially harder.
  Consider for example a classifier network trained with back-propagation
- that decides whether an image shows a red ball.
- Because the decision function of the network is a complicated function
- of all input pixels, it can be hard to determine the property an image
- must have so that the network would classify it as containing a red ball.
+ that decides whether an image shows a red ball (output: true or false).
+ The decision function of the network is a complicated function of all input
+ pixels.
+ Therefore it can be hard to determine the property an image must have so
+ that the network would classify it as containing a red ball.
  Due to their greater generality, generative models have the disadvantage
  that they are slower than discriminative models.
  As 
@@ -4373,8 +4374,8 @@ key "ChandrasekaranHarsha2012"
 
 \end_inset
 
- that a bounded treewidth of the graph underlying inference in a graphical
- model is the only structural property that enables tractable inference.
+ that low treewidth of the graph underlying inference in a graphical model
+ is the only structural property that enables tractable inference.
 \end_layout
 
 \begin_layout Standard
@@ -4608,6 +4609,26 @@ key "ChekuriChuzhoy2014"
 status open
 
 \begin_layout Plain Layout
+(in Theorem 1.1 whose proof is essentially the whole rest of their paper
+ (
+\begin_inset Quotes eld
+\end_inset
+
+In order to complete the proof of Theorem 1.1, it now suffices to prove Theorem
+ 4.1
+\begin_inset Quotes erd
+\end_inset
+
+))
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 Susi hat mir bewiesen, dass Theorem 1.1 in 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -4640,26 +4661,6 @@ in
 \end_inset
 
 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(in Theorem 1.1 whose proof is essentially the whole rest of their paper
- (
-\begin_inset Quotes eld
-\end_inset
-
-In order to complete the proof of Theorem 1.1, it now suffices to prove Theorem
- 4.1
-\begin_inset Quotes erd
-\end_inset
-
-))
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4686,11 +4687,29 @@ A decision problem is in the complexity class
 \begin_inset Formula $x$
 \end_inset
 
+ that may only depend on the length of 
+\begin_inset Formula $x$
+\end_inset
+
+, not 
+\begin_inset Formula $x$
+\end_inset
+
+ itself
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The advice string allows modeling pre-computation in the computation.
+\end_layout
+
+\end_inset
+
 .
  (See for example 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "AroraBarak2009,Goldreich2008,Sipser1996"
+key "Sipser1996,Goldreich2008,AroraBarak2009"
 
 \end_inset
 
@@ -4735,14 +4754,15 @@ key "ChandrasekaranHarsha2012"
 
 \end_inset
 
- showed that under the assumptions that the grid-minor hypothesis is true,
- and that 
+ showed that under the assumptions that the grid-minor hypothesis is true
+ (which it is), and that 
 \begin_inset Formula $\mathbf{NP}\nsubseteq\mathbf{P/poly}$
 \end_inset
 
 , and given that arbitrary potential functions should be allowed, low treewidth
- is the only structural property of arbitrary graphs that ensures tractable
- run-time of exact inference on the graphical model belonging to the graph
+ is the only structural property of otherwise arbitrary graphs that ensures
+ tractable run-time of exact inference on the graphical model belonging
+ to the graph
 \begin_inset Note Note
 status collapsed
 
@@ -4823,8 +4843,8 @@ If the assumption
 \begin_inset Formula $\mathbf{NP}\nsubseteq\mathbf{P/poly}$
 \end_inset
 
- is correct then the only way to reduce the computational cost of exact
- inference on a general graph is to reduce
+ is correct, then the only way to reduce the computational cost of exact
+ inference on a general graph with a given number of nodes is to reduce
 \begin_inset Note Note
 status open
 
@@ -4888,16 +4908,7 @@ key "Neal1993"
 \end_inset
 
 .
- To describe this, we first have to introduce Markov Chains.
- See e.g.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Norris1997,GrinsteadSnell2003"
-
-\end_inset
-
- for reference.
+ We first have to introduce Markov chains.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4905,13 +4916,25 @@ Markov Chains
 \end_layout
 
 \begin_layout Standard
+For the following section, see e.g.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Norris1997,GrinsteadSnell2003"
+
+\end_inset
+
+ as references.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: Bild von einer Markov Chain.
+TODO: Bild von einer Markov chain.
  Evtl.
- von einer Markov Chain, an der ich die verschiedenen Eigenschaften wie
+ von einer Markov chain, an der ich die verschiedenen Eigenschaften wie
  period, irreducible, etc.
  zeigen kann.
 \end_layout
@@ -4928,19 +4951,19 @@ Markov property: Memorylessness
 \begin_layout Standard
 A 
 \emph on
-Markov Chain
+Markov chain
 \emph default
 
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-Markov Chain
+Markov chain
 \end_layout
 
 \end_inset
 
- is a time sequence of random variables 
+ is a sequence of random variables 
 \begin_inset Formula $X_{t}$
 \end_inset
 
@@ -4949,7 +4972,7 @@ Markov Chain
 \end_inset
 
  denotes the discrete index of time.
- In a Markov Chain, each random variable 
+ In a Markov chain, each random variable 
 \begin_inset Formula $X_{t}$
 \end_inset
 
@@ -4987,7 +5010,7 @@ Markov property
 \end_inset
 
 .
- In a Markov Chain, possible states 
+ In a Markov chain, possible states 
 \begin_inset Formula $x_{t}$
 \end_inset
 
@@ -4995,35 +5018,15 @@ Markov property
 \begin_inset Formula $\mathbb{S}$
 \end_inset
 
-.
- (I.e.
- 
-\begin_inset Formula $x_{t}\in\mathbb{S}$
+: 
+\begin_inset Formula 
+\begin{eqnarray*}
+x_{t} & \in & \mathbb{S}\ \ \ \mbox{for all \ensuremath{t}}.
+\end{eqnarray*}
+
 \end_inset
 
- for all 
-\begin_inset Formula $t$
-\end_inset
 
-.) When the state a Markov Chain is in is not specific to a certain time
- point 
-\begin_inset Formula $t$
-\end_inset
-
-, we will also use single-letter variables like 
-\begin_inset Formula $i\in\mathbb{S}$
-\end_inset
-
- and 
-\begin_inset Formula $j\in\mathbb{S}$
-\end_inset
-
- to denote the state, e.g.
- 
-\begin_inset Formula $X_{1}=i$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Paragraph
@@ -5033,19 +5036,19 @@ Time-homogeneous Markov Chain and Transition Matrix
 \begin_layout Standard
 A 
 \emph on
-time-homogeneous Markov Chain
+time-homogeneous Markov chain
 \emph default
 
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-time-homogeneous Markov Chain
+time-homogeneous Markov chain
 \end_layout
 
 \end_inset
 
- is a Markov Chain in which the conditional probability 
+ is a Markov chain in which the conditional probability 
 \begin_inset Formula $P(X_{t}=x_{t}|X_{t-1}=x_{t-1})$
 \end_inset
 
@@ -5096,7 +5099,7 @@ for all time points
 status open
 
 \begin_layout Plain Layout
-TODO: In the following, do I have to replace 
+TODO: In the following, should I replace 
 \begin_inset Formula $p$
 \end_inset
 
@@ -5220,7 +5223,7 @@ transition matrix
 \noun off
 \color none
 .
- In the following we will only be dealing with time-homogeneous Markov chains.
+ In the following we will only deal with time-homogeneous Markov chains.
 \end_layout
 
 \begin_layout Paragraph
@@ -5228,13 +5231,29 @@ Computing future states from the initial distribution
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 It makes sense to talk about the distribution of states a Markov chain can
  have at a certain time point 
 \begin_inset Formula $t$
 \end_inset
 
 .
- Let it be named the 
+\end_layout
+
+\end_inset
+
+Let 
+\begin_inset Formula $d^{(t)}$
+\end_inset
+
+ be the distribution of 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+, also named the 
 \emph on
 probability vector
 \emph default
@@ -5248,23 +5267,16 @@ probability vector
 
 \end_inset
 
- 
-\begin_inset Formula $d^{(t)}$
-\end_inset
-
-, a row vector with its length equal to 
+, a row vector of length 
 \begin_inset Formula $|\mathbb{S}|$
 \end_inset
 
- (the number of different possible states of the random variables 
-\begin_inset Formula $X_{t}$
+.
+ An entry 
+\begin_inset Formula $d_{i}^{(t)}$
 \end_inset
 
-) and its entry 
-\begin_inset Formula $d_{i}^{(t)}=P(X_{t}=x_{i})$
-\end_inset
-
- equal to the probability of 
+ is equal to the probability of 
 \begin_inset Formula $X_{t}$
 \end_inset
 
@@ -5272,8 +5284,15 @@ probability vector
 \begin_inset Formula $x_{i}$
 \end_inset
 
-.
- (This means 
+: 
+\begin_inset Formula 
+\begin{eqnarray*}
+d_{i}^{(t)} & = & P(X_{t}=x_{i}).
+\end{eqnarray*}
+
+\end_inset
+
+This implies 
 \begin_inset Formula $\sum_{i}d_{i}^{(t)}=1$
 \end_inset
 
@@ -5281,30 +5300,27 @@ probability vector
 \begin_inset Formula $t$
 \end_inset
 
-.) The distribution at the next time point 
-\begin_inset Formula $t+1$
+.
+ The distribution 
+\begin_inset Formula $d^{(t+1)}$
 \end_inset
 
- can be computed by matrix multiplication from 
+ can be computed from 
 \begin_inset Formula $d^{(t)}$
 \end_inset
 
- and the transition matrix 
-\begin_inset Formula $(p_{ji})$
+ by matrix multiplication with the transition matrix 
+\begin_inset Formula $p$
 \end_inset
 
 : 
 \begin_inset Formula 
 \[
-d^{(t+1)}=d^{(t)}p
+d^{(t+1)}=d^{(t)}p.
 \]
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 Given an initial distribution 
 \begin_inset Formula $d^{(0)}$
 \end_inset
@@ -5313,12 +5329,11 @@ Given an initial distribution
 \begin_inset Formula $p$
 \end_inset
 
-, the probabilities of all states the Markov chain can assume are defined
- for all time points 
-\begin_inset Formula $t\geq0$
+, all 
+\begin_inset Formula $d^{(t)}$
 \end_inset
 
-: 
+ are specified by 
 \begin_inset Formula 
 \[
 d^{(t)}=d^{(0)}p^{t}.
@@ -5390,7 +5405,7 @@ If
 \end_inset
 
 .
- A Markov Chain can have more than one stationary distribution.
+ A Markov chain can have more than one stationary distribution.
 \end_layout
 
 \begin_layout Paragraph
@@ -5421,13 +5436,13 @@ detailed balance
  
 \emph default
 if there exists a probability distribution 
-\begin_inset Formula $\pi=(\pi_{1},\pi_{2},\dots\pi_{n})$
+\begin_inset Formula $\pi=(\pi_{1},\pi_{2},\dots,\pi_{n})$
 \end_inset
 
  such that 
 \begin_inset Formula 
 \[
-\pi_{j}p_{ji}=\pi_{i}p_{ij}\,\,\forall i,j.
+\pi_{j}p_{ji}=\pi_{i}p_{ij}\ \ \ \mbox{for all \ensuremath{i}, \ensuremath{j}}.
 \]
 
 \end_inset
@@ -5491,7 +5506,15 @@ key "Norris1997"
 status open
 
 \begin_layout Plain Layout
-Theorem 1.9.3
+Theorem 1.9.3 shows 
+\emph on
+detailed balance 
+\emph default
+and 
+\emph on
+reversible
+\emph default
+ to mean the same thing
 \end_layout
 
 \end_inset
@@ -5536,12 +5559,64 @@ One can show that an irreducible and aperiodic Markov chain on a finite
 
 \end_inset
 
-has at least one stationary distribution, where the stationary distributions
- fulfill the 
-\begin_inset Formula $\pi$
+has at least one stationary distribution, where each stationary distribution
+ 
+\begin_inset Formula $\lambda$
 \end_inset
 
- from the detailed balance condition 
+ fulfills the detailed balance condition: 
+\begin_inset Formula $\lambda_{j}p_{ji}=\lambda_{i}p_{ij}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $j$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Norris1997"
+
+\end_inset
+
+, Lemma 1.9.2
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+While having detailed balance implies that a Markov chain has a stationary
+ distribution, the reverse is not true: there are Markov chains with a stationar
+y distribution but not satisfying detailed balance.
+ For example, a Markov chain with transition probabilities 
+\begin_inset Formula 
+\[
+(p_{ij})=\left(\begin{array}{ccc}
+0 & 2/3 & 1/3\\
+1/3 & 0 & 2/3\\
+2/3 & 1/3 & 0
+\end{array}\right)
+\]
+
+\end_inset
+
+does not satisfy detailed balance, but 
+\begin_inset Formula $\pi=\left(\begin{array}{ccc}
+\frac{1}{3} & \frac{1}{3} & \frac{1}{3}\end{array}\right)$
+\end_inset
+
+ is a stationary distribution of this Markov chain 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Norris1997"
@@ -5553,37 +5628,12 @@ key "Norris1997"
 status open
 
 \begin_layout Plain Layout
-Lemma 1.9.2
+Example 1.9.4
 \end_layout
 
 \end_inset
 
 .
- While having detailed balance implies that a Markov chain has a stationary
- distribution, the reverse is not true: there are Markov chains with a stationar
-y distribution but not satisfying detailed balance.
- (For example, a Markov chain with transition probabilities 
-\begin_inset Formula $p_{ij}=p_{jk}=p_{ki}=1$
-\end_inset
-
- for 
-\begin_inset Formula $i\neq j$
-\end_inset
-
-, 
-\begin_inset Formula $j\neq k$
-\end_inset
-
-, 
-\begin_inset Formula $k\neq i$
-\end_inset
-
-, and the other entries of the transition matrix equal to 0 does not satisfy
- detailed balance, but 
-\begin_inset Formula $\pi_{i}=\pi_{j}=\pi_{k}=\frac{1}{3}$
-\end_inset
-
- is a stationary distribution of this Markov chain.)
 \end_layout
 
 \begin_layout Paragraph
@@ -5623,7 +5673,6 @@ TODO: which was proved by Kolmogorov?
 
 \end_inset
 
- (refer to e.g.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -5631,22 +5680,7 @@ key "Behrends2000"
 
 \end_inset
 
-).
- It states that, in the long run (i.e.
- 
-\begin_inset Formula $\lim_{t\rightarrow\infty}d^{(0)}p^{t}$
-\end_inset
 
-), the probability vector converges to the unique stationary distribution
- irrespective of the starting state 
-\begin_inset Formula $d^{(0)}$
-\end_inset
-
-, given that 
-\begin_inset Formula $p$
-\end_inset
-
- is irreducible, positive-recurrent and aperiodic
 \begin_inset Note Note
 status open
 
@@ -5656,8 +5690,45 @@ Theorem 7.4 in ~/uni/publication/zusammenfassung/markov chains/markovbuch2008.pd
 
 \end_inset
 
-.
- The definitions of irreducibility, positive recurrence, and aperiodicity
+:
+\end_layout
+
+\begin_layout Standard
+Theorem: Let 
+\begin_inset Formula $d^{(0)}$
+\end_inset
+
+ and 
+\begin_inset Formula $e^{(0)}$
+\end_inset
+
+ be any probability vectors of a Markov chain with transition probabilities
+ 
+\begin_inset Formula $(p_{ij})$
+\end_inset
+
+, where 
+\begin_inset Formula $(p_{ij})$
+\end_inset
+
+ is irreducible, positive-recurrent and aperiodic.
+ Then the Markov chain converges to the unique stationary distribution 
+\begin_inset Formula $\pi$
+\end_inset
+
+, irrespective of the starting states:
+\begin_inset Formula 
+\[
+\lim_{t\rightarrow\infty}d^{(0)}p^{t}=\lim_{t\rightarrow\infty}e^{(0)}p^{t}=\pi.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The definitions of irreducibility, positive recurrence, and aperiodicity
  follow.
 \end_layout
 
@@ -5666,7 +5737,7 @@ Irreducibility
 \end_layout
 
 \begin_layout Standard
-A Markov Chain is called 
+A Markov chain is called 
 \emph on
 irreducible
 \emph default
@@ -5684,12 +5755,12 @@ irreducible
 \begin_inset Formula $i$
 \end_inset
 
- of the Markov Chain to any state 
+ of the Markov chain to any state 
 \begin_inset Formula $j$
 \end_inset
 
  (possibly in more than 1 steps).
- Formally, a Markov Chain is called irreducible, if its states are all in
+ Formally, a Markov chain is called irreducible, if its states are all in
  the same (and only) closed subset.
  A subset 
 \begin_inset Formula $C$
@@ -5720,7 +5791,7 @@ if
 \begin_inset Formula $\mathbb{S}$
 \end_inset
 
- is the set of possible states of the Markov Chain.)
+ is the set of possible states of the Markov chain.)
 \end_layout
 
 \begin_layout Paragraph
@@ -5732,7 +5803,7 @@ A state
 \begin_inset Formula $i$
 \end_inset
 
- of a Markov Chain is 
+ of a Markov chain is 
 \emph on
 positive recurrent
 \emph default
@@ -5746,8 +5817,8 @@ positive recurrent
 
 \end_inset
 
-, if we expect the Markov Chain to take an finite number of steps until
- it is in state 
+, if we expect the Markov chain to take a finite number of steps until it
+ is in state 
 \begin_inset Formula $i$
 \end_inset
 
@@ -5770,7 +5841,7 @@ positive recurrent
 \begin_inset Formula $k$
 \end_inset
 
- for the first time after the Markov Chain had been in state 
+ for the first time after the Markov chain had been in state 
 \begin_inset Formula $i$
 \end_inset
 
@@ -5802,7 +5873,7 @@ f_{ij}^{*}:=\sum_{k=1}^{\infty}f_{ij}^{(k)}.
 
 \end_inset
 
-With this, we can define the expected number of steps for the Markov Chain
+With this, we can define the expected number of steps for the Markov chain
  to reach state 
 \begin_inset Formula $j$
 \end_inset
@@ -6058,8 +6129,18 @@ Markov Chain Monte Carlo algorithm
 
 \end_inset
 
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+MCMC algorithm
+\end_layout
+
+\end_inset
+
  is an algorithm to sample from a multivariate probability distribution.
- It sets up a Markov Chain that has the desired stationary distribution
+ It sets up a Markov chain that converges to the desired stationary distribution
  and iterates it through time until the stationary distribution is approximated
  sufficiently.
 \end_layout
@@ -6119,7 +6200,7 @@ Gibbs Sampling
 \end_layout
 
 \begin_layout Standard
-Here, we will introduce Gibbs Sampling to show how 
+Here, we will review Gibbs Sampling to show how 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neal1993"
@@ -6144,14 +6225,14 @@ Gibbs sampling
 
 \end_inset
 
-
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "GemanGeman1984"
 
 \end_inset
 
- is an instance of a Markov Chain Monte Carlo (MCMC) algorithm.
+ is an instance of a Markov chain Monte Carlo (MCMC) algorithm.
  Its goal is to generate samples from a multivariate joint probability distribut
 ion, without having to know its closed form.
  The generated samples can then be used to compute an approximation of the
@@ -6161,9 +6242,7 @@ ion, without having to know its closed form.
 \begin_layout Standard
 To use a Gibbs Sampler, one must construct a Markov chain with its (only)
  stationary distribution equal to the target distribution.
- Because its goal is to sample from a multivariate probability distribution,
- each of the random variables are updated in turn, based on the conditional
- probabilities.
+ Each random variable is updated in turn, based on the conditional probabilities.
 \end_layout
 
 \begin_layout Paragraph
@@ -6171,20 +6250,17 @@ Gibbs Sampling Requires Closed-form Conditional Probabilities
 \end_layout
 
 \begin_layout Standard
-This means that a precondition to being able to use a Gibbs Sampler is that
- the following conditional probabilities of the target distribution are
- known, so that they can be evaluated.
- Suppose that the multivariate target distribution is 
+Suppose that the multivariate target distribution is 
 \begin_inset Formula $P(X_{1},\dots,X_{n})$
 \end_inset
 
 .
- Then for each random variable 
+ Here, for each random variable 
 \begin_inset Formula $X_{i}\in\{X_{1},\dots,X_{n}\}$
 \end_inset
 
- the conditional probability of the variable given all other variables must
- be known in closed form: 
+, the conditional probability of the variable given all other variables
+ must be known in closed form, so that it can be evaluated: 
 \begin_inset Formula 
 \[
 P(X_{i}\mid\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},X_{n}).
@@ -6192,7 +6268,7 @@ P(X_{i}\mid\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}\mid X_{1},\dots
 
 \end_inset
 
-(Another prerequisite is that Gibbs Sampling, which requires sampling from
+Another prerequisite is that Gibbs Sampling, which requires sampling from
  the conditional probability distribution and iterating, should be faster
  than sampling from the joint target probability distribution directly.
  We already showed in section 
@@ -6202,7 +6278,7 @@ reference "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
 
 \end_inset
 
- that exact inference is infeasible in Deep Belief Networks.)
+ that exact inference is infeasible in Deep Belief Networks.
 \end_layout
 
 \begin_layout Paragraph
@@ -6213,8 +6289,8 @@ A Markov Chain in Multiple Dimensions
 The variable updates in Gibbs Sampling can be regarded as a Markov chain.
  However, we must first define how the random variables of Gibbs Sampling
  are mapped to the random variable of the Markov chain.
- One theoretic possibility is to re-map the random variables and their states
- to a single random variable.
+ One possibility is to re-map the random variables and their states to a
+ single random variable.
 \end_layout
 
 \begin_layout Standard
@@ -6229,13 +6305,8 @@ Above, Markov chains were defined for a single state variable
 \end_inset
 
  above.
- If there are a finite number of random variables in Gibbs Sampling, i.e.,
- if 
-\begin_inset Formula $n$
-\end_inset
-
- is finite, and the state space of these variables is also finite, say of
- size 
+ If there are a finite number of random variables in Gibbs Sampling, and
+ the state space of these variables is also finite, say of size 
 \begin_inset Formula $m$
 \end_inset
 
@@ -6248,26 +6319,17 @@ Above, Markov chains were defined for a single state variable
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
 For example, say there are 3 variables, each of which can assume 2 states,
  and we want to encode these 
 \begin_inset Formula $2^{3}$
 \end_inset
 
- different possible states in 1 variable.
- Then we have 1 variable with 
+ different possible states in one variable.
+ Then the Markov chain has one variable with 
 \begin_inset Formula $2*2*2$
 \end_inset
 
  different possible states.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Paragraph
@@ -6334,9 +6396,12 @@ on page 45
 
 \end_inset
 
- constructing a non-homogeneous Markov Chain by applying base transitions
- in turn, each of which describe the probability of a state change of one
- random variable.
+ constructing a non-homogeneous Markov chain with transition matrix 
+\begin_inset Formula $T$
+\end_inset
+
+ by applying base transitions in turn, each of which describe the probability
+ of a state change of one random variable.
  The base transitions are named 
 \begin_inset Formula $B_{k}(x,x')$
 \end_inset
@@ -6345,7 +6410,7 @@ on page 45
 \begin_inset Formula $k\in1,2,\ldots,s$
 \end_inset
 
- is the number of the base transition, 
+ is the index of the base transition, 
 \begin_inset Formula $x$
 \end_inset
 
@@ -6353,11 +6418,12 @@ on page 45
 \begin_inset Formula $x'$
 \end_inset
 
- is the target state of the transition, and the whole term 
+ is the target state of the transition.
+ 
 \begin_inset Formula $B_{k}(x,x')$
 \end_inset
 
- is the probability of the transition, which must be strictly greater than
+ is the probability of the transition and must be strictly greater than
  zero for all values of 
 \begin_inset Formula $x$
 \end_inset
@@ -6449,26 +6515,7 @@ A Gibbs Sampler starts by specifying a start value
  only stationary distribution the choice of start values is not critical,
  but it influences the numbers of iterations needed until the Gibbs Sampler
  returns samples from the target distribution.
- So the start value should be close to the 
-\begin_inset Quotes eld
-\end_inset
-
-center of mass
-\begin_inset Quotes erd
-\end_inset
-
-
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-i.e.
- the expected value
-\end_layout
-
-\end_inset
-
- of the distribution.
+ So the start value should be close to the expected value of the distribution.
 \end_layout
 
 \begin_layout Paragraph
@@ -6546,7 +6593,8 @@ reference "par:Fundamental-Theorem-of-Markov-Chains"
 
 ).
  However there is currently no known analytic method to determine when the
- Markov chain has done so, which leads to the following two practices, 
+ Markov chain has reached its stationary distribution, which leads to the
+ following two strategies, 
 \emph on
 burn-in
 \emph default
@@ -6615,7 +6663,7 @@ center
 
  of the equilibrium distribution is then one should use a value near that
  center as the starting point, however, in many cases such things are not
- known (and are the goal of Gibbs Sampling in the first place).
+ known (and may be the goal of Gibbs Sampling in the first place).
 \end_layout
 
 \begin_layout Standard
@@ -6660,7 +6708,7 @@ samples.
 \begin_inset Formula $\mathbf{x}^{(t+1)}$
 \end_inset
 
- are correlated however because the latter is dependent on the former (by
+ are correlated however, because the latter is dependent on the former (by
  definition).
 \end_layout
 
@@ -6700,7 +6748,7 @@ Again, there is currently no straightforward analytic way to determine what
 \end_layout
 
 \begin_layout Subsubsection
-Inference in Markov Random Fields
+Gibbs Sampling in Markov Random Fields and Bayesian Networks 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Inference-in-Markov-Random-Fields"
@@ -6708,6 +6756,70 @@ name "sub:Inference-in-Markov-Random-Fields"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+We can now define the algorithms for approximate inference using Gibbs Sampling
+ in Markov Random Fields and Bayesian Networks.
+\end_layout
+
+\begin_layout Standard
+In Markov Random Fields, we use the local Markov property
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+defined in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "local-Markov-property"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+: each random variable 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is independent of all other random variables given the states of the neighborin
+g random variables.
+ This means that in Markov Random Fields, the conditional probability (see
+ equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Gibbs sampling: CPD"
+
+\end_inset
+
+) is 
+\begin_inset Formula 
+\[
+P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{Neighborhood(X_{i})}).
+\]
+
+\end_inset
+
+In Bayesian Networks the conditional probability is 
+\begin_inset Formula 
+\[
+P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{X}_{MarkovBlanket(X_{i})}$
+\end_inset
+
+ are the random variables in the Markov Blanket of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
@@ -6722,59 +6834,57 @@ name "par:Gibbs-Sampling-in-Markov-Random-Fields"
 \end_layout
 
 \begin_layout Standard
-In section 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
-
-\end_inset
-
- we described how exact inference in Markov Random Fields can be done by
- conditioning on the known random variables and marginalizing out the uninterest
-ing variables.
- It was stated there that the exponential runtime of exact inference can
- be circumvented by approximate methods like Gibbs Sampling.
- Here we address that claim.
-\end_layout
-
-\begin_layout Standard
-The random variables of the Markov Random Field will be named like those
- in section 
+We described in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
 
 \end_inset
 
-.
- The interesting variables are named 
-\begin_inset Formula $\mathbf{W}$
-\end_inset
+ how exact inference in Markov Random Fields can be done by conditioning
+ on the known random variables and marginalizing out the uninteresting variables.
+ The exponential runtime of exact inference can be circumvented by approximate
+ methods like Gibbs Sampling.
+\end_layout
 
-, the variables whose states are known (for example because they were measured)
- 
-\begin_inset Formula $\mathbf{K}$
-\end_inset
-
-, and the variables we are not interested in 
-\begin_inset Formula $\mathbf{U}$
-\end_inset
-
-.
- The union of all random variables is called 
+\begin_layout Standard
+For example, we might want to infer the probability of a configuration of
+ variables when the values of only some of the variables are known.
+ This means that we can partition the variables 
 \begin_inset Formula $\mathbf{X}:=\mathbf{U}\cup\mathbf{K}\cup\mathbf{W}$
 \end_inset
 
-.
+ of a graphical model into three disjoint groups:
+\end_layout
+
+\begin_layout Enumerate
+the variables 
+\begin_inset Formula $\mathbf{K}$
+\end_inset
+
+ whose states are known (for example because they were measured)
+\end_layout
+
+\begin_layout Enumerate
+the unknown variables 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+ that we want to know the probability distribution of,
+\end_layout
+
+\begin_layout Enumerate
+the unknown variables 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+ that we do not care about.
 \end_layout
 
 \begin_layout Standard
 Gibbs Sampling in Markov Random Fields uses a converging Markov chain to
  sample from the target joint probability distribution.
-\end_layout
-
-\begin_layout Enumerate
-A prerequisite is that the conditional probability distributions are known
+ A prerequisite is that the conditional probability distributions are known
  in closed form.
 \end_layout
 
@@ -6787,7 +6897,7 @@ Initialize the state
 \begin_inset Formula $X_{i}\in\mathbf{W}\cup\mathbf{U}$
 \end_inset
 
- with an arbitrary value.
+ with an arbitrary state.
 \end_layout
 
 \begin_layout Enumerate
@@ -6853,14 +6963,24 @@ Given the states of all variables
 \end_inset
 
 .
- Due to the Hammersley-Clifford theorem (section 
+ The Hammersley-Clifford theorem 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(section 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "par:Hammersley-Clifford-theorem"
 
 \end_inset
 
-) this conditional probability is equal to 
+)
+\end_layout
+
+\end_inset
+
+ states that this conditional probability is equal to 
 \begin_inset Formula $P(X_{i}=x_{i}^{(t+1)}\mid\mathbf{X}_{Neighborhood(X_{i})})$
 \end_inset
 
@@ -6870,14 +6990,14 @@ reference "par:Hammersley-Clifford-theorem"
 \end_deeper
 \end_deeper
 \begin_layout Enumerate
-Repeat step (
+Repeat step 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "enu:For-each-time"
 
 \end_inset
 
-) until the Markov chain converges.
+ until the Markov chain converges.
 \end_layout
 
 \begin_layout Enumerate
@@ -6898,6 +7018,42 @@ Return the states of the interesting random variables
 
 \begin_layout Paragraph
 Gibbs Sampling in Bayesian Networks
+\end_layout
+
+\begin_layout Standard
+We use the same algorithmic structure as for Markov Random Fields above
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+paragraph 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, but sample from a different conditional probability distribution 
+\begin_inset Formula $P(X_{i}=x_{i}\mid\mathbf{X_{j}}=\mathbf{x_{j}}:j\neq i)$
+\end_inset
+
+ when updating the state of 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ in step 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:For-each-time"
+
+\end_inset
+
+(b).
 \end_layout
 
 \begin_layout Standard
@@ -6931,42 +7087,14 @@ where
 \end_inset
 
 's parents and children, and its children's parents.
- This conditional probability is needed for Gibbs Sampling from a Bayesian
- Network: We use the same algorithmic structure as for Markov Random Fields
- above (section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
-
-\end_inset
-
-), but sample from 
-\begin_inset Formula $P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}=\mathbf{x}_{MarkovBlanket(X_{i})})$
-\end_inset
-
- when updating the state of 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- in step 4(b).
-\end_layout
-
-\begin_layout Standard
-Due to the definition of the joint probability distribution in section 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "par:The-Joint-Encoded-by-Directed-Graphical-Model"
-
-\end_inset
-
-, and parallel to section 4.1 in 
+ Formally, and parallel to section 4.1 in 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neal1993"
 
 \end_inset
 
-, 
+, the conditional probability distribution 
 \begin_inset Formula $P(X_{i}=x_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})})$
 \end_inset
 
@@ -7006,92 +7134,6 @@ We start the Gibbs Sampling procedure by fixing the observed variables to
 \end_inset
 
  Diese Formel wurde hier eingefügt.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Comparison of Gibbs Sampling in Markov Random Fields and Bayesian Networks
-\end_layout
-
-\begin_layout Standard
-Gibbs Sampling in Markov Random Fields is easier than Gibbs Sampling in
- directed graphical models.
- This is because the conditional probability distributions needed for Gibbs
- Sampling are simpler than those in Bayesian Networks.
- The conditional probability distribution needed in Gibbs Sampling was given
- in equation 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "eq:Gibbs sampling: CPD"
-
-\end_inset
-
-.
- This conditional probability is particularly simple for Markov Random Fields,
- because of the local Markov property (refer to section 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "local-Markov-property"
-
-\end_inset
-
-): each random variable 
-\begin_inset Formula $X_{i}$
-\end_inset
-
- is independent of all other random variables given the states of the neighborin
-g random variables.
- This means that in Markov Random Fields, the conditional probability (see
- equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:Gibbs sampling: CPD"
-
-\end_inset
-
-) is 
-\begin_inset Formula 
-\[
-P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{Neighborhood(X_{i})}).
-\]
-
-\end_inset
-
-For comparison, in Bayesian Networks the conditional probability would be
- 
-\begin_inset Formula 
-\[
-P(X_{i}\mid X_{1},\dots,X_{i-1},X_{i+1},\dots,X_{n})=P(X_{i}\mid\mathbf{X}_{MarkovBlanket(X_{i})}),
-\]
-
-\end_inset
-
-where 
-\begin_inset Formula $\mathbf{X}_{MarkovBlanket(X_{i})}$
-\end_inset
-
- are the random variables in the Markov Blanket of 
-\begin_inset Formula $X_{i}$
-\end_inset
-
-.
- The Markov Blanket of a random variable is more complicated to compute
- than its neighborhood.
- The Markov Blanket of a random variable 
-\begin_inset Formula $X$
-\end_inset
-
- is the set of its parents and children, and its children's parents.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: the above definition is from wikipedia, but I have to cite some paper.
 \end_layout
 
 \end_inset
@@ -7233,7 +7275,7 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_inset
 
 .
- As there is no connection from node 
+ There is no connection from node 
 \begin_inset Formula $i$
 \end_inset
 
@@ -7241,7 +7283,7 @@ As this is not a stochastic network, I don't think it makes sense to define
 \begin_inset Formula $i$
 \end_inset
 
-, 
+, and therefore 
 \begin_inset Formula $w_{ii}=0$
 \end_inset
 
@@ -7661,7 +7703,7 @@ Each update of a single node either doesn't change the energy
 \end_inset
 
  or decreases it.
- As time progresses, 
+ As time progresses 
 \begin_inset Formula $E$
 \end_inset
 
@@ -8139,9 +8181,9 @@ TODO: Formel hinschreiben
 \end_layout
 
 \begin_layout Standard
-Because the momentum term includes a coefficient that is the fraction of
- the weight deltas in the previous time step to be added to the current
- weight deltas, it adds another meta-parameter to training.
+The momentum term includes a coefficient that is the fraction of the weight
+ deltas in the previous time step to be added to the current weight deltas.
+ The coefficient is an additional meta-parameter in training.
  Too large a momentum coefficient can cause 
 \begin_inset Quotes eld
 \end_inset
@@ -9148,8 +9190,8 @@ TODO: probably move this somewhere else
 \end_layout
 
 \begin_layout Standard
-Since a Boltzmann Machine is an undirected graphical model, the inference
- algorithm from 
+A Boltzmann Machine is an undirected graphical model.
+ Therefore the inference algorithm from 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Neal1993"
@@ -9669,8 +9711,9 @@ name "sub:Training-Restricted-Boltzmann-Machines-using-Contrastive-Divergence"
 \end_layout
 
 \begin_layout Standard
-Since a Restricted Boltzmann Machine is a restricted form of the more general
- Boltzmann Machine, it can be trained using the training procedure for Boltzmann
+A Restricted Boltzmann Machine is a restricted form of the more general
+ Boltzmann Machine.
+ Therefore, it can be trained using the training procedure for Boltzmann
  Machines.
  However, there is also a more direct learning procedure called 
 \emph on
@@ -10046,8 +10089,8 @@ deep
 \end_layout
 
 \begin_layout Standard
-Because they are directed graphical models, the computation of the values
- of children nodes does not affect the value of parent nodes.
+Deep Belief Networks are directed graphical models, therefore the computation
+ of the values of children nodes does not affect the value of parent nodes.
  In contrast to undirected graphical models, this allows generating (drawing
  a sample) from the model in a single pass.
  Thus, a Deep Belief Network can be used in an unsupervised algorithm to
@@ -10272,8 +10315,8 @@ in equation 27
 \end_layout
 
 \begin_layout Standard
-Since exact inference of the hidden nodes given the visible nodes is intractable
-, we must resort to the approximate Gibbs Sampling.
+Exact inference of the hidden nodes given the visible nodes is intractable.
+ Therefore we must resort to the approximate Gibbs Sampling.
  This works as shown in section 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -10802,7 +10845,7 @@ How Unlabeled Data was Used in Training Autoencoders
 \end_layout
 
 \begin_layout Standard
-Because autoencoders
+Autoencoders
 \begin_inset Index idx
 status collapsed
 
@@ -10832,9 +10875,10 @@ decoder
 
 \end_inset
 
- and the encoder tries to compress the input data and the decoder tries
- to reconstruct the input from its compressed form, training them is unsupervise
-d.
+.
+ The encoder tries to compress the input data and the decoder tries to reconstru
+ct the input from its compressed form.
+ Training autoencoders is unsupervised.
  As a general rule only the samples designated as 
 \begin_inset Quotes eld
 \end_inset
@@ -10970,15 +11014,25 @@ How Unlabeled Data was Used in Training Deep Belief Networks
 \end_layout
 
 \begin_layout Standard
-As was said in section 
+Deep Belief Networks are an unsupervised algorithm and thus were trained
+ using unlabeled data
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+see section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Deep-Belief-Network"
 
 \end_inset
 
-, Deep Belief Networks are an unsupervised algorithm and thus were trained
- using unlabeled data.
+
+\end_layout
+
+\end_inset
+
+.
  As with Restricted Boltzmann Machines, the resulting network was then extended
  with the classifier layer, and the complete network was fine-tuned using
  back-propagation on the labeled data.
