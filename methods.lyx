@@ -532,7 +532,7 @@ subject to the condition that all samples are classified correctly by
 \end_inset
 
 .
- This means that the constraints 
+ Hence, the constraints 
 \begin_inset Formula 
 \begin{equation}
 y_{i}(\mathbf{w}\cdot\mathbf{x_{i}}+b)-1\geq0,\label{eq:hard-margin-SVM-constraints}
@@ -3262,8 +3262,8 @@ equation 8, page 77 bottom
 \end_inset
 
 .
- (This means there are graphs which have more than one compatible ordering,
- for example in the graph 
+ (Thus, there are graphs which have more than one compatible ordering, for
+ example in the graph 
 \begin_inset Formula $A\rightarrow C\leftarrow B$
 \end_inset
 
@@ -3275,7 +3275,7 @@ equation 8, page 77 bottom
 \begin_inset Formula $B,A,C$
 \end_inset
 
-.) In the following the ordering is expressed as the subscript 
+.) In the following, the ordering is expressed as the subscript 
 \begin_inset Formula $i\in\mathbb{N}$
 \end_inset
 
@@ -3548,7 +3548,7 @@ f
 \begin_layout Standard
 For example, we might want to infer the probability of a configuration of
  variables when the values of only some of the variables are known.
- This means that we can partition the variables 
+ We can then partition the variables 
 \begin_inset Formula $\mathbf{V}$
 \end_inset
 
@@ -6787,8 +6787,8 @@ reference "local-Markov-property"
 
  is independent of all other random variables given the states of the neighborin
 g random variables.
- This means that in Markov Random Fields, the conditional probability (see
- equation 
+ Thus, in Markov Random Fields, the conditional probability (see equation
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:Gibbs sampling: CPD"
@@ -6850,7 +6850,7 @@ reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
 \begin_layout Standard
 For example, we might want to infer the probability of a configuration of
  variables when the values of only some of the variables are known.
- This means that we can partition the variables 
+ We can partition the variables 
 \begin_inset Formula $\mathbf{X}:=\mathbf{U}\cup\mathbf{K}\cup\mathbf{W}$
 \end_inset
 
@@ -7292,7 +7292,7 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_inset
 
 .
- This means each node has 
+ Hence, each node has 
 \begin_inset Formula $m-1$
 \end_inset
 
@@ -9447,7 +9447,7 @@ positive phase
 
  a few times when the Markov chain is in equilibrium, we determine their
  probability distributions.
- This means the conditional probability distribution of the remaining variables
+ Thus, the conditional probability distribution of the remaining variables
  
 \begin_inset Formula $P(\mathbf{S=s}|\mathbf{V=v})$
 \end_inset
@@ -10966,9 +10966,8 @@ Example scheme showing how the supervised network is trained on top of a
 \begin_layout Standard
 The weights of the classifier were initialized randomly, and standard back-propa
 gation was used to train the whole network to classify samples.
- This means that the encoder can be modified by back-propagation training,
- but pre-training with the autoencoder initializes it to a configuration
- that 
+ Hence, the encoder can be modified by back-propagation training, but pre-traini
+ng with the autoencoder initializes it to a configuration that 
 \begin_inset Quotes eld
 \end_inset
 

@@ -783,8 +783,8 @@ key "Deepnet2014"
  is a neural network implementation written by Nitish Srivastava, which
  uses a matrix library (called cudamat) written by Vlad Mnih and Alex Krizhevsky.
  It can run on graphics cards (supporting CUDA).
- Due to graphics cards having a highly parallel architecture, this means
- faster training times.
+ Since graphics cards have a highly parallel architecture, training times
+ are faster.
  However, because graphics cards have to process large data, their RAM is
  more expensive than normal RAM for PCs.
  The graphics cards tried have 4 GB of RAM installed.
@@ -931,8 +931,8 @@ name "sub:Model-selection"
 \end_layout
 
 \begin_layout Standard
-Because training an artificial neural network is an iterative process, there
- are as many models as there are iterations.
+Training an artificial neural network is an iterative process.
+ Hence, there are as many models as there are iterations.
  The question is which one to choose.
  We did not use 
 \begin_inset Quotes eld
@@ -14809,10 +14809,10 @@ eval_after: 500
 \end_layout
 
 \begin_layout Standard
-Because Deep Belief Networks need unlabeled samples during pre-training,
- data set 1, which does not contain unlabeled samples, cannot be used to
- train DBNs.
- Therefore the DBNs were only trained on data sets 2 to 6.
+Deep Belief Networks need unlabeled samples during pre-training.
+ Thus, data set 1, which does not contain unlabeled samples, cannot be used
+ to train DBNs.
+ Therefore we trained DBNs only on data sets 2 to 6.
 \end_layout
 
 \begin_layout Subsection
@@ -26120,7 +26120,7 @@ status open
 have an architecture of 500-1000-1000-2000-1 (500 input nodes, 1000 hidden
  layer 1 nodes, 1000 hidden layer 2 nodes, 2000 hidden layer 3 nodes, and
  1 output layer node).
- This means there are 
+ Hence, there are 
 \begin_inset Formula $500*1000+1000*1000+1000*2000+2000*1\approx3.5*10^{6}$
 \end_inset
 
@@ -28557,8 +28557,8 @@ reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
  It is significant with a p-value of 0.0029, and the accuracy difference
  between data 1 and 6 is an estimated 3.38 percent points (0.0338), while
  its 95% confidence interval is [2.02; 6.08] percent points.
- This means that in breast_cancer_15, the TSVM succeeded in increasing accuracy
- slightly by learning from unlabeled samples.
+ Thus, in breast_cancer_15, the TSVM succeeded in increasing accuracy slightly
+ by learning from unlabeled samples.
 \end_layout
 
 \begin_layout Standard
