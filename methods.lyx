@@ -2059,7 +2059,7 @@ key "HammersleyClifford1971"
 \end_layout
 
 \begin_layout Paragraph
-Hammersley-Clifford theorem
+Hammersley-Clifford Theorem
 \begin_inset CommandInset label
 LatexCommand label
 name "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
