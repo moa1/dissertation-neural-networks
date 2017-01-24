@@ -7147,9 +7147,9 @@ Artificial Neural Networks
 
 \begin_layout Standard
 Here we will introduce artificial neural networks that have been developed
- as models of biological neural networks by various people since about the
- middle of the last century.
- The artificial neural networks introduced here are related with Deep Belief
+ as models of biological neural networks since in the middle of the last
+ century.
+ The artificial neural networks introduced here are related to Deep Belief
  Networks, namely Hopfield networks, Multilayer Perceptrons, and (Restricted)
  Boltzmann Machines.
 \end_layout
@@ -7159,27 +7159,7 @@ Distinction Between a Deterministic and Stochastic Network
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: maybe move the definition of a deterministic network and a stochastic
- network somewhere else.
-\end_layout
-
-\end_inset
-
-The difference between a stochastic
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-stochastic network
-\end_layout
-
-\end_inset
-
- and a deterministic network
+In a deterministic network
 \begin_inset Index idx
 status collapsed
 
@@ -7189,9 +7169,19 @@ deterministic network
 
 \end_inset
 
- is that in a deterministic network a node represents a single value, while
- in a stochastic network a single node represents a probability distribution.
- In particular, if there is a set of 
+ a node represents a deterministic value.
+ In contrast, in a stochastic network
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+stochastic network
+\end_layout
+
+\end_inset
+
+ a node represents a probability distribution.
+ If there is a set of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -7200,18 +7190,68 @@ output
 \end_inset
 
  nodes, then in a deterministic setting the output can be interpreted as
- a single point in a high-dimensional space, while in a stochastic network
- the output is the joint probability distribution over all the random variables
- associated with the output nodes.
+ a point in a high-dimensional space, while in a stochastic network the
+ output is the joint probability distribution over all the random variables
+ associated with the output nodes
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer meint hier, ich sollte 
+\begin_inset Quotes eld
+\end_inset
+
+associated with
+\begin_inset Quotes erd
+\end_inset
+
+ genauer beschreiben, aber ich weiß nicht, was man da genauer beschreiben
+ sollte.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 A stochastic network is more general than its deterministic counterpart,
  since a stochastic network can be converted to a deterministic network,
  but not vice-versa.
- This greater generality comes at a higher cost, however, since inference
- and learning in stochastic networks take longer than the computation of
- the output and the learning in deterministic networks.
+ This comes at a higher cost.
+ Inference and learning in stochastic networks take longer than in deterministic
+ networks.
+\end_layout
+
+\begin_layout Paragraph
+Distinction Between Feed-forward and Recurrent Networks
+\end_layout
+
+\begin_layout Standard
+A 
+\emph on
+feed-forward network
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+feed-forward network
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+is a network defined on a directed acyclic graph.
+ In contrast, the connections of a 
+\emph on
+recurrent network 
+\emph default
+may form cycles.
 \end_layout
 
 \begin_layout Subsection
@@ -7223,13 +7263,24 @@ Structure
 \end_layout
 
 \begin_layout Standard
-A Hopfield Network
+A 
+\emph on
+Hopfield Network
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
 Hopfield Network
 \end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
 
 \end_inset
 
@@ -7261,7 +7312,7 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_inset
 
 .
- Each node has a connection with all others (but not itself).
+ Every node is connected with all others but not with itself.
  The connection from node 
 \begin_inset Formula $N_{i}$
 \end_inset
@@ -7309,7 +7360,15 @@ As this is not a stochastic network, I don't think it makes sense to define
 \begin_inset Formula $i$
 \end_inset
 
-.
+ that acts as a weight of a connection from a 
+\begin_inset Quotes eld
+\end_inset
+
+virtual
+\begin_inset Quotes erd
+\end_inset
+
+ node that always has state 1.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -7372,6 +7431,55 @@ Example of a Hopfield Network.
 \end_layout
 
 \begin_layout Paragraph
+Associative Memory
+\end_layout
+
+\begin_layout Standard
+Hopfield networks can be used as 
+\emph on
+associative 
+\emph default
+or
+\emph on
+ content-addressable memory
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+associative memory
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+content-addressable memory
+\end_layout
+
+\end_inset
+
+, where the memory is a binary number.
+ Bit 
+\begin_inset Formula $i$
+\end_inset
+
+ of the memory is stored in node 
+\begin_inset Formula $i$
+\end_inset
+
+ of the network.
+ Associative or content-addressable memory means that the network can be
+ initialized with a partially distorted memory and the network can recall
+ a previously learned memory that is close to the initialized memory.
+ Recalling a partially known memory is done by repeatedly updating the network.
+\end_layout
+
+\begin_layout Paragraph
 Updating Rule
 \end_layout
 
@@ -7409,17 +7517,85 @@ The network is updated asynchronously: At each time point
 \begin_inset Formula $t-1$
 \end_inset
 
+, the weights 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ from node 
+\begin_inset Formula $j$
+\end_inset
+
+ to node 
+\begin_inset Formula $i$
+\end_inset
+
+, and the bias 
+\begin_inset Formula $b_{i}$
+\end_inset
+
 : 
 \begin_inset Formula 
 \[
-n_{i}^{(t)}=f\left(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i}\right).
+n_{i}^{(t)}=f\left(\sum_{j\neq i}n_{j}^{(t-1)}w_{ji}+b_{i}\right),
+\]
+
+\end_inset
+
+where the 
+\emph on
+activation function
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+activation function
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $f$
+\end_inset
+
+ is a step function that maps nonpositive values to 0, and positive values
+ to 1: 
+\begin_inset Formula 
+\[
+f(x)=\begin{cases}
+0 & \mbox{for }x\leq0\\
+1 & \mbox{for }x>0
+\end{cases}.
 \]
 
 \end_inset
 
 
 \begin_inset Note Note
-status collapsed
+status open
+
+\begin_layout Plain Layout
+In 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1982"
+
+\end_inset
+
+, 
+\begin_inset Formula $f$
+\end_inset
+
+ ist defined implicitly in equation [1] (or equation [2] in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1984"
+
+\end_inset
+
+).
+\end_layout
 
 \begin_layout Plain Layout
 Note that I have added 
@@ -7460,7 +7636,7 @@ reference "eq:Energy of a Hopfield network"
 
 \end_inset
 
-(In Hopfield's formulation in 
+(In 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hopfield1984"
@@ -7506,57 +7682,9 @@ to each node, constant over all times
 \begin_inset Newline newline
 \end_inset
 
-The activation function 
-\begin_inset Formula $f$
-\end_inset
-
- is a stepping function
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: there must be a better word instead of 
-\begin_inset Quotes eld
-\end_inset
-
-stepping function
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-, with nonpositive values mapped to 0, and positive values mapped to 1:
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: stimmt die Definition von 
-\begin_inset Formula $f$
-\end_inset
-
- überhaupt?
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula 
-\[
-f(x)=\begin{cases}
-0 & \mbox{for }x\leq0\\
-1 & \mbox{for }x>0
-\end{cases}.
-\]
-
-\end_inset
-
-While this updating rule was described here as asynchronous (i.e.
+As described here, the updating rule is asynchronous (i.e.
  at each time step a node is picked at random and its state is updated,
- which is how Hopfield described it in 
+ which is how Hopfield described it 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hopfield1984"
@@ -7581,7 +7709,8 @@ Each neuron samples its input at random times.
 
 \end_inset
 
-), updating the network synchronously (i.e.
+).
+ Updating the network synchronously (i.e.
  all nodes are updated at the same time) is also possible
 \begin_inset Note Note
 status open
@@ -7595,18 +7724,43 @@ status open
 .
 \end_layout
 
+\begin_layout Paragraph
+Energy of a Hopfield Network
+\end_layout
+
 \begin_layout Standard
-\begin_inset Note Note
-status open
+The 
+\emph on
+energy 
+\emph default
+
+\begin_inset Index idx
+status collapsed
 
 \begin_layout Plain Layout
-Although a Hopfield network is recurrent, 
+energy
 \end_layout
 
 \end_inset
 
-Hopfield proved that the updating rule converges to a (possibly local) minimum
- of the energy function, given that the weights are symmetric (i.e.
+ is associated with the state of the network at time point 
+\begin_inset Formula $t$
+\end_inset
+
+ and is defined as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E^{(t)}=-\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}.\label{eq:Energy of a Hopfield network}
+\end{equation}
+
+\end_inset
+
+Hopfield showed that when applying the updating rule repeatedly, the energy
+ converges to a (possibly local) minimum, provided that the weights are
+ symmetric (i.e.
  
 \begin_inset Formula $w_{ij}=w_{ji}$
 \end_inset
@@ -7616,7 +7770,7 @@ Hopfield proved that the updating rule converges to a (possibly local) minimum
 \begin_inset Formula $w_{ii}=0$
 \end_inset
 
-).
+)
 \begin_inset Note Note
 status collapsed
 
@@ -7655,50 +7809,9 @@ There is a simple mathematical condition which guarantees that the state
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Paragraph
-Energy of a Hopfield Network
-\end_layout
-
-\begin_layout Standard
-This can be proven by showing that a single number, associated with the
- state of the network, can only decrease when updating a node.
- It is the so-called 
-\emph on
-energy 
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-energy
-\end_layout
-
-\end_inset
-
+.
+ In more detail, each update of a node either doesn't change the energy
  
-\begin_inset Formula $E$
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-E^{(t)}=-\frac{1}{2}\sum_{i}\sum_{j\neq i}w_{ij}n_{i}^{(t)}n_{j}^{(t)}-\sum_{i}b_{i}n_{i}^{(t)}.\label{eq:Energy of a Hopfield network}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Each update of a single node either doesn't change the energy 
 \begin_inset Formula $E$
 \end_inset
 
@@ -7715,8 +7828,21 @@ Each update of a single node either doesn't change the energy
 .
 \end_layout
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Although a Hopfield network is recurrent, 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
-Training a Hopfield Network
+Recalling a Training Pattern by the Updating Rule
 \end_layout
 
 \begin_layout Standard
@@ -7728,37 +7854,23 @@ Training a Hopfield network is the task of finding weights
 \begin_inset Formula $b_{i}$
 \end_inset
 
-, so that desirable states (training patterns) have a low energy and undesirable
- states have a high energy.
- Due to this property Hopfield networks can be used as 
-\emph on
-associative memory
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-associative memory
-\end_layout
+, so that training patterns (i.e.
+ memories to be learned) have a low energy and all other states have a high
+ energy.
+ After training, a Hopfield network can be initialized with a distorted
+ pattern, in which the states of some nodes are inverted.
+ After iteratively updating the network until its state doesn't change anymore,
+ the stationary state will be similar to a training pattern.
+ In a demonstration of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hopfield1982"
 
 \end_inset
 
-.
- Training is not described here.
-\end_layout
-
-\begin_layout Paragraph
-Recalling a Known State by the Updating Rule
-\end_layout
-
-\begin_layout Standard
-Recalling a partially known state works by updating.
- After training, a Hopfield network can be initialized with a distorted
- pattern, in which the state of some nodes is swapped.
- After iteratively updating until its state doesn't change anymore, the
- stationary state will be equal to a similar pattern used in training if
- training was successful.
+, approximately 85% of the trials ended in training patterns, 5% resulted
+ in stable states near training patterns, and 10% ended in stable states
+ of no obvious meaning.
 \end_layout
 
 \begin_layout Subsection
@@ -8287,8 +8399,8 @@ TODO: vielleicht sollte die Beschreibung eines autoassociators hier kürzer
 
 \end_inset
 
-An algorithm that can train an artificial neural network with more than
- one hidden layer is the auto-associator
+An algorithm that can train an artificial neural network deterministically
+ with more than one hidden layer is the auto-associator
 \begin_inset Index idx
 status collapsed
 
@@ -8997,7 +9109,14 @@ Boltzmann Machine
 \end_inset
 
  is an undirected graphical model that has a specific form of the conditional
- probability distribution defined at each node.
+ probability distribution defined at each node 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Neal1992"
+
+\end_inset
+
+.
  A Boltzmann Machine is a stochastic version of a Hopfield network.
  There are visible (
 \series bold
@@ -9598,10 +9717,11 @@ RBM
 
 \end_inset
 
-) has a bipartite topology: there are visible nodes and hidden nodes, and
- each node in the visible layer is connected to all hidden nodes by undirected
- edges, but in contrast to general Boltzmann Machines there are no visible-to-vi
-sible node connections and no hidden-to-hidden node connections.
+) is a restricted variant of a Boltzmann Machine.
+ It has a bipartite topology: there are visible nodes and hidden nodes,
+ and each node in the visible layer is connected to all hidden nodes by
+ undirected edges, but in contrast to general Boltzmann Machines there are
+ no visible-to-visible node connections and no hidden-to-hidden node connections.
  In a Restricted Boltzmann Machine, the visible nodes represent the observable
  features of a training set, while the hidden nodes are feature detectors
  which are computed from the states of all visible nodes.
