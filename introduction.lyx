@@ -1813,11 +1813,10 @@ key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
  Such results seem to imply that DBNs are able to abstract the images, which
  are given as vectors of pixels, into encodings of relevant features and
  compute a classifier on these abstract features.
- This can be seen as a form of batch-effect correction
-\begin_inset Foot
-status open
+ This can be seen as a form of batch-effect correction.
+\end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 An extreme form of batch-effect correction is when all training data are
  in batch 1 and all test data in batch 2.
  For example, suppose that batch 1 are all face portraits (frontal view),
@@ -1857,11 +1856,6 @@ super-recognizers
  person's portrait just moments before seeing the half profiles.
 \end_layout
 
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Standard
 Before we motivate using DBNs on expression data, we first introduce deep
  learning.
@@ -1879,8 +1873,7 @@ deep learning
  The advantage of a deep network over a network with just one hidden layer
  is that it can model a problem more compactly using less hidden neurons
  in total, because it has more than one intermediate computation step.
- Before deep learning there was back-propagation, but as we will see in
- a moment, this has problems coping with more than one hidden layer.
+ Before deep learning there was back-propagation.
 \end_layout
 
 \begin_layout Subsection
