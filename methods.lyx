@@ -5658,7 +5658,7 @@ Fundamental Theorem of Markov Chains
 status collapsed
 
 \begin_layout Plain Layout
-Fundamental Theorem of Markov Chains
+fundamental theorem of Markov chains
 \end_layout
 
 \end_inset
@@ -7237,7 +7237,7 @@ feed-forward network
 status collapsed
 
 \begin_layout Plain Layout
-feed-forward network
+feed-forward neural network
 \end_layout
 
 \end_inset
@@ -7249,7 +7249,21 @@ feed-forward network
 is a network defined on a directed acyclic graph.
  In contrast, the connections of a 
 \emph on
-recurrent network 
+recurrent network
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+recurrent neural network
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
 \emph default
 may form cycles.
 \end_layout
@@ -7882,35 +7896,29 @@ Structure
 \end_layout
 
 \begin_layout Standard
-A Multilayer Perceptron belongs to the class of deterministic feedforward
- neural networks
-\begin_inset Index idx
-status collapsed
+A Multilayer Perceptron belongs to the class of deterministic feed-forward
+ neural networks.
+ The neurons are arranged in layers, with the value of nodes in a layer
+ only depending on the values of nodes in the layer above.
+ Example structures of multilayer perceptrons were given in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:sigmoid-function"
 
-\begin_layout Plain Layout
-feedforward neural network
-\end_layout
+\end_inset
+
+ and figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Data-flow-in-back-propagation"
 
 \end_inset
 
 .
- In it, the neurons are arranged in layers, with the value of nodes in a
- layer only depending on the values of nodes in the layer above.
- Feedforward networks are in contrast to recurrent networks
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-recurrent neural network
-\end_layout
-
-\end_inset
-
-, which contain a directed cycle of neuronal connections.
 \end_layout
 
 \begin_layout Subsubsection
-Multilayer Feedforward Networks as Universal Function Approximators
+Multilayer Feed-forward Networks as Universal Function Approximators
 \end_layout
 
 \begin_layout Standard
@@ -7920,9 +7928,9 @@ key "HornikWhite1989"
 
 \end_inset
 
- found that artificial feedforward neural networks with as few as one hidden
- layer are capable of modeling virtually any (Borel measurable) function
- within a given error, provided the following conditions are met:
+ found that artificial feed-forward neural networks with as few as one hidden
+ layer can model any Borel measurable function within a given error, provided
+ the following conditions are met:
 \end_layout
 
 \begin_layout Itemize
@@ -7979,7 +7987,7 @@ This [result] implies that any lack of success in applications must arise
 \end_layout
 
 \begin_layout Subsubsection
-Back-propagation
+Training Using Back-propagation
 \end_layout
 
 \begin_layout Standard
@@ -8000,10 +8008,20 @@ back-propagation
  is the adaptation of weights and biases of the network to make its set
  of actual outputs better fit a set of desired outputs for a given set of
  inputs.
- Technically it is just running the network for a given input, observing
- the outputs in the output layer, computing the errors to the desired outputs
- and back-propagating them to adapt the weights and biases between all the
- layers.
+ Technically it is just running the network for a given input in the forward
+ pass
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+forward pass
+\end_layout
+
+\end_inset
+
+, observing the outputs in the output layer, computing the errors to the
+ desired outputs and back-propagating them to adapt the weights and biases
+ between all the layers.
  This will make the network output values closer to the desired values next
  time this particular input pattern is given to the network.
  The back-propagation algorithm is a supervised learning step and thus prone
@@ -8011,7 +8029,326 @@ back-propagation
 \end_layout
 
 \begin_layout Paragraph
-Optimizing the Sum of Squared Differences
+Forward and Backward Pass
+\end_layout
+
+\begin_layout Standard
+Back-propagation was reviewed in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Back-propagation"
+
+\end_inset
+
+.
+ The most important points are repeated here.
+ In the 
+\emph on
+forward pass
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+forward pass
+\end_layout
+
+\end_inset
+
+, each neuron's output is computed from the sum of its inputs:
+\begin_inset Formula 
+\begin{eqnarray*}
+v_{j} & = & -b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ is the bias, 
+\begin_inset Formula $o_{i}$
+\end_inset
+
+ is the output of a neuron in the layer above, and 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ is the weight of the connection from neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ The input 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ is then scaled by the sigmoid function to produce a neuron's output 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+o_{j}=\sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the 
+\emph on
+backward pass
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+backward pass
+\end_layout
+
+\end_inset
+
+, the training procedure computes the total error 
+\begin_inset Formula $E$
+\end_inset
+
+ of the network, which is defined as the squared sum of differences between
+ actual output 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+ and desired output 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+E=\sum_{p}\left(\frac{1}{2}\sum_{k}(o_{k,p}-y_{k,p})^{2}\right),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $o_{k,p}$
+\end_inset
+
+ is the activation (output) of neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ when training pattern 
+\begin_inset Formula $p$
+\end_inset
+
+ was fed into the input layer, and 
+\begin_inset Formula $y_{k,p}$
+\end_inset
+
+ is the desired output for neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ in the output layer for training pattern 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ The sum-of-squared-differences term 
+\begin_inset Formula $\frac{1}{2}\sum_{k}(o_{k,p}-y_{k,p})^{2}$
+\end_inset
+
+ is called the 
+\emph on
+error
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+error function
+\end_layout
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+or
+\emph on
+ loss function
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+loss function
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Error of the Output Layer
+\end_layout
+
+\begin_layout Standard
+The error is then differentiated with respect to a weight 
+\begin_inset Formula $w_{kj}$
+\end_inset
+
+ for a connection from neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer to neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ in the output layer: 
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial E}{\partial w_{kj}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\label{eq:backpropagation-error-wrt-weight}
+\end{equation}
+
+\end_inset
+
+ and with respect to 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-1).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Error of the Other Layers
+\end_layout
+
+\begin_layout Standard
+The derivative of the error with respect to the weights 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ and biases 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ for the remaining connections inside the network from neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the layer below is:
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\\
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot(-o_{j}),
+\end{eqnarray*}
+
+\end_inset
+
+ where
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})
+\end{eqnarray*}
+
+\end_inset
+
+and we take the value for 
+\begin_inset Formula $\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
+\end_inset
+
+ from neuron 
+\begin_inset Formula $k$
+\end_inset
+
+, which is in the layer below neuron 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Analogously, the derivative with respect to 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ is 
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial b_{k}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}o_{j}(1-o_{j})(-1).\\
+ & = & (o_{k}-y_{k})o_{k}(1-o_{k})o_{j}(1-o_{j})(-1).
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Updating Rule and Learning Rate
+\end_layout
+
+\begin_layout Standard
+After computing the derivatives of the error with respect to the parameters
+ of the network, we can perform gradient descent and update the parameters
+ using the learning rate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+learning rate
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, a small positive number:
+\begin_inset Formula 
+\begin{eqnarray}
+\Delta w & = & -\epsilon\frac{\partial E}{\partial w}\label{eq:backpropagation-deltas}\\
+\Delta b & = & -\epsilon\frac{\partial E}{\partial b}.\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Optimizing the Sum of Squared Differences Error
 \begin_inset CommandInset label
 LatexCommand label
 name "par:Optimizing-the-Sum-of-Squared-DIfferences"
@@ -8022,7 +8359,11 @@ name "par:Optimizing-the-Sum-of-Squared-DIfferences"
 \end_layout
 
 \begin_layout Standard
-Usually in back-propagation, the sum of the squared differences
+Usually in back-propagation, the error function to be minimized is the 
+\emph on
+sum of squared differences
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -8042,25 +8383,24 @@ squared-error sum
 
 \end_inset
 
- between the desired outputs and the actual outputs in the output layer
- are minimized:
+ between the desired outputs and the actual outputs:
 \begin_inset Formula 
 \[
-\sum_{i}(\hat{x_{i}}-x_{i})^{2},
+\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}
 \]
 
 \end_inset
 
  where 
-\begin_inset Formula $x_{i}$
+\begin_inset Formula $y_{k}$
 \end_inset
 
- is the desired value for node 
-\begin_inset Formula $i$
+ is the desired value of node 
+\begin_inset Formula $k$
 \end_inset
 
- of the output layer and 
-\begin_inset Formula $\hat{x_{i}}$
+ in the output layer and 
+\begin_inset Formula $o_{k}$
 \end_inset
 
  is the actual output value of node 
@@ -8068,23 +8408,30 @@ squared-error sum
 \end_inset
 
 .
- The minimization is done by computing the derivative of the error of one
- node (which is a function of the outputs of the nodes in the above layer
- and the desired output value) with respect to a particular weight and then
- increasing or decreasing the weight by the computed derivative multiplied
- by the learning rate
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-learning rate
-\end_layout
+ As stated in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-error-wrt-weight"
 
 \end_inset
 
-.
- Likewise, the bias is updated by taking the derivative of the error with
- respect to the bias, and using this as a delta to update the bias.
+, the derivative of the error 
+\begin_inset Formula $E$
+\end_inset
+
+ with respect to a weight 
+\begin_inset Formula $w_{kj}$
+\end_inset
+
+ is:
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}).
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -8099,7 +8446,11 @@ name "par:Optimizing-the-Cross-entropy-error"
 \end_layout
 
 \begin_layout Standard
-One can also minimize the cross-entropy error
+Another error function is the 
+\emph on
+cross-entropy error
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -8119,43 +8470,80 @@ key "NasrJoun2002"
 :
 \begin_inset Formula 
 \[
--\sum_{i}p_{i}\log\hat{p_{i}}-\sum_{i}(1-p_{i})\log(1-\hat{p_{i}}),
+-\sum_{k}y_{k}\log o_{k}-\sum_{k}(1-y_{k})\log(1-o_{k}),
 \]
 
 \end_inset
 
- where 
-\begin_inset Formula $p_{i}$
+ where again 
+\begin_inset Formula $y_{k}$
 \end_inset
 
  is the desired output value of node 
-\begin_inset Formula $i$
+\begin_inset Formula $k$
 \end_inset
 
  in the output layer and 
-\begin_inset Formula $\hat{p_{i}}$
+\begin_inset Formula $o_{k}$
 \end_inset
 
- is the actual output value output by node 
-\begin_inset Formula $i$
+ is the actual output value.
+ The derivative of error 
+\begin_inset Formula $E$
 \end_inset
 
-.
- This makes sense if only the node having the maximal value in a layer is
- interesting, and not its exact value.
+ with respect to a weight 
+\begin_inset Formula $w_{kj}$
+\end_inset
+
+ from neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer to neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ in the output layer is then:
+\begin_inset Formula 
+\[
+\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})(-o_{j})
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: formula for the updating in the back-propagation algorithm.
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GolikNey2013"
 
 \end_inset
 
+ note that the cross-entropy error function requires less updates, since
+ the gradient for the sum-of-squared-differences error function becomes
+ low not only when the actual output 
+\begin_inset Formula $o_{k}$
+\end_inset
 
+ is near the desired output 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+, but also when 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+ is near 0 or 1 (see equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-error-wrt-weight"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Subsubsection
@@ -8175,7 +8563,33 @@ Although described here for multilayer perceptrons, the parameters apply
 \end_layout
 
 \begin_layout Paragraph
-Sigmoid activation function
+Random Weight and Bias Initialization
+\end_layout
+
+\begin_layout Standard
+At the start of training, weights 
+\begin_inset Formula $w$
+\end_inset
+
+ and biases 
+\begin_inset Formula $b$
+\end_inset
+
+ have to be initialized.
+ They must not all be initialized to zero, because then the activations
+ in the output layer 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+ would become zero, leading to a zero sum-of-squared-differences error gradient,
+ which would prevent learning.
+ Usually the biases are initialized to zero, and the weights are drawn from
+ a uniform random distribution in [-1;1], or from a normal distribution
+ with mean 0 and standard deviation 1.
+\end_layout
+
+\begin_layout Paragraph
+Sigmoid Activation Function
 \begin_inset CommandInset label
 LatexCommand label
 name "The-sigmoid-activation-function"
@@ -8186,8 +8600,8 @@ name "The-sigmoid-activation-function"
 \end_layout
 
 \begin_layout Standard
-The value (activation) of hidden and visible nodes are a function of the
- sum of their inputs.
+The activation of hidden and visible nodes are a function of the sum of
+ their inputs.
  The function that maps the sum of the inputs of a node to its value is
  called the 
 \emph on
@@ -8277,26 +8691,63 @@ momentum
 \end_inset
 
  term.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Formel hinschreiben
-\end_layout
+ In this case, the weight and bias deltas from equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-deltas"
 
 \end_inset
 
- This term works like a low-pass filter and reduces oscillations during
- learning by smoothing the weight and bias deltas added to the parameters
- of the network.
+ are replaced with a momentum weight delta 
+\begin_inset Formula $\Delta w_{momentum}$
+\end_inset
+
+ and momentum bias delta 
+\begin_inset Formula $\Delta b_{momentum}$
+\end_inset
+
+.
+ The momentum term includes a coefficient 
+\begin_inset Formula $\mu$
+\end_inset
+
+ that is the fraction of the weight and bias deltas in the previous time
+ step 
+\begin_inset Formula $t-1$
+\end_inset
+
+ to be added to the current weight deltas:
+\begin_inset Formula 
+\begin{eqnarray*}
+\Delta w_{momentum}^{(t)} & = & \mu\Delta w_{momentum}^{(t-1)}+\Delta w^{(t)}\\
+\Delta b_{momentum}^{(t)} & = & \mu\Delta b_{momentum}^{(t-1)}+\Delta b^{(t)},
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\Delta w^{(t)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta b^{(t)}$
+\end_inset
+
+ are taken from equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-deltas"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-The momentum term includes a coefficient that is the fraction of the weight
- deltas in the previous time step to be added to the current weight deltas.
- The coefficient is an additional meta-parameter in training.
- Too large a momentum coefficient can cause 
+Momentum works like a low-pass filter and reduces oscillations during learning
+ by smoothing the weight and bias deltas added to the parameters of the
+ network.
+ However, too large a momentum coefficient can cause 
 \begin_inset Quotes eld
 \end_inset
 
@@ -8305,8 +8756,20 @@ explosion
 \end_inset
 
 , or non-convergence of the model during training.
- To prevent this, the coefficient is changed during training, and usually
- gradually increased during the early steps of training to its final value.
+ To prevent this, 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is usually gradually increased to its final value during the early steps
+ of training.
+\end_layout
+
+\begin_layout Standard
+The coefficient 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is an additional meta-parameter in training.
 \end_layout
 
 \begin_layout Subsubsection
@@ -8315,320 +8778,31 @@ Difficulties in Training Multi-layer Neural Networks
 
 \begin_layout Standard
 Training a randomly initialized feed-forward neural network with more than
- 1 hidden layer using back-propagation is difficult and usually does not
+ one hidden layer using back-propagation is difficult and usually does not
  succeed.
  When attempting to train such a network, each node in the output layer
  often just outputs the mean value of the desired output of the training
  cases, independently of the input.
  One problem is that there are many local minima (generated by repeatedly
- adding weighted sigmoid functions) of the implicitly optimized energy function
- during back-propagation.
+ adding weighted sigmoid functions) in the implicitly optimized energy function
+ during back-propagation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GoriTesi1992"
+
+\end_inset
+
+.
  Another problem is that in discriminative learning, each training case
  only contributes as many bits to the specification of the parameters of
- the network as needed to specify the label.
- This makes generative models
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-generative model
-\end_layout
-
-\end_inset
-
- with a discriminative part put on top, as will be shown later, more attractive
- than pure discriminative models
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-discriminative model
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Examples for generative models are the Restricted Boltzmann Machine or Deep
- Belief Network.
-\end_layout
-
-\begin_layout Subsection
-Autoassociator, Autoencoder
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Merge this note with the following text.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Autoassociator, Autoencoder
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Autoassociator-introduction"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: vielleicht sollte die Beschreibung eines autoassociators hier kürzer
- sein, und diese lange Beschreibung stattdessen in den Methods-Teil, da
- sonst die Beschreibung von Deep learning danach sehr kurz wirkt.
-\end_layout
-
-\end_inset
-
-An algorithm that can train an artificial neural network deterministically
- with more than one hidden layer is the auto-associator
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-auto-associator
-\end_layout
-
-\end_inset
-
-, or autoencoder
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-autoencoder
-\end_layout
-
-\end_inset
-
- 
+ the network as needed to specify the label 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "BengioLarochelle2007"
+key "Hinton2010"
 
 \end_inset
 
 .
- The algorithm is unsupervised and iteratively constructs deeper and deeper
- networks.
- Its essential idea is the construction of an encoder network and its anti-symme
-tric counterpart, the decoder network.
- The encoder starts in the first iteration as a network that consists of
- the input layer and one hidden layer on top.
- The (overlapping) decoder network consists of the very same hidden layer
- and the output layer on top, which must have the same dimensions as the
- input layer.
- Training an autoencoder slowly adds internal layers to en- and decoder,
- see figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Training-of-an-autoencoder"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset space \hfill{}
-\end_inset
-
-A 
-\begin_inset Graphics
-	filename images/autoencoder-1.dia
-	width 40col%
-
-\end_inset
-
-
-\begin_inset space \hfill{}
-\end_inset
-
-B 
-\begin_inset Graphics
-	filename images/autoencoder-2.dia
-	width 40col%
-
-\end_inset
-
-
-\begin_inset space \hfill{}
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Training-of-an-autoencoder"
-
-\end_inset
-
-Training of an autoencoder iteratively adds hidden layers.
- 
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Training of an autoencoder.
-\end_layout
-
-\end_inset
-
- A: It starts with a network architecture of an input layer, one hidden
- layer, and an output layer with the same size as the input layer.
- The parameters of this small network are initialized randomly (light gray
- area) and the network is trained.
- B: The hidden layer is copied and another hidden layer is inserted between
- encoder and decoder.
- The added weights are initialized randomly (light gray area), and the whole
- network (
-\emph on
-including 
-\emph default
-the previously trained weights, dark gray area) is trained.
- This procedure continues until the network has enough layers.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-The network size increases iteratively from 3 layers, to 5 layers, to 7
- layers, and so on, and only 2 weight layers are initialized randomly in
- each iteration.
- Therefore, back-propagation finds parameters for a network that is not
- stuck in a poor local optimum, because there are only few new added weights.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Autoassociator-introduction"
-
-\end_inset
-
-, an autoassociator was described as one of the first networks with a deep
- architecture that could be trained effectively.
- The training is done by iteratively adding layers to the network, and it
- starts with three layers: input layer, where input data is applied, the
- internal hidden layer, which usually has a smaller size than the input
- and output layers, and the output layer, which has the same size as the
- input layer and where the original input should be reconstructed as closely
- as possible 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BengioLarochelle2007"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-When training this first iteration of the network, the input patterns are
- taken from the training data set.
- Standard back-propagation is used to adapt the weights between input layer
- and hidden layer and between hidden layer and output layer.
- The goal of training is that the network reconstructs as output patterns
- the input patterns.
- One might think that that is too easy, but usually the number of nodes
- in the hidden layer is chosen to be smaller than the number of nodes in
- the input (and output) layer.
- In this way the autoassociator is forced to reconstruct its input from
- a compressed representation.
- Once back-propagation does not improve the reconstruction error on the
- test set anymore, the second step starts.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(TODO: hier ein Bild eines autoassociator networks.)
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
-In the second step, both encoder and decoder are extended by one layer.
- The encoder network is enlarged by an additional hidden layer put on top
- of its existing 1st hidden layer.
- The weights between the 1st and 2nd (new) hidden layer are initialized
- randomly.
- The biases of the nodes in the 2nd (new) hidden layer are also initialized
- (randomly or constantly zero).
- The decoder network is constructed on top of the new hidden 2nd layer by
- inserting weights initialized randomly, copying the 1st hidden layer to
- form the 3rd hidden layer, copying the weights between hidden layer 1 (from
- the first iteration) to the output layer, and copying the output layer
- (from the first iteration).
- Then back-propagation is used to train the autoassociator consisting of
- the new encoder network with the new decoder network on top.
- This establishes values for the values of the initialized weights and biases.
- This process can be repeated until a sufficient number of hidden layers
- has been trained.
-\end_layout
-
-\begin_layout Subsubsection
-Autoassociator with a Classifier on Top
-\end_layout
-
-\begin_layout Standard
-The autoassociator as described is an unsupervised algorithm, because it
- only reconstructs its input.
- The autoassociator can however be used in a supervised fashion by first
- training its encoder and decoder networks up to sufficient depth, and then
- removing the decoder network and replacing it by a single output layer
- that has the dimension of the training label.
- The weights between the last hidden layer of the encoder and the new output
- layer as well as the biases of the new output layer are initialized randomly
- (or to constantly zero), and trained using back-propagation.
 \end_layout
 
 \begin_layout Subsection
@@ -8715,22 +8889,40 @@ L2 weight decay
  Both weight decay methods decrease the absolute value of each weight in
  each training iteration, in order to prevent large weights.
  This can be necessary because for some training samples, some weights tend
- to escape, i.e.
- become larger and larger in value, making subsequent changes to the weights
- more difficult.
+ to 
+\begin_inset Quotes eld
+\end_inset
+
+escape
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ become larger and larger, making subsequent changes to the weights more
+ difficult.
 \end_layout
 
 \begin_layout Standard
-L1 weight decay uses in the updating of the weights, instead of the default
- weight delta 
-\begin_inset Formula $\Delta w_{ij}$
+Instead of the normal weight delta 
+\begin_inset Formula $\Delta w$
 \end_inset
 
-, the penalized 
-\begin_inset Formula $\Delta w_{ij}-c*sgn(w_{ij})$
+ defined in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-deltas"
+
 \end_inset
 
-, where 
+, L1 weight decay uses a penalized weight delta 
+\begin_inset Formula 
+\begin{eqnarray*}
+\Delta w_{L1} & = & \Delta w-c*sgn(w),
+\end{eqnarray*}
+
+\end_inset
+
+ where 
 \begin_inset Formula $c\in\mathbb{R}^{+}$
 \end_inset
 
@@ -8743,28 +8935,27 @@ weight-cost
 \end_inset
 
  of L1 weight decay, and 
-\begin_inset Formula $sgn(x)$
+\begin_inset Formula $sgn(w)$
 \end_inset
 
- is the sign of 
-\begin_inset Formula $x$
-\end_inset
-
-, i.e.
- -1, 0, 1, for 
-\begin_inset Formula $x$
+ is the sign of the weight, i.e.
+ -1, 0, 1, for the weight 
+\begin_inset Formula $w$
 \end_inset
 
  being negative, zero, positive, respectively.
- L2 weight decay replaces 
-\begin_inset Formula $\Delta w_{ij}$
+\end_layout
+
+\begin_layout Standard
+L2 weight decay uses
+\begin_inset Formula 
+\[
+\Delta w_{L2}=\Delta w-w*c,
+\]
+
 \end_inset
 
- with 
-\begin_inset Formula $\Delta w_{ij}-w_{ij}*c$
-\end_inset
-
-, where 
+ where 
 \begin_inset Formula $c\in\mathbb{R}^{+}$
 \end_inset
 
@@ -8797,7 +8988,7 @@ status open
 \begin_layout Plain Layout
 Contrastive divergence is explained in section 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "sub:Training-Restricted-Boltzmann-Machines-using-Contrastive-Divergence"
 
 \end_inset
@@ -8890,12 +9081,25 @@ where
 \end_inset
 
  is the decay rate.
- The penalty to the input is measured using the cross entropy between the
- desired distribution and actual activity distribution 
-\begin_inset Formula 
-\[
-\mbox{sparsity penalty}\propto-p\log q-(1-p)\log(1-q).
-\]
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Look up how enforcing sparsity is done.
+ Do you only decrease the bias in each iteration? The sparsity target suggested
+ in 
+\begin_inset Quotes eld
+\end_inset
+
+A Practical Guide to Training Restricted Boltzmann Machines
+\begin_inset Quotes erd
+\end_inset
+
+ seems to be specific to RBMs.
+\end_layout
 
 \end_inset
 
@@ -8967,8 +9171,16 @@ Dropout specifies a probability
 \begin_inset Formula $d*n$
 \end_inset
 
- nodes' output values are computed and the other nodes are set to contribute
- nothing (zero) to the input to the next layer.
+ nodes' output values 
+\begin_inset Formula $o_{i}$
+\end_inset
+
+ are computed and the other nodes are set to contribute nothing (i.e.
+ 
+\begin_inset Formula $o_{i}:=0$
+\end_inset
+
+) to the input to the next layer.
  This greatly constrains complex co-adaptations between nodes, in which
  nodes are only useful in the context of a large number of other nodes.
  It thereby reduces overfitting.
@@ -8986,7 +9198,7 @@ Dropout specifies a probability
 \end_layout
 
 \begin_layout Standard
-The theory behind dropout is that for a network with 
+The reasoning behind dropout is that for a network with 
 \begin_inset Formula $n$
 \end_inset
 
@@ -9074,6 +9286,252 @@ early stopping
 \begin_layout Standard
 This prevents the training procedure from overfitting to sampling error
  present in the training data set.
+\end_layout
+
+\begin_layout Subsection
+Autoassociator, Autoencoder
+\end_layout
+
+\begin_layout Standard
+An algorithm that can train an artificial neural network deterministically
+ with more than one hidden layer is the 
+\emph on
+auto-associator
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+auto-associator
+\end_layout
+
+\end_inset
+
+, or 
+\emph on
+autoencoder
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+autoencoder
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "BengioLarochelle2007"
+
+\end_inset
+
+.
+ The algorithm is unsupervised and iteratively constructs deeper and deeper
+ networks.
+ Its essential idea is the construction of an encoder network and its anti-symme
+tric counterpart, the decoder network.
+ Both are trained using back-propagation, wherein the target output to be
+ achieved in the output layer is the same unsupervised training sample as
+ presented to the network in the input layer, hence the name of the algorithm.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset space \hfill{}
+\end_inset
+
+A 
+\begin_inset Graphics
+	filename images/autoencoder-1.dia
+	width 40col%
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+B 
+\begin_inset Graphics
+	filename images/autoencoder-2.dia
+	width 40col%
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Training-of-an-autoencoder"
+
+\end_inset
+
+Training of an autoencoder iteratively adds hidden layers.
+ The layers are depicted as rectangles.
+ 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Training of an autoencoder.
+\end_layout
+
+\end_inset
+
+ A: It starts with a network architecture of an input layer, one hidden
+ layer, and an output layer with the same size as the input layer.
+ The parameters of this small network are initialized randomly (light gray
+ area) and the network is trained.
+ B: The hidden layer is copied and another hidden layer is inserted between
+ encoder and decoder.
+ The added weights are initialized randomly (light gray area), and the whole
+ network (
+\emph on
+including 
+\emph default
+the previously trained weights, dark gray area) is trained.
+ This procedure continues until the network has enough layers.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+encoder
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+encoder
+\end_layout
+
+\end_inset
+
+ starts in the first iteration as a network that consists of the input layer
+ and one hidden layer on top.
+ The (overlapping) 
+\emph on
+decoder
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+decoder
+\end_layout
+
+\end_inset
+
+
+\emph default
+ network consists of the very same hidden layer and the output layer on
+ top, which must have the same dimensions as the input layer.
+ Training an autoencoder slowly adds internal layers to en- and decoder,
+ see figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Training-of-an-autoencoder"
+
+\end_inset
+
+.
+ The network starts with three layers: input, hidden, and output layer.
+ This network is trained using back-propagation.
+ Once back-propagation does not improve the reconstruction error on the
+ test set anymore, the second step starts.
+ In the second step, both encoder and decoder are extended by one layer.
+ The existing middle hidden layer is copied and a new hidden layer is inserted
+ in the middle.
+ The new weights are initialized randomly, for example by drawing from a
+ uniform [-1;1] distribution or from a normal distribution with mean 0 and
+ standard deviation 1, and the new biases are initialized to zero.
+ Then back-propagation is used again to determine the paramters of the whole
+ network.
+ This process can be repeated until a sufficient number of hidden layers
+ has been trained.
+\end_layout
+
+\begin_layout Standard
+Network size increases iteratively from 3 layers, to 5 layers, to 7 layers,
+ and so on, and only 2 weight layers are initialized randomly in each iteration.
+ Therefore, the deep network is not stuck in a poor local optimum, because
+ there are only few new added weights each iteration, and back-propagation
+ finds parameters for a good (local) optimum.
+\end_layout
+
+\begin_layout Standard
+The goal of training is that the network reconstructs as output patterns
+ the input patterns.
+ One might think that that is too easy, since the network could just learn
+ the identity function, but usually the number of nodes in at least one
+ hidden layer is chosen to be smaller than the number of nodes in the input
+ (and output) layer.
+ In this way the autoencoder is forced to reconstruct its input from a compresse
+d representation.
+\end_layout
+
+\begin_layout Subsubsection
+Encoder with a Classifier on Top
+\end_layout
+
+\begin_layout Standard
+The autoencoder as described is an unsupervised algorithm, because it only
+ reconstructs its input.
+ The autoencoder can however be used in a supervised fashion by first training
+ its encoder and decoder networks up to sufficient depth, and then removing
+ the decoder network and replacing it by a single output layer that has
+ the dimension of the training label.
+ The weights between the last hidden layer of the encoder and the new output
+ layer as well as the biases of the new output layer are initialized randomly
+ (by drawing from a uniform or normal distribution), and trained using back-prop
+agation.
+\end_layout
+
+\begin_layout Standard
+An encoder network trained using an autoencoder is a generative model
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+generative model
+\end_layout
+
+\end_inset
+
+, because it was trained with the goal to reconstruct its input, and the
+ encoder's last hidden layer contains a compressed representation of the
+ input.
+ Hence, an encoder with a classifier on top is a generative model with a
+ discriminative part put on top.
 \end_layout
 
 \begin_layout Subsection
@@ -10009,7 +10467,7 @@ key "BengioDelalleau2007"
 \end_inset
 
  showed, training using contrastive divergence (CD-1) and training using
- reconstruction error as error metric in an autoassociator are linked.
+ reconstruction error as error metric in an autoencoder are linked.
  They showed that the weight learning gradient used with the reconstruction
  error is a more biased approximator of the log-likelihood than the gradient
  computed by 

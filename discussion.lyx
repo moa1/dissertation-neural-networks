@@ -280,11 +280,11 @@ Different Network Configurations
 \end_layout
 
 \begin_layout Standard
-As pre-training algorithms we assessed Autoencoders, Restricted Boltzmann
+As pre-training algorithms we assessed autoencoders, Restricted Boltzmann
  Machines, and Deep Belief Networks.
  There seemed to be only little difference in test set accuracy between
  these pre-training algorithms.
- However, some authors have reported that Autoencoders are harder to train
+ However, some authors have reported that autoencoders are harder to train
 \begin_inset Note Note
 status open
 

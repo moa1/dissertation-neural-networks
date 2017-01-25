@@ -761,7 +761,17 @@ Each glomerulus is connected to one or more Kenyon Cells in insects.
  nervous system the presence of one specific odor.
  (In the mammalian brain, a single odor is represented by neurons in the
  olfactory cortex.) Experiments show that the circuit connecting glomeruli
- to Kenyon cells is feed-forward only, i.e.
+ to Kenyon cells is feed-forward
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+feed-forward neural network
+\end_layout
+
+\end_inset
+
+ only, i.e.
  without recurrent connections (loops).
  The structure of a feed-forward compressed sensing circuitry is of interest,
  because standard compressed sensing circuits are recurrent dynamic systems
@@ -1089,7 +1099,7 @@ Left: The sigmoid function
 status collapsed
 
 \begin_layout Plain Layout
-feed-forward network
+feed-forward neural network
 \end_layout
 
 \end_inset
@@ -1811,13 +1821,14 @@ status open
 An extreme form of batch-effect correction is when all training data are
  in batch 1 and all test data in batch 2.
  For example, suppose that batch 1 are all face portraits (frontal view),
- batch 2 are half profile faces (30 degree angle view) from -- not necessarily
+ batch 2 are half profile faces (30 degree angle view) of -- not necessarily
  the same -- people, and the task is to match faces seen from both viewing
  angles to the same person.
  During training, semi-supervised learning would have access to the unlabeled
- faces from both viewing angles, but the half profiles would be unlabeled.
+ faces from both viewing angles, but all the half profiles would be unlabeled.
  We are not aware of a study of that setting using artificial neural networks,
- but a similar setting was studied for humans as learners
+ but a similar setting was studied in cognitive psychology, where humans
+ were the learners 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BobakBate2015"
@@ -1825,8 +1836,8 @@ key "BobakBate2015"
 \end_inset
 
 .
- The participants of the study were asked to match a half profile to one
- out of 10 portraits, or indicate that there is no matching face.
+ The participants of the study were asked to match a given half profile
+ to one out of 10 portraits, or indicate that there is no matching face.
  The accuracy of average people was 81%, while people who have extraordinary
  face recognition abilities, so-called 
 \begin_inset Quotes eld
@@ -1840,10 +1851,10 @@ super-recognizers
  When there was no matching face, average people correctly rejected the
  face in 65% of all cases, and super-recognizers did so in 92%.
  For humans, the unsupervised training would consist in seeing people's
- faces from different angles during normal day-to-day activity, but one
- could argue that this is unfair, since humans have access to the label
- for many half profiles, since they saw a person's portrait just moments
- ago.
+ faces from different angles during normal day-to-day activity.
+ However, one could argue that this training is unfair, because humans had
+ access to the label of many half profiles, since they often have seen a
+ person's portrait just moments before seeing the half profiles.
 \end_layout
 
 \end_inset
@@ -1874,12 +1885,17 @@ deep learning
 
 \begin_layout Subsection
 Back-propagation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Back-propagation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Before deep learning was known, supervised artificial neural networks were
- trained using back-propagation.
- Back-propagation learns from labeled samples the parameters of the artificial
+Back-propagation learns from labeled samples the parameters of the artificial
  neural network, the weights and biases, using 
 \emph on
 gradient descent
@@ -1902,8 +1918,53 @@ key "RumelhartWilliams1988"
 \end_inset
 
 .
- Each neuron's output is computed from the sum of its inputs (see section
- 
+ The supervised training patterns are indexed by 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ So 
+\begin_inset Formula $x_{i,p}$
+\end_inset
+
+ is the input for a neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in the input layer and pattern number 
+\begin_inset Formula $p$
+\end_inset
+
+, and 
+\begin_inset Formula $y_{i,p}$
+\end_inset
+
+ is the corresponding desired output for neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in the output layer for this training pattern.
+\end_layout
+
+\begin_layout Standard
+Each neuron's input 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ is either set to a training input 
+\begin_inset Formula 
+\[
+v_{j}=x_{i,p}
+\]
+
+\end_inset
+
+when neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ is in the input layer or computed from the sum of the connected neurons'
+ outputs in the layer above (see section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Artificial-Neurons-as-Simple-Models-of-Biological-Neurons"
@@ -1918,7 +1979,7 @@ v_{j}=-b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},\label{eq:input-to-a-neuron-2}
 
 \end_inset
 
-where 
+ where 
 \begin_inset Formula $b_{j}$
 \end_inset
 
@@ -1958,33 +2019,15 @@ o_{j}=\sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.\label{eq:sigmoid-function-2}
 
 \end_inset
 
-The supervised training patterns are indexed by 
-\begin_inset Formula $p$
-\end_inset
 
-.
- So 
-\begin_inset Formula $x_{i,p}$
-\end_inset
+\end_layout
 
- is the input for neuron 
-\begin_inset Formula $i$
-\end_inset
+\begin_layout Paragraph
+Forward Pass
+\end_layout
 
- in the input layer and pattern number 
-\begin_inset Formula $p$
-\end_inset
-
-, and 
-\begin_inset Formula $y_{i,p}$
-\end_inset
-
- is the corresponding desired output for neuron 
-\begin_inset Formula $i$
-\end_inset
-
- in the output layer.
- This supervised training procedure first does the 
+\begin_layout Standard
+The supervised training procedure first performs the 
 \emph on
 forward pass
 \emph default
@@ -2015,7 +2058,27 @@ forward pass
 \end_inset
 
 .
- (Note that here, each neuron has a unique index, also among different layers.)
+\end_layout
+
+\begin_layout Standard
+(Note that each neuron has a unique index, also among different layers.
+ In the following, index 
+\begin_inset Formula $k$
+\end_inset
+
+ is used for a neuron in the output layer, index 
+\begin_inset Formula $j$
+\end_inset
+
+ for a neuron in a hidden layer, and index 
+\begin_inset Formula $i$
+\end_inset
+
+ for a neuron in either the input or a hidden layer.)
+\end_layout
+
+\begin_layout Paragraph
+Backward Pass for the Output Layer
 \end_layout
 
 \begin_layout Standard
@@ -2058,15 +2121,15 @@ The error is then differentiated with respect to a weight
 \begin_inset Formula $w_{kj}$
 \end_inset
 
- for a connection from 
+ for a connection from neuron 
 \begin_inset Formula $j$
 \end_inset
 
- to 
+ in the last hidden layer to neuron 
 \begin_inset Formula $k$
 \end_inset
 
- (see 
+ in the output layer (see 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "RumelhartWilliams1988"
@@ -2096,23 +2159,40 @@ key "RumelhartWilliams1988"
 
 \end_layout
 
+\begin_layout Paragraph
+Backward Pass for the Other Layers
+\end_layout
+
 \begin_layout Standard
-To perform gradient descent, we also need the derivatives of the error with
- respect to the weights 
+To perform gradient descent, we also need to update the weights and biases
+ for the remaining connections between hidden layers, and from the input
+ layer to the first hidden layer.
+ The derivative of the error with respect to the weight 
 \begin_inset Formula $w_{ji}$
 \end_inset
 
- and biases 
-\begin_inset Formula $b_{j}$
+ for the connection from neuron 
+\begin_inset Formula $i$
 \end_inset
 
- for the connection between the last and the second last hidden layer.
- It is
+ in a layer to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the layer below (for example, from neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in the second last hidden layer to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer) is
 \begin_inset Formula 
-\begin{eqnarray*}
-\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\\
- & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot(-o_{j}),
-\end{eqnarray*}
+\begin{eqnarray}
+\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\label{eq:backpropagation-derivative-of-weight-other-layers}\\
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -2124,25 +2204,72 @@ To perform gradient descent, we also need the derivatives of the error with
  & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(v_{k})\frac{\partial v_{k}}{\partial o_{j}}\\
  & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(v_{k})\frac{\partial v_{k}}{\partial o_{j}}\\
  & = & \sum_{k}\frac{\partial}{\partial o_{k}}E(o_{k})\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\\
- & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})
+ & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj}),
 \end{eqnarray*}
 
 \end_inset
 
-and we take the value for 
+and neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in the layer below the layer that neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ is in (in our example neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in the output layer).
+ We take the value for 
 \begin_inset Formula $\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
 \end_inset
 
- from the layer below, i.e.
- from equation 
+ in the equation above from equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:backpropagation-derivative-of-weight"
 
 \end_inset
 
-.
- For example, for the last hidden layer, we take 
+ when neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in the output layer or equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-derivative-of-weight-other-layers"
+
+\end_inset
+
+ when neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in a hidden layer.
+ (Neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is named 
+\begin_inset Formula $j$
+\end_inset
+
+ in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-derivative-of-weight-other-layers"
+
+\end_inset
+
+).
+ In our example (for neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer), we take 
 \begin_inset Formula $\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
 \end_inset
 
@@ -2240,6 +2367,10 @@ Data flow in training a neural network with three layers using back-propagation.
 
 \end_layout
 
+\begin_layout Paragraph
+Updating rule
+\end_layout
+
 \begin_layout Standard
 After computing the derivatives of the error with respect to the parameters
  of the network, we can perform gradient descent and update the parameters
@@ -2269,12 +2400,16 @@ learning rate
 
 \end_layout
 
+\begin_layout Paragraph
+Limits of Backpropagation
+\end_layout
+
 \begin_layout Standard
 The purpose of error back-propagation is to adjust the weights of the artificial
  neural network following the gradient, such that when the current input
  pattern pair is presented to the network, its computed output pattern gets
  closer and closer to the desired output pattern.
- However, back-propagation was not able to train networks with more than
+ However, back-propagation is not able to train networks with more than
  one or two hidden layers, because it is a gradient descent method and can
  get stuck in poor local optima, and the error surface gets more rugged
  the more hidden neurons and layers there are 
@@ -2286,9 +2421,9 @@ key "GoriTesi1992"
 
 .
  Having artificial neural networks with more than one hidden layer is desirable,
- because it can perform the same computation with less total number of hidden
- nodes compared to a network with less hidden layers, up to an exponential
- factor 
+ because they can perform the same computation with less total number of
+ hidden nodes compared to a network with less hidden layers, up to an exponentia
+l factor 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hastad1987"
@@ -2411,9 +2546,18 @@ Overview of Own and Related Work
 \end_layout
 
 \begin_layout Standard
-We used auto-associators, Deep Belief Networks, and TSVMs on expression
- data to predict whether breast cancer patients will show pathologic complete
- response to chemotherapy or residual disease.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: an dieser Stelle habe ich autoencoder und TSVMs noch nicht eingeführt
+\end_layout
+
+\end_inset
+
+We used autoencoders, Deep Belief Networks, and Transductive Support Vector
+ Machines on expression data to predict whether breast cancer patients will
+ show pathologic complete response to chemotherapy or residual disease.
  The expression data are high-dimensional (
 \begin_inset Formula $\approx22,000$
 \end_inset
