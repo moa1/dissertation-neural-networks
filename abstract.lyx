@@ -79,8 +79,8 @@ In classification tasks of biological data, there are usually fewer labeled
  In addition, labeled data sets can be re-used in different contexts as
  additional unlabeled data sets.
  For example, when searching the Gene Expression Omnibus (GEO) repository
- for microarray data of drug sensitivity and resistance experiments, the
- largest one has 2,522 samples, but the median has only 12 samples.
+ for microarray data sets of drug sensitivity and resistance experiments,
+ the largest one has 2,522 samples, but the median has only 12 samples.
 \end_layout
 
 \begin_layout Standard
@@ -94,42 +94,32 @@ In machine learning in general, utilizing unlabeled data in classification
 \end_layout
 
 \begin_layout Standard
-Here we compared the three aforementioned artificial neural networks and
- support vector machines, both in supervised and semi-supervised mode.
- We measured accuracies in the task of classifying tissue taken from breast
+We measured accuracies in the task of classifying tissue taken from breast
  cancer patients at reductive surgery as chemotherapy-resistant or -sensitive.
-\end_layout
-
-\begin_layout Standard
-Different data sets were constructed by subsampling from GEO data set GSE25055
+ Different data sets were constructed by subsampling from GEO data set GSE25055
  and GSE25065.
- Using these data sets, we compared classification accuracy of the relatively
- new neural networks Autoencoder, Restricted Boltzmann Machine, Deep Belief
- Network (DBN) and the established support vector machine (SVM), and Transductiv
-e SVM (TSVM).
+ Using these data sets, we compared classification accuracy of the neural
+ networks autoencoder, Restricted Boltzmann Machine, Deep Belief Network
+ (DBN) and support vector machine (SVM), and Transductive SVM (TSVM).
+ Training was done both in supervised and semi-supervised mode.
  For the neural networks, we tried several different network architectures.
+ 
 \end_layout
 
 \begin_layout Standard
-Transcriptomic data and visual images are both similar in that they have
- highly correlated dimensions, and dissimilar because the number of available
- unlabeled samples is much higher for images than expression data.
- We found that smoothing the validation set accuracies obtained during training
- iterations to alleviate low sample numbers helped in model selection of
- the best classifier.
-\end_layout
-
-\begin_layout Standard
-We also investigated the effect of different normalization procedures on
+Smoothing the validation set accuracies obtained during training iterations
+ to alleviate low sample numbers helped in model selection of the best classifie
+r.
+ We also investigated the effect of different normalization procedures on
  the classification accuracy.
- Before classifying, the data were normalized with either RMA or MAS5, followed
- by either no batch-effect correction or Combat batch-effect correction.
+ The data were normalized with either RMA or MAS5, followed by either no
+ batch-effect correction or Combat batch-effect correction.
  Only MAS5 profited from added Combat batch-effect correction, but normalization
  with RMA alone yielded the best classification accuracy.
 \end_layout
 
 \begin_layout Standard
-In particular, we were interested whether classification accuracies improve
+We were particularly interested whether classification accuracies improve
  when adding unlabeled samples in semi-supervised learning.
  Overall, neural networks and support vector machines performed similar.
  We found a slight improvement of classification accuracy when the number
