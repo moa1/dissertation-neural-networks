@@ -1308,7 +1308,7 @@ Hebbian learning rule
 \end_inset
 
  The cellular mechanisms controlling these processes, and their interplay
- in larger neuron ensembles are a field of active research
+ in larger neuron ensembles are a field of active research 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BermudezFederico2007"
@@ -1528,7 +1528,7 @@ semi-supervised learning
  output pattern for every input pattern.
  However, in contrast to fully unsupervised machine learning, it does need
  some labeled input data sets.
- An common objective of semi-supervised machine learning algorithms is to
+ A common objective of semi-supervised machine learning algorithms is to
  find underlying structure in all input data sets and then use the known
  labels to assign labels to unlabeled input samples.
  This assumes that samples close in the (high-dimensional) input space have
@@ -1911,16 +1911,31 @@ key "RumelhartWilliams1988"
 \end_inset
 
 .
- The supervised training patterns are indexed by 
+ The basic idea is to first compute the activations of neurons in the network,
+ then compute the total error observed in the output layer, determine how
+ much each neuron was 
+\begin_inset Quotes eld
+\end_inset
+
+responsible
+\begin_inset Quotes erd
+\end_inset
+
+ for the total error in the network, and use it to adapt the weights and
+ biases.
+ This procedure is then repeated until the network is fully trained.
+\end_layout
+
+\begin_layout Standard
+Let the supervised training patterns be indexed by 
 \begin_inset Formula $p$
 \end_inset
 
-.
- So 
+, 
 \begin_inset Formula $x_{i,p}$
 \end_inset
 
- is the input for a neuron 
+ be the input for a neuron 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1929,14 +1944,52 @@ key "RumelhartWilliams1988"
 \end_inset
 
 , and 
-\begin_inset Formula $y_{i,p}$
+\begin_inset Formula $y_{k,p}$
 \end_inset
 
- is the corresponding desired output for neuron 
-\begin_inset Formula $i$
+ be the desired output for neuron 
+\begin_inset Formula $k$
 \end_inset
 
  in the output layer for this training pattern.
+\end_layout
+
+\begin_layout Paragraph
+Forward Pass
+\end_layout
+
+\begin_layout Standard
+The supervised training procedure first performs the 
+\emph on
+forward pass
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+forward pass
+\end_layout
+
+\end_inset
+
+: it sets input activations 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ in the input layer according to the input pattern 
+\begin_inset Formula $x_{i,p}$
+\end_inset
+
+ to be learned, computes the activations of the hidden layers 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+ and the output layer 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1946,9 +1999,9 @@ Each neuron's input
 
  is either set to a training input 
 \begin_inset Formula 
-\[
+\begin{equation}
 v_{j}=x_{i,p}
-\]
+\end{equation}
 
 \end_inset
 
@@ -1993,6 +2046,20 @@ v_{j}=-b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},\label{eq:input-to-a-neuron-2}
 \end_inset
 
 .
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: rewrite for 
+\begin_inset Formula $v_{j}=b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji}$
+\end_inset
+
+.
+ It is usually defined that way in the literature.
+\end_layout
+
+\end_inset
+
  The input 
 \begin_inset Formula $v_{j}$
 \end_inset
@@ -2013,44 +2080,6 @@ o_{j}=\sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.\label{eq:sigmoid-function-2}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Paragraph
-Forward Pass
-\end_layout
-
-\begin_layout Standard
-The supervised training procedure first performs the 
-\emph on
-forward pass
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-forward pass
-\end_layout
-
-\end_inset
-
-: it sets input activations 
-\begin_inset Formula $v_{i}$
-\end_inset
-
- in the input layer according to the input pattern 
-\begin_inset Formula $x_{i,p}$
-\end_inset
-
- to be learned, computes the activations of the hidden layers 
-\begin_inset Formula $o_{j}$
-\end_inset
-
- and the output layer 
-\begin_inset Formula $o_{k}$
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
@@ -2090,7 +2119,7 @@ backward pass
 \end_inset
 
 , the training procedure computes the total error 
-\begin_inset Formula $E$
+\begin_inset Formula $E_{total}$
 \end_inset
 
  of the network, which is defined as the squared sum of differences between
@@ -2102,15 +2131,44 @@ backward pass
 \begin_inset Formula $y_{k}$
 \end_inset
 
-:
+ over all training patterns:
 \begin_inset Formula 
-\begin{equation}
-E=\frac{1}{2}\sum_{p}\sum_{k}(o_{k,p}-y_{k,p})^{2}.
-\end{equation}
+\begin{eqnarray}
+E_{total} & = & \sum_{p}\sum_{k}\frac{1}{2}(o_{k,p}-y_{k,p})^{2}\\
+ & = & \sum_{p}E,\nonumber 
+\end{eqnarray}
 
 \end_inset
 
-The error is then differentiated with respect to a weight 
+ where 
+\begin_inset Formula $E$
+\end_inset
+
+ is the error of one training pattern.
+ We further split 
+\begin_inset Formula $E$
+\end_inset
+
+ into a sum of errors of individual neurons: 
+\begin_inset Formula 
+\begin{eqnarray}
+E & = & \frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}\\
+ & = & \sum_{k}\frac{1}{2}(o_{k}-y_{k})^{2}\nonumber \\
+ & = & \sum_{k}E_{k},\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+where 
+\begin_inset Formula $E_{k}=\frac{1}{2}(o_{k}-y_{k})^{2}$
+\end_inset
+
+.
+ The error 
+\begin_inset Formula $E$
+\end_inset
+
+ is then differentiated with respect to a weight 
 \begin_inset Formula $w_{kj}$
 \end_inset
 
@@ -2122,30 +2180,67 @@ The error is then differentiated with respect to a weight
 \begin_inset Formula $k$
 \end_inset
 
- in the output layer (see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RumelhartWilliams1988"
-
-\end_inset
-
-) 
+ in the output layer: 
 \begin_inset Formula 
-\begin{equation}
-\frac{\partial E}{\partial w_{kj}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\label{eq:backpropagation-derivative-of-weight}
-\end{equation}
+\begin{eqnarray}
+\frac{\partial E}{\partial w_{kj}} & = & \frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
+ & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
+ & = & \frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\label{eq:backpropagation-error-wrt-weight-output-layer}\\
+ & = & (o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\nonumber 
+\end{eqnarray}
 
 \end_inset
 
- and with respect to 
+ which uses that the derivative of the sigmoid function is 
+\begin_inset Formula $\frac{\partial o_{k}}{\partial v_{k}}=o_{k}(v_{k})\left(1-o_{k}(v_{k})\right)$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Derivative of the sigmoid function:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial o_{j}}{\partial v_{j}} & = & \frac{\partial}{\partial v_{j}}\frac{1}{1+\exp(-v_{j})}\\
+ & = & -\frac{\frac{\partial}{\partial v_{j}}1+\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & -\frac{\frac{\partial}{\partial v_{j}}\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & -\frac{\exp(-v_{j})\frac{\partial(-v_{j})}{\partial v_{j}}}{(1+\exp(-v_{j}))^{2}}\\
+ & = & -\frac{-\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{1-o_{j}(v_{j})}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{1-\frac{1}{1+\exp(-v_{j})}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{\frac{(1+\exp(-v_{j}))-1}{1+\exp(-v_{j})}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}}\\
+ & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
+ & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
+ & = & \frac{\exp(-v_{j})}{\exp(-v_{j})(1+\exp(-v_{j}))}\left(1-o_{j}(v_{j})\right)\\
+ & = & \frac{1}{\frac{\exp(-v_{j})(1+\exp(-v_{j}))}{\exp(-v_{j})}}\left(1-o_{j}(v_{j})\right)\\
+ & = & \frac{1}{1+\exp(-v_{j})}\left(1-o_{j}(v_{j})\right)\\
+ & = & o_{j}(v_{j})\left(1-o_{j}(v_{j})\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ The derivative of the error with respect to 
 \begin_inset Formula $b_{k}$
 \end_inset
 
-
+ is :
 \begin_inset Formula 
-\[
+\begin{equation}
 \frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-1).
-\]
+\end{equation}
 
 \end_inset
 
@@ -2183,22 +2278,23 @@ To perform gradient descent, we also need to update the weights and biases
  in the last hidden layer) is
 \begin_inset Formula 
 \begin{eqnarray}
-\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\label{eq:backpropagation-derivative-of-weight-other-layers}\\
+\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\label{eq:backpropagation-error-wrt-weight-other-layers}\\
  & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\nonumber 
 \end{eqnarray}
 
 \end_inset
 
- where
+ where 
 \begin_inset Formula 
-\begin{eqnarray*}
-\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}(v_{k}(o_{j}))\\
- & = & \sum_{k}\frac{\partial}{\partial o_{j}}E_{k}(v_{k}(o_{j}))\\
- & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(v_{k})\frac{\partial v_{k}}{\partial o_{j}}\\
- & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(v_{k})\frac{\partial v_{k}}{\partial o_{j}}\\
- & = & \sum_{k}\frac{\partial}{\partial o_{k}}E(o_{k})\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\\
- & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj}),
-\end{eqnarray*}
+\begin{eqnarray}
+\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}\label{eq:backpropagation-error-wrt-output-other-layers}\\
+ & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}(o_{k}(v_{k}(o_{j})))\nonumber \\
+ & = & \sum_{k}\frac{\partial}{\partial o_{j}}E_{k}(o_{k}(v_{k}(o_{j})))\nonumber \\
+ & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(o_{k}(v_{k}))\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
+ & = & \sum_{k}\frac{\partial}{\partial o_{k}}E_{k}(o_{k})\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj}),\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -2216,13 +2312,20 @@ and neuron
 
  is in the output layer).
  We take the value for 
-\begin_inset Formula $\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
+\begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
 \end_inset
 
- in the equation above from equation 
+ in equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:backpropagation-derivative-of-weight"
+reference "eq:backpropagation-error-wrt-output-other-layers"
+
+\end_inset
+
+ above from equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-error-wrt-weight-output-layer"
 
 \end_inset
 
@@ -2233,7 +2336,7 @@ reference "eq:backpropagation-derivative-of-weight"
  is in the output layer or equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:backpropagation-derivative-of-weight-other-layers"
+reference "eq:backpropagation-error-wrt-weight-other-layers"
 
 \end_inset
 
@@ -2253,7 +2356,7 @@ reference "eq:backpropagation-derivative-of-weight-other-layers"
  in equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:backpropagation-derivative-of-weight-other-layers"
+reference "eq:backpropagation-error-wrt-weight-other-layers"
 
 \end_inset
 
@@ -2263,28 +2366,83 @@ reference "eq:backpropagation-derivative-of-weight-other-layers"
 \end_inset
 
  in the last hidden layer), we take 
-\begin_inset Formula $\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
+\begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
 \end_inset
 
  from the output layer: 
 \begin_inset Formula 
-\begin{eqnarray*}
-\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\\
- & = & \sum_{k}(o_{k}-y_{k})o_{k}(1-o_{k})(-w_{kj}).
-\end{eqnarray*}
+\begin{eqnarray}
+\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\\
+ & = & \sum_{k}(o_{k}-y_{k})o_{k}(1-o_{k})(-w_{kj}).\nonumber 
+\end{eqnarray}
 
 \end_inset
 
-Analogously, the derivative with respect to 
+Analogously, the derivative of 
+\begin_inset Formula $E$
+\end_inset
+
+ with respect to 
 \begin_inset Formula $b_{j}$
 \end_inset
 
- is 
+ is
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Derivation of the following equation (after the Note)
+\end_layout
+
+\begin_layout Plain Layout
+Use the following definitions:
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{\partial E}{\partial b_{k}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}o_{j}(1-o_{j})(-1).\\
- & = & (o_{k}-y_{k})o_{k}(1-o_{k})o_{j}(1-o_{j})(-1).
+v_{j} & = & -b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji}\\
+o_{j} & = & \sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.
 \end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Finally, the derivative of the error with respect to the bias of node 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial(-b_{k}-\sum_{j\in\mathbf{c_{k}}}o_{j}w_{kj})}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})o_{j}(v_{j})(1-o_{j}(v_{j}))\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})o_{j}(v_{j})(1-o_{j}(v_{j}))(-1)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})o_{j}(1-o_{j})(-1).\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -2360,7 +2518,7 @@ Data flow in training a neural network with three layers using back-propagation.
 
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subparagraph
 Updating rule
 \end_layout
 
@@ -2383,14 +2541,19 @@ learning rate
 
 , a small positive number:
 \begin_inset Formula 
-\begin{eqnarray*}
+\begin{eqnarray}
 \Delta w & = & -\epsilon\frac{\partial E}{\partial w}\\
-\Delta b & = & -\epsilon\frac{\partial E}{\partial b}.
-\end{eqnarray*}
+\Delta b & = & -\epsilon\frac{\partial E}{\partial b}.\nonumber 
+\end{eqnarray}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Alternate application of a forward pass followed by a backward pass forms
+ the complete back-propagation training procedure of a neural network.
 \end_layout
 
 \begin_layout Paragraph
