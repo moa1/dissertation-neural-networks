@@ -8033,7 +8033,8 @@ Forward and Backward Pass
 \end_layout
 
 \begin_layout Standard
-Back-propagation was reviewed in section 
+We will first repeat the most important points of back-propagation as reviewed
+ in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Back-propagation"
@@ -8041,7 +8042,6 @@ reference "sub:Back-propagation"
 \end_inset
 
 .
- The most important points are repeated here.
  In the 
 \emph on
 forward pass
@@ -8059,12 +8059,12 @@ forward pass
 , each neuron's output is computed from the sum of its inputs:
 \begin_inset Formula 
 \begin{eqnarray*}
-v_{j} & = & -b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},
+v_{j} & = & b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},
 \end{eqnarray*}
 
 \end_inset
 
-where 
+ where 
 \begin_inset Formula $b_{j}$
 \end_inset
 
@@ -8138,38 +8138,26 @@ backward pass
 :
 \begin_inset Formula 
 \[
-E=\sum_{p}\left(\frac{1}{2}\sum_{k}(o_{k,p}-y_{k,p})^{2}\right),
+E=\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2},
 \]
 
 \end_inset
 
-where 
-\begin_inset Formula $o_{k,p}$
+ where 
+\begin_inset Formula $o_{k}$
 \end_inset
 
- is the activation (output) of neuron 
+ is the actual activation (output) of neuron 
 \begin_inset Formula $k$
 \end_inset
 
- when training pattern 
-\begin_inset Formula $p$
+ in the output layer, and 
+\begin_inset Formula $y_{k}$
 \end_inset
 
- was fed into the input layer, and 
-\begin_inset Formula $y_{k,p}$
-\end_inset
-
- is the desired output for neuron 
-\begin_inset Formula $k$
-\end_inset
-
- in the output layer for training pattern 
-\begin_inset Formula $p$
-\end_inset
-
-.
+ is its the desired output.
  The sum-of-squared-differences term 
-\begin_inset Formula $\frac{1}{2}\sum_{k}(o_{k,p}-y_{k,p})^{2}$
+\begin_inset Formula $\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}$
 \end_inset
 
  is called the 
@@ -8227,7 +8215,7 @@ The error is then differentiated with respect to a weight
  in the output layer: 
 \begin_inset Formula 
 \begin{equation}
-\frac{\partial E}{\partial w_{kj}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\label{eq:backpropagation-error-wrt-weight}
+\frac{\partial E}{\partial w_{kj}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j},\label{eq:backpropagation-error-wrt-weight}
 \end{equation}
 
 \end_inset
@@ -8239,7 +8227,7 @@ The error is then differentiated with respect to a weight
 
 \begin_inset Formula 
 \[
-\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-1).
+\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot1.
 \]
 
 \end_inset
@@ -8272,7 +8260,7 @@ The derivative of the error with respect to the weights
 \begin_inset Formula 
 \begin{eqnarray*}
 \frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\\
- & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot(-o_{j}),
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot o_{j},
 \end{eqnarray*}
 
 \end_inset
@@ -8280,7 +8268,7 @@ The derivative of the error with respect to the weights
  where
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})
+\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}
 \end{eqnarray*}
 
 \end_inset
@@ -8305,8 +8293,7 @@ and we take the value for
  is 
 \begin_inset Formula 
 \begin{eqnarray*}
-\frac{\partial E}{\partial b_{k}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}o_{j}(1-o_{j})(-1).\\
- & = & (o_{k}-y_{k})o_{k}(1-o_{k})o_{j}(1-o_{j})(-1).
+\frac{\partial E}{\partial b_{j}} & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}\cdot o_{j}(1-o_{j})\cdot1.
 \end{eqnarray*}
 
 \end_inset
@@ -8426,7 +8413,7 @@ reference "eq:backpropagation-error-wrt-weight"
  is:
 \begin_inset Formula 
 \[
-\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}).
+\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j}.
 \]
 
 \end_inset
@@ -8507,7 +8494,7 @@ key "NasrJoun2002"
  in the output layer is then:
 \begin_inset Formula 
 \[
-\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})(-o_{j})
+\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})o_{j}
 \]
 
 \end_inset
@@ -8586,10 +8573,30 @@ At the start of training, weights
  Usually the biases are initialized to zero, and the weights are drawn from
  a uniform random distribution in [-1;1], or from a normal distribution
  with mean 0 and standard deviation 1.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Another possibility is to use 
+\begin_inset Quotes eld
+\end_inset
+
+fan-in
+\begin_inset Quotes erd
+\end_inset
+
+ initialization.
+ I have seen a possible reference once, but I don't remember who it was
+ from: I think it was LeCun or Bengio.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
-Sigmoid Activation Function
+Activation Function
 \begin_inset CommandInset label
 LatexCommand label
 name "The-sigmoid-activation-function"

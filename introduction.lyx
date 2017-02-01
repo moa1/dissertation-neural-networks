@@ -1139,7 +1139,7 @@ The effect of an incoming axon onto a neuron, that is, the different types
  as in
 \begin_inset Formula 
 \begin{equation}
-v_{i}=-b_{i}-\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij},\label{eq:input-to-a-neuron}
+v_{i}=b_{i}+\sum_{j\in\mathbf{c_{i}}}o_{j}w_{ij},\label{eq:input-to-a-neuron}
 \end{equation}
 
 \end_inset
@@ -2020,7 +2020,7 @@ reference "sub:Artificial-Neurons-as-Simple-Models-of-Biological-Neurons"
  ):
 \begin_inset Formula 
 \begin{equation}
-v_{j}=-b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},\label{eq:input-to-a-neuron-2}
+v_{j}=b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},
 \end{equation}
 
 \end_inset
@@ -2046,20 +2046,6 @@ v_{j}=-b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},\label{eq:input-to-a-neuron-2}
 \end_inset
 
 .
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: rewrite for 
-\begin_inset Formula $v_{j}=b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji}$
-\end_inset
-
-.
- It is usually defined that way in the literature.
-\end_layout
-
-\end_inset
-
  The input 
 \begin_inset Formula $v_{j}$
 \end_inset
@@ -2068,7 +2054,7 @@ TODO: rewrite for
 \begin_inset Formula $o_{j}$
 \end_inset
 
-
+:
 \end_layout
 
 \begin_layout Standard
@@ -2164,7 +2150,11 @@ where
 \end_inset
 
 .
- The error 
+ To compute the contribution of weight 
+\begin_inset Formula $w_{kj}$
+\end_inset
+
+ to the error, the error 
 \begin_inset Formula $E$
 \end_inset
 
@@ -2186,13 +2176,13 @@ where
 \frac{\partial E}{\partial w_{kj}} & = & \frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
  & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
  & = & \frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\label{eq:backpropagation-error-wrt-weight-output-layer}\\
- & = & (o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\nonumber 
+ & = & (o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j},\nonumber 
 \end{eqnarray}
 
 \end_inset
 
  which uses that the derivative of the sigmoid function is 
-\begin_inset Formula $\frac{\partial o_{k}}{\partial v_{k}}=o_{k}(v_{k})\left(1-o_{k}(v_{k})\right)$
+\begin_inset Formula $\frac{\partial o_{k}}{\partial v_{k}}=o_{k}(v_{k})(1-o_{k}(v_{k}))$
 \end_inset
 
 
@@ -2239,7 +2229,7 @@ Derivative of the sigmoid function:
  is :
 \begin_inset Formula 
 \begin{equation}
-\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot(-1).
+\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot1.
 \end{equation}
 
 \end_inset
@@ -2278,8 +2268,8 @@ To perform gradient descent, we also need to update the weights and biases
  in the last hidden layer) is
 \begin_inset Formula 
 \begin{eqnarray}
-\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\label{eq:backpropagation-error-wrt-weight-other-layers}\\
- & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot(-o_{j}),\nonumber 
+\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial w_{ji}}\label{eq:backpropagation-error-wrt-weight-other-layers}\\
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot o_{j},\nonumber 
 \end{eqnarray}
 
 \end_inset
@@ -2287,13 +2277,13 @@ To perform gradient descent, we also need to update the weights and biases
  where 
 \begin_inset Formula 
 \begin{eqnarray}
-\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}\label{eq:backpropagation-error-wrt-output-other-layers}\\
+\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}\nonumber \\
  & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}(o_{k}(v_{k}(o_{j})))\nonumber \\
  & = & \sum_{k}\frac{\partial}{\partial o_{j}}E_{k}(o_{k}(v_{k}(o_{j})))\nonumber \\
- & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(o_{k}(v_{k}))\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
- & = & \sum_{k}\frac{\partial}{\partial o_{k}}E_{k}(o_{k})\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj}),\nonumber 
+ & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(o_{k}(v_{k}))\cdot\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
+ & = & \sum_{k}\frac{\partial}{\partial o_{k}}E_{k}(o_{k})\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot w_{kj},\label{eq:backpropagation-error-wrt-output-other-layers}
 \end{eqnarray}
 
 \end_inset
@@ -2360,8 +2350,7 @@ reference "eq:backpropagation-error-wrt-weight-other-layers"
 
 \end_inset
 
-).
- In our example (for neuron 
+.) In our example (for neuron 
 \begin_inset Formula $j$
 \end_inset
 
@@ -2372,8 +2361,8 @@ reference "eq:backpropagation-error-wrt-weight-other-layers"
  from the output layer: 
 \begin_inset Formula 
 \begin{eqnarray}
-\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\\
- & = & \sum_{k}(o_{k}-y_{k})o_{k}(1-o_{k})(-w_{kj}).\nonumber 
+\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot w_{kj}\\
+ & = & \sum_{k}(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot w_{kj}.\nonumber 
 \end{eqnarray}
 
 \end_inset
@@ -2401,7 +2390,7 @@ Use the following definitions:
 \begin_layout Plain Layout
 \begin_inset Formula 
 \begin{eqnarray*}
-v_{j} & = & -b_{j}-\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji}\\
+v_{j} & = & b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji}\\
 o_{j} & = & \sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.
 \end{eqnarray*}
 
@@ -2424,10 +2413,10 @@ Finally, the derivative of the error with respect to the bias of node
 \frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
  & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
  & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial(-b_{k}-\sum_{j\in\mathbf{c_{k}}}o_{j}w_{kj})}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})o_{j}(v_{j})(1-o_{j}(v_{j}))\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})o_{j}(v_{j})(1-o_{j}(v_{j}))(-1)
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial(b_{k}+\sum_{j\in\mathbf{c_{k}}}o_{j}w_{kj})}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(v_{j})(1-o_{j}(v_{j}))\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(v_{j})(1-o_{j}(v_{j}))\cdot1
 \end{eqnarray*}
 
 \end_inset
@@ -2440,8 +2429,8 @@ Finally, the derivative of the error with respect to the bias of node
  
 \begin_inset Formula 
 \begin{eqnarray}
-\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}(-w_{kj})o_{j}(1-o_{j})(-1).\nonumber 
+\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}\cdot o_{j}(1-o_{j})\cdot1.\nonumber 
 \end{eqnarray}
 
 \end_inset
@@ -2524,7 +2513,15 @@ Updating rule
 
 \begin_layout Standard
 After computing the derivatives of the error with respect to the parameters
- of the network, we can perform gradient descent and update the parameters
+ of the network, we can perform gradient descent and update each weight
+ 
+\begin_inset Formula $w$
+\end_inset
+
+ and bias 
+\begin_inset Formula $b$
+\end_inset
+
  using the learning rate
 \begin_inset Index idx
 status collapsed
