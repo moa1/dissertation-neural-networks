@@ -277,6 +277,16 @@ noindent{
 \end_inset
 
 Promotionsgesuch eingereicht am: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: DATUM
+\end_layout
+
+\end_inset
+
+
 \begin_inset ERT
 status open
 
@@ -440,12 +450,12 @@ Qian.
 \end_layout
 
 \begin_layout Standard
-Special thanks go to my sister 
+I would also like to thank my family for their support.
+ Special thanks go to my sister 
 \emph on
 Susanne
 \emph default
  for proofreading and commenting on a draft of this thesis.
- I would also like to thank my whole family for their support.
 \end_layout
 
 \end_body
