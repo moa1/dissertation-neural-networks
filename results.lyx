@@ -933,7 +933,7 @@ name "sub:Model-selection"
 \begin_layout Standard
 Training an artificial neural network is an iterative process.
  Hence, there are as many models as there are iterations.
- The question is which one to choose.
+ The question is which one to choose for testing the performance.
  We did not use 
 \begin_inset Quotes eld
 \end_inset
@@ -942,15 +942,41 @@ early stopping
 \begin_inset Quotes erd
 \end_inset
 
- (see section 
+, i.e.
+ aborting training when the error on the validation data set becomes too
+ large due to overfitting
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+overfitting
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(see section 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "sub:Early-stopping"
 
 \end_inset
 
-), but selected the neural network that was best on the validation data
- among all evaluated iterations.
+)
+\end_layout
+
+\end_inset
+
+, but selected the neural network that was best on the validation data among
+ all evaluated iterations.
+\end_layout
+
+\begin_layout Paragraph
+Select the Most Trained Model for Unsupervised Training
 \end_layout
 
 \begin_layout Standard
@@ -959,14 +985,18 @@ We normally did not use any model selection for the unsupervised training,
  or RBM did not show overfitting on the validation data set.
  Instead we selected the neural network from the last iteration that was
  computed.
- An example of the plot can be seen in figure 
+ For example, in the plot in figure 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
 
 \end_inset
 
-.
+, we selected the network producing the right-most error.
+\end_layout
+
+\begin_layout Paragraph
+Select the Model With Best Validation Error for Supervised Training
 \end_layout
 
 \begin_layout Standard
@@ -979,6 +1009,10 @@ We used model selection in training the (supervised) classifiers, because
  used to pick the model (see below); and a test data set, which was used
  to evaluate the accuracy of the neural network picked using the validation
  data set.
+\end_layout
+
+\begin_layout Paragraph
+Smoothing the Accuracies for Model Selection
 \end_layout
 
 \begin_layout Standard
@@ -1686,14 +1720,14 @@ LOGISTIC
 \begin_inset Quotes erd
 \end_inset
 
- is the sigmoid activation function, see section 
+ is the sigmoid activation function (defined on page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "The-sigmoid-activation-function"
 
 \end_inset
 
-.
+).
  
 \begin_inset Quotes eld
 \end_inset
@@ -1702,14 +1736,14 @@ RECTIFIED_LINEAR
 \begin_inset Quotes erd
 \end_inset
 
- is the rectified linear activation function, see section 
+ is the rectified linear activation function (defined on page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "par:Rectified-linear-activation-function"
 
 \end_inset
 
-.
+).
 \end_layout
 
 \begin_layout Description
@@ -1733,10 +1767,9 @@ final_momentum
 \emph on
 momentum_change_steps 
 \emph default
-These are the settings for the momentum of the learning rate, see section
- 
+These are the settings for the momentum of the learning rate, see page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "par:Momentum-of-the-learning-rule"
 
 \end_inset
@@ -1788,10 +1821,9 @@ sparsity_damping
 \emph default
  These are the parameters of the sparsity regularization.
  sparsity is either true or false and controls whether sparsity regularization
- is used or not, and the other three parameters are described in section
- 
+ is used or not, and the other three parameters were described on page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "sub:Sparsity-Target"
 
 \end_inset
@@ -1820,9 +1852,9 @@ controls whether the dropout regularization is enabled or not, and
 \emph on
 dropout_prob 
 \emph default
-is the dropout probability, described in section 
+is the dropout probability, described on page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "sub:Dropout"
 
 \end_inset
@@ -1851,9 +1883,9 @@ apply_l2_decay
 \emph on
 l2_decay
 \emph default
- is its constant weight cost, described in section 
+ is its constant weight cost, described on page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "sub:L1-and-L2-Weight-Decay"
 
 \end_inset
@@ -1891,9 +1923,9 @@ CROSS_ENTROPY
 \end_inset
 
  optimizes the cross entropy.
- Both are described in 
+ Both are described on page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "par:Optimizing-the-Sum-of-Squared-DIfferences"
 
 \end_inset
@@ -6144,10 +6176,20 @@ Surprisingly, the neural network accuracies do not improve with increasing
  Instead it seems that the classifiers using the least and most (18 and
  302) samples perform best, and all others (especially those using 76 samples)
  perform worst.
- As we will see in section 
+ As we will see
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -7094,19 +7136,38 @@ breast_cancer_06_ae - ah
 \end_inset
 
 When training a neural network using back-propagation that was pre-trained
- using one of the four autoencoders described in the previous section 
+ using one of the four autoencoders described in the previous section
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Unsupervised-pre-training-using-autoencoder"
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
 , the resulting accuracy plots looked similar to the ones when pre-training
  with an RBM (plots not shown).
- As we will see in section 
+ As we will see
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+ in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-labels"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -9320,16 +9381,9 @@ reference "fig:Accuracy-box-plots-of-breast_cancer_07_ai-aj"
 \begin_inset Formula $dropout$
 \end_inset
 
- in breast_cancer_07_ai yields better accuracies than not using it in in
- breast_cancer_07_aj.
- Recall from section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Dropout"
-
-\end_inset
-
- that 
+ (breast_cancer_07_ai) yields better accuracies than not using it (breast_cancer
+_07_aj).
+ An explanation can be that 
 \emph on
 
 \begin_inset Formula $dropout$
@@ -9350,9 +9404,10 @@ reference "sub:Dropout"
 \end_layout
 
 \begin_layout Standard
-As seen in the above sections, the accuracies of the classifiers on breast_cance
-r_07 are lower than those on breast_cancer_06, indicating the higher difficulty
- of the classification task when the labels are balanced.
+The accuracies of the classifiers on breast_cancer_07 are lower than those
+ on breast_cancer_06.
+ This indicates the higher difficulty of the classification task when the
+ labels are balanced.
  We will look into this in the following.
 \end_layout
 
@@ -9867,18 +9922,18 @@ reference "tab:design-of-breast_cancer_08"
 \end_inset
 
  shows the assignment of samples to data sets.
- Note that labeled training and validation data are exclusively from GSE25055,
- and labeled testing data are exclusively from GSE25065.
+ Note that labeled training and validation data are almost exclusively from
+ GSE25055, and labeled testing data are exclusively from GSE25065.
 \end_layout
 
 \begin_layout Standard
 Labeled training and testing data are balanced with respect to the number
  of label 0 and label 1 samples.
- If a data set were unbalanced, this would lead to a biased classifier which
- prefers the label it was shown more often during training.
- (See section 
+ An unbalanced data set leads to a biased classifier which prefers the label
+ it was shown more often during training.
+ (As was demonstrated on page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "par:Examining-biased-classifier"
 
 \end_inset
@@ -15003,6 +15058,14 @@ ised transductive support vector machine.
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Paragraph
+Paired and Two-Sided Wilcoxon Test
+\end_layout
+
+\begin_layout Standard
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -15015,7 +15078,17 @@ reference "fig:Accuracy-comparison-of-breast_cancer_12"
 \end_layout
 
 \begin_layout Standard
-This can be quantified using a paired and two-sided Wilcoxon test.
+This can be quantified using a paired and two-sided Wilcoxon test
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Wilcoxon test
+\end_layout
+
+\end_inset
+
+.
  It is paired over the repetitions because the labeled training and validation
  sets are constant across data sets 1-6 within a repetition and the only
  difference is the amount of unlabeled data used during training.
@@ -26252,7 +26325,7 @@ Altogether, there are in the labeled and unlabeled training data
 \end_inset
 
  samples = 276 samples, when counting the quadrupled label 1 samples as
- individual samples.
+ 4 individual samples.
  When counting the quadrupled samples as only 1 real sample, there are 
 \begin_inset Formula $10|10+128|32=10*2+128+32=180$
 \end_inset
@@ -26679,27 +26752,43 @@ name "tab:breast_cancer_12-number-r"
 status open
 
 \begin_layout Plain Layout
-The number 
-\begin_inset Formula $r$
-\end_inset
-
- for 10 hidden nodes in data set breast_cancer_15.
+The ratio of training samples to network parameters for 10 hidden nodes.
 \end_layout
 
 \end_inset
 
-The number 
+The ratio of training samples to network parameters, 
 \begin_inset Formula $r$
 \end_inset
 
- (see text, section 
+, 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+(see text, section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Data-Set-Design-of-breast_cancer_15"
 
 \end_inset
 
-) for 10 hidden nodes in data set breast_cancer_15.
+)
+\end_layout
+
+\end_inset
+
+ for 10 hidden nodes in data set breast_cancer_15.
+ 
+\begin_inset Formula $t_{quad}$
+\end_inset
+
+ is the number of samples when counting quadrupled samples as 4 samples.
+ 
+\begin_inset Formula $t_{indiv}$
+\end_inset
+
+ is the number of samples when quadrupled samples are counted as 1 sample.
 \end_layout
 
 \end_inset
@@ -26726,8 +26815,8 @@ As the values for
 \end_inset
 
 .
- The architecture for artificial neural networks of breast_cancer_15 is
- 22283-10-10-10-1.
+ The architecture for the artificial neural networks of breast_cancer_15
+ is 22283-10-10-10-1.
 \end_layout
 
 \begin_layout Standard
@@ -28415,16 +28504,16 @@ status open
 
 \begin_layout Plain Layout
 In training, the network parameters' deltas are alternatingly computed,
- then applied.
- The mini-batch is the number of samples whose deltas are added before the
- network parameters are changed.
+ then the parameters are updated.
+ The mini-batch is the number of samples whose deltas are accumulated before
+ the network parameters are updated.
 \end_layout
 
 \end_inset
 
- size from 100 to 1000, which is more inefficient, but iterates over all
- training samples before changing weights, and thus approximates the derivative
- of the weights more faithfully.
+ size from 100 to 1000, which leads to slower training, but iterates over
+ all training samples before changing weights, and thus approximates the
+ derivative of the weights more faithfully.
 \end_layout
 
 \begin_layout Subsection
@@ -28510,14 +28599,24 @@ reference "fig:Accuracy-in-breast_cancer_15"
 \begin_layout Standard
 To check whether there is a dependence of accuracies on the amount of unlabeled
  samples available to training, we use a paired (over the repetitions) and
- two-sided Wilcoxon test (see section 
+ two-sided Wilcoxon test
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(see section 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
 
 \end_inset
 
-).
+)
+\end_layout
+
+\end_inset
+
+.
  The p-value for the accuracy difference between data sets 2 and 6 is 0.089.
  The estimated difference between accuracies of data sets 2 and 6 is 2.8
  percent points (0.028).
@@ -28545,15 +28644,25 @@ reference "fig:Accuracy-box-plots-of-breast_cancer_15"
  set 1 to data set 6, i.e.
  from the data set with no unlabeled samples to the data set with the most
  unlabeled samples.
- Following the same rationale as in section 
+ The accuracy difference between data sets 1 and 6 was tested for significance
+ with a paired (over the repetitions) and two-sided Wilcoxon test
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
 
 \end_inset
 
-, the accuracy difference between data sets 1 and 6 was tested for significance
- with a paired (over the repetitions) and two-sided Wilcoxon test.
+
+\end_layout
+
+\end_inset
+
+.
  It is significant with a p-value of 0.0029, and the accuracy difference
  between data 1 and 6 is an estimated 3.38 percent points (0.0338), while
  its 95% confidence interval is [2.02; 6.08] percent points.

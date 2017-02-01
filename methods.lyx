@@ -3490,25 +3490,6 @@ Since a graphical model is a representation of a joint probability distribution,
 \end_layout
 
 \begin_layout Standard
-How to calculate the joint encoded by the graphical model was defined in
- section 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
-
-\end_inset
-
- for undirected graphical models and in section 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "par:The-Joint-Encoded-by-Directed-Graphical-Model"
-
-\end_inset
-
- for directed graphical models.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Note Note
 status open
 
@@ -3615,6 +3596,34 @@ Let the known values of
 
 .
  
+\end_layout
+
+\begin_layout Standard
+How to calculate the joint 
+\begin_inset Formula $P(\mathbf{W},\mathbf{U},\mathbf{K})$
+\end_inset
+
+ encoded by the graphical model was defined in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:The-Hammersley-Clifford-theorem-of-Undirected-Graphical-Model"
+
+\end_inset
+
+ for undirected graphical models and in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "par:The-Joint-Encoded-by-Directed-Graphical-Model"
+
+\end_inset
+
+ for directed graphical models.
+ Let's now turn our attention to marginalizing out the non-interesting variables
+ 
+\begin_inset Formula $\mathbf{U}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -3970,7 +3979,7 @@ Now assume that
 
 .
  Using Bayes' Theorem (
-\begin_inset Formula $\mbox{posterior}=\mbox{likelihood}*\mbox{prior}$
+\begin_inset Formula $\mbox{posterior}=\mbox{likelihood}\cdot\mbox{prior}$
 \end_inset
 
 ) we get
@@ -4084,7 +4093,7 @@ P(H_{1}) & = & \sum_{v_{1}}\sum_{v_{2}}P(H_{1}|V_{1}=v_{1},V_{2}=v_{2})P(V_{1}=v
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Subsubsection
 Inference in Deep Belief Networks is Complicated
 \begin_inset CommandInset label
 LatexCommand label
@@ -4096,8 +4105,8 @@ name "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
 \end_layout
 
 \begin_layout Standard
-This shows that inference in a directed graphical model with densely connected
- layers is complicated.
+The previous example shows that inference in a directed graphical model
+ with densely connected layers is complicated.
  If there are 
 \begin_inset Formula $n$
 \end_inset
@@ -4177,7 +4186,7 @@ TODO: In Rainers Korrektur steht hier etwas, was ich nicht entziffern kann,
 \begin_inset Quotes eld
 \end_inset
 
-winp.
+comp.
  shps
 \begin_inset Quotes erd
 \end_inset
@@ -4186,7 +4195,7 @@ winp.
 \begin_inset Quotes eld
 \end_inset
 
-wmp.
+comp.
  slrps
 \begin_inset Quotes erd
 \end_inset
@@ -4314,14 +4323,24 @@ These procedures become infeasible in a Belief Network with more than a
  This is a problem in learning.
  If we want to learn the parameters of a Deep Belief Network, we have to
  do inference.
- However, as we will see in section 
+ However, we will see
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:A-Fast-Learning-Algorithm-for-Deep-Belief-Networks"
 
 \end_inset
 
-, there is a fast approximate learning algorithm.
+
+\end_layout
+
+\end_inset
+
+ that there is a fast approximate learning algorithm.
  
 \begin_inset Note Note
 status open
@@ -6271,7 +6290,11 @@ P(X_{i}\mid\mathbf{X_{j}},j\in\{1,\dots,n\}\backslash i)=P(X_{i}\mid X_{1},\dots
 Another prerequisite is that Gibbs Sampling, which requires sampling from
  the conditional probability distribution and iterating, should be faster
  than sampling from the joint target probability distribution directly.
- We already showed in section 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+We already showed in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
@@ -6279,6 +6302,11 @@ reference "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
 \end_inset
 
  that exact inference is infeasible in Deep Belief Networks.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -6583,15 +6611,25 @@ block
 
 \begin_layout Standard
 If the Markov chain fulfills irreducibility, positive recurrence, and aperiodici
-ty, then it is guaranteed to converge to its stationary distribution (see
- section 
+ty, then it is guaranteed to converge to its stationary distribution (Fundamenta
+l Theorem of Markov Chains)
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(see section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Fundamental-Theorem-of-Markov-Chains"
 
 \end_inset
 
-).
+)
+\end_layout
+
+\end_inset
+
+.
  However there is currently no known analytic method to determine when the
  Markov chain has reached its stationary distribution, which leads to the
  following two strategies, 
@@ -6834,15 +6872,16 @@ name "par:Gibbs-Sampling-in-Markov-Random-Fields"
 \end_layout
 
 \begin_layout Standard
-We described in section 
+Exact inference in Markov Random Fields can be done by conditioning on the
+ known random variables and marginalizing out the uninteresting variables
+ (see section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "par:Exact-Inference-in-Directed-and-Undirected Graphical Models"
 
 \end_inset
 
- how exact inference in Markov Random Fields can be done by conditioning
- on the known random variables and marginalizing out the uninteresting variables.
+).
  The exponential runtime of exact inference can be circumvented by approximate
  methods like Gibbs Sampling.
 \end_layout
@@ -9005,7 +9044,8 @@ reference "sub:Training-Restricted-Boltzmann-Machines-using-Contrastive-Divergen
 
 \end_inset
 
-, where small weights increase the mixing rate of the Gibbs chain.
+, a training procedure for Restricted Boltzmann Machines, where small weights
+ increase the mixing rate of the Gibbs chain.
 \end_layout
 
 \begin_layout Standard
@@ -9296,7 +9336,7 @@ This prevents the training procedure from overfitting to sampling error
 \end_layout
 
 \begin_layout Subsection
-Autoassociator, Autoencoder
+Autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -10208,7 +10248,7 @@ key "Smolensky1986"
 The conditional probabilities are defined analogous to Boltzmann Machines
  (see equation 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "eq:Boltzmann Machine p(h=1|S)"
 
 \end_inset
@@ -10489,10 +10529,11 @@ Parameters of Training a Restricted Boltzmann Machine
 \end_layout
 
 \begin_layout Standard
-In addition to the parameters for training a Multilayer Perceptron (see
- section 
+In addition to the parameters for training a Multilayer Perceptron, i.e.
+ the amount of momentum, the choice of the activation function, and how
+ to randomly initialize weights and biases (see section 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "sub:Parameters-of-Training-a-Multilayer-Perceptron"
 
 \end_inset
@@ -10694,15 +10735,7 @@ key "Neal1992"
 
 \end_inset
 
- as a directed graphical model with a sigmoid conditional probability function
- (see section 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "The-sigmoid-activation-function"
-
-\end_inset
-
-).
+ as a directed graphical model with a sigmoid conditional probability function.
  A Sigmoid Belief Network is a Belief Network in which the conditional probabili
 ty associated with node 
 \begin_inset Formula $N_{i}$
@@ -10902,14 +10935,15 @@ in equation 27
 \begin_layout Standard
 Exact inference of the hidden nodes given the visible nodes is intractable.
  Therefore we must resort to the approximate Gibbs Sampling.
- This works as shown in section 
+ This works by alternatingly updating each random variable using the conditional
+ probability of the variable given all other variables (see page 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand pageref
 reference "par:Gibbs-Sampling-in-Markov-Random-Fields"
 
 \end_inset
 
-.
+).
  However, in Gibbs Sampling, all hidden variables (of all layers simultaneously)
  are inferred together (at the same time), and this scales poorly as models
  become larger.
@@ -10939,18 +10973,30 @@ key "HintonTeh2006"
 \end_layout
 
 \begin_layout Standard
-As mentioned in section 
+There are computational problems with inferring the hidden variables from
+ visible ones: Inference requires marginalizing out all variables of a layer
+ except one due to explaining away, and it requires integrating over all
+ variables above that layer
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+and updating a weight requires knowing all weights above in the network
+\end_layout
+
+\end_inset
+
+ (see section 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand ref
 reference "par:Exact-Inference-in-Deep-Belief-Networks-is-Complicated"
 
 \end_inset
 
-, there are computational problems with inferring the hidden variables from
- visible ones.
+).
  The problems would go away if the posterior of the hidden given the visible
- nodes were independent between individual hidden nodes, but this is not
- the case due to explaining away.
+ nodes were independent between individual hidden nodes, because this would
+ eliminate explaining away.
  However, 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -10981,7 +11027,7 @@ P(\mathbf{y}\mid\mathbf{x})=\prod_{j}P(y_{j}\mid\mathbf{x}),
  They showed that such priors exist and have the form
 \begin_inset Formula 
 \[
-P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum\alpha_{j}(y_{j})\right),
+P(\mathbf{y})=\frac{1}{C}\exp\left(\log\Omega(\mathbf{y})+\sum_{j}\alpha_{j}(y_{j})\right),
 \]
 
 \end_inset

@@ -1888,8 +1888,9 @@ name "sub:Back-propagation"
 \end_layout
 
 \begin_layout Standard
-Back-propagation learns from labeled samples the parameters of the artificial
- neural network, the weights and biases, using 
+Back-propagation is a training procedure for artificial neural networks.
+ It learns from labeled samples the parameters of the network, the weights
+ and biases, using 
 \emph on
 gradient descent
 \emph default
@@ -2135,7 +2136,11 @@ E_{total} & = & \sum_{p}\sum_{k}\frac{1}{2}(o_{k,p}-y_{k,p})^{2}\\
 \begin_inset Formula $E$
 \end_inset
 
- into a sum of errors of individual neurons: 
+ into a sum of errors of individual neurons 
+\begin_inset Formula $E_{k}$
+\end_inset
+
+: 
 \begin_inset Formula 
 \begin{eqnarray}
 E & = & \frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}\\
@@ -2209,7 +2214,6 @@ Derivative of the sigmoid function:
  & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
  & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
  & = & \frac{\exp(-v_{j})}{\exp(-v_{j})(1+\exp(-v_{j}))}\left(1-o_{j}(v_{j})\right)\\
- & = & \frac{1}{\frac{\exp(-v_{j})(1+\exp(-v_{j}))}{\exp(-v_{j})}}\left(1-o_{j}(v_{j})\right)\\
  & = & \frac{1}{1+\exp(-v_{j})}\left(1-o_{j}(v_{j})\right)\\
  & = & o_{j}(v_{j})\left(1-o_{j}(v_{j})\right)
 \end{eqnarray*}
