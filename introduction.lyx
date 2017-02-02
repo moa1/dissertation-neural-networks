@@ -2274,7 +2274,7 @@ To perform gradient descent, we also need to update the weights and biases
 \begin_inset Formula 
 \begin{eqnarray}
 \frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial w_{ji}}\label{eq:backpropagation-error-wrt-weight-other-layers}\\
- & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot o_{j},\nonumber 
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{j}(1-o_{j})\cdot o_{i},\nonumber 
 \end{eqnarray}
 
 \end_inset

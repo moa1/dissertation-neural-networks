@@ -8334,7 +8334,7 @@ The derivative of the error with respect to the weights
 \begin_inset Formula 
 \begin{eqnarray*}
 \frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\\
- & = & \frac{\partial E}{\partial o_{j}}\cdot o_{k}(1-o_{k})\cdot o_{j},
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{j}(1-o_{j})\cdot o_{i},
 \end{eqnarray*}
 
 \end_inset
