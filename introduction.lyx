@@ -1027,7 +1027,7 @@ where
 \end_inset
 
 , and 
-\begin_inset Formula $o_{i}=\sigma(v_{i})\in[0;1]$
+\begin_inset Formula $o_{i}\in[0;1]$
 \end_inset
 
  is the activation of neuron 
@@ -1094,7 +1094,8 @@ Left: The sigmoid function
 \end_inset
 
 .
- Right: Schema of the computational steps in a neural feed-forward network
+ Right: Schema of the computational steps in an artificial neural feed-forward
+ network
 \begin_inset Index idx
 status collapsed
 

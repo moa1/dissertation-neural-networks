@@ -8213,13 +8213,9 @@ error function
 
 \end_inset
 
-
+,
 \emph on
- 
-\emph default
-or
-\emph on
- loss function
+ loss 
 \emph default
 
 \begin_inset Index idx
@@ -8227,6 +8223,20 @@ status collapsed
 
 \begin_layout Plain Layout
 loss function
+\end_layout
+
+\end_inset
+
+, or 
+\emph on
+cost
+\emph default
+ function
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+cost function
 \end_layout
 
 \end_inset
@@ -8412,7 +8422,7 @@ squared-error sum
  between the desired outputs and the actual outputs:
 \begin_inset Formula 
 \[
-\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}
+E=\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}
 \]
 
 \end_inset
@@ -8496,7 +8506,7 @@ key "NasrJoun2002"
 :
 \begin_inset Formula 
 \[
--\sum_{k}y_{k}\log o_{k}-\sum_{k}(1-y_{k})\log(1-o_{k}),
+E=-\sum_{k}y_{k}\log o_{k}-\sum_{k}(1-y_{k})\log(1-o_{k}),
 \]
 
 \end_inset
@@ -8602,13 +8612,13 @@ At the start of training, weights
 \end_inset
 
  have to be initialized.
- They must not all be initialized to zero, because then the activations
- in the output layer 
+ They must not all be initialized to the same value, because then the activation
+s in the output layer 
 \begin_inset Formula $o_{k}$
 \end_inset
 
- would become zero, leading to a zero sum-of-squared-differences error gradient,
- which would prevent learning.
+ would become equal, leading to an equal error gradient for the weights
+ and biases, which would prevent learning.
  Usually the biases are initialized to zero, and the weights are drawn from
  a uniform random distribution in [-1;1], or from a normal distribution
  with mean 0 and standard deviation 1.
@@ -8669,9 +8679,9 @@ activation function
 \begin_layout Standard
 The sigmoid activation function is a standard activation function, often
  used in neural networks.
- It has the property that it is almost linear for inputs around zero, tends
- to 1 as its inputs go to positive infinity and to 0 as inputs go to negative
- infinity (see figure 
+ It is almost linear for inputs around zero, tends to 1 as its inputs go
+ to positive infinity and to 0 as inputs go to negative infinity (see figure
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:sigmoid-function"
@@ -8703,11 +8713,20 @@ tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}.
 
 \end_inset
 
+Its graph looks very similar to the graph of the sigmoid function.
+ While the output range of the sigmoid is 
+\begin_inset Formula $[0;1]$
+\end_inset
 
+, it is 
+\begin_inset Formula $[-1;1]$
+\end_inset
+
+ for the hyperbolic tangent function.
 \end_layout
 
 \begin_layout Standard
-In this work, only the sigmoid activation function was used.
+In this work only the sigmoid activation function was used.
 \end_layout
 
 \begin_layout Paragraph
@@ -8757,7 +8776,7 @@ reference "eq:backpropagation-deltas"
 \begin_inset Formula $\mu$
 \end_inset
 
- that is the fraction of the weight and bias deltas in the previous time
+ that is the fraction of the weight and bias deltas of the previous time
  step 
 \begin_inset Formula $t-1$
 \end_inset
@@ -8765,8 +8784,8 @@ reference "eq:backpropagation-deltas"
  to be added to the current weight deltas:
 \begin_inset Formula 
 \begin{eqnarray*}
-\Delta w_{momentum}^{(t)} & = & \mu\Delta w_{momentum}^{(t-1)}+\Delta w^{(t)}\\
-\Delta b_{momentum}^{(t)} & = & \mu\Delta b_{momentum}^{(t-1)}+\Delta b^{(t)},
+\Delta w_{momentum}^{(t)} & = & \mu\Delta w_{momentum}^{(t-1)}+(1-\mu)\Delta w^{(t)}\\
+\Delta b_{momentum}^{(t)} & = & \mu\Delta b_{momentum}^{(t-1)}+(1-\mu)\Delta b^{(t)},
 \end{eqnarray*}
 
 \end_inset
@@ -8840,8 +8859,8 @@ key "GoriTesi1992"
 
 .
  Another problem is that in discriminative learning, each training case
- only contributes as many bits to the specification of the parameters of
- the network as needed to specify the label 
+ only contributes as many bits to the specification of the network parameters
+ as needed to specify the label 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hinton2010"
@@ -8944,8 +8963,8 @@ escape
 \end_inset
 
 , i.e.
- become larger and larger, making subsequent changes to the weights more
- difficult.
+ become larger and larger in absolute value, making subsequent changes to
+ the weights more difficult.
 \end_layout
 
 \begin_layout Standard
