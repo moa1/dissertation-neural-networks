@@ -2767,7 +2767,7 @@ DBN
 ) overcame the limitation of only a few hidden layers 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "HintonTeh2006"
+key "BengioLarochelle2007,HintonTeh2006"
 
 \end_inset
 

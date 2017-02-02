@@ -9122,7 +9122,7 @@ Sparsity regularization is a method to make only a small fraction of hidden
  makes the trained network more interpretable 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Hinton2010,NairHinton2009"
+key "Ng2011,Hinton2010,NairHinton2009"
 
 \end_inset
 
