@@ -97,6 +97,23 @@ filename "title.lyx"
 status open
 
 \begin_layout Plain Layout
+TODO vor dem Drucken: ueber alle Seiten des PDFs gehen und das Layout ueberarbei
+ten, so dass wenig Platz leer ist wegen Formeln, die LaTeX anscheinend nicht
+ ueber verschiedene Seiten bricht.
+ Ich finde Formeln ueber zwei nebeneinanderliegende Seiten zu brechen ok,
+ aber nicht ueber Vorder- und Rueckseite eines Blattes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 TODO: akademischer Lebenslauf (siehe z.B.
  Inka's Dissertation ganz hinten)
 \end_layout

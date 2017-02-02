@@ -1211,7 +1211,7 @@ reference "fig:sigmoid-function"
 \end_layout
 
 \begin_layout Subsection
-Learning
+Learning in Biological Neural Networks
 \end_layout
 
 \begin_layout Standard
@@ -1269,21 +1269,6 @@ key "GalanGalizia2006"
 \end_inset
 
 .
- The rule for this strengthening is also called the 
-\emph on
-Hebbian learning rule
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-Hebbian learning rule
-\end_layout
-
-\end_inset
-
-.
  The molecular mechanisms responsible for this phenomenon are not yet completely
  understood.
  It is known that they differ between brain regions, and also between types
@@ -1319,12 +1304,8 @@ key "BermudezFederico2007"
 .
 \end_layout
 
-\begin_layout Paragraph
-The Hebbian learning rule is local
-\end_layout
-
 \begin_layout Standard
-Of note in the Hebbian learning rule is that it is local
+An unproven hypothesis is that learning is local
 \begin_inset Index idx
 status collapsed
 
@@ -1336,6 +1317,877 @@ locality of Hebbian learning rule
 
 , which means that changes at a synapse only depend on the directly connected
  neurons, but not on other distantly-connected neurons.
+ This type of local learning is called 
+\emph on
+Hebbian learning
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Hebbian learning
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The learning in biological neuronal systems happens seemingly automatically,
+ for example, migratory birds learn and remember travel paths around the
+ globe, without an apparent teacher.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Ultimately the goals of learning are determined by an interplay of evolution
+ and the environment.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Back-propagation for Training Artificial Neural Networks
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Back-propagation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The nearest analog to learning in biological neural networks is 
+\emph on
+training 
+\emph default
+artificial neural networks
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+training of artificial neural networks
+\end_layout
+
+\end_inset
+
+.
+ Here, the goal is explicitly set by humans by providing training data sets.
+ One training sample consists of of a vector of real numbers called 
+\emph on
+input patterns
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+input pattern
+\end_layout
+
+\end_inset
+
+ and a corresponding vector of real numbers of desired 
+\emph on
+output patterns
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+output pattern
+\end_layout
+
+\end_inset
+
+, also called 
+\emph on
+labels
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+label
+\end_layout
+
+\end_inset
+
+.
+ For every input pattern in the training data set an output pattern is defined
+ that the learner should compute from the input pattern.
+ Learning is hereby facilitated by changing the parameters of the artificial
+ neural network.
+\end_layout
+
+\begin_layout Standard
+Back-propagation is a supervised training procedure for artificial neural
+ networks 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RumelhartWilliams1988"
+
+\end_inset
+
+.
+ It learns from labeled training samples.
+ The parameters of the network, the weights and biases, are adapted using
+ 
+\emph on
+gradient descent
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+gradient descent
+\end_layout
+
+\end_inset
+
+.
+ The basic idea is to set the neurons in the input layer to the input pattern,
+ compute the activations of neurons in the network, compute the total error
+ observed in the output layer using the difference between actual and desired
+ output, then determine how much each neuron was 
+\begin_inset Quotes eld
+\end_inset
+
+responsible
+\begin_inset Quotes erd
+\end_inset
+
+ for the total error in the network, and finally use it to adapt the weights
+ and biases.
+ This procedure is then repeated until the network is fully trained.
+\end_layout
+
+\begin_layout Standard
+Let the supervised training patterns be indexed by 
+\begin_inset Formula $p$
+\end_inset
+
+, 
+\begin_inset Formula $x_{i,p}$
+\end_inset
+
+ the activation of a neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in the input layer for training pattern 
+\begin_inset Formula $p$
+\end_inset
+
+, and 
+\begin_inset Formula $y_{k,p}$
+\end_inset
+
+ the desired activation of neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ in the output layer for this training pattern.
+\end_layout
+
+\begin_layout Paragraph
+Forward Pass
+\end_layout
+
+\begin_layout Standard
+The supervised training procedure first performs the 
+\emph on
+forward pass
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+forward pass
+\end_layout
+
+\end_inset
+
+: it sets activations 
+\begin_inset Formula $o_{i}$
+\end_inset
+
+ in the input layer according to the input pattern 
+\begin_inset Formula $x_{i,p}$
+\end_inset
+
+ to be learned, computes the activations 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+ of the hidden layers and the output layer 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+(In the following, index 
+\begin_inset Formula $k$
+\end_inset
+
+ is used for a neuron in the output layer, and indices 
+\begin_inset Formula $j$
+\end_inset
+
+ and 
+\begin_inset Formula $i$
+\end_inset
+
+ for a neuron in a hidden layer or the output layer.
+ If the network has only one hidden layer, then index 
+\begin_inset Formula $i$
+\end_inset
+
+ refers to a neuron in the input layer.)
+\end_layout
+
+\begin_layout Standard
+Each input neuron's output 
+\begin_inset Formula $o_{i}$
+\end_inset
+
+ is set to a training input: 
+\begin_inset Formula 
+\begin{equation}
+o_{i}=x_{i,p}.
+\end{equation}
+
+\end_inset
+
+The input 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ to a hidden or output neuron is computed from the sum of the connected
+ neurons' outputs in the layer above (see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Artificial-Neurons-as-Simple-Models-of-Biological-Neurons"
+
+\end_inset
+
+ ):
+\begin_inset Formula 
+\begin{equation}
+v_{j}=b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},
+\end{equation}
+
+\end_inset
+
+ where 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ is the bias, 
+\begin_inset Formula $o_{i}$
+\end_inset
+
+ is the output of a neuron in the layer above, and 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ is the weight of the connection from neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ The input 
+\begin_inset Formula $v_{j}$
+\end_inset
+
+ is then scaled by the sigmoid function to produce a neuron's output 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+o_{j}=\sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.\label{eq:sigmoid-function-2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Backward Pass for the Output Layer
+\end_layout
+
+\begin_layout Standard
+In the 
+\emph on
+backward pass
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+backward pass
+\end_layout
+
+\end_inset
+
+, the training procedure computes the total error 
+\begin_inset Formula $E_{total}$
+\end_inset
+
+ of the network, which is defined as the squared sum of differences between
+ actual output 
+\begin_inset Formula $o_{k}$
+\end_inset
+
+ and desired output 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+ over all training patterns:
+\begin_inset Formula 
+\begin{eqnarray}
+E_{total} & = & \sum_{p}\sum_{k}\frac{1}{2}(o_{k,p}-y_{k,p})^{2}\\
+ & = & \sum_{p}E,\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+ where 
+\begin_inset Formula $E$
+\end_inset
+
+ is the error of one training pattern.
+ We further split 
+\begin_inset Formula $E$
+\end_inset
+
+ into a sum of errors of individual neurons 
+\begin_inset Formula $E_{k}$
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{eqnarray}
+E & = & \sum_{k}\frac{1}{2}(o_{k}-y_{k})^{2}\\
+ & = & \sum_{k}E_{k},\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+where 
+\begin_inset Formula $E_{k}=\frac{1}{2}(o_{k}-y_{k})^{2}$
+\end_inset
+
+.
+ To compute the contribution of weight 
+\begin_inset Formula $w_{kj}$
+\end_inset
+
+ to the error, the error 
+\begin_inset Formula $E$
+\end_inset
+
+ is then differentiated with respect to a weight 
+\begin_inset Formula $w_{kj}$
+\end_inset
+
+ for a connection from neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer to neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ in the output layer: 
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial E}{\partial w_{kj}} & = & \frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
+ & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
+ & = & \frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\label{eq:backpropagation-error-wrt-weight-output-layer}\\
+ & = & (o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j},\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+ which uses that the derivative of the sigmoid function 
+\begin_inset Formula $o_{k}=\frac{1}{1+\exp(-v_{k})}$
+\end_inset
+
+ is 
+\begin_inset Formula $\frac{\partial o_{k}}{\partial v_{k}}=o_{k}(1-o_{k})$
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Derivative of the sigmoid function:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial o_{j}}{\partial v_{j}} & = & \frac{\partial}{\partial v_{j}}\frac{1}{1+\exp(-v_{j})}\\
+ & = & -\frac{\frac{\partial}{\partial v_{j}}1+\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & -\frac{\frac{\partial}{\partial v_{j}}\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & -\frac{\exp(-v_{j})\frac{\partial(-v_{j})}{\partial v_{j}}}{(1+\exp(-v_{j}))^{2}}\\
+ & = & -\frac{-\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{1-o_{j}(v_{j})}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{1-\frac{1}{1+\exp(-v_{j})}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{\frac{(1+\exp(-v_{j}))-1}{1+\exp(-v_{j})}}\\
+ & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}}\\
+ & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
+ & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
+ & = & \frac{\exp(-v_{j})}{\exp(-v_{j})(1+\exp(-v_{j}))}\left(1-o_{j}(v_{j})\right)\\
+ & = & \frac{1}{1+\exp(-v_{j})}\left(1-o_{j}(v_{j})\right)\\
+ & = & o_{j}(v_{j})\left(1-o_{j}(v_{j})\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ The derivative of the error with respect to 
+\begin_inset Formula $b_{k}$
+\end_inset
+
+ is
+\begin_inset Formula 
+\begin{equation}
+\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot1.
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Backward Pass for the Other Layers
+\end_layout
+
+\begin_layout Standard
+To perform gradient descent, we also need to update the weights and biases
+ for the remaining connections between hidden layers, and from the input
+ layer to the first hidden layer.
+ The derivative of the error with respect to the weight 
+\begin_inset Formula $w_{ji}$
+\end_inset
+
+ of the connection from neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in a layer to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the layer below (for example, from neuron 
+\begin_inset Formula $i$
+\end_inset
+
+ in the second last hidden layer to neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer) is
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial w_{ji}}\label{eq:backpropagation-error-wrt-weight-other-layers}\\
+ & = & \frac{\partial E}{\partial o_{j}}\cdot o_{j}(1-o_{j})\cdot o_{i},\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+ where
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+this was 
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}\\
+ & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}(o_{k}(v_{k}(o_{j})))\\
+ & = & \sum_{k}\frac{\partial}{\partial o_{j}}E_{k}(o_{k}(v_{k}(o_{j})))\\
+ & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(o_{k}(v_{k}))\cdot\frac{\partial v_{k}}{\partial o_{j}}\\
+ & = & \sum_{k}\frac{\partial}{\partial o_{k}}E_{k}(o_{k})\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot w_{kj},
+\end{eqnarray*}
+
+\end_inset
+
+, but I shortened it, which has the side-effect that it looks cleaner.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}\nonumber \\
+ & = & \sum_{k}\frac{\partial}{\partial o_{j}}E_{k}\nonumber \\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot w_{kj},\label{eq:backpropagation-error-wrt-output-other-layers}
+\end{eqnarray}
+
+\end_inset
+
+and neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in the layer below the layer that neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ is in (in our example neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in the output layer).
+ We take the value for 
+\begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
+\end_inset
+
+ in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-error-wrt-output-other-layers"
+
+\end_inset
+
+ above from equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-error-wrt-weight-output-layer"
+
+\end_inset
+
+ when neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in the output layer or equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-error-wrt-weight-other-layers"
+
+\end_inset
+
+ when neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is in a hidden layer.
+ (Neuron 
+\begin_inset Formula $k$
+\end_inset
+
+ is named 
+\begin_inset Formula $j$
+\end_inset
+
+ in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-error-wrt-weight-other-layers"
+
+\end_inset
+
+.) In our example (for neuron 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer), we take 
+\begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
+\end_inset
+
+ from the output layer: 
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot w_{kj}\\
+ & = & \sum_{k}(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot w_{kj}.\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+Analogously, the derivative of 
+\begin_inset Formula $E$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $b_{j}$
+\end_inset
+
+ is
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Derivative of the error with respect to the bias.
+\end_layout
+
+\begin_layout Plain Layout
+Use the following definitions:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{eqnarray*}
+v_{j} & = & b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji}\\
+o_{j} & = & \sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The derivative of the error with respect to the bias of node 
+\begin_inset Formula $j$
+\end_inset
+
+ in the last hidden layer:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{eqnarray*}
+\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial(b_{k}+\sum_{j\in\mathbf{c_{k}}}o_{j}w_{kj})}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(v_{j})(1-o_{j}(v_{j}))\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(v_{j})(1-o_{j}(v_{j}))\cdot1
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{eqnarray}
+\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial b_{j}}\\
+ & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}\cdot o_{j}(1-o_{j})\cdot1.\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The error for each node 
+\begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}$
+\end_inset
+
+ is thus back-propagated in reverse input direction through the hidden layers.
+ See figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Data-flow-in-back-propagation"
+
+\end_inset
+
+ for an illustration of the two data flow directions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/introduction-backpropagation-data-flow.dia
+	width 34col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Data-flow-in-back-propagation"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Data flow in training a neural network using back-propagation.
+\end_layout
+
+\end_inset
+
+Data flow in training a neural network with three layers using back-propagation.
+ The input layer is at the top, the hidden layer in the middle, and the
+ output layer at the bottom.
+ The black arrows denote information flow during the forward pass.
+ Each black arrow is associated with a weight from tail to head.
+ The grey arrows denote information flow during the backward pass, which
+ propagates errors in the reverse direction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+Updating rule
+\end_layout
+
+\begin_layout Standard
+After having computed the derivatives of the error with respect to the parameter
+s of the network, we can perform gradient descent and integrate these derivative
+s over the training patterns 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ We update each weight 
+\begin_inset Formula $w$
+\end_inset
+
+ and bias 
+\begin_inset Formula $b$
+\end_inset
+
+ using the learning rate
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+learning rate
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+, a small positive number:
+\begin_inset Formula 
+\begin{eqnarray}
+\Delta w & = & -\epsilon\sum_{p}\frac{\partial E}{\partial w}^{(p)}\\
+\Delta b & = & -\epsilon\sum_{p}\frac{\partial E}{\partial b}^{(p)},\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+where 
+\begin_inset Formula $\frac{\partial E}{\partial w}^{(p)}$
+\end_inset
+
+ or 
+\begin_inset Formula $\frac{\partial E}{\partial b}^{(p)}$
+\end_inset
+
+ are the derivatives of the error with respect to a weight or bias, when
+ the input layer was set to training pattern 
+\begin_inset Formula $p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Alternatingly performing forward and backward pass and updating the weights
+ and biases, until the error over all training patterns 
+\begin_inset Formula $E_{total}$
+\end_inset
+
+ is small enough, forms the complete back-propagation training procedure
+ of a neural network.
+\end_layout
+
+\begin_layout Paragraph
+Limits of Backpropagation
+\end_layout
+
+\begin_layout Standard
+The purpose of error back-propagation is to adjust the weights of the artificial
+ neural network following the gradient, such that when the current input
+ pattern pair is presented to the network, its computed output pattern gets
+ closer and closer to the desired output pattern.
+ However, back-propagation is not able to train networks with more than
+ one or two hidden layers, because it is a gradient descent method and can
+ get stuck in poor local optima, and the error surface gets more rugged
+ the more hidden neurons and layers there are 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GoriTesi1992"
+
+\end_inset
+
+.
+ Having artificial neural networks with more than one hidden layer is desirable,
+ because they can perform the same computation with less total number of
+ hidden nodes compared to a network with less hidden layers.
+ A network with one hidden layer less needs up to an exponential factor
+ more of hidden nodes 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hastad1987"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -1347,10 +2199,7 @@ Supervised and Unsupervised Machine Learning
 \end_layout
 
 \begin_layout Standard
-In artificial neural networks, the goals of learning are defined by humans.
- Learning is hereby facilitated by changing the weights between neurons.
- In machine learning in general, there are two major types of learning:
- 
+In machine learning, there are two major types of learning: 
 \emph on
 supervised
 \emph default
@@ -1386,8 +2235,8 @@ key "Barber2012"
 \end_inset
 
 .
- Both methods process data sets that are in matrix form: for example, in
- expression data, the rows usually denote different genes or transcripts,
+ Both methods process training data sets that are in matrix form: for example,
+ in expression data, the rows usually denote different genes or transcripts,
  and each column represents an independently measured sample.
  (Note that in the general machine learning literature, usually the data
  matrix is transposed: the columns denote the features, and the rows the
@@ -1857,740 +2706,6 @@ super-recognizers
  person's portrait just moments before seeing the half profiles.
 \end_layout
 
-\begin_layout Standard
-Before we motivate using DBNs on expression data, we first introduce deep
- learning.
- Deep learning
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-deep learning
-\end_layout
-
-\end_inset
-
- is a term used in artificial neural networks with several hidden layers.
- The advantage of a deep network over a network with just one hidden layer
- is that it can model a problem more compactly using less hidden neurons
- in total, because it has more than one intermediate computation step.
- Before deep learning there was back-propagation.
-\end_layout
-
-\begin_layout Subsection
-Back-propagation
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Back-propagation"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Back-propagation is a training procedure for artificial neural networks.
- It learns from labeled samples the parameters of the network, the weights
- and biases, using 
-\emph on
-gradient descent
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-gradient descent
-\end_layout
-
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RumelhartWilliams1988"
-
-\end_inset
-
-.
- The basic idea is to first compute the activations of neurons in the network,
- then compute the total error observed in the output layer, determine how
- much each neuron was 
-\begin_inset Quotes eld
-\end_inset
-
-responsible
-\begin_inset Quotes erd
-\end_inset
-
- for the total error in the network, and use it to adapt the weights and
- biases.
- This procedure is then repeated until the network is fully trained.
-\end_layout
-
-\begin_layout Standard
-Let the supervised training patterns be indexed by 
-\begin_inset Formula $p$
-\end_inset
-
-, 
-\begin_inset Formula $x_{i,p}$
-\end_inset
-
- be the input for a neuron 
-\begin_inset Formula $i$
-\end_inset
-
- in the input layer and pattern number 
-\begin_inset Formula $p$
-\end_inset
-
-, and 
-\begin_inset Formula $y_{k,p}$
-\end_inset
-
- be the desired output for neuron 
-\begin_inset Formula $k$
-\end_inset
-
- in the output layer for this training pattern.
-\end_layout
-
-\begin_layout Paragraph
-Forward Pass
-\end_layout
-
-\begin_layout Standard
-The supervised training procedure first performs the 
-\emph on
-forward pass
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-forward pass
-\end_layout
-
-\end_inset
-
-: it sets input activations 
-\begin_inset Formula $v_{i}$
-\end_inset
-
- in the input layer according to the input pattern 
-\begin_inset Formula $x_{i,p}$
-\end_inset
-
- to be learned, computes the activations of the hidden layers 
-\begin_inset Formula $o_{j}$
-\end_inset
-
- and the output layer 
-\begin_inset Formula $o_{k}$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Each neuron's input 
-\begin_inset Formula $v_{j}$
-\end_inset
-
- is either set to a training input 
-\begin_inset Formula 
-\begin{equation}
-v_{j}=x_{i,p}
-\end{equation}
-
-\end_inset
-
-when neuron 
-\begin_inset Formula $j$
-\end_inset
-
- is in the input layer or computed from the sum of the connected neurons'
- outputs in the layer above (see section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Artificial-Neurons-as-Simple-Models-of-Biological-Neurons"
-
-\end_inset
-
- ):
-\begin_inset Formula 
-\begin{equation}
-v_{j}=b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},
-\end{equation}
-
-\end_inset
-
- where 
-\begin_inset Formula $b_{j}$
-\end_inset
-
- is the bias, 
-\begin_inset Formula $o_{i}$
-\end_inset
-
- is the output of a neuron in the layer above, and 
-\begin_inset Formula $w_{ji}$
-\end_inset
-
- is the weight of the connection from neuron 
-\begin_inset Formula $i$
-\end_inset
-
- to neuron 
-\begin_inset Formula $j$
-\end_inset
-
-.
- The input 
-\begin_inset Formula $v_{j}$
-\end_inset
-
- is then scaled by the sigmoid function to produce a neuron's output 
-\begin_inset Formula $o_{j}$
-\end_inset
-
-:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-o_{j}=\sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.\label{eq:sigmoid-function-2}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-(Note that each neuron has a unique index, also among different layers.
- In the following, index 
-\begin_inset Formula $k$
-\end_inset
-
- is used for a neuron in the output layer, index 
-\begin_inset Formula $j$
-\end_inset
-
- for a neuron in a hidden layer, and index 
-\begin_inset Formula $i$
-\end_inset
-
- for a neuron in either the input or a hidden layer.)
-\end_layout
-
-\begin_layout Paragraph
-Backward Pass for the Output Layer
-\end_layout
-
-\begin_layout Standard
-In the 
-\emph on
-backward pass
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-backward pass
-\end_layout
-
-\end_inset
-
-, the training procedure computes the total error 
-\begin_inset Formula $E_{total}$
-\end_inset
-
- of the network, which is defined as the squared sum of differences between
- actual output 
-\begin_inset Formula $o_{k}$
-\end_inset
-
- and desired output 
-\begin_inset Formula $y_{k}$
-\end_inset
-
- over all training patterns:
-\begin_inset Formula 
-\begin{eqnarray}
-E_{total} & = & \sum_{p}\sum_{k}\frac{1}{2}(o_{k,p}-y_{k,p})^{2}\\
- & = & \sum_{p}E,\nonumber 
-\end{eqnarray}
-
-\end_inset
-
- where 
-\begin_inset Formula $E$
-\end_inset
-
- is the error of one training pattern.
- We further split 
-\begin_inset Formula $E$
-\end_inset
-
- into a sum of errors of individual neurons 
-\begin_inset Formula $E_{k}$
-\end_inset
-
-: 
-\begin_inset Formula 
-\begin{eqnarray}
-E & = & \frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}\\
- & = & \sum_{k}\frac{1}{2}(o_{k}-y_{k})^{2}\nonumber \\
- & = & \sum_{k}E_{k},\nonumber 
-\end{eqnarray}
-
-\end_inset
-
-where 
-\begin_inset Formula $E_{k}=\frac{1}{2}(o_{k}-y_{k})^{2}$
-\end_inset
-
-.
- To compute the contribution of weight 
-\begin_inset Formula $w_{kj}$
-\end_inset
-
- to the error, the error 
-\begin_inset Formula $E$
-\end_inset
-
- is then differentiated with respect to a weight 
-\begin_inset Formula $w_{kj}$
-\end_inset
-
- for a connection from neuron 
-\begin_inset Formula $j$
-\end_inset
-
- in the last hidden layer to neuron 
-\begin_inset Formula $k$
-\end_inset
-
- in the output layer: 
-\begin_inset Formula 
-\begin{eqnarray}
-\frac{\partial E}{\partial w_{kj}} & = & \frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
- & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\nonumber \\
- & = & \frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}\label{eq:backpropagation-error-wrt-weight-output-layer}\\
- & = & (o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j},\nonumber 
-\end{eqnarray}
-
-\end_inset
-
- which uses that the derivative of the sigmoid function is 
-\begin_inset Formula $\frac{\partial o_{k}}{\partial v_{k}}=o_{k}(v_{k})(1-o_{k}(v_{k}))$
-\end_inset
-
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Derivative of the sigmoid function:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{eqnarray*}
-\frac{\partial o_{j}}{\partial v_{j}} & = & \frac{\partial}{\partial v_{j}}\frac{1}{1+\exp(-v_{j})}\\
- & = & -\frac{\frac{\partial}{\partial v_{j}}1+\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
- & = & -\frac{\frac{\partial}{\partial v_{j}}\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
- & = & -\frac{\exp(-v_{j})\frac{\partial(-v_{j})}{\partial v_{j}}}{(1+\exp(-v_{j}))^{2}}\\
- & = & -\frac{-\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
- & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\\
- & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{1-o_{j}(v_{j})}\\
- & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{1-\frac{1}{1+\exp(-v_{j})}}\\
- & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{\frac{(1+\exp(-v_{j}))-1}{1+\exp(-v_{j})}}\\
- & = & \frac{\exp(-v_{j})}{(1+\exp(-v_{j}))^{2}}\frac{1-o_{j}(v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}}\\
- & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
- & = & \frac{\exp(-v_{j})}{\frac{\exp(-v_{j})}{1+\exp(-v_{j})}(1+\exp(-v_{j}))^{2}}\left(1-o_{j}(v_{j})\right)\\
- & = & \frac{\exp(-v_{j})}{\exp(-v_{j})(1+\exp(-v_{j}))}\left(1-o_{j}(v_{j})\right)\\
- & = & \frac{1}{1+\exp(-v_{j})}\left(1-o_{j}(v_{j})\right)\\
- & = & o_{j}(v_{j})\left(1-o_{j}(v_{j})\right)
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
- The derivative of the error with respect to 
-\begin_inset Formula $b_{k}$
-\end_inset
-
- is :
-\begin_inset Formula 
-\begin{equation}
-\frac{\partial E}{\partial b_{k}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial b_{k}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot1.
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph
-Backward Pass for the Other Layers
-\end_layout
-
-\begin_layout Standard
-To perform gradient descent, we also need to update the weights and biases
- for the remaining connections between hidden layers, and from the input
- layer to the first hidden layer.
- The derivative of the error with respect to the weight 
-\begin_inset Formula $w_{ji}$
-\end_inset
-
- for the connection from neuron 
-\begin_inset Formula $i$
-\end_inset
-
- in a layer to neuron 
-\begin_inset Formula $j$
-\end_inset
-
- in the layer below (for example, from neuron 
-\begin_inset Formula $i$
-\end_inset
-
- in the second last hidden layer to neuron 
-\begin_inset Formula $j$
-\end_inset
-
- in the last hidden layer) is
-\begin_inset Formula 
-\begin{eqnarray}
-\frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial w_{ji}}\label{eq:backpropagation-error-wrt-weight-other-layers}\\
- & = & \frac{\partial E}{\partial o_{j}}\cdot o_{j}(1-o_{j})\cdot o_{i},\nonumber 
-\end{eqnarray}
-
-\end_inset
-
- where 
-\begin_inset Formula 
-\begin{eqnarray}
-\frac{\partial E}{\partial o_{j}} & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}\nonumber \\
- & = & \frac{\partial}{\partial o_{j}}\sum_{k}E_{k}(o_{k}(v_{k}(o_{j})))\nonumber \\
- & = & \sum_{k}\frac{\partial}{\partial o_{j}}E_{k}(o_{k}(v_{k}(o_{j})))\nonumber \\
- & = & \sum_{k}\frac{\partial}{\partial v_{k}}E_{k}(o_{k}(v_{k}))\cdot\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
- & = & \sum_{k}\frac{\partial}{\partial o_{k}}E_{k}(o_{k})\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\nonumber \\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot w_{kj},\label{eq:backpropagation-error-wrt-output-other-layers}
-\end{eqnarray}
-
-\end_inset
-
-and neuron 
-\begin_inset Formula $k$
-\end_inset
-
- is in the layer below the layer that neuron 
-\begin_inset Formula $j$
-\end_inset
-
- is in (in our example neuron 
-\begin_inset Formula $k$
-\end_inset
-
- is in the output layer).
- We take the value for 
-\begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
-\end_inset
-
- in equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:backpropagation-error-wrt-output-other-layers"
-
-\end_inset
-
- above from equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:backpropagation-error-wrt-weight-output-layer"
-
-\end_inset
-
- when neuron 
-\begin_inset Formula $k$
-\end_inset
-
- is in the output layer or equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:backpropagation-error-wrt-weight-other-layers"
-
-\end_inset
-
- when neuron 
-\begin_inset Formula $k$
-\end_inset
-
- is in a hidden layer.
- (Neuron 
-\begin_inset Formula $k$
-\end_inset
-
- is named 
-\begin_inset Formula $j$
-\end_inset
-
- in equation 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:backpropagation-error-wrt-weight-other-layers"
-
-\end_inset
-
-.) In our example (for neuron 
-\begin_inset Formula $j$
-\end_inset
-
- in the last hidden layer), we take 
-\begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}$
-\end_inset
-
- from the output layer: 
-\begin_inset Formula 
-\begin{eqnarray}
-\frac{\partial E}{\partial o_{j}} & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot w_{kj}\\
- & = & \sum_{k}(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot w_{kj}.\nonumber 
-\end{eqnarray}
-
-\end_inset
-
-Analogously, the derivative of 
-\begin_inset Formula $E$
-\end_inset
-
- with respect to 
-\begin_inset Formula $b_{j}$
-\end_inset
-
- is
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Derivation of the following equation (after the Note)
-\end_layout
-
-\begin_layout Plain Layout
-Use the following definitions:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{eqnarray*}
-v_{j} & = & b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji}\\
-o_{j} & = & \sigma(v_{j})=\frac{1}{1+\exp(-v_{j})}.
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Finally, the derivative of the error with respect to the bias of node 
-\begin_inset Formula $j$
-\end_inset
-
- in the last hidden layer:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{eqnarray*}
-\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \frac{\partial\sum_{k}E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial v_{k}}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\frac{\partial(b_{k}+\sum_{j\in\mathbf{c_{k}}}o_{j}w_{kj})}{\partial o_{j}}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}\frac{\partial o_{j}}{\partial v_{j}}\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(v_{j})(1-o_{j}(v_{j}))\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(v_{j})(1-o_{j}(v_{j}))\cdot1
-\end{eqnarray*}
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula 
-\begin{eqnarray}
-\frac{\partial E}{\partial b_{j}} & = & \frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial b_{j}}\\
- & = & \sum_{k}\frac{\partial E_{k}}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}\cdot o_{j}(1-o_{j})\cdot1.\nonumber 
-\end{eqnarray}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The error for each node is thus back-propagated in reverse input direction
- through the hidden layers.
- See figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Data-flow-in-back-propagation"
-
-\end_inset
-
- for an illustration of the two data flow directions.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/introduction-backpropagation-data-flow.dia
-	width 34col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Data-flow-in-back-propagation"
-
-\end_inset
-
-
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Data flow in training a neural network using back-propagation.
-\end_layout
-
-\end_inset
-
-Data flow in training a neural network with three layers using back-propagation.
- The input layer is at the top, the hidden layer in the middle, and the
- output layer at the bottom.
- The black arrows denote information flow during the forward pass.
- Each black arrow is associated with a weight from tail to head.
- The grey arrows denote information flow during the backward pass, which
- propagates errors in the reverse direction.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subparagraph
-Updating rule
-\end_layout
-
-\begin_layout Standard
-After computing the derivatives of the error with respect to the parameters
- of the network, we can perform gradient descent and update each weight
- 
-\begin_inset Formula $w$
-\end_inset
-
- and bias 
-\begin_inset Formula $b$
-\end_inset
-
- using the learning rate
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-learning rate
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula $\epsilon$
-\end_inset
-
-, a small positive number:
-\begin_inset Formula 
-\begin{eqnarray}
-\Delta w & = & -\epsilon\frac{\partial E}{\partial w}\\
-\Delta b & = & -\epsilon\frac{\partial E}{\partial b}.\nonumber 
-\end{eqnarray}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Alternate application of a forward pass followed by a backward pass forms
- the complete back-propagation training procedure of a neural network.
-\end_layout
-
-\begin_layout Paragraph
-Limits of Backpropagation
-\end_layout
-
-\begin_layout Standard
-The purpose of error back-propagation is to adjust the weights of the artificial
- neural network following the gradient, such that when the current input
- pattern pair is presented to the network, its computed output pattern gets
- closer and closer to the desired output pattern.
- However, back-propagation is not able to train networks with more than
- one or two hidden layers, because it is a gradient descent method and can
- get stuck in poor local optima, and the error surface gets more rugged
- the more hidden neurons and layers there are 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "GoriTesi1992"
-
-\end_inset
-
-.
- Having artificial neural networks with more than one hidden layer is desirable,
- because they can perform the same computation with less total number of
- hidden nodes compared to a network with less hidden layers, up to an exponentia
-l factor 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Hastad1987"
-
-\end_inset
-
-.
-\end_layout
-
 \begin_layout Subsection
 Deep Learning
 \end_layout
@@ -2606,71 +2721,20 @@ deep learning
 
 \end_inset
 
- overcame the limitation of only a few hidden layers 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "HintonTeh2006"
-
-\end_inset
-
-.
- It is separated into a pre-training phase and a fine-tuning phase.
- The pre-training phase is unsupervised.
- In this phase, hidden layers are iteratively added on top of the input
- layer of the network, and the weights between layers are initialized and
- pre-trained like 
-\emph on
-Restricted Boltzmann Machines
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-Restricted Boltzmann Machine
-\end_layout
-
-\end_inset
-
- (RBMs
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-RBM
-\end_layout
-
-\end_inset
-
-).
- Without this step, fine-tuning a multiple-hidden-layer network usually
- gets stuck in a local error minimum.
- The pre-training algorithm is called
-\emph on
- contrastive divergence
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-contrastive divergence
-\end_layout
-
-\end_inset
-
-.
+ is a term used in artificial neural networks with several hidden layers.
+ The advantage of a deep network over a network with just one hidden layer
+ is that it can model a problem more compactly using less hidden neurons
+ in total, because it has more than one intermediate computation step.
 \end_layout
 
 \begin_layout Standard
-In unsupervised pre-training, unlabeled training samples can be used in
- learning the weights between layers.
- While the pre-training phase is unsupervised, the fine-tuning phase can
- be unsupervised as well as supervised.
- After training, the multiple-hidden-layer-network forms a generative artificial
- neural network called a 
+
 \emph on
-Deep Belief Network
+Autoencoders
+\emph default
+ and 
+\emph on
+Deep Belief Networks
 \emph default
 
 \begin_inset Index idx
@@ -2686,7 +2750,11 @@ Deep Belief Network
 \emph on
  
 \emph default
-(DBN
+(
+\emph on
+DBNs
+\emph default
+
 \begin_inset Index idx
 status collapsed
 
@@ -2696,7 +2764,92 @@ DBN
 
 \end_inset
 
+) overcame the limitation of only a few hidden layers 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HintonTeh2006"
+
+\end_inset
+
+.
+ Here we give brief overviews over both types of artificial neural network.
+\end_layout
+
+\begin_layout Paragraph
+Autoencoder
+\end_layout
+
+\begin_layout Standard
+An autoencoder is a network with more than one hidden layer, whose training
+ is unsupervised and its objective is to reconstruct the input in the output
+ layer.
+ An autoencoder starts as a three-layer network composed of input layer,
+ hidden layer, and output layer.
+ This network is trained using back-propagation.
+ The middle hidden layer is then copied and new hidden layer is inserted
+ between both copies, forming a five-layer-network.
+ The newly added parameters of this network are the same in number compared
+ to a three-layer network, which can be trained using back-propagation.
+ Hence, training the five-layer-network using back-propagation also works,
+ and adding a new hidden layer in the middle can be repeated.
+\end_layout
+
+\begin_layout Paragraph
+Deep Belief Network
+\end_layout
+
+\begin_layout Standard
+Training a Deep Belief Network is separated into a pre-training phase and
+ a fine-tuning phase.
+ The pre-training phase is unsupervised.
+ It starts with a network consisting of one input layer and a hidden layer.
+ This pair of  layers is called a 
+\emph on
+Restricted Boltzmann Machine
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Restricted Boltzmann Machine
+\end_layout
+
+\end_inset
+
+ (RBM
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+RBM
+\end_layout
+
+\end_inset
+
 ).
+ There is an accompanying unsupervised training procedure called 
+\emph on
+contrastive divergence
+\emph default
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+contrastive divergence
+\end_layout
+
+\end_inset
+
+ which finds weights between these layers.
+ After training the RBM, hidden layers are iteratively added on top of the
+ RBM, and the new weights between layers are initialized and pre-trained
+ using contrastive divergence.
+ While the pre-training phase is unsupervised, the fine-tuning phase can
+ be unsupervised as well as supervised.
+ After training, the multiple-hidden-layer-network forms a generative artificial
+ neural network called a Deep Belief Network.
 \end_layout
 
 \begin_layout Section
@@ -2704,15 +2857,6 @@ Overview of Own and Related Work
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: an dieser Stelle habe ich autoencoder und TSVMs noch nicht eingeführt
-\end_layout
-
-\end_inset
-
 We used autoencoders, Deep Belief Networks, and Transductive Support Vector
  Machines on expression data to predict whether breast cancer patients will
  show pathologic complete response to chemotherapy or residual disease.
