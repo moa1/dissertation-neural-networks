@@ -550,7 +550,7 @@ The presence of a critical threshold suggests that it is not the
 \begin_inset Quotes eld
 \end_inset
 
-analogue
+analog
 \begin_inset Quotes erd
 \end_inset
 
@@ -568,11 +568,11 @@ digital
  the muscle fiber.
  However, some neurons involved in perception directly transmit information
  in the fluctuations of neurotransmitter released.
- This analogue mode of transmission allows more information to be transmitted
+ This analog mode of transmission allows more information to be transmitted
  per time.
  Sub\SpecialChar \-
 threshold emission of neurotransmitter also seems to modulate subsequent
- action potentials, allowing for a mixture of analogue and digital information
+ action potentials, allowing for a mixture of analog and digital information
  transmission 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1338,18 +1338,9 @@ Hebbian learning
 The learning in biological neuronal systems happens seemingly automatically,
  for example, migratory birds learn and remember travel paths around the
  globe, without an apparent teacher.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Ultimately the goals of learning are determined by an interplay of evolution
+ Ultimately the goals of learning are determined by an interplay of evolution
  and the environment.
-\end_layout
-
-\end_inset
-
-
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -1640,7 +1631,8 @@ Backward Pass for the Output Layer
 \end_layout
 
 \begin_layout Standard
-In the 
+While in the forward pass the information flowed from input to output, in
+ the 
 \emph on
 backward pass
 \emph default
@@ -1654,7 +1646,72 @@ backward pass
 
 \end_inset
 
-, the training procedure computes the total error 
+, the information flows from output to input, adjusting the weights and
+ biases on the way.
+ See figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Data-flow-in-back-propagation"
+
+\end_inset
+
+ for an illustration of the two data flow directions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/introduction-backpropagation-data-flow.dia
+	width 34col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Data-flow-in-back-propagation"
+
+\end_inset
+
+
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Data flow in training a neural network using back-propagation.
+\end_layout
+
+\end_inset
+
+Data flow in training a neural network with three layers using back-propagation.
+ The input layer is at the top, the hidden layer in the middle, and the
+ output layer at the bottom.
+ The black arrows denote information flow during the forward pass.
+ Each black arrow is associated with a weight from tail to head.
+ The grey arrows denote information flow during the backward pass, which
+ propagates errors in the reverse direction.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+The training procedure computes the total error 
 \begin_inset Formula $E_{total}$
 \end_inset
 
@@ -2020,71 +2077,8 @@ The error for each node
 \begin_inset Formula $\frac{\partial E_{k}}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}$
 \end_inset
 
- is thus back-propagated in reverse input direction through the hidden layers.
- See figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Data-flow-in-back-propagation"
-
-\end_inset
-
- for an illustration of the two data flow directions.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/introduction-backpropagation-data-flow.dia
-	width 34col%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Data-flow-in-back-propagation"
-
-\end_inset
-
-
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-Data flow in training a neural network using back-propagation.
-\end_layout
-
-\end_inset
-
-Data flow in training a neural network with three layers using back-propagation.
- The input layer is at the top, the hidden layer in the middle, and the
- output layer at the bottom.
- The black arrows denote information flow during the forward pass.
- Each black arrow is associated with a weight from tail to head.
- The grey arrows denote information flow during the backward pass, which
- propagates errors in the reverse direction.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+ is thus back-propagated in reverse input direction through the hidden layers,
+ until all derivatives have been determined.
 \end_layout
 
 \begin_layout Subparagraph

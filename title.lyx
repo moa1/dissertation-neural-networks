@@ -142,13 +142,14 @@ thispagestyle{empty}
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace 1.5cm
+\begin_inset VSpace 0.9cm
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
+\paragraph_spacing other 1.6
 \align center
 
 \shape smallcaps
@@ -157,21 +158,31 @@ Dissertation zur Erlangung des Doktorgrades
 \begin_inset Newline newline
 \end_inset
 
- der Naturwissenschaften (Dr.
+der Naturwissenschaften (Dr.
  rer.
  nat.)
 \begin_inset Newline newline
 \end_inset
 
- der Fakultät für Biologie und Vorklinische Medizin 
+der Fakultät für Biologie und Vorklinische Medizin
 \begin_inset Newline newline
 \end_inset
 
+
+\shape default
+\size default
+
+\begin_inset VSpace 0.3cm
+\end_inset
+
+
+\shape smallcaps
+\size large
 der Universität Regensburg
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace 1.2cm
+\begin_inset VSpace 0.8cm
 \end_inset
 
 
@@ -187,9 +198,10 @@ vorgelegt von
 \begin_layout Standard
 \align center
 
+\series bold
 \shape smallcaps
 \size larger
-Anton Georg Moll
+Anton Moll
 \end_layout
 
 \begin_layout Standard
@@ -200,7 +212,7 @@ aus Starnberg
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace 0.5cm
+\begin_inset VSpace 0.3cm
 \end_inset
 
 

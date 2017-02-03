@@ -286,8 +286,8 @@ discriminative model
 
 \begin_layout Standard
 Restricted Boltzmann Machines and Deep Belief Networks are both generative
- models, while a neural network trained with back-propagation is a discriminativ
-e model.
+ models, while a neural network supervisedly trained with back-propagation
+ is a discriminative model.
  In a discriminative model, the parameters (weights and biases) specify
  the class label of a training sample.
  In a generative model, the parameters need to encode the whole sample.
@@ -339,8 +339,8 @@ generate samples
  that decides whether an image shows a red ball (output: true or false).
  The decision function of the network is a complicated function of all input
  pixels.
- Therefore it can be hard to determine the property an image must have so
- that the network would classify it as containing a red ball.
+ Therefore it can be hard to determine the property an unseen image must
+ have so that the network would classify it as containing a red ball.
  Due to their greater generality, generative models have the disadvantage
  that they are slower than discriminative models.
  As 
@@ -890,15 +890,16 @@ Calculating
 \begin_inset Formula $g(x)$
 \end_inset
 
- the following integral must be non-negative:
+ the integral 
 \begin_inset Formula 
 \[
-\int\int K(\mathbf{x_{i}},\mathbf{x_{j}})g(\mathbf{x_{i}})g(\mathbf{x_{j}})dxdy\geq0
+\int\int K(\mathbf{x_{i}},\mathbf{x_{j}})g(\mathbf{x_{i}})g(\mathbf{x_{j}})d\mathbf{x_{i}}d\mathbf{x_{j}}\geq0
 \]
 
 \end_inset
 
-Otherwise, the quadratic programming problem may not have a solution 
+ must be non-negative.
+ Otherwise, the quadratic programming problem may not have a solution 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "StatnikovGuyon2011"
@@ -8094,14 +8095,8 @@ forward pass
  time this particular input pattern is given to the network.
  The back-propagation algorithm is a supervised learning step and thus prone
  to overfitting.
-\end_layout
-
-\begin_layout Paragraph
-Forward and Backward Pass
-\end_layout
-
-\begin_layout Standard
-We will first repeat the most important points of back-propagation as reviewed
+ In order to discuss modifications and extensions of the algorithm, we will
+ first repeat the most important points of back-propagation as reviewed
  in section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -8110,7 +8105,14 @@ reference "sub:Back-propagation"
 \end_inset
 
 .
- In the 
+\end_layout
+
+\begin_layout Paragraph
+Forward and Backward Pass
+\end_layout
+
+\begin_layout Standard
+In the 
 \emph on
 forward pass
 \emph default
@@ -8124,7 +8126,7 @@ forward pass
 
 \end_inset
 
-, each node's output is computed from the sum of its inputs:
+, each node's output is computed from the sum of its inputs
 \begin_inset Formula 
 \begin{eqnarray*}
 v_{j} & = & b_{j}+\sum_{i\in\mathbf{c_{j}}}o_{i}w_{ji},
@@ -8203,7 +8205,7 @@ backward pass
 \begin_inset Formula $y_{k}$
 \end_inset
 
-:
+
 \begin_inset Formula 
 \[
 E=\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2},
@@ -8290,7 +8292,7 @@ The error is then differentiated with respect to a weight
 \begin_inset Formula $k$
 \end_inset
 
- in the output layer: 
+ in the output layer 
 \begin_inset Formula 
 \begin{equation}
 \frac{\partial E}{\partial w_{kj}}=\frac{\partial E}{\partial o_{k}}\cdot\frac{\partial o_{k}}{\partial v_{k}}\cdot\frac{\partial v_{k}}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j},\label{eq:backpropagation-error-wrt-weight}
@@ -8330,7 +8332,7 @@ The derivative of the error with respect to the weights
 \begin_inset Formula $j$
 \end_inset
 
- in the layer below is:
+ in the layer below is
 \begin_inset Formula 
 \begin{eqnarray*}
 \frac{\partial E}{\partial w_{ji}} & = & \frac{\partial E}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{i}}\cdot\frac{\partial v_{i}}{\partial w_{ji}}\\
@@ -8444,10 +8446,10 @@ squared-error sum
 
 \end_inset
 
- between the desired outputs and the actual outputs:
+ between the desired outputs and the actual outputs
 \begin_inset Formula 
 \[
-E=\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}
+E=\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2},
 \]
 
 \end_inset
@@ -8484,11 +8486,11 @@ reference "eq:backpropagation-error-wrt-weight"
 \begin_inset Formula $w_{kj}$
 \end_inset
 
- is:
+ is
 \begin_inset Formula 
-\[
-\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j}.
-\]
+\begin{equation}
+\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})\cdot o_{k}(1-o_{k})\cdot o_{j}.\label{eq:backpropagation-error-wrt-weight-1}
+\end{equation}
 
 \end_inset
 
@@ -8528,7 +8530,7 @@ key "NasrJoun2002"
 
 \end_inset
 
-:
+ 
 \begin_inset Formula 
 \[
 E=-\sum_{k}y_{k}\log o_{k}-\sum_{k}(1-y_{k})\log(1-o_{k}),
@@ -8565,10 +8567,10 @@ E=-\sum_{k}y_{k}\log o_{k}-\sum_{k}(1-y_{k})\log(1-o_{k}),
 \begin_inset Formula $k$
 \end_inset
 
- in the output layer is then:
+ in the output layer is then
 \begin_inset Formula 
 \[
-\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})o_{j}
+\frac{\partial E}{\partial w_{kj}}=(o_{k}-y_{k})o_{j}.
 \]
 
 \end_inset
@@ -8583,8 +8585,8 @@ key "GolikNey2013"
 
 \end_inset
 
- note that the cross-entropy error function requires less updates, since
- the gradient for the sum-of-squared-differences error function becomes
+ note that using the cross-entropy error function requires less updates,
+ since the gradient for the sum-of-squared-differences error function becomes
  low not only when the actual output 
 \begin_inset Formula $o_{k}$
 \end_inset
@@ -8600,7 +8602,7 @@ key "GolikNey2013"
  is near 0 or 1 (see equation 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:backpropagation-error-wrt-weight"
+reference "eq:backpropagation-error-wrt-weight-1"
 
 \end_inset
 
@@ -8608,7 +8610,7 @@ reference "eq:backpropagation-error-wrt-weight"
 \end_layout
 
 \begin_layout Subsubsection
-Parameters in Training a Multilayer Perceptron
+Parameters in Training a Neural Network
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Parameters-of-Training-a-Multilayer-Perceptron"
@@ -8644,14 +8646,28 @@ s in the output layer
 
  would become equal, leading to an equal error gradient for the weights
  and biases, which would prevent learning.
- Usually the biases are initialized to zero, and the weights are drawn from
+ Ideally, the hidden and output layer activations 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+ should be in the linear region of the activation function, so that the
+ error derivatives are large.
+ As 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "LeCunMuller1998"
+
+\end_inset
+
+ note, this requires coordinating the training set  normalization, the choice
+ of the activation function, and the weight and bias initialization.
+\end_layout
+
+\begin_layout Standard
+Usually the biases are initialized to zero, and the weights are drawn from
  a uniform random distribution in [-1;1], or from a normal distribution
  with mean 0 and standard deviation 1.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Another possibility is to use 
+ Another possibility is to use 
 \begin_inset Quotes eld
 \end_inset
 
@@ -8659,10 +8675,17 @@ fan-in
 \begin_inset Quotes erd
 \end_inset
 
- initialization.
- I have seen a possible reference once, but I don't remember who it was
- from: I think it was LeCun or Bengio.
-\end_layout
+ initialization, where the number of incoming connections 
+\begin_inset Formula $m$
+\end_inset
+
+ to a node are taken into account.
+ Then the weights are randomly drawn from a normal distribution with mean
+ 0 and standard deviation
+\begin_inset Formula 
+\[
+\sigma=m^{-1/2}.
+\]
 
 \end_inset
 
@@ -8702,8 +8725,15 @@ activation function
 \end_layout
 
 \begin_layout Standard
-The sigmoid activation function is a standard activation function, often
- used in neural networks.
+The sigmoid activation function
+\begin_inset Formula 
+\[
+\sigma(x)=\frac{1}{1+e^{-x}}
+\]
+
+\end_inset
+
+ is a standard activation function, often used in neural networks.
  It is almost linear for inputs around zero, tends to 1 as its inputs go
  to positive infinity and to 0 as inputs go to negative infinity (see figure
  
@@ -8714,23 +8744,11 @@ reference "fig:sigmoid-function"
 \end_inset
 
 ).
-\begin_inset Formula 
-\[
-\sigma(x)=\frac{1}{1+e^{-x}}
-\]
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
 Another commonly used activation function is the hyperbolic tangent function
  
-\begin_inset Formula $tanh$
-\end_inset
-
-: 
 \begin_inset Formula 
 \[
 tanh(x)=\frac{1-e^{-2x}}{1+e^{-2x}}.
@@ -8797,16 +8815,7 @@ reference "eq:backpropagation-deltas"
 \end_inset
 
 .
- The momentum term includes a coefficient 
-\begin_inset Formula $\mu$
-\end_inset
-
- that is the fraction of the weight and bias deltas of the previous time
- step 
-\begin_inset Formula $t-1$
-\end_inset
-
- to be added to the current weight deltas:
+ The momentum term 
 \begin_inset Formula 
 \begin{eqnarray*}
 \Delta w_{momentum}^{(t)} & = & \mu\Delta w_{momentum}^{(t-1)}+(1-\mu)\Delta w^{(t)}\\
@@ -8815,7 +8824,16 @@ reference "eq:backpropagation-deltas"
 
 \end_inset
 
-where 
+ includes a coefficient 
+\begin_inset Formula $\mu$
+\end_inset
+
+ that is the fraction of the weight and bias deltas of the previous time
+ step 
+\begin_inset Formula $t-1$
+\end_inset
+
+ to be added to the current weight deltaswhere 
 \begin_inset Formula $\Delta w^{(t)}$
 \end_inset
 
@@ -8922,7 +8940,7 @@ learning by heart
 \begin_inset Quotes erd
 \end_inset
 
- and instead make its predictions more general.
+ and instead make its predictions apply to more unseen test set data.
 \end_layout
 
 \begin_layout Standard
@@ -9126,32 +9144,6 @@ key "Ng2011,Hinton2010,NairHinton2009"
 
 \end_inset
 
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: add the 
-\begin_inset Quotes eld
-\end_inset
-
-CS294A Lecture notes
-\begin_inset Quotes erd
-\end_inset
-
- (
-\begin_inset Quotes eld
-\end_inset
-
-~/uni/publication/zusammenfassung/neural network/sparsity/sparseAutoencoder.pdf
-\begin_inset Quotes erd
-\end_inset
-
-) as a reference.
-\end_layout
-
-\end_inset
-
 .
  Like other regularization methods, sparsity regularization constrains the
  space of possible parameters of the model.
@@ -9226,7 +9218,7 @@ One way to define the average activation
 \begin_inset Formula $o_{j}^{(t)}$
 \end_inset
 
-:
+
 \begin_inset Formula 
 \[
 q_{j}^{(t)}=\lambda q_{j}^{(t-1)}+(1-\lambda)o_{j}^{(t)},
@@ -9284,7 +9276,7 @@ Alternatively, we can measure the average activation
 \begin_inset Formula $m$
 \end_inset
 
- training samples:
+ training samples
 \begin_inset Formula 
 \[
 q_{j}=\frac{1}{m}\sum_{s}^{m}o_{j}^{(s)},
@@ -9488,7 +9480,7 @@ The idea is to add to the error term
 \begin_inset Formula $q_{j}$
 \end_inset
 
-:
+
 \begin_inset Formula 
 \begin{eqnarray*}
 E_{sparsity} & = & D_{KL}(P_{Bernoulli(p)}||P_{Bernoulli(q_{j})})\\
@@ -9510,15 +9502,7 @@ It is zero for
 \end_inset
 
 .
- Approximating the average activation 
-\begin_inset Formula $q_{j}$
-\end_inset
-
- to be equal to the activation 
-\begin_inset Formula $o_{j}$
-\end_inset
-
-, and differentiating this sparsity error with respect to the weight 
+ Differentiating this sparsity error with respect to the weight 
 \begin_inset Formula $w_{ji}$
 \end_inset
 
@@ -9530,7 +9514,15 @@ It is zero for
 \begin_inset Formula $j$
 \end_inset
 
- gives:
+, and approximating the average activation 
+\begin_inset Formula $q_{j}$
+\end_inset
+
+ to be equal to the activation 
+\begin_inset Formula $o_{j}$
+\end_inset
+
+ gives
 \begin_inset Formula 
 \begin{eqnarray*}
 \frac{\partial E_{sparsity}}{\partial w_{ji}} & = & \frac{\partial E_{sparsity}}{\partial o_{j}}\cdot\frac{\partial o_{j}}{\partial v_{j}}\cdot\frac{\partial v_{j}}{\partial w_{ji}}\\
@@ -9550,7 +9542,7 @@ Substituting
 \begin_inset Formula $o_{j}$
 \end_inset
 
- gives:
+ gives
 \begin_inset Formula 
 \[
 \frac{\partial E_{sparsity}}{\partial w_{ji}}\approx(q_{j}-p)\cdot o_{i}.
@@ -9611,11 +9603,11 @@ sparsity cost
 \begin_inset Formula $\lambda$
 \end_inset
 
-:
+
 \begin_inset Formula 
 \begin{eqnarray*}
-\Delta w_{ji} & = & -\epsilon\left(\frac{\partial E}{\partial w_{ji}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)=-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right)o_{i}\\
-\Delta b_{j} & = & -\epsilon\left(\frac{\partial E}{\partial b_{j}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)=-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right).
+\Delta w_{ji} & = & -\epsilon\left(\frac{\partial E}{\partial w_{ji}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right)o_{i}\\
+\Delta b_{j} & = & -\epsilon\left(\frac{\partial E}{\partial b_{j}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right).
 \end{eqnarray*}
 
 \end_inset
@@ -9662,9 +9654,12 @@ dropping
 \begin_inset Quotes erd
 \end_inset
 
- each training iteration a random subset of nodes in a layer.
+ during each training iteration a random subset of nodes in a hidden or
+ visible layer.
  This prevents subsequent layers from adapting to specific combinations
- of node activations in the previous layer.
+ of node activations in the previous layer, in which nodes are only useful
+ in the context of a large number of other nodes.
+ It thereby reduces overfitting.
  Dropout can be used in any neural network whose input to a node is computed
  from several input nodes.
  
@@ -9675,24 +9670,25 @@ Dropout specifies a probability
 \begin_inset Formula $d$
 \end_inset
 
- for nodes in a layer to be active during a training iteration.
+ for nodes in a layer with 
+\begin_inset Formula $n$
+\end_inset
+
+ nodes to be active during a training iteration.
  In each iteration, on average only 
 \begin_inset Formula $d*n$
 \end_inset
 
  nodes' output values 
-\begin_inset Formula $o_{i}$
+\begin_inset Formula $o_{j}$
 \end_inset
 
  are computed and the other nodes are set to contribute nothing (i.e.
  
-\begin_inset Formula $o_{i}:=0$
+\begin_inset Formula $o_{j}:=0$
 \end_inset
 
 ) to the input to the next layer.
- This greatly constrains complex co-adaptations between nodes, in which
- nodes are only useful in the context of a large number of other nodes.
- It thereby reduces overfitting.
  To utilize all trained nodes during testing, all nodes contribute to the
  computation of input to a layer, but their total input must then be multiplied
  by 
@@ -9721,9 +9717,26 @@ The reasoning behind dropout is that for a network with
 \begin_inset Formula $2^{n}$
 \end_inset
 
+ networks.
+ This is faster than to do explicit model averaging over 
+\begin_inset Formula $2^{n}$
+\end_inset
+
  networks with shared weights.
- Dropping out a random fraction of nodes prevents single nodes from co-adapting
- to the specific working of a large number of other nodes.
+\end_layout
+
+\begin_layout Standard
+Dropping out a random fraction of nodes prevents single nodes from co-adapting
+ to the specific workings of a large number of other nodes.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SrivastavaSalakhutdinov2014"
+
+\end_inset
+
+ note that a side-effect of dropout is that the activations of nodes become
+ sparse, without another sparsity-inducing regularization method being used.
 \end_layout
 
 \begin_layout Standard
@@ -10001,11 +10014,13 @@ Network size increases iteratively from 3 layers, to 5 layers, to 7 layers,
 The goal of training is that the network reconstructs as output patterns
  the input patterns.
  One might think that that is too easy, since the network could just learn
- the identity function, but usually the number of nodes in at least one
- hidden layer is chosen to be smaller than the number of nodes in the input
- (and output) layer.
+ the identity function at every layer, but usually the number of nodes in
+ at least one hidden layer is chosen to be smaller than the number of nodes
+ in the input (and output) layer.
  In this way the autoencoder is forced to reconstruct its input from a compresse
 d representation.
+ Another way to obtain interesting features in the middle hidden layer is
+ to use a regularization method on the network.
 \end_layout
 
 \begin_layout Subsubsection
@@ -10075,7 +10090,8 @@ Boltzmann Machine
 
 \end_inset
 
- is an undirected graphical model that has a specific form of the conditional
+ is a stochastic version of a Hopfield network.
+ It is an undirected graphical model that has a specific form of the conditional
  probability distribution defined at each node 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -10084,7 +10100,6 @@ key "Neal1992"
 \end_inset
 
 .
- A Boltzmann Machine is a stochastic version of a Hopfield network.
  There are visible (
 \series bold
 
@@ -10099,8 +10114,8 @@ key "Neal1992"
 
 ), all of which have a binary state.
  In contrast to the Restricted Boltzmann Machine, its two kinds of nodes
- are not arranged in the visible and hidden layer, but the (undirected)
- connections can be between any two nodes.
+ are not arranged in a visible and hidden layer, but the (undirected) connection
+s can be between any two nodes.
  Like Restricted Boltzmann Machines, a Boltzmann Machine is a way to store
  a joint probability distribution.
  
