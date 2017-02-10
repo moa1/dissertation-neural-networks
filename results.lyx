@@ -773,6 +773,8 @@ deepnet
 \emph on
 deepnet
 \emph default
+ is a neural network implementation written by Nitish Srivastava, which
+ uses a matrix library (called cudamat) written by Vlad Mnih and Alex Krizhevsky
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -780,8 +782,7 @@ key "Deepnet2014"
 
 \end_inset
 
- is a neural network implementation written by Nitish Srivastava, which
- uses a matrix library (called cudamat) written by Vlad Mnih and Alex Krizhevsky.
+.
  It can run on graphics cards (supporting CUDA).
  Since graphics cards have a highly parallel architecture, training times
  are faster.

@@ -320,11 +320,34 @@ addcontentsline{toc}{section}{List of Tables}
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%% strangely, this cannot be in the LaTeX Preamble
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+refname}{Bibliography}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintAll"
 bibfiles "zusammenfassung"
-options "bibtotoc,dcbib"
+options "bibtotoc,myabbrvnat"
 
 \end_inset
 
