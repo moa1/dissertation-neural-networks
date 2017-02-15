@@ -2174,7 +2174,7 @@ key "GoriTesi1992"
  because they can perform the same computation with less total number of
  hidden nodes compared to a network with less hidden layers.
  A network with one hidden layer less needs up to an exponential factor
- more of hidden nodes 
+ more hidden nodes 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hastad1987"
@@ -2641,10 +2641,10 @@ key "HintonTeh2006"
 \end_inset
 
 .
- This machine-learning algorithm (which can be used unsupervisedly, supervisedly
-, as well as semi-supervisedly) can learn from images of objects or faces,
- where the objects or faces are in different lighting conditions or are
- viewed from different angles (
+ This machine-learning algorithm (which is unsupervised, but can be used
+ for supervised and semi-supervised learning) can learn from images of objects
+ or faces, where the objects or faces are in different lighting conditions
+ or are viewed from different angles (
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
