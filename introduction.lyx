@@ -2580,8 +2580,8 @@ batch-effect
 
 , caused, for example, by different sample handling or conditions at measurement
  time.
- This means one either has to use samples from one data set only, or, if
- one wants to use samples from different GEO data sets simultaneously, correct
+ Hence one either has to use samples from one data set only, or, if one
+ wants to use samples from different GEO data sets simultaneously, correct
  for a possible batch-effect manually, or use an algorithm that has some
  built-in mechanism to make such a correction.
 \end_layout

@@ -2372,8 +2372,7 @@ global Markov property
 \end_layout
 
 \begin_layout Standard
-This means that when we have a strictly positive joint probability distribution
- 
+Hence when we have a strictly positive joint probability distribution 
 \begin_inset Formula $P(\mathbf{N})$
 \end_inset
 
@@ -9793,21 +9792,30 @@ early stopping
 
 \end_inset
 
- is not really a regularization method, but nevertheless a method to prevent
- overfitting in supervised training of an artificial neural network.
- It is used by splitting the training data set into a real training data
- set and a validation data set, and using only the real training data set
- for adapting the weights and biases during learning.
+ is not a regularization method, but still a method to prevent overfitting
+ in supervised training of an artificial neural network.
+ The training data set is split into a training data set and a validation
+ data set, and uses only the training data set for adapting the weights
+ and biases during learning.
  After each learning iteration, the validation data set is used to compute
  the output error of the current network.
  After a defined number of training iterations, the neural network that
- had the lowest output error on the validation data set is used as the final
- network to be used in making predictions.
+ had the lowest output error on the validation data set is used for predictions.
 \end_layout
 
 \begin_layout Standard
 This prevents the training procedure from overfitting to sampling error
- present in the training data set.
+ present in the training data set
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO:Zitat
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -10067,7 +10075,7 @@ Boltzmann Machines
 status open
 
 \begin_layout Plain Layout
-TODO: Elaborate the definition
+TODO: Hier ein Diagramm einer Boltzmann Machine.
 \end_layout
 
 \end_inset
@@ -10129,7 +10137,7 @@ key "Neal1992"
 \end_inset
 
 .
- A Boltzmann Machine is a way to store a joint probability distribution.
+ A Boltzmann Machine stores a joint probability distribution.
  
 \begin_inset Note Note
 status open
@@ -10251,6 +10259,27 @@ where
 \begin_inset Formula $V_{j}$
 \end_inset
 
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+this 
+\begin_inset Formula $w_{ij}$
+\end_inset
+
+ is the same as in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Boltzmann Machine p(h=1|S)"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 , and 
 \begin_inset Formula $c_{j}$
 \end_inset
@@ -10260,23 +10289,6 @@ where
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Finding the values 
-\begin_inset Formula $s_{i}$
-\end_inset
-
- from the conditional probabilities 
-\begin_inset Formula $P(H_{i}=1\mid\mathbf{S})$
-\end_inset
-
- or 
-\begin_inset Formula $P(V_{j}=1\mid\mathbf{S})$
-\end_inset
-
- works by drawing a one with these conditional probabilities and a zero
- otherwise.
 \end_layout
 
 \begin_layout Standard
@@ -10294,16 +10306,6 @@ TODO: rewrite the following using consistent variable names and fonts.
 
 \begin_layout Paragraph
 Gibbs Sampling in Boltzmann Machines
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: probably move this somewhere else
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -10316,8 +10318,16 @@ key "Neal1993"
 \end_inset
 
  applies, which works by iteratively drawing the state of an unknown variable
+ 
+\begin_inset Formula $s_{i}$
+\end_inset
+
  from its conditional probability distribution, given the states of all
- other variables.
+ other variables 
+\begin_inset Formula $\mathbf{s_{j:j\neq\mathbf{i}}}$
+\end_inset
+
+.
  See section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -10463,12 +10473,20 @@ key "Neal1992"
 \end_inset
 
 .
- The goal is to find a delta for each weight 
+ The goal is to find a delta 
+\begin_inset Formula $\Delta w_{ij}$
+\end_inset
+
+ for each weight 
 \begin_inset Formula $w_{ij}$
 \end_inset
 
 , which can be added to the weight, so that the likelihood for the training
- sample increases.
+ sample using the updated weights 
+\begin_inset Formula $w_{ij}+\Delta w_{ij}$
+\end_inset
+
+ increases.
  The derivative of the log-likelihood with respect to a weight 
 \begin_inset Formula $w_{ij}$
 \end_inset
@@ -10509,7 +10527,6 @@ key "Neal1992"
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Paragraph
@@ -10539,8 +10556,8 @@ positive phase
 
 , and then the states of the remaining (i.e.
  hidden) nodes are sampled via Gibbs Sampling.
- This means starting in any (for example random) configuration of the hidden
- nodes, repeatedly sampling each remaining variable 
+ We start in any (for example random) configuration of the hidden nodes,
+ repeatedly sample each remaining variable 
 \begin_inset Formula $S$
 \end_inset
 
@@ -10550,7 +10567,7 @@ positive phase
 \begin_inset Formula $P(S_{i}=s_{i}\mid\mathbf{S_{j}}=\mathbf{s_{j}}:j\neq i)$
 \end_inset
 
-) until the Gibbs sampler reaches equilibrium, and recording the state 
+) until the Gibbs sampler reaches equilibrium, and record the state 
 \begin_inset Formula $s_{i}$
 \end_inset
 
@@ -10563,14 +10580,22 @@ positive phase
 \begin_inset Formula $s_{i}$
 \end_inset
 
- a few times when the Markov chain is in equilibrium, we determine their
- probability distributions.
- Thus, the conditional probability distribution of the remaining variables
- 
+ a few times 
+\begin_inset Formula $t$
+\end_inset
+
+ when the Markov chain is in equilibrium, we determine their probability
+ distributions, where 
+\begin_inset Formula $t$
+\end_inset
+
+ depends on the desired resolution of the probabilities.
+ The conditional probability distribution of the remaining variables 
 \begin_inset Formula $P(\mathbf{S=s}|\mathbf{V=v})$
 \end_inset
 
- is determined, and therefore the term 
+ is determined.
+ Therefore the term 
 \begin_inset Formula $\sum_{\mathbf{s}}P(\mathbf{S=s}|\mathbf{V=v})s_{i}s_{j}$
 \end_inset
 
@@ -10641,8 +10666,19 @@ learning rate
 
 \end_inset
 
- (a small positive real constant) and added to the current weights.
- Then another training iteration is started.
+ 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ (a small positive real constant) and added to the current weights
+\begin_inset Formula 
+\[
+w_{ij}^{(t+1)}=w_{ij}^{(t)}+\epsilon\frac{\partial L}{\partial w_{ij}}.
+\]
+
+\end_inset
+
+Then another training iteration is started.
  This is repeated until the derivatives all converge to zero.
 \end_layout
 
@@ -10744,6 +10780,14 @@ key "Smolensky1986"
 
 , a Restricted Boltzmann Machine has binary visible and hidden nodes.
  There are extensions to real-valued nodes, however.
+ See for example 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "FischerIgel2012"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -11025,8 +11069,8 @@ The negative phase
 
  is not as straightforward to compute.
  It may be approximated by running a Gibbs chain until convergence.
- This means initializing the network with any state, and then alternatingly
- computing 
+ We first initialize the network with any state, then alternatingly compute
+ 
 \begin_inset Formula $P(\mathbf{H}\mid\mathbf{V})$
 \end_inset
 
@@ -11080,6 +11124,10 @@ contrastive divergence
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 (As 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -11100,6 +11148,11 @@ key "BengioDelalleau2007"
 \end_inset
 
 .)
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -11124,15 +11177,14 @@ Interpreting the Output of a Node as a Continuous Value
 \end_layout
 
 \begin_layout Standard
-The output of a node in a Restricted Boltzmann Machine, as orignially proposed,
- is binary (i.e.
+The output of a node in a Restricted Boltzmann Machine, is binary (i.e.
  either 0 or 1).
  However the sigmoid activation function outputs continuous values between
  0 and 1.
  This output of the sigmoid activation function is interpreted as the probabilit
 y that the node outputs value 1, and 0 otherwise.
- Using this output value directly, without using it to sample from a binomial
- distribution, allows the output to be from the interval 
+ Using this output value directly, without sampling from a binomial distribution
+, allows the output to be from the interval 
 \begin_inset Formula $\{0,1\}$
 \end_inset
 
@@ -11204,6 +11256,20 @@ key "HintonSalakhutdinov2006"
 
  and variance 
 \begin_inset Formula $\sigma(x)$
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer wants to know where the 
+\begin_inset Formula $N(0,\sigma(x))$
+\end_inset
+
+ term comes from, but I can't find the paper offline.
+\end_layout
+
 \end_inset
 
 .
@@ -12348,212 +12414,6 @@ TODO: HIER WEITERMACHEN.
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-How Unlabeled Data Was Used in Training
-\end_layout
-
-\begin_layout Standard
-In the following, we will discuss how we used unlabeled data in semi-supervised
- training.
-\end_layout
-
-\begin_layout Subsubsection
-How Unlabeled Data was Used in Training Autoencoders
-\end_layout
-
-\begin_layout Standard
-Autoencoders
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-autoencoder
-\end_layout
-
-\end_inset
-
- are composed of an encoder
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-encoder
-\end_layout
-
-\end_inset
-
- and a decoder
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-decoder
-\end_layout
-
-\end_inset
-
-.
- The encoder tries to compress the input data and the decoder tries to reconstru
-ct the input from its compressed form.
- Training autoencoders is unsupervised.
- As a general rule only the samples designated as 
-\begin_inset Quotes eld
-\end_inset
-
-unlabeled
-\begin_inset Quotes erd
-\end_inset
-
- were used in training the unsupervised part of an algorithm.
-\end_layout
-
-\begin_layout Standard
-The decoder network of the trained autoencoder was then thrown away, so
- that only the encoder remained.
- Classification was done on the compressed representation of the input.
- The classifier network was built on top of the encoder (see figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:supervised-network-on-top-of-unsupervised"
-
-\end_inset
-
-), and the compressed output layer of the encoder was used as the input
- layer of the classifier.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename images/progress_report_201411-unsupervised-to-supervised.eps
-	width 35page%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:supervised-network-on-top-of-unsupervised"
-
-\end_inset
-
-
-\begin_inset Argument 1
-status open
-
-\begin_layout Plain Layout
-How a supervised network is trained on top of a pre-trained unsupervised
- network.
-\end_layout
-
-\end_inset
-
-Example scheme showing how the supervised network is trained on top of a
- pre-trained unsupervised network.
- The network receives input from the bottom, and the resulting label is
- read off at the top.
- The unsupervised network can be more than 2 layers deep.
- It is trained first during pre-training.
- Then the supervised network is appended onto the top and trained together
- with the unsupervised network.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The weights of the classifier were initialized randomly, and standard back-propa
-gation was used to train the whole network to classify samples.
- Hence, the encoder can be modified by back-propagation training, but pre-traini
-ng with the autoencoder initializes it to a configuration that 
-\begin_inset Quotes eld
-\end_inset
-
-knows
-\begin_inset Quotes erd
-\end_inset
-
- about the unlabeled samples.
- The learning rate of the second training run (
-\emph on
-fine-tuning
-\emph default
-
-\begin_inset Index idx
-status collapsed
-
-\begin_layout Plain Layout
-fine-tuning
-\end_layout
-
-\end_inset
-
-) should be small enough not to diverge from the unlabeled training configuratio
-n in too large steps (per iteration).
-\end_layout
-
-\begin_layout Subsubsection
-How Unlabeled Data was Used When Pre-training a Restricted Boltzmann Machine
- and Fine-tuning Using Back-propagation
-\end_layout
-
-\begin_layout Standard
-When using the unsupervised Restricted Boltzmann Machine to find the approximate
- weights of a neural network, the unlabeled data were used to train the
- Restricted Boltzmann Machine.
- The resulting neural network was then extended with the network layer for
- supervised classification, and the complete network was trained using (supervis
-ed) back-propagation on the labeled data.
-\end_layout
-
-\begin_layout Subsubsection
-How Unlabeled Data was Used in Training Deep Belief Networks
-\end_layout
-
-\begin_layout Standard
-Deep Belief Networks are an unsupervised algorithm and thus were trained
- using unlabeled data
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-see section 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Deep-Belief-Network"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
- As with Restricted Boltzmann Machines, the resulting network was then extended
- with the classifier layer, and the complete network was fine-tuned using
- back-propagation on the labeled data.
 \end_layout
 
 \end_body
