@@ -126,64 +126,17 @@ The goal of personalized medicine is to provide custom-tailored medicine
  patient out of the available treatments.
  The treatment should have a high probability of succeeding.
  One way of approaching this is through machine learning on the expression
- data from a patients tissue to predict the treatment outcome.
+ data from a patient's tissue to predict treatment outcome.
  Such a prediction requires similar expression data from multiple patients
- that already underwent the treatment in question and where the therapy
- outcome is known.
+ that already underwent the treatment and where the therapy outcome is known.
 \end_layout
 
 \begin_layout Standard
 In order to evaluate the usefulness of deep learning in the context of personali
-zed medicine, we searched for a data set that had something to do with drug
+zed medicine, we analyzed a data set that had something to do with drug
  sensitivity and resistance.
- The 
-\begin_inset Quotes eld
-\end_inset
-
-Gene Expression Omnibus
-\begin_inset Quotes erd
-\end_inset
-
- is a database of expression data, mostly from high-dimensional microarray
- and RNA-Seq experiments 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "BarrettSoboleva2013"
-
-\end_inset
-
-.
- We conducted a GEO database search.
- All data sets uploaded to GEO between January 1st 2000, and August 31st
- 2013 were considered and their titles and abstracts searched for 
-\begin_inset Quotes eld
-\end_inset
-
-sensitiv
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-resist
-\begin_inset Quotes erd
-\end_inset
-
-.
- The ones having a match were sorted by the number of samples in the data
- set because deep neural network learning seems to require big data sets,
- and we have to split samples into a training, validation, and test data
- set.
- We read the abstracts of this list, starting from the top.
- GSE25055 and GSE25065 were among those that really had something to do
- with drug sensitivity and had a relatively high sample count.
-\end_layout
-
-\begin_layout Standard
-GSE25055 and GSE25065 are microarray expression data sets produced for the
- same paper, namely 
+ GSE25055 and GSE25065 are microarray expression data sets produced for
+ the same paper, namely 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "HatzisSymmans2011"
@@ -209,7 +162,8 @@ acycline chemotherapy.
 \end_layout
 
 \begin_layout Standard
-After a mean of 3 years, the patients were labeled as either showing 
+After an observation period of a couple of years, the mean of which was
+ 3 years, the patients were labeled as either showing 
 \emph on
 pCR
 \emph default
@@ -595,7 +549,7 @@ Goal of this Work
 The context of this work is the use of classifiers on high-dimensional data
  as supporting tools for treatment decisions.
  Two types of neural networks that lend themselves to semi-supervised training
- were used: autoencoders and deep belief networks.
+ were used: autoencoders and Deep Belief Networks.
  Parallel to these, the performance of a semi-supervised version of Support
  Vector Machines, namely the Transductive SVM was evaluated.
 \end_layout
@@ -1275,7 +1229,7 @@ key "Deepnet2014"
  are faster.
  However, because graphics cards have to process large data, their RAM is
  more expensive than normal RAM for PCs.
- The graphics cards tried have 4 GB of RAM installed.
+ The graphics cards used have 4 GB of RAM installed.
  
 \emph on
 deepnet
@@ -1324,8 +1278,10 @@ Training Iterations and Evaluations
 \begin_layout Standard
 We trained both the unsupervised as well as the supervised network for a
  pre-determined number of iterations.
- This number was determined by a trial run on one data set, so that the
- improvement of the neural network was only marginal at the end.
+ This number was determined by a trial training run on the data set in question.
+ The trial training run was continued as long as we considered the reconstructio
+n error (for unsupervised training) or accuracy changes (for supervised
+ networks) of the neural network substantial.
  There were usually between 100,000 and 1,000,000 iterations (
 \emph on
 deepnet
@@ -1380,7 +1336,17 @@ stat classifier_1452806285; stat classifier_LAST
 For example, training 100,000 (unsupervised) DBN iterations of the first
  hidden layer of classification run breast_cancer_15_aa, which consists
  of a 22283-10-10-10-1 network, took 2 hours on 1 core of the aforementioned
- 32 cores computer.
+ 32 cores computer
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer meint, ich soll hier eine table mit running times einfügen.
+\end_layout
+
+\end_inset
+
+.
  The second and third hidden layer took about 15 minutes.
  Computing 1,000,000 (supervised) back-propagation iterations of the same
  run took a little less than 6 hours.
@@ -1388,8 +1354,18 @@ For example, training 100,000 (unsupervised) DBN iterations of the first
  rate, and number of training iterations.
  Classifying a sample took about as long as 1 supervised training iteration
  and thus was almost instant.
- (Note that running time here does not mean time until convergence, which
- depends on the specific training samples.)
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(Note that running time here does not mean time until convergence, which
+ depends on the specific training samples.) hä?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1497,6 +1473,17 @@ We used model selection in training the (supervised) classifiers, because
  used to pick the model (see below); and a test data set, which was used
  to evaluate the accuracy of the neural network picked using the validation
  data set.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer meint, ich sollte hier ein Bildchen einfügen, aber ich weiss
+ nicht was in dem Bildchen abgebildet sein könnte.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -1828,7 +1815,9 @@ deepnet
 \begin_inset Newline newline
 \end_inset
 
-In an initial learning trial, the following settings for 
+The optimal value can vary greatly between different data sets.
+ It was selected using a grid search.
+ For example, in an initial learning trial, the following settings for 
 \emph on
 
 \begin_inset Formula $base\textrm{\_}epsilon$
@@ -1846,12 +1835,25 @@ reference "tab:Effect-of-learning-rate-on-reconstruction-error"
 \end_inset
 
 .
- In this case, 0.01 was a good tradeoff between accuracy and training speed.
- However, the optimal value can vary greatly between different data sets.
-\begin_inset Newline newline
+ In this case, 0.01 was a good tradeoff between accuracy and training speed
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer hat hier 
+\begin_inset Quotes eld
 \end_inset
 
+???
+\begin_inset Quotes erd
+\end_inset
 
+ in den Rand geschrieben, aber ich verstehe nicht, was er nicht versteht.
+\end_layout
+
+\end_inset
+
+.
 \begin_inset Float table
 wide false
 sideways false
@@ -1975,7 +1977,7 @@ breast_cancer_02_a
 \begin_inset Text
 
 \begin_layout Plain Layout
-T_E was still falling
+converging T_E
 \end_layout
 
 \end_inset
@@ -2013,7 +2015,7 @@ NA
 \begin_inset Text
 
 \begin_layout Plain Layout
-in a chaotic state
+T_E in a chaotic state
 \end_layout
 
 \end_inset
@@ -2051,7 +2053,7 @@ breast_cancer_02_c
 \begin_inset Text
 
 \begin_layout Plain Layout
-last 3 T_E repeat
+oscillating T_E
 \end_layout
 
 \end_inset
@@ -2089,7 +2091,7 @@ breast_cancer_02_d
 \begin_inset Text
 
 \begin_layout Plain Layout
-T_E was still falling
+converging T_E
 \end_layout
 
 \end_inset
@@ -2127,7 +2129,7 @@ breast_cancer_02_e
 \begin_inset Text
 
 \begin_layout Plain Layout
-T_E was still falling
+converging T_E
 \end_layout
 
 \end_inset
@@ -2181,6 +2183,17 @@ min T_E
 \end_inset
 
  is the minimal reconstruction error in 5,100,000 iterations.
+ 
+\begin_inset Quotes eld
+\end_inset
+
+NA
+\begin_inset Quotes erd
+\end_inset
+
+ means not applicable.
+ The table shows that the learning rate base_epsilon has a large effect
+ on the minimal reconstruction error.
 \end_layout
 
 \end_inset
@@ -2436,10 +2449,6 @@ status open
 \end_layout
 
 \begin_layout Subsection
-Nomenclature of Data Sets and Training Runs
-\end_layout
-
-\begin_layout Subsection
 Overview Over the Following Sections
 \end_layout
 
@@ -2572,11 +2581,43 @@ One label was on a data set whose prediction reached an accuracy (of about
 \end_layout
 
 \begin_layout Standard
-As we will see, only the very last attempts with artificial neural networks
- show partially that adding unlabeled data in training leads to slightly
+As we will see, only the attempts with artificial neural networks in section
+ 
+\series bold
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:breast_cancer_15"
+
+\end_inset
+
+
+\series default
+ show partially that adding unlabeled data in training leads to 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+slightly
+\end_layout
+
+\end_inset
+
  better classifiers.
  This is also true for the established semi-supervised TSVM, which only
- show improvement for the last attempts when adding unlabeled data to training.
+ show improvement when adding unlabeled data to training for the last tried
+ data sets in section 
+\series bold
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:breast_cancer_15"
+
+\end_inset
+
+
+\series default
+.
  We therefore believe that it is mainly a property of the data set whether
  a semi-supervised machine learning algorithm can benefit from unlabelled
  data.
@@ -2587,7 +2628,8 @@ Nomenclature of Data Sets and Training Runs
 \end_layout
 
 \begin_layout Standard
-The data sets created all have a prefix of 
+The various data sets created from the GEO data sets GSE25055 and GSE25065
+ all have a prefix of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2605,6 +2647,8 @@ breast_cancer_04
 \end_inset
 
  is the fourth data set created.
+ The data sets created differ mainly in how the training, validation, and
+ testing data sets were selected.
 \end_layout
 
 \begin_layout Standard
@@ -15673,14 +15717,14 @@ status open
 
 \begin_layout Plain Layout
 Accuracy comparison of supervised feed-forward network, semi-supervised
- deep belief network, supervised support vector machine, and semi-supervised
+ Deep Belief Network, supervised support vector machine, and semi-supervised
  transductive support vector machine.
 \end_layout
 
 \end_inset
 
 Accuracy comparison of (a) supervised feed-forward network, (b) semi-supervised
- deep belief network, (c) supervised support vector machine, and (d) semi-superv
+ Deep Belief Network, (c) supervised support vector machine, and (d) semi-superv
 ised transductive support vector machine.
  On the x-axis of each plot are the sub-data-sets (of breast_cancer_12)
  predicted for each algorithm, on the y-axis is the accuracy.
