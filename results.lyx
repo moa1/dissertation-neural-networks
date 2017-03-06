@@ -2629,7 +2629,12 @@ Nomenclature of Data Sets and Training Runs
 
 \begin_layout Standard
 The various data sets created from the GEO data sets GSE25055 and GSE25065
- all have a prefix of 
+ differ mainly in how the training, validation, and testing data sets were
+ selected.
+\end_layout
+
+\begin_layout Standard
+They all have a prefix of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2647,8 +2652,6 @@ breast_cancer_04
 \end_inset
 
  is the fourth data set created.
- The data sets created differ mainly in how the training, validation, and
- testing data sets were selected.
 \end_layout
 
 \begin_layout Standard
@@ -3055,9 +3058,39 @@ Rectionstruction error of data set breast_cancer_0.
  Left: True (x-axis) versus reconstructed (y-axis) expression values of
  data set breast_cancer_0.
  The heatmap shows pixels from red over yellow to white.
- A pixel in red means zero genes and in white means many genes that have
- the pixel's true and reconstructed expression value.
- Middle: Boxplot of reconstruction errors of the 10,000 most variable genes.
+ A pixel in red means zero genes and in white means 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: find out how many genes a red (RGB=(255,255,255)) pixel stands for.
+ Rainer wants this.
+\end_layout
+
+\end_inset
+
+many genes that have the pixel's true and reconstructed expression value.
+ Middle:
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer will wissen: 
+\begin_inset Quotes eld
+\end_inset
+
+wie kommt es zu den großen Fehlern.
+ [bei den outliern über dem 95% (99%?) quantil] Welche Eigenschaften haben
+ diese Gene?
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Boxplot of reconstruction errors of the 10,000 most variable genes.
  Right: Histogram of reconstruction errors of the 10,000 most variable genes.
  Most genes have a low reconstruction error.
  Displayed is the mean reconstruction error over all test samples.
@@ -3467,9 +3500,8 @@ Definition of labeled data sets
 \end_layout
 
 \begin_layout Standard
-The smaller and smaller labeled training data sets were defined by taking
- smaller and smaller fractions of the total 306 available labeled GSE25055
- samples.
+To define the smaller and smaller labeled training data sets, we took smaller
+ and smaller fractions of the total 306 available labeled GSE25055 samples.
  The fractions were as displayed in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4139,8 +4171,7 @@ rep
 \begin_inset Quotes erd
 \end_inset
 
-).
- This is to be able to draw error bars.
+), to be able to draw error bars.
  Note that the number of samples is not balanced between label 0 and label
  1 samples.
 \end_layout
@@ -4482,7 +4513,7 @@ breast_cancer_04_bg - bj
 
 \end_inset
 
-For unsupervised pre-training of the RBM, we tried different configurations
+For unsupervised pre-training of the RBM, we tried four different configurations
  that are denoted in table 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4492,8 +4523,12 @@ reference "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
 
 .
  (They were re-used from the runs labeled breast_cancer_04, which are not
- described here.) The reconstruction errors observed at the input layer during
- training are shown in figure 
+ described here.)
+\end_layout
+
+\begin_layout Standard
+The reconstruction errors observed at the input layer during training are
+ shown in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
@@ -4501,11 +4536,10 @@ reference "fig:reconstruction-errors-of-breast_cancer_04_bg-bj"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Of note in this plot is that there is no overfitting since training reconstructi
-on error does not rise at the end of training.
+ In each training step, they (stochastically) decrease for all four configuratio
+ns and for training, validation, and testing data set.
+ Of note in this plot is that there is no overfitting since training reconstruct
+ion error does not rise at the end of training.
  Also note that reconstruction error is not normalized to the number of
  samples.
 \end_layout
@@ -5486,12 +5520,20 @@ name "tab:deepnet-settings-for-breast_cancer_04_bg-bj"
 status open
 
 \begin_layout Plain Layout
-Settings for unsupervised pre-training RBMs breast_cancer_04_bg - bj.
+
+\emph on
+deepnet 
+\emph default
+settings for unsupervised pre-training RBMs breast_cancer_04_bg - bj.
 \end_layout
 
 \end_inset
 
-Settings for unsupervised pre-training RBMs breast_cancer_04_bg - bj.
+
+\emph on
+deepnet 
+\emph default
+settings for unsupervised pre-training RBMs breast_cancer_04_bg - bj.
  No entry in a cell means that it has the same value as the cell to the
  left.
 \end_layout
@@ -6874,6 +6916,11 @@ reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-la
 
 , this is due to an unbalanced number of label 0 and label 1 samples in
  the training set.
+ The tendency that the accuracies for 18 labeled samples are about as high
+ as those for 302 labeled samples, and are the lower the closer the number
+ of labeled samples are to 76 samples, could be due to using the same pre-traine
+d hidden-layer weights and biases across the 5 repetitions.
+ (The training and validation data are sampled independelty though.)
 \end_layout
 
 \begin_layout Standard
@@ -8909,6 +8956,9 @@ reference "fig:Accuracy-box-plots-of-SVM-on-breast_cancer_07"
 
  shows there is the tendency that adding more samples to supervised learning
  yields better accuracy.
+ Although the 25%- and 75%-quantile of the boxplots suggest different variances,
+ we believe that the boxplots should not be over-interpreted, as there are
+ only 5 data points (5 subsamplings).
 \end_layout
 
 \begin_layout Subsubsection
@@ -10080,6 +10130,24 @@ _07_aj).
 
 ) in the data sets with little labeled samples.
  However, this assertion should be re-done with more than 5 repetitions.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer meint, ich sollte dieses 
+\begin_inset Quotes eld
+\end_inset
+
+re-doing
+\begin_inset Quotes erd
+\end_inset
+
+ noch machen.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -11270,10 +11338,10 @@ key "JohnsonRabinovic2007"
  Because MAS5 does not logarithmize the data, but RMA does, MAS5 was tried
  with additional logarithmizing of the data.
  ComBat was designed as a batch-effect correction method.
- This means it tries to produce a data set with the same size as the original
- one, but with a possible batch-effect between samples removed.
+ It produces a data set with the same size as the original one, but with
+ batch-effects between samples removed.
  As input, ComBat needs the expression matrix and, for each sample, the
- batch number it was measured in.
+ batch.
  
 \begin_inset Note Note
 status open
@@ -12036,7 +12104,7 @@ reference "tab:Reconstruction-error-for-breast_cancer_08"
 \end_layout
 
 \begin_layout Itemize
-The reconstruction error becomes higher the more unlabeled data there are.
+The reconstruction error increases the more unlabeled data there are.
  
 \begin_inset Note Note
 status open
@@ -12069,8 +12137,8 @@ The standard deviation of the reconstruction errors across replicates (i.e.
 
 \end_deeper
 \begin_layout Itemize
-Additional ComBat batch effect correction does not seem to improve the reconstru
-ction error of RMA or MAS5 normalized data.
+Additional ComBat batch effect correction does not improve the reconstruction
+ error of RMA or MAS5 normalized data.
 \end_layout
 
 \begin_deeper
@@ -12902,8 +12970,8 @@ name "sec:breast_cancer_12"
 \end_layout
 
 \begin_layout Standard
-A flaw in the design of the data sets of breast_cancer_08 is that the number
- of label 0 and label 1 samples is not balanced.
+A problem in the design of the data sets of breast_cancer_08 is that the
+ number of label 0 and label 1 samples is not balanced.
  This is due to the class imbalance in GSE25055 and GSE25065.
  The next data set 
 \begin_inset Index idx
@@ -15498,8 +15566,20 @@ explode
 \begin_inset Quotes erd
 \end_inset
 
- (i.e.
- their parameters and reconstruction error oscillate).
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I.e.
+ their parameters and reconstruction error oscillate because neural network
+ training is a gradient descent method, with the gradient decent step controlled
+ by the learning rate.
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -18418,7 +18498,6 @@ reference "tab:breast_cancer_12-FFN-versus-DBN"
 
 \begin_layout Standard
 The lowest adjusted p-value is 0.158 between SVM and TSVM on data set 1.
- Some people consider this significant.
 \end_layout
 
 \begin_layout Subsubsection
@@ -26938,8 +27017,8 @@ name "sub:Data-Set-Design-of-breast_cancer_15"
 \end_layout
 
 \begin_layout Standard
-To exclude the possibility that a batch effect between GSE25055 and GSE25065
- ruins semi-supervised learning, in breast_cancer_15 we only use GSE25055,
+To exclude that a batch effect between GSE25055 and GSE25065 negatively
+ affects semi-supervised learning, in breast_cancer_15 we only use GSE25055,
  also for testing.
  Again we use 10|10 labeled training and validation samples.
  This leaves us with remaining 
@@ -29318,7 +29397,17 @@ reference "fig:Accuracy-box-plots-of-breast_cancer_15"
 \end_inset
 
  shows the accuracies on the test sets.
- Training failed in data set 2.
+ Inexplicably
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer is interested in a possible reason
+\end_layout
+
+\end_inset
+
+, training failed in data set 2.
  Except for data set 2, one can see a slight accuracy increase from data
  set 1 to data set 6, i.e.
  from the data set with no unlabeled samples to the data set with the most
