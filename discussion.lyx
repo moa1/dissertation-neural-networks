@@ -74,9 +74,9 @@ Discussion
 \end_layout
 
 \begin_layout Standard
-We tried finding evidence that adding unlabeled data to semi-supervised
- training is beneficial in deep neural networks, when predicting breast
- cancer recurrence after chemotherapy.
+We evaluated whether adding unlabeled data to semi-supervised training is
+ beneficial in deep neural networks, when predicting breast cancer recurrence
+ after chemotherapy.
 \end_layout
 
 \begin_layout Subsection
@@ -88,7 +88,8 @@ Using Tumour Expression Data Directly to Classify Recurrence
 \end_layout
 
 \begin_layout Standard
-We predicted recurrence directly from expression data.
+We predicted breast cancer recurrence after reductive surgery followed by
+ chemotherapy directly from expression data.
  Papers that use neural networks to classify cancerous tissue are for example
  
 \begin_inset CommandInset citation
@@ -137,7 +138,7 @@ key "HatzisSymmans2011"
 \end_inset
 
 , the larger data set GSE25055 was used for training a classifier, and the
- independently measured data set GSE25065 was used for testing the classifier.
+ data set of independent cases GSE25065 was used for testing the classifier.
  We used artificial neural networks as classifiers by predicting the class
  1 probability of the samples.
 \end_layout
@@ -187,10 +188,29 @@ key "AppelSpang2011"
 
 \end_inset
 
- is straightforward, because the network outputs class probabilities anyways.
- Last, but not least, artificial neural networks are supposed to be plausible
- models of the real biological neural networks, which are the control centers
- of animals, and were shaped by evolution during millions of years.
+ is straightforward, because the network outputs class probabilities anyways
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: ask Rainer what he means by: 
+\begin_inset Quotes eld
+\end_inset
+
+yes, but what do these probabilities mean.
+ If you have a class 1 probability at 0.7, which event has probability 0.7?
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Last, but not least, artificial neural networks are plausible models of
+ the real biological neural networks, which are the control centers of animals,
+ and were shaped by evolution during millions of years.
  However, neural networks' versatility can also be a disadvantage: it is
  often not clear what component or parameter to modify to achieve a desired
  result.
@@ -212,11 +232,9 @@ key "ErhanBengio2010"
 .
  There are some differences between those fields and the scenario of microarray
  expression data: The dimensionality of microarrays is usually higher than
- that of images or phonemes.
- Expression data sets differ from these data sets in mainly two aspects:
- their dimensionality is higher (~1000 pixels versus ~20,000 genes), but
- the training set sizes are several magnitudes smaller (thousands to tenthousand
-s versus tens to hundreds).
+ that of images or phonemes (~1000 pixels versus ~20,000 genes), but the
+ training set sizes are several magnitudes smaller (thousands to tenthousands
+ versus tens to hundreds).
  For example, in the image classification task in the ImageNet Large Scale
  Visual Recognition Challenge 
 \begin_inset CommandInset citation
@@ -342,12 +360,11 @@ Model Selection
 \begin_layout Standard
 We always selected the iteration/model of the neural network that had the
  highest validation set accuracy.
- There was the problem that very few samples lead to very few different
- possible accuracy values.
+ Few samples lead to few different possible accuracy values.
  To be able to choose the best model among candidates that have only few
- possible accuracies, we smoothed the accuracies over time/iterations.
- We deem this justified because the network's state of parameters at a specific
- iteration is closest to its state of parameters at the closest iterations.
+ possible accuracies, we smoothed the accuracies over time (or iterations),
+ because the network's state of parameters at a specific iteration is closest
+ to its state of parameters at the closest iterations.
  The artificial neural networks change only little every iteration.
 \end_layout
 
@@ -436,9 +453,10 @@ Only the very last approaches tried (data set breast_cancer_15) showed a
  Second, we used all 22,283 genes as input instead of only the 500 most
  variable genes.
  Third, we tested on GSE25055 instead of GSE25065.
- The benefit using unlabeled samples is not due to the first point, since
- TSVM was not influenced by this point, but also showed the benefit.
- Whether the benefit is due to the second or third point remains to be seen.
+ The benefit using unlabeled samples is not due to less hidden layer neurons,
+ since TSVM was not influenced by this point, but also showed the benefit.
+ Whether the benefit is due to using all 22,283 genes or testing on the
+ same data set as used for training remains to be seen.
 \end_layout
 
 \begin_layout Subsection
@@ -453,7 +471,27 @@ More Advanced Prediction Schemes
 More sophisticated prediction schemes can be imagined so that the prediction
  made produces more than one number: For example, in addition to the severity
  of the disease after therapy (a number between 0 and 1), the number of
- metastases (a natural number) could be trained and predicted.
+ metastases
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO: Rainer frägt: 
+\begin_inset Quotes eld
+\end_inset
+
+How do you count them? Some are very small.
+\begin_inset Quotes erd
+\end_inset
+
+ But I don't understand what he means.
+ The only (small) problem I see is how to represent a natural number as
+ a number between 0 and 1 to be used in the input of the neural network.
+\end_layout
+
+\end_inset
+
+ (a natural number) could be trained and predicted.
  Such a prediction is not made in this work, because only little clinical
  data was recorded in GSE25055 and GSE25065.
  However, in the neural network it would be straightforward to predict such
