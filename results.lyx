@@ -548,8 +548,9 @@ Goal of this Work
 \begin_layout Standard
 The context of this work is the use of classifiers on high-dimensional data
  as supporting tools for treatment decisions.
- Two types of neural networks that lend themselves to semi-supervised training
- were used: autoencoders and Deep Belief Networks.
+ Three types of neural networks that lend themselves to semi-supervised
+ training were used: autoencoders, Restricted Boltzmann Machines and Deep
+ Belief Networks.
  Parallel to these, the performance of a semi-supervised version of Support
  Vector Machines, namely the Transductive SVM was evaluated.
 \end_layout
@@ -1369,18 +1370,25 @@ status open
 \end_layout
 
 \begin_layout Standard
-SVMlight and the R package e1071 
+As Transductive Support Vector Machine implementation we used SVMlight,
+ and as Support Vector Machine implementation we used the R package e1071
+ 
 \emph on
 svm
 \emph default
- function 
+ function
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Joachims1999,R2008"
 
 \end_inset
 
- took a few minutes to train and classify breast_cancer_15_aa.
+.
+ SVMlight and the R package e1071 
+\emph on
+svm
+\emph default
+ function took a few minutes to train and classify breast_cancer_15_aa.
 \end_layout
 
 \begin_layout Subsection
@@ -1630,10 +1638,7 @@ key "R2008"
 \end_inset
 
  for the SVM implementation and TSVM.
-\end_layout
-
-\begin_layout Standard
-SVMlight and the R package e1071 
+ SVMlight and the R package e1071 
 \emph on
 svm
 \emph default
@@ -3117,7 +3122,7 @@ reference "fig:Reconstruction-error-breast_cancer_0"
 
  middle).
  Considering that the possible range (log2-intensities) of microarray values
- is in [0;16], this is equivalent to a relative error of 3.5%.
+ is in the interval [0;16], this is equivalent to a relative error of 3.5%.
  This demonstrated that RBMs are able to reduce dimensionality of an expression
  data set while preserving most information.
 \end_layout
@@ -6920,7 +6925,7 @@ reference "sub:Increasing-number-of-labeled-samples-and-equal-number-of-class-la
  as those for 302 labeled samples, and are the lower the closer the number
  of labeled samples are to 76 samples, could be due to using the same pre-traine
 d hidden-layer weights and biases across the 5 repetitions.
- (The training and validation data are sampled independelty though.)
+ (The supervised training and validation data are sampled independelty though.)
 \end_layout
 
 \begin_layout Standard
