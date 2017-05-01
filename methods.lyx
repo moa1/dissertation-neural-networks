@@ -9604,10 +9604,10 @@ sparsity cost
 
 
 \begin_inset Formula 
-\begin{eqnarray*}
-\Delta w_{ji} & = & -\epsilon\left(\frac{\partial E}{\partial w_{ji}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right)o_{i}\\
-\Delta b_{j} & = & -\epsilon\left(\frac{\partial E}{\partial b_{j}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right).
-\end{eqnarray*}
+\begin{eqnarray}
+\Delta w_{ji} & = & -\epsilon\left(\frac{\partial E}{\partial w_{ji}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right)o_{i}\label{eq:backpropagation-delta-for-sparsity}\\
+\Delta b_{j} & = & -\epsilon\left(\frac{\partial E}{\partial b_{j}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right).\nonumber 
+\end{eqnarray}
 
 \end_inset
 
@@ -9805,13 +9805,10 @@ early stopping
 
 \begin_layout Standard
 This prevents the training procedure from overfitting to sampling error
- present in the training data set
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO:Zitat
-\end_layout
+ present in the training data set 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Prechelt1997"
 
 \end_inset
 
@@ -10071,11 +10068,54 @@ Boltzmann Machines
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
-TODO: Hier ein Diagramm einer Boltzmann Machine.
+\align center
+\begin_inset Graphics
+	filename images/boltzmann-machine-example.dia
+	width 40col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Boltzmann-Machine-schema"
+
+\end_inset
+
+A schematic example of a Boltzmann Machine.
+ 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+A schematic example of a Boltzmann Machine.
+\end_layout
+
+\end_inset
+
+ There are visible nodes V1 to V5 and hidden nodes H1 to H3, each of which
+ have a real-valued bias.
+ Pairs of nodes are connected with an undirected and real-valued weight.
+ All pairs of nodes can be connected by a weight different from 0, but self-conn
+ections are not allowed.
+ A Boltzmann Machine stores a joint probability distribution (see text).
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -10108,6 +10148,14 @@ key "Neal1992"
 \end_inset
 
 .
+ An schematic example can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Boltzmann-Machine-schema"
+
+\end_inset
+
+.
  There are visible nodes 
 \series bold
 
@@ -10136,18 +10184,16 @@ key "Neal1992"
 \begin_inset Formula $w_{ij}$
 \end_inset
 
-.
- A Boltzmann Machine stores a joint probability distribution.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: Example figure of a BM.
-\end_layout
-
+, with the restrictions that there are no self-connections (
+\begin_inset Formula $w_{ii}=0$
 \end_inset
 
+) and all connections are symmetric (
+\begin_inset Formula $w_{ij}=w_{ji}$
+\end_inset
+
+).
+ A Boltzmann Machine stores a joint probability distribution.
  
 \end_layout
 
@@ -10291,19 +10337,6 @@ reference "eq:Boltzmann Machine p(h=1|S)"
 .
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-TODO: rewrite the following using consistent variable names and fonts.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Paragraph
 Gibbs Sampling in Boltzmann Machines
 \end_layout
@@ -10319,7 +10352,7 @@ key "Neal1993"
 
  applies, which works by iteratively drawing the state of an unknown variable
  
-\begin_inset Formula $s_{i}$
+\begin_inset Formula $s_{i}\in\mathbf{S}=\mathbf{H}\cup\mathbf{V}$
 \end_inset
 
  from its conditional probability distribution, given the states of all
@@ -10673,7 +10706,7 @@ learning rate
  (a small positive real constant) and added to the current weights
 \begin_inset Formula 
 \[
-w_{ij}^{(t+1)}=w_{ij}^{(t)}+\epsilon\frac{\partial L}{\partial w_{ij}}.
+w_{ij}^{(t+1)}=w_{ij}^{(t)}+\epsilon\frac{\partial L}{\partial w_{ij}}=w_{ij}^{(t)}+\Delta w_{ij}^{(t)}.
 \]
 
 \end_inset
@@ -10718,6 +10751,64 @@ Boltzmann machine
 Restricted Boltzmann Machines
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename images/restricted-boltzmann-machine-example.dia
+	width 40col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Restricted-Boltzmann-Machine-schema"
+
+\end_inset
+
+A schematic example of a Restricted Boltzmann Machine.
+ 
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+A schematic example of a Restricted Boltzmann Machine.
+\end_layout
+
+\end_inset
+
+ There are two layers: the visible layers with nodes V1 to V5 and the hidden
+ layer with nodes H1 to H3, each of which have a real-valued bias.
+ Node pairs from different layers are connected with an undirected and real-valu
+ed weight.
+ Connections between nodes from the same layer and self-connections are
+ not allowed.
+ A Restricted Boltzmann Machine stores a joint probability distribution
+ (see text).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 Structure
 \end_layout
@@ -10754,6 +10845,15 @@ RBM
 
 ) is a restricted variant of a Boltzmann Machine.
  Hence, it also is a way to store a joint probability distribution.
+ An schematic example of a Restricted Boltzmann Machine can be seen in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Restricted-Boltzmann-Machine-schema"
+
+\end_inset
+
+.
  It has a bipartite topology: there are visible nodes 
 \begin_inset Formula $\mathbf{V}$
 \end_inset
