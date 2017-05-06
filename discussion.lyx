@@ -234,7 +234,7 @@ key "ErhanBengio2010"
  expression data: The dimensionality of microarrays is usually higher than
  that of images or phonemes (~1000 pixels versus ~20,000 genes), but the
  training set sizes are several magnitudes smaller (thousands to tenthousands
- versus tens to hundreds).
+ images versus tens to hundreds microarray data sets).
  For example, in the image classification task in the ImageNet Large Scale
  Visual Recognition Challenge 
 \begin_inset CommandInset citation
@@ -472,12 +472,12 @@ More Advanced Prediction Schemes
 More sophisticated prediction schemes can be imagined so that the prediction
  made produces more than one number: For example, in addition to the severity
  of the disease after therapy (a number between 0 and 1), the number of
- metastases
+ (visible) metastases
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-TODO: Rainer frägt: 
+Rainer fragte hier: 
 \begin_inset Quotes eld
 \end_inset
 
@@ -485,9 +485,11 @@ How do you count them? Some are very small.
 \begin_inset Quotes erd
 \end_inset
 
- But I don't understand what he means.
- The only (small) problem I see is how to represent a natural number as
- a number between 0 and 1 to be used in the input of the neural network.
+ I think he means that the metastases in the body are hard to determine
+ experimentally.
+ The only (small) mathematical problem I see is how to represent a natural
+ number as a number between 0 and 1 to be used in the input of the neural
+ network.
 \end_layout
 
 \end_inset

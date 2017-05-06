@@ -2438,7 +2438,7 @@ name "tab:selected-running-times-table1"
 status open
 
 \begin_layout Plain Layout
-Running times of training the neural networks, table 1.
+Running times of training selected neural networks, table 1.
 \end_layout
 
 \end_inset
@@ -3807,7 +3807,7 @@ name "tab:selected-running-times-table2"
 status open
 
 \begin_layout Plain Layout
-Running times of training the neural networks, table 2.
+Running times of training selected neural networks, table 2.
 \end_layout
 
 \end_inset
