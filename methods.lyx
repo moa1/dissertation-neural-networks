@@ -1086,7 +1086,10 @@ key "Joachims1999a"
  group of samples containing mostly positively labelled training samples,
  then test samples showing that same feature pattern will likely also be
  positively labelled.
- Figure 
+\end_layout
+
+\begin_layout Standard
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:transductive-feature-co-occurrence"

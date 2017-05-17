@@ -153,7 +153,7 @@ reference "tab:GSE25055-GSE25065-sample-number"
 
  shows the number of samples of each label in both data sets.
  The authors used GSE25055 to generate a classifier for the prognosis of
- breast cancer patients that received reductive surgery followed by taxane-anthr
+ breast cancer patients that received reductive surgery preceded by taxane-anthr
 acycline chemotherapy.
  All patients had ERBB2 (also called HER2 or HER2/neu)-negative breast cancer.
  From each patient tissue was extracted in reductive surgery and measured
@@ -31935,7 +31935,7 @@ reference "sub:Comparison-of-Neuronal-Networks-with-Support-Vector-Machines"
 
 .
  It is significant with a p-value of 0.0029, and the accuracy difference
- between data 1 and 6 is an estimated 3.38 percent points (0.0338), while
+ between data sets 1 and 6 is an estimated 3.38 percent points (0.0338), while
  its 95% confidence interval is [2.02; 6.08] percent points.
  Thus, in breast_cancer_15, the TSVM succeeded in increasing accuracy slightly
  by learning from unlabeled samples.

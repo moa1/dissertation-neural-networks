@@ -88,7 +88,7 @@ Using Tumour Expression Data Directly to Classify Recurrence
 \end_layout
 
 \begin_layout Standard
-We predicted breast cancer recurrence after reductive surgery followed by
+We predicted breast cancer recurrence after reductive surgery with neoadjuvant
  chemotherapy directly from expression data.
  Papers that use neural networks to classify cancerous tissue are for example
  
