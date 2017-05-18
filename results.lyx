@@ -211,7 +211,7 @@ pathologic complete response
 \end_inset
 
  and means that there was no sign of a remaining breast cancer.
- In the following it will be termed as 
+ In the following it will be labeled as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -584,7 +584,8 @@ In the following, we will discuss how we used unlabeled data in semi-supervised
 \end_layout
 
 \begin_layout Subsubsection
-How Unlabeled Data was Used in Training Autoencoders
+How Unlabeled Data was Used in Pre-Training Autoencoders and Fine-tuning
+ Using Back-propagation
 \end_layout
 
 \begin_layout Standard
@@ -3812,7 +3813,7 @@ Running times of training selected neural networks, table 2.
 
 \end_inset
 
-Selected running times of training neural networks on data sets breast_cancer_08
+Running times of training neural networks on data sets breast_cancer_08
  to breast_cancer_15.
  Column 
 \begin_inset Quotes eld
@@ -3990,7 +3991,7 @@ We used model selection in training the (supervised) classifiers, because
  the validation and test data.
  Therefore we defined three data sets: a training data set, which was used
  to iteratively train the neural network; a validation data set, which was
- used to pick the model (see below); and a test data set, which was used
+ used to select the model (see below); and a test data set, which was used
  to evaluate the accuracy of the neural network picked using the validation
  data set.
 \begin_inset Note Note
@@ -4011,8 +4012,8 @@ Smoothing the Accuracies for Model Selection
 \end_layout
 
 \begin_layout Standard
-Usually model selection works by picking the neural network defined in the
- iteration with the highest validation data set accuracy.
+Usually model selection means picking the neural network from the iteration
+ with the highest validation data set accuracy.
  However, we sometimes had only few (in the tens) labeled samples in the
  validation data set.
  This led to a very coarse resolution in accuracy plots, and also to noisy
@@ -4034,7 +4035,7 @@ loess
  smoother with a span of 0.125.
  Then we selected the iteration where the smoothed validation set accuracy
  was highest, and reported the smoothed test set accuracy at that iteration.
- (If there were more than one iterations that had the highest validation
+ (If there were more than one iteration that had the highest validation
  set accuracy, we reported the mean and the median of the smoothed test
  set accuracies at these iterations, and plotted all these accuracies in
  a box plot
@@ -4129,7 +4130,7 @@ Note that this procedure allows reporting test set accuracies which seem
  impossible.
  For example in a test set with 10 samples, only an accuracy in {0, 0.1,
  0.2, ..., 1} would be possible, but smoothing allows all rational numbers between
- 0 and 1 to be returned as accuracy.
+ 0 and 1 to be returned.
 \end_layout
 
 \begin_layout Subsection
@@ -4733,7 +4734,7 @@ RECTIFIED_LINEAR
 \begin_inset Quotes erd
 \end_inset
 
- is the rectified linear activation function (defined on page 
+ is the rectified linear activation function (see page 
 \begin_inset CommandInset ref
 LatexCommand pageref
 reference "par:Rectified-linear-activation-function"
@@ -5472,8 +5473,8 @@ The reconstruction error was computed after each iteration.
 \end_layout
 
 \begin_layout Standard
-In the last of the fixed number of iterations, training and testing data
- set reconstruction errors were still decreasing by small amounts each iteration.
+During the last iterations, training and testing data set reconstruction
+ errors were still decreasing by small amounts each iteration.
  (The decreasing was stochastic, i.e.
  some iterations had slightly higher reconstruction error than the one of
  the iteration before, but on average, the reconstruction error of both
@@ -6676,15 +6677,14 @@ rep
 \begin_layout Standard
 The testing set consists of all labeled GSE25065 samples, and no GSE25055
  samples.
- See table 
+ (See table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Testing-set-for-breast_cancer_06"
 
 \end_inset
 
-.
- Thus, betting on the largest group 0 yields an accuracy of 
+.) Thus, betting on the largest group 0 yields an accuracy of 
 \begin_inset Formula $140/182\approx0.769$
 \end_inset
 
@@ -13795,6 +13795,13 @@ unlabeled training
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Normalizations
 \end_layout
@@ -15478,8 +15485,8 @@ breast_cancer_12 thus had balanced classes in the unlabeled training samples.
 To be able to statistically detect a possible rise in accuracy with a rising
  number of unlabled samples, we also increased the number of sub-sampling
  repetitions.
- In addition, instead of using autoencoder or RBM for pre-training, we pre-train
-ed a Deep Belief Network.
+ Also, instead of using autoencoder or RBM for pre-training, we used a Deep
+ Belief Network.
 \end_layout
 
 \begin_layout Subsection
@@ -15513,10 +15520,7 @@ There are the following differences between breast_cancer_12 and breast_cancer_0
  There are 20 instead of 5 repetitions for each data set.
  Again the sub-sampling repetitions were made by selecting the samples at
  random from the eligible samples.
-\end_layout
-
-\begin_layout Standard
-The labeled samples were held constant across all 6 data sets within one
+ The labeled samples were held constant across all 6 data sets within one
  repetition, to be able to directly compare performance between e.g.
  data sets 1 and 3 within a repetition.
  The only difference between data sets 1 and 3 is the unlabeled pre-training
