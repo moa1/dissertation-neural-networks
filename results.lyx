@@ -211,7 +211,7 @@ pathologic complete response
 \end_inset
 
  and means that there was no sign of a remaining breast cancer.
- In the following it will be labeled as 
+ In the following it will be termed as 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3812,7 +3812,7 @@ Running times of training selected neural networks, table 2.
 
 \end_inset
 
-Running times of training neural networks on data sets breast_cancer_08
+Selected running times of training neural networks on data sets breast_cancer_08
  to breast_cancer_15.
  Column 
 \begin_inset Quotes eld
@@ -6676,14 +6676,15 @@ rep
 \begin_layout Standard
 The testing set consists of all labeled GSE25065 samples, and no GSE25055
  samples.
- (See table 
+ See table 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "tab:Testing-set-for-breast_cancer_06"
 
 \end_inset
 
-.) Thus, betting on the largest group 0 yields an accuracy of 
+.
+ Thus, betting on the largest group 0 yields an accuracy of 
 \begin_inset Formula $140/182\approx0.769$
 \end_inset
 

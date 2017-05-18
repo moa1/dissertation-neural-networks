@@ -82,6 +82,39 @@ fix-cm
 
 \begin_body
 
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Dieses Titelblatt soll sowohl auf der Außenseite als auch im Innern der
+ Dissertation erscheinen (siehe 
+\begin_inset Quotes eld
+\end_inset
+
+0513_Ä4_PromNat_voll_26.02.2014.pdf
+\begin_inset Quotes erd
+\end_inset
+
+, ganz hinten, oder 
+\begin_inset Quotes eld
+\end_inset
+
+Promotion Dr.
+ rer.
+ nat.
+ - ZulassungsantragPflichtexemplareLaufzettel - Stand 2013-8-22.pdf
+\begin_inset Quotes erd
+\end_inset
+
+, Seite 6).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Title
 \begin_inset VSpace -1.4cm
 \end_inset
@@ -247,24 +280,11 @@ thispagestyle{empty}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage cleardoublepage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
+\begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-
-\backslash
-thispagestyle{empty}
+diese Seite muss auf der Innenseite des Titelblattes sein.
 \end_layout
 
 \end_inset
@@ -368,7 +388,7 @@ Unterschrift
 \begin_inset space \hfill{}
 \end_inset
 
-Regensburg
+Regensburg, den
 \begin_inset Note Note
 status open
 
