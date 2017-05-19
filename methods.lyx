@@ -3143,6 +3143,14 @@ Like undirected graphical models, directed graphical models represent an
  in the model.
  The graph must be directed and acyclic, and each node of the graph is associate
 d with a random variable.
+ See figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-a-Directed-Graph"
+
+\end_inset
+
+ for an example.
 \end_layout
 
 \begin_layout Standard
@@ -7973,14 +7981,14 @@ A Multilayer Perceptron belongs to the class of deterministic feed-forward
  only depending on the values of nodes in the layer above.
  Example structures of multilayer perceptrons were given in figure 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "fig:sigmoid-function"
 
 \end_inset
 
  and figure 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "fig:Data-flow-in-back-propagation"
 
 \end_inset
@@ -8747,7 +8755,7 @@ The sigmoid activation function
  to positive infinity and to 0 as inputs go to negative infinity (see figure
  
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand vref
 reference "fig:sigmoid-function"
 
 \end_inset
@@ -9614,10 +9622,10 @@ sparsity cost
 
 
 \begin_inset Formula 
-\begin{eqnarray}
-\Delta w_{ji} & = & -\epsilon\left(\frac{\partial E}{\partial w_{ji}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right)o_{i}\label{eq:backpropagation-delta-for-sparsity}\\
-\Delta b_{j} & = & -\epsilon\left(\frac{\partial E}{\partial b_{j}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right).\nonumber 
-\end{eqnarray}
+\begin{eqnarray*}
+\Delta w_{ji} & = & -\epsilon\left(\frac{\partial E}{\partial w_{ji}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right)o_{i}\\
+\Delta b_{j} & = & -\epsilon\left(\frac{\partial E}{\partial b_{j}}+\lambda\frac{\partial E_{sparsity}}{\partial w_{ji}}\right)\approx-\epsilon\left(\left(\sum_{k}\frac{\partial E}{\partial o_{k}}\frac{\partial o_{k}}{\partial v_{k}}w_{kj}o_{j}(1-o_{j})\right)+\lambda(q_{j}-p)\right).
+\end{eqnarray*}
 
 \end_inset
 
@@ -12067,6 +12075,10 @@ P(\mathbf{V},\mathbf{H})=\frac{1}{C}\exp\left(\sum_{i}\Phi_{i}(\mathbf{v},h_{i})
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
 The reason we wanted to have both independencies as encoded by equations
  
 \begin_inset CommandInset ref
@@ -12084,10 +12096,7 @@ reference "eq:DBN-y-given-x"
 
  is that these are the (in)dependecies described by a Restricted Boltzmann
  Machine.
-\end_layout
-
-\begin_layout Standard
-Inference in an RBM works by repeatedly and alternatingly evaluating these
+ Inference in an RBM works by repeatedly and alternatingly evaluating these
  two conditional probabilities.
  The correctly inferred distribution is obtained once the Markov chain reaches
  equilibrium in iterating.

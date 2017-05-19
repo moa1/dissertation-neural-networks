@@ -1317,66 +1317,6 @@ checkpoint_after
 \end_layout
 
 \begin_layout Standard
-Tables 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:selected-running-times-table1"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "tab:selected-running-times-table2"
-
-\end_inset
-
- show the approximate training times of selected neural network training
- runs.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Timings were measured like this in ~/uni/nnet/outputs/breast_cancer_15_aa/:
- 
-\begin_inset Quotes eld
-\end_inset
-
-stat classifier_1452806285; stat classifier_LAST
-\begin_inset Quotes erd
-\end_inset
-
- and taking the difference
-\end_layout
-
-\end_inset
-
-For example, training 100,000 (unsupervised) DBN iterations of the first
- hidden layer of classification run breast_cancer_15_aa, which consists
- of a 22283-10-10-10-1 network, took 2 hours on 1 core of the aforementioned
- 32 cores computer.
- The second and third hidden layer took about 15 minutes.
- Computing 1,000,000 (supervised) back-propagation iterations of the same
- run took a little less than 4 hours.
- The running time mainly depends on the network architecture, the learning
- rate, and number of training iterations.
- Classifying a sample took about as long as 1 supervised training iteration
- and thus was almost instant.
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-(Note that running time here does not mean time until convergence, which
- depends on the specific training samples.) hä?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
 wide false
 sideways false
@@ -3883,6 +3823,70 @@ h
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+Tables 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:selected-running-times-table1"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:selected-running-times-table2"
+
+\end_inset
+
+ show the approximate training times of selected neural network training
+ runs.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Timings were measured like this in ~/uni/nnet/outputs/breast_cancer_15_aa/:
+ 
+\begin_inset Quotes eld
+\end_inset
+
+stat classifier_1452806285; stat classifier_LAST
+\begin_inset Quotes erd
+\end_inset
+
+ and taking the difference
+\end_layout
+
+\end_inset
+
+For example, training 100,000 (unsupervised) DBN iterations of the first
+ hidden layer of classification run breast_cancer_15_aa, which consists
+ of a 22283-10-10-10-1 network, took 2 hours on 1 core of the aforementioned
+ 32 cores computer.
+ The second and third hidden layer took about 15 minutes.
+ Computing 1,000,000 (supervised) back-propagation iterations of the same
+ run took a little less than 4 hours.
+ The running time mainly depends on the network architecture, the learning
+ rate, and number of training iterations.
+ Classifying a sample took about as long as 1 supervised training iteration
+ and thus was almost instant.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+(Note that running time here does not mean time until convergence, which
+ depends on the specific training samples.) hä?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 As Transductive Support Vector Machine implementation we used SVMlight,
  and as Support Vector Machine implementation we used the R package e1071
  
