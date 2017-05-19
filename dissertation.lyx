@@ -8,6 +8,9 @@
 \tolerance=1600
 %\sloppy
 %\setlength\emergencystretch{2em}
+
+% \bot or \perp sign with two parallel vertical lines, for independency between random variables
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
 \end_preamble
 \use_default_options true
 \begin_modules

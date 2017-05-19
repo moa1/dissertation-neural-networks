@@ -365,7 +365,8 @@ We always selected the iteration/model of the neural network that had the
  possible accuracies, we smoothed the accuracies over time (or iterations),
  because the network's state of parameters at a specific iteration is closest
  to its state of parameters at the closest iterations.
- The artificial neural networks change only little every iteration.
+ In other words, the artificial neural networks change only little every
+ iteration, and we want to select a model from a stable learning period.
 \end_layout
 
 \begin_layout Paragraph
@@ -407,7 +408,7 @@ key "ChenXie2015"
 \end_inset
 
 , where they used the representation of a sample at the deepest hidden layer
- to classify the sample, using a supervised algorithm
+ to do regression on
 \begin_inset Note Note
 status collapsed
 
@@ -431,7 +432,7 @@ To dissect the nonlinear contribution, we took a relatively simple approach
 
 \end_inset
 
-.
+ (whereas we classify the sample, using a supervised algorithm).
  Like 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -472,7 +473,7 @@ More Advanced Prediction Schemes
 More sophisticated prediction schemes can be imagined so that the prediction
  made produces more than one number: For example, in addition to the severity
  of the disease after therapy (a number between 0 and 1), the number of
- (visible) metastases
+ (visibly large) metastases
 \begin_inset Note Note
 status open
 
@@ -584,7 +585,8 @@ key "ChenXie2015"
 
 ).
  There seem to be hub networks, that have outgoing connections to many output
- layer genes, with many of the hub networks having either positive (i.e.
+ layer genes, with many of the hub networks having either positive outgoing
+ weights (i.e.
  that positively affect the expression of a target gene) or negative outgoing
  weights, but not both.
 \end_layout
@@ -594,8 +596,8 @@ The algorithm would work like this: Determine for each
 \emph on
 measured
 \emph default
- input sample the gene hub activation (by training an RBM or unsupervised
- DBN on all input samples).
+ input sample the gene hub activation (by unsupervisedly training an RBM
+ or DBN on all input samples).
  This results in a vector of numbers, one vector for each input sample;
  each number stands for one gene hub activation.
  Permute the gene hub activations between the learned representations, but

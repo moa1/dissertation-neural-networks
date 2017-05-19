@@ -156,7 +156,7 @@ reference "tab:GSE25055-GSE25065-sample-number"
  breast cancer patients that received reductive surgery preceded by taxane-anthr
 acycline chemotherapy.
  All patients had ERBB2 (also called HER2 or HER2/neu)-negative breast cancer.
- From each patient tissue was extracted in reductive surgery and measured
+ From each patient, tissue was extracted in reductive surgery and measured
  for genome-wide gene expression on Affymetrix HG-U133A microarrays.
  
 \end_layout
@@ -4822,8 +4822,12 @@ sparsity_cost
 sparsity_damping
 \emph default
  These are the parameters of the sparsity regularization.
- sparsity is either true or false and controls whether sparsity regularization
- is used or not, and the other three parameters were described on page 
+ 
+\emph on
+sparsity
+\emph default
+ is either true or false and controls whether sparsity regularization is
+ used or not, and the other three parameters were described on page 
 \begin_inset CommandInset ref
 LatexCommand pageref
 reference "sub:Sparsity-Target"
@@ -5450,7 +5454,8 @@ Reconstruction Error
 \end_layout
 
 \begin_layout Standard
-An RBM with 10,000 input nodes and 50 hidden nodes was trained.
+An RBM with 10,000 input nodes and 50 hidden nodes was trained for about
+ 70,000 iterations.
  Both layer's node types were gaussian 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -5459,16 +5464,28 @@ key "HintonSalakhutdinov2006"
 \end_inset
 
 .
- The RBM was trained for about 70,000 iterations.
- 
 \end_layout
 
 \begin_layout Standard
-The reconstruction error was computed after each iteration.
+The 
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+reconstruction error
+\end_layout
+
+\end_inset
+
+
+\emph on
+reconstruction error
+\emph default
+ was computed after each iteration.
  The reconstructed value of a visible node is obtained by initializing the
  visible layer with the original data, computing the hidden layer's nodes
  from the visible layer, computing the visible layer from the hidden layer's
- nodes, and these values are the reconstructed values.
+ nodes, and these visible nodes' values are the reconstructed values.
  The reconstruction error of a visible node is the euclidean distance between
  its original value in the data set and the visible node's reconstructed
  value.
@@ -15410,7 +15427,7 @@ Using ComBat as pre-processing leads to worse accuracies on the RMA-normalized
 \end_layout
 
 \begin_layout Itemize
-RMA seems to perform consistently better than MAS5 without log2 (an exceptions
+RMA seems to perform consistently better than MAS5 without log2 (an exception
  is data set 3 with ComBat pre-processing), but MAS5 with log2 and ComBat
  perform better than RMA with ComBat (due to RMA taking a performance hit
  when used together with ComBat).
@@ -15487,7 +15504,7 @@ breast_cancer_12 thus had balanced classes in the unlabeled training samples.
 
 \begin_layout Standard
 To be able to statistically detect a possible rise in accuracy with a rising
- number of unlabled samples, we also increased the number of sub-sampling
+ number of unlabeled samples, we also increased the number of sub-sampling
  repetitions.
  Also, instead of using autoencoder or RBM for pre-training, we used a Deep
  Belief Network.
@@ -18054,7 +18071,8 @@ sparsity_damping: 0.9
 
  to 0.99 in layer 2 and 3.
  We do this because otherwise these layers have their best model on the
- labeled validation data set very early in training, and sometimes 
+ labeled validation data set very early in training, and also sometimes
+ 
 \begin_inset Quotes eld
 \end_inset
 
@@ -29313,7 +29331,7 @@ name "sec:breast_cancer_15"
 
 \begin_layout Standard
 Since breast_cancer_12 has a negative result in summary, because it cannot
- confirm the benefit of adding unlabled samples to training, in data set
+ confirm the benefit of adding unlabeled samples to training, in data set
  
 \begin_inset Index idx
 status collapsed

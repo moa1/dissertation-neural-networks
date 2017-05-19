@@ -4,7 +4,8 @@
 \begin_header
 \textclass article
 \begin_preamble
-% Added by lyx2lyx
+% note that this must be defined in dissertation.lyx, if the whole dissertation is to be compiled.
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -2416,24 +2417,54 @@ brute-force
 , given the neighbors
 \begin_inset Formula 
 \[
-N_{i}\bot\mathbf{N_{nonneighbors(i)}}\mid\mathbf{N_{neighbors(i)}},
+N_{i}\,\mathbf{\,\indep\,\, N_{nonneighbors(i)}}\mid\mathbf{N_{neighbors(i)}},
 \]
 
 \end_inset
 
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-TODO: the 
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\backslash
+rotatebox[origin=c]{90}{
+\backslash
+ensuremath{
+\backslash
+models}}
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ makes a 
 \backslash
 bot 
 \begin_inset Formula $\bot$
 \end_inset
 
- above should be two vertical lines with one horizontal line _||_, but I
- don't know its latex name
+ sign with two vertical lines with one horizontal line _||_, from https://tex.sta
+ckexchange.com/questions/79434/double-perpendicular-symbol-for-independence
 \end_layout
 
 \end_inset
@@ -3083,7 +3114,7 @@ Example of a Directed Graph.
 \end_inset
 
 Example of a Directed Graph.
- Note that the graph is acyclic, and the nodes are layed out in layers.
+ Note that the graph is acyclic, and the nodes are laid out in layers.
 \end_layout
 
 \end_inset
@@ -3213,7 +3244,7 @@ local Markov property
  of directed graphs):
 \begin_inset Formula 
 \[
-X\perp(\mathbf{N}\backslash\mathbf{N_{descendant(\mathrm{X})}})\mid\mathbf{N_{parent(\mathrm{X})}}.
+X\,\,\indep\,\,(\mathbf{N}\backslash\mathbf{N_{descendant(\mathrm{X})}})\mid\mathbf{N_{parent(\mathrm{X})}}.
 \]
 
 \end_inset
@@ -4091,7 +4122,11 @@ Since we now have
 \begin_inset Formula $P(H_{1}|V_{1},V_{2})=P(H_{1},V_{1},V_{2})/P(V_{1},V_{2})$
 \end_inset
 
-, we can determine 
+ (and equivalently 
+\begin_inset Formula $P(H_{1},V_{1},V_{2})=P(H_{1}|V_{1},V_{2})P(V_{1},V_{2})$
+\end_inset
+
+), we can determine 
 \begin_inset Formula $P(H_{1})$
 \end_inset
 
@@ -7419,7 +7454,7 @@ As this is not a stochastic network, I don't think it makes sense to define
 \end_inset
 
 .
- There is no connection from node 
+ There is no self-connection from node 
 \begin_inset Formula $i$
 \end_inset
 
@@ -8242,7 +8277,7 @@ E=\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2},
 \begin_inset Formula $y_{k}$
 \end_inset
 
- is its the desired output.
+ is its desired output.
  The sum-of-squared-differences term 
 \begin_inset Formula $\frac{1}{2}\sum_{k}(o_{k}-y_{k})^{2}$
 \end_inset
@@ -8850,7 +8885,7 @@ reference "eq:backpropagation-deltas"
 \begin_inset Formula $t-1$
 \end_inset
 
- to be added to the current weight deltaswhere 
+ to be added to the current weight deltas where 
 \begin_inset Formula $\Delta w^{(t)}$
 \end_inset
 
@@ -10019,8 +10054,8 @@ reference "fig:Training-of-an-autoencoder"
  The new weights are initialized randomly, for example by drawing from a
  uniform [-1;1] distribution or from a normal distribution with mean 0 and
  standard deviation 1, and the new biases are initialized to zero.
- Then back-propagation is used again to determine the paramters of the whole
- network.
+ Then back-propagation is used again to determine the parameters of the
+ whole network.
  This process can be repeated until a sufficient number of hidden layers
  has been trained.
 \end_layout
@@ -10166,7 +10201,7 @@ key "Neal1992"
 \end_inset
 
 .
- An schematic example can be seen in figure 
+ A schematic example can be seen in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Boltzmann-Machine-schema"
@@ -10469,8 +10504,8 @@ Connectionist learning for belief networks
 \end_inset
 
 The goal of training a Boltzmann Machine is to find parameters, i.e.
- weights and biases, such that the the probability of the training data
- becomes maximal.
+ weights and biases, such that the probability of the training data becomes
+ maximal.
  Remember that Boltzmann Machines store a joint probability distribution.
  The log-likelihood is
 \end_layout
@@ -10964,7 +10999,7 @@ P(V_{j}=1\mid\mathbf{H}=\mathbf{h})=\sigma\left(\sum_{i}h_{i}w_{ij}-c_{j}\right)
 \begin_inset Formula $w_{ij}$
 \end_inset
 
- is the weight of the connection between node hidden node 
+ is the weight of the connection between hidden node 
 \begin_inset Formula $i$
 \end_inset
 
@@ -11102,7 +11137,7 @@ contrastive divergence
 
 \begin_layout Standard
 Like for Boltzmann Machines, the goal of training is to find parameters
- such that the the probability of the training data becomes maximal.
+ such that the probability of the training data becomes maximal.
  The log-likelihood is 
 \begin_inset Formula 
 \begin{eqnarray*}
@@ -11122,9 +11157,9 @@ L & = & \log\prod_{\mathbf{v}\in\mathbf{T}}P(\mathbf{V}=\mathbf{v}),
 
  is 
 \begin_inset Formula 
-\[
-\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\left(P(H_{i}=1\mid\mathbf{V=v})v_{j}-\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})v_{j}\right)
-\]
+\begin{equation}
+\frac{\partial L}{\partial w_{ij}}=\sum_{\mathbf{v}\in\mathbf{T}}\left(P(H_{i}=1\mid\mathbf{V=v})v_{j}-\sum_{\mathbf{v}}P(\mathbf{V=v})P(H_{i}=1\mid\mathbf{v})v_{j}\right)\label{eq:RBM-contrastive-divergence}
+\end{equation}
 
 \end_inset
 
@@ -11147,6 +11182,42 @@ Formel 29 auf Seite 26
 \end_inset
 
 ).
+ The difference in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:RBM-contrastive-divergence"
+
+\end_inset
+
+ is called the difference between the 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+positive phase
+\end_layout
+
+\end_inset
+
+
+\emph on
+positive 
+\emph default
+and 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+negative phase
+\end_layout
+
+\end_inset
+
+
+\emph on
+negative phase
+\emph default
+.
 \end_layout
 
 \begin_layout Paragraph
@@ -11295,7 +11366,7 @@ Interpreting the Output of a Node as a Continuous Value
 \end_layout
 
 \begin_layout Standard
-The output of a node in a Restricted Boltzmann Machine, is binary (i.e.
+The output of a node in a Restricted Boltzmann Machine is binary (i.e.
  either 0 or 1).
  However the sigmoid activation function outputs continuous values between
  0 and 1.

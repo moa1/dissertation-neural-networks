@@ -1372,7 +1372,7 @@ training of artificial neural networks
 
 .
  Here, the goal is explicitly set by humans by providing training data sets.
- One training sample consists of of a vector of real numbers called 
+ One training sample consists of a vector of real numbers called 
 \emph on
 input patterns
 \emph default
@@ -1632,8 +1632,8 @@ Backward Pass for the Output Layer
 \end_layout
 
 \begin_layout Standard
-While in the forward pass the information flowed from input to output, in
- the 
+While in the forward pass the information flowed from input to output layer,
+ in the 
 \emph on
 backward pass
 \emph default
@@ -1647,8 +1647,8 @@ backward pass
 
 \end_inset
 
-, the information flows from output to input, adjusting the weights and
- biases on the way.
+, the information flows from output to input layer, adjusting the weights
+ and biases on the way.
  See figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2664,10 +2664,11 @@ key "HintonSalakhutdinov2006,KrizhevskyHinton2012,KarpathyFei-Fei2014"
 \begin_layout Standard
 An extreme form of batch-effect correction is when all training data are
  in batch 1 and all test data in batch 2.
- For example, suppose that batch 1 are all face portraits (frontal view),
- batch 2 are half profile faces (30 degree angle view) of -- not necessarily
- the same -- people, and the task is to match faces seen from both viewing
- angles to the same person.
+ Are neural networks able to handle such a situation? For example, suppose
+ that batch 1 are all face portraits (frontal view), batch 2 are half profile
+ faces (30 degree angle view) of -- not necessarily the same -- people,
+ and the task is to match faces seen from both viewing angles to the same
+ person.
  During training, semi-supervised learning would have access to the unlabeled
  faces from both viewing angles, but all the half profiles would be unlabeled.
  We are not aware of a study of that setting using artificial neural networks,
@@ -3515,8 +3516,8 @@ L1000 Luminex bead technology
 \begin_inset Formula $943$
 \end_inset
 
- genes at a low cost, and computationally infers the remaining ~
-\begin_inset Formula $21,000$
+ genes at a low cost, and computationally infers the remaining 
+\begin_inset Formula $\approx21,000$
 \end_inset
 
  genes.
