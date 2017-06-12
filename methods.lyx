@@ -1915,14 +1915,14 @@ Belief network
 
 , and undirected graphical models are also called 
 \emph on
-Markov random fields
+Markov Random Fields
 \emph default
 
 \begin_inset Index idx
 status collapsed
 
 \begin_layout Plain Layout
-Markov random field
+Markov Random Field
 \end_layout
 
 \end_inset
@@ -11523,7 +11523,7 @@ Deep Belief Network
 
 \end_inset
 
-(DBN
+ (DBNs
 \begin_inset Index idx
 status collapsed
 

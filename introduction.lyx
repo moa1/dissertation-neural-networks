@@ -249,7 +249,7 @@ The goal of this work is to contribute to such a predictor.
 
 \begin_layout Standard
 The study of neural networks in biology prompted the development of artificial
- neural networks.
+ neural networks as models of biological neural networks.
  After an introduction to biological and artificial neural networks we will
  give an overview of the relevant topics of machine learning and then introduce
  the own work done in this manuscript.
@@ -1051,10 +1051,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-\begin_inset space \hfill{}
-\end_inset
-
-
 \begin_inset Graphics
 	filename images/plot-sigmoid.pdf
 	lyxscale 50
@@ -1071,10 +1067,6 @@ status open
 	filename images/neuronal-network-example.dia
 	width 45col%
 
-\end_inset
-
-
-\begin_inset space \hfill{}
 \end_inset
 
 
@@ -1107,6 +1099,28 @@ feed-forward neural network
 \end_inset
 
  from input layer to output layer.
+ The 
+\begin_inset Quotes eld
+\end_inset
+
++
+\begin_inset Quotes erd
+\end_inset
+
+ nodes accumulate their input values, and the 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\sigma$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ nodes compute the output of a neuron, to be used as input for the next
+ layer.
 \end_layout
 
 \end_inset
