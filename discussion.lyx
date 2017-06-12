@@ -447,9 +447,16 @@ key "Zhu2005"
 \end_layout
 
 \begin_layout Standard
-Only the very last approaches tried (data set breast_cancer_15) showed a
- (partially) significant benefit between those networks trained using more
- unlabeled samples over those trained using less unlabeled samples.
+Only the very last approaches tried (data set breast_cancer_15, section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:breast_cancer_15"
+
+\end_inset
+
+) showed a (small) significant benefit between those networks trained using
+ more unlabeled samples over those trained using less unlabeled samples.
  There are three differences between these approaches and the ones before:
  First, we used less hidden layer neurons.
  Second, we used all 22,283 genes as input instead of only the 500 most

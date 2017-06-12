@@ -738,9 +738,23 @@ fine-tuning
 n in too large steps (per iteration).
 \end_layout
 
-\begin_layout Paragraph
-Pseudo-code Algorithm
+\begin_layout Standard
+Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:pretrain-autoencoder-finetune-backprop"
+
+\end_inset
+
+ shows the pseduo-code for pre-training using a DBN and fine-tuning using
+ backpropagation.
 \end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
 
 \begin_layout Enumerate
 initialize the autoencoder 
@@ -870,6 +884,30 @@ reference "enu:Autoencoder-for-all-training-pairs"
  or model selection)
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:pretrain-autoencoder-finetune-backprop"
+
+\end_inset
+
+Pre-training on unlabeled data using an autoencoder and backpropagation
+ fine-tuning with labeled data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 How Unlabeled Data was Used When Pre-training a Restricted Boltzmann Machine
  and Fine-tuning Using Back-propagation
@@ -882,11 +920,26 @@ When using the unsupervised Restricted Boltzmann Machine to find the approximate
  The resulting neural network was then extended with the network layer for
  supervised classification, and the complete network was trained using (supervis
 ed) back-propagation on the labeled data.
+ 
 \end_layout
 
-\begin_layout Paragraph
-Pseudo-code Algorithm
+\begin_layout Standard
+Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:pretrain-RBM-finetune-backprop"
+
+\end_inset
+
+ shows the pseduo-code for pre-training using a DBN and fine-tuning using
+ backpropagation.
 \end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
 
 \begin_layout Enumerate
 initialize the Restricted Boltzmann Machine 
@@ -1003,6 +1056,30 @@ reference "enu:RBM-for-all-training-pairs"
  or model selection)
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:pretrain-RBM-finetune-backprop"
+
+\end_inset
+
+Pre-training on unlabeled data using a Restricted Boltzmann Machine and
+ backpropagation fine-tuning with labeled data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 How Unlabeled Data was Used in Training Deep Belief Networks
 \end_layout
@@ -1040,19 +1117,29 @@ Initializing the complete network with the weights and biases of a trained
  is far away from the weights and biases of the trained DBN.
 \end_layout
 
-\begin_layout Paragraph
-Pseudo-code Algorithm
-\end_layout
-
 \begin_layout Standard
-The pseudo-code is identical to pre-training using a Restricted Boltzmann
- Machine and fine-tuning using back-propagation, except that we pre-train
- the 
+Algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:pretrain-DBN-finetune-backprop"
+
+\end_inset
+
+ shows the pseduo-code for pre-training using a DBN and fine-tuning using
+ backpropagation.
+ It is identical to pre-training using a Restricted Boltzmann Machine and
+ fine-tuning using back-propagation, except that we pre-train the 
 \begin_inset Formula $n$
 \end_inset
 
  layers of the Deep Belief Network using RBMs on re-represented data.
 \end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
 
 \begin_layout Enumerate
 initialize the Deep Belief Network 
@@ -1203,6 +1290,30 @@ reference "enu:DBN-for-all-training-pairs"
 
  until the classification error is small enough (subject to early stopping
  or model selection)
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:pretrain-DBN-finetune-backprop"
+
+\end_inset
+
+Pre-training on unlabeled data using a Deep Belief Network and backpropagation
+ fine-tuning with labeled data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -10357,7 +10468,7 @@ Settings for the unsupervised pre-training autoencoders breast_cancer_03_ai,
 \end_layout
 
 \begin_layout Subsubsection
-Supervised Classification with Unsupervised Pre-trained Autoencoder
+Supervised Classification with Unsupervisedly Pre-trained Autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -11393,8 +11504,8 @@ If we were to bet on the larger test set class we would achieve an accuracy
 \begin_layout Standard
 The following machine learning algorithms were tested on this data set:
  SVM, TSVM, supervised classification with unsupervised pre-trained RBM,
- supervised classification with unsupervised pre-trained autoencoder, supervised
- classification without pre-training.
+ supervised classification with unsupervisedly pre-trained autoencoder,
+ supervised classification without pre-training.
  Unsupervised pre-training was performed as for breast_cancer_06.
 \end_layout
 
@@ -11551,7 +11662,7 @@ Accuracy box plots of TSVM predicting the testing data set of breast_cancer_07.
 \end_layout
 
 \begin_layout Subsubsection
-Supervised Classification with Unsupervised Pre-trained RBM
+Supervised Classification with Unsupervisedly Pre-trained RBM
 \end_layout
 
 \begin_layout Standard
@@ -11650,7 +11761,7 @@ Accuracy box plots of a feed-forward neural network pre-trained with an
 \end_layout
 
 \begin_layout Subsubsection
-Supervised Classification with Unsupervised Pre-trained Autoencoder
+Supervised Classification with Unsupervisedly Pre-trained Autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -31793,8 +31904,15 @@ status open
 \begin_layout Plain Layout
 In training, the network parameters' deltas are alternatingly computed,
  then the parameters are updated.
- The mini-batch is the number of samples whose deltas are accumulated before
- the network parameters are updated.
+ (See equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:backpropagation-deltas"
+
+\end_inset
+
+ in backpropagation training.) The mini-batch is the number of samples whose
+ deltas are accumulated before the network parameters are updated.
 \end_layout
 
 \end_inset

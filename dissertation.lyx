@@ -336,6 +336,37 @@ status open
 
 \begin_layout Plain Layout
 
+
+\backslash
+addcontentsline{toc}{section}{List of Algorithms}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList algorithm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage cleardoublepage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
 %% strangely, this cannot be in the LaTeX Preamble
 \end_layout
 
