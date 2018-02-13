@@ -1,0 +1,243 @@
+
+\section{Discussion}
+
+We evaluated whether adding unlabeled data to semi-supervised training
+is beneficial in deep neural networks, when predicting breast cancer
+recurrence after chemotherapy.
+
+\subsection{Related Work}
+
+\paragraph{Using Tumour Expression Data Directly to Classify Recurrence}
+
+We predicted breast cancer recurrence after reductive surgery with
+neoadjuvant chemotherapy directly from expression data. Papers that
+use neural networks to classify cancerous tissue are for example \cite{ChenHuang2002}
+and \cite{ErcalMoss1994}. In \cite{SharafTsokos2015}, Sharaf and
+Tsokos predict from 4 input variables the survival time by training
+a neural network on 69,000 patients.
+
+We selected the GSE25055 and GSE25065 data sets because they are among
+the largest labeled cancer data sets in GEO that come from a single
+source. Like in \cite{HatzisSymmans2011}, the larger data set GSE25055
+was used for training a classifier, and the data set of independent
+cases GSE25065 was used to test the classifier. We used artificial
+neural networks as classifiers by predicting the class 1 probability
+of the samples.
+
+\paragraph{Neural Networks are Attractive}
+
+In our view, neural networks have attractive properties: they are
+non-linear, they can be used generatively, their implementations are
+often modular (e.g. regularizations and network parameters), and in
+prediction deep neural networks often are among the best predictors
+in several machine learning fields. As \cite{BiganzoliMarubini1998}
+ put it: ``Feed forward ANNs are strictly equivalent to non-linear
+multivariate regression methods.'' They can be used unsupervisedly
+as well as supervisedly. For example, to obtain a probability for
+a class like done in \cite{AppelSpang2011} is straightforward, because
+the network outputs class probabilities anyways. Last, but not least,
+artificial neural networks are plausible models of the real biological
+neural networks, which are the control centers of animals, and were
+shaped by evolution during millions of years. However, neural networks'
+versatility can also be a disadvantage: it is often not clear what
+component or parameter to modify to achieve a desired result.
+
+\paragraph{Differences Between Object Recognition Tasks and Cancer Recurrence
+Prediction}
+
+In different settings the pre-training and back-propagation approach
+worked well \cite{ErhanBengio2010}. There are some differences between
+those fields and the scenario of microarray expression data: The dimensionality
+of microarrays is usually higher than that of images or phonemes (\textasciitilde{}1000
+pixels versus \textasciitilde{}20,000 genes), but the training set
+sizes are several magnitudes smaller (thousands to tenthousands images
+versus tens to hundreds microarray data sets). For example, in the
+image classification task in the ImageNet Large Scale Visual Recognition
+Challenge \cite{RussakovskyFeiFei2015}, there are an average of $\approx$1,200
+images per class, while in the GSE25055 data set, there are 249 class
+0 and 57 class 1 samples.
+
+The fact that there is a much smaller number of labeled and unlabeled
+samples in expression data than in image recognition is probably due
+to several factors: price, logistical and ethical issues. The price
+of microarrays (and RNASeq) is magnitudes larger (hundreds of Euros
+or dollars) than the price to take and label pictures of hand-written
+digits or objects (images are ubiquitous on the internet, and manual
+or computer-assisted labeling is relatively cheap). In addition, expression
+data aquisition does not merely consist of putting cDNA onto microarrays,
+but the process also involves selecting patients according to ethical
+criteria, keeping track of patients' whereabouts and collecting clinical
+parameters over an extended time-span (``follow-up'').
+
+The difficulty of the learning task seems higher than that of recognizing
+digits, where accuracies of 96\% can be achieved by nearest neighbor
+classifiers. However, it may be comparable to the object recognition
+tasks, that had accuracies around 70\% using SVMs in the ImageNet
+Large Scale Visual Recognition Challenge.
+
+\subsection{Summary of Own Approaches}
+
+To sum up, we tried different training parameters, different network
+architectures (with many free parameters relative to training data
+set size, and with few free parameters), different normalizations,
+different data set compositions. A small improvement in testing set
+accuracy was achieved by using additional unlabeled data during training.
+
+\paragraph{Different Network Configurations}
+
+As pre-training algorithms we assessed autoencoders, Restricted Boltzmann
+Machines, and Deep Belief Networks. There seemed to be only little
+difference in test set accuracy between these pre-training algorithms.
+However, some authors have reported that autoencoders are harder to
+train. In general, reconstruction error during pre-training converged
+well for our cases. Sometimes one has to wait a few iterations for
+the network to travel through configurations that do not seem to change
+the resulting reconstruction error.
+
+\paragraph{Different Normalizations}
+
+We tried using different normalizations of the raw expression data:
+RMA and MAS5 normalization, logarithmizing, COMBAT batch effect correction,
+and ZCA whitening. We observed the effect of normalization on reconstruction
+error during pre-training as well as on classification accuracy. The
+reconstruction error plots seem to depend on the normalization used.
+MAS5 normalized data seem to have lower reconstruction error than
+RMA normalized data. The effect of different normalizations on classification
+accuracy were the other way around: Of all normalizations tested,
+RMA with no additional pre-processing yielded the best accuracies
+in all data sets tested. Of note is that a low reconstruction error
+rate does not imply a good accuracy on the test set: Although the
+neuronal nets using MAS5 normalized data had a lower reconstruction
+error than their RMA counterparts, MAS5 yielded a lower accuracy than
+RMA.
+
+\paragraph{Deep Networks}
+
+We also tried deeper networks with more than one hidden layer. Using
+these did not always improve accuracy. However, using more than a
+few hidden layers was not systematically investigated due to limits
+in computation time.
+
+\paragraph{Model Selection}
+
+We always selected the iteration/model of the neural network that
+had the highest validation set accuracy. Few samples lead to few different
+possible accuracy values. To be able to choose the best model among
+candidates that have only few possible accuracies, we smoothed the
+accuracies over time (or iterations), because the network's state
+of parameters at a specific iteration is closest to its state of parameters
+at the closest iterations. In other words, the artificial neural networks
+change only little every iteration, and we want to select a model
+from a stable learning period.
+
+\paragraph{Compared Methods: Neural Networks, SVM and TSVM}
+
+We compared Support Vector Machine (SVM) and Transductive Support
+Vector Machine (TSVM) to the artificial neural networks. TSVM is a
+semi-supervised version of the normal supervised SVM, and the artificial
+neural networks were used with (semi-supervised) and without (supervised)
+pre-training. We compared the semi-supervised and the supervised versions
+of both neuronal network and Support Vector Machine.
+
+\paragraph{Does Semi-supervised Learning Lead to Better Neural Network Classifiers?}
+
+We used an increasing number of unlabeled samples during pre-training
+to find out whether this has an effect on the accuracy achieved during
+fine-tuning. In terms of \cite{Zhu2005}, we are learning an efficient
+coding of the domain from unlabeled data and then perform supervised
+learning on the coded samples (see their chapter 8). The approach
+is similar to that of \cite{ChenXie2015}, where they used the representation
+of a sample at the deepest hidden layer to do regression on (whereas
+we classify the sample, using a supervised algorithm). Like \cite{Zhu2005},
+we also noticed that during data set creation for semi-supervised
+learning, one has to constrain the class proportions \textendash{}
+in our case to 50\% for class 0 and 50\% for class 1, otherwise the
+semi-supervised training often fails with predictions biased in favor
+of the larger class.
+
+Only the very last approaches tried (data set breast\_cancer\_15,
+section \ref{sec:breast_cancer_15}) showed a (small) significant
+benefit between those networks trained using more unlabeled samples
+over those trained using less unlabeled samples. There are three differences
+between these approaches and the ones before: First, we used less
+hidden layer neurons. Second, we used all 22,283 genes as input instead
+of only the 500 most variable genes. Third, we tested on GSE25055
+instead of GSE25065. The benefit using unlabeled samples is not due
+to less hidden layer neurons, since TSVM was not influenced by this
+point, but also showed the benefit. Whether the benefit is due to
+using all 22,283 genes or testing on the same data set as used for
+training remains to be seen.
+
+\subsection{Outlook}
+
+\paragraph{More Advanced Prediction Schemes}
+
+More sophisticated prediction schemes can be imagined so that the
+prediction made produces more than one number: For example, in addition
+to the severity of the disease after therapy (a number between 0 and
+1), the number of (visibly large) metastases (a natural number) could
+be trained and predicted. Such a prediction is not made in this work,
+because only little clinical data was recorded in GSE25055 and GSE25065.
+However, in the neural network it would be straightforward to predict
+such two numbers by adding an additional (properly scaled) number
+to the output layer in the training set.
+
+\paragraph{Multiplying of Training Samples}
+
+In most applications of deep learning there is some algorithm involved
+to multiply the number of available training data sets. For example,
+in image classification the training images are usually translated
+by pixel or subpixel shifts, or small non-linear deformations are
+applied using a warped mesh. This has the effect that a local feature
+of an input training image (for example, a red pixel on green background)
+is present in different input pixels in the transformed training images.
+This allows producing a large number of similar training images from
+an input training set. The neural network is thereby forced to learn
+the property of a feature regardless of its position in the image.
+Nevertheless the position of the feature will probably vary in ``real''
+(not modified) images as well.
+
+Having such a transformation for expression data would be very useful,
+not only for classification using neural networks, but also other
+machine learning algorithms. However, it is not at all clear what
+a pre-processing equivalent to the local image deformations could
+look like for mRNA abundance. Straightforward application of the image
+deformation scheme would provide the neural network with input for
+a gene in the dimension of a maybe completely unrelated gene. (Note
+that adding some sort of noise onto the expression levels would be
+equivalent to adding noise to the image, which is not equivalent to
+shifting the image.)
+
+One approach could be to use different normalization methods, parameters,
+and random number seeds used in some normalization methods to obtain
+multiple copies of the same raw data set, but with small changes providing
+different ``points of view'' of the data.
+
+Another possible approach could be to look for gene modules that consist
+of redundant genes, and permute their expression values among the
+redundacy group. This would require knowledge about gene modules in
+advance.
+
+A third approach could be to increase the number of input samples
+by creating additional samples by composing them of random subsets
+of other input samples. For example, take gene 1-1000 from sample
+1, gene 1001-2001 from samples 2, and so on. Or maybe even better
+use gene modules as learned by an RBM (see the \emph{hub features
+}in Figure S3 of \cite{ChenXie2015}). There seem to be hub networks,
+that have outgoing connections to many output layer genes, with many
+of the hub networks having either positive outgoing weights (i.e.
+that positively affect the expression of a target gene) or negative
+outgoing weights, but not both.
+
+The algorithm would work like this: Determine for each \emph{measured}
+input sample the gene hub activation (by unsupervisedly training an
+RBM or DBN on all input samples). This results in a vector of numbers,
+one vector for each input sample; each number stands for one gene
+hub activation. Permute the gene hub activations between the learned
+representations, but only use representations from samples that have
+the same class label. Due to the number of permutations this creates
+a large number of labeled training samples (each training sample is
+labeled like the measured samples used in the training sample generation).
+Use these generated training samples as input for a supervised DBN.
+
+
