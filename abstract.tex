@@ -1,0 +1,47 @@
+
+\section{Summary}
+
+In classification tasks of biological data, there are usually fewer
+labeled than unlabeled samples because labeling samples is costly
+or time-consuming. In addition, labeled data sets can be re-used in
+different contexts as additional unlabeled data sets. For example,
+when searching the Gene Expression Omnibus (GEO) repository for microarray
+data sets of drug sensitivity and resistance experiments, the largest
+one has 2,522 samples, but the median has only 12 samples.
+
+In machine learning in general, utilizing unlabeled data in classification
+tasks is called semi-supervised learning. Artificial neural networks
+can be used to pre-train on unlabeled data before fine-tuning via
+back-propagation with labeled data. Such artificial neural networks
+enabling deep learning have gained attention since around 2010, since
+when they have been among the best-performing algorithms in visual
+object recognition.
+
+We measured accuracies in the task of classifying tissue taken from
+breast cancer patients at reductive surgery as chemotherapy-resistant
+or -sensitive. Different data sets were constructed by subsampling
+from GEO data set GSE25055 and GSE25065. Using these data sets, we
+compared classification accuracy of the neural networks autoencoder,
+Restricted Boltzmann Machine, Deep Belief Network (DBN) and support
+vector machine (SVM), and Transductive SVM (TSVM). Training was done
+both in supervised and semi-supervised mode. For the neural networks,
+we tried several different network architectures. 
+
+Smoothing the validation set accuracies obtained during training iterations
+to alleviate low sample numbers helped in model selection of the best
+classifier. We also investigated the effect of different normalization
+procedures on the classification accuracy. The data were normalized
+with either RMA or MAS5, followed by either no batch-effect correction
+or Combat batch-effect correction. Only MAS5 profited from added Combat
+batch-effect correction, but normalization with RMA alone yielded
+the best classification accuracy.
+
+We were particularly interested whether classification accuracies
+improve when adding unlabeled samples in semi-supervised learning.
+Overall, neural networks and support vector machines performed similar.
+We found a slight improvement of classification accuracy when the
+number of unlabeled samples presented to DBN and TSVM was increased
+to the maximal number of samples in our data sets. However, this effect
+was only observed when the learning algorithms were presented the
+expression values of all 22,283 genes, not just the 500 most variable
+genes.

@@ -1,0 +1,111 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\RequirePackage{fix-cm}
+\documentclass[12pt,twoside,english]{article}
+\usepackage[latin9]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=24.75mm,bmargin=48.5mm,lmargin=23.25mm,rmargin=31.5mm}
+\pagestyle{headings}
+\usepackage{babel}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{varioref}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\makeindex
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[numbers]{natbib}
+\onehalfspacing
+\usepackage[unicode=true]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+\floatstyle{ruled}
+\newfloat{algorithm}{tbp}{loa}
+\providecommand{\algorithmname}{Algorithm}
+\floatname{algorithm}{\protect\algorithmname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+% how to get rid of overfull hboxes:
+\tolerance=1600
+%\sloppy
+%\setlength\emergencystretch{2em}
+
+% \bot or \perp sign with two parallel vertical lines, for independency between random variables
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+\makeatother
+
+\begin{document}
+\input{title.tex}
+
+\cleardoublepage{}\tableofcontents{}
+
+\cleardoublepage{}
+
+\input{abstract.tex}
+
+\cleardoublepage{}
+
+\part{Introduction}
+
+\input{introduction.tex}
+
+\cleardoublepage{}
+
+\part{Methods}
+
+\input{methods.tex}
+
+\cleardoublepage{}
+
+\part{Results}
+
+\input{results.tex}
+
+\cleardoublepage{}
+
+\part{Discussion}
+
+\input{discussion.tex}
+
+\cleardoublepage{}
+
+\addcontentsline{toc}{section}{List of Figures}\listoffigures
+
+\cleardoublepage{}
+
+\addcontentsline{toc}{section}{List of Tables}
+
+\listoftables
+
+\cleardoublepage{}
+
+\addcontentsline{toc}{section}{List of Algorithms}
+
+\listof{algorithm}{List of Algorithms}
+
+\cleardoublepage{}
+
+%% strangely, this cannot be in the LaTeX Preamble
+\renewcommand{\refname}{Bibliography}
+
+\bibliographystyle{myabbrvnat}
+\addcontentsline{toc}{section}{\refname}\nocite{*}
+\bibliography{dissertation}
+
+\cleardoublepage{}
+
+\addcontentsline{toc}{section}{Index}
+
+\printindex{}
+\end{document}
